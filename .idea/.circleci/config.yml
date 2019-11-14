@@ -1,0 +1,149 @@
+version: 2.1
+jobs:
+  #  CHECKOUT REPOSITORY
+  checkout_repo:
+    docker:
+      - image: circleci/node:10.13.0
+    working_directory: ~/insinger
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/insinger
+      - restore_cache:
+          keys:
+            - dep-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - dep-cache-{{ checksum "yarn.lock" }}
+            - dep-cache-
+      - run: yarn install
+      - save_cache:
+          key: dep-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: ~
+          paths:
+            - .cache/yarn
+            - .cache/Cypress
+
+  #  BUILD SOURCE AND DEPLOY TO SERVER
+  build_deploy:
+    docker:
+      - image: circleci/node:10.13.0-browsers
+    working_directory: ~/insinger
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/insinger
+      - run: sudo apt-get install python-dev
+      - run:
+          name: Set REACT_APP_PROJECT_URL env var and production envs
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "feature" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_PROD"' >> $BASH_ENV
+            else
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+            fi
+            source $BASH_ENV
+      # - run:
+      #     name: Check if master and build
+      #     command: |
+      #       if [ "${CIRCLE_BRANCH}" == "master" ]; then
+      #          yarn build:production
+      #       else
+      #          yarn build
+      #       fi
+      # - run:
+      #     name: Check if staging and build storybook
+      #     command: |
+      #       if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+      #          yarn build-storybook
+      #       fi
+      - run:
+          name: Add target host to known_hosts files
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                ssh-keyscan "$PROD_SSH_HOST" >> ~/.ssh/known_hosts
+            else
+                ssh-keyscan "$SSH_HOST" >> ~/.ssh/known_hosts
+            fi
+      - add_ssh_keys:
+          name: Add SSH KEY
+          fingerprints:
+            - $FINGERPRINT
+      - run: eval ssh-agent -s
+      - run: sudo apt install rsync
+      - run:
+          name: Upload build folder to target host
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-staging/build
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              rsync -O -ave ssh ~/mlt-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-test/build
+            elif [ "${CIRCLE_BRANCH}" == "feature" ]; then
+              rsync -O -ave ssh ~/mlt-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
+            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+              rsync -O -ave ssh ~/mlt-frontend/build/ "$PROD_SSH_USER"@"$PROD_SSH_HOST":~/mlt-frontend/build
+            else
+              rsync -O -ave ssh ~/mlt-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
+            fi
+          # name: Upload storybook build folder to target host
+          # command: |
+          #   if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+          #     rsync -O -ave ssh ~/mlt-frontend/.out/ "$SSH_USER"@"$SSH_HOST":~/mlt-apps/staging/build-storybook
+          #   fi
+      # - run:
+  #  RUN CYPRESS END TO END TESTS
+  test_e2e:
+    docker:
+      - image: circleci/node:10.13.0-browsers
+    parallelism: 2
+    working_directory: ~/insinger
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/insinger
+      # setting this env var to only test on dev server when deployed.
+      - run:
+          name: Install Cypress -> OPTIMISE, UNESCESSARY STEP!!!
+          command: yarn add cypress --ignore-engines
+      - run:
+          name: Set CYPRESS_BASEURL
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+               echo 'export CYPRESS_baseUrl="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+               echo 'export CYPRESS_baseUrl="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "feature" ]; then
+               echo 'export CYPRESS_baseUrl="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+               echo 'export CYPRESS_baseUrl="$REACT_APP_PROJECT_URL_PROD"' >> $BASH_ENV
+            else
+               echo 'export CYPRESS_baseUrl="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+            fi
+            source $BASH_ENV
+      - run:
+          name: Run E2E test
+          # Here we check if the bash variable is unset, or set to a empty string
+          command: |
+            yarn cy:run:record:parallel
+      - store_test_results:
+          path: test_results
+
+# WORKFLOWS
+workflows:
+  version: 2
+  checkout_build_deploy_test:
+    jobs:
+      - checkout_repo
+      - build_deploy:
+          requires:
+            - checkout_repo
+      # - test_e2e:
+      #     requires:
+      #       - build_deploy
