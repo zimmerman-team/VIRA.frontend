@@ -67,11 +67,8 @@ jobs:
       - run:
           name: Add target host to known_hosts files
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                ssh-keyscan "$PROD_SSH_HOST" >> ~/.ssh/known_hosts
-            else
-                ssh-keyscan "$SSH_HOST" >> ~/.ssh/known_hosts
-            fi
+            ssh-keyscan "$SSH_HOST" >> ~/.ssh/known_hosts
+
       - add_ssh_keys:
           name: Add SSH KEY
           fingerprints:
@@ -84,18 +81,18 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
               rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-staging/build
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              rsync -O -ave ssh ~/mlt-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-test/build
+              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-test/build
             elif [ "${CIRCLE_BRANCH}" == "feature" ]; then
-              rsync -O -ave ssh ~/mlt-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
+              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
             elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-              rsync -O -ave ssh ~/mlt-frontend/build/ "$PROD_SSH_USER"@"$PROD_SSH_HOST":~/mlt-frontend/build
+              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$PROD_SSH_USER"@"$PROD_SSH_HOST":~/insinger-staging/build
             else
-              rsync -O -ave ssh ~/mlt-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
+              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
             fi
           # name: Upload storybook build folder to target host
           # command: |
           #   if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-          #     rsync -O -ave ssh ~/mlt-frontend/.out/ "$SSH_USER"@"$SSH_HOST":~/mlt-apps/staging/build-storybook
+          #     rsync -O -ave ssh ~/insinger-monitoring-frontend/.out/ "$SSH_USER"@"$SSH_HOST":~/mlt-apps/staging/build-storybook
           #   fi
       # - run:
   #  RUN CYPRESS END TO END TESTS
