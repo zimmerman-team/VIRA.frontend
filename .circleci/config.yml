@@ -20,7 +20,7 @@ jobs:
           paths:
             - ~/.cache/yarn
       - persist_to_workspace:
-          root: /
+          root: /home/circleci/
           paths:
             - .cache/yarn
             - .cache/Cypress
