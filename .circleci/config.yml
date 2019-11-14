@@ -79,15 +79,15 @@ jobs:
           name: Upload build folder to target host
           command: |
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-staging/build
+              rsync -O -ave ssh ~/insinger/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-staging/build
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-test/build
+              rsync -O -ave ssh ~/insinger/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-test/build
             elif [ "${CIRCLE_BRANCH}" == "feature" ]; then
-              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
+              rsync -O -ave ssh ~/insinger/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
             elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$PROD_SSH_USER"@"$PROD_SSH_HOST":~/insinger-staging/build
+              rsync -O -ave ssh ~/insinger/build/ "$PROD_SSH_USER"@"$PROD_SSH_HOST":~/insinger-staging/build
             else
-              rsync -O -ave ssh ~/insinger-monitoring-frontend/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
+              rsync -O -ave ssh ~/insinger/build/ "$SSH_USER"@"$SSH_HOST":~/insinger-dev/build
             fi
           # name: Upload storybook build folder to target host
           # command: |
