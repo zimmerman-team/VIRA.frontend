@@ -30,13 +30,13 @@ export const LandingLayout = () => {
         open: open,
         theme: theme,
         handleDrawerClose: handleDrawerClose,
-        handleDrawerOpen: handleDrawerOpen,
       })}
 
       {AppSideBar({
         classes: classes,
         open: open,
         handleDrawerClose: handleDrawerClose,
+        handleDrawerOpen: handleDrawerOpen,
         theme: theme,
         navItems: navItems,
       })}
