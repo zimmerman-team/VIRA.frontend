@@ -32,7 +32,7 @@ interface PrimarySearchAppBarParams {
   >;
   open: boolean;
   theme: Theme;
-  handleDrawerOpen: () => void;
+
   handleDrawerClose: () => void;
 }
 
@@ -93,20 +93,7 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
               <IconMenuToggle />
             </IconButton>
           ) : (
-            <IconButton
-              onClick={props.handleDrawerOpen}
-              css={`
-                && {
-                  background-color: ${ProjectPalette.primary.main};
-                  border-radius: 0;
-                  padding: 0;
-                  width: 36px;
-                  height: 36px;
-                }
-              `}
-            >
-              <IconMenuToggle />
-            </IconButton>
+            <div />
           )}
           {/*{TopBarSearchSection(classes)}*/}
           <div className={classes.grow} />
