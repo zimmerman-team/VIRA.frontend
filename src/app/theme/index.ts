@@ -42,11 +42,17 @@ export const ProjectPalette: Palette = {
   },
   text: {
     primary: 'rgba(0, 0, 0, 0.87)',
-    secondary: 'rgba(0, 0, 0, 0.54)',
+    secondary: '#fff',
     disabled: 'rgba(0, 0, 0, 0.38)',
     hint: 'rgba(0, 0, 0, 0.38)',
   },
   divider: 'rgba(0, 0, 0, 0.12)',
+  primary: {
+    main: '#242e42',
+    light: 'rgb(134,154,172)',
+    dark: 'rgb(25, 32, 46)',
+    contrastText: '#fff',
+  },
   secondary: {
     main: '#25baa4',
     light: 'rgb(80,199,182)',
@@ -68,12 +74,6 @@ export const ProjectPalette: Palette = {
     disabledBackground: 'rgba(0, 0, 0, 0.12)',
     disabled: 'rgba(0, 0, 0, 0.26)',
     active: 'rgba(0, 0, 0, 0.54)',
-  },
-  primary: {
-    main: '#242e42',
-    light: 'rgb(79, 87, 103)',
-    dark: 'rgb(25, 32, 46)',
-    contrastText: '#fff',
   },
 };
 
@@ -113,10 +113,10 @@ export const Typography: TypographyOptions = {
     lineHeight: '1.5',
   },
   subtitle1: {
-    fontSize: `${1}rem`,
-    fontWeight: TextStyle.fontWeightMedium,
-    lineHeight: '1.5',
-    letterSpacing: '0.2px',
+    fontSize: `${0.9}rem`,
+    fontWeight: TextStyle.fontWeightRegular,
+    lineHeight: '1.2',
+    letterSpacing: '0.25px',
   },
   subtitle2: {
     fontSize: `${0.875}rem`,
@@ -130,11 +130,11 @@ export const Typography: TypographyOptions = {
     fontWeight: 500,
   },
   caption: {
-    color: ProjectPalette.text.secondary,
+    color: ProjectPalette.primary.light,
     fontFamily: TextStyle.fontFamily,
     lineHeight: `${1.375}em`,
-    fontSize: `${0.75}rem`,
-    fontWeight: 400,
+    fontSize: `${0.6}rem`,
+    fontWeight: TextStyle.fontWeightBold,
   },
   body1: {
     color: ProjectPalette.text.primary,
