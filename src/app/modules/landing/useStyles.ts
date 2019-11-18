@@ -17,15 +17,23 @@ export const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(2),
     },
     hide: {
-      // display: 'none',
+      display: 'none',
     },
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
+      whiteSpace: 'nowrap',
     },
     drawerPaper: {
       width: drawerWidth,
       backgroundColor: theme.palette.primary.main,
+    },
+    drawerOpen: {
+      width: drawerWidth,
+    },
+    drawerClose: {
+      overflowX: 'hidden',
+      width: '54px',
     },
     drawerHeader: {
       display: 'flex',
