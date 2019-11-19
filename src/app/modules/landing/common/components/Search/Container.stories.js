@@ -1,14 +1,14 @@
 import React from 'react';
-import { MiniDrawer } from './';
+import { Search } from './';
 import Providers from 'app/Providers';
 
 export default {
-  component: MiniDrawer,
-  title: 'MiniDrawer',
+  component: Search,
+  title: 'Search',
 };
 
 export const text = () => (
   <Providers>
-    <MiniDrawer />
+    <Search />
   </Providers>
 );

@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import { ProjectPalette } from '../../../../theme';
 import { IconMenuToggle } from '../icons/IconMenuToggle';
+import { IconMenuOpen } from '../icons/IconMenuOpen';
 
 interface AppSideBarParams {
   classes: Record<
@@ -89,7 +90,7 @@ export function AppSideBar(props: AppSideBarParams) {
               }
             `}
           >
-            <IconMenuToggle />
+            <IconMenuOpen />
           </IconButton>
         )}
       </div>

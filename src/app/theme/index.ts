@@ -49,7 +49,7 @@ export const ProjectPalette: Palette = {
   divider: 'rgba(0, 0, 0, 0.12)',
   primary: {
     main: '#242e42',
-    light: 'rgb(134,154,172)',
+    light: '#2f3b52',
     dark: 'rgb(25, 32, 46)',
     contrastText: '#fff',
   },

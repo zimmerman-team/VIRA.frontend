@@ -73,7 +73,6 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
           css={`
             && {
               padding-left: 0;
-              //padding-right: 0
             }
           `}
         >
