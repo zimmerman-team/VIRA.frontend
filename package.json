@@ -87,7 +87,8 @@
           "**/*.ts?(x)"
         ],
         "rules": {
-          "no-unused-vars": "off"
+          "no-unused-vars": "off",
+          "react/destructuring-assignment": 0
         }
       }
     ]
