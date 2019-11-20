@@ -1,15 +1,15 @@
 // @ts-nocheck
 import React from 'react';
-import { LandingLayout } from './layout';
+import { GlobalLayout } from './layout';
 import Providers from 'app/Providers';
 
 export default {
-  component: LandingLayout,
+  component: GlobalLayout,
   title: 'Container',
 };
 
 export const text = () => (
   <Providers>
-    <LandingLayout />
+    <GlobalLayout />
   </Providers>
 );
