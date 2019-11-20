@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import Providers from 'app/Providers';
 import { Grid } from '@material-ui/core';
 import mockData from './mock';
