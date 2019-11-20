@@ -6,7 +6,7 @@ import { PageLoader } from 'app/modules/common/page-loader';
 
 import { NoMatchPage } from 'app/modules/common/no-match-page';
 const AboutModule = lazy(() => import('app/modules/about'));
-const LandingModule = lazy(() => import('app/modules/landing'));
+const LandingModule = lazy(() => import('app/modules/global'));
 
 export function MainRoutes() {
   return (
