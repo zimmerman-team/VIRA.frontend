@@ -10,6 +10,7 @@ export const getInputGeneralStyle = (theme: Theme): CSSProperties => {
     border: '1px solid transparent',
     fontSize: 16,
     padding: '10px 12px',
+    height: '28px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     fontFamily: 'Inter',
     '&:focus': {

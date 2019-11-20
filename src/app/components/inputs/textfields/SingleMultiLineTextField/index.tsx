@@ -4,15 +4,17 @@ import FormControl from '@material-ui/core/FormControl';
 import InputBase, { InputBaseProps } from '@material-ui/core/InputBase';
 import { getInputGeneralStyle } from 'app/components/inputs/common/mock';
 import { Theme, withStyles, createStyles } from '@material-ui/core/styles';
+import { ProjectPalette } from 'app/theme';
 
 export interface Props extends InputBaseProps {
   id: string;
   label: string;
   value?: string;
   defaultValue?: string;
-  setValue: Function;
+  setValue?: Function;
   variant?: string;
   multiline?: boolean;
+  placeholder?: string;
 }
 
 const Input = withStyles((theme: Theme) =>
@@ -20,6 +22,7 @@ const Input = withStyles((theme: Theme) =>
     root: {
       'label + &': {
         marginTop: theme.spacing(3),
+        color: ProjectPalette.text.primary,
       },
     },
     input: getInputGeneralStyle(theme),
@@ -37,7 +40,11 @@ export const SingleMultiLineTextField = (props: Props) => {
       <InputLabel shrink htmlFor={props.id}>
         {props.label}
       </InputLabel>
-      <Input {...props} onChange={e => props.setValue(e.target.value)} />
+      <Input
+        {...props}
+        placeholder={props.placeholder}
+        onChange={e => props.setValue(e.target.value)}
+      />
     </FormControl>
   );
 };
