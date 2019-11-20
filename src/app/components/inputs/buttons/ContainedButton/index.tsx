@@ -15,7 +15,7 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    button: props => ({
+    button: (props: any) => ({
       margin: props.margin || '0',
       width: props.width,
       color:
