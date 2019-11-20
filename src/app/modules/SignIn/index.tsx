@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { SignInLayout } from 'app/modules/SignIn/layout';
