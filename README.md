@@ -2,6 +2,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+Before running any of the scripts, please make sure you add an `.env` file in the root directory of the project containing the following:
+
+```
+REACT_APP_PROJECT_URL=http://localhost:3000
+REACT_APP_AUTH_CUSTOM_DOMAIN=<REACT_APP_AUTH_CUSTOM_DOMAIN>
+REACT_APP_AUTH_DOMAIN=<REACT_APP_AUTH_DOMAIN>
+REACT_APP_CLIENT_ID=<REACT_APP_CLIENT_ID>
+REACT_APP_AE_API_CLIENT_ID=<REACT_APP_AE_API_CLIENT_ID>
+REACT_APP_AE_API_CLIENT_SECRET=<REACT_APP_AE_API_CLIENT_SECRET>
+REACT_APP_AE_API_URL=<REACT_APP_AE_API_URL>
+```
+
 In the project directory, you can run:
 
 ### `yarn start`
