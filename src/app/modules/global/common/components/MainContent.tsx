@@ -23,9 +23,61 @@ interface MainContentParams {
   open: boolean;
 }
 
-const projectsMock = [];
+const projectsMock: StatItemParams[] = [
+  {
+    amount: 104,
+    type: 'projects',
+  },
+  {
+    amount: 5,
+    type: 'new reports',
+  },
+  {
+    amount: 140,
+    type: 'total reports',
+  },
+];
 
-const StatItem = () => <div>stat item</div>;
+interface StatItemParams {
+  amount: number;
+  type: string;
+}
+
+const StatItem = (props: StatItemParams) => (
+  <Grid
+    item
+    lg={4}
+    css={`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    `}
+  >
+    <Typography
+      css={`
+        && {
+          font-size: 36px;
+          font-weight: 600;
+          color: #155366;
+        }
+      `}
+    >
+      {props.amount}
+    </Typography>
+    <Typography
+      css={`
+        && {
+          font-size: 20px;
+          font-weight: 500;
+          color: black;
+        }
+      `}
+    >
+      {props.type}
+    </Typography>
+  </Grid>
+);
 const StatContainer = () => <div>statcontainer</div>;
 
 const PriorityArea = () => <div>priority</div>;
@@ -39,15 +91,9 @@ export function MainContent(props: MainContentParams) {
       <Container maxWidth="lg">
         <Box height="100px" />
         <Grid container spacing={4}>
-          <Grid item lg={4}>
-            <Typography paragraph>1</Typography>
-          </Grid>
-          <Grid item lg={4}>
-            <Typography paragraph>2</Typography>
-          </Grid>
-          <Grid item lg={4}>
-            <Typography paragraph>3</Typography>
-          </Grid>
+          {projectsMock.map(project => (
+            <StatItem amount={project.amount} type={project.type} />
+          ))}
         </Grid>
       </Container>
     </React.Fragment>
