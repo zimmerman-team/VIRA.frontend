@@ -11,6 +11,14 @@ import {
   TypographyOptions,
 } from '@material-ui/core/styles/createTypography';
 
+interface Icon {
+  black: string;
+}
+
+interface ProjectPalette extends Palette {
+  icon: Icon;
+}
+
 export const TextStyle: FontStyle = {
   fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
   fontSize: 14,
@@ -20,7 +28,7 @@ export const TextStyle: FontStyle = {
   fontWeightBold: 700,
 };
 
-export const ProjectPalette: Palette = {
+export const ProjectPalette: ProjectPalette = {
   tonalOffset: 0.2,
   background: { paper: '#fff', default: '#fafafa' },
   contrastThreshold: 3,
