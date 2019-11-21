@@ -1,8 +1,8 @@
 /* core */
 import React, { ReactNode } from 'react';
 import useTitle from 'react-use/lib/useTitle';
-import { Container, Grid, Box } from '@material-ui/core';
-import styled from 'styled-components';
+import { Container, Grid, Box, Typography } from '@material-ui/core';
+import styled from 'styled-components/macro';
 
 export type PageProps = {
   title?: string;
@@ -30,7 +30,26 @@ const Page = (props: PageProps) => {
     <MainContainer maxWidth="xl">
       <MainGrid container>
         <GridItem item md={12}>
-          <Box paddingLeft="240px" height="100%">
+          <Box
+            paddingLeft="240px"
+            height="100%"
+            css={`
+              background-color: #f7f7f7;
+            `}
+          >
+            {props.title && (
+              <Typography
+                variant="h3"
+                css={`
+                  && {
+                    padding-top: 24px;
+                    margin-bottom: 48px;
+                  }
+                `}
+              >
+                {props.title}
+              </Typography>
+            )}
             {props.children}
           </Box>
         </GridItem>
