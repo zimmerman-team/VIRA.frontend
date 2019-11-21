@@ -75,6 +75,9 @@ export const ProjectPalette: Palette = {
     disabled: 'rgba(0, 0, 0, 0.26)',
     active: 'rgba(0, 0, 0, 0.54)',
   },
+  icon: {
+    black: '#222224',
+  },
 };
 
 export const Typography: TypographyOptions = {
@@ -113,6 +116,7 @@ export const Typography: TypographyOptions = {
     lineHeight: '1.5',
   },
   subtitle1: {
+    fontFamily: 'Inter',
     fontSize: `${0.9}rem`,
     fontWeight: TextStyle.fontWeightRegular,
     lineHeight: '1.2',
@@ -137,6 +141,7 @@ export const Typography: TypographyOptions = {
     fontWeight: TextStyle.fontWeightBold,
   },
   body1: {
+    fontFamily: 'Inter',
     color: ProjectPalette.text.primary,
     fontFamily: TextStyle.fontFamily,
     lineHeight: `${1.46429}em`,
