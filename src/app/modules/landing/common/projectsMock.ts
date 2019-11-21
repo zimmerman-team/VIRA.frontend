@@ -1,15 +1,15 @@
 export const projectsMock: StatItemParams[] = [
   {
     amount: 104,
-    type: 'projects',
+    type: 'Projects',
   },
   {
     amount: 5,
-    type: 'new reports',
+    type: 'New Reports',
   },
   {
     amount: 140,
-    type: 'total reports',
+    type: 'Total Reports',
   },
 ];
 export interface StatItemParams {

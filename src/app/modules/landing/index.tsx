@@ -13,54 +13,53 @@ const LandingLayout = () => {
     <>
       {/* -------------------------------------------------------------- */}
       {/* stat items */}
-      <Grid container spacing={4}>
-        <Grid item sm={12} lg={12}>
-          <Card>
-            <CardContent>
-              <Grid container direction="row" alignItems="center" wrap="nowrap">
-                {projectsMock.map(project => (
-                  <>
-                    <StatItem amount={project.amount} type={project.type} />
-                    <StatItemDivider />
-                  </>
-                ))}
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
 
-        {/* -------------------------------------------------------------- */}
-        {/* priority area */}
-        <Grid item sm={12} lg={7}>
-          <Card>
-            <CardHeader title="Priority Area" />
-            <CardContent>
-              <CardFiller />
-            </CardContent>
-          </Card>
-        </Grid>
+      <Grid item sm={12} lg={12}>
+        <Card>
+          <CardContent>
+            <Grid container direction="row" alignItems="center" wrap="nowrap">
+              {projectsMock.map(project => (
+                <>
+                  <StatItem amount={project.amount} type={project.type} />
+                  <StatItemDivider />
+                </>
+              ))}
+            </Grid>
+          </CardContent>
+        </Card>
+      </Grid>
 
-        {/* -------------------------------------------------------------- */}
-        {/* project */}
-        <Grid item sm={12} lg={5}>
-          <Card>
-            <CardHeader title="Project (Netherlands)" />
-            <CardContent>
-              <CardFiller />
-            </CardContent>
-          </Card>
-        </Grid>
+      {/* -------------------------------------------------------------- */}
+      {/* priority area */}
+      <Grid item sm={12} lg={7}>
+        <Card>
+          <CardHeader title="Priority Area" />
+          <CardContent>
+            <CardFiller />
+          </CardContent>
+        </Card>
+      </Grid>
 
-        {/* -------------------------------------------------------------- */}
-        {/* projects */}
-        <Grid item sm={12} lg={12}>
-          <Card>
-            <CardHeader title="Projects" />
-            <CardContent>
-              <CardFiller />
-            </CardContent>
-          </Card>
-        </Grid>
+      {/* -------------------------------------------------------------- */}
+      {/* project */}
+      <Grid item sm={12} lg={5}>
+        <Card>
+          <CardHeader title="Project (Netherlands)" />
+          <CardContent>
+            <CardFiller />
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/* -------------------------------------------------------------- */}
+      {/* projects */}
+      <Grid item sm={12} lg={12}>
+        <Card>
+          <CardHeader title="Projects" />
+          <CardContent>
+            <CardFiller />
+          </CardContent>
+        </Card>
       </Grid>
     </>
   );
