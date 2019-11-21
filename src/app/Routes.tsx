@@ -1,17 +1,17 @@
 //cc:application base#;application routes
 
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { NoMatchPage } from 'app/modules/common/no-match-page';
 import auth from 'app/auth';
 import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
-
-const AboutModule = lazy(() => import('app/modules/about'));
-const LandingModule = lazy(() => import('app/modules/global'));
-const SignInModule = lazy(() => import('app/modules/SignIn'));
-const LoginCallbackModule = lazy(() => import('app/modules/loginCallback'));
+import LandingLayout from 'app/modules/landing';
+import About from 'app/modules/about';
+import { ProjectsModule } from 'app/modules/projects';
+import SignInModule from 'app/modules/SignIn';
+import LoginCallbackModule from 'app/modules/loginCallback';
 
 function redirectUnAuth<ReactModule>(
   component: ReactModule,
@@ -42,11 +42,15 @@ export function MainRoutes() {
         </Route>
 
         <Route exact path="/">
-          {redirectUnAuth(<LandingModule />, storeUser)}
+          {redirectUnAuth(<LandingLayout />, storeUser)}
+        </Route>
+
+        <Route exact path="/projects">
+          {redirectUnAuth(<ProjectsModule />, storeUser)}
         </Route>
 
         <Route exact path="/about">
-          <AboutModule />
+          <About />
         </Route>
 
         <Route exact path="/notFound">

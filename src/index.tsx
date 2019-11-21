@@ -7,9 +7,17 @@ import { App } from 'app';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars,import/no-unresolved
 import * as _ from 'styled-components/cssprop';
 
+import Providers from 'app/Providers';
+import { PositionedSnackbar } from 'app/components/datadisplay/snackbar';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Providers>
+    <App />
+    <PositionedSnackbar />
+  </Providers>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
