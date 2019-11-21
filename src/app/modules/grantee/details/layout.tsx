@@ -9,12 +9,12 @@ import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 export const GranteeDetailLayout = (props: GranteeDetailModel) => {
   return (
     <>
-      <Page>
+      <Page
+        title={props.title}
+        subtitle={props.subtitle}
+        breadcrumbs={props.breadcrumbs}
+      >
         <Grid container>
-          <BreadCrumbs
-            currentLocation={props.breadcrumbs.currentLocation}
-            previousLocations={props.breadcrumbs.previousLocations}
-          />
           <InPageNavigation
             locations={props.inpageNavigation.locations}
             activity={props.inpageNavigation.activity}

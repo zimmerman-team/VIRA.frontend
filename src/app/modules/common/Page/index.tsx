@@ -4,9 +4,13 @@ import React, { ReactNode } from 'react';
 import useTitle from 'react-use/lib/useTitle';
 import { Container, Grid, Box, Typography } from '@material-ui/core';
 import styled from 'styled-components/macro';
+import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
+import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 
 export type PageProps = {
   title?: string;
+  subtitle?: string;
+  breadcrumbs?: BreadcrumbModel;
   children?: ReactNode;
 };
 
@@ -38,6 +42,13 @@ const Page = (props: PageProps) => {
             //   background-color: #f7f7f7;
             // `}
           >
+            {props.breadcrumbs && (
+              <BreadCrumbs
+                currentLocation={props.breadcrumbs.currentLocation}
+                previousLocations={props.breadcrumbs.previousLocations}
+              />
+            )}
+
             {props.title && (
               <Typography
                 variant="h3"
@@ -50,6 +61,12 @@ const Page = (props: PageProps) => {
               >
                 {props.title}
               </Typography>
+            )}
+            {props.subtitle && (
+              <>
+                <Typography variant="subtitle2">{props.subtitle}</Typography>
+                <Box width="100%" height="24px" />
+              </>
             )}
             {props.children}
           </Box>

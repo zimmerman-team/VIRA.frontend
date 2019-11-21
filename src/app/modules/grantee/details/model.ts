@@ -3,6 +3,8 @@ import { InPageNavigationModel } from 'app/components/navigation/InPageNavigatio
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 
 export type GranteeDetailModel = {
+  title: string;
+  subtitle: string;
   breadcrumbs: BreadcrumbModel;
   inpageNavigation: InPageNavigationModel;
   datatable: TableModuleModel;
