@@ -33,9 +33,9 @@ const Page = (props: PageProps) => {
           <Box
             paddingLeft="240px"
             height="100%"
-            css={`
-              background-color: #f7f7f7;
-            `}
+            // css={`
+            //   background-color: #f7f7f7;
+            // `}
           >
             {props.title && (
               <Typography

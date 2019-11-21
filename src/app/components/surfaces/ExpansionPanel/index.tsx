@@ -31,9 +31,9 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
             expandIcon={
               <ExpandMoreIcon
                 fontSize="large"
-                css={`
-                  color: ${ProjectPalette.icon.black};
-                `}
+                // css={`
+                //   //color: ${ProjectPalette.icon.black};
+                // `}
               />
             }
           >
