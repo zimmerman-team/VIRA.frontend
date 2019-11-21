@@ -1,62 +1,40 @@
 // @ts-nocheck
 import React from 'react';
+import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { ProjectPalette } from 'app/theme';
 
 type Props = {
-  text: string | JSX.Element;
-  margin?: string;
-  backgroundColor?: string;
-  onClick(): void;
+  text: string;
   disabled?: boolean;
-  fullWidth?: boolean;
-  icon?: any;
-  specWidth?: string;
+  onClick?: any;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: props => ({
-      margin: props.margin || '0',
-      width: props.width,
-      color:
-        props.backgroundColor === 'transparent'
-          ? '#ed6060'
-          : theme.palette.primary.contrastText,
-      backgroundColor: props.backgroundColor || theme.palette.primary.main,
-    }),
-    input: {
-      display: 'none',
-    },
-  })
-);
+const BaseContainedButton = styled(props => <Button {...props} />)`
+  padding: 12px 15px !important;
+  box-shadow: none !important;
+  &:hover {
+    background-color: ${ProjectPalette.secondary.light} !important;
+  }
+
+  & [class*='MuiButton-label'] {
+    min-width: 102px;
+    text-transform: none;
+  }
+`;
 
 export const ContainedButton = (props: Props) => {
-  const {
-    text,
-    margin,
-    backgroundColor,
-    fullWidth,
-    icon,
-    specWidth,
-    ...otherProps
-  } = props;
+  const { text, disabled, ...other } = props;
 
-  let width = 'fit-content';
-
-  if (fullWidth) {
-    width = '100%';
-  }
-
-  if (specWidth) {
-    width = specWidth;
-  }
-
-  const classes = useStyles({ margin, backgroundColor, width });
   return (
-    <Button variant="contained" className={classes.button} {...otherProps}>
+    <BaseContainedButton
+      variant={'contained'}
+      color="secondary"
+      disabled={disabled}
+      disableRipple
+      {...other}
+    >
       {text}
-      {icon}
-    </Button>
+    </BaseContainedButton>
   );
 };

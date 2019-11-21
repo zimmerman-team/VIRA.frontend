@@ -41,7 +41,7 @@ export const ProjectPalette: Palette = {
     A200: '#aaaaaa',
   },
   text: {
-    primary: 'rgba(0, 0, 0, 0.87)',
+    primary: '#222222',
     secondary: '#fff',
     disabled: 'rgba(0, 0, 0, 0.38)',
     hint: 'rgba(0, 0, 0, 0.38)',
