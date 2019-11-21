@@ -12,7 +12,9 @@ function LoginCallback(props: any) {
   const setUserAction = useStoreActions(
     actions => actions.syncVariables.setUser
   );
-
+  const userDetailsAction = useStoreActions(
+    actions => actions.userDetails.fetch
+  );
   useEffect(() => {
     props.auth
       .handleAuthentication()
@@ -22,6 +24,10 @@ function LoginCallback(props: any) {
           name: results.idTokenPayload.name,
           role: '',
           _id: results.idTokenPayload.sub,
+        });
+        userDetailsAction({
+          socketName: 'getUser',
+          values: { user: results.idTokenPayload.sub },
         });
       })
       .catch((err: any) => setError(err.description));
