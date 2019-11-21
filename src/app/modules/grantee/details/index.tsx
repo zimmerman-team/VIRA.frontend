@@ -8,6 +8,7 @@ export function GranteeDetail() {
       title={mockData.title}
       subtitle={mockData.subtitle}
       breadcrumbs={mockData.breadcrumbs}
+      contactsCard={mockData.contactsCard}
       datatable={mockData.datatable}
       inpageNavigation={mockData.inpageNavigation}
     />

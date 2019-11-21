@@ -5,6 +5,7 @@ import { GranteeDetailModel } from 'app/modules/grantee/details/model';
 import TableModule from 'app/components/datadisplay/Table';
 import { InPageNavigation } from 'app/components/navigation/InPageNavigation';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
+import { ContactsCard } from 'app/components/surfaces/Cards/ContactsCard';
 
 export const GranteeDetailLayout = (props: GranteeDetailModel) => {
   return (
@@ -14,6 +15,28 @@ export const GranteeDetailLayout = (props: GranteeDetailModel) => {
         subtitle={props.subtitle}
         breadcrumbs={props.breadcrumbs}
       >
+        <Grid container direction="row" spacing={3}>
+          <Grid item xs={6}>
+            <ContactsCard
+              title={props.contactsCard.title}
+              email={props.contactsCard.email}
+              phonenumber={props.contactsCard.phonenumber}
+              ufo={props.contactsCard.ufo}
+              address={props.contactsCard.address}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <ContactsCard
+              title={props.contactsCard.title}
+              email={props.contactsCard.email}
+              phonenumber={props.contactsCard.phonenumber}
+              ufo={props.contactsCard.ufo}
+              address={props.contactsCard.address}
+            />
+          </Grid>
+          <Box width="100%" height="24px" />
+        </Grid>
+
         <Grid container>
           <InPageNavigation
             locations={props.inpageNavigation.locations}
