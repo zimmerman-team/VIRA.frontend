@@ -157,23 +157,18 @@ export function formatMoney(value: number, currency?: string): string {
 export function calculateTotalRow(tableState: any, totalRowColsDef: any) {
   const data = tableState.displayData
     ? filter(tableState.data, (d: any) => {
-        console.log('tableState', typeof d);
         return find(tableState.displayData, { dataIndex: d.index });
       })
     : tableState.data;
   const totalRowData = totalRowColsDef.map((cd: any, index: any) => {
-    console.log('cd', typeof cd);
-
     switch (cd.dataType) {
       case 'money':
         const validData = filter(data, (item: any) => {
-          console.log('item', test);
           return typeof item.data[index] === 'number';
         });
         return formatMoney(sumBy(validData, `data[${index}]`));
       case 'percentage':
         const count = filter(data, (item: any) => {
-          console.log('item', typeof item);
           return item.data[index] === cd.percValue;
         }).length;
         const percVal = (count / data.length) * 100;

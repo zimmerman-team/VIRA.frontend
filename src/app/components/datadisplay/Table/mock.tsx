@@ -277,55 +277,36 @@ export const mockDataVar2: TableModuleModel = {
 };
 
 export const mockDataVar3: TableModuleModel = {
-  title: 'Humanitarian activities',
+  title: 'Grantee',
   data: [
     [
-      '29 Jan 2018',
-      '',
-      'Implementation',
+      '11003399',
       'Promoting Opportunities for Women s Empowerment and Rights',
-      ['Ukraine', 'Latvia', 'Estonia'],
-      '1',
+      'Label',
+      'Label',
     ],
     [
-      '29 Jan 2018',
-      '',
-      'Implementation',
+      '11003399',
       'Promoting Opportunities for Women s Empowerment and Rights',
-      ['Ukraine'],
-      '1',
+      'Label',
+      'Label',
     ],
     [
-      '29 Jan 2018',
-      '',
-      'Implementation',
+      '11003399',
       'Promoting Opportunities for Women s Empowerment and Rights',
-      ['Ukraine'],
-      '1',
+      'Label',
+      'Label',
     ],
   ],
   columns: [
     {
-      name: 'Start date',
+      name: 'ID',
       options: {
         filter: false,
       },
     },
     {
-      name: 'End date',
-      options: {
-        filter: false,
-      },
-    },
-    {
-      name: 'Status',
-      options: {
-        filter: true,
-        filterType: 'checkbox',
-      },
-    },
-    {
-      name: 'Activity title',
+      name: 'Title',
       options: {
         filter: true,
         filterType: 'checkbox',
@@ -335,17 +316,14 @@ export const mockDataVar3: TableModuleModel = {
       },
     },
     {
-      name: 'Country(s)',
+      name: 'Label',
       options: {
         filter: true,
         filterType: 'checkbox',
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return <MultiValuesCell value={value} />;
-        },
       },
     },
     {
-      name: 'Result',
+      name: 'Label',
       options: {
         filter: true,
         filterType: 'checkbox',

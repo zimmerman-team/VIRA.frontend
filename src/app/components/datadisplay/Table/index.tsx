@@ -2,7 +2,7 @@
 import React from 'react';
 
 /* project-comps */
-import TableLayout from 'app/components/datadisplay/Table/layout';
+import { TableLayout } from 'app/components/datadisplay/Table/layout';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import {
   addConfig,

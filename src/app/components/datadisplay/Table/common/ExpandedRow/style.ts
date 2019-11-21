@@ -27,5 +27,4 @@ export const CellItem = styled.div`
   font-size: ${Typography.fontSize};
   line-height: 1.71;
   letter-spacing: 0.25px;
-  color: ${ProjectPalette.text.primary};
 `;

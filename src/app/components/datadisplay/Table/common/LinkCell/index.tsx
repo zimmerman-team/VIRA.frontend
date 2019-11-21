@@ -11,6 +11,7 @@ const CustomLink = styled(props => <Link {...props} />)`
   line-height: 1.71;
   letter-spacing: 0.25px;
   color: ${ProjectPalette.secondary.main};
+  text-decoration: none;
 `;
 
 const ExtCustomLink = styled.a`
@@ -19,6 +20,7 @@ const ExtCustomLink = styled.a`
   line-height: 1.71;
   letter-spacing: 0.25px;
   color: ${ProjectPalette.secondary.main};
+  text-decoration: none;
 `;
 
 const LinkCellModule = (props: LinkCellModuleModel) => {
