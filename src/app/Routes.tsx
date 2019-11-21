@@ -6,6 +6,7 @@ import { PageLoader } from 'app/modules/common/page-loader';
 import { NoMatchPage } from 'app/modules/common/no-match-page';
 import LandingLayout from 'app/modules/landing';
 import About from 'app/modules/about';
+import { ProjectsModule } from 'app/modules/projects';
 
 export function MainRoutes() {
   return (
@@ -13,6 +14,10 @@ export function MainRoutes() {
       <Switch>
         <Route exact path="/">
           <LandingLayout />
+        </Route>
+
+        <Route exact path="/projects">
+          <ProjectsModule />
         </Route>
 
         <Route exact path="/about">
