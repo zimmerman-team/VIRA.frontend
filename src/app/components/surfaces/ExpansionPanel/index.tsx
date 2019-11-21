@@ -32,7 +32,7 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
               <ExpandMoreIcon
                 fontSize="large"
                 css={`
-                  color: ${ProjectPalette.icon.black};
+                  color: ${ProjectPalette.common.black};
                 `}
               />
             }
