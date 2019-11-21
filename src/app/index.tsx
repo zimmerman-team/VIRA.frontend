@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { MainRoutes } from 'app/Routes';
-import { PositionedSnackbar } from 'app/components/datadisplay/snackbar';
 import { useStyles } from 'app/modules/global/useStyles';
 import { useTheme } from '@material-ui/core';
 import PrimarySearchAppBar from 'app/modules/global/common/components/AppBar';
@@ -42,7 +41,6 @@ export function App() {
       material
       <MainContent>
         <MainRoutes />
-        <PositionedSnackbar />
       </MainContent>
     </div>
   );
