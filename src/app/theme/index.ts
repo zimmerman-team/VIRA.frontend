@@ -39,7 +39,8 @@ export const ProjectPalette: Palette = {
   },
   text: {
     primary: '#222222',
-    secondary: '#fff',
+    // secondary: '#fff',
+    secondary: '#6f7173',
     disabled: 'rgba(0, 0, 0, 0.38)',
     hint: 'rgba(0, 0, 0, 0.38)',
   },
@@ -170,6 +171,18 @@ export default createMuiTheme({
           transition: 'none !important',
           animation: 'none !important',
         },
+      },
+    },
+    MuiTabs: {
+      indicator: {
+        height: '4px',
+      },
+    },
+    MuiTab: {
+      wrapper: {
+        color: ProjectPalette.common.black,
+        fontWeight: 600,
+        fontSize: '14px',
       },
     },
   },
