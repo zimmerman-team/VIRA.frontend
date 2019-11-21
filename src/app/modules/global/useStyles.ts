@@ -30,10 +30,12 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     drawerOpen: {
       width: drawerWidth,
+      backgroundColor: theme.palette.primary.main,
     },
     drawerClose: {
       overflowX: 'hidden',
       width: '54px',
+      backgroundColor: theme.palette.primary.main,
     },
     drawerHeader: {
       display: 'flex',
