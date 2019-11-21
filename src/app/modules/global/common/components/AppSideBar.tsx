@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 import { SidebarNavButton } from './SidebarNavButton';
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
-import { ProjectPalette } from '../../../../theme';
+import { ProjectPalette } from 'app/theme';
 import { IconMenuToggle } from '../icons/IconMenuToggle';
 import { IconMenuOpen } from '../icons/IconMenuOpen';
 
