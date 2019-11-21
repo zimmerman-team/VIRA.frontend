@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 /* third-party */
 import { withRouter } from 'react-router-dom';
 import useTitle from 'react-use/lib/useTitle';
@@ -7,27 +7,33 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
 function LoginCallback(props: any) {
   useTitle(`Project - Login`);
+  const [error, setError] = useState('');
   const storeUser = useStoreState(state => state.syncVariables.user);
   const setUserAction = useStoreActions(
     actions => actions.syncVariables.setUser
   );
 
   useEffect(() => {
-    props.auth.handleAuthentication().then((results: any) => {
-      setUserAction({
-        email: results.idTokenPayload.email,
-        name: results.idTokenPayload.name,
-        role: '',
-        _id: results.idTokenPayload.sub,
-      });
-    });
+    props.auth
+      .handleAuthentication()
+      .then((results: any) => {
+        setUserAction({
+          email: results.idTokenPayload.email,
+          name: results.idTokenPayload.name,
+          role: '',
+          _id: results.idTokenPayload.sub,
+        });
+      })
+      .catch((err: any) => setError(err.description));
   }, []);
   useEffect(() => {
     props.history.replace('/');
   }, [storeUser]);
 
   return (
-    <div style={{ width: '100%', textAlign: 'center' }}>Loading profile...</div>
+    <div style={{ width: '100%', textAlign: 'center' }}>
+      {error.length > 0 ? error : 'Loading profile...'}
+    </div>
   );
 }
 

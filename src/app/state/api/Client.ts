@@ -2,8 +2,7 @@ import { createClient } from 'react-fetching-library';
 
 import { requestHostInterceptor } from './requestHostInterceptor';
 
-// In real application this const will be stored in ENV's
-const HOST = 'http://localhost:3000/';
+const HOST = process.env.REACT_APP_PROJECT_URL as string;
 
 export const Client = createClient({
   requestInterceptors: [requestHostInterceptor(HOST)],
