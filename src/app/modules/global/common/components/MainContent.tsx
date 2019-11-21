@@ -95,6 +95,14 @@ export function MainContent(props: MainContentParams) {
             <StatItem amount={project.amount} type={project.type} />
           ))}
         </Grid>
+        <Grid container spacing={4}>
+          <Grid item lg={9}>
+            1
+          </Grid>
+          <Grid item lg={3}>
+            2
+          </Grid>
+        </Grid>
       </Container>
     </React.Fragment>
   );
