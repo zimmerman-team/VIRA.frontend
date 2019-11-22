@@ -1,6 +1,6 @@
 //cc:application base#;application routes
 
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { NoMatchPage } from 'app/modules/common/no-match-page';
