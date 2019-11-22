@@ -1,7 +1,8 @@
 /* base */
 import { createStore } from 'easy-peasy';
-import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer } from 'redux-persist';
+import createEncryptor from 'redux-persist-transform-encrypt';
 
 /* interfaces */
 import {
@@ -13,10 +14,18 @@ import {
 import { syncVariables } from 'app/state/api/actionsReducers';
 import userDetails from 'app/state/api/actionsReducers/userDetails';
 
-const persistSessionConfig = {
+const encryptor = createEncryptor({
+  secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
+  onError: error => {
+    // Handle the error
+  },
+});
+
+const persistConfig = {
   storage,
   key: 'storage',
   blacklist: ['snackbar'],
+  transforms: [encryptor],
 };
 
 export interface ApplicationStoreModel {
@@ -31,7 +40,9 @@ const applicationStore: ApplicationStoreModel = {
 
 export const appStore = createStore(applicationStore, {
   reducerEnhancer: reducer => {
-    return persistReducer(persistSessionConfig, reducer);
+    // TODO: check why persistor throws error with encryptor
+    // @ts-ignore
+    return persistReducer(persistConfig, reducer);
   },
 });
 
