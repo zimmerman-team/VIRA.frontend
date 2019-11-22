@@ -7,7 +7,7 @@ import {
   addUserToGroup,
   assignRoleToUser,
 } from '../utils/auth';
-import { genericError } from '../utils/general';
+import { makePass, genericError } from '../utils/general';
 
 import get from 'lodash/get';
 import some from 'lodash/some';
@@ -154,7 +154,7 @@ export function addUser(req: any, res: any) {
           blocked: false,
           email_verified: false,
           verify_email: true,
-          password: 'wPsRZT?&&H%p2sj3',
+          password: makePass(8),
           given_name: name,
           family_name: surname,
           name: `${name} ${surname}`,
