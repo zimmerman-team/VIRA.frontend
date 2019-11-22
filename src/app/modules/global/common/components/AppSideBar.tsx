@@ -7,7 +7,6 @@ import { SidebarNavButton } from './SidebarNavButton';
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import { ProjectPalette } from 'app/theme';
-import { IconMenuToggle } from '../icons/IconMenuToggle';
 import { IconMenuOpen } from '../icons/IconMenuOpen';
 
 interface AppSideBarParams {
@@ -36,14 +35,8 @@ interface AppSideBarParams {
 export function AppSideBar(props: AppSideBarParams) {
   return (
     <Drawer
-      // className={props.classes.drawer}
       variant="permanent"
-      // anchor="left"
       open={props.open}
-      // classes={{
-      //   paper: props.classes.drawerPaper,
-      // }}
-
       className={clsx(props.classes.drawer, {
         [props.classes.drawerOpen]: props.open,
         [props.classes.drawerClose]: !props.open,

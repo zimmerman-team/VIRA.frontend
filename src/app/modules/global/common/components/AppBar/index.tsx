@@ -3,18 +3,14 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-
-import MenuIcon from '@material-ui/icons/Menu';
 import { useStyles } from './useStyles';
 import { MobileRendering } from './MobileRenderingParams';
-import { MenuRendering } from './MenuRenderingParams';
 import { TopBarMobileSection } from './TopBarMobileSection';
 import { TopBarDesktopSection } from './TopBarDesktopSection';
 import { Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import { ProjectPalette } from '../../../../../theme';
 import { IconMenuToggle } from '../../icons/IconMenuToggle';
-// import { TopBarSearchSection } from './TopBarSearchSection';
 
 interface PrimarySearchAppBarParams {
   classes: Record<
