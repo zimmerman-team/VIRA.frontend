@@ -78,7 +78,7 @@
     "depcheck": "depcheck",
     "codecrumbs": "codecrumbs -e src/index.tsx -d src -p 1234 ",
     "start-front": "react-scripts start",
-    "start-back": "nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/server.ts",
+    "start-back": "nodemon --watch 'server/**/*.ts' --exec 'ts-node' --project 'nodetsconfig.json' server/server.ts",
     "start": "yarn start-front & yarn start-back",
     "build": "react-scripts build",
     "test": "react-scripts test",
