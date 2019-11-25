@@ -1,5 +1,6 @@
 import React from 'react';
 import 'styled-components/macro';
+import styled from 'styled-components';
 import { ExpansionPanel as MuiExpansionPanel } from '@material-ui/core';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -8,6 +9,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ExpansionPanelModel } from 'app/components/surfaces/ExpansionPanel/model';
 import Box from '@material-ui/core/Box';
 import { ProjectPalette } from 'app/theme';
+
+const StyledExpandMoreIcon = styled(ExpandMoreIcon)`
+  && {
+    color: ${ProjectPalette.common.black};
+  }
+`;
 
 export const ExpansionPanel = (props: ExpansionPanelModel) => {
   return (
@@ -44,6 +51,7 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
                 }
               }
             `}
+
             expandIcon={
               <ExpandMoreIcon
                 css={`
@@ -51,6 +59,8 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
                 `}
               />
             }
+
+            
           >
             <Typography
               variant="subtitle1"
