@@ -1,37 +1,39 @@
 // @ts-nocheck
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import { useStoreActions } from 'app/state/store/hooks';
 import { SignInLayout } from 'app/modules/SignIn/layout';
-// import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
-function SignInComp(props) {
-  /*const [email, setEmail] = React.useState('');
+function SignIn(props: any) {
+  const [email, setEmail] = React.useState('');
+  const [error, setError] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [showPass, setShowPass] = React.useState(false);
-
-  const loginAction = useStoreActions(actions => actions.spaceCloud.login);
-  const clearLoginErrorAction = useStoreActions(
-    actions => actions.spaceCloud.setError
-  );*/
-
-  // const login = () => loginAction({ email, password, history: props.history });
-
-  /*const user = useStoreState(state => state.spaceCloud.user);
-
-  const storeLoginErr = useStoreState(state => state.spaceCloud.error);
-
   const snackbarAction = useStoreActions(
-    state => state.syncVariables.setSnackbar
-  );*/
+    actions => actions.syncVariables.setSnackbar
+  );
 
-  /* React.useEffect(() => {
-    snackbarAction(storeLoginErr ? (storeLoginErr as string) : '');
-    setTimeout(() => {
-      clearLoginErrorAction({ data: { error: '' }, status: 0 });
-    }, 3000);
-  }, [storeLoginErr]);*/
+  useEffect(() => {
+    snackbarAction(error);
+  }, [error]);
 
-  return <SignInLayout />;
+  const signInAction = () => {
+    if (email.length > 0 && password.length > 0) {
+      props.auth.signIn(email, password, setError);
+    }
+  };
+
+  return (
+    <SignInLayout
+      email={email}
+      password={password}
+      showPass={showPass}
+      setEmail={setEmail}
+      setPassword={setPassword}
+      setShowPass={setShowPass}
+      signInAction={signInAction}
+    />
+  );
 }
 
-export const SignIn = withRouter(SignInComp);
+export default withRouter(SignIn);
