@@ -39,7 +39,7 @@ export const ProjectPalette: ProjectPalette = {
     '600': '#757575',
     '700': '#616161',
     '800': '#424242',
-    '900': '#212121',
+    '900': '#a1a3a6',
     A700: '#616161',
     A100: '#d5d5d5',
     A400: '#303030',
@@ -80,9 +80,6 @@ export const ProjectPalette: ProjectPalette = {
     disabledBackground: 'rgba(0, 0, 0, 0.12)',
     disabled: 'rgba(0, 0, 0, 0.26)',
     active: 'rgba(0, 0, 0, 0.54)',
-  },
-  icon: {
-    black: '#222224',
   },
 };
 
@@ -153,12 +150,12 @@ export const Typography: TypographyOptions = {
     fontWeight: TextStyle.fontWeightBold,
   },
   body1: {
-    fontFamily: 'Inter',
     color: ProjectPalette.text.primary,
     fontFamily: TextStyle.fontFamily,
-    lineHeight: `${1.46429}em`,
-    fontSize: `${0.875}rem`,
-    fontWeight: 400,
+    lineHeight: `1.5`,
+    fontSize: `${1}rem`,
+    letterSpacing: '0.5px',
+    fontWeight: 300,
   },
   body2: {
     color: ProjectPalette.text.primary,
