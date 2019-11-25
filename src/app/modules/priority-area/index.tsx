@@ -1,23 +1,24 @@
-import 'styled-components/macro';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { TabNavigation } from 'app/modules/projects/common/components/TabNavigation';
 
-export const ProjectsModule = () => {
+export const PriorityAreaModule = () => {
   return (
     <React.Fragment>
-      {/* using this element as an helper */}
       <Grid item lg={6} />
-
-      {/* ------------------------------------------------------------------ */}
-      {/* projects table navigation */}
       <Grid item lg={6}>
         <TabNavigation />
       </Grid>
       {/* ------------------------------------------------------------------ */}
-      {/* projects table */}
+      {/* priority area */}
       <Grid item lg={12}>
-        empty
+        Priority Area
+      </Grid>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* projects list */}
+      <Grid item lg={12}>
+        Projects list
       </Grid>
     </React.Fragment>
   );
