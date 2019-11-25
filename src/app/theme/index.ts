@@ -1,10 +1,7 @@
 // @ts-nocheck
 
 import { createMuiTheme } from '@material-ui/core/styles';
-import {
-  Palette,
-  PaletteOptions,
-} from '@material-ui/core/styles/createPalette';
+import { Palette } from '@material-ui/core/styles/createPalette';
 
 import {
   FontStyle,
@@ -42,7 +39,8 @@ export const ProjectPalette: Palette = {
   },
   text: {
     primary: '#222222',
-    secondary: '#fff',
+    // secondary: '#fff',
+    secondary: '#6f7173',
     disabled: 'rgba(0, 0, 0, 0.38)',
     hint: 'rgba(0, 0, 0, 0.38)',
   },
@@ -79,17 +77,19 @@ export const ProjectPalette: Palette = {
 
 export const Typography: TypographyOptions = {
   h1: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${4}rem`,
     fontWeight: TextStyle.fontWeightMedium,
     letterSpacing: '-0.5px',
   },
   h2: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${3.5}rem`,
     fontWeight: TextStyle.fontWeightRegular,
     lineHeight: '64px',
   },
   h3: {
-    fontFamily: 'Inter',
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${3}rem`,
     fontWeight: TextStyle.fontWeightMedium,
     lineHeight: 'normal',
@@ -97,29 +97,33 @@ export const Typography: TypographyOptions = {
     fontStyle: 'normal',
   },
   h4: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${2.125}rem`,
     fontWeight: TextStyle.fontWeightBold,
     letterSpacing: '0.3px',
   },
   h6: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${1.25}rem`,
     fontWeight: TextStyle.fontWeightBold,
     lineHeight: '1.5',
     letterSpacing: 'normal',
   },
   h5: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${1.25}rem`,
-    fontWeight: TextStyle.fontWeightLight,
+    fontWeight: TextStyle.fontWeightMedium,
     lineHeight: '1.5',
   },
   subtitle1: {
-    fontFamily: 'Inter',
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${0.9}rem`,
     fontWeight: TextStyle.fontWeightRegular,
     lineHeight: '1.2',
     letterSpacing: '0.25px',
   },
   subtitle2: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${0.875}rem`,
     fontWeight: TextStyle.fontWeightMedium,
   },
@@ -164,6 +168,18 @@ export default createMuiTheme({
           transition: 'none !important',
           animation: 'none !important',
         },
+      },
+    },
+    MuiTabs: {
+      indicator: {
+        height: '4px',
+      },
+    },
+    MuiTab: {
+      wrapper: {
+        color: ProjectPalette.common.black,
+        fontWeight: 600,
+        fontSize: '14px',
       },
     },
   },

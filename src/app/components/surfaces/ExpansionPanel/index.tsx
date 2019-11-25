@@ -47,7 +47,7 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
             expandIcon={
               <ExpandMoreIcon
                 css={`
-                  color: ${ProjectPalette.text.primary};
+                  color: ${ProjectPalette.common.black};
                 `}
               />
             }
