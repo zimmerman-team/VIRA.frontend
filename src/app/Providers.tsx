@@ -21,7 +21,7 @@ function Providers(props: ProviderProps) {
       {/* redux store provider */}
       <StoreProvider store={appStore}>
         {/* TODO: check why persistor throws error with encryptor */}
-        // @ts-ignore
+        {/* @ts-ignore*/}
         <PersistGate loading={null} persistor={persistor}>
           <ClientContextProvider client={Client}>
             <CssBaseline />

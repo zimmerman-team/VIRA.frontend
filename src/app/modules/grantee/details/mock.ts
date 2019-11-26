@@ -1,5 +1,5 @@
 import { GranteeDetailModel } from 'app/modules/grantee/details/model';
-import { mockDataVar3 as mockDatatable } from 'app/components/datadisplay/Table/mock';
+import { mockDataVar8 as mockDatatable } from 'app/components/datadisplay/Table/mock';
 import { mockData as mockDataInpageNav } from 'app/components/navigation/InPageNavigation/mock';
 import { mockData as mockDataBreadcrumbs } from 'app/components/navigation/Breadcrumbs/mock';
 import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';

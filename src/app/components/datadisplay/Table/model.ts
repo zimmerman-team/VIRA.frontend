@@ -52,6 +52,14 @@ export interface LinkCellModuleModel {
   colSpan?: number;
 }
 
+export interface ButtonCellModuleModel {
+  label: string;
+  // link: string;
+  // extLink?: boolean;
+  disabled: boolean;
+  colSpan?: number;
+}
+
 export interface IconCellModuleModel {
   value: string | string[];
   colSpan?: number;

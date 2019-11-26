@@ -11,6 +11,7 @@ import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
 import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
+import { ButtonCellModule } from 'app/components/datadisplay/Table/common/ButtonCell';
 import MultiValuesCell from 'app/components/datadisplay/Table/common/MultiValuesCell';
 
 export const mockDataVar1: TableModuleModel = {
@@ -980,4 +981,96 @@ export const mockDataVar7: TableModuleModel = {
     selectableRows: 'none',
   },
   columnsCell: [''],
+};
+
+export const mockDataVar8: TableModuleModel = {
+  title: 'Projects',
+  data: [
+    [
+      '11003399',
+      '31 Dec 2018',
+      'Implementation',
+      'Promoting Opportunities for Women s Empowerment and Rights …',
+      'Label',
+      '00',
+    ],
+    [
+      '11003399',
+      '31 Dec 2018',
+      'Implementation',
+      'Promoting Opportunities for Women s Empowerment and Rights …',
+      'Label',
+      '00',
+    ],
+    [
+      '11003399',
+      '31 Dec 2018',
+      'Implementation',
+      'Promoting Opportunities for Women s Empowerment and Rights …',
+      'Label',
+      '00',
+    ],
+  ],
+  columns: [
+    {
+      name: 'ID',
+      options: {
+        filter: false,
+      },
+    },
+    {
+      name: 'DATE',
+      options: {
+        filter: true,
+        filterType: 'checkbox',
+      },
+    },
+    {
+      name: 'Label',
+      options: {
+        filter: true,
+        filterType: 'checkbox',
+      },
+    },
+    {
+      name: 'Title',
+      options: {
+        filter: true,
+        filterType: 'checkbox',
+        customBodyRender: value => {
+          return <LinkCellModule value={value} link={''} />;
+        },
+      },
+    },
+    {
+      name: 'Lable',
+      options: {
+        filter: true,
+        filterType: 'checkbox',
+      },
+    },
+    {
+      name: '',
+      options: {
+        filter: true,
+        filterType: 'checkbox',
+        customBodyRender: label => {
+          return <ButtonCellModule label="Label" disabled={false} />;
+        },
+      },
+    },
+  ],
+  options: {
+    print: true,
+    search: false,
+    filter: false,
+    download: true,
+    rowHover: false,
+    pagination: false,
+    viewColumns: true,
+    responsive: 'scrollFullHeight',
+    filterType: 'checkbox',
+    selectableRows: 'none',
+  },
+  columnsCell: ['', '', '', 'LinkCellModule', '', ''],
 };

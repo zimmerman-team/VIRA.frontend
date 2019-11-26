@@ -51,7 +51,6 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
                 }
               }
             `}
-
             expandIcon={
               <ExpandMoreIcon
                 css={`
@@ -59,8 +58,6 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
                 `}
               />
             }
-
-
           >
             <Typography
               variant="subtitle1"
