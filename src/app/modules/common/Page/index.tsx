@@ -35,20 +35,13 @@ const Page = (props: PageProps) => {
     <MainContainer maxWidth="xl">
       <MainGrid container>
         <GridItem item md={12}>
-          <Box
-            paddingLeft="240px"
-            height="100%"
-            // css={`
-            //   background-color: #f7f7f7;
-            // `}
-          >
+          <Box paddingLeft="240px" height="100%" bgcolor="#f7f7f7">
             {props.breadcrumbs && (
               <BreadCrumbs
                 currentLocation={props.breadcrumbs.currentLocation}
                 previousLocations={props.breadcrumbs.previousLocations}
               />
             )}
-
             {props.title && (
               <Typography
                 variant="h3"

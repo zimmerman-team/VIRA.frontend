@@ -30,7 +30,6 @@ export function App() {
         theme: theme,
         handleDrawerClose: handleDrawerClose,
       })}
-
       {AppSideBar({
         classes: classes,
         open: open,
@@ -39,8 +38,8 @@ export function App() {
         theme: theme,
         navItems: navItems,
       })}
-
-      <MainContent classes={classes} open={open}>
+      material
+      <MainContent>
         <MainRoutes />
       </MainContent>
     </div>

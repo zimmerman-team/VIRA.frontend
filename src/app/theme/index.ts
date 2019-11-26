@@ -8,6 +8,14 @@ import {
   TypographyOptions,
 } from '@material-ui/core/styles/createTypography';
 
+interface Icon {
+  black: string;
+}
+
+interface ProjectPalette extends Palette {
+  icon: Icon;
+}
+
 export const TextStyle: FontStyle = {
   fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
   fontSize: 14,
@@ -17,7 +25,7 @@ export const TextStyle: FontStyle = {
   fontWeightBold: 700,
 };
 
-export const ProjectPalette: Palette = {
+export const ProjectPalette: ProjectPalette = {
   tonalOffset: 0.2,
   background: { paper: '#fff', default: '#fafafa' },
   contrastThreshold: 3,
@@ -39,7 +47,8 @@ export const ProjectPalette: Palette = {
   },
   text: {
     primary: '#222222',
-    secondary: '#fff',
+    // secondary: '#fff',
+    secondary: '#6f7173',
     disabled: 'rgba(0, 0, 0, 0.38)',
     hint: 'rgba(0, 0, 0, 0.38)',
   },
@@ -71,9 +80,6 @@ export const ProjectPalette: Palette = {
     disabledBackground: 'rgba(0, 0, 0, 0.12)',
     disabled: 'rgba(0, 0, 0, 0.26)',
     active: 'rgba(0, 0, 0, 0.54)',
-  },
-  icon: {
-    black: '#222224',
   },
 };
 
@@ -144,12 +150,12 @@ export const Typography: TypographyOptions = {
     fontWeight: TextStyle.fontWeightBold,
   },
   body1: {
-    fontFamily: 'Inter',
     color: ProjectPalette.text.primary,
     fontFamily: TextStyle.fontFamily,
-    lineHeight: `${1.46429}em`,
-    fontSize: `${0.875}rem`,
-    fontWeight: 400,
+    lineHeight: `1.5`,
+    fontSize: `${1}rem`,
+    letterSpacing: '0.5px',
+    fontWeight: 300,
   },
   body2: {
     color: ProjectPalette.text.primary,
@@ -170,6 +176,18 @@ export default createMuiTheme({
           transition: 'none !important',
           animation: 'none !important',
         },
+      },
+    },
+    MuiTabs: {
+      indicator: {
+        height: '4px',
+      },
+    },
+    MuiTab: {
+      wrapper: {
+        color: ProjectPalette.common.black,
+        fontWeight: 600,
+        fontSize: '14px',
       },
     },
   },

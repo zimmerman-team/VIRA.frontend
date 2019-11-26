@@ -67,9 +67,9 @@ export const InputForm = (props: LayoutModel) => {
         />
         <ContainedButton
           text="Sign in"
-          onClick={() => props.login()}
-          disabled={props.email === '' || props.password === ''}
           data-testid="login-button"
+          onClick={() => props.signInAction()}
+          disabled={props.email === '' || props.password === ''}
         />
       </Form>
     </Container>
