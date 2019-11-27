@@ -8,13 +8,11 @@ import { App } from 'app';
 import * as _ from 'styled-components/cssprop';
 
 import Providers from 'app/Providers';
-import { PositionedSnackbar } from 'app/components/datadisplay/snackbar';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Providers>
     <App />
-    <PositionedSnackbar />
   </Providers>,
   document.getElementById('root')
 );
