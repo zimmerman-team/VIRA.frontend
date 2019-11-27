@@ -1,3 +1,4 @@
+// @ts-nocheck
 // cc:application base#;application providers
 import React, { ReactNode } from 'react';
 import theme from 'app/theme';
@@ -21,7 +22,6 @@ function Providers(props: ProviderProps) {
       {/* redux store provider */}
       <StoreProvider store={appStore}>
         {/* TODO: check why persistor throws error with encryptor */}
-        // @ts-ignore
         <PersistGate loading={null} persistor={persistor}>
           <ClientContextProvider client={Client}>
             <CssBaseline />
