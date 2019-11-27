@@ -10,9 +10,12 @@ import { useStoreState } from 'app/state/store/hooks';
 import LandingLayout from 'app/modules/landing';
 import About from 'app/modules/about';
 import { ProjectsModule } from 'app/modules/projects';
-import SignInModule from 'app/modules/SignIn';
-import LoginCallbackModule from 'app/modules/loginCallback';
+import SignInModule from 'app/modules/sign-in';
+import LoginCallbackModule from 'app/modules/sign-in-callback';
+import { ProjectDetailLayout } from 'app/modules/projects/sub-modules/project-detail';
+import { ReportDetailLayout } from 'app/modules/reports/sub-modules';
 
+/* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
   component: ReactModule,
   user: UserModel | null,
@@ -25,6 +28,7 @@ function redirectUnAuth<ReactModule>(
   return component;
 }
 
+/* todo: let's move this logic somewhere else */
 function redirectAuth(user: UserModel | null) {
   if (user) {
     return <Redirect to="/" />;
@@ -42,11 +46,23 @@ export function MainRoutes() {
         </Route>
 
         <Route exact path="/">
-          {redirectUnAuth(<LandingLayout />, storeUser)}
+          {/*{redirectUnAuth(<LandingLayout />, storeUser)}*/}
+          {/*{redirectUnAuth(<LandingLayout />, storeUser)}*/}
+          <LandingLayout />
         </Route>
 
         <Route exact path="/projects">
-          {redirectUnAuth(<ProjectsModule />, storeUser)}
+          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
+          <ProjectsModule />
+        </Route>
+        <Route exact path="/projects/detail">
+          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
+          <ProjectDetailLayout />
+        </Route>
+
+        <Route exact path="/reports/detail">
+          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
+          <ReportDetailLayout />
         </Route>
 
         <Route exact path="/about">
