@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { MainRoutes } from 'app/Routes';
-import { useStyles } from 'app/modules/global/useStyles';
+import { useStyles } from 'app/modules/common/useStyles';
 import { useTheme } from '@material-ui/core';
-import PrimarySearchAppBar from 'app/modules/global/components/AppBar';
-import { AppSideBar } from 'app/modules/global/components/AppSideBar';
-import { NavItems } from 'app/modules/global/consts';
-import { MainContent } from 'app/modules/global/components/MainContent';
+import PrimarySearchAppBar from 'app/modules/common/components/AppBar';
+import { AppSideBar } from 'app/modules/common/components/AppSideBar';
+import { NavItems } from 'app/modules/common/consts';
+import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 import { PositionedSnackbar } from 'app/components/datadisplay/snackbar';
 
 export function App() {
@@ -41,9 +41,9 @@ export function App() {
         navItems={NavItems}
       />
 
-      <MainContent>
+      <PageWrapper>
         <MainRoutes />
-      </MainContent>
+      </PageWrapper>
 
       <PositionedSnackbar />
     </div>
