@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card';
 import { projectsMock } from 'app/modules/landing/common/projectsMock';
 import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
 import { StatItem } from 'app/modules/landing/common/StatItem';
-import { CardFiller } from 'app/modules/global/components/CardFiller';
+import { CardFiller } from 'app/modules/common/components/cards/common/CardFiller';
 
 const LandingLayout = () => {
   return (

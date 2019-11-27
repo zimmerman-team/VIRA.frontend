@@ -5,21 +5,14 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
-import { StatItem } from 'app/modules/common/components/StatItem';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
-import { Description } from 'app/modules/common/components/DescriptionParams';
-import {
-  ProjectTitleMock,
-  ProjectStatMock,
-  ProjectOutcomeCardMock,
-  DescriptionMock,
-} from 'app/modules/projects/sub-modules/project-detail/mock';
+import { ReportTitleMock } from 'app/modules/reports/sub-modules/report-detail/mock';
+import { ReportOutcomeCardMock } from 'app/modules/reports/sub-modules/report-detail/mock';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/grantees/sub-modules/grantee-detail/mock';
 
-export const ProjectDetailLayout = () => (
+export const ReportDetailLayout = () => (
   <React.Fragment>
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
@@ -39,22 +32,8 @@ export const ProjectDetailLayout = () => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
-    <Grid item container lg={6} direction="column">
-      <TitleFragment {...ProjectTitleMock} />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* stat fragment */}
-    <Grid item container lg={6} alignItems="center" wrap="nowrap">
-      <StatItem {...ProjectStatMock[0]} />
-      <StatItemDivider />
-      <StatItem {...ProjectStatMock[1]} />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* project description */}
-    <Grid item xs={12} lg={12}>
-      <Description {...DescriptionMock} />
+    <Grid item container lg={12} direction="column">
+      <TitleFragment {...ReportTitleMock} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
@@ -69,8 +48,8 @@ export const ProjectDetailLayout = () => (
     {/* ---------------------------------------------------------------------*/}
     {/* outcome cards */}
     <Grid item container xs={12} lg={6}>
-      <OutcomeCard {...ProjectOutcomeCardMock[0]} />
-      <OutcomeCard {...ProjectOutcomeCardMock[1]} />
+      <OutcomeCard {...ReportOutcomeCardMock[0]} />
+      <OutcomeCard {...ReportOutcomeCardMock[1]} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}

@@ -6,16 +6,17 @@ import { ProjectPalette } from 'app/theme';
 
 export interface TitleParams {
   title: string;
-  id: string;
+  id?: string;
   date?: string;
-  note: string;
-  url_note: string;
-  url: string;
-  description: string;
+  note?: string;
+  url_note?: string;
+  url?: string;
 }
 export const TitleFragment = (props: TitleParams) => {
   return (
     <React.Fragment>
+      {/* ---------------------------- */}
+      {/* title */}
       <Typography
         css={`
           && {
@@ -27,48 +28,67 @@ export const TitleFragment = (props: TitleParams) => {
         {props.title}
       </Typography>
       <Box height="10px" />
-      <Typography
-        css={`
-          && {
-            font-size: 12px;
-            line-height: 1.33;
-            letter-spacing: 2px;
-            color: ${ProjectPalette.common.black};
-          }
-        `}
-      >
-        {props.id}
-      </Typography>
-      <Box height="10px" />
-      <Typography
-        css={`
-          && {
-            font-size: 12px;
-            line-height: 1.33;
-            letter-spacing: 2px;
-            color: ${ProjectPalette.common.black};
-          }
-        `}
-      >
-        {props.note}
-      </Typography>
-      <Box height="10px" />
-      <Typography
-        css={`
-          && {
-            font-size: 12px;
-            line-height: 1.33;
-            letter-spacing: 2px;
 
-            a {
-              text-decoration: none;
-              color: ${ProjectPalette.secondary.main};
+      {/* ---------------------------- */}
+      {/* id */}
+      {props.id && (
+        <React.Fragment>
+          <Typography
+            css={`
+              && {
+                font-size: 12px;
+                line-height: 1.33;
+                letter-spacing: 2px;
+                color: ${ProjectPalette.common.black};
+              }
+            `}
+          >
+            {props.id}
+          </Typography>
+          <Box height="10px" />
+        </React.Fragment>
+      )}
+
+      {/* ---------------------------- */}
+      {/* note */}
+      {props.note && (
+        <React.Fragment>
+          <Typography
+            css={`
+              && {
+                font-size: 12px;
+                line-height: 1.33;
+                letter-spacing: 2px;
+                color: ${ProjectPalette.common.black};
+              }
+            `}
+          >
+            {props.note}
+          </Typography>
+          <Box height="10px" />
+        </React.Fragment>
+      )}
+
+      {/* ---------------------------- */}
+      {/* url */}
+      {props.url && (
+        <Typography
+          css={`
+            && {
+              font-size: 12px;
+              line-height: 1.33;
+              letter-spacing: 2px;
+
+              a {
+                text-decoration: none;
+                color: ${ProjectPalette.secondary.main};
+              }
             }
-          }
-        `}
-      >
-        <a href={props.url}>{props.url_note}</a>
-      </Typography>
+          `}
+        >
+          <a href={props.url}>{props.url_note}</a>
+        </Typography>
+      )}
     </React.Fragment>
   );
 };

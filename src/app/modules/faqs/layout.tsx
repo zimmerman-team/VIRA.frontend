@@ -1,18 +1,21 @@
 import React from 'react';
-import Page from 'app/modules/common/Page/index';
-import { Box, Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { FaqsModel } from 'app/modules/faqs/model';
 import { ExpansionPanel } from 'app/components/surfaces/ExpansionPanel';
+import { TitleFragment } from 'app/modules/common/components/TitleParams';
 
-export const FaqsLayout = (props: FaqsModel) => {
-  return (
-    <>
-      <Page title={props.title}>
-        <Grid container>
-          <ExpansionPanel faqItems={props.faqItems} />
-        </Grid>
-      </Page>
-      <Box height="40px" width="100%" />
-    </>
-  );
-};
+export const FaqsLayout = (props: FaqsModel) => (
+  <React.Fragment>
+    {/* ---------------------------------------------------------------------*/}
+    {/* title fragment */}
+    <Grid item container xs={12} lg={12}>
+      <TitleFragment title="FAQ" />
+    </Grid>
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* FAQ's fragment */}
+    <Grid item xs={12} lg={12}>
+      <ExpansionPanel faqItems={props.faqItems} />
+    </Grid>
+  </React.Fragment>
+);
