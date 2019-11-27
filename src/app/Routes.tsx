@@ -11,9 +11,11 @@ import LandingLayout from 'app/modules/landing';
 import About from 'app/modules/about';
 import { ProjectsModule } from 'app/modules/projects';
 import SignInModule from 'app/modules/sign-in';
-import LoginCallbackModule from 'app/modules/sign-in-callback';
+import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
 import { ProjectDetailLayout } from 'app/modules/projects/sub-modules/project-detail';
-import { ReportDetailLayout } from 'app/modules/reports/sub-modules';
+import { ReportDetailLayout } from 'app/modules/reports/sub-modules/report-detail';
+import { GranteeDetailLayout } from 'app/modules/grantees/sub-modules/grantee-detail';
+import { Faqs } from 'app/modules/faqs';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -63,6 +65,20 @@ export function MainRoutes() {
         <Route exact path="/reports/detail">
           {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
           <ReportDetailLayout />
+        </Route>
+
+        <Route exact path="/reports/detail">
+          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
+          <ReportDetailLayout />
+        </Route>
+
+        <Route exact path="/grantees/detail">
+          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
+          <GranteeDetailLayout />
+        </Route>
+
+        <Route exact path="/faq">
+          <Faqs />
         </Route>
 
         <Route exact path="/about">
