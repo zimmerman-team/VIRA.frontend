@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* base */
 import { createStore } from 'easy-peasy';
 import storage from 'redux-persist/lib/storage';
@@ -41,7 +42,6 @@ const applicationStore: ApplicationStoreModel = {
 export const appStore = createStore(applicationStore, {
   reducerEnhancer: reducer => {
     // TODO: check why persistor throws error with encryptor
-    // @ts-ignore
     return persistReducer(persistConfig, reducer);
   },
 });
