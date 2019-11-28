@@ -15,12 +15,12 @@ export const OutcomeCard = (props: OutcomeCardParams) => {
   return (
     <Grid item lg={12}>
       <Card>
-        <CardHeader title={props.title} />
+        <CardHeader title={props.title} css={``} />
         <CardContent>
           <Typography>{props.description}</Typography>
         </CardContent>
       </Card>
-      <Box height="30px" width="100%" />
+      <Box height="24px" width="100%" />
     </Grid>
   );
 };

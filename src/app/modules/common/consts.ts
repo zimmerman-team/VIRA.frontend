@@ -14,51 +14,52 @@ export interface NavItemParams {
 
 export const NavItems: NavItemParams[] = [
   {
-    label: 'landing',
+    label: 'Dashboard',
     path: '/',
   },
   {
-    label: 'projects',
-    path: '/projects',
+    label: 'Projects',
+    path: '/list/projects',
   },
   /* ------------------------------------------------------------------------ */
   /* debug */
   {
-    label: 'project detail',
+    label: 'Grantees',
+    path: '/list/grantees',
+  },
+  /* ---------------------------- */
+  {
+    label: 'Reports',
+    path: '/list/reports',
+  },
+  /* ------------------------------------------------------------------------ */
+  /* debug */
+  {
+    label: 'Project Detail',
     path: '/projects/detail',
   },
 
   {
-    label: 'reports detail',
+    label: 'Reports Detail',
     path: '/reports/detail',
   },
   /* ---------------------------- */
   {
-    label: 'grantees detail',
+    label: 'Grantees Detail',
     path: '/grantees/detail',
   },
   {
-    label: 'if priority area',
+    label: 'IF Priority Area / SDGs',
     path: '/if-priority-area',
   },
-  /* ------------------------------------------------------------------------ */
-  /* debug */
-  /*{
-    label: 'grantee detail',
-    path: '/grantees/detail',
-  },*/
-  /* ---------------------------- */
-  {
-    label: 'reports',
-    path: '/reports',
-  },
+
   /* ------------------------------------------------------------------------ */
   /* debug */
 
   /* ---------------------------- */
 
   {
-    label: 'faq',
+    label: 'FAQ',
     path: '/faq',
   },
   /* ------------------------------------------------------------------------ */
@@ -89,12 +90,12 @@ export const NavItems: NavItemParams[] = [
   },*/
   /* ---------------------------- */
   {
-    label: 'sdg',
+    label: 'SDGs',
     path: '/sdg',
   },
   {
-    label: 'privacy',
-    path: '/sdg',
+    label: 'Privacy',
+    path: '/privacy',
   },
   /* ------------------------------------------------------------------------ */
   /* debug */

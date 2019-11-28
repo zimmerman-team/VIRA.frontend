@@ -7,8 +7,6 @@ import { IconDashBoard } from 'app/modules/common/icons/IconDashBoard';
 import { IconProjects } from 'app/modules/common/icons/IconProjects';
 import { ListItemText } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import { LocationDescriptor } from 'history';
-import { ProjectPalette } from 'app/theme';
 
 interface SidebarNavButtonParams {
   text: string;

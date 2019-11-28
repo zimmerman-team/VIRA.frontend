@@ -7,6 +7,8 @@ import { projectsMock } from 'app/modules/landing/common/projectsMock';
 import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
 import { StatItem } from 'app/modules/landing/common/StatItem';
 import { CardFiller } from 'app/modules/common/components/cards/common/CardFiller';
+import TableModule from 'app/components/datadisplay/Table';
+import { ProjectListMock } from 'app/modules/list-module/mock';
 
 const LandingLayout = () => {
   return (
@@ -54,12 +56,7 @@ const LandingLayout = () => {
       {/* -------------------------------------------------------------- */}
       {/* projects */}
       <Grid item sm={12} lg={12}>
-        <Card>
-          <CardHeader title="Projects" />
-          <CardContent>
-            <CardFiller />
-          </CardContent>
-        </Card>
+        <TableModule {...ProjectListMock} />
       </Grid>
     </>
   );

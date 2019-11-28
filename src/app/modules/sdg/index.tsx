@@ -1,8 +1,6 @@
 import 'styled-components/macro';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { TabNavigation } from 'app/modules/projects/common/components/TabNavigation';
-import { NavItemParams } from 'app/modules/common/consts';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,30 +8,12 @@ import { ProjectListMock } from 'app/modules/list-module/mock';
 import TableModule from 'app/components/datadisplay/Table';
 import { ProjectPalette } from 'app/theme';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
+
 import { PriorityAreaNavMock } from 'app/modules/priority-area/mock';
 
-const navItemMock: NavItemParams[] = [
-  {
-    label: 'Projects',
-    path: '/projects',
-  },
-  {
-    label: 'Grantee',
-    path: '/projects/grantee',
-  },
-  {
-    label: 'Grantee',
-    path: '/projects/grantee',
-  },
-];
-
-export const PriorityAreaModule = () => {
+export const SdgModule = () => {
   return (
     <React.Fragment>
-      <Grid item lg={6} />
-      <Grid item lg={6}>
-        <TabNavigation tabs={navItemMock} />
-      </Grid>
       {/* using this element as an helper */}
       <Grid item lg={9} />
 

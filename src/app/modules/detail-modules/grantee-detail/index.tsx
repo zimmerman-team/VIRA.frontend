@@ -3,16 +3,16 @@ import Grid from '@material-ui/core/Grid';
 import TableModule from 'app/components/datadisplay/Table';
 import { ContactsCard } from 'app/components/surfaces/Cards/ContactsCard';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
-import { GranteeTitleMock } from 'app/modules/grantees/sub-modules/grantee-detail/mock';
+import { GranteeTitleMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import { Description } from 'app/modules/common/components/DescriptionParams';
-import { GranteeDescriptionMock } from 'app/modules/grantees/sub-modules/grantee-detail/mock';
+import { GranteeDescriptionMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { GranteeProjectListMock } from 'app/modules/grantees/sub-modules/grantee-detail/mock';
-import { GranteeContactCardMock } from 'app/modules/grantees/sub-modules/grantee-detail/mock';
-import { GranteeBreadCrumbsMock } from 'app/modules/grantees/sub-modules/grantee-detail/mock';
+import { GranteeProjectListMock } from 'app/modules/detail-modules/grantee-detail/mock';
+import { GranteeContactCardMock } from 'app/modules/detail-modules/grantee-detail/mock';
+import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
 
 export const GranteeDetailLayout = () => (
   <React.Fragment>

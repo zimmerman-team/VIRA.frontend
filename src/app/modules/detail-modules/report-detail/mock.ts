@@ -10,8 +10,6 @@ export const ReportTitleMock: TitleParams = {
   note: '*earliest and latest activity start dates',
   url_note: 'Grantee Title and Link to it',
   url: 'https://www.google.com',
-  description:
-    'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',
 };
 
 export const ReportStatMock: StatParams[] = [
@@ -27,12 +25,26 @@ export const ReportStatMock: StatParams[] = [
 
 export const ReportOutcomeCardMock: OutcomeCardParams[] = [
   {
+    title: 'Contacts',
+    description: ' Amsterda, 1396TH, Netherlands',
+  },
+  {
     title: 'Key outcomes',
     description:
-      ' Prisoners recidivism reduced through skills-training demonstrably improving their labor market access and retention upon release',
+      'Prisoners recidivism reduced through skills-training demonstrably improving their labor market access and retention upon release',
   },
   {
     title: 'Indicator and verification',
+    description:
+      'Number of prisoners obtaining a Tertiary and Vocational Education certificate, labor market connection after one year after the release from prison',
+  },
+  {
+    title: 'Future plans',
+    description:
+      'Prisoners recidivism reduced through skills-training demonstrably improving their labor market access and retention upon release',
+  },
+  {
+    title: 'Other comments',
     description:
       'Number of prisoners obtaining a Tertiary and Vocational Education certificate, labor market connection after one year after the release from prison',
   },

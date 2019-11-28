@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Typography, ProjectPalette } from 'app/theme';
+import { ProjectTypography, ProjectPalette } from 'app/theme';
 
 interface RowContainerModel {
   hover?: boolean;
@@ -23,8 +23,8 @@ export const LinkContainer = styled.div`
 
 export const CellItem = styled.div`
   padding: 14px 40px 14px 23px;
-  font-family: ${Typography.fontFamily};
-  font-size: ${Typography.fontSize};
+  font-family: ${ProjectTypography.fontFamily};
+  font-size: ${ProjectTypography.fontSize};
   line-height: 1.71;
   letter-spacing: 0.25px;
 `;

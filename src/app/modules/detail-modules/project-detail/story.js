@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ProjectDetailLayout } from './';
+import { ProjectDetailLayout } from 'src/app/modules/detail-modules/project-detail/index';
 import Providers from 'app/Providers';
 import { MainContent } from 'app/modules/global/components/MainContent';
 

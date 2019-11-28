@@ -83,7 +83,7 @@ export const ProjectPalette: ProjectPalette = {
   },
 };
 
-export const Typography: TypographyOptions = {
+export const ProjectTypography: TypographyOptions = {
   h1: {
     fontFamily: TextStyle.fontFamily,
     fontSize: `${4}rem`,
@@ -190,6 +190,11 @@ export default createMuiTheme({
         fontSize: '14px',
       },
     },
+    MuiCardHeader: {
+      root: {
+        paddingBottom: 0,
+      },
+    },
   },
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg', 'xl'],
@@ -247,7 +252,7 @@ export default createMuiTheme({
       complex: 375,
     },
   }, */
-  typography: Typography,
+  typography: ProjectTypography,
   zIndex: {
     modal: 1300,
     snackbar: 1400,
