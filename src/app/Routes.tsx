@@ -15,6 +15,7 @@ import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callbac
 import { ProjectDetailLayout } from 'app/modules/projects/sub-modules/project-detail';
 import { ReportDetailLayout } from 'app/modules/reports/sub-modules/report-detail';
 import { GranteeDetailLayout } from 'app/modules/grantees/sub-modules/grantee-detail';
+import { CreateReport } from 'app/modules/reports/sub-modules/create-report';
 import { Faqs } from 'app/modules/faqs';
 
 /* todo: let's move this logic somewhere else */
@@ -49,7 +50,6 @@ export function MainRoutes() {
 
         <Route exact path="/">
           {/*{redirectUnAuth(<LandingLayout />, storeUser)}*/}
-          {/*{redirectUnAuth(<LandingLayout />, storeUser)}*/}
           <LandingLayout />
         </Route>
 
@@ -58,22 +58,22 @@ export function MainRoutes() {
           <ProjectsModule />
         </Route>
         <Route exact path="/projects/detail">
-          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
+          {/*{redirectUnAuth(<ProjectDetailLayout />, storeUser)}*/}
           <ProjectDetailLayout />
         </Route>
 
         <Route exact path="/reports/detail">
-          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
+          {/*{redirectUnAuth(<ReportDetailLayout />, storeUser)}*/}
           <ReportDetailLayout />
         </Route>
 
-        <Route exact path="/reports/detail">
-          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
-          <ReportDetailLayout />
+        <Route path="/reports/create">
+          {/*{redirectUnAuth(<CreateReport />, storeUser)}*/}
+          <CreateReport />
         </Route>
 
         <Route exact path="/grantees/detail">
-          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
+          {/*{redirectUnAuth(<GranteeDetailLayout />, storeUser)}*/}
           <GranteeDetailLayout />
         </Route>
 

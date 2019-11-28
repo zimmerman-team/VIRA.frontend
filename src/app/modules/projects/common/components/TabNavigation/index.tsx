@@ -3,28 +3,29 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { NavItemParams } from 'app/modules/common/consts';
 
-const navItemMock: NavItemParams[] = [
-  {
-    label: 'Projects',
-    path: '/projects',
-  },
-  {
-    label: 'Grantee',
-    path: '/projects/grantee',
-  },
-  {
-    label: 'Grantee',
-    path: '/projects/grantee',
-  },
-];
-export const TabNavigation = () => {
-  const [value, setValue] = React.useState(0);
+type TabNavigationModel = {
+  tabs: NavItemParams[];
+  onTabChange?: Function;
+  initialTabIndex?: number;
+};
+
+export const TabNavigation = (props: TabNavigationModel) => {
+  const [value, setValue] = React.useState(props.initialTabIndex || 0);
+  React.useEffect(() => {
+    if (props.initialTabIndex !== undefined) {
+      setValue(props.initialTabIndex);
+    }
+  }, [props.initialTabIndex]);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
+    if (props.onTabChange) {
+      props.onTabChange(newValue);
+    } else {
+      setValue(newValue);
+    }
   };
   return (
     <Tabs value={value} onChange={handleChange} variant="fullWidth">
-      {navItemMock.map(navItem => (
+      {props.tabs.map(navItem => (
         <Tab
           label={navItem.label}
           disableFocusRipple

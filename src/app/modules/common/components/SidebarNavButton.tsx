@@ -27,7 +27,7 @@ export function SidebarNavButton(props: SidebarNavButtonParams): JSX.Element {
           justify-content: center;
           align-items: center;
           height: 44px;
-          width: ${props.open ? '256px' : '54px'};
+          width: ${props.open ? '255px' : '54px'};
         `}
       >
         <ListItemIcon

@@ -1,12 +1,12 @@
 import { fade, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/styles/withStyles';
-import { ProjectPalette } from 'app/theme';
+// import { ProjectPalette } from 'app/theme';
 
 export const getInputGeneralStyle = (theme: Theme): CSSProperties => {
   return {
     borderRadius: 2,
     position: 'relative',
-    backgroundColor: ProjectPalette.grey[50],
+    backgroundColor: '#f0f3f7',
     border: '1px solid transparent',
     fontSize: 16,
     padding: '10px 12px',

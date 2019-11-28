@@ -6,6 +6,7 @@ import { ProjectPalette } from 'app/theme';
 
 type Props = {
   text: string;
+  icon?: React.ReactNode;
   disabled?: boolean;
   onClick?: any;
 };
@@ -15,6 +16,10 @@ const BaseContainedButton = styled(props => <Button {...props} />)`
   box-shadow: none !important;
   &:hover {
     background-color: ${ProjectPalette.secondary.light} !important;
+  }
+
+  svg {
+    margin-right: 5px;
   }
 
   & [class*='MuiButton-label'] {
@@ -28,13 +33,16 @@ export const ContainedButton = (props: Props) => {
 
   return (
     <BaseContainedButton
-      variant={'contained'}
+      variant="contained"
       color="secondary"
       disabled={disabled}
       disableRipple
       {...other}
     >
-      {text}
+      <>
+        {props.icon && props.icon}
+        {text}
+      </>
     </BaseContainedButton>
   );
 };
