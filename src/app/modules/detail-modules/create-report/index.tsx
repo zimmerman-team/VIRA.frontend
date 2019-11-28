@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { CreateReportLayout } from 'app/modules/reports/sub-modules/create-report/layout';
+import { CreateReportLayout } from 'app/modules/detail-modules/create-report/layout';
 import {
   tabs,
   breadcrumbs,
-} from 'app/modules/reports/sub-modules/create-report/mock';
+} from 'app/modules/detail-modules/create-report/mock';
 import findIndex from 'lodash/findIndex';
 
 const getTabIndex = (pathname: string) =>

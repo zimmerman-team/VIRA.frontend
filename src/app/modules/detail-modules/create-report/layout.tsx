@@ -4,11 +4,11 @@ import Page from 'app/modules/common/Page/index';
 import { Grid, Typography, Box } from '@material-ui/core';
 import { NavItemParams } from 'app/modules/common/consts';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
-import { TabNavigation } from 'app/modules/projects/common/components/TabNavigation';
+import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import {
   BottomNav,
   Outcomes,
-} from 'app/modules/reports/sub-modules/create-report/sub-modules';
+} from 'app/modules/detail-modules/create-report/sub-modules';
 
 type CreateReportLayoutModel = {
   tabs: NavItemParams[];
@@ -30,8 +30,8 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => {
         </Typography>
         <Grid container>
           <Grid item sm={12}>
-            <TabNavigation
-              tabs={props.tabs}
+            <TabNavigator
+              items={props.tabs}
               onTabChange={props.changeRoute}
               initialTabIndex={props.initialTabIndex}
             />
@@ -44,17 +44,17 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => {
               <Route
                 exact
                 path="/reports/create/indicator-verification"
-                render={() => <div>indicator-verification</div>}
+                render={() => <div></div>}
               />
               <Route
                 exact
                 path="/reports/create/challenges-plans"
-                render={() => <div>challenges-plans</div>}
+                render={() => <div></div>}
               />
               <Route
                 exact
                 path="/reports/create/preview"
-                render={() => <div>preview</div>}
+                render={() => <div></div>}
               />
             </Switch>
           </Grid>

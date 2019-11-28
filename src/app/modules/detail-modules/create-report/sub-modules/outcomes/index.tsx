@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
-import { outcomeCheckboxes } from 'app/modules/reports/sub-modules/create-report/mock';
+import { outcomeCheckboxes } from 'app/modules/detail-modules/create-report/mock';
 
 export const OutcomesView = () => {
   return (
