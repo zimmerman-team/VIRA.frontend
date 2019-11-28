@@ -17,6 +17,7 @@ import { Faqs } from 'app/modules/faqs';
 import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
 import { SdgModule } from 'app/modules/sdg';
+import { PrivacyModule } from 'app/modules/privacy';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -91,9 +92,9 @@ export function MainRoutes() {
           <Faqs />
         </Route>
 
-        {/*<Route exact path="/privacy">
+        <Route exact path="/privacy">
           <PrivacyModule />
-        </Route>*/}
+        </Route>
 
         <Route exact path="/notFound">
           <NoMatchPage />
