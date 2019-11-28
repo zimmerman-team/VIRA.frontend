@@ -8,14 +8,15 @@ import auth from 'app/auth';
 import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
 import LandingLayout from 'app/modules/landing';
-import About from 'app/modules/about';
-import { ProjectsModule } from 'app/modules/projects';
 import SignInModule from 'app/modules/sign-in';
 import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
-import { ProjectDetailLayout } from 'app/modules/projects/sub-modules/project-detail';
-import { ReportDetailLayout } from 'app/modules/reports/sub-modules/report-detail';
-import { GranteeDetailLayout } from 'app/modules/grantees/sub-modules/grantee-detail';
+import { ProjectDetailLayout } from 'app/modules/detail-modules/project-detail';
+import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
+import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail';
 import { Faqs } from 'app/modules/faqs';
+import { ListModule } from 'app/modules/list-module';
+import { PriorityAreaModule } from 'app/modules/priority-area';
+import { SdgModule } from 'app/modules/sdg';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -53,10 +54,11 @@ export function MainRoutes() {
           <LandingLayout />
         </Route>
 
-        <Route exact path="/projects">
+        <Route exact path="/list/:id">
           {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
-          <ProjectsModule />
+          <ListModule />
         </Route>
+
         <Route exact path="/projects/detail">
           {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
           <ProjectDetailLayout />
@@ -77,13 +79,21 @@ export function MainRoutes() {
           <GranteeDetailLayout />
         </Route>
 
+        <Route exact path="/if-priority-area">
+          <PriorityAreaModule />
+        </Route>
+
+        <Route exact path="/sdg">
+          <SdgModule />
+        </Route>
+
         <Route exact path="/faq">
           <Faqs />
         </Route>
 
-        <Route exact path="/about">
-          <About />
-        </Route>
+        {/*<Route exact path="/privacy">
+          <PrivacyModule />
+        </Route>*/}
 
         <Route exact path="/notFound">
           <NoMatchPage />
