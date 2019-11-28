@@ -11,6 +11,7 @@ export interface TitleParams {
   note?: string;
   url_note?: string;
   url?: string;
+  description?: string;
 }
 export const TitleFragment = (props: TitleParams) => {
   return (

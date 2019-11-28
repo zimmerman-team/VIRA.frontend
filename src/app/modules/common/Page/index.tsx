@@ -12,6 +12,7 @@ export type PageProps = {
   subtitle?: string;
   breadcrumbs?: BreadcrumbModel;
   children?: ReactNode;
+  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
 };
 
 const GridItem = styled(Grid)`
@@ -22,9 +23,9 @@ const MainGrid = styled(Grid)`
 `;
 const MainContainer = styled(Container)`
   height: 100vh;
-  overflow-y: auto;
-  max-height: 100vh;
-  min-height: 100vh;
+  // overflow-y: auto;
+  // max-height: 100vh;
+  // min-height: 100vh;
   padding-top: 40px;
 `;
 
@@ -32,10 +33,10 @@ const Page = (props: PageProps) => {
   useTitle(`MLT CMS - ${props.title}`);
 
   return (
-    <MainContainer maxWidth="xl">
+    <MainContainer maxWidth={props.maxWidth}>
       <MainGrid container>
         <GridItem item md={12}>
-          <Box paddingLeft="240px" height="100%" bgcolor="#f7f7f7">
+          <Box height="100%" bgcolor="#f7f7f7">
             {props.breadcrumbs && (
               <BreadCrumbs
                 currentLocation={props.breadcrumbs.currentLocation}

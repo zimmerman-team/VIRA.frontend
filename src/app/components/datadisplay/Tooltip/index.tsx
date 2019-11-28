@@ -12,7 +12,8 @@ type Props = {
 
 const BaseButton = styled(props => <Button {...props} />)`
   && {
-    background-color: ${ProjectPalette.grey[200]};
+    margin-left: 9px;
+    background-color: ${ProjectPalette.primary.main};
     border-radius: 50%;
     height: 15px;
     width: 15px;
@@ -29,7 +30,7 @@ const BaseButton = styled(props => <Button {...props} />)`
       line-height: 1;
     }
     &:hover {
-      background-color: ${ProjectPalette.grey[200]};
+      background-color: ${ProjectPalette.primary.main};
     }
   }
 `;

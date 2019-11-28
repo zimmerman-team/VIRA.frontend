@@ -9,7 +9,7 @@ import { ProjectPalette } from 'app/theme';
 
 export interface Props extends InputBaseProps {
   id: string;
-  label: string;
+  label?: string;
   value?: string;
   defaultValue?: string;
   setValue?: Function;
@@ -38,9 +38,11 @@ const Input = withStyles((theme: Theme) =>
 export const SingleMultiLineTextField = (props: Props) => {
   return (
     <FormControl fullWidth={props.fullWidth}>
-      <InputLabel shrink htmlFor={props.id}>
-        {props.label}
-      </InputLabel>
+      {props.label && (
+        <InputLabel shrink htmlFor={props.id}>
+          {props.label}
+        </InputLabel>
+      )}
       <Input
         {...props}
         placeholder={props.placeholder}

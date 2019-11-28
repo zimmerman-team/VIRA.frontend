@@ -8,12 +8,12 @@ import { ProjectListMock } from 'app/modules/list-module/mock';
 import TableModule from 'app/components/datadisplay/Table';
 import { ProjectPalette } from 'app/theme';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-
 import { PriorityAreaNavMock } from 'app/modules/priority-area/mock';
 
 export const PriorityAreaModule = () => {
   return (
     <React.Fragment>
+      <Grid item lg={6} />
       {/* using this element as an helper */}
       <Grid item lg={9} />
 
