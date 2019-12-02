@@ -10,7 +10,7 @@ import { useStoreState } from 'app/state/store/hooks';
 import LandingLayout from 'app/modules/landing';
 import SignInModule from 'app/modules/sign-in';
 import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
-import { CreateReport } from 'app/modules/detail-modules/create-report';
+import { CreateReport } from 'app/modules/report';
 import { ProjectDetailLayout } from 'app/modules/detail-modules/project-detail';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
 import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail';
@@ -70,7 +70,7 @@ export function MainRoutes() {
           <ReportDetailLayout />
         </Route>
 
-        <Route path="/reports/create">
+        <Route path="/report/create">
           {/*{redirectUnAuth(<CreateReport />, storeUser)}*/}
           <CreateReport />
         </Route>
