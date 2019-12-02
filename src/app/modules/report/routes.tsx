@@ -1,25 +1,26 @@
 // @ts-nocheck
-import React, { ReactChild } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route } from 'react-router-dom';
 import { OutcomesLayout } from 'app/modules/report/sub-modules/outcomes';
 import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
 import { ChallengesPlansLayout } from 'app/modules/report/sub-modules/challenges-plans';
 import { PreviewLayout } from 'app/modules/report/sub-modules/preview';
+import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 
 // import { RouteItemParams } from 'app/modules/report/config';
 
 export const ReportModuleRoutes = () => (
   <React.Fragment>
-    <Route exact path="/report/create/outcomes">
+    <Route exact path="/report/outcomes">
       <OutcomesLayout />
     </Route>
-    <Route exact path="/report/create/indicator-verification">
+    <Route exact path="/report/indicator-verification">
       <IndicatorVerificationLayout />
     </Route>
-    <Route exact path="/report/create/challenges-plans">
+    <Route exact path="/report/challenges-plans">
       <ChallengesPlansLayout />
     </Route>
-    <Route exact path="/report/create/preview">
+    <Route exact path="/report/preview">
       <PreviewLayout />
     </Route>
   </React.Fragment>

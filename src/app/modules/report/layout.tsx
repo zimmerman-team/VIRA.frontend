@@ -6,7 +6,6 @@ import { Grid, Typography, Box } from '@material-ui/core';
 import { NavItemParams } from 'app/modules/common/consts';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { BottomNav } from 'app/modules/report/sub-modules';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
@@ -16,6 +15,7 @@ import { ChallengesPlansLayout } from 'app/modules/report/sub-modules/challenges
 import { PreviewLayout } from 'app/modules/report/sub-modules/preview';
 import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
 import { ReportModuleRoutes } from 'app/modules/report/routes';
+import { BottomNav } from 'app/modules/report/common/bottom-nav';
 
 type CreateReportLayoutModel = {
   tabs: NavItemParams[];
@@ -59,7 +59,7 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
       />
     </Grid>
     <Grid item xs={12} lg={12}>
-      {/*<ReportModuleRoutes />*/}
+      <ReportModuleRoutes />
     </Grid>
 
     <Grid xs={12} lg={12}>

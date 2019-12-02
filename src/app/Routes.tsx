@@ -19,6 +19,7 @@ import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
 import { SdgModule } from 'app/modules/sdg';
 import { PrivacyModule } from 'app/modules/privacy';
+import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -70,7 +71,7 @@ export function MainRoutes() {
           <ReportDetailLayout />
         </Route>
 
-        <Route path="/report/create">
+        <Route path="/report">
           {/*{redirectUnAuth(<CreateReport />, storeUser)}*/}
           <CreateReport />
         </Route>
@@ -102,6 +103,10 @@ export function MainRoutes() {
 
         <Route exact path="/callback">
           <LoginCallbackModule auth={auth} />
+        </Route>
+
+        <Route exact path="/submitted">
+          <SubmittedLayout />
         </Route>
       </Switch>
     </Suspense>
