@@ -30,7 +30,7 @@ const MainContainer = styled(Container)`
 `;
 
 const Page = (props: PageProps) => {
-  useTitle(`MLT CMS - ${props.title}`);
+  useTitle(`M&E - ${props.title}`);
 
   return (
     <MainContainer maxWidth={props.maxWidth}>
