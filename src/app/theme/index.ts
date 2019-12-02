@@ -146,8 +146,9 @@ export const ProjectTypography: TypographyOptions = {
     color: ProjectPalette.primary.light,
     fontFamily: TextStyle.fontFamily,
     lineHeight: `${1.375}em`,
-    fontSize: `${0.6}rem`,
-    fontWeight: TextStyle.fontWeightBold,
+    fontSize: `${0.75}rem`,
+    letterSpacing: '0.42px',
+    fontWeight: TextStyle.fontWeightMedium,
   },
   body1: {
     color: ProjectPalette.text.primary,
