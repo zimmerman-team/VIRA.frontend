@@ -62,3 +62,9 @@ typings/
 
 build/
 
+._.DS_Store
+.DS_Store
+._.*
+
+
+
