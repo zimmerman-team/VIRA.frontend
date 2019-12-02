@@ -8,6 +8,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
 import { notifMock } from 'app/modules/common/components/Notifications/common/mock';
 import { NotificationContainer } from 'app/modules/common/components/Notifications';
+import { UserProfileCard } from 'app/components/surfaces/Cards/UserProfileCard';
+import { mockData } from 'app/components/surfaces/Cards/UserProfileCard/mock';
 
 interface TopBarDesktopSectionParams {
   classes: Record<
@@ -26,6 +28,7 @@ interface TopBarDesktopSectionParams {
 }
 
 export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
+  //TODO: implement logic to handle more than 1 popper.
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -42,35 +45,57 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
 
   return (
     <div className={props.classes.sectionDesktop}>
+      {/* SEARCH */}
       <IconButton aria-label="search" color="primary">
         <SearchIcon />
       </IconButton>
-      <Popper
-        open={open}
-        anchorEl={anchorEl}
-        placement={placement}
-        disablePortal
-      >
-        <NotificationContainer notificationItems={notifMock} />
-      </Popper>
-      <IconButton
-        aria-label="show new notifications"
-        color="primary"
-        onClick={handleClick('bottom-end')}
-      >
-        <Badge badgeContent={17} color="secondary">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton>
-      <IconButton
-        edge="end"
-        aria-label="account of current user"
-        aria-controls={props.menuId}
-        aria-haspopup="true"
-        color="primary"
-      >
-        <AccountCircle />
-      </IconButton>
+
+      {/* NOTIFICATION*/}
+      <>
+        <Popper
+          open={open}
+          anchorEl={anchorEl}
+          placement={placement}
+          disablePortal
+        >
+          <NotificationContainer notificationItems={notifMock} />
+        </Popper>
+        <IconButton
+          aria-label="show new notifications"
+          color="primary"
+          onClick={handleClick('bottom-end')}
+        >
+          <Badge badgeContent={17} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+      </>
+
+      {/* USERPROFILE */}
+      <>
+        <Popper
+          open={open}
+          anchorEl={anchorEl}
+          placement={placement}
+          disablePortal
+        >
+          <UserProfileCard
+            imageSrc={mockData.imageSrc}
+            firstName={mockData.firstName}
+            lastName={mockData.lastName}
+          />
+        </Popper>
+        <IconButton
+          edge="end"
+          aria-label="account of current user"
+          aria-controls={props.menuId}
+          aria-haspopup="true"
+          onClick={handleClick('bottom-end')}
+          color="primary"
+        >
+          <AccountCircle />
+        </IconButton>
+      </>
     </div>
   );
 }
