@@ -23,7 +23,7 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => {
   return (
     <>
       <Page maxWidth={false} breadcrumbs={props.breadcrumbs}>
-        <Typography component="div">
+        <Typography>
           <Box mt={2} mb={2} fontWeight={500} fontSize={20} lineHeight={1.4}>
             Report
           </Box>

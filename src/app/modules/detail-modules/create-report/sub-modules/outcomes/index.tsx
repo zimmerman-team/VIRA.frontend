@@ -15,7 +15,7 @@ import { outcomeCheckboxes } from 'app/modules/detail-modules/create-report/mock
 export const OutcomesView = () => {
   return (
     <Grid container>
-      <Typography component="div">
+      <Typography>
         <Box
           mb={2}
           mt={3}
@@ -36,7 +36,7 @@ export const OutcomesView = () => {
         placeholder="Type"
         setValue={() => console.log('value set')}
       />
-      <Typography component="div">
+      <Typography>
         <Box
           mb={2}
           mt={4}
@@ -58,7 +58,7 @@ export const OutcomesView = () => {
         placeholder="Type"
         setValue={() => console.log('value set')}
       />
-      <Typography component="div">
+      <Typography>
         <Box
           mb={5}
           mt={1}
@@ -74,7 +74,7 @@ export const OutcomesView = () => {
       </Typography>
       <ContainedButton text="Add media (Optional)" icon={<GetAppIcon />} />
       <Box width="100%" height="24px" />
-      <Typography component="div">
+      <Typography>
         <Box
           mb={2}
           mt={4}
@@ -98,7 +98,7 @@ export const OutcomesView = () => {
           </Grid>
         ))}
       </Grid>
-      <Typography component="div">
+      <Typography>
         <Box
           mb={1}
           mt={1}
