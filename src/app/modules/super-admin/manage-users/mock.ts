@@ -1,7 +1,7 @@
-import { ManageTeamsLayoutModel } from 'app/modules/super-admin/manage-teams/models';
+import { ManageUsersLayoutModel } from 'app/modules/super-admin/manage-users/models';
 import { mockData as TeamUserCardMock } from 'app/components/surfaces/Cards/TeamUserCard/mock';
 
-export const mockData: ManageTeamsLayoutModel = {
+export const mockData: ManageUsersLayoutModel = {
   breadcrumbs: {
     currentLocation: '',
     previousLocations: [
@@ -11,14 +11,14 @@ export const mockData: ManageTeamsLayoutModel = {
       },
     ],
   },
-  title: 'Teams',
+  title: 'Users',
   inPageNavigation: {
     locations: [
       {
         items: [
           {
             label: 'Teams',
-            url: 'super-admin/manage-teams',
+            url: 'super-admin/manage-users',
           },
           {
             label: 'Users',
@@ -27,7 +27,7 @@ export const mockData: ManageTeamsLayoutModel = {
         ],
       },
     ],
-    activity: 'Teams',
+    activity: 'Users',
   },
   teamCards: [
     TeamUserCardMock,

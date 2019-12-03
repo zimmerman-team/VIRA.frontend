@@ -22,6 +22,7 @@ import { PrivacyModule } from 'app/modules/privacy';
 import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 import { mockData } from 'app/modules/super-admin/manage-teams/mock';
 import ManageTeams from 'app/modules/super-admin/manage-teams';
+import ManageUsers from 'app/modules/super-admin/manage-users';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -113,6 +114,10 @@ export function MainRoutes() {
 
         <Route exact path="/super-admin/manage-teams">
           <ManageTeams />
+        </Route>
+
+        <Route exact path="/super-admin/manage-users">
+          <ManageUsers />
         </Route>
       </Switch>
     </Suspense>

@@ -75,7 +75,7 @@ export function InPageNavigation(props: InPageNavigationModel) {
                     fontSize={lines.fontSize}
                     variant="button"
                     key={location.label}
-                    to={`/signatory-data/${props.activity}/${location.url}`}
+                    to={`/${location.url}`}
                   >
                     {location.label}
                     <Underline show="true" />
@@ -86,7 +86,7 @@ export function InPageNavigation(props: InPageNavigationModel) {
                 <LocationLink
                   fontSize={lines.fontSize}
                   key={location.label}
-                  to={`/signatory-data/${props.activity}/${location.url}`}
+                  to={`/${location.url}`}
                 >
                   {location.label}
                   <Underline />
