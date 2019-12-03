@@ -5,7 +5,6 @@ import { OutcomesLayout } from 'app/modules/report/sub-modules/outcomes';
 import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
 import { ChallengesPlansLayout } from 'app/modules/report/sub-modules/challenges-plans';
 import { PreviewLayout } from 'app/modules/report/sub-modules/preview';
-import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 
 // import { RouteItemParams } from 'app/modules/report/config';
 
