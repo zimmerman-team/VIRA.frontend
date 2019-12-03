@@ -64,10 +64,10 @@ export function InPageNavigation(props: InPageNavigationModel) {
 
   return (
     <>
-      {props.locations.map(lines => {
+      {props.locations.map((lines, index) => {
         return (
           /* todo: serious layout flaw, needs to be fixed */
-          <Grid container justify="flex-end" xs={12}>
+          <Grid container justify="flex-end" key={index}>
             {lines.items.map(location => {
               if (get(state, 'pathname', '').includes(location.url)) {
                 return (

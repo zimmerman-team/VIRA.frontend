@@ -28,7 +28,10 @@ const BottomContainer = styled(Container)`
 `;
 
 const CardContainer = styled(Card)`
-  padding: 16px 16px 24px 24px;
+  && {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    padding: 16px 16px 24px 24px;
+  }
 `;
 
 const Header = styled(Typography)`
@@ -63,13 +66,7 @@ export function TeamUserCard(props: TeamUserCardModel) {
       <Header variant="body1">{props.title}</Header>
       <Description variant={'subtitle1'}>{props.description}</Description>
       <BottomContainer>
-        <Grid
-          container
-          xs={12}
-          lg={12}
-          justify="space-between"
-          alignItems="flex-end"
-        >
+        <Grid container justify="space-between" alignItems="flex-end">
           <Grid item>
             <Caption variant={'caption'}>Created: {props.dateCreated}</Caption>
           </Grid>
