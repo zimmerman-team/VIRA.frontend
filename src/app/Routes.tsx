@@ -20,6 +20,8 @@ import { PriorityAreaModule } from 'app/modules/priority-area';
 import { SdgModule } from 'app/modules/sdg';
 import { PrivacyModule } from 'app/modules/privacy';
 import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
+import { mockData } from 'app/modules/super-admin/manage-teams/mock';
+import ManageTeams from 'app/modules/super-admin/manage-teams';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -107,6 +109,10 @@ export function MainRoutes() {
 
         <Route exact path="/submitted">
           <SubmittedLayout />
+        </Route>
+
+        <Route exact path="/super-admin/manage-teams">
+          <ManageTeams />
         </Route>
       </Switch>
     </Suspense>
