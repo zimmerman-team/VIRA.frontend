@@ -1,7 +1,7 @@
 import React from 'react';
 import Providers from 'app/Providers';
-import { ManageUsersLayout } from 'app/modules/super-admin/manage-users/layout';
-import { mockData } from 'app/modules/super-admin/manage-users/mock';
+import { ManageUsersLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
+import { mockData } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 
 export default {
   component: ManageUsersLayout,

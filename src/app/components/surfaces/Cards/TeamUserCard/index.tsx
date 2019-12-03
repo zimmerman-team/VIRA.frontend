@@ -26,10 +26,9 @@ const BottomContainer = styled(Container)`
     padding: 0;
   }
 `;
-/* todo: sort this in the theme file */
+
 const CardContainer = styled(Card)`
   && {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     padding: 16px 16px 24px 24px;
   }
 `;

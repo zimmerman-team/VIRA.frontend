@@ -23,7 +23,6 @@ const Title = styled(Typography)`
 
 const IconLabelButton = styled(ContainedButton)`
   && {
-    margin-bottom: 12px;
     width: 100%;
     height: 50px;
     font-size: 1.1428571428571428rem;
@@ -45,6 +44,7 @@ const ButtonIcon = styled(IconButton)`
 
 export type HeaderParams = {
   title: string;
+  buttonLabel: string;
 };
 
 export const HeaderFragment = (props: HeaderParams) => {
@@ -62,7 +62,7 @@ export const HeaderFragment = (props: HeaderParams) => {
         </Box>
       </Header>
       <Grid item container lg={2}>
-        <IconLabelButton text={'Add Team'} icon={<Add />} />
+        <IconLabelButton text={props.buttonLabel} icon={<Add />} />
       </Grid>
     </React.Fragment>
   );
