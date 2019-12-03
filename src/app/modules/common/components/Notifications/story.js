@@ -1,7 +1,7 @@
 import React from 'react';
-import { NotificationContainer } from 'src/app/modules/common/components/Notifications/index';
+import { NotificationContainer } from 'app/modules/common/components/Notifications/index';
 import Providers from 'app/Providers';
-import { notifMock } from 'src/app/modules/common/components/Notifications/common/mock';
+import { notifMock } from 'app/modules/common/components/Notifications/common/mock';
 
 export default {
   component: NotificationContainer,
