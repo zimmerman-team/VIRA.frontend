@@ -7,44 +7,50 @@ import { TeamUserCard } from 'app/components/surfaces/Cards/TeamUserCard';
 import { HeaderFragment } from 'app/modules/super-admin/common/header';
 import styled from 'styled-components/macro';
 import { Pagination } from 'app/components/misc/TablePagination';
+import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
+import { TabNavMock } from 'app/modules/list-module/mock';
 
-const GridContainer = styled(Grid)`
-  && {
-    margin: 0;
-  }
-`;
+export const ManageUsersLayout = (props: ManageUsersLayoutModel) => (
+  <React.Fragment>
+    {/* ---------------------------------------------------------------------*/}
+    {/* breadcrumbs */}
 
-export const ManageUsersLayout = (props: ManageUsersLayoutModel) => {
-  return (
-    <React.Fragment>
-      {/* ---------------------------------------------------------------------*/}
-      {/* breadcrumbs */}
-
+    <Grid item lg={12}>
       <BreadCrumbs {...props.breadcrumbs} />
+    </Grid>
 
-      {/* ---------------------------------------------------------------------*/}
-      {/* InPageNavigation fragment */}
-      <InPageNavigation {...props.inPageNavigation} />
+    {/* ---------------------------------------------------------------------*/}
+    {/* InPageNavigation fragment */}
+    {/*<InPageNavigation {...props.inPageNavigation} />*/}
 
-      {/* ---------------------------------------------------------------------*/}
-      {/* Header */}
+    {/* using this element as an helper */}
+    <Grid item lg={9} />
+
+    {/* ------------------------------------------------------------------ */}
+    {/* projects table navigation */}
+    <Grid item lg={3}>
+      <TabNavigator {...TabNavMock} />
+    </Grid>
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* Header */}
+    <Grid item container lg={12} direction="column">
       <HeaderFragment title={props.title} />
+    </Grid>
 
-      {/* ---------------------------------------------------------------------*/}
-      {/* Cards */}
-      <GridContainer container justify={'space-between'} spacing={3}>
-        {props.teamCards.map((card, index) => (
-          <Grid item xs={12} lg={4} key={index}>
-            <TeamUserCard {...card} />
-          </Grid>
-        ))}
-      </GridContainer>
+    {/* ---------------------------------------------------------------------*/}
+    {/* Cards */}
 
-      {/* ---------------------------------------------------------------------*/}
-      {/* Pagination */}
-      <Grid container justify={'flex-end'}>
-        <Pagination {...props.pagination} />
+    {props.teamCards.map((card, index) => (
+      <Grid item xs={12} lg={4} key={index}>
+        <TeamUserCard {...card} />
       </Grid>
-    </React.Fragment>
-  );
-};
+    ))}
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* Pagination */}
+    <Grid item lg={12} container justify={'flex-end'}>
+      <Pagination {...props.pagination} />
+    </Grid>
+  </React.Fragment>
+);

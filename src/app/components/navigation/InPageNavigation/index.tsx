@@ -15,6 +15,7 @@ const LocationLink = styled(props => <NavLink {...props} />)`
     font-weight: 600;
     line-height: 1.71;
     letter-spacing: 1.25px;
+    /* todo: move to theme file */
     color: #6f7173;
     padding-right: 32px;
     margin-bottom: 20px;

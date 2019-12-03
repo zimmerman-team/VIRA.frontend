@@ -61,10 +61,8 @@ export const HeaderFragment = (props: HeaderParams) => {
           </ButtonIcon>
         </Box>
       </Header>
-      <Grid container>
-        <Grid item lg={2}>
-          <IconLabelButton text={'Add Team'} icon={<Add />} />
-        </Grid>
+      <Grid item container lg={2}>
+        <IconLabelButton text={'Add Team'} icon={<Add />} />
       </Grid>
     </React.Fragment>
   );

@@ -21,7 +21,6 @@ export const IndicatorVerificationLayout = () => (
     </Grid>
 
     <Box width="100%" height="24px" />
-
     {/* ---------------------------------------------------------------------*/}
     {/* options */}
     <Grid item lg={12}>
