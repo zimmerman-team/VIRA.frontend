@@ -4,6 +4,7 @@ import { CSSProperties } from '@material-ui/styles/withStyles';
 
 export const getInputGeneralStyle = (theme: Theme): CSSProperties => {
   return {
+    marginTop: '14px',
     borderRadius: 2,
     position: 'relative',
     backgroundColor: '#f0f3f7',

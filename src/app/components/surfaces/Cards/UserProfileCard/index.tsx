@@ -105,11 +105,13 @@ export const UserProfileCard = (props: UserProfileCardModel) => {
 
         {/* BUTTONS */}
         <OutlinedButton text={'Manage teams & users'} />
-        <OutlinedButton text={'Manage your account'} />
+        <Link to={'/profile/manage-account'}>
+          <OutlinedButton text={'Manage your account'} />
+        </Link>
         <ContainedButton text={'Sign Out'} />
 
         {/* LINKS */}
-        <Link to={'/privacy-policy'}>
+        <Link to={'/privacy'}>
           <Typography variant="caption">Privacy Policy</Typography>
         </Link>
         <Link to={'/terms'}>

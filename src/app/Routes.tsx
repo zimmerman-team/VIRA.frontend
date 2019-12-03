@@ -19,6 +19,8 @@ import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
 import { SdgModule } from 'app/modules/sdg';
 import { PrivacyModule } from 'app/modules/privacy';
+import { ManageAccount } from 'app/modules/super-admin/manage-account';
+import { mockData } from 'app/modules/super-admin/manage-account/mock';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -102,6 +104,10 @@ export function MainRoutes() {
 
         <Route exact path="/callback">
           <LoginCallbackModule auth={auth} />
+        </Route>
+
+        <Route exact path="/profile/manage-account">
+          <ManageAccount {...mockData} />
         </Route>
       </Switch>
     </Suspense>
