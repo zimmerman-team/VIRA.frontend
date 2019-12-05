@@ -53,6 +53,31 @@ export const NavItems: NavItemParams[] = [
     path: '/if-priority-area',
   },
 
+  {
+    label: 'Report: outcomes',
+    path: '/report/outcomes',
+  },
+
+  {
+    label: 'Report: indicator verification',
+    path: '/report/indicator-verification',
+  },
+
+  {
+    label: 'Report: challenges & plans',
+    path: '/report/challenges-plans',
+  },
+
+  {
+    label: 'Report: preview',
+    path: '/report/preview',
+  },
+
+  {
+    label: 'Admin: manage users',
+    path: '/super-admin/manage-users',
+  },
+
   /* ------------------------------------------------------------------------ */
   /* debug */
 
