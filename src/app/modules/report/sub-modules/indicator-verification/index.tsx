@@ -1,3 +1,4 @@
+import 'styled-components/macro';
 import React from 'react';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { Grid, Box } from '@material-ui/core';
@@ -21,7 +22,6 @@ export const IndicatorVerificationLayout = () => (
     </Grid>
 
     <Box width="100%" height="24px" />
-
     {/* ---------------------------------------------------------------------*/}
     {/* options */}
     <Grid item lg={12}>

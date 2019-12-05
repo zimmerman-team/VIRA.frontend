@@ -7,8 +7,8 @@ import { getInputGeneralStyle } from 'app/components/inputs/common/mock';
 import { Theme, withStyles, createStyles } from '@material-ui/core/styles';
 import { ProjectPalette } from 'app/theme';
 
-export interface Props extends InputBaseProps {
-  id: string;
+export interface MultilineTextfieldParams extends InputBaseProps {
+  id?: string;
   label?: string;
   value?: string;
   defaultValue?: string;
@@ -35,7 +35,7 @@ const Input = withStyles((theme: Theme) =>
   })
 )(InputBase);
 
-export const SingleMultiLineTextField = (props: Props) => {
+export const SingleMultiLineTextField = (props: MultilineTextfieldParams) => {
   return (
     <FormControl fullWidth={props.fullWidth}>
       {props.label && (

@@ -1,3 +1,4 @@
+import 'styled-components/macro';
 import React from 'react';
 import {
   Grid,
@@ -6,14 +7,18 @@ import {
   FormControlLabel,
 } from '@material-ui/core';
 import { outcomeCheckboxes } from 'app/modules/report/mock';
+import { InfoCaption } from './InfoCaption';
 
 export interface PriorityOptionParams {
   description: string;
   explanation?: string;
 }
+
 export const PolicyPriorityOptions = (props: PriorityOptionParams) => (
   <React.Fragment>
-    <Typography>{props.description}</Typography>
+    <Typography variant="subtitle2" color="textPrimary">
+      {props.description}
+    </Typography>
     <Grid container>
       {outcomeCheckboxes.map(checkbox => (
         <Grid item key={checkbox.value} lg={6}>
@@ -24,6 +29,6 @@ export const PolicyPriorityOptions = (props: PriorityOptionParams) => (
         </Grid>
       ))}
     </Grid>
-    {props.explanation && <Typography>{props.explanation}</Typography>}
+    {props.explanation && <InfoCaption text={props.explanation} />}
   </React.Fragment>
 );

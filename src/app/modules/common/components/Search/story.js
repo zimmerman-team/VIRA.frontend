@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search } from 'src/app/modules/common/components/Search/index';
+import { Search } from 'app/modules/common/components/Search/index';
 import Providers from 'app/Providers';
 
 export default {

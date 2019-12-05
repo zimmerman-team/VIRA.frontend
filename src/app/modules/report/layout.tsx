@@ -16,6 +16,7 @@ import { PreviewLayout } from 'app/modules/report/sub-modules/preview';
 import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
 import { ReportModuleRoutes } from 'app/modules/report/routes';
 import { BottomNav } from 'app/modules/report/common/bottom-nav';
+import { AddMediaLayout } from './sub-modules/indicator-verification/common/AddMedia';
 
 type CreateReportLayoutModel = {
   tabs: NavItemParams[];
@@ -62,7 +63,9 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
       <ReportModuleRoutes />
     </Grid>
 
-    <Grid xs={12} lg={12}>
+    {/* <AddMediaLayout /> */}
+
+    <Grid item xs={12} lg={12}>
       <BottomNav next={props.onNextBtnClick} back={props.onBackBtnClick} />
     </Grid>
   </React.Fragment>
