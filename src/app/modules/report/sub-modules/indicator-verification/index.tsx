@@ -1,3 +1,4 @@
+import 'styled-components/macro';
 import React from 'react';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { Grid, Box } from '@material-ui/core';
