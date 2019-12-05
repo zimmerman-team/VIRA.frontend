@@ -6,7 +6,6 @@ import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indi
 import { ChallengesPlansLayout } from 'app/modules/report/sub-modules/challenges-plans';
 import { PreviewLayout } from 'app/modules/report/sub-modules/preview';
 
-// import { RouteItemParams } from 'app/modules/report/config';
 
 export const ReportModuleRoutes = () => (
   <React.Fragment>

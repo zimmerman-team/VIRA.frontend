@@ -16,7 +16,14 @@ interface SidebarNavButtonParams {
 }
 export function SidebarNavButton(props: SidebarNavButtonParams): JSX.Element {
   return (
-    <NavLink to={props.path} exact data-testid={props.text}>
+    <NavLink
+      to={props.path}
+      exact
+      data-testid={props.text}
+      css={`
+        text-decoration: none;
+      `}
+    >
       <ListItem
         button
         key={props.text}
