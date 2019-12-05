@@ -35,7 +35,12 @@ export function BreadCrumbs(props: BreadcrumbModel) {
   return (
     <BreadCrumb aria-label="breadcrumb" data-testid="BreadCrumbs">
       {props.previousLocations.map(previousLocation => (
-        <PreviousLink variant="subtitle2" strict to={previousLocation.url}>
+        <PreviousLink
+          variant="subtitle2"
+          strict
+          to={previousLocation.url}
+          key={previousLocation.label}
+        >
           {previousLocation.label}
         </PreviousLink>
       ))}

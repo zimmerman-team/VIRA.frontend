@@ -204,6 +204,11 @@ export default createMuiTheme({
         paddingBottom: 0,
       },
     },
+    MuiCard: {
+      root: {
+        boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
+      },
+    },
   },
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg', 'xl'],
