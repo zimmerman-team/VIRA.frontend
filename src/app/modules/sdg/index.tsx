@@ -2,13 +2,14 @@ import 'styled-components/macro';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
+
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import { ProjectListMock } from 'app/modules/list-module/mock';
 import TableModule from 'app/components/datadisplay/Table';
-import { ProjectPalette } from 'app/theme';
-import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 
+import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
+import graph1 from 'app/assets/images/graph_sdg.png';
 import { PriorityAreaNavMock } from 'app/modules/priority-area/mock';
 
 export const SdgModule = () => {
@@ -28,22 +29,19 @@ export const SdgModule = () => {
       <Grid item xs={12} lg={12}>
         <Card
           css={`
-            height: 315px;
+            //height: 315px;
           `}
         >
           <CardHeader title="Insinger Fonds Priority area" />
           <CardContent
             css={`
-              height: calc(100% - 34px);
+              img {
+                width: 100%;
+                height: auto;
+              }
             `}
           >
-            <div
-              css={`
-                background-color: ${ProjectPalette.grey.A200};
-                height: 100%;
-                width: 100%;
-              `}
-            />
+            <img src={graph1} alt="graph" />
           </CardContent>
         </Card>
       </Grid>

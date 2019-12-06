@@ -11,7 +11,7 @@ import LandingLayout from 'app/modules/landing';
 import SignInModule from 'app/modules/sign-in';
 import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
 import { CreateReport } from 'app/modules/report';
-import { ProjectDetailLayout } from 'app/modules/detail-modules/project-detail';
+import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
 import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail';
 import { Faqs } from 'app/modules/faqs';
@@ -65,7 +65,7 @@ export function MainRoutes() {
 
         <Route exact path="/projects/detail">
           {/*{redirectUnAuth(<ProjectDetailLayout />, storeUser)}*/}
-          <ProjectDetailLayout />
+          <ProjectDetailModule />
         </Route>
 
         <Route exact path="/reports/detail">

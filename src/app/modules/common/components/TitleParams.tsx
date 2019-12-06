@@ -87,7 +87,9 @@ export const TitleFragment = (props: TitleParams) => {
             }
           `}
         >
-          <a href={props.url}>{props.url_note}</a>
+          <a href={props.url} target="_blank">
+            {props.url_note}
+          </a>
         </Typography>
       )}
     </React.Fragment>

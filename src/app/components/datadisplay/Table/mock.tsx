@@ -13,6 +13,7 @@ import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
 import { ButtonCellModule } from 'app/components/datadisplay/Table/common/ButtonCell';
 import MultiValuesCell from 'app/components/datadisplay/Table/common/MultiValuesCell';
+import { insingerData } from 'app/assets/data/insingerData';
 
 export const mockDataVar1: TableModuleModel = {
   title: 'Aggregated signatory data publication indicator values',
@@ -985,32 +986,7 @@ export const mockDataVar7: TableModuleModel = {
 
 export const mockDataVar8: TableModuleModel = {
   title: 'Projects',
-  data: [
-    [
-      '11003399',
-      '31 Dec 2018',
-      'Implementation',
-      'Promoting Opportunities for Women s Empowerment and Rights …',
-      'Label',
-      '00',
-    ],
-    [
-      '11003399',
-      '31 Dec 2018',
-      'Implementation',
-      'Promoting Opportunities for Women s Empowerment and Rights …',
-      'Label',
-      '00',
-    ],
-    [
-      '11003399',
-      '31 Dec 2018',
-      'Implementation',
-      'Promoting Opportunities for Women s Empowerment and Rights …',
-      'Label',
-      '00',
-    ],
-  ],
+  data: insingerData,
   columns: [
     {
       name: 'ID',

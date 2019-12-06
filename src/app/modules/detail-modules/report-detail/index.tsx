@@ -13,6 +13,7 @@ import { ReportOutcomeCardMock } from 'app/modules/detail-modules/report-detail/
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import { ProjectPalette } from 'app/theme';
+import graph1 from 'app/assets/images/dummy_graph1.png';
 import Box from '@material-ui/core/Box';
 
 export const ReportDetailLayout = () => (
@@ -58,15 +59,18 @@ export const ReportDetailLayout = () => (
       <Box height="24px" width="100%" />
       <Grid item lg={12}>
         <Card>
-          <CardHeader title="Key outcomes" />
-          <CardContent>
-            <div
-              css={`
-                background-color: ${ProjectPalette.grey.A200};
-                height: 200px;
+          {/*<CardHeader title="Key outcomes" />*/}
+          <CardContent
+            css={`
+              height: calc(100% - 34px);
+
+              img {
                 width: 100%;
-              `}
-            />
+                height: auto;
+              }
+            `}
+          >
+            <img src={graph1} alt="graph" />
           </CardContent>
         </Card>
       </Grid>
