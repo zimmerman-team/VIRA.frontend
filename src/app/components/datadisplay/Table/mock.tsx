@@ -1,3 +1,4 @@
+import 'styled-components/macro';
 /* core */
 import React from 'react';
 import get from 'lodash/get';
@@ -995,7 +996,7 @@ export const mockDataVar8: TableModuleModel = {
       },
     },
     {
-      name: 'DATE',
+      name: 'Project',
       options: {
         filter: true,
         filterType: 'checkbox',
@@ -1006,6 +1007,27 @@ export const mockDataVar8: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
+        customBodyRender: value => {
+          return (
+            <LinkCellModule
+              css={`
+                a {
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  line-height: 16px;
+                  max-height: 32px;
+                  -webkit-line-clamp: 2; /* Write the number of 
+                              lines you want to be 
+                              displayed */
+                  -webkit-box-orient: vertical;
+                }
+              `}
+              value={value}
+              link={'/projects/detail'}
+            />
+          );
+        },
       },
     },
     {
