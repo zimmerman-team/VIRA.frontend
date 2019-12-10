@@ -3,6 +3,10 @@ const http = require('http');
 const socketIO = require('socket.io');
 const cors = require('cors');
 const helmet = require('helmet');
+let apiRouter = require('./api-routes');
+let bodyParser = require('body-parser');
+let mongoose = require('mongoose');
+let url = 'mongodb://localhost:27017/insinger';
 
 import {
   getUser,
@@ -29,6 +33,8 @@ import {
 const app = express();
 app.use(cors());
 app.use(helmet());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
@@ -87,6 +93,16 @@ IO.sockets.on('connection', (socket: any) => {
     assignRoleToUser({ query: data }, (res: any) => fn(res));
   });
 });
+
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+var db = mongoose.connection;
+if (!db) {
+  console.log('Error connecting to database.');
+} else {
+  console.log('connected to database successfully.');
+}
+
+app.use('/api', apiRouter);
 
 server.listen(process.env.REACT_APP_BACKEND_PORT, () =>
   console.log(`LISTENING ON PORT ${process.env.REACT_APP_BACKEND_PORT}`)
