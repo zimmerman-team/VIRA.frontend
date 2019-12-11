@@ -1,3 +1,4 @@
+import 'styled-components/macro';
 /* core */
 import React from 'react';
 import get from 'lodash/get';
@@ -13,6 +14,7 @@ import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
 import { ButtonCellModule } from 'app/components/datadisplay/Table/common/ButtonCell';
 import MultiValuesCell from 'app/components/datadisplay/Table/common/MultiValuesCell';
+import { insingerData } from 'app/assets/data/insingerData';
 
 export const mockDataVar1: TableModuleModel = {
   title: 'Aggregated signatory data publication indicator values',
@@ -985,32 +987,7 @@ export const mockDataVar7: TableModuleModel = {
 
 export const mockDataVar8: TableModuleModel = {
   title: 'Projects',
-  data: [
-    [
-      '11003399',
-      '31 Dec 2018',
-      'Implementation',
-      'Promoting Opportunities for Women s Empowerment and Rights …',
-      'Label',
-      '00',
-    ],
-    [
-      '11003399',
-      '31 Dec 2018',
-      'Implementation',
-      'Promoting Opportunities for Women s Empowerment and Rights …',
-      'Label',
-      '00',
-    ],
-    [
-      '11003399',
-      '31 Dec 2018',
-      'Implementation',
-      'Promoting Opportunities for Women s Empowerment and Rights …',
-      'Label',
-      '00',
-    ],
-  ],
+  data: insingerData,
   columns: [
     {
       name: 'ID',
@@ -1019,7 +996,7 @@ export const mockDataVar8: TableModuleModel = {
       },
     },
     {
-      name: 'DATE',
+      name: 'Project',
       options: {
         filter: true,
         filterType: 'checkbox',
@@ -1030,6 +1007,27 @@ export const mockDataVar8: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
+        customBodyRender: value => {
+          return (
+            <LinkCellModule
+              css={`
+                a {
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  line-height: 16px;
+                  max-height: 32px;
+                  -webkit-line-clamp: 2; /* Write the number of 
+                              lines you want to be 
+                              displayed */
+                  -webkit-box-orient: vertical;
+                }
+              `}
+              value={value}
+              link={'/projects/detail'}
+            />
+          );
+        },
       },
     },
     {

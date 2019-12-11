@@ -4,6 +4,7 @@ import React from 'react';
 import { mockDataVar8 as mockDatatable } from 'app/components/datadisplay/Table/mock';
 import { NavItemParams } from 'app/modules/common/consts';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
+import { insingerData } from 'app/assets/data/insingerData';
 
 export const navItemMock: NavItemParams[] = [
   {

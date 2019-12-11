@@ -1,0 +1,34 @@
+export interface InsingerModel {
+  project_id: string;
+  project: string;
+  project_description: string;
+  category: string;
+  duration: string;
+  start_date: string;
+  end_date: string;
+  total_amount: string;
+  decision_date: string;
+  decision: string;
+  allocated_amount: string;
+  released_amount: string;
+  paid_amount: string;
+  organisation: string;
+  org_type: string;
+  street: string;
+  house_number: string;
+  additional_house_number: string;
+  postcode: string;
+  place: string;
+  country: string;
+  telephone: string;
+  organisation_email: string;
+  website: string;
+  family_name: string;
+  initial: string;
+  insertion: string;
+  title: string;
+  email: string;
+  login_email: string;
+  sex: string;
+  role: string;
+}
