@@ -5,3 +5,7 @@ const OrgTypeSchema = new mongoose.Schema({
 });
 
 const orgType = (module.exports = mongoose.model('orgType', OrgTypeSchema));
+
+module.exports.get = (callback, limit) => {
+  orgType.find(callback).limit(limit);
+};

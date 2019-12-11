@@ -16,18 +16,20 @@ export function allOrg(req: any, res: any) {
 }
 
 export function oneOrg(req: any, res: any) {
-  organisation.findById(req.params._id, (err: any, org: any) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json({ data: org });
-  });
+  organisation
+    .findById(req.params._id)
+    .populate('org_type', 'name')
+    .exec((err: any, org: any) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ data: org });
+    });
 }
 
 export function AddOrg(req: any, res: any) {
-  // one org per one time.
   orgType.findOne({ name: req.body.org_type }, (err: any, orgType: any) => {
-    if (err) {
+    if (!orgType) {
       let org = new organisation();
       org.organisation_name = req.body.organisation_name;
       org.street = req.body.street;
@@ -48,7 +50,7 @@ export function AddOrg(req: any, res: any) {
           data: org,
         });
       });
-    } else {
+    } else if (orgType) {
       let org = new organisation();
       org.organisation_name = req.body.organisation_name;
       org.street = req.body.street;
@@ -94,11 +96,29 @@ export function UpdateOrg(req: any, res: any) {
       found_org.save((err: any) => {
         if (err) {
           res.json(err);
+        } else {
+          orgType.findOne({ name: req.body.org_type }, (err: any, org: any) => {
+            if (org) {
+              found_org.organisation_name = req.body.organisation_name;
+              found_org.street = req.body.street;
+              found_org.house_number = req.body.house_number;
+              found_org.additional_house_number =
+                req.body.additional_house_number;
+              found_org.postcode = req.body.postcode;
+              found_org.place = req.body.place;
+              found_org.country = req.body.country;
+              found_org.email = req.body.email;
+              found_org.website = req.body.website;
+              found_org.org_type = req.body.org_type;
+
+              found_org.save();
+            }
+            res.json({
+              status: 'success',
+              data: found_org,
+            });
+          });
         }
-        res.json({
-          status: 'success',
-          data: found_org,
-        });
       });
     } else {
       res.json({

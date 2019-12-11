@@ -13,4 +13,17 @@ const PersonSchema = new Schema({
   organisation: { type: Schema.Types.ObjectId, ref: organisation },
 });
 
-module.exports = mongoose.model('responsiblePerson', PersonSchema);
+const responsible_person = (module.exports = mongoose.model(
+  'responsiblePerson',
+  PersonSchema
+));
+
+module.exports.get = (callback, limit) => {
+  responsible_person
+    .find(callback)
+    .populate({
+      path: 'organisation',
+      select: 'organisation_name',
+    })
+    .limit(limit);
+};

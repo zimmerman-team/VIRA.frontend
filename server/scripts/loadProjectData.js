@@ -112,6 +112,7 @@ csvtojson()
       } else {
         new organisation({
           organisation_name: record.organisation,
+          org_type: null,
           street: record.street,
           house_number: record.house_number,
           additional_house_number: record.additional_house_number,
@@ -159,10 +160,10 @@ csvtojson()
                   allocated_amount: record.allocated_amount,
                   released_amount: record.released_amount,
                   paid_amount: record.paid_amount,
+                  organisation: org,
 
                   category: diversen,
                 });
-                temp_project.organisation.push(org);
                 temp_project.save();
               }
             );
@@ -183,10 +184,9 @@ csvtojson()
                   allocated_amount: record.allocated_amount,
                   released_amount: record.released_amount,
                   paid_amount: record.paid_amount,
-
+                  organisation: org,
                   category: jeugdwerk,
                 });
-                temp_project.organisation.push(org);
                 temp_project.save();
               }
             );
@@ -207,10 +207,9 @@ csvtojson()
                   allocated_amount: record.allocated_amount,
                   released_amount: record.released_amount,
                   paid_amount: record.paid_amount,
-
+                  organisation: org,
                   category: restauraties,
                 });
-                temp_project.organisation.push(org);
                 temp_project.save();
               }
             );
@@ -231,10 +230,9 @@ csvtojson()
                   allocated_amount: record.allocated_amount,
                   released_amount: record.released_amount,
                   paid_amount: record.paid_amount,
-
+                  organisation: org,
                   category: predikantsplaatsen,
                 });
-                temp_project.organisation.push(org);
                 temp_project.save();
               }
             );
@@ -255,10 +253,32 @@ csvtojson()
                   allocated_amount: record.allocated_amount,
                   released_amount: record.released_amount,
                   paid_amount: record.paid_amount,
-
+                  organisation: org,
                   category: Overigen,
                 });
-                temp_project.organisation.push(org);
+                temp_project.save();
+              }
+            );
+          } else {
+            organisation.findOne(
+              { organisation_name: record.organisation },
+              (err, org) => {
+                temp_project = new project({
+                  project_number: record.project_id,
+                  project_name: record.project,
+                  project_description: record.project_description,
+                  duration: record.duration,
+                  start_date: record.start_date,
+                  end_date: record.end_date,
+                  total_amount: record.total_amount,
+                  decision_date: record.decision_date,
+                  decision: record.decision,
+                  allocated_amount: record.allocated_amount,
+                  released_amount: record.released_amount,
+                  paid_amount: record.paid_amount,
+                  organisation: org,
+                  category: null,
+                });
                 temp_project.save();
               }
             );

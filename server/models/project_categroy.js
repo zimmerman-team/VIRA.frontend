@@ -5,4 +5,11 @@ const CategorySchema = new Schema({
   description: { type: String, required: false },
 });
 
-module.exports = mongoose.model('projectCategory', CategorySchema);
+const projectCategory = (module.exports = mongoose.model(
+  'projectCategory',
+  CategorySchema
+));
+
+module.exports.get = (callback, limit) => {
+  projectCategory.find(callback).limit(limit);
+};

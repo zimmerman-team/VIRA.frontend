@@ -20,5 +20,8 @@ const organisation = (module.exports = mongoose.model(
 ));
 
 module.exports.get = (callback, limit) => {
-  organisation.find(callback).limit(limit);
+  organisation
+    .find(callback)
+    .populate('org_type', 'name')
+    .limit(limit);
 };

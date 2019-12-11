@@ -16,8 +16,22 @@ const ProjectSchema = new Schema({
   allocated_amount: { type: Number, required: false },
   released_amount: { type: Number, required: false },
   paid_amount: { type: Number, required: false },
-  organisation: [{ type: Schema.Types.ObjectId, ref: organisation }],
+  organisation: { type: Schema.Types.ObjectId, ref: organisation },
   category: { type: Schema.Types.ObjectId, ref: category },
 });
 
-module.exports = mongoose.model('project', ProjectSchema);
+const project = (module.exports = mongoose.model('project', ProjectSchema));
+
+module.exports.get = (callback, limit) => {
+  project
+    .find(callback)
+    .populate({
+      path: 'organisation',
+      select: 'organisation_name',
+    })
+    .populate({
+      path: 'category',
+      select: 'name',
+    })
+    .limit(limit);
+};
