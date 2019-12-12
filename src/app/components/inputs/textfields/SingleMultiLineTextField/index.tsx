@@ -42,7 +42,7 @@ const Input = withStyles((theme: Theme) =>
 )(InputBase);
 
 // Typography not in sync with our theme file, therefore overriding it here.
-const BigInputLabel = styled(props => <Typography {...props} />)`
+export const BigInputLabel = styled(props => <Typography {...props} />)`
   && {
     font-size: 1.125rem;
     font-weight: 500;

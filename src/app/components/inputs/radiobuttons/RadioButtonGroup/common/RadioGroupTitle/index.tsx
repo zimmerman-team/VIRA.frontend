@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
 /* project component */
-import { TooltipButton } from 'app/components/inputs/buttons/TooltipButton';
+// import { TooltipButton } from 'app/components/inputs/buttons/TooltipButton';
 
 type Props = {
   title: string;
@@ -26,7 +26,7 @@ export const RadioGroupTitle = (props: Props) => {
       <Grid item>
         <GroupTitle component="legend">{props.title}</GroupTitle>
       </Grid>
-      {props.tip && <TooltipButton tip={props.tip} />}
+      {/*{props.tip && <TooltipButton tip={props.tip} />}*/}
     </Grid>
   );
 };
