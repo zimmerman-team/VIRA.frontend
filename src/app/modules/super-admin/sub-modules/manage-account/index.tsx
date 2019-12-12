@@ -29,13 +29,17 @@ export const ManageAccount = (props: ManageAccountModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* form */}
     <Grid item container xs={12} lg={12} direction={'column'}>
-      <SingleMultiLineTextField id={'First Name'} label={'First Name'} />
+      <SingleMultiLineTextField
+        id={'First Name'}
+        label={'First Name'}
+        bigLabel
+      />
       <Box width="100%" height="32px" />
 
-      <SingleMultiLineTextField id={'Last Name'} label={'Last Name'} />
+      <SingleMultiLineTextField id={'Last Name'} label={'Last Name'} bigLabel />
       <Box width="100%" height="32px" />
 
-      <SingleMultiLineTextField id={'Email'} label={'Email'} />
+      <SingleMultiLineTextField id={'Email'} label={'Email'} bigLabel />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}

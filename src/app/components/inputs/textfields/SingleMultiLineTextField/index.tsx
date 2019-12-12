@@ -6,10 +6,13 @@ import InputBase, { InputBaseProps } from '@material-ui/core/InputBase';
 import { getInputGeneralStyle } from 'app/components/inputs/common/mock';
 import { Theme, withStyles, createStyles } from '@material-ui/core/styles';
 import { ProjectPalette } from 'app/theme';
+import { Typography } from '@material-ui/core';
+import styled from 'styled-components';
 
 export interface MultilineTextfieldParams extends InputBaseProps {
   id?: string;
   label?: string;
+  bigLabel?: boolean;
   value?: string;
   defaultValue?: string;
   setValue?: Function;
@@ -32,13 +35,26 @@ const Input = withStyles((theme: Theme) =>
       lineHeight: '2rem',
       paddingBottom: '30px',
     },
+    inputLabel: {
+      root: {},
+    },
   })
 )(InputBase);
+
+const BigInputLabel = styled(props => <Typography {...props} />)`
+  && {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+`;
 
 export const SingleMultiLineTextField = (props: MultilineTextfieldParams) => {
   return (
     <FormControl fullWidth={props.fullWidth}>
-      {props.label && (
+      {props.label && props.bigLabel ? (
+        <BigInputLabel variant="subtitle1">{props.label}</BigInputLabel>
+      ) : (
         <InputLabel shrink htmlFor={props.id}>
           {props.label}
         </InputLabel>
