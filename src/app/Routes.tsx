@@ -21,7 +21,9 @@ import { SdgModule } from 'app/modules/sdg';
 import { PrivacyModule } from 'app/modules/privacy';
 import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
-import { ManageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
+import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
+import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account';
+import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -112,7 +114,11 @@ export function MainRoutes() {
         </Route>
 
         <Route path="/super-admin/*">
-          <ManageUsersTeamsLayout {...ManageUsersTeamsLayoutMock} />
+          <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />
+        </Route>
+
+        <Route path="/super-admin/manage-user/edit">
+          <ManageAccount {...manageAccountMock} />
         </Route>
       </Switch>
     </Suspense>
