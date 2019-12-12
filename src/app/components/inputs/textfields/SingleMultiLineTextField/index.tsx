@@ -41,24 +41,36 @@ const Input = withStyles((theme: Theme) =>
   })
 )(InputBase);
 
+// Typography not in sync with our theme file, therefore overriding it here.
 const BigInputLabel = styled(props => <Typography {...props} />)`
   && {
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 500;
     margin-bottom: 14px;
   }
 `;
 
+//Doing this because we have two label versions for a input in the design.
+function renderLabel(props) {
+  if (!props.label) {
+    return null;
+  }
+
+  if (props.bigLabel) {
+    return <BigInputLabel variant="subtitle1">{props.label}</BigInputLabel>;
+  } else {
+    return (
+      <InputLabel shrink htmlFor={props.id}>
+        {props.label}
+      </InputLabel>
+    );
+  }
+}
+
 export const SingleMultiLineTextField = (props: MultilineTextfieldParams) => {
   return (
     <FormControl fullWidth={props.fullWidth}>
-      {props.label && props.bigLabel ? (
-        <BigInputLabel variant="subtitle1">{props.label}</BigInputLabel>
-      ) : (
-        <InputLabel shrink htmlFor={props.id}>
-          {props.label}
-        </InputLabel>
-      )}
+      {renderLabel(props)}
       <Input
         {...props}
         placeholder={props.placeholder}
