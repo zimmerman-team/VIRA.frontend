@@ -11,6 +11,7 @@ import {
   mockDataVar6,
   mockDataVar7,
   mockDataVar8,
+  mockDataVar9,
 } from './mock';
 import Providers from 'app/Providers';
 import { ProjectPalette } from 'app/theme';
@@ -80,6 +81,14 @@ storiesOf('Data Display|Table', module).add('Variant 8', () => (
   <Providers>
     <Container>
       <Component {...mockDataVar8} />
+    </Container>
+  </Providers>
+));
+
+storiesOf('Data Display|Table', module).add('Variant 9', () => (
+  <Providers>
+    <Container>
+      <Component {...mockDataVar9} />
     </Container>
   </Providers>
 ));
