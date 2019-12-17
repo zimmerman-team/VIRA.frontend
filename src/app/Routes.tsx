@@ -122,13 +122,13 @@ export function MainRoutes() {
           <SubmittedLayout />
         </Route>
 
-        <Route path="/super-admin/manage-team/edit">
+        <Route path="/super-admin/manage-teams/edit">
           <ManageTeamEdit />
         </Route>
 
-        {/*<Route path="/super-admin/">*/}
-        {/*  <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />*/}
-        {/*</Route>*/}
+        <Route exact path="/super-admin/:id">
+          <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />
+        </Route>
 
         <Route path="/super-admin/manage-user">
           <ManageUser />
@@ -138,7 +138,7 @@ export function MainRoutes() {
           <ManageAccount {...manageAccountMock} />
         </Route>
 
-        <Route path="/super-admin/manage-user/edit">
+        <Route path="/super-admin/manage-users/edit">
           <ManageUserEdit {...manageUserEditMock} />
         </Route>
       </Switch>

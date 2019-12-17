@@ -22,7 +22,7 @@ export const breadcrumbsMock: BreadcrumbModel = {
   previousLocations: [
     {
       label: 'Manage',
-      url: '/',
+      url: 'super-admin/manage-teams',
     },
   ],
 };

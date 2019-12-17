@@ -7,6 +7,7 @@ export type PageModuleModel = {
   title: string;
   teamCards: TeamUserCardModel[];
   pagination: PaginationModel;
+  urlParam?: string;
 };
 
 export type ManageUsersTeamsLayoutModel = {
