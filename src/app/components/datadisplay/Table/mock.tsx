@@ -15,6 +15,8 @@ import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
 import { ButtonCellModule } from 'app/components/datadisplay/Table/common/ButtonCell';
 import MultiValuesCell from 'app/components/datadisplay/Table/common/MultiValuesCell';
 import { insingerData } from 'app/assets/data/insingerData';
+import { table9Data } from 'app/assets/data/insingerData';
+import { Checkbox } from 'app/components/inputs/checkboxes/Checkbox';
 
 export const mockDataVar1: TableModuleModel = {
   title: 'Aggregated signatory data publication indicator values',
@@ -987,7 +989,7 @@ export const mockDataVar7: TableModuleModel = {
 
 export const mockDataVar8: TableModuleModel = {
   title: 'Projects',
-  data: insingerData,
+  data: table9Data,
   columns: [
     {
       name: 'ID',
@@ -1071,4 +1073,77 @@ export const mockDataVar8: TableModuleModel = {
     selectableRows: 'none',
   },
   columnsCell: ['', '', '', 'LinkCellModule', '', ''],
+};
+
+export const mockDataVar9: TableModuleModel = {
+  title: 'Add Team Member',
+  data: table9Data,
+  columns: [
+    {
+      name: '',
+      options: {
+        filter: false,
+        customBodyRender: value => {
+          return <Checkbox />;
+        },
+      },
+    },
+    {
+      name: '',
+      options: {
+        filter: false,
+        customBodyRender: value => {
+          return (
+            <LinkCellModule
+              css={`
+                a {
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  line-height: 16px;
+                  max-height: 32px;
+                  -webkit-line-clamp: 1; /* Write the number of 
+                              lines you want to be 
+                              displayed */
+                  -webkit-box-orient: vertical;
+                }
+              `}
+              value={value}
+              link={'/projects/detail'}
+            />
+          );
+        },
+      },
+    },
+    {
+      name: '',
+      options: {
+        filter: false,
+      },
+    },
+    {
+      name: '',
+      options: {
+        filter: false,
+        customBodyRender: value => {
+          return <IconCellModule value="Edit" />;
+        },
+      },
+    },
+  ],
+  options: {
+    print: false,
+    search: true,
+    filter: false,
+    download: false,
+    rowHover: false,
+    pagination: true,
+    viewColumns: true,
+    responsive: 'scrollFullHeight',
+    filterType: 'checkbox',
+    selectableRows: 'none',
+    fixedHeader: true,
+  },
+  columnsCell: ['', '', '', 'IconCellModule'],
+  cssVariant: 'variant9',
 };

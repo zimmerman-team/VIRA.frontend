@@ -23,6 +23,11 @@ import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
 import { ManageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
+import ManageTeamEdit from 'app/modules/super-admin/sub-modules/manage-team-edit';
+import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account';
+import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
+import { ManageUserEdit } from 'app/modules/super-admin/sub-modules/manage-user-edit';
+import { manageUserEditMock } from 'app/modules/super-admin/sub-modules/manage-user-edit/mock';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -116,8 +121,25 @@ export function MainRoutes() {
           <SubmittedLayout />
         </Route>
 
+
+        {/*<Route path="/super-admin/*">*/}
+        {/*  /!*<ManageUsersTeamsLayout {...ManageUsersTeamsLayoutMock} />*!/*/}
+        {/*</Route>*/}
+
+        <Route path="/super-admin/manage-team/edit">
+          <ManageTeamEdit />
+        </Route>   
+
         <Route path="/super-admin/*">
-          <ManageUsersTeamsLayout {...ManageUsersTeamsLayoutMock} />
+          <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />
+        </Route>
+
+        <Route path="/super-admin/manage-account">
+          <ManageAccount {...manageAccountMock} />
+        </Route>
+
+        <Route path="/super-admin/manage-user/edit">
+          <ManageUserEdit {...manageUserEditMock} />
         </Route>
       </Switch>
     </Suspense>
