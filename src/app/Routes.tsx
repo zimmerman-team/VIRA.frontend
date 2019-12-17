@@ -37,18 +37,26 @@ function redirectUnAuth<ReactModule>(
   return component;
 }
 
+/* todo: let's move this logic somewhere else */
+function redirectAuth(user: UserModel | null) {
+  if (user) {
+    return <Redirect to="/" />;
+  }
+  return <SignInModule auth={auth} />;
+}
+
 export function MainRoutes() {
   const storeUser = useStoreState(state => state.syncVariables.user);
   return (
     <Suspense fallback={<PageLoader />}>
       <Switch>
-        {/*<Route exact path="/login">*/}
-        {/*  {redirectAuth(storeUser)}*/}
-        {/*</Route>*/}
+        <Route exact path="/login">
+          {redirectAuth(storeUser)}
+        </Route>
 
-        {/*<Route exact path="/recover-password">*/}
-        {/*  <PasswordRecovery />*/}
-        {/*</Route>*/}
+        <Route exact path="/recover-password">
+          <PasswordRecovery />
+        </Route>
 
         <Route exact path="/">
           {/*{redirectUnAuth(<LandingLayout />, storeUser)}*/}

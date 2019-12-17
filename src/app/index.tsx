@@ -20,7 +20,6 @@ export function App() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-  const storeUser = useStoreState(state => state.syncVariables.user);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -30,46 +29,34 @@ export function App() {
     setOpen(false);
   };
 
-  /* todo: let's move this logic somewhere else */
-  function redirectAuth(user: UserModel | null) {
-    if (user) {
-      return <Redirect to="/" />;
-    }
-    return <SignInModule auth={auth} />;
-  }
-
   return (
     <div className={classes.root}>
-      {console.log(window.location.pathname)}
-      {window.location.pathname === '/login' && (
-        <Route exact path="/login">
-          {redirectAuth(storeUser)}
-        </Route>
-      )}
-
-      <PrimarySearchAppBar
-        classes={classes}
-        open={open}
-        theme={theme}
-        handleDrawerClose={handleDrawerClose}
-      />
-
-      <AppSideBar
-        classes={classes}
-        open={open}
-        handleDrawerClose={handleDrawerClose}
-        handleDrawerOpen={handleDrawerOpen}
-        theme={theme}
-        navItems={NavItems}
-      />
-
-      <PageWrapper>
+      {window.location.pathname === '/login' ||
+      window.location.pathname === '/recover-password' ? (
         <MainRoutes />
-      </PageWrapper>
+      ) : (
+        <>
+          <PrimarySearchAppBar
+            classes={classes}
+            open={open}
+            theme={theme}
+            handleDrawerClose={handleDrawerClose}
+          />
 
-      {/*<Route exact path="/recover-password">*/}
-      {/*  <PasswordRecovery />*/}
-      {/*</Route>*/}
+          <AppSideBar
+            classes={classes}
+            open={open}
+            handleDrawerClose={handleDrawerClose}
+            handleDrawerOpen={handleDrawerOpen}
+            theme={theme}
+            navItems={NavItems}
+          />
+
+          <PageWrapper>
+            <MainRoutes />
+          </PageWrapper>
+        </>
+      )}
       <PositionedSnackbar />
     </div>
   );
