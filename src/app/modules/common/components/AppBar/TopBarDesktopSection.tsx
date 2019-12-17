@@ -32,14 +32,19 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
-  const [open, setOpen] = React.useState(false);
+  const [openNotification, setOpenNotification] = React.useState(false);
+  const [openUserProfileCard, setOpenUserProfileCard] = React.useState(false);
   const [placement, setPlacement] = React.useState<PopperPlacementType>();
 
-  const handleClick = (newPlacement: PopperPlacementType) => (
+  const handleClick = (newPlacement: PopperPlacementType, content: String) => (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     setAnchorEl(event.currentTarget);
-    setOpen(prev => placement !== newPlacement || !prev);
+    if ('userprofile' === content) {
+      setOpenUserProfileCard(prev => placement !== newPlacement || !prev);
+    } else {
+      setOpenNotification(prev => placement !== newPlacement || !prev);
+    }
     setPlacement(newPlacement);
   };
 
@@ -53,7 +58,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
       {/* NOTIFICATION*/}
       <>
         <Popper
-          open={open}
+          open={openNotification}
           anchorEl={anchorEl}
           placement={placement}
           disablePortal
@@ -63,7 +68,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         <IconButton
           aria-label="show new notifications"
           color="primary"
-          onClick={handleClick('bottom-end')}
+          onClick={handleClick('bottom-end', 'notification')}
         >
           <Badge badgeContent={17} color="secondary">
             <NotificationsIcon />
@@ -74,7 +79,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
       {/* USERPROFILE */}
       <>
         <Popper
-          open={open}
+          open={openUserProfileCard}
           anchorEl={anchorEl}
           placement={placement}
           disablePortal
@@ -90,7 +95,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           aria-label="account of current user"
           aria-controls={props.menuId}
           aria-haspopup="true"
-          onClick={handleClick('bottom-end')}
+          onClick={handleClick('bottom-end', 'userprofile')}
           color="primary"
         >
           <AccountCircle />
