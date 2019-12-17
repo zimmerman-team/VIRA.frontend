@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { PasswordRecoveryLayoutModel } from 'app/modules/sign-in/sub-modules/password-recovery/models';
 import { FormSingleLineField } from 'app/components/inputs/textfields/FormSingleLineField';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { Container, Typography } from '@material-ui/core';
+import { Container, Typography, Box } from '@material-ui/core';
 import styled from 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
 import { GroupImage } from 'app/assets/images/group';
@@ -46,16 +46,8 @@ export const PasswordRecoveryLayout = (props: PasswordRecoveryLayoutModel) => {
       >
         <Container maxWidth="sm">
           <Form>
-            <Typography
-              variant="h3"
-              css={`
-                && {
-                  margin-bottom: 41px;
-                }
-              `}
-            >
-              Recover password
-            </Typography>
+            <Typography variant="h3">Recover password</Typography>
+            <Box height="41px" />
             <FormSingleLineField
               css={`
                 width: 392px;
