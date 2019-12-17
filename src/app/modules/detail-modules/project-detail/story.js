@@ -9,7 +9,7 @@ storiesOf('Modules|Project Detail/', module).add(
   () => (
     <Providers>
       {/*<MainContent>*/}
-      {/*  <ProjectDetailLayout />*/}
+      <ProjectDetailLayout />
       {/*</MainContent>*/}
     </Providers>
   )

@@ -10,8 +10,8 @@ import { useStoreState } from 'app/state/store/hooks';
 import LandingLayout from 'app/modules/landing';
 import SignInModule from 'app/modules/sign-in';
 import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
-import { CreateReport } from 'app/modules/detail-modules/create-report';
-import { ProjectDetailLayout } from 'app/modules/detail-modules/project-detail';
+import { CreateReport } from 'app/modules/report';
+import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
 import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail';
 import { Faqs } from 'app/modules/faqs';
@@ -19,6 +19,15 @@ import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
 import { SdgModule } from 'app/modules/sdg';
 import { PrivacyModule } from 'app/modules/privacy';
+import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
+import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
+import { ManageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
+import ManageTeamEdit from 'app/modules/super-admin/sub-modules/manage-team-edit';
+//import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
+import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account';
+import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
+import { ManageUserEdit } from 'app/modules/super-admin/sub-modules/manage-user-edit';
+import { manageUserEditMock } from 'app/modules/super-admin/sub-modules/manage-user-edit/mock';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -62,7 +71,7 @@ export function MainRoutes() {
 
         <Route exact path="/projects/detail">
           {/*{redirectUnAuth(<ProjectDetailLayout />, storeUser)}*/}
-          <ProjectDetailLayout />
+          <ProjectDetailModule />
         </Route>
 
         <Route exact path="/reports/detail">
@@ -70,7 +79,7 @@ export function MainRoutes() {
           <ReportDetailLayout />
         </Route>
 
-        <Route path="/reports/create">
+        <Route path="/report">
           {/*{redirectUnAuth(<CreateReport />, storeUser)}*/}
           <CreateReport />
         </Route>
@@ -102,6 +111,30 @@ export function MainRoutes() {
 
         <Route exact path="/callback">
           <LoginCallbackModule auth={auth} />
+        </Route>
+
+        <Route exact path="/submitted">
+          <SubmittedLayout />
+        </Route>
+
+        {/*<Route path="/super-admin/*">*/}
+        {/*  /!*<ManageUsersTeamsLayout {...ManageUsersTeamsLayoutMock} />*!/*/}
+        {/*</Route>*/}
+
+        <Route path="/super-admin/manage-team/edit">
+          <ManageTeamEdit />
+        </Route>
+
+        <Route path="/super-admin/*">
+          <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />
+        </Route>
+
+        <Route path="/super-admin/manage-account">
+          <ManageAccount {...manageAccountMock} />
+        </Route>
+
+        <Route path="/super-admin/manage-user/edit">
+          <ManageUserEdit {...manageUserEditMock} />
         </Route>
       </Switch>
     </Suspense>

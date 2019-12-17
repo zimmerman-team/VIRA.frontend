@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { ProjectPalette } from 'app/theme';
 
 export interface DescriptionParams {
-  description: string;
+  project_description: string;
 }
 export const Description = (props: DescriptionParams) => {
   return (
@@ -17,7 +17,7 @@ export const Description = (props: DescriptionParams) => {
         }
       `}
     >
-      {props.description}
+      {props.project_description}
     </Typography>
   );
 };

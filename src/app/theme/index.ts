@@ -24,6 +24,15 @@ export const TextStyle: FontStyle = {
   fontWeightMedium: 500,
   fontWeightBold: 700,
 };
+export const ProjectTextStyles = {
+  explanation: {
+    fontFamily: TextStyle.fontFamily,
+    fontSize: `${0.8571428571428571}rem`,
+    fontWeight: TextStyle.fontWeightLight,
+    letterSpacing: '0.42px',
+    color: '#185568',
+  },
+};
 
 export const ProjectPalette: ProjectPalette = {
   tonalOffset: 0.2,
@@ -40,7 +49,7 @@ export const ProjectPalette: ProjectPalette = {
     '700': '#616161',
     '800': '#424242',
     '900': '#a1a3a6',
-    A700: '#616161',
+    A700: '#a1aebd',
     A100: '#d5d5d5',
     A400: '#303030',
     A200: '#aaaaaa',
@@ -132,7 +141,7 @@ export const ProjectTypography: TypographyOptions = {
   },
   subtitle2: {
     fontFamily: TextStyle.fontFamily,
-    fontSize: `${0.875}rem`,
+    fontSize: `${1.1428571428571428}rem`,
     fontWeight: TextStyle.fontWeightMedium,
   },
   button: {
@@ -194,6 +203,11 @@ export default createMuiTheme({
     MuiCardHeader: {
       root: {
         paddingBottom: 0,
+      },
+    },
+    MuiCard: {
+      root: {
+        boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
       },
     },
   },

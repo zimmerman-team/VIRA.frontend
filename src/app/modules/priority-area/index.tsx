@@ -9,6 +9,7 @@ import TableModule from 'app/components/datadisplay/Table';
 import { ProjectPalette } from 'app/theme';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { PriorityAreaNavMock } from 'app/modules/priority-area/mock';
+import graph1 from 'app/assets/images/graph_if.png';
 
 export const PriorityAreaModule = () => {
   return (
@@ -26,24 +27,17 @@ export const PriorityAreaModule = () => {
       {/* ---------------------------------------------------------------------*/}
       {/* outcome charts */}
       <Grid item xs={12} lg={12}>
-        <Card
-          css={`
-            height: 315px;
-          `}
-        >
+        <Card>
           <CardHeader title="Insinger Fonds Priority area" />
           <CardContent
             css={`
-              height: calc(100% - 34px);
+              img {
+                width: 100%;
+                height: auto;
+              }
             `}
           >
-            <div
-              css={`
-                background-color: ${ProjectPalette.grey.A200};
-                height: 100%;
-                width: 100%;
-              `}
-            />
+            <img src={graph1} alt="graph 1" width="100%" height="auto" />
           </CardContent>
         </Card>
       </Grid>

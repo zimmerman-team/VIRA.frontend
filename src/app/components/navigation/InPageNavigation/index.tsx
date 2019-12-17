@@ -15,6 +15,7 @@ const LocationLink = styled(props => <NavLink {...props} />)`
     font-weight: 600;
     line-height: 1.71;
     letter-spacing: 1.25px;
+    /* todo: move to theme file */
     color: #6f7173;
     padding-right: 32px;
     margin-bottom: 20px;
@@ -64,10 +65,10 @@ export function InPageNavigation(props: InPageNavigationModel) {
 
   return (
     <>
-      {props.locations.map(lines => {
+      {props.locations.map((lines, index) => {
         return (
           /* todo: serious layout flaw, needs to be fixed */
-          <Grid container justify="flex-end" xs={12}>
+          <Grid container justify="flex-end" key={index}>
             {lines.items.map(location => {
               if (get(state, 'pathname', '').includes(location.url)) {
                 return (
@@ -75,7 +76,7 @@ export function InPageNavigation(props: InPageNavigationModel) {
                     fontSize={lines.fontSize}
                     variant="button"
                     key={location.label}
-                    to={`/signatory-data/${props.activity}/${location.url}`}
+                    to={`/${location.url}`}
                   >
                     {location.label}
                     <Underline show="true" />
@@ -86,7 +87,7 @@ export function InPageNavigation(props: InPageNavigationModel) {
                 <LocationLink
                   fontSize={lines.fontSize}
                   key={location.label}
-                  to={`/signatory-data/${props.activity}/${location.url}`}
+                  to={`/${location.url}`}
                 >
                   {location.label}
                   <Underline />

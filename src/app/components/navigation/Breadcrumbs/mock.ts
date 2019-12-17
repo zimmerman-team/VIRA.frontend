@@ -7,7 +7,7 @@ export const mockData: BreadcrumbModel = {
   currentLocation: 'ActionAid UK',
   previousLocations: [
     {
-      label: 'Grantees',
+      label: 'Projects',
       url: '/',
     },
   ],

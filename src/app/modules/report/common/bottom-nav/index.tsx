@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import Grid from '@material-ui/core/Grid';
 
 type BottomNavModel = {
   next: Function;
@@ -20,8 +21,9 @@ const Container = styled.div`
 `;
 
 export const BottomNav = (props: BottomNavModel) => (
-  <Container>
+  <Grid item container lg={12} justify="space-between">
     <ContainedButton text="Back" onClick={props.back} />
+
     <ContainedButton text="Next" onClick={props.next} />
-  </Container>
+  </Grid>
 );
