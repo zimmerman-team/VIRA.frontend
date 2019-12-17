@@ -6,9 +6,10 @@ import { changeTableRowColor } from 'app/components/datadisplay/Table/helpers';
 import 'styled-components/macro';
 import { CustomStyleDataTable } from 'app/components/datadisplay/Table/styles';
 
-function setTableVariant(styleVariant: string) {
+function setTableVariant(cssVariant: string) {
   //TODO: make switch
-  if (styleVariant === 'variant9') {
+  console.log(cssVariant);
+  if (cssVariant === 'variant9') {
     return CustomStyleDataTable.variant9;
   }
   return CustomStyleDataTable.standard;
@@ -24,7 +25,7 @@ export const TableLayout = (props: TableLayoutModel) => {
       title={props.title}
       options={props.options}
       columns={props.columns}
-      css={setTableVariant(props.styleVariant)}
+      css={setTableVariant(props.cssVariant)}
     />
   );
 };

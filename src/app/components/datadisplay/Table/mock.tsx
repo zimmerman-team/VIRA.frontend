@@ -1132,12 +1132,12 @@ export const mockDataVar9: TableModuleModel = {
     },
   ],
   options: {
-    print: true,
-    search: false,
+    print: false,
+    search: true,
     filter: false,
-    download: true,
+    download: false,
     rowHover: false,
-    pagination: false,
+    pagination: true,
     viewColumns: true,
     responsive: 'scrollFullHeight',
     filterType: 'checkbox',
@@ -1145,4 +1145,5 @@ export const mockDataVar9: TableModuleModel = {
     fixedHeader: true,
   },
   columnsCell: ['', '', '', 'IconCellModule'],
+  cssVariant: 'variant9',
 };

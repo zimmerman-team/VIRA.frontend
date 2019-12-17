@@ -77,14 +77,8 @@ export const CustomStyleDataTable = {
       }
 
       [class*='MUIDataTableHeadCell-root'] {
-        font-size: 12px;
         padding: 13px 24px;
         color: rgba(1, 1, 10, 0.6);
-      }
-
-      [class*='MUIDataTableBodyCell'] {
-        padding: 13px 24px;
-        color: ${ProjectPalette.common.black};
       }
 
       [class*='MuiTablePagination-toolbar'] > * {
@@ -99,13 +93,18 @@ export const CustomStyleDataTable = {
 
       [class*='MUIDataTableBodyRow'] {
         border: solid 1px rgba(198, 198, 198, 0.2);
+        > * {
+          padding-top: 6px;
+          padding-bottom: 6px;
+        }
       }
 
-      // DIFF
+      //TODO: Different from "standard" variant.
       [class*='MuiTableHead-root'] {
-        //display: none;
-        height: 0;
-        padding: 0;
+        * > th {
+          height: 0;
+          padding: 0;
+        }
       }
 
       [class*='MUIDataTableHeadCell-root']:nth-child(1) {
@@ -118,6 +117,16 @@ export const CustomStyleDataTable = {
 
       [class*='MUIDataTableHeadCell-root']:nth-child(4) {
         width: 50px;
+      }
+
+      [class*='MUIDataTableBodyCell'] {
+        padding: 13px 24px;
+        color: ${ProjectPalette.common.black};
+        font-size: 14px;
+
+        > a {
+          font-weight: 600;
+        }
       }
     }
   `,
