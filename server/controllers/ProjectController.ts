@@ -3,18 +3,65 @@ const project_categroy = require('../models/project_categroy');
 const organisation = require('../models/Org');
 
 export function allProject(req: any, res: any) {
-  Project.get((err: any, project: any) => {
-    if (err) {
-      res.json({
-        status: 'error',
-        message: err.message,
-      });
-    }
+  if (!req.query.hasOwnProperty('project_number')) {
+    Project.get((err: any, project: any) => {
+      if (err) {
+        res.json({
+          status: 'error',
+          message: err.message,
+        });
+      }
 
-    res.json({
-      data: project,
+      Project.populate(
+        project,
+        {
+          path: 'organisation',
+          select: 'organisation_name', //org name and category name
+          match: req.query.hasOwnProperty('organisation_name')
+            ? {
+                organisation_name: {
+                  $in: req.query.organisation_name.split(','),
+                },
+              }
+            : {},
+        },
+        (err: any, data: any) => {
+          res.json({
+            data: data.filter((projects: any) => {
+              return projects.organisation != null;
+            }),
+          });
+        }
+      );
     });
-  });
+  } else {
+    Project.find(
+      { project_number: req.query.project_number.split(',') },
+      (err: any, projects: any) => {
+        Project.populate(
+          projects,
+          {
+            path: 'organisation category',
+            select: 'organisation_name name', //org name and category name
+            match: req.query.hasOwnProperty('organisation_name')
+              ? {
+                  organisation_name: {
+                    $in: req.query.organisation_name.split(','),
+                  },
+                }
+              : {},
+          },
+          (err: any, data: any) => {
+            res.json({
+              data: data.filter((projects: any) => {
+                return projects.organisation != null;
+              }),
+            });
+          }
+        );
+      }
+    );
+  }
 }
 
 //get one project

@@ -26,10 +26,6 @@ module.exports.get = (callback, limit) => {
   project
     .find(callback)
     .populate({
-      path: 'organisation',
-      select: 'organisation_name',
-    })
-    .populate({
       path: 'category',
       select: 'name',
     })

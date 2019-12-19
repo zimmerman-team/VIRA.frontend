@@ -21,9 +21,6 @@ const responsible_person = (module.exports = mongoose.model(
 module.exports.get = (callback, limit) => {
   responsible_person
     .find(callback)
-    .populate({
-      path: 'organisation',
-      select: 'organisation_name',
-    })
+
     .limit(limit);
 };

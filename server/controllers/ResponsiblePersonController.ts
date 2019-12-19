@@ -9,9 +9,27 @@ export function allPerson(req: any, res: any) {
         message: err.message,
       });
     }
-    res.json({
-      data: person,
-    });
+    responsible_person.populate(
+      person,
+      {
+        path: 'organisation',
+        select: 'organisation_name ', //org name
+        match: req.query.hasOwnProperty('organisation_name')
+          ? {
+              organisation_name: {
+                $in: req.query.organisation_name.split(','),
+              },
+            }
+          : {},
+      },
+      (err: any, data: any) => {
+        res.json({
+          data: data.filter((projects: any) => {
+            return projects.organisation != null;
+          }),
+        });
+      }
+    );
   });
 }
 
