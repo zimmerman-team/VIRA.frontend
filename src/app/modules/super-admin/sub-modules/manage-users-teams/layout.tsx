@@ -17,20 +17,20 @@ export const ManageUsersTeamsLayout = (props: ManageUsersTeamsLayoutModel) => (
     </Grid>
 
     {/* using this element as an helper */}
-    <Grid item lg={9} />
+    <Grid item lg={10} />
 
     {/* ------------------------------------------------------------------ */}
     {/* projects table navigation */}
-    <Grid item lg={3}>
+    <Grid item lg={2}>
       <TabNavigator {...props.tabNavigator} />
     </Grid>
 
     <Route path="/super-admin/manage-users">
-      <PageModel {...pageModuleMockUsers} />
+      <PageModel {...pageModuleMockUsers} urlParam="manage-users" />
     </Route>
 
     <Route path="/super-admin/manage-teams">
-      <PageModel {...pageModuleMockTeams} />
+      <PageModel {...pageModuleMockTeams} urlParam="manage-teams" />
     </Route>
   </React.Fragment>
 );

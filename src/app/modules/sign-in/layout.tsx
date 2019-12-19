@@ -1,17 +1,48 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Page from 'app/modules/common/Page';
+import { Container, Grid } from '@material-ui/core';
 import { InputForm } from 'app/modules/sign-in/common/InputForm';
+import styled from 'styled-components/macro';
 import { LayoutModel } from 'app/modules/sign-in/models';
+import { ProjectPalette } from 'app/theme';
+import { GroupImage } from 'app/assets/images/group';
 
+// TODO: so a lot of code is repeated in recovery in sign in
+// TODO: Also the sign in flow should be outside of the generel wrapper component
 export const SignInLayout = (props: LayoutModel) => {
   return (
-    <Page title="Sign in">
-      <Grid container direction="row" justify="flex-start" alignItems="center">
-        <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
-          <InputForm {...props} />
-        </Grid>
+    <Grid
+      container
+      css={`
+        height: 100vh;
+      `}
+    >
+      {/*Left side*/}
+      <Grid
+        item
+        xs={6}
+        css={`
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: ${ProjectPalette.primary.main};
+        `}
+      >
+        <GroupImage />
       </Grid>
-    </Page>
+
+      {/*Right side*/}
+      <Grid
+        item
+        xs={6}
+        css={`
+          align-self: center;
+        `}
+      >
+        <Container maxWidth="sm">
+          <InputForm {...props} />
+        </Container>
+      </Grid>
+    </Grid>
   );
 };
