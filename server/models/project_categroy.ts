@@ -1,6 +1,7 @@
+// @ts-ignore
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
-const CategorySchema = new Schema({
+//const { Schema } = mongoose;
+const CategorySchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   description: { type: String, required: false },
 });
@@ -10,6 +11,6 @@ const projectCategory = (module.exports = mongoose.model(
   CategorySchema
 ));
 
-module.exports.get = (callback, limit) => {
+module.exports.get = (callback: any, limit: any) => {
   projectCategory.find(callback).limit(limit);
 };

@@ -1,3 +1,4 @@
+import { Component } from 'react';
 const mongoose = require('mongoose');
 const org_type = require('../models/orgType');
 const { Schema } = mongoose;
@@ -19,7 +20,7 @@ const organisation = (module.exports = mongoose.model(
   OrgSchema
 ));
 
-module.exports.get = (callback, limit) => {
+module.exports.get = (callback: any, limit: any) => {
   organisation
     .find(callback)
     .populate('org_type', 'name')

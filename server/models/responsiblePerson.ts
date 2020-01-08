@@ -1,7 +1,8 @@
+// @ts-ignore
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
-const organisation = require('../models/Org');
-const PersonSchema = new Schema({
+//const { Schema } = mongoose;
+const Organisation = require('../models/Org');
+const PersonSchema = new mongoose.Schema({
   family_name: { type: String, required: true },
   initials: { type: String, required: false },
   name_insertion: { type: String, required: false },
@@ -10,7 +11,7 @@ const PersonSchema = new Schema({
   login_email: { type: String, required: false },
   sex: { type: String, required: false },
   role: { type: String, required: false },
-  organisation: { type: Schema.Types.ObjectId, ref: organisation },
+  organisation: { type: mongoose.Schema.Types.ObjectId, ref: Organisation },
 });
 
 const responsible_person = (module.exports = mongoose.model(
@@ -18,7 +19,7 @@ const responsible_person = (module.exports = mongoose.model(
   PersonSchema
 ));
 
-module.exports.get = (callback, limit) => {
+module.exports.get = (callback: any, limit: any) => {
   responsible_person
     .find(callback)
 

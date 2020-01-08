@@ -1,5 +1,5 @@
 const organisation = require('../models/Org');
-const orgType = require('../models/orgType.js');
+const orgType = require('../models/orgType');
 
 export function allOrg(req: any, res: any) {
   organisation.get((err: any, org: any) => {

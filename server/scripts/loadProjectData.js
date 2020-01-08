@@ -1,10 +1,10 @@
 // @ts-ignore
 const mongoose = require('mongoose');
-const orgType = require('../models/orgType');
-const category = require('../models/project_categroy');
-const organisation = require('../models/Org');
-const project = require('../models/project');
-const responsible_person = require('../models/responsiblePerson');
+const orgType = require('server/models/orgType');
+const category = require('server/models/project_categroy');
+const organisation = require('server/models/Org');
+const project = require('server/models/project');
+const responsible_person = require('server/models/responsiblePerson');
 const csvtojson = require('csvtojson');
 const fs = require('fs');
 let url = 'mongodb://localhost:27017/insinger';
