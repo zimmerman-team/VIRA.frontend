@@ -340,3 +340,11 @@ export const insingerData = [
     'Contactpersoon',
   ],
 ];
+
+export const table9Data = [
+  ['', 'User Name', 'Administrator', ''],
+  ['', 'User Name', 'Grantee', ''],
+  ['', 'User Name', 'Granteee', ''],
+  ['', 'User Name', 'Administrator', ''],
+  ['', 'User Name', 'Grantee', ''],
+];

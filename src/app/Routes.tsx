@@ -21,7 +21,14 @@ import { SdgModule } from 'app/modules/sdg';
 import { PrivacyModule } from 'app/modules/privacy';
 import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
-import { ManageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
+import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
+import ManageTeamEdit from 'app/modules/super-admin/sub-modules/manage-team-edit';
+import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account';
+import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
+import { ManageUserEdit } from 'app/modules/super-admin/sub-modules/manage-user-edit';
+import { manageUserEditMock } from 'app/modules/super-admin/sub-modules/manage-user-edit/mock';
+import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
+import ManageUser from 'app/modules/super-admin/sub-modules/manage-user';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -51,6 +58,10 @@ export function MainRoutes() {
       <Switch>
         <Route exact path="/login">
           {redirectAuth(storeUser)}
+        </Route>
+
+        <Route exact path="/recover-password">
+          <PasswordRecovery />
         </Route>
 
         <Route exact path="/">
@@ -111,8 +122,24 @@ export function MainRoutes() {
           <SubmittedLayout />
         </Route>
 
-        <Route path="/super-admin/*">
-          <ManageUsersTeamsLayout {...ManageUsersTeamsLayoutMock} />
+        <Route path="/super-admin/manage-teams/edit">
+          <ManageTeamEdit />
+        </Route>
+
+        <Route exact path="/super-admin/:id">
+          <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />
+        </Route>
+
+        <Route path="/super-admin/manage-user">
+          <ManageUser />
+        </Route>
+
+        <Route path="/super-admin/manage-account">
+          <ManageAccount {...manageAccountMock} />
+        </Route>
+
+        <Route path="/super-admin/manage-users/edit">
+          <ManageUserEdit {...manageUserEditMock} />
         </Route>
       </Switch>
     </Suspense>

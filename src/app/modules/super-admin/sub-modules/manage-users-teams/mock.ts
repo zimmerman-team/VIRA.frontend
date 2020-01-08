@@ -22,7 +22,7 @@ export const breadcrumbsMock: BreadcrumbModel = {
   previousLocations: [
     {
       label: 'Manage',
-      url: '/',
+      url: 'super-admin/manage-teams',
     },
   ],
 };
@@ -69,7 +69,7 @@ export const pageModuleMockTeams: PageModuleModel = {
   },
 };
 
-export const ManageUsersTeamsLayoutMock: ManageUsersTeamsLayoutModel = {
+export const manageUsersTeamsLayoutMock: ManageUsersTeamsLayoutModel = {
   breadcrumbs: breadcrumbsMock,
   pageModule: pageModuleMockUsers,
   tabNavigator: tabNavigatorMock,

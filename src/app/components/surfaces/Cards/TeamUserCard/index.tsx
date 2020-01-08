@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
 import { ProjectPalette } from 'app/theme';
+import { useHistory, useParams } from 'react-router-dom';
 
 const Description = styled(Typography)`
   && {
@@ -60,6 +61,8 @@ const Caption = styled(Typography)`
 `;
 
 export function TeamUserCard(props: TeamUserCardModel) {
+  let history = useHistory();
+
   return (
     <CardContainer>
       <Header variant="body1">{props.title}</Header>
@@ -70,7 +73,11 @@ export function TeamUserCard(props: TeamUserCardModel) {
             <Caption variant={'caption'}>Created: {props.dateCreated}</Caption>
           </Grid>
           <Grid item>
-            <ButtonIcon>
+            <ButtonIcon
+              onClick={() =>
+                history.push(`/super-admin/${props.urlParam}/edit`)
+              }
+            >
               <Edit />
             </ButtonIcon>
             <ButtonIcon>
