@@ -1,10 +1,10 @@
 // @ts-ignore
 const mongoose = require('mongoose');
-const orgType = require('server/models/orgType');
-const category = require('server/models/project_categroy');
-const organisation = require('server/models/Org');
-const project = require('server/models/project');
-const responsible_person = require('server/models/responsiblePerson');
+const orgType = require('../models/orgType.ts');
+const category = require('../models/project_categroy');
+const organisation = require('../models/Org');
+const project = require('../models/project');
+const responsible_person = require('../models/responsiblePerson');
 const csvtojson = require('csvtojson');
 const fs = require('fs');
 let url = 'mongodb://localhost:27017/insinger';
@@ -12,7 +12,7 @@ let url = 'mongodb://localhost:27017/insinger';
 const db = mongoose.connect(
   url,
   { useNewUrlParser: true, useUnifiedTopology: true },
-  (err, client) => {
+  (err: any, client: any) => {
     if (err) {
       console.log(err.message);
     } else {
@@ -50,8 +50,8 @@ diversen.save();
 
 csvtojson()
   .fromFile('./insinger_data.csv')
-  .then(csvData => {
-    fs.writeFile('insingerData.json', JSON.stringify(csvData), err => {
+  .then((csvData: any[]) => {
+    fs.writeFile('insingerData.json', JSON.stringify(csvData), (err: any) => {
       if (err) {
         console.log('error');
       } else {
@@ -71,7 +71,7 @@ csvtojson()
           country: record.country,
           email: record.organisation_email,
           website: record.website,
-        }).save((err, org) => {
+        }).save((err: any, org: any) => {
           new responsible_person({
             family_name: record.family_name,
             initials: record.initial,
@@ -96,7 +96,7 @@ csvtojson()
           country: record.country,
           email: record.organisation_email,
           website: record.website,
-        }).save((err, org) => {
+        }).save((err: any, org: any) => {
           new responsible_person({
             family_name: record.family_name,
             initials: record.initial,
@@ -121,7 +121,7 @@ csvtojson()
           country: record.country,
           email: record.organisation_email,
           website: record.website,
-        }).save((err, org) => {
+        }).save((err: any, org: any) => {
           new responsible_person({
             family_name: record.family_name,
             initials: record.initial,
@@ -140,13 +140,13 @@ csvtojson()
   .then(() => {
     csvtojson()
       .fromFile('./insinger_data.csv')
-      .then(csvData => {
+      .then((csvData: any[]) => {
         let temp_project = null;
         csvData.forEach((record, index, arr) => {
           if (record.category === 'diversen') {
             organisation.findOne(
               { organisation_name: record.organisation },
-              (err, org) => {
+              (err: any, org: any) => {
                 temp_project = new project({
                   project_number: record.project_id,
                   project_name: record.project,
@@ -170,7 +170,7 @@ csvtojson()
           } else if (record.category === 'jeugdwerk') {
             organisation.findOne(
               { organisation_name: record.organisation },
-              (err, org) => {
+              (err: any, org: any) => {
                 temp_project = new project({
                   project_number: record.project_id,
                   project_name: record.project,
@@ -193,7 +193,7 @@ csvtojson()
           } else if (record.category === 'restauraties') {
             organisation.findOne(
               { organisation_name: record.organisation },
-              (err, org) => {
+              (err: any, org: any) => {
                 temp_project = new project({
                   project_number: record.project_id,
                   project_name: record.project,
@@ -216,7 +216,7 @@ csvtojson()
           } else if (record.category === 'predikantsplaatsen') {
             organisation.findOne(
               { organisation_name: record.organisation },
-              (err, org) => {
+              (err: any, org: any) => {
                 temp_project = new project({
                   project_number: record.project_id,
                   project_name: record.project,
@@ -239,7 +239,7 @@ csvtojson()
           } else if (record.category === 'Overigen') {
             organisation.findOne(
               { organisation_name: record.organisation },
-              (err, org) => {
+              (err: any, org: any) => {
                 temp_project = new project({
                   project_number: record.project_id,
                   project_name: record.project,
@@ -262,7 +262,7 @@ csvtojson()
           } else {
             organisation.findOne(
               { organisation_name: record.organisation },
-              (err, org) => {
+              (err: any, org: any) => {
                 temp_project = new project({
                   project_number: record.project_id,
                   project_name: record.project,
