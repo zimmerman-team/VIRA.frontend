@@ -25,7 +25,7 @@ export function getAllUsers(req: any, res: any) {
       axios
         .all([
           axios.get(
-            `${process.env.REACT_APP_AUTH_DOMAIN}/api/v2/users?include_totals=true&q=identities.connection:"Username-Password-Authentication"`,
+            `${process.env.REACT_APP_AUTH_DOMAIN}/api/v2/users?include_totals=true&q=identities.connection:"insinger-database-connection"`,
             {
               headers: {
                 Authorization: token1,
@@ -143,7 +143,7 @@ export function addUser(req: any, res: any) {
     roleId,
     groupName,
     roleName,
-  } = req.body;
+  } = req.query;
 
   getAccessToken('management').then(token => {
     axios
@@ -154,12 +154,12 @@ export function addUser(req: any, res: any) {
           blocked: false,
           email_verified: false,
           verify_email: true,
-          password: makePass(8),
+          password: `@${makePass(8)}`,
           given_name: name,
           family_name: surname,
           name: `${name} ${surname}`,
           nickname: name,
-          connection: 'Username-Password-Authentication',
+          connection: 'insinger-database-connection',
           user_metadata: {
             firstName: name,
             lastName: surname,
@@ -182,7 +182,7 @@ export function addUser(req: any, res: any) {
           sendWelcomeEmail(response.data.user_id, name, surname, email);
           addUserToGroup(response.data.user_id, groupId);
           assignRoleToUser(response.data.user_id, roleId);
-          return res(JSON.stringify({ message: 'success' }));
+          return res(JSON.stringify({ message: 'User created successfully' }));
         }
         return res(JSON.stringify(response.data));
       })
@@ -227,7 +227,7 @@ export function editUser(req: any, res: any) {
             firstName: name,
             lastName: surname,
           },
-          connection: 'Username-Password-Authentication',
+          connection: 'insinger-database-connection',
         },
         {
           headers: {

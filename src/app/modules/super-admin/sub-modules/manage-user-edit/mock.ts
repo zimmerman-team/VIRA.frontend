@@ -31,5 +31,7 @@ export const manageUserEditMock: ManageUserEditModel = {
         },
       ],
     },
+    selectOptions: [],
   },
+  mode: 'edit',
 };

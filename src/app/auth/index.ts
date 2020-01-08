@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import auth0 from 'auth0-js';
 
 class AuthProps {

@@ -1,6 +1,6 @@
 export function genericError(error: any, res: any) {
-  console.log('error', error);
-  return res(JSON.stringify(error));
+  const _error = error.response.data || error;
+  return res(JSON.stringify(_error));
 }
 
 export function makePass(length: number): string {

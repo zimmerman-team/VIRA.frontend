@@ -1,6 +1,6 @@
 // @ts-nocheck
 import axios from 'axios';
-// import { sendMail } from './email';
+import { sendMail } from './email';
 
 export async function getAccessToken(apiType: string) {
   try {
@@ -97,7 +97,7 @@ export function sendWelcomeEmail(
       const redirectUrl = `${
         process.env.REACT_APP_PROJECT_URL &&
         process.env.REACT_APP_PROJECT_URL.includes('localhost')
-          ? process.env.REACT_APP_EXPRESS_BACKEND_BASE_URL
+          ? process.env.REACT_APP_BACKEND_URL
           : process.env.REACT_APP_PROJECT_URL
       }/api/redirectToHome`;
       axios
@@ -114,7 +114,7 @@ export function sendWelcomeEmail(
           }
         )
         .then(response => {
-          //   return sendMail(name, surname, email, response.data.ticket);
+          return sendMail(name, surname, email, response.data.ticket);
         })
         .catch(error => {
           return error.response.data.message;
