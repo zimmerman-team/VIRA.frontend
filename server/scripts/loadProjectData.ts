@@ -1,6 +1,6 @@
 // @ts-ignore
 const mongoose = require('mongoose');
-const orgType = require('../models/orgType.ts');
+const orgType = require('../models/orgType');
 const category = require('../models/project_categroy');
 const organisation = require('../models/Org');
 const project = require('../models/project');
