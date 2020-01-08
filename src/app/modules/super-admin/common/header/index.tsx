@@ -45,6 +45,7 @@ const ButtonIcon = styled(IconButton)`
 export type HeaderParams = {
   title: string;
   buttonLabel: string;
+  buttonClick?: Function;
 };
 
 export const HeaderFragment = (props: HeaderParams) => {
@@ -62,7 +63,11 @@ export const HeaderFragment = (props: HeaderParams) => {
         </Box>
       </Header>
       <Grid item container lg={2}>
-        <IconLabelButton text={props.buttonLabel} icon={<Add />} />
+        <IconLabelButton
+          text={props.buttonLabel}
+          icon={<Add />}
+          onClick={props.buttonClick}
+        />
       </Grid>
     </React.Fragment>
   );

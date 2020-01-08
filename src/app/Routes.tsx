@@ -144,6 +144,10 @@ export function MainRoutes() {
         <Route path="/super-admin/manage-users/add">
           {redirectUnAuth(ManageUserEdit, storeUser, {
             ...manageUserEditMock,
+            breadcrumbs: {
+              ...manageUserEditMock.breadcrumbs,
+              currentLocation: 'Add',
+            },
             mode: 'add',
             form: {
               ...manageUserEditMock.form,
