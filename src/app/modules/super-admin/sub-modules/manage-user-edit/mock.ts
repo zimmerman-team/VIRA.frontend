@@ -6,7 +6,7 @@ export const manageUserEditMock: ManageUserEditModel = {
     previousLocations: [
       {
         label: 'Manage',
-        url: '/',
+        url: '/super-admin/manage-users',
       },
     ],
   },
@@ -31,5 +31,7 @@ export const manageUserEditMock: ManageUserEditModel = {
         },
       ],
     },
+    selectOptions: [],
   },
+  mode: 'edit',
 };

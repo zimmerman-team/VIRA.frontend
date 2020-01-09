@@ -13116,6 +13116,13 @@ postcss@^7, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, po
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+postmark@2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/postmark/-/postmark-2.2.4.tgz#30a9ef57f738009bae14aa22f2f62e497b6f4a08"
+  integrity sha512-qzqcXrKQnSGIScOpCNz2ArC69zHSuVZKo8RLg8Nioz633NIi4aVYeBNBwCn1hfAcQ/g/eCAyTAvVbMYyPmlSzQ==
+  dependencies:
+    request "^2.88.0"
+
 precinct@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/precinct/-/precinct-6.2.0.tgz#1755c369316d58ffeed2332a31442d5498f3cc33"

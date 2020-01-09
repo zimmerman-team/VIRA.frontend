@@ -1,12 +1,12 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { TeamUserCard } from 'app/components/surfaces/Cards/TeamUserCard';
 import { HeaderFragment } from 'app/modules/super-admin/common/header';
 import { Pagination } from 'app/components/misc/TablePagination';
 import { PageModuleModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
-import { useHistory, useParams } from 'react-router-dom';
 
-export function PageModel(props: PageModuleModel) {
+function PageModelF(props: PageModuleModel) {
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -15,6 +15,9 @@ export function PageModel(props: PageModuleModel) {
         <HeaderFragment
           title={props.title}
           buttonLabel={`Add ${props.title.slice(0, props.title.length - 1)}`}
+          buttonClick={() => {
+            props.history.push(`${props.location.pathname}/add`);
+          }}
         />
       </Grid>
 
@@ -28,9 +31,11 @@ export function PageModel(props: PageModuleModel) {
 
       {/* ---------------------------------------------------------------------*/}
       {/* Pagination */}
-      <Grid item lg={12} container justify={'flex-end'}>
+      <Grid item lg={12} container justify="flex-end">
         <Pagination {...props.pagination} />
       </Grid>
     </React.Fragment>
   );
 }
+
+export const PageModel = withRouter(PageModelF);

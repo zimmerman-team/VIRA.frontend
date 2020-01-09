@@ -3,6 +3,7 @@ const http = require('http');
 const socketIO = require('socket.io');
 const cors = require('cors');
 const helmet = require('helmet');
+const router = express.Router();
 
 import {
   getUser,
@@ -91,5 +92,10 @@ IO.sockets.on('connection', (socket: any) => {
 server.listen(process.env.REACT_APP_BACKEND_PORT, () =>
   console.log(`LISTENING ON PORT ${process.env.REACT_APP_BACKEND_PORT}`)
 );
+
+router.get('/redirectToHome', (req: any, res: any) => {
+  res.redirect(`${process.env.REACT_APP_PROJECT_URL}/`);
+});
+app.use('/api', router);
 
 export {};

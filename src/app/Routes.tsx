@@ -32,15 +32,16 @@ import ManageUser from 'app/modules/super-admin/sub-modules/manage-user';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
-  component: ReactModule,
+  Component: any,
   user: UserModel | null,
+  componentProps?: any,
   role?: string
 ) {
   if (!user) {
     return <Redirect to="/login" />;
   }
 
-  return component;
+  return <Component {...componentProps} />;
 }
 
 /* todo: let's move this logic somewhere else */
@@ -53,6 +54,8 @@ function redirectAuth(user: UserModel | null) {
 
 export function MainRoutes() {
   const storeUser = useStoreState(state => state.syncVariables.user);
+  const userRoles = useStoreState(state => state.getUserRoles.data);
+  const userGroups = useStoreState(state => state.getUserGroups.data);
   return (
     <Suspense fallback={<PageLoader />}>
       <Switch>
@@ -65,49 +68,41 @@ export function MainRoutes() {
         </Route>
 
         <Route exact path="/">
-          {/*{redirectUnAuth(<LandingLayout />, storeUser)}*/}
-          <LandingLayout />
+          {redirectUnAuth(LandingLayout, storeUser)}
         </Route>
 
         <Route exact path="/list/:id">
-          {/*{redirectUnAuth(<ProjectsModule />, storeUser)}*/}
-          <ListModule />
+          {redirectUnAuth(ListModule, storeUser)}
         </Route>
 
         <Route exact path="/projects/detail">
-          {/*{redirectUnAuth(<ProjectDetailLayout />, storeUser)}*/}
-          <ProjectDetailModule />
+          {redirectUnAuth(ProjectDetailModule, storeUser)}
         </Route>
 
         <Route exact path="/reports/detail">
-          {/*{redirectUnAuth(<ReportDetailLayout />, storeUser)}*/}
-          <ReportDetailLayout />
+          {redirectUnAuth(ReportDetailLayout, storeUser)}
         </Route>
 
-        <Route path="/report">
-          {/*{redirectUnAuth(<CreateReport />, storeUser)}*/}
-          <CreateReport />
-        </Route>
+        <Route path="/report">{redirectUnAuth(CreateReport, storeUser)}</Route>
 
         <Route exact path="/grantees/detail">
-          {/*{redirectUnAuth(<GranteeDetailLayout />, storeUser)}*/}
-          <GranteeDetailLayout />
+          {redirectUnAuth(GranteeDetailLayout, storeUser)}
         </Route>
 
         <Route exact path="/if-priority-area">
-          <PriorityAreaModule />
+          {redirectUnAuth(PriorityAreaModule, storeUser)}
         </Route>
 
         <Route exact path="/sdg">
-          <SdgModule />
+          {redirectUnAuth(SdgModule, storeUser)}
         </Route>
 
         <Route exact path="/faq">
-          <Faqs />
+          {redirectUnAuth(Faqs, storeUser)}
         </Route>
 
         <Route exact path="/privacy">
-          <PrivacyModule />
+          {redirectUnAuth(PrivacyModule, storeUser)}
         </Route>
 
         <Route exact path="/notFound">
@@ -119,27 +114,51 @@ export function MainRoutes() {
         </Route>
 
         <Route exact path="/submitted">
-          <SubmittedLayout />
+          {redirectUnAuth(SubmittedLayout, storeUser)}
         </Route>
 
         <Route path="/super-admin/manage-teams/edit">
-          <ManageTeamEdit />
+          {redirectUnAuth(ManageTeamEdit, storeUser)}
         </Route>
 
         <Route exact path="/super-admin/:id">
-          <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />
+          {redirectUnAuth(
+            ManageUsersTeamsLayout,
+            storeUser,
+            manageUsersTeamsLayoutMock
+          )}
         </Route>
 
         <Route path="/super-admin/manage-user">
-          <ManageUser />
+          {redirectUnAuth(ManageUser, storeUser)}
         </Route>
 
         <Route path="/super-admin/manage-account">
-          <ManageAccount {...manageAccountMock} />
+          {redirectUnAuth(ManageAccount, storeUser, manageAccountMock)}
         </Route>
 
         <Route path="/super-admin/manage-users/edit">
-          <ManageUserEdit {...manageUserEditMock} />
+          {redirectUnAuth(ManageUserEdit, storeUser, manageUserEditMock)}
+        </Route>
+
+        <Route path="/super-admin/manage-users/add">
+          {redirectUnAuth(ManageUserEdit, storeUser, {
+            ...manageUserEditMock,
+            breadcrumbs: {
+              ...manageUserEditMock.breadcrumbs,
+              currentLocation: 'Add',
+            },
+            mode: 'add',
+            form: {
+              ...manageUserEditMock.form,
+              radioButtonGroup: {
+                title: 'User Role',
+                items:
+                  userRoles || manageUserEditMock.form.radioButtonGroup.items,
+              },
+              selectOptions: userGroups,
+            },
+          })}
         </Route>
       </Switch>
     </Suspense>
