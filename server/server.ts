@@ -8,7 +8,9 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 let url = 'mongodb://localhost:27017/insinger';
 const router = express.Router();
-
+const orgController = require('./controllers/OrgControllerSocket');
+const orgTypeController = require('./controllers/OrgTypeControllerSocket');
+const projectCategoryController = require('./controllers/ProjectCategoryControllerSocket');
 import {
   getUser,
   getAllUsers,
@@ -92,6 +94,46 @@ IO.sockets.on('connection', (socket: any) => {
   });
   socket.on('assignRoleToUser', (data: any, fn: any) => {
     assignRoleToUser({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('allOrg', (data: any, fn: any) => {
+    orgController.allOrg({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('oneOrg', (data: any, fn: any) => {
+    orgController.oneOrg({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('addOrg', (data: any, fn: any) => {
+    orgController.AddOrg({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('updateOrg', (data: any, fn: any) => {
+    orgController.UpdateOrg({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('delOrg', (data: any, fn: any) => {
+    orgController.DelOrg({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('allOrgType', (data: any, fn: any) => {
+    orgTypeController.allOrgType({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('oneOrgType', (data: any, fn: any) => {
+    orgTypeController.oneOrgType({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('addOrgType', (data: any, fn: any) => {
+    orgTypeController.addOrgType({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('updateOrgType', (data: any, fn: any) => {
+    orgTypeController.UpdateOrgType({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('delOrgType', (data: any, fn: any) => {
+    orgTypeController.DelOrgType({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('allProjectCategory', (data: any, fn: any) => {
+    projectCategoryController.allProjectCategory({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('oneProjectCategory', (data: any, fn: any) => {
+    projectCategoryController.oneProjectCategory({ query: data }, (res: any) =>
+      fn(res)
+    );
   });
 });
 
