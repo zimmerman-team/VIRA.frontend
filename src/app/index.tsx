@@ -9,6 +9,7 @@ import { AppSideBar } from 'app/modules/common/components/AppSideBar';
 import { NavItems } from 'app/modules/common/consts';
 import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 import { PositionedSnackbar } from 'app/components/datadisplay/snackbar';
+import { InitialLoad } from 'app/utils/initialLoad';
 import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
 import { UserModel } from 'app/state/api/interfaces';
 import SignInModule from 'app/modules/sign-in';
@@ -20,6 +21,7 @@ export function App() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  InitialLoad();
 
   const handleDrawerOpen = () => {
     setOpen(true);

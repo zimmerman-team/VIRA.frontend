@@ -12,8 +12,11 @@ import {
 } from 'app/state/api/interfaces';
 
 /* action reducers */
+import addUser from 'app/state/api/actionsReducers/addUser';
 import { syncVariables } from 'app/state/api/actionsReducers';
 import userDetails from 'app/state/api/actionsReducers/userDetails';
+import getUserRoles from 'app/state/api/actionsReducers/getUserRoles';
+import getUserGroups from 'app/state/api/actionsReducers/getUserGroups';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
@@ -25,18 +28,24 @@ const encryptor = createEncryptor({
 const persistConfig = {
   storage,
   key: 'storage',
-  blacklist: ['snackbar'],
+  blacklist: ['snackbar', 'addUser'],
   transforms: [encryptor],
 };
 
 export interface ApplicationStoreModel {
   syncVariables: SyncVariablesModel;
+  addUser: SocketAPIResonseInterface;
   userDetails: SocketAPIResonseInterface;
+  getUserRoles: SocketAPIResonseInterface;
+  getUserGroups: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
   syncVariables,
+  getUserGroups,
+  getUserRoles,
   userDetails,
+  addUser,
 };
 
 export const appStore = createStore(applicationStore, {

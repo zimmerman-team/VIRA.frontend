@@ -7,6 +7,7 @@ let apiRouter = require('./api-routes');
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 let url = 'mongodb://localhost:27017/insinger';
+const router = express.Router();
 
 import {
   getUser,
@@ -107,5 +108,10 @@ app.use('/api', apiRouter);
 server.listen(process.env.REACT_APP_BACKEND_PORT, () =>
   console.log(`LISTENING ON PORT ${process.env.REACT_APP_BACKEND_PORT}`)
 );
+
+router.get('/redirectToHome', (req: any, res: any) => {
+  res.redirect(`${process.env.REACT_APP_PROJECT_URL}/`);
+});
+app.use('/api', router);
 
 export {};
