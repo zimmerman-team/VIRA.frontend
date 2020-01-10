@@ -26,16 +26,19 @@ export function oneProjectCategory(req: any, res: any) {
 export function addProjectCategory(req: any, res: any) {
   let project_categroy = new projectCategory();
 
-  project_categroy.name = req.body.name;
-  project_categroy.description = req.body.description;
+  project_categroy.name = req.query.name;
+  project_categroy.description = req.query.description;
   project_categroy.save((err: any, project_categroy: any) => {
     if (err) {
-      res.send(err);
+      res(JSON.stringify({ status: 'error', message: err.message }));
     }
-    res.json({
-      message: 'new project category created.',
-      data: project_categroy,
-    });
+
+    res(
+      JSON.stringify({
+        message: 'new project category created',
+        data: project_categroy,
+      })
+    );
   });
 }
 
@@ -43,27 +46,28 @@ export function addProjectCategory(req: any, res: any) {
 
 export function UpdateProjectCategory(req: any, res: any) {
   projectCategory.findById(
-    req.params._id,
+    req.query.id,
     (err: any, found_projectCategory: any) => {
       if (err) {
         res.json(err);
       } else if (found_projectCategory) {
-        found_projectCategory.name = req.body.name;
-        found_projectCategory.description = req.body.description;
+        found_projectCategory.name = req.query.name;
+        found_projectCategory.description = req.query.description;
         found_projectCategory.save((err: any) => {
           if (err) {
-            res.json(err);
+            res(JSON.stringify({ status: 'error', message: err.message }));
           }
-          res.json({
-            status: 'success',
-            data: found_projectCategory,
-          });
+          res(
+            JSON.stringify({ status: 'success', data: found_projectCategory })
+          );
         });
       } else {
-        res.json({
-          status: 'fail',
-          message: 'project categroy not found.',
-        });
+        res(
+          JSON.stringify({
+            status: 'fail',
+            message: 'project categroy not found.',
+          })
+        );
       }
     }
   );
@@ -74,18 +78,20 @@ export function UpdateProjectCategory(req: any, res: any) {
 export function DelProjectCategory(req: any, res: any) {
   projectCategory.deleteOne(
     {
-      _id: req.params._id,
+      _id: req.query.id,
     },
-    (err: any, project_categroy: any) => {
+    (err: any, project_category: any) => {
       if (err) {
-        res.json(err);
+        res(JSON.stringify({ status: 'error', message: err.message }));
       } else {
-        res.json({
-          status:
-            project_categroy.deletedCount +
-            ' project category successfully deleted.',
-          message: project_categroy,
-        });
+        res(
+          JSON.stringify({
+            status:
+              project_category.deletedCount +
+              'project category successfully deleted.',
+            message: project_category,
+          })
+        );
       }
     }
   );

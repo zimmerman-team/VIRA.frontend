@@ -11,6 +11,8 @@ const router = express.Router();
 const orgController = require('./controllers/OrgControllerSocket');
 const orgTypeController = require('./controllers/OrgTypeControllerSocket');
 const projectCategoryController = require('./controllers/ProjectCategoryControllerSocket');
+const projectController = require('./controllers/ProjectControllerSocket');
+const responsiblePersonController = require('./controllers/ResponsiblePersonControllerSocket');
 import {
   getUser,
   getAllUsers,
@@ -132,6 +134,62 @@ IO.sockets.on('connection', (socket: any) => {
   });
   socket.on('oneProjectCategory', (data: any, fn: any) => {
     projectCategoryController.oneProjectCategory({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('addProjectCategory', (data: any, fn: any) => {
+    projectCategoryController.addProjectCategory({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('updateProjectCategory', (data: any, fn: any) => {
+    projectCategoryController.UpdateProjectCategory(
+      { query: data },
+      (res: any) => fn(res)
+    );
+  });
+  socket.on('delProjectCategory', (data: any, fn: any) => {
+    projectCategoryController.DelProjectCategory({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('allProject', (data: any, fn: any) => {
+    projectController.allProject({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('oneProject', (data: any, fn: any) => {
+    projectController.oneProject({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('addProject', (data: any, fn: any) => {
+    projectController.addProject({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('updateProject', (data: any, fn: any) => {
+    projectController.UpdateProject({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('delProject', (data: any, fn: any) => {
+    projectController.DelProject({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('allPerson', (data: any, fn: any) => {
+    responsiblePersonController.allPerson({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('onePerson', (data: any, fn: any) => {
+    responsiblePersonController.onePeron({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('addPerson', (data: any, fn: any) => {
+    responsiblePersonController.AddPerson({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('updatePerson', (data: any, fn: any) => {
+    responsiblePersonController.UpdatePerson({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('delPerson', (data: any, fn: any) => {
+    responsiblePersonController.DelPerson({ query: data }, (res: any) =>
       fn(res)
     );
   });

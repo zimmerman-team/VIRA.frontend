@@ -54,7 +54,7 @@ export function onePeron(req: any, res: any) {
 
 export function AddPerson(req: any, res: any) {
   organisation.findOne(
-    { name: req.body.organisation },
+    { organisation_name: req.body.organisation },
     (err: any, org: any) => {
       if (!org) {
         let person = new responsible_person();
@@ -149,7 +149,7 @@ export function UpdatePerson(req: any, res: any) {
     } else {
       res.json({
         status: 'fail',
-        message: 'organisation not found.',
+        message: 'person not found.',
       });
     }
   });

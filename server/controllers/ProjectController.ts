@@ -39,10 +39,11 @@ export function allProject(req: any, res: any) {
       { project_number: req.query.project_number.split(',') },
       (err: any, projects: any) => {
         Project.populate(
+          //first populate for organisation.
           projects,
           {
-            path: 'organisation category',
-            select: 'organisation_name name', //org name and category name
+            path: 'organisation ',
+            select: 'organisation_name ', //org name
             match: req.query.hasOwnProperty('organisation_name')
               ? {
                   organisation_name: {
@@ -51,12 +52,24 @@ export function allProject(req: any, res: any) {
                 }
               : {},
           },
-          (err: any, data: any) => {
-            res.json({
-              data: data.filter((projects: any) => {
-                return projects.organisation != null;
-              }),
-            });
+          (err: any, projects: any) => {
+            //callback from first populate()
+            Project.populate(
+              // second populate for category
+              projects,
+              {
+                path: 'category',
+                select: 'name',
+              },
+              (err: any, data: any) => {
+                //callback from second populate()
+                res.json({
+                  data: data.filter((projects: any) => {
+                    return projects.organisation != null;
+                  }),
+                });
+              }
+            );
           }
         );
       }
