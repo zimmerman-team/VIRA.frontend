@@ -17,6 +17,7 @@ import { syncVariables } from 'app/state/api/actionsReducers';
 import userDetails from 'app/state/api/actionsReducers/userDetails';
 import getUserRoles from 'app/state/api/actionsReducers/getUserRoles';
 import getUserGroups from 'app/state/api/actionsReducers/getUserGroups';
+import allProjects from 'app/state/api/actionsReducers/allProjects';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
@@ -38,6 +39,7 @@ export interface ApplicationStoreModel {
   userDetails: SocketAPIResonseInterface;
   getUserRoles: SocketAPIResonseInterface;
   getUserGroups: SocketAPIResonseInterface;
+  allProjects: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
@@ -46,6 +48,7 @@ const applicationStore: ApplicationStoreModel = {
   getUserRoles,
   userDetails,
   addUser,
+  allProjects,
 };
 
 export const appStore = createStore(applicationStore, {

@@ -989,7 +989,7 @@ export const mockDataVar7: TableModuleModel = {
 
 export const mockDataVar8: TableModuleModel = {
   title: 'Projects',
-  data: table9Data,
+  data: [[]], //table9Data,
   columns: [
     {
       name: 'ID',
