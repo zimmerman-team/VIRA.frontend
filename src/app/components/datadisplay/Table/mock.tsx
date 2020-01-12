@@ -1066,7 +1066,7 @@ export const mockDataVar8: TableModuleModel = {
     filter: false,
     download: true,
     rowHover: false,
-    pagination: false,
+    pagination: true,
     viewColumns: true,
     responsive: 'scrollFullHeight',
     filterType: 'checkbox',

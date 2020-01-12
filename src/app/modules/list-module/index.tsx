@@ -9,7 +9,12 @@ import { ReportListMock } from 'app/modules/list-module/mock';
 import { GranteeListMock } from 'app/modules/list-module/mock';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { TabNavMock } from 'app/modules/list-module/mock';
-import { getBaseTable, formatTableData } from 'app/modules/list-module/utils';
+import {
+  getBaseTableForProject,
+  formatTableDataForProject,
+  getBaseTableForGrantee,
+  formatTableDataForGrantee,
+} from 'app/modules/list-module/utils';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { useStoreState } from 'app/state/store/hooks';
 import { useStoreActions } from 'app/state/store/hooks';
@@ -19,12 +24,18 @@ import find from 'lodash/find';
 
 export const ListModule = () => {
   useTitle('M&E - Reports');
-  const baseTable: TableModuleModel = getBaseTable();
-  //baseTable.data = [['hellofuck', 'hellofuck']];
+  const baseTableForProject: TableModuleModel = getBaseTableForProject();
+  const baseTableForGrantee: TableModuleModel = getBaseTableForGrantee();
 
   const allProjectsData = useStoreState(actions => actions.allProjects.data);
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
+  );
+  const allOrganisationsData = useStoreState(
+    actions => actions.allOrganisations.data
+  );
+  const allOrganisationsAction = useStoreActions(
+    actions => actions.allOrganisations.fetch
   );
 
   React.useEffect(() => {
@@ -33,10 +44,25 @@ export const ListModule = () => {
       values: '',
     }).then(() => {
       if (allProjectsData) {
-        baseTable.data = formatTableData(get(allProjectsData, 'data'));
+        baseTableForProject.data = formatTableDataForProject(
+          get(allProjectsData, 'data')
+        );
       }
     });
-  }, [baseTable]);
+  }, [baseTableForGrantee]);
+
+  React.useEffect(() => {
+    allOrganisationsAction({
+      socketName: 'allOrg',
+      values: '',
+    }).then(() => {
+      if (allOrganisationsData) {
+        baseTableForGrantee.data = formatTableDataForGrantee(
+          get(allOrganisationsData, 'data')
+        );
+      }
+    });
+  }, [baseTableForProject]);
 
   return (
     <React.Fragment>
@@ -54,13 +80,13 @@ export const ListModule = () => {
       {/* ---------------------------------------------------------------------*/}
       <Grid item xs={12} lg={12}>
         <Route path="/list/projects">
-          <TableModule {...baseTable} />
+          <TableModule {...baseTableForProject} />
         </Route>
         <Route path="/list/reports">
           <TableModule {...ReportListMock} />
         </Route>
         <Route path="/list/grantees">
-          <TableModule {...GranteeListMock} />
+          <TableModule {...baseTableForGrantee} />
         </Route>
       </Grid>
     </React.Fragment>
