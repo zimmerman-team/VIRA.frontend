@@ -989,7 +989,7 @@ export const mockDataVar7: TableModuleModel = {
 
 export const mockDataVar8: TableModuleModel = {
   title: 'Projects',
-  data: table9Data,
+  data: [[]], //table9Data,
   columns: [
     {
       name: 'ID',
@@ -1066,7 +1066,7 @@ export const mockDataVar8: TableModuleModel = {
     filter: false,
     download: true,
     rowHover: false,
-    pagination: false,
+    pagination: true,
     viewColumns: true,
     responsive: 'scrollFullHeight',
     filterType: 'checkbox',

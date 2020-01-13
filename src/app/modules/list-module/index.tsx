@@ -9,9 +9,63 @@ import { ReportListMock } from 'app/modules/list-module/mock';
 import { GranteeListMock } from 'app/modules/list-module/mock';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { TabNavMock } from 'app/modules/list-module/mock';
+import {
+  getBaseTableForProject,
+  formatTableDataForProject,
+  getBaseTableForGrantee,
+  formatTableDataForGrantee,
+} from 'app/modules/list-module/utils';
+import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+import { useStoreState } from 'app/state/store/hooks';
+import { useStoreActions } from 'app/state/store/hooks';
+/* utils */
+import get from 'lodash/get';
+import find from 'lodash/find';
 
 export const ListModule = () => {
   useTitle('M&E - Reports');
+  const baseTableForProject: TableModuleModel = getBaseTableForProject();
+  const baseTableForGrantee: TableModuleModel = getBaseTableForGrantee();
+
+  const allProjectsData = useStoreState(actions => actions.allProjects.data);
+  const allProjectsAction = useStoreActions(
+    actions => actions.allProjects.fetch
+  );
+  const allOrganisationsData = useStoreState(
+    actions => actions.allOrganisations.data
+  );
+  const allOrganisationsAction = useStoreActions(
+    actions => actions.allOrganisations.fetch
+  );
+
+  // Load the projects on componentDidMount
+  React.useEffect(() => {
+    allProjectsAction({
+      socketName: 'allProject',
+      values: '',
+    });
+  }, []);
+  // Format the projects on componentDidUpdate when allProjectsData change
+  React.useEffect(() => {
+    baseTableForProject.data = formatTableDataForProject(
+      get(allProjectsData, 'data', [])
+    );
+  }, [allProjectsData]);
+
+  // Load the orgs on componentDidMount
+  React.useEffect(() => {
+    allOrganisationsAction({
+      socketName: 'allOrg',
+      values: '',
+    });
+  }, []);
+  // Format the projects on componentDidUpdate when allOrganisationsData change
+  React.useEffect(() => {
+    baseTableForGrantee.data = formatTableDataForGrantee(
+      get(allOrganisationsData, 'data', [])
+    );
+  }, [allOrganisationsData]);
+
   return (
     <React.Fragment>
       {/* using this element as an helper */}
@@ -28,13 +82,13 @@ export const ListModule = () => {
       {/* ---------------------------------------------------------------------*/}
       <Grid item xs={12} lg={12}>
         <Route path="/list/projects">
-          <TableModule {...ProjectListMock} />
+          <TableModule {...baseTableForProject} />
         </Route>
         <Route path="/list/reports">
           <TableModule {...ReportListMock} />
         </Route>
         <Route path="/list/grantees">
-          <TableModule {...GranteeListMock} />
+          <TableModule {...baseTableForGrantee} />
         </Route>
       </Grid>
     </React.Fragment>
