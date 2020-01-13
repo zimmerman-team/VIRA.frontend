@@ -16,7 +16,7 @@ import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];
-  let bigTempArray: any[][] = [[]];
+  const bigTempArray: any[][] = [];
   data.forEach((row: any) => {
     tempArray.push(
       row.project_number,
@@ -108,7 +108,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
 
 export const formatTableDataForGrantee = (data: any): any[] => {
   let tempArray: any[] = [];
-  let bigTempArray: any[][] = [[]];
+  const bigTempArray: any[][] = [];
   data.forEach((row: any) => {
     tempArray.push(
       row.organisation_name,
