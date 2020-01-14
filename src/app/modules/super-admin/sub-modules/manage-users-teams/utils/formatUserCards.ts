@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import filter from 'lodash/filter';
 import orderBy from 'lodash/orderBy';
 
@@ -12,12 +13,20 @@ export function formatUserCards(
   let allData = data;
   let newData = data;
   if (init) {
-    allData = data.map((item: any) => ({
-      _id: item.user_id,
-      title: item.name,
-      description: '',
-      dateCreated: item.created_at.slice(0, 10),
-    }));
+    allData = data.map((item: any) => {
+      const title = item.user_metadata
+        ? `${item.user_metadata.firstName} ${item.user_metadata.lastName}`
+        : item.name;
+      const role = item.app_metadata
+        ? get(item.app_metadata, 'authorization.roles[0].name', '-')
+        : '-';
+      return {
+        _id: item.user_id,
+        title,
+        description: role,
+        dateCreated: item.created_at.slice(0, 10),
+      };
+    });
     newData = allData;
   }
 

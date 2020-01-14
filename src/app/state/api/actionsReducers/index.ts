@@ -46,6 +46,9 @@ export const socketAPIModel = <QueryModel, ResponseModel>(): ApiModel<
     state.loading = true;
     state.success = false;
   }),
+  clear: action(state => {
+    state.data = null;
+  }),
   fetch: thunk(async (actions, query: RequestValues<QueryModel>) => {
     actions.onRequest();
     const socket = openSocket(process.env.REACT_APP_BACKEND_URL as string);

@@ -133,7 +133,7 @@ export function MainRoutes() {
           {redirectUnAuth(ManageAccount, storeUser, manageAccountMock)}
         </Route>
 
-        <Route path="/super-admin/manage-users/edit">
+        <Route path="/super-admin/manage-users/edit/:id">
           {redirectUnAuth(ManageUserEdit, storeUser, manageUserEditMock)}
         </Route>
 

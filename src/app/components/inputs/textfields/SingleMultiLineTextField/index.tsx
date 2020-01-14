@@ -50,7 +50,7 @@ export const BigInputLabel = styled(props => <Typography {...props} />)`
   }
 `;
 
-//Doing this because we have two label versions for a input in the design.
+// Doing this because we have two label versions for a input in the design.
 function renderLabel(props) {
   if (!props.label) {
     return null;
@@ -58,13 +58,12 @@ function renderLabel(props) {
 
   if (props.bigLabel) {
     return <BigInputLabel variant="subtitle1">{props.label}</BigInputLabel>;
-  } else {
-    return (
-      <InputLabel shrink htmlFor={props.id}>
-        {props.label}
-      </InputLabel>
-    );
   }
+  return (
+    <InputLabel shrink htmlFor={props.id}>
+      {props.label}
+    </InputLabel>
+  );
 }
 
 export const SingleMultiLineTextField = (props: MultilineTextfieldParams) => {

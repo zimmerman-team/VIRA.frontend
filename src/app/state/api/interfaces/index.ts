@@ -56,6 +56,7 @@ export interface ApiModel<QueryModel, ResponseModel> {
     ResponseData<ResponseModel> | ResponseData<ResponseModel>[]
   >;
   onRequest: Action<ApiModel<QueryModel, ResponseModel>>;
+  clear: Action<ApiModel<QueryModel, ResponseModel>>;
   fetch: Thunk<ApiModel<QueryModel, ResponseModel>, RequestValues<QueryModel>>;
 }
 

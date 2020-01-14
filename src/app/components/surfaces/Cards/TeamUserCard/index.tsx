@@ -81,7 +81,9 @@ export function TeamUserCard(props: TeamUserCardModel) {
             >
               <Edit />
             </ButtonIcon>
-            <ButtonIcon>
+            <ButtonIcon
+              onClick={() => props.deleteUser && props.deleteUser(props._id)}
+            >
               <Delete />
             </ButtonIcon>
           </Grid>

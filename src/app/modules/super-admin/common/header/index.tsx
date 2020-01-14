@@ -107,10 +107,11 @@ export function HeaderFragment(props: HeaderParams) {
               </ButtonIcon>
             }
             content={[
-              <List>
+              <List key="list">
                 {(props.sortOptions || []).map(option => (
                   <ListItem
                     button
+                    key={option.value}
                     onClick={() =>
                       props.onSortChange && props.onSortChange(option.value)
                     }
