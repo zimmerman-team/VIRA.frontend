@@ -29,7 +29,11 @@ function PageModelF(props: PageModuleModel) {
       {/* Cards */}
       {props.teamCards.map((card, index) => (
         <Grid item xs={12} lg={4} key={index}>
-          <TeamUserCard {...card} urlParam={props.urlParam} />
+          <TeamUserCard
+            {...card}
+            urlParam={props.urlParam}
+            deleteUser={props.deleteUser}
+          />
         </Grid>
       ))}
 

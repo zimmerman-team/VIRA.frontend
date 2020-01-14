@@ -18,6 +18,7 @@ export type PageModuleModel = RouteComponentProps & {
   onSearchChange?: Function;
   sortOptions?: SortOptionsModel[];
   onSortChange?: Function;
+  deleteUser?: Function;
 };
 
 export type ManageUsersTeamsLayoutModel = {

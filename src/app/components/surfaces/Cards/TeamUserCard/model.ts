@@ -4,4 +4,5 @@ export type TeamUserCardModel = {
   description: string;
   dateCreated: string;
   urlParam?: string;
+  deleteUser?: Function;
 };

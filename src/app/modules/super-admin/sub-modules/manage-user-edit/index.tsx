@@ -4,6 +4,7 @@ import find from 'lodash/find';
 import 'styled-components/macro';
 import { Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router-dom';
 import { Select } from 'app/components/inputs/select';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
@@ -13,13 +14,26 @@ import { ManageUserEditModel } from 'app/modules/super-admin/sub-modules/manage-
 import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
-export function ManageUserEdit(props: ManageUserEditModel) {
+function ManageUserEditF(props: ManageUserEditModel) {
   // redux state & actions
   const addUserData = useStoreState(actions => actions.addUser.data);
   const addUserAction = useStoreActions(actions => actions.addUser.fetch);
+  const loadUserData = useStoreState(actions => actions.loadUser.data);
+  const loadUserAction = useStoreActions(actions => actions.loadUser.fetch);
+  const loadUserClearAction = useStoreActions(
+    actions => actions.loadUser.clear
+  );
   const snackbarAction = useStoreActions(
     actions => actions.syncVariables.setSnackbar
   );
+  const editUserData = useStoreState(actions => actions.editUser.data);
+  const editUserAction = useStoreActions(actions => actions.editUser.fetch);
+  const editUserClearAction = useStoreActions(
+    actions => actions.editUser.clear
+  );
+  const storeUser = useStoreState(state => state.syncVariables.user);
+  const allUsersAction = useStoreActions(actions => actions.allUsers.fetch);
+  const roles = useStoreState(actions => actions.getUserRoles.data);
   // state
   const [firstName, setFirstName] = React.useState(
     get(props, 'form.firstName', '')
@@ -47,10 +61,70 @@ export function ManageUserEdit(props: ManageUserEditModel) {
           roleName: find(props.form.radioButtonGroup.items, { value: role }),
         },
       });
-    } else {
-      console.log('edit action');
+    }
+    if (props.mode === 'edit') {
+      const prevRoleId = get(
+        find(roles, r => get(r, 'label', '') === get(loadUserData, 'role', '')),
+        'value',
+        ''
+      );
+      const roleId = get(
+        find(roles, r => get(r, 'label', '') === role),
+        'value',
+        ''
+      );
+      editUserAction({
+        socketName: 'editUser',
+        values: {
+          userId: get(props.match.params, 'id', ''),
+          email,
+          name: firstName,
+          surname: lastName,
+          prevRoleId,
+          roleId,
+          role,
+        },
+      });
     }
   }
+
+  React.useEffect(() => {
+    if (props.mode === 'edit') {
+      loadUserAction({
+        socketName: 'getUser',
+        values: {
+          user: get(props.match.params, 'id', ''),
+        },
+      });
+    }
+
+    return () => {
+      editUserClearAction();
+      loadUserClearAction();
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (editUserData) {
+      if (get(editUserData, 'message', '') === 'success') {
+        snackbarAction('User edited successfully');
+        loadUserAction({
+          socketName: 'getUser',
+          values: {
+            user: get(props.match.params, 'id', ''),
+          },
+        });
+        allUsersAction({
+          socketName: 'getAllUsers',
+          values: { user: storeUser },
+        });
+        setTimeout(() => {
+          snackbarAction('');
+          editUserClearAction();
+        }, 5000);
+      }
+    }
+  }, [editUserData]);
 
   React.useEffect(() => {
     if (addUserData) {
@@ -64,6 +138,35 @@ export function ManageUserEdit(props: ManageUserEditModel) {
       }
     }
   }, [addUserData]);
+
+  React.useEffect(() => {
+    if (loadUserData && props.mode === 'edit') {
+      setFirstName(get(loadUserData, 'firstName', ''));
+      setLastName(get(loadUserData, 'lastName', ''));
+      setEmail(get(loadUserData, 'email', ''));
+      setRole(get(loadUserData, 'role', ''));
+    }
+  }, [loadUserData]);
+
+  function isSubmitDisabled() {
+    if (props.mode === 'add') {
+      return (
+        firstName === '' || lastName === '' || email === '' || group === ''
+      );
+    }
+    if (props.mode === 'edit') {
+      return (
+        firstName === '' ||
+        lastName === '' ||
+        email === '' ||
+        (firstName === get(loadUserData, 'firstName', '') &&
+          lastName === get(loadUserData, 'lastName', '') &&
+          email === get(loadUserData, 'email', '') &&
+          role === get(loadUserData, 'role', ''))
+      );
+    }
+    return true;
+  }
 
   // returned components
   return (
@@ -134,13 +237,13 @@ export function ManageUserEdit(props: ManageUserEditModel) {
       <Grid item container xs={12} lg={12} justify="flex-end">
         <ContainedButton
           onClick={onSubmit}
-          css={{ position: 'absolute', bottom: 32 }}
+          disabled={isSubmitDisabled()}
+          css={{ position: 'fixed', bottom: 32 }}
           text={props.mode === 'add' ? 'Add' : 'Save'}
-          disabled={
-            firstName === '' || lastName === '' || email === '' || group === ''
-          }
         />
       </Grid>
     </>
   );
 }
+
+export const ManageUserEdit = withRouter(ManageUserEditF);

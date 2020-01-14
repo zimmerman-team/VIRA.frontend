@@ -6,6 +6,7 @@ import {
   sendWelcomeEmail,
   addUserToGroup,
   assignRoleToUser,
+  removeRoleFromUser,
 } from '../utils/auth';
 import { makePass, genericError } from '../utils/general';
 
@@ -200,23 +201,14 @@ export function deleteUser(req: any, res: any) {
         },
       })
       .then(response => {
-        return res(JSON.stringify(response.data));
+        return res(JSON.stringify({ message: 'User deleted successfully' }));
       })
       .catch(error => genericError(error, res));
   });
 }
 
 export function editUser(req: any, res: any) {
-  const {
-    adminId,
-    userId,
-    email,
-    name,
-    surname,
-    roleId,
-    roleLabel,
-    prevRoleId,
-  } = req.body;
+  const { userId, email, name, surname, role, roleId, prevRoleId } = req.query;
   getAccessToken('management').then(token => {
     axios
       .patch(
@@ -226,6 +218,11 @@ export function editUser(req: any, res: any) {
           user_metadata: {
             firstName: name,
             lastName: surname,
+          },
+          app_metadata: {
+            authorization: {
+              roles: [{ name: role }],
+            },
           },
           connection: 'insinger-database-connection',
         },
@@ -237,6 +234,12 @@ export function editUser(req: any, res: any) {
       )
       .then(response => {
         if (response.status === 200 || response.status === 201) {
+          if (userId !== prevRoleId) {
+            roleId !== '' && assignRoleToUser(userId, roleId);
+            prevRoleId !== '' &&
+              roleId !== '' &&
+              removeRoleFromUser(userId, prevRoleId);
+          }
           return res(JSON.stringify({ message: 'success' }));
         }
       })
