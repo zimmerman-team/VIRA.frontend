@@ -1,58 +1,110 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import TableModule from 'app/components/datadisplay/Table';
-import { ContactsCard } from 'app/components/surfaces/Cards/ContactsCard';
-import { TitleFragment } from 'app/modules/common/components/TitleParams';
+import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail/layout';
+import { useParams } from 'react-router';
+import { useTitle } from 'react-use';
+import React, { useState } from 'react';
 import { GranteeTitleMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import { Description } from 'app/modules/common/components/DescriptionParams';
+import { TitleParams } from 'app/modules/common/components/TitleParams';
+import { useStoreActions } from 'app/state/store/hooks';
+import { useStoreState } from 'app/state/store/hooks';
+import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
+import { mockData as mockDataBreadcrumbs } from 'app/components/navigation/Breadcrumbs/mock';
+import get from 'lodash/get';
+import { previousLocations } from 'app/components/navigation/Breadcrumbs/mock';
 import { GranteeDescriptionMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { GranteeProjectListMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import { GranteeContactCardMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
+import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
+import { ContactsCardModel } from 'app/components/surfaces/Cards/ContactsCard/model';
+import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';
+import {
+  getBaseTableForProject,
+  formatTableDataForProject,
+} from 'app/modules/list-module/utils';
+import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+import { table9Data } from 'app/assets/data/insingerData';
 
-export const GranteeDetailLayout = () => (
-  <React.Fragment>
-    {/* ---------------------------------------------------------------------*/}
-    {/* breadcrumbs */}
-    <Grid item lg={12}>
-      <BreadCrumbs {...GranteeBreadCrumbsMock} />
-    </Grid>
+export const GranteeDetailModule = (props: any) => {
+  const granteeID: any = useParams();
+  const grantee_id: any = granteeID.code;
+  useTitle('M&E - Reports');
+  const granteeTitleMock: TitleParams = GranteeTitleMock;
+  const breadcrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
+  const descriptionMock: DescriptionParams = GranteeDescriptionMock;
+  const contactMock: ContactsCardModel = mockDataContactsCard;
+  const baseTableForProject: TableModuleModel = getBaseTableForProject();
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* title fragment */}
-    <Grid item container lg={6} direction="column">
-      <TitleFragment {...GranteeTitleMock} />
-    </Grid>
+  const [granteeTitle, setGranteeTitle] = useState(granteeTitleMock);
+  const [breadCrumb, setBreadCrumb] = useState(breadcrumbsMock);
+  const [description, setDescription] = useState(descriptionMock);
+  const [contact, setContact] = useState(contactMock);
+  const [projectTableData, setProjectTableData] = useState([[]]);
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* project description */}
-    <Grid item xs={12} lg={12}>
-      <Description {...GranteeDescriptionMock} />
-    </Grid>
+  const granteeDetailAction = useStoreActions(
+    actions => actions.orgDetail.fetch
+  );
+  const granteeDetailData = useStoreState(actions => actions.orgDetail.data);
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* outcome charts */}
-    <Grid item xs={12} lg={6}>
-      <Card>
-        <CardHeader title="Key outcomes" />
-        <CardContent>charts</CardContent>
-      </Card>
-    </Grid>
+  const allProjectsAction = useStoreActions(
+    actions => actions.allProjects.fetch
+  );
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* contact card */}
-    <Grid item xs={12} lg={6}>
-      <ContactsCard {...GranteeContactCardMock} />
-    </Grid>
+  const ProjectsData = useStoreState(actions => actions.allProjects.data);
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* projects */}
-    <Grid item xs={12} lg={12}>
-      <TableModule {...GranteeProjectListMock} />
-    </Grid>
-  </React.Fragment>
-);
+  React.useEffect(() => {
+    granteeDetailAction({
+      socketName: 'allOrg',
+      values: { id: grantee_id },
+    });
+
+    if (granteeDetailData) {
+      setGranteeTitle({
+        title: get(granteeDetailData, 'data').organisation_name,
+      });
+      setBreadCrumb({
+        currentLocation: get(granteeDetailData, 'data').organisation_name,
+        previousLocations: previousLocations,
+      });
+      setDescription({
+        project_description: get(granteeDetailData, 'data').organisation_name,
+      });
+      setContact({
+        title: 'Contacts',
+        email: get(granteeDetailData, 'data').email,
+        phonenumber: '0000',
+        ufo: '0000',
+        address:
+          get(granteeDetailData, 'data').place +
+          ', ' +
+          get(granteeDetailData, 'data').postcode +
+          ', ' +
+          get(granteeDetailData, 'data').country,
+      });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (granteeDetailData) {
+      allProjectsAction({
+        socketName: 'allProject',
+        values: {
+          organisation_name: get(granteeDetailData, 'data').organisation_name,
+        },
+      }).then(() => {
+        if (ProjectsData) {
+          setProjectTableData(
+            formatTableDataForProject(get(ProjectsData, 'data'))
+          );
+          baseTableForProject.data = projectTableData;
+        }
+      });
+    }
+  }, [granteeDetailData]);
+
+  return (
+    <GranteeDetailLayout
+      title={granteeTitle}
+      breadcrumbs={breadCrumb}
+      description={description}
+      contact={contact}
+      projectTable={baseTableForProject}
+    />
+  );
+};

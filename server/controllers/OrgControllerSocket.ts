@@ -2,12 +2,30 @@ const organisation = require('../models/Org');
 const orgType = require('../models/orgType');
 
 export function allOrg(req: any, res: any) {
-  organisation.get((err: any, org: any) => {
-    if (err) {
-      res(JSON.stringify({ status: 'error', message: err.message }));
-    }
-    res(JSON.stringify({ data: org }));
-  });
+  if (!req.query.id) {
+    organisation.get((err: any, org: any) => {
+      if (err) {
+        res(JSON.stringify({ status: 'error', message: err.message }));
+      }
+      res(JSON.stringify({ data: org }));
+    });
+  } else {
+    organisation.findById(req.query.id, (err: any, org: any) => {
+      organisation.populate(
+        org,
+        {
+          path: 'org_type ',
+          select: 'name ', //org_type name
+        },
+        (err: any, org: any) => {
+          if (err) {
+            res(JSON.stringify({ status: 'error', message: err.message }));
+          }
+          res(JSON.stringify({ data: org }));
+        }
+      );
+    });
+  }
 }
 
 export function oneOrg(req: any, res: any) {
