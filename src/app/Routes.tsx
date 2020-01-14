@@ -20,7 +20,7 @@ import { PriorityAreaModule } from 'app/modules/priority-area';
 import { SdgModule } from 'app/modules/sdg';
 import { PrivacyModule } from 'app/modules/privacy';
 import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
-import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
+import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-teams';
 import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
 import ManageTeamEdit from 'app/modules/super-admin/sub-modules/manage-team-edit';
 import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account';
@@ -122,11 +122,7 @@ export function MainRoutes() {
         </Route>
 
         <Route exact path="/super-admin/:id">
-          {redirectUnAuth(
-            ManageUsersTeamsLayout,
-            storeUser,
-            manageUsersTeamsLayoutMock
-          )}
+          {redirectUnAuth(ManageUsers, storeUser, manageUsersTeamsLayoutMock)}
         </Route>
 
         <Route path="/super-admin/manage-user">

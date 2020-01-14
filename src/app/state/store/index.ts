@@ -13,6 +13,7 @@ import {
 
 /* action reducers */
 import addUser from 'app/state/api/actionsReducers/addUser';
+import allUsers from 'app/state/api/actionsReducers/allUsers';
 import { syncVariables } from 'app/state/api/actionsReducers';
 import userDetails from 'app/state/api/actionsReducers/userDetails';
 import getUserRoles from 'app/state/api/actionsReducers/getUserRoles';
@@ -42,6 +43,7 @@ export interface ApplicationStoreModel {
   getUserGroups: SocketAPIResonseInterface;
   allProjects: SocketAPIResonseInterface;
   allOrganisations: SocketAPIResonseInterface;
+  allUsers: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
@@ -52,6 +54,7 @@ const applicationStore: ApplicationStoreModel = {
   addUser,
   allProjects,
   allOrganisations,
+  allUsers,
 };
 
 export const appStore = createStore(applicationStore, {

@@ -18,6 +18,10 @@ function PageModelF(props: PageModuleModel) {
           buttonClick={() => {
             props.history.push(`${props.location.pathname}/add`);
           }}
+          sortOptions={props.sortOptions}
+          onSortChange={props.onSortChange}
+          searchValue={props.searchValue}
+          onSearchChange={props.onSearchChange}
         />
       </Grid>
 

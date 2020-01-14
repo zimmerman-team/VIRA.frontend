@@ -4,9 +4,17 @@ import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 import {
   PageModuleModel,
   ManageUsersTeamsLayoutModel,
+  SortOptionsModel,
 } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 
 import { UnregisterCallback, Href } from 'history';
+
+export const sortOptions: SortOptionsModel[] = [
+  { label: 'Title (asc)', value: 'title' },
+  { label: 'Title (desc)', value: '-title' },
+  { label: 'Created (asc)', value: 'dateCreated' },
+  { label: 'Created (desc)', value: '-dateCreated' },
+];
 
 export const tabNavigatorMock: TabNavigatorParams = {
   items: [
@@ -49,6 +57,7 @@ export const pageModuleMockUsers: PageModuleModel = {
     page: 0,
     rowsPerPage: 0,
     onChangePage: () => {},
+    onChangeRowsPerPage: () => {},
   },
   match: {
     isExact: true,
@@ -92,6 +101,7 @@ export const pageModuleMockUsers: PageModuleModel = {
     },
   },
   staticContext: {},
+  sortOptions,
 };
 
 export const pageModuleMockTeams: PageModuleModel = {
@@ -112,6 +122,7 @@ export const pageModuleMockTeams: PageModuleModel = {
     page: 0,
     rowsPerPage: 0,
     onChangePage: () => {},
+    onChangeRowsPerPage: () => {},
   },
   match: {
     isExact: true,
@@ -155,6 +166,7 @@ export const pageModuleMockTeams: PageModuleModel = {
     },
   },
   staticContext: {},
+  sortOptions,
 };
 
 export const manageUsersTeamsLayoutMock: ManageUsersTeamsLayoutModel = {
