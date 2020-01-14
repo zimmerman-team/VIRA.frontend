@@ -18,6 +18,10 @@ function PageModelF(props: PageModuleModel) {
           buttonClick={() => {
             props.history.push(`${props.location.pathname}/add`);
           }}
+          sortOptions={props.sortOptions}
+          onSortChange={props.onSortChange}
+          searchValue={props.searchValue}
+          onSearchChange={props.onSearchChange}
         />
       </Grid>
 
@@ -25,7 +29,11 @@ function PageModelF(props: PageModuleModel) {
       {/* Cards */}
       {props.teamCards.map((card, index) => (
         <Grid item xs={12} lg={4} key={index}>
-          <TeamUserCard {...card} urlParam={props.urlParam} />
+          <TeamUserCard
+            {...card}
+            urlParam={props.urlParam}
+            deleteUser={props.deleteUser}
+          />
         </Grid>
       ))}
 

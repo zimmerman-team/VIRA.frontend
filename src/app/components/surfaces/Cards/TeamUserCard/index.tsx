@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import styled from 'styled-components';
 import 'styled-components/macro';
@@ -61,26 +62,28 @@ const Caption = styled(Typography)`
 `;
 
 export function TeamUserCard(props: TeamUserCardModel) {
-  let history = useHistory();
+  const history = useHistory();
 
   return (
     <CardContainer>
       <Header variant="body1">{props.title}</Header>
-      <Description variant={'subtitle1'}>{props.description}</Description>
+      <Description variant="subtitle1">{props.description}</Description>
       <BottomContainer>
         <Grid container justify="space-between" alignItems="flex-end">
           <Grid item>
-            <Caption variant={'caption'}>Created: {props.dateCreated}</Caption>
+            <Caption variant="caption">Created: {props.dateCreated}</Caption>
           </Grid>
           <Grid item>
             <ButtonIcon
               onClick={() =>
-                history.push(`/super-admin/${props.urlParam}/edit`)
+                history.push(`/super-admin/${props.urlParam}/edit/${props._id}`)
               }
             >
               <Edit />
             </ButtonIcon>
-            <ButtonIcon>
+            <ButtonIcon
+              onClick={() => props.deleteUser && props.deleteUser(props._id)}
+            >
               <Delete />
             </ButtonIcon>
           </Grid>

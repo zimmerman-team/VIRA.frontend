@@ -38,31 +38,33 @@ export const ListModule = () => {
     actions => actions.allOrganisations.fetch
   );
 
+  // Load the projects on componentDidMount
   React.useEffect(() => {
     allProjectsAction({
       socketName: 'allProject',
       values: '',
-    }).then(() => {
-      if (allProjectsData) {
-        baseTableForProject.data = formatTableDataForProject(
-          get(allProjectsData, 'data')
-        );
-      }
     });
-  }, [baseTableForGrantee]);
+  }, []);
+  // Format the projects on componentDidUpdate when allProjectsData change
+  React.useEffect(() => {
+    baseTableForProject.data = formatTableDataForProject(
+      get(allProjectsData, 'data', [])
+    );
+  }, [allProjectsData]);
 
+  // Load the orgs on componentDidMount
   React.useEffect(() => {
     allOrganisationsAction({
       socketName: 'allOrg',
       values: '',
-    }).then(() => {
-      if (allOrganisationsData) {
-        baseTableForGrantee.data = formatTableDataForGrantee(
-          get(allOrganisationsData, 'data')
-        );
-      }
     });
-  }, [baseTableForProject]);
+  }, []);
+  // Format the projects on componentDidUpdate when allOrganisationsData change
+  React.useEffect(() => {
+    baseTableForGrantee.data = formatTableDataForGrantee(
+      get(allOrganisationsData, 'data', [])
+    );
+  }, [allOrganisationsData]);
 
   return (
     <React.Fragment>
