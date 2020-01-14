@@ -7,9 +7,11 @@ import { Route } from 'react-router-dom';
 // import { pageModuleMockUsers } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 import { pageModuleMockTeams } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
+import { PageLoader } from 'app/modules/common/page-loader';
 
 export const ManageUsersTeamsLayout = (props: ManageUsersTeamsLayoutModel) => (
   <React.Fragment>
+    {props.loading && <PageLoader />}
     {/* ---------------------------------------------------------------------*/}
     {/* Breadcrumbs */}
     <Grid item lg={12}>

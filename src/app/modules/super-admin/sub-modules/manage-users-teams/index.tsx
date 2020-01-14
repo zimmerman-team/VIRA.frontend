@@ -69,8 +69,11 @@ export function ManageUsers() {
     deletUserAction({ socketName: 'deleteUser', values: { delId: id } });
   }
 
+  const loading = useStoreState(state => state.allUsers.loading);
+
   const layoutProps: ManageUsersTeamsLayoutModel = {
     ...manageUsersTeamsLayoutMock,
+    loading,
     pageModule: {
       ...manageUsersTeamsLayoutMock.pageModule,
       teamCards: users,

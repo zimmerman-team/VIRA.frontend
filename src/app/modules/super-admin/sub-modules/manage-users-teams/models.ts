@@ -25,4 +25,5 @@ export type ManageUsersTeamsLayoutModel = {
   breadcrumbs: BreadcrumbModel;
   tabNavigator: TabNavigatorParams;
   pageModule: PageModuleModel;
+  loading?: boolean;
 };
