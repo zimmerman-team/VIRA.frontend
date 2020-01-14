@@ -78,9 +78,7 @@ export function getAllUsers(req: any, res: any) {
           //   });
           //   result = [currentUserAuth0];
           // }
-          return res(
-            JSON.stringify([...result, ...result, ...result, ...result])
-          );
+          return res(JSON.stringify(result));
         })
         .catch(error => genericError(error, res));
     });
