@@ -23,7 +23,7 @@ export const formatTableDataForProject = (data: any): any[] => {
       row.project_name,
       row.decision,
       row.decision_date,
-      row.allocated_amount,
+      row.released_amount, //Som van vrijgevallen
       row.organisation.organisation_name
     );
     bigTempArray.push(tempArray);
