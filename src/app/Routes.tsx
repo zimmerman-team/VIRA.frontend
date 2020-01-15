@@ -80,7 +80,7 @@ export function MainRoutes() {
           {redirectUnAuth(ProjectDetailModule, storeUser)}
         </Route>
         <Route exact path="/projects/:code/detail">
-          render = {redirectUnAuth(ProjectDetailModule, storeUser)}
+          {redirectUnAuth(ProjectDetailModule, storeUser)}
         </Route>
 
         <Route exact path="/reports/detail">
@@ -90,7 +90,7 @@ export function MainRoutes() {
         <Route path="/report">{redirectUnAuth(CreateReport, storeUser)}</Route>
 
         <Route exact path="/grantees/detail">
-          render = {redirectUnAuth(GranteeDetailModule, storeUser)}
+          {redirectUnAuth(GranteeDetailModule, storeUser)}
         </Route>
         <Route exact path="/grantee/:code/detail">
           {redirectUnAuth(GranteeDetailModule, storeUser)}

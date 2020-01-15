@@ -50,6 +50,9 @@ export function GranteeDetailModule(props: any) {
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
   );
+  const allProjectsClearAction = useStoreActions(
+    actions => actions.allProjects.clear
+  );
   const granteeDetailData = useStoreState(state => state.orgDetail.data);
   const ProjectsData = useStoreState(state => state.allProjects.data);
   const loading = useStoreState(
@@ -61,7 +64,10 @@ export function GranteeDetailModule(props: any) {
       socketName: 'allOrg',
       values: { id: granteeID },
     });
-    return () => granteeDetailClearAction();
+    return () => {
+      // allProjectsClearAction();
+      granteeDetailClearAction();
+    };
   }, []);
 
   React.useEffect(() => {

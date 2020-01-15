@@ -27,7 +27,13 @@ export const ListModule = () => {
   const baseTableForProject: TableModuleModel = getBaseTableForProject();
   const baseTableForGrantee: TableModuleModel = getBaseTableForGrantee();
 
-  const allProjectsData = useStoreState(actions => actions.allProjects.data);
+  const [projectsTableData, setProjectsTableData] = React.useState([]);
+
+  const allProjectsData = get(
+    useStoreState(actions => actions.allProjects.data),
+    'data',
+    []
+  );
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
   );
@@ -47,9 +53,7 @@ export const ListModule = () => {
   }, []);
   // Format the projects on componentDidUpdate when allProjectsData change
   React.useEffect(() => {
-    baseTableForProject.data = formatTableDataForProject(
-      get(allProjectsData, 'data', [])
-    );
+    setProjectsTableData(formatTableDataForProject(allProjectsData) as never[]);
   }, [allProjectsData]);
 
   // Load the orgs on componentDidMount
@@ -65,6 +69,8 @@ export const ListModule = () => {
       get(allOrganisationsData, 'data', [])
     );
   }, [allOrganisationsData]);
+
+  baseTableForProject.data = projectsTableData;
 
   return (
     <React.Fragment>
