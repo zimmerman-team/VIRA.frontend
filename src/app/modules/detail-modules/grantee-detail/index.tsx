@@ -1,16 +1,21 @@
-import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail/layout';
-import { useParams } from 'react-router';
-import { useTitle } from 'react-use';
 import React, { useState } from 'react';
-import { GranteeTitleMock } from 'app/modules/detail-modules/grantee-detail/mock';
+import { useTitle } from 'react-use';
+import { useParams } from 'react-router-dom';
+import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail/layout';
+import {
+  GranteeTitleMock,
+  GranteeDescriptionMock,
+} from 'app/modules/detail-modules/grantee-detail/mock';
 import { TitleParams } from 'app/modules/common/components/TitleParams';
-import { useStoreActions } from 'app/state/store/hooks';
-import { useStoreState } from 'app/state/store/hooks';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
-import { mockData as mockDataBreadcrumbs } from 'app/components/navigation/Breadcrumbs/mock';
+import {
+  mockData as mockDataBreadcrumbs,
+  previousLocations,
+} from 'app/components/navigation/Breadcrumbs/mock';
 import get from 'lodash/get';
-import { previousLocations } from 'app/components/navigation/Breadcrumbs/mock';
-import { GranteeDescriptionMock } from 'app/modules/detail-modules/grantee-detail/mock';
+
 import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
 import { ContactsCardModel } from 'app/components/surfaces/Cards/ContactsCard/model';
 import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';
@@ -19,11 +24,10 @@ import {
   formatTableDataForProject,
 } from 'app/modules/list-module/utils';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import { table9Data } from 'app/assets/data/insingerData';
 
-export const GranteeDetailModule = (props: any) => {
-  const granteeID: any = useParams();
-  const grantee_id: any = granteeID.code;
+export function GranteeDetailModule(props: any) {
+  const params: any = useParams();
+  const granteeID: any = params.code;
   useTitle('M&E - Reports');
   const granteeTitleMock: TitleParams = GranteeTitleMock;
   const breadcrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
@@ -40,27 +44,41 @@ export const GranteeDetailModule = (props: any) => {
   const granteeDetailAction = useStoreActions(
     actions => actions.orgDetail.fetch
   );
-  const granteeDetailData = useStoreState(actions => actions.orgDetail.data);
-
+  const granteeDetailClearAction = useStoreActions(
+    actions => actions.orgDetail.clear
+  );
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
   );
-
-  const ProjectsData = useStoreState(actions => actions.allProjects.data);
+  const granteeDetailData = useStoreState(state => state.orgDetail.data);
+  const ProjectsData = useStoreState(state => state.allProjects.data);
+  const loading = useStoreState(
+    state => state.orgDetail.loading || state.allProjects.loading
+  );
 
   React.useEffect(() => {
     granteeDetailAction({
       socketName: 'allOrg',
-      values: { id: grantee_id },
+      values: { id: granteeID },
     });
+    return () => granteeDetailClearAction();
+  }, []);
 
+  React.useEffect(() => {
+    granteeDetailAction({
+      socketName: 'allOrg',
+      values: { id: granteeID },
+    });
+  }, [granteeID]);
+
+  React.useEffect(() => {
     if (granteeDetailData) {
       setGranteeTitle({
         title: get(granteeDetailData, 'data').organisation_name,
       });
       setBreadCrumb({
         currentLocation: get(granteeDetailData, 'data').organisation_name,
-        previousLocations: previousLocations,
+        previousLocations,
       });
       setDescription({
         project_description: get(granteeDetailData, 'data').organisation_name,
@@ -70,15 +88,22 @@ export const GranteeDetailModule = (props: any) => {
         email: get(granteeDetailData, 'data').email,
         phonenumber: '0000',
         ufo: '0000',
-        address:
-          get(granteeDetailData, 'data').place +
-          ', ' +
-          get(granteeDetailData, 'data').postcode +
-          ', ' +
-          get(granteeDetailData, 'data').country,
+        address: `${get(granteeDetailData, 'data').place}, ${
+          get(granteeDetailData, 'data').postcode
+        }, ${get(granteeDetailData, 'data').country}`,
       });
     }
-  }, []);
+  }, [granteeDetailData]);
+
+  React.useEffect(() => {
+    if (ProjectsData) {
+      setProjectTableData(formatTableDataForProject(get(ProjectsData, 'data')));
+    }
+  }, [ProjectsData]);
+
+  React.useEffect(() => {
+    baseTableForProject.data = projectTableData;
+  }, [projectTableData]);
 
   React.useEffect(() => {
     if (granteeDetailData) {
@@ -87,19 +112,13 @@ export const GranteeDetailModule = (props: any) => {
         values: {
           organisation_name: get(granteeDetailData, 'data').organisation_name,
         },
-      }).then(() => {
-        if (ProjectsData) {
-          setProjectTableData(
-            formatTableDataForProject(get(ProjectsData, 'data'))
-          );
-          baseTableForProject.data = projectTableData;
-        }
       });
     }
   }, [granteeDetailData]);
 
   return (
     <GranteeDetailLayout
+      loading={loading}
       title={granteeTitle}
       breadcrumbs={breadCrumb}
       description={description}
@@ -107,4 +126,4 @@ export const GranteeDetailModule = (props: any) => {
       projectTable={baseTableForProject}
     />
   );
-};
+}
