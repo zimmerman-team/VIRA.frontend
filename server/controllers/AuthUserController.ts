@@ -246,3 +246,27 @@ export function editUser(req: any, res: any) {
       .catch(error => genericError(error, res));
   });
 }
+
+export function getAuth0DBConnection(req: any, res: any) {
+  getAccessToken('management')
+    .then(token => {
+      axios
+        .get(`${process.env.REACT_APP_AUTH_DOMAIN}/api/v2/connections`, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then(response => {
+          const connectionID = find(response.data, {
+            name: 'insinger-database-connection',
+          });
+          return res(JSON.stringify(connectionID.id));
+        })
+        .catch(error => {
+          return res(JSON.stringify({ message: 'Something went wrong.' }));
+        });
+    })
+    .catch((error: any) => {
+      return res(JSON.stringify({ message: 'Something went wrong.' }));
+    });
+}

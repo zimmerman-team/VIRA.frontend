@@ -21,7 +21,7 @@ export function sendMail(
       TemplateId: 15721543,
       From: 'insinger@zimmermanzimmerman.nl',
       To: email,
-      TemplateModel: { name, surname, link },
+      TemplateModel: { app: 'M&E Insinger', name, surname, link },
       Attachments: [
         {
           Content: fs
@@ -44,4 +44,28 @@ export function sendMail(
     .catch((error: any) => {
       return error;
     });
+}
+
+export function sendForgotPassMail(email: string, link: string) {
+  return client.sendEmailWithTemplate({
+    TemplateId: 15847923,
+    From: 'insinger@zimmermanzimmerman.nl',
+    To: email,
+    TemplateModel: { app: 'M&E Insinger', link },
+    Attachments: [
+      {
+        Content: fs
+          .readFileSync(
+            path.resolve(
+              __dirname,
+              '../../src/app/assets/images/insinger_logo.png'
+            )
+          )
+          .toString('base64'),
+        Name: 'insinger_logo.png',
+        ContentType: 'image/png',
+        ContentID: 'cid:insinger_logo.png',
+      },
+    ],
+  });
 }

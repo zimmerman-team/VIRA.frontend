@@ -19,6 +19,7 @@ import {
   addUser,
   deleteUser,
   editUser,
+  getAuth0DBConnection,
 } from './controllers/AuthUserController';
 import {
   getUserGroup,
@@ -34,6 +35,7 @@ import {
   getUserRoles,
   assignRoleToUser,
 } from './controllers/AuthRole';
+import { sendForgetPasswordEmail } from './utils/auth';
 
 const app = express();
 app.use(cors());
@@ -48,7 +50,7 @@ const IO = socketIO(server);
 require('dotenv').config();
 
 IO.sockets.on('connection', (socket: any) => {
-  console.log('Client connected...');
+  // console.log('Client connected...');
   /* User */
   socket.on('getUser', (data: any, fn: any) => {
     getUser({ query: data }, (res: any) => fn(res));
@@ -64,6 +66,12 @@ IO.sockets.on('connection', (socket: any) => {
   });
   socket.on('editUser', (data: any, fn: any) => {
     editUser({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('sendForgetPasswordEmail', (data: any, fn: any) => {
+    sendForgetPasswordEmail({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('getAuth0DBConnection', (data: any, fn: any) => {
+    getAuth0DBConnection({ query: data }, (res: any) => fn(res));
   });
   /* Group */
   socket.on('getUserGroup', (data: any, fn: any) => {
