@@ -124,7 +124,11 @@ export function MainRoutes() {
           {redirectUnAuth(SubmittedLayout, storeUser)}
         </Route>
 
-        <Route path="/super-admin/manage-teams/edit">
+        <Route path="/super-admin/manage-teams/edit/:id">
+          {redirectUnAuth(ManageTeamEdit, storeUser)}
+        </Route>
+
+        <Route path="/super-admin/manage-teams/add">
           {redirectUnAuth(ManageTeamEdit, storeUser)}
         </Route>
 

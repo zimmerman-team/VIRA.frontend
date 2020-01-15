@@ -27,6 +27,7 @@ import projectDetail from 'app/state/api/actionsReducers/projectDetail';
 import orgDetail from 'app/state/api/actionsReducers/orgDetail';
 import forgetPassword from 'app/state/api/actionsReducers/forgetPassword';
 import loadAuth0DBConnection from 'app/state/api/actionsReducers/loadAuth0DBConnection';
+import allTeams from 'app/state/api/actionsReducers/allTeams';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
@@ -58,6 +59,7 @@ export interface ApplicationStoreModel {
   deleteUser: SocketAPIResonseInterface;
   forgetPassword: SocketAPIResonseInterface;
   loadAuth0DBConnection: SocketAPIResonseInterface;
+  allTeams: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
@@ -76,6 +78,7 @@ const applicationStore: ApplicationStoreModel = {
   deleteUser,
   forgetPassword,
   loadAuth0DBConnection,
+  allTeams,
 };
 
 export const appStore = createStore(applicationStore, {

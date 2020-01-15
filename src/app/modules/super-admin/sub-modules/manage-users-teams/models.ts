@@ -26,4 +26,5 @@ export type ManageUsersTeamsLayoutModel = {
   tabNavigator: TabNavigatorParams;
   pageModule: PageModuleModel;
   loading?: boolean;
+  teamPageModule: PageModuleModel;
 };

@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import useTitle from 'react-use/lib/useTitle';
 import Grid from '@material-ui/core/Grid';
 import { TeamUserCard } from 'app/components/surfaces/Cards/TeamUserCard';
 import { HeaderFragment } from 'app/modules/super-admin/common/header';
@@ -7,6 +9,7 @@ import { Pagination } from 'app/components/misc/TablePagination';
 import { PageModuleModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 
 function PageModelF(props: PageModuleModel) {
+  useTitle(`Manage ${props.urlParam?.split('-')[1]}`);
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -28,7 +31,7 @@ function PageModelF(props: PageModuleModel) {
       {/* ---------------------------------------------------------------------*/}
       {/* Cards */}
       {props.teamCards.map((card, index) => (
-        <Grid item xs={12} lg={4} key={index}>
+        <Grid item xs={12} lg={4} key={card._id}>
           <TeamUserCard
             {...card}
             urlParam={props.urlParam}
