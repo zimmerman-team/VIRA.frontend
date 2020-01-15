@@ -1,5 +1,4 @@
 /* todo: make this module more descriptive */
-
 import React, { useState, useEffect } from 'react';
 /* third-party */
 import { withRouter } from 'react-router-dom';
@@ -21,9 +20,16 @@ function LoginCallback(props: any) {
     props.auth
       .handleAuthentication()
       .then((results: any) => {
+        let name =
+          results.idTokenPayload[
+            `https://${process.env.REACT_APP_AUTH_CUSTOM_DOMAIN}_user_metadata`
+          ];
+        name = name
+          ? `${name.firstName} ${name.lastName}`
+          : results.idTokenPayload.name;
         setUserAction({
           email: results.idTokenPayload.email,
-          name: results.idTokenPayload.name,
+          name,
           role: '',
           _id: results.idTokenPayload.sub,
         });

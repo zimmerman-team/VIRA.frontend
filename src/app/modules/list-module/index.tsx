@@ -24,53 +24,51 @@ import find from 'lodash/find';
 
 export const ListModule = () => {
   useTitle('M&E - Reports');
-  const baseTableForProject: TableModuleModel = getBaseTableForProject();
-  const baseTableForGrantee: TableModuleModel = getBaseTableForGrantee();
-
-  const [projectsTableData, setProjectsTableData] = React.useState([]);
-
-  const allProjectsData = get(
-    useStoreState(actions => actions.allProjects.data),
-    'data',
-    []
+  const [baseTableForProject, setBaseTableForProject] = React.useState(
+    getBaseTableForProject()
   );
+  const [baseTableForGrantee, setBaseTableForGrantee] = React.useState(
+    getBaseTableForGrantee()
+  );
+
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
-  );
-  const allOrganisationsData = useStoreState(
-    actions => actions.allOrganisations.data
   );
   const allOrganisationsAction = useStoreActions(
     actions => actions.allOrganisations.fetch
   );
+  const allProjectsData = useStoreState(state => state.allProjects.data);
+  const allOrganisationsData = useStoreState(
+    state => state.allOrganisations.data
+  );
 
-  // Load the projects on componentDidMount
+  // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
     allProjectsAction({
       socketName: 'allProject',
       values: '',
     });
-  }, []);
-  // Format the projects on componentDidUpdate when allProjectsData change
-  React.useEffect(() => {
-    setProjectsTableData(formatTableDataForProject(allProjectsData) as never[]);
-  }, [allProjectsData]);
-
-  // Load the orgs on componentDidMount
-  React.useEffect(() => {
     allOrganisationsAction({
       socketName: 'allOrg',
       values: '',
     });
   }, []);
+
+  // Format the projects on componentDidUpdate when allProjectsData change
+  React.useEffect(() => {
+    setBaseTableForProject({
+      ...baseTableForProject,
+      data: formatTableDataForProject(get(allProjectsData, 'data', [])),
+    });
+  }, [allProjectsData]);
+
   // Format the projects on componentDidUpdate when allOrganisationsData change
   React.useEffect(() => {
-    baseTableForGrantee.data = formatTableDataForGrantee(
-      get(allOrganisationsData, 'data', [])
-    );
+    setBaseTableForGrantee({
+      ...baseTableForGrantee,
+      data: formatTableDataForGrantee(get(allOrganisationsData, 'data', [])),
+    });
   }, [allOrganisationsData]);
-
-  baseTableForProject.data = projectsTableData;
 
   return (
     <React.Fragment>

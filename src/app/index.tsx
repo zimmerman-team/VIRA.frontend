@@ -31,10 +31,11 @@ export function App() {
     setOpen(false);
   };
 
+  const isLoggedIn = Boolean(useStoreState(state => state.syncVariables.user));
+
   return (
     <div className={classes.root}>
-      {window.location.pathname === '/login' ||
-      window.location.pathname === '/recover-password' ? (
+      {!isLoggedIn ? (
         <MainRoutes />
       ) : (
         <>

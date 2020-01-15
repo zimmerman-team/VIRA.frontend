@@ -19,6 +19,9 @@ export const syncVariables: SyncVariablesModel = {
   setUser: action((state, payload: UserModel) => {
     state.user = payload;
   }),
+  clearUser: action(state => {
+    state.user = null;
+  }),
 };
 
 export const socketAPIModel = <QueryModel, ResponseModel>(): ApiModel<
