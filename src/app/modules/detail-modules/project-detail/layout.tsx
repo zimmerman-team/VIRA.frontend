@@ -10,20 +10,14 @@ import { StatItem } from 'app/modules/common/components/StatItem';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
 import { Description } from 'app/modules/common/components/DescriptionParams';
-import {
-  ProjectTitleMock,
-  ProjectStatMock,
-  ProjectOutcomeCardMock,
-  DescriptionMock,
-} from 'app/modules/detail-modules/project-detail/mock';
+import { ProjectOutcomeCardMock } from 'app/modules/detail-modules/project-detail/mock';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import { ProjectPalette } from 'app/theme';
 import TableModule from 'app/components/datadisplay/Table';
 import { ProjectReportsMock } from 'app/modules/detail-modules/project-detail/mock';
 import { ProjectModel } from 'app/modules/detail-modules/project-detail/model';
-import { DummyKeyOutcomes } from 'app/modules/detail-modules/project-detail/common/DummyKeyOutcomes';
 import graph1 from 'app/assets/images/dummy_graph1.png';
+
 export const ProjectDetailLayout = (props: ProjectModel) => (
   <React.Fragment>
     {/* ---------------------------------------------------------------------*/}

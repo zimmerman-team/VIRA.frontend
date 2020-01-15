@@ -3,16 +3,6 @@ import {
   LocationModel,
 } from 'app/components/navigation/Breadcrumbs/model';
 
-export const mockData: BreadcrumbModel = {
-  currentLocation: 'ActionAid UK',
-  previousLocations: [
-    {
-      label: 'Projects',
-      url: '/',
-    },
-  ],
-};
-
 export const currentLocation = 'ActionAid UK';
 export const previousLocations: LocationModel[] = [
   {
@@ -20,3 +10,7 @@ export const previousLocations: LocationModel[] = [
     url: '/',
   },
 ];
+export const mockData: BreadcrumbModel = {
+  currentLocation: 'ActionAid UK',
+  previousLocations: previousLocations,
+};

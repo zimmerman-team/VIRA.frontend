@@ -12,8 +12,9 @@ import SignInModule from 'app/modules/sign-in';
 import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
 import { CreateReport } from 'app/modules/report';
 import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
+import { GranteeDetailModule } from 'app/modules/detail-modules/grantee-detail';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
-import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail';
+import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail/layout';
 import { Faqs } from 'app/modules/faqs';
 import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
@@ -78,6 +79,9 @@ export function MainRoutes() {
         <Route exact path="/projects/detail">
           {redirectUnAuth(ProjectDetailModule, storeUser)}
         </Route>
+        <Route exact path="/projects/:code/detail">
+          {redirectUnAuth(ProjectDetailModule, storeUser)}
+        </Route>
 
         <Route exact path="/reports/detail">
           {redirectUnAuth(ReportDetailLayout, storeUser)}
@@ -86,7 +90,10 @@ export function MainRoutes() {
         <Route path="/report">{redirectUnAuth(CreateReport, storeUser)}</Route>
 
         <Route exact path="/grantees/detail">
-          {redirectUnAuth(GranteeDetailLayout, storeUser)}
+          {redirectUnAuth(GranteeDetailModule, storeUser)}
+        </Route>
+        <Route exact path="/grantee/:code/detail">
+          {redirectUnAuth(GranteeDetailModule, storeUser)}
         </Route>
 
         <Route exact path="/if-priority-area">

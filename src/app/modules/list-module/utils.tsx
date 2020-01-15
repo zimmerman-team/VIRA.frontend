@@ -23,7 +23,7 @@ export const formatTableDataForProject = (data: any): any[] => {
       row.project_name,
       row.decision,
       row.decision_date,
-      row.allocated_amount,
+      row.released_amount, //Som van vrijgevallen
       row.organisation.organisation_name
     );
     bigTempArray.push(tempArray);
@@ -111,7 +111,7 @@ export const formatTableDataForGrantee = (data: any): any[] => {
   const bigTempArray: any[][] = [];
   data.forEach((row: any) => {
     tempArray.push(
-      row.organisation_name,
+      row.organisation_name + ' && ' + row._id,
       row.org_type ? row.org_type.name : '',
       row.place,
       row.country,
@@ -136,11 +136,19 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
         customHeadRender: (columnMeta, updateDirection) =>
           getInfoTHead('Grantee Name', 'info'),
         customBodyRender: (value, tableMeta, updateValue) => {
+          if (value) {
+            let temp_value = value.split(' && ');
+            value = temp_value[0];
+            updateValue = temp_value[1];
+          }
           return (
-            <LinkCellModule link={`/grantee/${value}/detail`} value={value} />
+            <LinkCellModule
+              link={`/grantee/${updateValue}/detail`}
+              value={value}
+            />
           );
         },
-        customFilterListRender: value => `Grantee Name: ${value}`,
+        customFilterListRender: updateValue => `Grantee Name: ${updateValue}`,
       },
     },
     {
