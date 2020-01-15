@@ -31,7 +31,7 @@ export function Account() {
         Sign out
       </Button>
       <Box height="24px" />
-      <Link to="/privacy-policy">Privacy Policy</Link>
+      <Link to="/privacy">Privacy Policy</Link>
       <Box height="8px" />
       <Link to="/terms">Terms</Link>
     </Container>
