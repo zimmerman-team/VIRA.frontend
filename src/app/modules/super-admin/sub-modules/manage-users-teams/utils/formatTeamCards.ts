@@ -1,34 +1,27 @@
 import get from 'lodash/get';
+import find from 'lodash/find';
 import filter from 'lodash/filter';
 import orderBy from 'lodash/orderBy';
 
-export function formatUserCards(
+export function formatTeamCards(
   init: boolean,
   data: any,
   sort: string,
   page: number,
   pageSize: number,
-  search: string
+  search: string,
+  allUsers: any
 ) {
   let allData = data;
   let newData = data;
   if (init) {
     allData = (data || []).map((item: any) => {
-      const title = item.user_metadata
-        ? `${item.user_metadata.firstName} ${item.user_metadata.lastName}`
-        : item.name;
-      const role = item.app_metadata
-        ? get(item.app_metadata, 'authorization.roles[0].name', '-')
-        : '-';
+      const creator = find(allUsers, { user_id: item.createdBy });
       return {
-        _id: item.user_id,
-        title,
-        description: role,
-        dateCreated: item.created_at
-          .slice(0, 10)
-          .split('-')
-          .reverse()
-          .join('.'),
+        _id: item._id,
+        title: item.label,
+        description: `Created by: ${get(creator, 'name', '')}`,
+        dateCreated: item.date.replace(/\//g, '.'),
       };
     });
     newData = allData;

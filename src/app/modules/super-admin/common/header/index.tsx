@@ -59,6 +59,13 @@ export type HeaderParams = {
 
 export function HeaderFragment(props: HeaderParams) {
   const [searchOpen, setSearchOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (props.searchValue !== '' && !searchOpen) {
+      setSearchOpen(true);
+    }
+  }, [props.searchValue]);
+
   return (
     <React.Fragment>
       <Header>

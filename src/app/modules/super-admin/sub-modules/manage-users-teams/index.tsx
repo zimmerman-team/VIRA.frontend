@@ -1,37 +1,45 @@
 /* third-party */
 import React from 'react';
 import get from 'lodash/get';
-import useTitle from 'react-use/lib/useTitle';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 /* project */
 import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 import { formatUserCards } from 'app/modules/super-admin//sub-modules/manage-users-teams/utils/formatUserCards';
+import { formatTeamCards } from './utils/formatTeamCards';
 
 export function ManageUsers() {
-  useTitle(`Manage Users`);
   const [users, setUsers] = React.useState([]);
   const [allUsers, setAllUsers] = React.useState([]);
+  const [teams, setTeams] = React.useState([]);
+  const [allTeams, setAllTeams] = React.useState([]);
   const [sort, setSort] = React.useState('title');
   const [search, setSearch] = React.useState('');
   const [page, setPage] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(10);
   // redux state & actions
   const storeUser = useStoreState(state => state.syncVariables.user);
-  const allUsersData = useStoreState(actions => actions.allUsers.data);
   const allUsersAction = useStoreActions(actions => actions.allUsers.fetch);
+  const allUsersData = useStoreState(state => state.allUsers.data);
   const deletUserAction = useStoreActions(actions => actions.deleteUser.fetch);
   const deleteUserData = useStoreState(state => state.deleteUser.data);
   const deleteUserClear = useStoreActions(actions => actions.deleteUser.clear);
+  const allTeamsAction = useStoreActions(actions => actions.allTeams.fetch);
+  const allTeamsData = useStoreState(state => state.allTeams.data);
 
   React.useEffect(() => {
     allUsersAction({
       socketName: 'getAllUsers',
       values: { user: storeUser },
     });
+    allTeamsAction({
+      socketName: 'getUserGroups',
+      values: { user: storeUser },
+    });
   }, []);
-  React.useEffect(() => {
+
+  function formatUsers() {
     const init =
       allUsers.length === 0 ||
       allUsers.length !== get(allUsersData, 'length', 0);
@@ -45,7 +53,29 @@ export function ManageUsers() {
     );
     setAllUsers(data.allData);
     setUsers(data.paginatedData);
-  }, [allUsersData, sort, page, pageSize, search]);
+  }
+
+  function formatTeams() {
+    const init =
+      allTeams.length === 0 ||
+      allTeams.length !== get(allTeamsData, 'length', 0);
+    const data = formatTeamCards(
+      init,
+      init ? allTeamsData : allTeams,
+      sort,
+      page,
+      pageSize,
+      search,
+      allUsersData
+    );
+    setAllTeams(data.allData);
+    setTeams(data.paginatedData);
+  }
+
+  React.useEffect(() => {
+    formatUsers();
+    formatTeams();
+  }, [allUsersData, allTeamsData, sort, page, pageSize, search]);
   React.useEffect(() => {
     allUsersAction({
       socketName: 'getAllUsers',
@@ -83,6 +113,21 @@ export function ManageUsers() {
         onChangeRowsPerPage,
         rowsPerPage: pageSize,
         count: allUsers.length,
+      },
+      onSortChange: setSort,
+      onSearchChange: setSearch,
+      searchValue: search,
+      deleteUser,
+    },
+    teamPageModule: {
+      ...manageUsersTeamsLayoutMock.teamPageModule,
+      teamCards: teams,
+      pagination: {
+        page,
+        onChangePage,
+        onChangeRowsPerPage,
+        rowsPerPage: pageSize,
+        count: allTeams.length,
       },
       onSortChange: setSort,
       onSearchChange: setSearch,

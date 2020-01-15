@@ -34,7 +34,7 @@ export const breadcrumbsMock: BreadcrumbModel = {
   previousLocations: [
     {
       label: 'Manage',
-      url: 'super-admin/manage-teams',
+      url: '/super-admin/manage-teams',
     },
   ],
 };
@@ -173,4 +173,5 @@ export const manageUsersTeamsLayoutMock: ManageUsersTeamsLayoutModel = {
   breadcrumbs: breadcrumbsMock,
   pageModule: pageModuleMockUsers,
   tabNavigator: tabNavigatorMock,
+  teamPageModule: pageModuleMockTeams,
 };
