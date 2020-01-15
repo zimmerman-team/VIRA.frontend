@@ -8,6 +8,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
 import { notifMock } from 'app/modules/common/components/Notifications/common/mock';
 import { NotificationContainer } from 'app/modules/common/components/Notifications';
+import { Account } from 'app/modules/common/components/Account';
 
 interface TopBarDesktopSectionParams {
   classes: Record<
@@ -40,6 +41,23 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
     setPlacement(newPlacement);
   };
 
+  const [
+    anchorElAccount,
+    setAnchorElAccount,
+  ] = React.useState<HTMLButtonElement | null>(null);
+  const [openAccount, setOpenAccount] = React.useState(false);
+  const [placementAccount, setPlacementAccount] = React.useState<
+    PopperPlacementType
+  >();
+
+  const handleClickAccount = (newPlacement: PopperPlacementType) => (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setAnchorElAccount(event.currentTarget);
+    setOpenAccount(prev => placementAccount !== newPlacement || !prev);
+    setPlacementAccount(newPlacement);
+  };
+
   return (
     <div className={props.classes.sectionDesktop}>
       <IconButton aria-label="search" color="primary">
@@ -62,12 +80,21 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           <NotificationsIcon />
         </Badge>
       </IconButton>
+      <Popper
+        open={openAccount}
+        anchorEl={anchorElAccount}
+        placement={placementAccount}
+        disablePortal
+      >
+        <Account />
+      </Popper>
       <IconButton
         edge="end"
         aria-label="account of current user"
         aria-controls={props.menuId}
         aria-haspopup="true"
         color="primary"
+        onClick={handleClickAccount('bottom-end')}
       >
         <AccountCircle />
       </IconButton>

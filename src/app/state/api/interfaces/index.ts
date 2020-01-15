@@ -27,6 +27,7 @@ export interface SyncVariablesModel {
   setSnackbar: Action<SyncVariablesModel, string>;
   user: UserModel | null;
   setUser: Action<SyncVariablesModel, UserModel>;
+  clearUser: Action<SyncVariablesModel>;
 }
 
 export interface ResponseData<T> {

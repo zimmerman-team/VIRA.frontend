@@ -2,7 +2,7 @@ import React, { ReactText } from 'react';
 import styled from 'styled-components';
 import { Typography } from '@material-ui/core';
 
-//TODO: add toolitp pointer on bottom of component
+// TODO: add toolitp pointer on bottom of component
 
 const ContentContainer = styled.div`
   padding: 16px 4px;
