@@ -6,9 +6,13 @@ import { SingleMultiLineTextField } from 'app/components/inputs/textfields/Singl
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import 'styled-components/macro';
 import TableModule from 'app/components/datadisplay/Table';
+import { PageLoader } from 'app/modules/common/page-loader';
 
 export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
-  <React.Fragment>
+  <>
+    {/* ---------------------------------------------------------------------*/}
+    {/* Loader */}
+    {props.loading && <PageLoader />}
     {/* ---------------------------------------------------------------------*/}
     {/* Breadcrumbs */}
     <Grid item lg={12}>
@@ -21,9 +25,11 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
     {/* form */}
     <Grid item container xs={12} lg={12} direction={'column'}>
       <SingleMultiLineTextField
-        id={'Edit Title'}
-        label={'Edit Title'}
         bigLabel
+        id={'Edit Title'}
+        value={props.title}
+        label={'Edit Title'}
+        setValue={props.setTitle}
       />
     </Grid>
 
@@ -38,10 +44,10 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
     <Grid item container xs={12} lg={12} justify={'flex-end'}>
       <ContainedButton
         text="Save"
-        onClick={() => console.log(props)}
+        onClick={props.submit}
+        disabled={!props.submitEnabled}
         css={{ position: 'absolute', bottom: 32 }}
-        disabled={props.editedTitle === ''}
       />
     </Grid>
-  </React.Fragment>
+  </>
 );

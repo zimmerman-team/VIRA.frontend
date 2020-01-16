@@ -4,9 +4,7 @@ import { useTitle } from 'react-use';
 import Grid from '@material-ui/core/Grid';
 import TableModule from 'app/components/datadisplay/Table';
 import { Route } from 'react-router-dom';
-import { ProjectListMock } from 'app/modules/list-module/mock';
 import { ReportListMock } from 'app/modules/list-module/mock';
-import { GranteeListMock } from 'app/modules/list-module/mock';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { TabNavMock } from 'app/modules/list-module/mock';
 import {
@@ -15,12 +13,9 @@ import {
   getBaseTableForGrantee,
   formatTableDataForGrantee,
 } from 'app/modules/list-module/utils';
-import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import { useStoreState } from 'app/state/store/hooks';
-import { useStoreActions } from 'app/state/store/hooks';
+import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 /* utils */
 import get from 'lodash/get';
-import find from 'lodash/find';
 
 export const ListModule = () => {
   useTitle('M&E - Reports');

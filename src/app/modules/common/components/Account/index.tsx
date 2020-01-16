@@ -25,7 +25,9 @@ export function Account() {
       <Avatar>{avatar.toUpperCase()}</Avatar>
       <Typography variant="subtitle2">{storeUserName}</Typography>
       <Box height="32px" />
-      <Button>Manage teams & users</Button>
+      <Button>
+        <Link to="/super-admin/manage-teams">Manage teams & users</Link>
+      </Button>
       <Button>Manage your account</Button>
       <Button onClick={() => auth.signOut().then(() => clearUser())}>
         Sign out

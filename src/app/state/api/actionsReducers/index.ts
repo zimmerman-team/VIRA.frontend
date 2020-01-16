@@ -9,6 +9,7 @@ import {
   ResponseData,
 } from 'app/state/api/interfaces';
 import openSocket from 'socket.io-client';
+const socket = openSocket(process.env.REACT_APP_BACKEND_URL as string);
 
 export const syncVariables: SyncVariablesModel = {
   snackbar: '',
@@ -54,7 +55,6 @@ export const socketAPIModel = <QueryModel, ResponseModel>(): ApiModel<
   }),
   fetch: thunk(async (actions, query: RequestValues<QueryModel>) => {
     actions.onRequest();
-    const socket = openSocket(process.env.REACT_APP_BACKEND_URL as string);
     socket.emit(query.socketName, query.values, (res: any) =>
       actions.onSuccess(JSON.parse(res))
     );

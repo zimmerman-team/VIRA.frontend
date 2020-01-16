@@ -46,6 +46,13 @@ export const Button = styled.div`
     background: #ffffff;
     color: ${ProjectPalette.primary.main};
   }
+
+  a {
+    &:hover {
+      cursor: pointer;
+      color: ${ProjectPalette.primary.main};
+    }
+  }
 `;
 
 export const Link = styled(RouteLink)`

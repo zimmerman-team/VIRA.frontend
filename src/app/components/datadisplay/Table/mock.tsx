@@ -1134,11 +1134,11 @@ export const mockDataVar9: TableModuleModel = {
   options: {
     print: false,
     search: true,
-    filter: false,
+    filter: true,
     download: false,
     rowHover: false,
     pagination: true,
-    viewColumns: true,
+    viewColumns: false,
     responsive: 'scrollFullHeight',
     filterType: 'checkbox',
     selectableRows: 'none',

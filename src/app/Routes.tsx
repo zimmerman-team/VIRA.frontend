@@ -23,13 +23,14 @@ import { PrivacyModule } from 'app/modules/privacy';
 import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-teams';
 import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
-import ManageTeamEdit from 'app/modules/super-admin/sub-modules/manage-team-edit';
+import { ManageTeamEditAdd } from 'app/modules/super-admin/sub-modules/manage-team-edit';
 import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account';
 import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
 import { ManageUserEdit } from 'app/modules/super-admin/sub-modules/manage-user-edit';
 import { manageUserEditMock } from 'app/modules/super-admin/sub-modules/manage-user-edit/mock';
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 import ManageUser from 'app/modules/super-admin/sub-modules/manage-user';
+import { manageTeamEditAddMock } from './modules/super-admin/sub-modules/manage-team-edit/mock';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -125,11 +126,18 @@ export function MainRoutes() {
         </Route>
 
         <Route path="/super-admin/manage-teams/edit/:id">
-          {redirectUnAuth(ManageTeamEdit, storeUser)}
+          {redirectUnAuth(ManageTeamEditAdd, storeUser, {
+            ...manageTeamEditAddMock,
+            mode: 'edit',
+            breadcrumbs: {
+              ...manageTeamEditAddMock.breadcrumbs,
+              currentLocation: 'Edit',
+            },
+          })}
         </Route>
 
         <Route path="/super-admin/manage-teams/add">
-          {redirectUnAuth(ManageTeamEdit, storeUser)}
+          {redirectUnAuth(ManageTeamEditAdd, storeUser, manageTeamEditAddMock)}
         </Route>
 
         <Route exact path="/super-admin/:id">

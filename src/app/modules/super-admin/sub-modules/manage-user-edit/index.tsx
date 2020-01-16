@@ -6,6 +6,7 @@ import { Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import { Select } from 'app/components/inputs/select';
+import { PageLoader } from 'app/modules/common/page-loader';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
@@ -16,9 +17,9 @@ import { SingleMultiLineTextField } from 'app/components/inputs/textfields/Singl
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {
   // redux state & actions
-  const addUserData = useStoreState(actions => actions.addUser.data);
+  const addUserData = useStoreState(state => state.addUser.data);
   const addUserAction = useStoreActions(actions => actions.addUser.fetch);
-  const loadUserData = useStoreState(actions => actions.loadUser.data);
+  const loadUserData = useStoreState(state => state.loadUser.data);
   const loadUserAction = useStoreActions(actions => actions.loadUser.fetch);
   const loadUserClearAction = useStoreActions(
     actions => actions.loadUser.clear
@@ -26,14 +27,14 @@ function ManageUserEditF(props: ManageUserEditModel) {
   const snackbarAction = useStoreActions(
     actions => actions.syncVariables.setSnackbar
   );
-  const editUserData = useStoreState(actions => actions.editUser.data);
+  const editUserData = useStoreState(state => state.editUser.data);
   const editUserAction = useStoreActions(actions => actions.editUser.fetch);
   const editUserClearAction = useStoreActions(
     actions => actions.editUser.clear
   );
   const storeUser = useStoreState(state => state.syncVariables.user);
   const allUsersAction = useStoreActions(actions => actions.allUsers.fetch);
-  const roles = useStoreState(actions => actions.getUserRoles.data);
+  const roles = useStoreState(state => state.getUserRoles.data);
   // state
   const [firstName, setFirstName] = React.useState(
     get(props, 'form.firstName', '')
@@ -168,9 +169,13 @@ function ManageUserEditF(props: ManageUserEditModel) {
     return true;
   }
 
+  const loading = useStoreState(state => state.loadUser.loading);
+
   // returned components
   return (
     <>
+      {loading && <PageLoader />}
+
       {/* ---------------------------------------------------------------------*/}
       {/* breadcrumbs */}
       <Grid item lg={12}>
