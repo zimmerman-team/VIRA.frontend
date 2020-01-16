@@ -1,14 +1,15 @@
-import 'styled-components/macro';
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
+import 'styled-components/macro';
 import Badge from '@material-ui/core/Badge';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import { Account } from 'app/modules/common/components/Account';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
 import { notifMock } from 'app/modules/common/components/Notifications/common/mock';
 import { NotificationContainer } from 'app/modules/common/components/Notifications';
-import { Account } from 'app/modules/common/components/Account';
 
 interface TopBarDesktopSectionParams {
   classes: Record<
@@ -69,7 +70,15 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         placement={placement}
         disablePortal
       >
-        <NotificationContainer notificationItems={notifMock} />
+        <ClickAwayListener
+          onClickAway={() => {
+            setOpen(false);
+          }}
+        >
+          <div>
+            <NotificationContainer notificationItems={notifMock} />
+          </div>
+        </ClickAwayListener>
       </Popper>
       <IconButton
         aria-label="show new notifications"
@@ -86,7 +95,15 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         placement={placementAccount}
         disablePortal
       >
-        <Account />
+        <ClickAwayListener
+          onClickAway={() => {
+            setOpenAccount(false);
+          }}
+        >
+          <div>
+            <Account />
+          </div>
+        </ClickAwayListener>
       </Popper>
       <IconButton
         edge="end"

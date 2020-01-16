@@ -16,7 +16,8 @@ export function formatTeamCards(
   let newData = data;
   if (init) {
     allData = (data || []).map((item: any) => {
-      const creator = find(allUsers, { user_id: item.createdBy });
+      const splits = item.description.split(',');
+      const creator = find(allUsers, { user_id: splits[1] });
       return {
         _id: item._id,
         title: item.label,

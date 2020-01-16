@@ -128,7 +128,7 @@ export function getGroup(req: any, res: any) {
 }
 
 export function addGroup(req: any, res: any) {
-  const { user, name, usersToAdd } = req.body;
+  const { user, name, usersToAdd } = req.query;
   let today = new Date();
   const dd = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
   const mm =
@@ -199,7 +199,7 @@ export function editGroup(req: any, res: any) {
     usersToAdd,
     user,
     team,
-  } = req.body;
+  } = req.query;
 
   let today = new Date();
   const dd = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
@@ -210,16 +210,17 @@ export function editGroup(req: any, res: any) {
   const yyyy = today.getFullYear();
   const todayStr = `${dd}/${mm}/${yyyy}`;
 
+  const newDescription = `${description
+    .split(',')
+    .slice(0, 2)},${todayStr},Insinger`;
+
   getAccessToken('auth_ext').then(token => {
     const requests = [
       axios.put(
         `${process.env.REACT_APP_AE_API_URL}/groups/${groupId}`,
         {
           name,
-          description: `${description.replace(
-            ',Insinger',
-            ''
-          )},${todayStr},Insinger`,
+          description: newDescription,
         },
         {
           headers: {

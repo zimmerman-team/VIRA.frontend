@@ -1,6 +1,8 @@
 /* third-party */
 import React from 'react';
 import get from 'lodash/get';
+import { withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
@@ -9,7 +11,7 @@ import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules
 import { formatUserCards } from 'app/modules/super-admin//sub-modules/manage-users-teams/utils/formatUserCards';
 import { formatTeamCards } from './utils/formatTeamCards';
 
-export function ManageUsers() {
+function ManageUsersF(props: RouteComponentProps) {
   const [users, setUsers] = React.useState([]);
   const [allUsers, setAllUsers] = React.useState([]);
   const [teams, setTeams] = React.useState([]);
@@ -22,7 +24,7 @@ export function ManageUsers() {
   const storeUser = useStoreState(state => state.syncVariables.user);
   const allUsersAction = useStoreActions(actions => actions.allUsers.fetch);
   const allUsersData = useStoreState(state => state.allUsers.data);
-  const deletUserAction = useStoreActions(actions => actions.deleteUser.fetch);
+  const deleteUserAction = useStoreActions(actions => actions.deleteUser.fetch);
   const deleteUserData = useStoreState(state => state.deleteUser.data);
   const deleteUserClear = useStoreActions(actions => actions.deleteUser.clear);
   const allTeamsAction = useStoreActions(actions => actions.allTeams.fetch);
@@ -77,10 +79,17 @@ export function ManageUsers() {
     formatTeams();
   }, [allUsersData, allTeamsData, sort, page, pageSize, search]);
   React.useEffect(() => {
-    allUsersAction({
-      socketName: 'getAllUsers',
-      values: { user: storeUser },
-    });
+    if (get(props.match.params, 'id', '') === 'manage-teams') {
+      allTeamsAction({
+        socketName: 'getUserGroups',
+        values: { user: storeUser },
+      });
+    } else {
+      allUsersAction({
+        socketName: 'getAllUsers',
+        values: { user: storeUser },
+      });
+    }
     deleteUserClear();
   }, [deleteUserData]);
 
@@ -96,7 +105,11 @@ export function ManageUsers() {
   }
 
   function deleteUser(id: string) {
-    deletUserAction({ socketName: 'deleteUser', values: { delId: id } });
+    const socketName =
+      get(props.match.params, 'id', '') === 'manage-teams'
+        ? 'deleteGroup'
+        : 'deleteUser';
+    deleteUserAction({ socketName, values: { delId: id } });
   }
 
   const loading = useStoreState(state => state.allUsers.loading);
@@ -138,3 +151,5 @@ export function ManageUsers() {
 
   return <ManageUsersTeamsLayout {...layoutProps} />;
 }
+
+export const ManageUsers = withRouter(ManageUsersF);
