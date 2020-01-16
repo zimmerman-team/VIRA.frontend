@@ -1,8 +1,20 @@
 import { mockData as TeamUserCardMock } from 'app/components/surfaces/Cards/TeamUserCard/mock';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
-import { PageModuleModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
-import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
+import {
+  PageModuleModel,
+  ManageUsersTeamsLayoutModel,
+  SortOptionsModel,
+} from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
+
+import { UnregisterCallback, Href } from 'history';
+
+export const sortOptions: SortOptionsModel[] = [
+  { label: 'Title (asc)', value: 'title' },
+  { label: 'Title (desc)', value: '-title' },
+  { label: 'Created (asc)', value: 'dateCreated' },
+  { label: 'Created (desc)', value: '-dateCreated' },
+];
 
 export const tabNavigatorMock: TabNavigatorParams = {
   items: [
@@ -22,7 +34,7 @@ export const breadcrumbsMock: BreadcrumbModel = {
   previousLocations: [
     {
       label: 'Manage',
-      url: '/',
+      url: '/super-admin/manage-teams',
     },
   ],
 };
@@ -45,7 +57,51 @@ export const pageModuleMockUsers: PageModuleModel = {
     page: 0,
     rowsPerPage: 0,
     onChangePage: () => {},
+    onChangeRowsPerPage: () => {},
   },
+  match: {
+    isExact: true,
+    params: {},
+    path: '',
+    url: '',
+  },
+  location: {
+    hash: '',
+    key: '',
+    pathname: '',
+    search: '',
+    state: {},
+  },
+  history: {
+    length: 2,
+    action: 'POP',
+    location: {
+      hash: '',
+      key: '',
+      pathname: '',
+      search: '',
+      state: {},
+    },
+    push: () => {},
+    replace: () => {},
+    go: num => {},
+    goBack: () => {},
+    goForward: () => {},
+    block: t => {
+      const temp: UnregisterCallback = () => {};
+      return temp;
+    },
+    createHref: t => {
+      const temp: Href = '';
+      return temp;
+    },
+    listen: t => {
+      const temp: UnregisterCallback = () => {};
+      return temp;
+    },
+  },
+  staticContext: {},
+  sortOptions,
 };
 
 export const pageModuleMockTeams: PageModuleModel = {
@@ -66,11 +122,56 @@ export const pageModuleMockTeams: PageModuleModel = {
     page: 0,
     rowsPerPage: 0,
     onChangePage: () => {},
+    onChangeRowsPerPage: () => {},
   },
+  match: {
+    isExact: true,
+    params: {},
+    path: '',
+    url: '',
+  },
+  location: {
+    hash: '',
+    key: '',
+    pathname: '',
+    search: '',
+    state: {},
+  },
+  history: {
+    length: 2,
+    action: 'POP',
+    location: {
+      hash: '',
+      key: '',
+      pathname: '',
+      search: '',
+      state: {},
+    },
+    push: () => {},
+    replace: () => {},
+    go: num => {},
+    goBack: () => {},
+    goForward: () => {},
+    block: t => {
+      const temp: UnregisterCallback = () => {};
+      return temp;
+    },
+    createHref: t => {
+      const temp: Href = '';
+      return temp;
+    },
+    listen: t => {
+      const temp: UnregisterCallback = () => {};
+      return temp;
+    },
+  },
+  staticContext: {},
+  sortOptions,
 };
 
 export const manageUsersTeamsLayoutMock: ManageUsersTeamsLayoutModel = {
   breadcrumbs: breadcrumbsMock,
   pageModule: pageModuleMockUsers,
   tabNavigator: tabNavigatorMock,
+  teamPageModule: pageModuleMockTeams,
 };

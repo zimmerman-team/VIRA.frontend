@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import auth0 from 'auth0-js';
 
 class AuthProps {
@@ -61,9 +62,8 @@ class Auth extends AuthProps {
         email,
         connection: 'insinger-database-connection',
       },
-      (err: any) => {
-        // console.log(err);
-        reduxAction && reduxAction();
+      (err: any, result: any) => {
+        reduxAction && reduxAction(err || result);
       }
     );
   };

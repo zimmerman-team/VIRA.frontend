@@ -1,6 +1,6 @@
 // @ts-nocheck
 import axios from 'axios';
-// import { sendMail } from './email';
+import { sendMail, sendForgotPassMail } from './email';
 
 export async function getAccessToken(apiType: string) {
   try {
@@ -97,7 +97,7 @@ export function sendWelcomeEmail(
       const redirectUrl = `${
         process.env.REACT_APP_PROJECT_URL &&
         process.env.REACT_APP_PROJECT_URL.includes('localhost')
-          ? process.env.REACT_APP_EXPRESS_BACKEND_BASE_URL
+          ? process.env.REACT_APP_BACKEND_URL
           : process.env.REACT_APP_PROJECT_URL
       }/api/redirectToHome`;
       axios
@@ -114,7 +114,7 @@ export function sendWelcomeEmail(
           }
         )
         .then(response => {
-          //   return sendMail(name, surname, email, response.data.ticket);
+          return sendMail(name, surname, email, response.data.ticket);
         })
         .catch(error => {
           return error.response.data.message;
@@ -122,5 +122,51 @@ export function sendWelcomeEmail(
     })
     .catch((error: any) => {
       return error.response.data.message;
+    });
+}
+
+export function sendForgetPasswordEmail(req: any, res: any) {
+  const { email, connectionID } = req.query;
+  getAccessToken('management')
+    .then((token: string) => {
+      const redirectUrl = `${
+        process.env.REACT_APP_PROJECT_URL &&
+        process.env.REACT_APP_PROJECT_URL.includes('localhost')
+          ? process.env.REACT_APP_BACKEND_URL
+          : process.env.REACT_APP_PROJECT_URL
+      }/api/redirectToHome`;
+      axios
+        .post(
+          `${process.env.REACT_APP_AUTH_DOMAIN}/api/v2/tickets/password-change`,
+          {
+            email: email,
+            result_url: redirectUrl,
+            connection_id: connectionID,
+          },
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        )
+        .then(response => {
+          sendForgotPassMail(email, response.data.ticket)
+            .then(result => {
+              return res(
+                JSON.stringify({
+                  message: 'Reset password email has been sent to the address.',
+                })
+              );
+            })
+            .catch(error => {
+              return res(JSON.stringify({ message: 'Something went wrong.' }));
+            });
+        })
+        .catch(error => {
+          return res(JSON.stringify({ message: 'Something went wrong.' }));
+        });
+    })
+    .catch((error: any) => {
+      return res(JSON.stringify({ message: 'Something went wrong.' }));
     });
 }

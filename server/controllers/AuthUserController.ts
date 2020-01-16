@@ -6,6 +6,7 @@ import {
   sendWelcomeEmail,
   addUserToGroup,
   assignRoleToUser,
+  removeRoleFromUser,
 } from '../utils/auth';
 import { makePass, genericError } from '../utils/general';
 
@@ -25,7 +26,7 @@ export function getAllUsers(req: any, res: any) {
       axios
         .all([
           axios.get(
-            `${process.env.REACT_APP_AUTH_DOMAIN}/api/v2/users?include_totals=true&q=identities.connection:"Username-Password-Authentication"`,
+            `${process.env.REACT_APP_AUTH_DOMAIN}/api/v2/users?include_totals=true&q=identities.connection:"insinger-database-connection"`,
             {
               headers: {
                 Authorization: token1,
@@ -41,43 +42,43 @@ export function getAllUsers(req: any, res: any) {
         .then(response => {
           let result = response[0].data.users;
           const groups = response[1].data.groups;
-          if (user.role === roles.admin) {
-            result = filter(response[0].data.users, d => {
-              let pass = false;
-              const dUserGroups = filter(groups, gr =>
-                some(gr.members, member => member === user.authId)
-              );
-              for (let c1 = 0; c1 < dUserGroups.length; c1++) {
-                for (let c2 = 0; c2 < dUserGroups[c1].members.length; c2++) {
-                  if (
-                    dUserGroups[c1].members[c2] === d.user_id &&
-                    get(d, 'app_metadata.authorization.roles[0]', '') !==
-                      roles.superAdm
-                  ) {
-                    pass = true;
-                    break;
-                  }
-                  if (pass) break;
-                }
-              }
+          // if (user.role === roles.admin) {
+          //   result = filter(response[0].data.users, d => {
+          //     let pass = false;
+          //     const dUserGroups = filter(groups, gr =>
+          //       some(gr.members, member => member === user.authId)
+          //     );
+          //     for (let c1 = 0; c1 < dUserGroups.length; c1++) {
+          //       for (let c2 = 0; c2 < dUserGroups[c1].members.length; c2++) {
+          //         if (
+          //           dUserGroups[c1].members[c2] === d.user_id &&
+          //           get(d, 'app_metadata.authorization.roles[0]', '') !==
+          //             roles.superAdm
+          //         ) {
+          //           pass = true;
+          //           break;
+          //         }
+          //         if (pass) break;
+          //       }
+          //     }
 
-              return pass;
-            });
-            if (result.length === 0) {
-              const currentUserEmail = user.email;
-              const currentUserAuth0 = find(response[0].data.users, {
-                email: currentUserEmail,
-              });
-              result = [currentUserAuth0];
-            }
-          }
-          if (user.role === roles.regular || user.role === roles.mod) {
-            const currentUserEmail = user.email;
-            const currentUserAuth0 = find(response[0].data.users, {
-              email: currentUserEmail,
-            });
-            result = [currentUserAuth0];
-          }
+          //     return pass;
+          //   });
+          //   if (result.length === 0) {
+          //     const currentUserEmail = user.email;
+          //     const currentUserAuth0 = find(response[0].data.users, {
+          //       email: currentUserEmail,
+          //     });
+          //     result = [currentUserAuth0];
+          //   }
+          // }
+          // if (user.role === roles.regular || user.role === roles.mod) {
+          //   const currentUserEmail = user.email;
+          //   const currentUserAuth0 = find(response[0].data.users, {
+          //     email: currentUserEmail,
+          //   });
+          //   result = [currentUserAuth0];
+          // }
           return res(JSON.stringify(result));
         })
         .catch(error => genericError(error, res));
@@ -143,7 +144,7 @@ export function addUser(req: any, res: any) {
     roleId,
     groupName,
     roleName,
-  } = req.body;
+  } = req.query;
 
   getAccessToken('management').then(token => {
     axios
@@ -154,12 +155,12 @@ export function addUser(req: any, res: any) {
           blocked: false,
           email_verified: false,
           verify_email: true,
-          password: makePass(8),
+          password: `@${makePass(8)}`,
           given_name: name,
           family_name: surname,
           name: `${name} ${surname}`,
           nickname: name,
-          connection: 'Username-Password-Authentication',
+          connection: 'insinger-database-connection',
           user_metadata: {
             firstName: name,
             lastName: surname,
@@ -182,7 +183,7 @@ export function addUser(req: any, res: any) {
           sendWelcomeEmail(response.data.user_id, name, surname, email);
           addUserToGroup(response.data.user_id, groupId);
           assignRoleToUser(response.data.user_id, roleId);
-          return res(JSON.stringify({ message: 'success' }));
+          return res(JSON.stringify({ message: 'User created successfully' }));
         }
         return res(JSON.stringify(response.data));
       })
@@ -200,23 +201,14 @@ export function deleteUser(req: any, res: any) {
         },
       })
       .then(response => {
-        return res(JSON.stringify(response.data));
+        return res(JSON.stringify({ message: 'User deleted successfully' }));
       })
       .catch(error => genericError(error, res));
   });
 }
 
 export function editUser(req: any, res: any) {
-  const {
-    adminId,
-    userId,
-    email,
-    name,
-    surname,
-    roleId,
-    roleLabel,
-    prevRoleId,
-  } = req.body;
+  const { userId, email, name, surname, role, roleId, prevRoleId } = req.query;
   getAccessToken('management').then(token => {
     axios
       .patch(
@@ -227,7 +219,12 @@ export function editUser(req: any, res: any) {
             firstName: name,
             lastName: surname,
           },
-          connection: 'Username-Password-Authentication',
+          app_metadata: {
+            authorization: {
+              roles: [{ name: role }],
+            },
+          },
+          connection: 'insinger-database-connection',
         },
         {
           headers: {
@@ -237,9 +234,39 @@ export function editUser(req: any, res: any) {
       )
       .then(response => {
         if (response.status === 200 || response.status === 201) {
+          if (userId !== prevRoleId) {
+            roleId !== '' && assignRoleToUser(userId, roleId);
+            prevRoleId !== '' &&
+              roleId !== '' &&
+              removeRoleFromUser(userId, prevRoleId);
+          }
           return res(JSON.stringify({ message: 'success' }));
         }
       })
       .catch(error => genericError(error, res));
   });
+}
+
+export function getAuth0DBConnection(req: any, res: any) {
+  getAccessToken('management')
+    .then(token => {
+      axios
+        .get(`${process.env.REACT_APP_AUTH_DOMAIN}/api/v2/connections`, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then(response => {
+          const connectionID = find(response.data, {
+            name: 'insinger-database-connection',
+          });
+          return res(JSON.stringify(connectionID.id));
+        })
+        .catch(error => {
+          return res(JSON.stringify({ message: 'Something went wrong.' }));
+        });
+    })
+    .catch((error: any) => {
+      return res(JSON.stringify({ message: 'Something went wrong.' }));
+    });
 }
