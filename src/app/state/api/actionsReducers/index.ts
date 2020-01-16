@@ -19,9 +19,6 @@ export const syncVariables: SyncVariablesModel = {
   setUser: action((state, payload: UserModel) => {
     state.user = payload;
   }),
-  clearUser: action(state => {
-    state.user = null;
-  }),
 };
 
 export const socketAPIModel = <QueryModel, ResponseModel>(): ApiModel<
@@ -48,9 +45,6 @@ export const socketAPIModel = <QueryModel, ResponseModel>(): ApiModel<
   onRequest: action(state => {
     state.loading = true;
     state.success = false;
-  }),
-  clear: action(state => {
-    state.data = null;
   }),
   fetch: thunk(async (actions, query: RequestValues<QueryModel>) => {
     actions.onRequest();

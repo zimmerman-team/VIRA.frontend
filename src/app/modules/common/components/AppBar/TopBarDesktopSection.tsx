@@ -10,7 +10,6 @@ import { notifMock } from 'app/modules/common/components/Notifications/common/mo
 import { NotificationContainer } from 'app/modules/common/components/Notifications';
 import { UserProfileCard } from 'app/components/surfaces/Cards/UserProfileCard';
 import { mockData } from 'app/components/surfaces/Cards/UserProfileCard/mock';
-import { Account } from 'app/modules/common/components/Account';
 
 interface TopBarDesktopSectionParams {
   classes: Record<
@@ -47,23 +46,6 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
       setOpenNotification(prev => placement !== newPlacement || !prev);
     }
     setPlacement(newPlacement);
-  };
-
-  const [
-    anchorElAccount,
-    setAnchorElAccount,
-  ] = React.useState<HTMLButtonElement | null>(null);
-  const [openAccount, setOpenAccount] = React.useState(false);
-  const [placementAccount, setPlacementAccount] = React.useState<
-    PopperPlacementType
-  >();
-
-  const handleClickAccount = (newPlacement: PopperPlacementType) => (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    setAnchorElAccount(event.currentTarget);
-    setOpenAccount(prev => placementAccount !== newPlacement || !prev);
-    setPlacementAccount(newPlacement);
   };
 
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
-import { Edit, Delete } from '@material-ui/icons';
+import { Edit } from '@material-ui/icons';
 import { IconButton } from '@material-ui/core';
 import { IconCellModuleModel } from 'app/components/datadisplay/Table/model';
 
@@ -43,8 +43,6 @@ function getIcon(value: string | string[]) {
   switch (value) {
     case 'Edit':
       return <Edit color="secondary" />;
-    case 'Delete':
-      return <Delete color="secondary" />;
     default:
       return null;
   }

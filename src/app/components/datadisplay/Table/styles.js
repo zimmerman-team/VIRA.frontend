@@ -1,6 +1,6 @@
 import { css } from 'styled-components/macro';
 import { ProjectPalette, TextStyle } from 'app/theme';
-// TODO: this file should be refactored so that there is a base styling. So all the variants can just overwrite it.
+
 export const CustomStyleDataTable = {
   standard: css`
     && {
@@ -117,75 +117,6 @@ export const CustomStyleDataTable = {
 
       [class*='MUIDataTableHeadCell-root']:nth-child(4) {
         width: 50px;
-      }
-
-      [class*='MUIDataTableBodyCell'] {
-        padding: 13px 24px;
-        color: ${ProjectPalette.common.black};
-        font-size: 14px;
-
-        > a {
-          font-weight: 600;
-        }
-      }
-    }
-  `,
-
-  variant10: css`
-    && {
-      box-shadow: none;
-      border-color: white;
-
-      [class*='MUIDataTableToolbar'] {
-        [class*='MuiTypography-root'] {
-          font-family: ${TextStyle.fontFamily};
-          font-size: 20px;
-          font-weight: 600;
-          line-height: 1.5;
-          letter-spacing: normal;
-          color: ${ProjectPalette.common.black};
-        }
-
-        [class*='MuiSvgIcon-root'] {
-          fill: ${ProjectPalette.grey[900]};
-        }
-      }
-
-      [class*='MUIDataTable-tableRoot'] {
-        border: solid 1px rgba(198, 198, 198, 0.2);
-      }
-
-      [class*='MUIDataTableHeadCell-root'] {
-        padding: 13px 24px;
-        color: rgba(1, 1, 10, 0.6);
-      }
-
-      [class*='MuiTablePagination-toolbar'] > * {
-        font-size: 12px;
-        color: rgba(1, 1, 10, 0.6);
-        border-bottom: none;
-      }
-
-      [class*='MuiTableCell-root'] {
-        border-bottom: 0 white solid !important;
-      }
-
-      [class*='MUIDataTableBodyRow'] {
-        border: solid 1px rgba(198, 198, 198, 0.2);
-        > * {
-          padding-top: 6px;
-          padding-bottom: 6px;
-        }
-      }
-
-      //TODO: Different from "standard" variant.
-
-      [class*='MUIDataTableHeadCell-root']:nth-child(4) {
-        width: 24px;
-      }
-
-      [class*='MUIDataTableHeadCell-root']:nth-child(5) {
-        width: 24px;
       }
 
       [class*='MUIDataTableBodyCell'] {

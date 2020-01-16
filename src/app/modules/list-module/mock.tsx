@@ -99,7 +99,26 @@ export const ReportListMock: TableModuleModel = {
 
 export const GranteeListMock: TableModuleModel = {
   title: 'Grantee',
-  data: [[]],
+  data: [
+    [
+      '11003399',
+      'Promoting Opportunities for Women s Empowerment and Rights',
+      'Label',
+      'Label',
+    ],
+    [
+      '11003399',
+      'Promoting Opportunities for Women s Empowerment and Rights',
+      'Label',
+      'Label',
+    ],
+    [
+      '11003399',
+      'Promoting Opportunities for Women s Empowerment and Rights',
+      'Label',
+      'Label',
+    ],
+  ],
   columns: [
     {
       name: 'ID',

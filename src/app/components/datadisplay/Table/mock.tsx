@@ -989,7 +989,7 @@ export const mockDataVar7: TableModuleModel = {
 
 export const mockDataVar8: TableModuleModel = {
   title: 'Projects',
-  data: [[]], //table9Data,
+  data: table9Data,
   columns: [
     {
       name: 'ID',
@@ -1066,7 +1066,7 @@ export const mockDataVar8: TableModuleModel = {
     filter: false,
     download: true,
     rowHover: false,
-    pagination: true,
+    pagination: false,
     viewColumns: true,
     responsive: 'scrollFullHeight',
     filterType: 'checkbox',
@@ -1146,83 +1146,4 @@ export const mockDataVar9: TableModuleModel = {
   },
   columnsCell: ['', '', '', 'IconCellModule'],
   cssVariant: 'variant9',
-};
-
-export const mockDataVar10: TableModuleModel = {
-  title: 'Manage Users',
-  data: table9Data,
-  columns: [
-    {
-      name: 'ID',
-      options: {
-        filter: false,
-      },
-    },
-    {
-      name: 'Name of User Grantee',
-      options: {
-        filter: false,
-        customBodyRender: value => {
-          return (
-            <LinkCellModule
-              css={`
-                a {
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  display: -webkit-box;
-                  line-height: 16px;
-                  max-height: 32px;
-                  -webkit-line-clamp: 1; /* Write the number of 
-                              lines you want to be 
-                              displayed */
-                  -webkit-box-orient: vertical;
-                }
-              `}
-              value={value}
-              link={'/projects/detail'}
-            />
-          );
-        },
-      },
-    },
-    {
-      name: 'Review',
-      options: {
-        filter: false,
-      },
-    },
-    {
-      name: '',
-      options: {
-        filter: false,
-        customBodyRender: value => {
-          return <IconCellModule value="Edit" />;
-        },
-      },
-    },
-    {
-      name: '',
-      options: {
-        filter: false,
-        customBodyRender: value => {
-          return <IconCellModule value="Delete" />;
-        },
-      },
-    },
-  ],
-  options: {
-    print: false,
-    search: true,
-    filter: false,
-    download: false,
-    rowHover: false,
-    pagination: true,
-    viewColumns: false,
-    responsive: 'scrollFullHeight',
-    filterType: 'checkbox',
-    selectableRows: 'none',
-    fixedHeader: true,
-  },
-  columnsCell: ['', '', '', 'IconCellModule', 'IconCellModule'],
-  cssVariant: 'variant10',
 };

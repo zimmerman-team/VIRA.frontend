@@ -27,7 +27,6 @@ export interface SyncVariablesModel {
   setSnackbar: Action<SyncVariablesModel, string>;
   user: UserModel | null;
   setUser: Action<SyncVariablesModel, UserModel>;
-  clearUser: Action<SyncVariablesModel>;
 }
 
 export interface ResponseData<T> {
@@ -57,7 +56,6 @@ export interface ApiModel<QueryModel, ResponseModel> {
     ResponseData<ResponseModel> | ResponseData<ResponseModel>[]
   >;
   onRequest: Action<ApiModel<QueryModel, ResponseModel>>;
-  clear: Action<ApiModel<QueryModel, ResponseModel>>;
   fetch: Thunk<ApiModel<QueryModel, ResponseModel>, RequestValues<QueryModel>>;
 }
 

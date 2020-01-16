@@ -29,17 +29,15 @@ export function getUserRoles(req: any, res: any) {
         },
       })
       .then(response => {
-        const data = filter(
-          response.data.roles,
-          r => r.description === 'M&E Insinger'
-        ).map(g => {
-          return {
-            ...g,
-            label: g.name,
-            value: g._id,
-          };
-        });
-        return res(JSON.stringify(data));
+        return res.json(
+          filter(response.data.roles, r => r.name !== 'Super admin').map(g => {
+            return {
+              ...g,
+              label: g.name,
+              value: g._id,
+            };
+          })
+        );
       })
       .catch(error => genericError(error, res));
   });

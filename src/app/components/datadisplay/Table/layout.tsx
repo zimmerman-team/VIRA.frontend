@@ -7,16 +7,13 @@ import 'styled-components/macro';
 import { CustomStyleDataTable } from 'app/components/datadisplay/Table/styles';
 
 function setTableVariant(cssVariant: string) {
-  switch (cssVariant) {
-    case 'variant9':
-      return CustomStyleDataTable.variant9;
-    case 'variant10':
-      return CustomStyleDataTable.variant10;
-    default:
-      return CustomStyleDataTable.standard;
+  //TODO: make switch
+  console.log(cssVariant);
+  if (cssVariant === 'variant9') {
+    return CustomStyleDataTable.variant9;
   }
+  return CustomStyleDataTable.standard;
 }
-
 export const TableLayout = (props: TableLayoutModel) => {
   React.useEffect(() => {
     props.changeTableRowColor && changeTableRowColor(props.changeTableRowColor);

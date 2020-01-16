@@ -90,20 +90,20 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
           ) : (
             <div />
           )}
-          {/* {TopBarSearchSection(classes)} */}
+          {/*{TopBarSearchSection(classes)}*/}
           <div className={classes.grow} />
           {TopBarDesktopSection({
-            classes,
-            menuId,
+            classes: classes,
+            menuId: menuId,
           })}
           {TopBarMobileSection(classes, mobileMenuId, handleMobileMenuOpen)}
         </Toolbar>
       </AppBar>
       {MobileRendering({
-        mobileMoreAnchorEl,
-        mobileMenuId,
-        isMobileMenuOpen,
-        handleMobileMenuClose,
+        mobileMoreAnchorEl: mobileMoreAnchorEl,
+        mobileMenuId: mobileMenuId,
+        isMobileMenuOpen: isMobileMenuOpen,
+        handleMobileMenuClose: handleMobileMenuClose,
       })}
     </>
   );

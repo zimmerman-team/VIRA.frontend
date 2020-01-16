@@ -20,11 +20,8 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* form */}
     <Grid item container xs={12} lg={12} direction={'column'}>
-      <SingleMultiLineTextField
-        id={'Edit Title'}
-        label={'Edit Title'}
-        bigLabel
-      />
+      {/*TODO: add bigLabel as prop when IN-124 is merged*/}
+      <SingleMultiLineTextField id={'Edit Title'} label={'Edit Title'} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}

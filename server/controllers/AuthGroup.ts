@@ -35,27 +35,20 @@ export function getUserGroups(req: any, res: any) {
           },
         })
         .then(response => {
-          let result = filter(response.data.groups, g => {
-            const splits = g.description.split(',');
-            if (splits.length > 3) {
-              if (splits[3] === 'Insinger') {
-                return true;
-              }
-              return false;
-            }
-            return false;
-          });
-          // const result = filter(response.data.groups, g => {
-          //   let pass = false;
+          let result = response.data.groups;
+          if (user.role !== roles.superAdm) {
+            result = filter(response.data.groups, g => {
+              let pass = false;
 
-          //   for (let b = 0; b < get(user.teams, 'length', 0); b++) {
-          //     if (user.teams[b] === g.name) {
-          //       pass = true;
-          //       break;
-          //     }
-          //   }
-          //   return pass;
-          // });
+              for (let b = 0; b < get(user.teams, 'length', 0); b++) {
+                if (user.teams[b] === g.name) {
+                  pass = true;
+                  break;
+                }
+              }
+              return pass;
+            });
+          }
           return res(
             JSON.stringify(
               result.map((g: any) => {
@@ -142,10 +135,7 @@ export function addGroup(req: any, res: any) {
     axios
       .post(
         `${process.env.REACT_APP_AE_API_URL}/groups`,
-        {
-          name,
-          description: `${todayStr},${user.authId},${todayStr},Insinger`,
-        },
+        { name, description: `${todayStr},${user.authId},${todayStr}` },
         {
           headers: {
             Authorization: token,
@@ -214,13 +204,7 @@ export function editGroup(req: any, res: any) {
     const requests = [
       axios.put(
         `${process.env.REACT_APP_AE_API_URL}/groups/${groupId}`,
-        {
-          name,
-          description: `${description.replace(
-            ',Insinger',
-            ''
-          )},${todayStr},Insinger`,
-        },
+        { name, description: `${description},${todayStr}` },
         {
           headers: {
             Authorization: token,

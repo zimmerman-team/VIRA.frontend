@@ -6,13 +6,7 @@ export type PaginationModel = {
   count: number;
   page: number;
   rowsPerPage: number;
-  onChangePage: (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    page: number
-  ) => void;
-  onChangeRowsPerPage: React.ChangeEventHandler<
-    HTMLTextAreaElement | HTMLInputElement
-  >;
+  onChangePage: Function;
 };
 
 const BasePagination = styled(TablePagination)`
@@ -37,11 +31,10 @@ export const Pagination = (props: PaginationModel) => {
   return (
     <React.Fragment>
       <BasePagination
-        page={props.page}
         count={props.count}
+        onChangePage={() => console.log('Show next items')}
+        page={props.page}
         rowsPerPage={props.rowsPerPage}
-        onChangePage={props.onChangePage}
-        onChangeRowsPerPage={props.onChangeRowsPerPage}
       />
     </React.Fragment>
   );
