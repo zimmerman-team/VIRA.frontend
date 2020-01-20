@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { FaqsModel } from 'app/modules/faqs/model';
+import { FaqsModel } from 'app/modules/faq-module/model';
 import { ExpansionPanel } from 'app/components/surfaces/ExpansionPanel';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 

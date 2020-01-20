@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Card from '@material-ui/core/Card';
-import { projectsMock } from 'app/modules/landing/common/projectsMock';
+import { projectsMock } from 'app/modules/landing/projectsMock';
 import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
 import { StatItem } from 'app/modules/landing/common/StatItem';
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';

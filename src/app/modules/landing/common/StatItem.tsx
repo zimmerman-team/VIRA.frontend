@@ -2,7 +2,7 @@ import 'styled-components/macro';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
-import { StatItemParams } from 'app/modules/landing/common/projectsMock';
+import { StatItemParams } from 'app/modules/landing/projectsMock';
 import { ProjectPalette } from 'app/theme';
 
 export const StatItem = (props: StatItemParams) => (

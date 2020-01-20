@@ -15,7 +15,7 @@ import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
 import { GranteeDetailModule } from 'app/modules/detail-modules/grantee-detail';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
 import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail/layout';
-import { Faqs } from 'app/modules/faqs';
+import { Faqs } from 'app/modules/faq-module';
 import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
 import { SdgModule } from 'app/modules/sdg';

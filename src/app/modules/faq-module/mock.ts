@@ -1,4 +1,4 @@
-import { FaqsModel } from 'app/modules/faqs/model';
+import { FaqsModel } from 'app/modules/faq-module/model';
 
 export const mockData: FaqsModel = {
   title: 'FAQ',
