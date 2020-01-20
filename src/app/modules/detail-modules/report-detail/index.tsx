@@ -1,20 +1,25 @@
-import 'styled-components/macro';
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { TitleFragment } from 'app/modules/common/components/TitleParams';
-import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
-import { ReportTitleMock } from 'app/modules/detail-modules/report-detail/mock';
-import { ReportOutcomeCardMock } from 'app/modules/detail-modules/report-detail/mock';
-import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import { ProjectPalette } from 'app/theme';
-import graph1 from 'app/assets/images/dummy_graph1.png';
+// global
 import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
+
+// absolute
+import graph1 from 'app/assets/images/dummy_graph1.png';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
+import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
+import { TitleFragment } from 'app/modules/common/components/TitleParams';
+import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
+import {
+  ReportOutcomeCardMock,
+  ReportTitleMock,
+} from 'app/modules/detail-modules/report-detail/mock';
+
+// direct
+import 'styled-components/macro';
 
 export const ReportDetailLayout = () => (
   <React.Fragment>

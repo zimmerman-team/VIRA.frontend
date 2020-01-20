@@ -58,7 +58,7 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
-    <>
+    <React.Fragment>
       <AppBar
         position="fixed"
         className={clsx(props.classes.appBar, {
@@ -105,6 +105,6 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
         isMobileMenuOpen,
         handleMobileMenuClose,
       })}
-    </>
+    </React.Fragment>
   );
 }

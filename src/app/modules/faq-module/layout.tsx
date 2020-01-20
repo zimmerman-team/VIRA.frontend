@@ -1,8 +1,9 @@
-import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { FaqsModel } from 'app/modules/faq-module/model';
+import React from 'react';
+
 import { ExpansionPanel } from 'app/components/surfaces/ExpansionPanel';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
+import { FaqsModel } from 'app/modules/faq-module/model';
 
 export const FaqsLayout = (props: FaqsModel) => (
   <React.Fragment>

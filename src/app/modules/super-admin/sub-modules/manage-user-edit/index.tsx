@@ -1,18 +1,23 @@
-import React from 'react';
-import get from 'lodash/get';
-import find from 'lodash/find';
-import 'styled-components/macro';
+// global
 import { Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import find from 'lodash/find';
+import get from 'lodash/get';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Select } from 'app/components/inputs/select';
-import { PageLoader } from 'app/modules/common/page-loader';
-import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+
+// aboslute
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { RadioButtonsGroup } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
-import { ManageUserEditModel } from 'app/modules/super-admin/sub-modules/manage-user-edit/model';
+import { Select } from 'app/components/inputs/select';
 import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
+import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
+import { PageLoader } from 'app/modules/common/page-loader';
+import { ManageUserEditModel } from 'app/modules/super-admin/sub-modules/manage-user-edit/model';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+
+// direct
+import 'styled-components/macro';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {
@@ -173,7 +178,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
 
   // returned components
   return (
-    <>
+    <React.Fragment>
       {loading && <PageLoader />}
 
       {/* ---------------------------------------------------------------------*/}
@@ -247,7 +252,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           text={props.mode === 'add' ? 'Add' : 'Save'}
         />
       </Grid>
-    </>
+    </React.Fragment>
   );
 }
 

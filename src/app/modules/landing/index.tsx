@@ -1,25 +1,30 @@
-import React from 'react';
-import get from 'lodash/get';
-import { useTitle } from 'react-use';
-import Grid from '@material-ui/core/Grid';
+// global
+import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import Card from '@material-ui/core/Card';
-import { projectsMock } from 'app/modules/landing/projectsMock';
-import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
-import { StatItem } from 'app/modules/landing/common/StatItem';
-import { useStoreState, useStoreActions } from 'app/state/store/hooks';
-import TableModule from 'app/components/datadisplay/Table';
+import Grid from '@material-ui/core/Grid';
+import get from 'lodash/get';
+import React from 'react';
+import { useTitle } from 'react-use';
+
+// absolute
 import graph1 from 'app/assets/images/graph_dashboard.png';
 import graph2 from 'app/assets/images/graph_map.png';
-import { ProjectListMock } from 'app/modules/list-module/mock';
+import TableModule from 'app/components/datadisplay/Table';
+import { StatItem } from 'app/modules/landing/common/StatItem';
+import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
+import { projectsMock } from 'app/modules/landing/projectsMock';
 import {
-  getBaseTableForProject,
   formatTableDataForProject,
+  getBaseTableForProject,
 } from 'app/modules/list-module/utils';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
 function LandingLayout() {
+  // set window title
   useTitle('M&E - Dashboard');
+
+  // set state
   const [baseTableForProject, setBaseTableForProject] = React.useState(
     getBaseTableForProject()
   );
@@ -45,7 +50,7 @@ function LandingLayout() {
   }, [allProjectsData]);
 
   return (
-    <>
+    <React.Fragment>
       {/* -------------------------------------------------------------- */}
       {/* stat items */}
 
@@ -54,10 +59,10 @@ function LandingLayout() {
           <CardContent>
             <Grid container direction="row" alignItems="center" wrap="nowrap">
               {projectsMock.map(project => (
-                <>
+                <React.Fragment>
                   <StatItem amount={project.amount} type={project.type} />
                   <StatItemDivider />
-                </>
+                </React.Fragment>
               ))}
             </Grid>
           </CardContent>
@@ -105,7 +110,7 @@ function LandingLayout() {
       <Grid item sm={12} lg={12}>
         <TableModule {...baseTableForProject} />
       </Grid>
-    </>
+    </React.Fragment>
   );
 }
 

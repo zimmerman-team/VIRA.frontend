@@ -11,7 +11,7 @@ import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { PageLoader } from 'app/modules/common/page-loader';
 
 export const GranteeDetailLayout = (props: any) => (
-  <>
+  <React.Fragment>
     {props.loading && <PageLoader />}
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
@@ -51,5 +51,5 @@ export const GranteeDetailLayout = (props: any) => (
     <Grid item xs={12} lg={12}>
       <TableModule {...props.projectTable} />
     </Grid>
-  </>
+  </React.Fragment>
 );

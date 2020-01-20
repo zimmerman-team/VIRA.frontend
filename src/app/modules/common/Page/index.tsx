@@ -57,10 +57,10 @@ const Page = (props: PageProps) => {
               </Typography>
             )}
             {props.subtitle && (
-              <>
+              <React.Fragment>
                 <Typography variant="subtitle2">{props.subtitle}</Typography>
                 <Box width="100%" height="24px" />
-              </>
+              </React.Fragment>
             )}
             {props.children}
           </Box>

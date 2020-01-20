@@ -18,7 +18,10 @@ import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 import get from 'lodash/get';
 
 export const ListModule = () => {
+  // set window title
   useTitle('M&E - Reports');
+
+  // set state
   const [baseTableForProject, setBaseTableForProject] = React.useState(
     getBaseTableForProject()
   );
@@ -26,12 +29,15 @@ export const ListModule = () => {
     getBaseTableForGrantee()
   );
 
+  // actions
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
   );
   const allOrganisationsAction = useStoreActions(
     actions => actions.allOrganisations.fetch
   );
+
+  // get state
   const allProjectsData = useStoreState(state => state.allProjects.data);
   const allOrganisationsData = useStoreState(
     state => state.allOrganisations.data

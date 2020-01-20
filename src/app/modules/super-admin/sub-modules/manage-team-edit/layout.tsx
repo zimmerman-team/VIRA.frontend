@@ -9,7 +9,7 @@ import TableModule from 'app/components/datadisplay/Table';
 import { PageLoader } from 'app/modules/common/page-loader';
 
 export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
-  <>
+  <React.Fragment>
     {/* ---------------------------------------------------------------------*/}
     {/* Loader */}
     {props.loading && <PageLoader />}
@@ -49,5 +49,5 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
         css={{ position: 'absolute', bottom: 32 }}
       />
     </Grid>
-  </>
+  </React.Fragment>
 );

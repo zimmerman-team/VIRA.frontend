@@ -4,6 +4,8 @@ import { mockData } from 'app/modules/faq-module/mock';
 import useTitle from 'react-use/lib/useTitle';
 
 export function Faqs() {
+  // set window title
   useTitle(`M&E - FAQ`);
+
   return <FaqsLayout {...mockData} />;
 }
