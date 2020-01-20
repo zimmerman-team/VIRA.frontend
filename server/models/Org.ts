@@ -1,7 +1,9 @@
-import { Component } from 'react';
+// @ts-ignore
 const mongoose = require('mongoose');
 const org_type = require('../models/orgType');
+// @ts-ignore
 const { Schema } = mongoose;
+
 const OrgSchema = new Schema({
   organisation_name: { type: String, required: true },
   org_type: { type: Schema.Types.ObjectId, ref: org_type },
@@ -15,6 +17,7 @@ const OrgSchema = new Schema({
   website: { type: String, required: false },
 });
 
+// @ts-ignore
 const organisation = (module.exports = mongoose.model(
   'organisation',
   OrgSchema
