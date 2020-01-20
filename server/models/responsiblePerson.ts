@@ -20,8 +20,5 @@ const responsible_person = (module.exports = mongoose.model(
 ));
 
 module.exports.get = (callback: any, limit: any) => {
-  responsible_person
-    .find(callback)
-
-    .limit(limit);
+  responsible_person.find(callback).limit(limit);
 };

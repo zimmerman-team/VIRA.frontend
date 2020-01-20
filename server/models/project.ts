@@ -1,6 +1,8 @@
 // @ts-ignore
 const mongoose = require('mongoose');
-//const { Schema } = mongoose;
+// @ts-ignore
+const { Schema } = mongoose;
+// @ts-ignore
 const organisation = require('../models/Org');
 const category = require('../models/project_categroy');
 

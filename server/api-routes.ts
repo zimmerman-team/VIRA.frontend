@@ -1,11 +1,11 @@
-let router = require('express').Router();
+const router = require('express').Router();
 const orgController = require('./controllers/OrgController');
 const projectController = require('./controllers/ProjectController');
 const orgTypeController = require('./controllers/OrgTypeController');
 const projectCategoryController = require('./controllers/ProjectCategoryController.ts');
 const responsiblePersonController = require('./controllers/ResponsiblePersonController');
 
-router.get('/', (req, res) => {
+router.get('/', (req: any, res: any) => {
   res.json({ status: 200, message: 'api working' });
 });
 
@@ -65,3 +65,5 @@ router
   .delete(responsiblePersonController.DelPerson);
 
 module.exports = router;
+
+export {};
