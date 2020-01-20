@@ -1,22 +1,22 @@
-import React from 'react';
-import get from 'lodash/get';
-import { useTitle } from 'react-use';
-import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import Card from '@material-ui/core/Card';
-import { projectsMock } from 'app/modules/landing/common/projectsMock';
-import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
-import { StatItem } from 'app/modules/landing/common/StatItem';
-import { useStoreState, useStoreActions } from 'app/state/store/hooks';
-import TableModule from 'app/components/datadisplay/Table';
+import Grid from '@material-ui/core/Grid';
+import get from 'lodash/get';
+import React from 'react';
+import { useTitle } from 'react-use';
+
 import graph1 from 'app/assets/images/graph_dashboard.png';
 import graph2 from 'app/assets/images/graph_map.png';
-import { ProjectListMock } from 'app/modules/list-module/mock';
+import TableModule from 'app/components/datadisplay/Table';
+import { projectsMock } from 'app/modules/landing/common/projectsMock';
+import { StatItem } from 'app/modules/landing/common/StatItem';
+import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
 import {
-  getBaseTableForProject,
   formatTableDataForProject,
+  getBaseTableForProject,
 } from 'app/modules/list-module/utils';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
 function LandingLayout() {
   useTitle('M&E - Dashboard');

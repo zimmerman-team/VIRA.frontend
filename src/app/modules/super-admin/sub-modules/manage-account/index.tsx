@@ -1,10 +1,12 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { Box, Typography } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import React from 'react';
+
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
+import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { ManageAccountModel } from 'app/modules/super-admin/sub-modules/manage-account/model';
+
 import 'styled-components/macro';
 
 export const ManageAccount = (props: ManageAccountModel) => (

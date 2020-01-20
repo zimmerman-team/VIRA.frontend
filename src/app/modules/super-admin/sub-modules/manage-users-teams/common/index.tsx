@@ -1,11 +1,11 @@
-/* eslint-disable no-underscore-dangle */
+import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import useTitle from 'react-use/lib/useTitle';
-import Grid from '@material-ui/core/Grid';
+
+import { Pagination } from 'app/components/misc/TablePagination';
 import { TeamUserCard } from 'app/components/surfaces/Cards/TeamUserCard';
 import { HeaderFragment } from 'app/modules/super-admin/common/header';
-import { Pagination } from 'app/components/misc/TablePagination';
 import { PageModuleModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 
 function PageModelF(props: PageModuleModel) {

@@ -1,13 +1,12 @@
-/* eslint-disable no-underscore-dangle */
+import filter from 'lodash/filter';
+import find from 'lodash/find';
+import get from 'lodash/get';
+import isEqual from 'lodash/isEqual';
+import some from 'lodash/some';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import useTitle from 'react-use/lib/useTitle';
-import get from 'lodash/get';
-import find from 'lodash/find';
-import some from 'lodash/some';
-import filter from 'lodash/filter';
-import isEqual from 'lodash/isEqual';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+
 import { ManageTeamEditLayout } from 'app/modules/super-admin/sub-modules/manage-team-edit/layout';
 import { manageTeamEditLayoutMock } from 'app/modules/super-admin/sub-modules/manage-team-edit/mock';
 import {
@@ -16,6 +15,7 @@ import {
 } from 'app/modules/super-admin/sub-modules/manage-team-edit/models';
 import { formatUserTable } from 'app/modules/super-admin/sub-modules/manage-team-edit/utils/formatUserTable';
 import { getTableColumns } from 'app/modules/super-admin/sub-modules/manage-team-edit/utils/getTableColumns';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
 function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
   useTitle(`Manage Team - ${props.breadcrumbs.currentLocation}`);

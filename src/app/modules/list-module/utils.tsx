@@ -1,18 +1,14 @@
 /* eslint-disable no-nested-ternary */
-/* core */
-import React from 'react';
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
-import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
-/* utils */
-import get from 'lodash/get';
-import find from 'lodash/find';
 
+//globalWithNamed:
+import React from 'react';
+
+//absoluteWithNamed:
+import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
 import { getInfoTHead } from 'app/components/datadisplay/Table/helpers';
-/* mock */
 import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
-import { GranteeListMock } from 'app/modules/list-module/mock';
-/* models */
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+import { GranteeListMock } from 'app/modules/list-module/mock';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];

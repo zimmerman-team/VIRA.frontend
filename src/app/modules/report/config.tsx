@@ -1,7 +1,8 @@
 import React, { ReactChild } from 'react';
-import { OutcomesLayout } from 'app/modules/report/sub-modules/outcomes';
-import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
+
 import { ChallengesPlansLayout } from 'app/modules/report/sub-modules/challenges-plans';
+import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
+import { OutcomesLayout } from 'app/modules/report/sub-modules/outcomes';
 import { PreviewLayout } from 'app/modules/report/sub-modules/preview';
 
 export interface RouteItemParams {

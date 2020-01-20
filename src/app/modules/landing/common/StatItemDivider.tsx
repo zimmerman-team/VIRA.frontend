@@ -1,6 +1,8 @@
-import 'styled-components/macro';
 import React from 'react';
+
 import { ProjectPalette } from 'app/theme';
+
+import 'styled-components/macro';
 
 export const StatItemDivider = () => (
   <div

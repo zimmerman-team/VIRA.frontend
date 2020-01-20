@@ -1,10 +1,12 @@
-import 'styled-components/macro';
-import React from 'react';
 import { Box } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 import { NavItemParams } from 'app/modules/common/consts';
+
+import 'styled-components/macro';
 
 export const NavigationButton = (props: NavItemParams) => {
   const theme = useTheme();

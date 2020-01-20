@@ -10,11 +10,6 @@ import { NavItems } from 'app/modules/common/consts';
 import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 import { PositionedSnackbar } from 'app/components/datadisplay/snackbar';
 import { InitialLoad } from 'app/utils/initialLoad';
-import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
-import { UserModel } from 'app/state/api/interfaces';
-import SignInModule from 'app/modules/sign-in';
-import auth from 'app/auth';
-import { Route, Switch, Redirect } from 'react-router-dom';
 import { useStoreState } from 'app/state/store/hooks';
 
 export function App() {

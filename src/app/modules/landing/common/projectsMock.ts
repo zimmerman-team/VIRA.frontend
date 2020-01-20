@@ -12,6 +12,7 @@ export const projectsMock: StatItemParams[] = [
     type: 'Total Reports',
   },
 ];
+
 export interface StatItemParams {
   amount: number;
   type: string;

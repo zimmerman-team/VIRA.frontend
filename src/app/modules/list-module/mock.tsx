@@ -1,10 +1,12 @@
-import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+// global
 import React from 'react';
+
+// absolute
+import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
 import { mockDataVar8 as mockDatatable } from 'app/components/datadisplay/Table/mock';
+import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { NavItemParams } from 'app/modules/common/consts';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
-import { insingerData } from 'app/assets/data/insingerData';
 
 export const navItemMock: NavItemParams[] = [
   {

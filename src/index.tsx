@@ -1,14 +1,19 @@
+//globalWithNamed:
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { App } from 'app';
-
 // this import looks unused; it isn't so please do not remove
 // eslint-disable-next-line @typescript-eslint/no-unused-vars,import/no-unresolved
 import * as _ from 'styled-components/cssprop';
 
+//absoluteWithNamed
+import { App } from 'app';
 import Providers from 'app/Providers';
+
+//relativeWithNamed
 import * as serviceWorker from './serviceWorker';
+
+//relativeDirect
+import './index.css';
 
 ReactDOM.render(
   <Providers>

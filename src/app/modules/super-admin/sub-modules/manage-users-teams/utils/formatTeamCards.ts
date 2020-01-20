@@ -1,6 +1,6 @@
-import get from 'lodash/get';
-import find from 'lodash/find';
 import filter from 'lodash/filter';
+import find from 'lodash/find';
+import get from 'lodash/get';
 import orderBy from 'lodash/orderBy';
 
 export function formatTeamCards(
