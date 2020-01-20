@@ -1,5 +1,5 @@
-import filter from 'lodash/filter';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
 import orderBy from 'lodash/orderBy';
 
 export function formatUserCards(

@@ -1,14 +1,14 @@
-import get from 'lodash/get';
+/* third-party */
 import React from 'react';
+import get from 'lodash/get';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router-dom';
-
-import { formatUserCards } from 'app/modules/super-admin//sub-modules/manage-users-teams/utils/formatUserCards';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
+/* project */
 import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
-
+import { formatUserCards } from 'app/modules/super-admin//sub-modules/manage-users-teams/utils/formatUserCards';
 import { formatTeamCards } from './utils/formatTeamCards';
 
 function ManageUsersF(props: RouteComponentProps) {

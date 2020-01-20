@@ -1,24 +1,21 @@
-//global
-import Grid from '@material-ui/core/Grid';
-import get from 'lodash/get';
+import 'styled-components/macro';
 import React from 'react';
-import { Route } from 'react-router-dom';
 import { useTitle } from 'react-use';
-
-//absolute
+import Grid from '@material-ui/core/Grid';
 import TableModule from 'app/components/datadisplay/Table';
+import { Route } from 'react-router-dom';
+import { ReportListMock } from 'app/modules/list-module/mock';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { ReportListMock, TabNavMock } from 'app/modules/list-module/mock';
+import { TabNavMock } from 'app/modules/list-module/mock';
 import {
-  formatTableDataForGrantee,
+  getBaseTableForProject,
   formatTableDataForProject,
   getBaseTableForGrantee,
-  getBaseTableForProject,
+  formatTableDataForGrantee,
 } from 'app/modules/list-module/utils';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
-
-//direct
-import 'styled-components/macro';
+import { useStoreState, useStoreActions } from 'app/state/store/hooks';
+/* utils */
+import get from 'lodash/get';
 
 export const ListModule = () => {
   useTitle('M&E - Reports');

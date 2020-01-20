@@ -1,8 +1,8 @@
-import Box from '@material-ui/core/Box';
 import React from 'react';
+import { NavigationButton } from 'app/modules/list-module/common/NavigationButton';
+import Box from '@material-ui/core/Box';
 
 import { NavItemParams } from 'app/modules/common/consts';
-import { NavigationButton } from 'app/modules/list-module/common/NavigationButton';
 
 export interface TabNavigatorParams {
   items: NavItemParams[];

@@ -1,14 +1,12 @@
-import { Box, Grid } from '@material-ui/core';
 import React from 'react';
-
-import TableModule from 'app/components/datadisplay/Table';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
+import { Grid, Box } from '@material-ui/core';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { PageLoader } from 'app/modules/common/page-loader';
 import { ManageTeamEditLayoutModel } from 'app/modules/super-admin/sub-modules/manage-team-edit/models';
-
+import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import 'styled-components/macro';
+import TableModule from 'app/components/datadisplay/Table';
+import { PageLoader } from 'app/modules/common/page-loader';
 
 export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
   <>

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+/* todo: make this module more descriptive */
+import React, { useState, useEffect } from 'react';
+/* third-party */
 import { withRouter } from 'react-router-dom';
 import useTitle from 'react-use/lib/useTitle';
-
+/* project */
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
 function LoginCallback(props: any) {

@@ -1,10 +1,8 @@
 // @ts-nocheck
-
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-
-import { SignInLayout } from 'app/modules/sign-in/layout';
 import { useStoreActions } from 'app/state/store/hooks';
+import { SignInLayout } from 'app/modules/sign-in/layout';
 
 function SignIn(props: any) {
   const [email, setEmail] = React.useState('');

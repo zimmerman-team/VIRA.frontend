@@ -1,13 +1,12 @@
-import { Box, Container, Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import styled from 'styled-components/macro';
-
-import { GroupImage } from 'app/assets/images/group';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { FormSingleLineField } from 'app/components/inputs/textfields/FormSingleLineField';
+import Grid from '@material-ui/core/Grid';
 import { PasswordRecoveryLayoutModel } from 'app/modules/sign-in/sub-modules/password-recovery/models';
+import { FormSingleLineField } from 'app/components/inputs/textfields/FormSingleLineField';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { Container, Typography, Box } from '@material-ui/core';
+import styled from 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
+import { GroupImage } from 'app/assets/images/group';
 
 const Form = styled.form`
   display: flex;

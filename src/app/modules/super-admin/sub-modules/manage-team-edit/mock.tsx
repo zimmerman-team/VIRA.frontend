@@ -1,11 +1,10 @@
-import { Href, UnregisterCallback } from 'history';
-
-import { mockDataVar9 } from 'app/components/datadisplay/Table/mock';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 import {
-  ManageEditAddTeamModel,
   ManageTeamEditLayoutModel,
+  ManageEditAddTeamModel,
 } from 'app/modules/super-admin/sub-modules/manage-team-edit/models';
+import { mockDataVar9 } from 'app/components/datadisplay/Table/mock';
+import { UnregisterCallback, Href } from 'history';
 
 export const breadcrumbsMock: BreadcrumbModel = {
   currentLocation: 'Add',

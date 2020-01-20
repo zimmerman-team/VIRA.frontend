@@ -1,12 +1,11 @@
-import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import { Route } from 'react-router-dom';
-
+import Grid from '@material-ui/core/Grid';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { PageLoader } from 'app/modules/common/page-loader';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { PageModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/common';
+import { Route } from 'react-router-dom';
 import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
+import { PageLoader } from 'app/modules/common/page-loader';
 
 export const ManageUsersTeamsLayout = (props: ManageUsersTeamsLayoutModel) => (
   <React.Fragment>

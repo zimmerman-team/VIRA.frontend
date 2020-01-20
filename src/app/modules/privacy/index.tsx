@@ -1,14 +1,11 @@
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
-
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
-import {
-  cookieDescriptionMock,
-  CookieItemsMock,
-  privacyDescriptionMock,
-  PrivacyModuleItemsMock,
-} from 'app/modules/privacy/mock';
+import { privacyDescriptionMock } from 'app/modules/privacy/mock';
+import { PrivacyModuleItemsMock } from 'app/modules/privacy/mock';
+import { cookieDescriptionMock } from 'app/modules/privacy/mock';
+import { CookieItemsMock } from 'app/modules/privacy/mock';
 
 /* todo: this module is a it convoluted, let's refactor asap */
 

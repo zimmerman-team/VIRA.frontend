@@ -1,11 +1,9 @@
 // @ts-nocheck
-
 import React from 'react';
 import { Route } from 'react-router-dom';
-
-import { ChallengesPlansLayout } from 'app/modules/report/sub-modules/challenges-plans';
-import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
 import { OutcomesLayout } from 'app/modules/report/sub-modules/outcomes';
+import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
+import { ChallengesPlansLayout } from 'app/modules/report/sub-modules/challenges-plans';
 import { PreviewLayout } from 'app/modules/report/sub-modules/preview';
 
 export const ReportModuleRoutes = () => (
