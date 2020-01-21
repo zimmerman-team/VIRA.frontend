@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 
 const targetBeneficiarySchema = new Schema({
   name: { type: String, required: true },
+  value: { type: Number, default: 0, required: true },
 });
 
 // @ts-ignore
