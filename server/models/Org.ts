@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 
 const OrgSchema = new Schema({
   organisation_name: { type: String, required: true },
-  org_type: { type: Schema.Types.ObjectId, ref: org_type },
+  org_type: { type: Schema.Types.ObjectId, ref: org_type, index: true },
   street: { type: String, required: false },
   house_number: { type: String, required: false },
   additional_house_number: { type: String, required: false },
@@ -16,6 +16,8 @@ const OrgSchema = new Schema({
   email: { type: String, required: false },
   website: { type: String, required: false },
 });
+
+OrgSchema.index({ '$**': 'text' });
 
 // @ts-ignore
 const organisation = (module.exports = mongoose.model(

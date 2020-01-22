@@ -13,12 +13,12 @@ const { Schema } = mongoose;
 
 const ReportSchema = new Schema({
   title: { type: String, required: true },
-  location: { type: Schema.Types.ObjectId, ref: location },
+  location: { type: Schema.Types.ObjectId, ref: location, index: true },
   total_target_beneficiaries: { type: Number, default: 0, required: true },
   target_beneficiaries: [
-    { type: Schema.Types.ObjectId, ref: targetBeneficiary },
+    { type: Schema.Types.ObjectId, ref: targetBeneficiary, index: true },
   ],
-  project: { type: Schema.Types.ObjectId, ref: project },
+  project: { type: Schema.Types.ObjectId, ref: project, index: true },
   key_outcomes: { type: String, required: true },
   monitor_report_outcomes: { type: String, required: true },
   media: { type: String, required: true },
@@ -28,6 +28,8 @@ const ReportSchema = new Schema({
   plans: { type: String, required: true },
   other_comments: { type: String, required: true },
 });
+
+ReportSchema.index({ '$**': 'text' });
 
 const report = (module.exports = mongoose.model('report', ReportSchema));
 

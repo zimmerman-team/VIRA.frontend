@@ -36,6 +36,7 @@ import {
   assignRoleToUser,
 } from './controllers/AuthRole';
 import { sendForgetPasswordEmail } from './utils/auth';
+import { generalSearchSocketAPI } from './controllers/SearchController';
 
 const app = express();
 app.use(cors());
@@ -105,6 +106,7 @@ IO.sockets.on('connection', (socket: any) => {
   socket.on('assignRoleToUser', (data: any, fn: any) => {
     assignRoleToUser({ query: data }, (res: any) => fn(res));
   });
+  /* Grantee */
   socket.on('allOrg', (data: any, fn: any) => {
     orgController.allOrg({ query: data }, (res: any) => fn(res));
   });
@@ -135,6 +137,7 @@ IO.sockets.on('connection', (socket: any) => {
   socket.on('delOrgType', (data: any, fn: any) => {
     orgTypeController.DelOrgType({ query: data }, (res: any) => fn(res));
   });
+  /* Project */
   socket.on('allProjectCategory', (data: any, fn: any) => {
     projectCategoryController.allProjectCategory({ query: data }, (res: any) =>
       fn(res)
@@ -173,6 +176,7 @@ IO.sockets.on('connection', (socket: any) => {
   socket.on('updateProject', (data: any, fn: any) => {
     projectController.UpdateProject({ query: data }, (res: any) => fn(res));
   });
+  /* Responsible person */
   socket.on('delProject', (data: any, fn: any) => {
     projectController.DelProject({ query: data }, (res: any) => fn(res));
   });
@@ -200,6 +204,10 @@ IO.sockets.on('connection', (socket: any) => {
     responsiblePersonController.DelPerson({ query: data }, (res: any) =>
       fn(res)
     );
+  });
+  /* General search */
+  socket.on('search', (data: any, fn: any) => {
+    generalSearchSocketAPI({ query: data }, (res: any) => fn(res));
   });
 });
 

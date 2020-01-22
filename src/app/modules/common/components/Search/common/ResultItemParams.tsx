@@ -1,34 +1,40 @@
 import 'styled-components/macro';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ProjectPalette } from 'app/theme';
 import { Typography } from '@material-ui/core';
 
 interface ResultItemParams {
   text: string;
+  link: string;
 }
+
 export const SearchResultItem = (props: ResultItemParams) => (
   <div
     css={`
-      background-color: ${ProjectPalette.primary.light};
-      width: 1024px;
-      height: 36px;
+      margin: 8px 0;
+      display: flex;
+      cursor: pointer;
+      line-height: 24px;
       padding-left: 24px;
       padding-right: 24px;
-      display: flex;
       align-items: center;
       justify-content: space-between;
-      cursor: pointer;
+      background-color: ${ProjectPalette.primary.light};
     `}
   >
     <Typography
-      color="textSecondary"
       css={`
-        &:hover {
-          color: ${ProjectPalette.secondary.dark};
+        a {
+          color: ${ProjectPalette.common.white};
+          text-decoration: none;
+          &:hover {
+            color: ${ProjectPalette.secondary.main};
+          }
         }
       `}
     >
-      {props.text}
+      <Link to={props.link}>{props.text}</Link>
     </Typography>
   </div>
 );
