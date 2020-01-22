@@ -1,0 +1,89 @@
+orbs:
+  cypress: cypress-io/cypress@1.13.0
+version: 2.1
+# todo: move all ip's to env vars
+# todo: make zz orb
+#   - circleci_path
+#   - ssh_target
+#   - ssh_path
+jobs:
+  deploy-test:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: eval ssh-agent -s
+      - run: sudo apt install rsync
+      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
+
+  deploy-staging:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: eval ssh-agent -s
+      - run: sudo apt install rsync
+      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
+
+  deploy-production:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: eval ssh-agent -s
+      - run: sudo apt install rsync
+      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
+
+workflows:
+  build-and-test:
+    jobs:
+      - cypress/install:
+          executor: cypress/base-12-6-0
+          yarn: true
+          build: yarn build
+
+      # - cypress/run:
+      # executor: cypress/browsers-chrome76
+      # browser: chrome
+      # requires:
+      # - cypress/install
+      # start: yarn start
+      # wait-on: 'http://localhost:3000'
+      # yarn: true
+      # record: false
+      # parallel: true
+      # parallelism: 4
+      # group: '4 machines'
+      # post-steps:
+      # - store_test_results:
+      # path: cypress/results
+
+      - deploy-test:
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: feature/
+
+      - deploy-staging:
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: develop
+
+      - deploy-production:
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: master
