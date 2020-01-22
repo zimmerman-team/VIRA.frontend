@@ -5,6 +5,7 @@ const OrgTypeSchema = new mongoose.Schema({
   description: { type: String, required: false },
 });
 
+// @ts-ignore
 const orgType = (module.exports = mongoose.model('orgType', OrgTypeSchema));
 
 module.exports.get = (callback: any, limit: any) => {
