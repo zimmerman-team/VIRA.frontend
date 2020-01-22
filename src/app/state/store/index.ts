@@ -29,6 +29,7 @@ import forgetPassword from 'app/state/api/actionsReducers/forgetPassword';
 import loadAuth0DBConnection from 'app/state/api/actionsReducers/loadAuth0DBConnection';
 import allTeams from 'app/state/api/actionsReducers/allTeams';
 import addTeam from 'app/state/api/actionsReducers/addTeam';
+import generalSearch from 'app/state/api/actionsReducers/generalSearch';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
@@ -40,7 +41,7 @@ const encryptor = createEncryptor({
 const persistConfig = {
   storage,
   key: 'storage',
-  blacklist: ['snackbar', 'addUser'],
+  blacklist: ['snackbar', 'addUser', 'generalSearch'],
   transforms: [encryptor],
 };
 
@@ -62,6 +63,7 @@ export interface ApplicationStoreModel {
   loadAuth0DBConnection: SocketAPIResonseInterface;
   allTeams: SocketAPIResonseInterface;
   addTeam: SocketAPIResonseInterface;
+  generalSearch: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
@@ -82,6 +84,7 @@ const applicationStore: ApplicationStoreModel = {
   loadAuth0DBConnection,
   allTeams,
   addTeam,
+  generalSearch,
 };
 
 export const appStore = createStore(applicationStore, {

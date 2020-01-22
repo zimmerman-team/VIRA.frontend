@@ -19,10 +19,21 @@ const ProjectSchema = new mongoose.Schema({
   allocated_amount: { type: Number, required: false },
   released_amount: { type: Number, required: false },
   paid_amount: { type: Number, required: false },
-  organisation: { type: mongoose.Schema.Types.ObjectId, ref: organisation },
-  category: { type: mongoose.Schema.Types.ObjectId, ref: category },
+  organisation: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: organisation,
+    index: true,
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: category,
+    index: true,
+  },
 });
 
+ProjectSchema.index({ '$**': 'text' });
+
+// @ts-ignore
 const project = (module.exports = mongoose.model('project', ProjectSchema));
 
 module.exports.get = (callback: any, limit: any) => {

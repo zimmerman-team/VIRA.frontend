@@ -4,10 +4,13 @@ const projectController = require('./controllers/ProjectController');
 const orgTypeController = require('./controllers/OrgTypeController');
 const projectCategoryController = require('./controllers/ProjectCategoryController.ts');
 const responsiblePersonController = require('./controllers/ResponsiblePersonController');
+const SearchController = require('./controllers/SearchController');
 
 router.get('/', (req: any, res: any) => {
   res.json({ status: 200, message: 'api working' });
 });
+
+router.route('/search').get(SearchController.generalSearchAPI);
 
 router
   .route('/organisation')

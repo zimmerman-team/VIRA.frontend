@@ -56,7 +56,10 @@ export const useStyles = makeStyles((theme: Theme) =>
     sectionDesktop: {
       display: 'none',
       [theme.breakpoints.up('md')]: {
+        width: '100%',
         display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
       },
     },
     sectionMobile: {
@@ -64,6 +67,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('md')]: {
         display: 'none',
       },
+    },
+    searchDesktop: {
+      width: '100%',
+      paddingLeft: 80,
     },
   })
 );
