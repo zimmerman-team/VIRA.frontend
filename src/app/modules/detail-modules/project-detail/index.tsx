@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import get from 'lodash/get';
 import { useTitle } from 'react-use';
@@ -30,7 +31,7 @@ export const ProjectDetailModule = (props: any) => {
       socketName: 'allProject',
       values: { project_number },
     });
-  }, [project_number]);
+  }, [projectDetailAction, project_number]);
 
   React.useEffect(() => {
     if (projectDetailData) {

@@ -1,16 +1,17 @@
-import 'styled-components/macro';
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import { useStyles } from 'app/modules/common/components/AppBar/useStyles';
-import { MobileRendering } from 'app/modules/common/components/AppBar/MobileRenderingParams';
-import { TopBarMobileSection } from 'app/modules/common/components/AppBar/TopBarMobileSection';
-import { TopBarDesktopSection } from 'app/modules/common/components/AppBar/TopBarDesktopSection';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Theme } from '@material-ui/core';
-import clsx from 'clsx';
-import { ProjectPalette } from 'app/theme';
+import AppBar from '@material-ui/core/AppBar';
+import IconButton from '@material-ui/core/IconButton';
+import Toolbar from '@material-ui/core/Toolbar';
+import { MobileRendering } from 'app/modules/common/components/AppBar/MobileRenderingParams';
+import { TopBarDesktopSection } from 'app/modules/common/components/AppBar/TopBarDesktopSection';
+import { TopBarMobileSection } from 'app/modules/common/components/AppBar/TopBarMobileSection';
+import { useStyles } from 'app/modules/common/components/AppBar/useStyles';
 import { IconMenuToggle } from 'app/modules/common/icons/IconMenuToggle';
+import { ProjectPalette } from 'app/theme';
+import clsx from 'clsx';
+import React from 'react';
+import 'styled-components/macro';
 
 interface PrimarySearchAppBarParams {
   classes: Record<

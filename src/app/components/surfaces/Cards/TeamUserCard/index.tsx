@@ -1,18 +1,18 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
-import styled from 'styled-components';
-import 'styled-components/macro';
-import { TeamUserCardModel } from 'app/components/surfaces/Cards/TeamUserCard/model';
 import {
   Card,
   Container,
+  Grid,
   IconButton,
   Typography,
-  Grid,
 } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
+import { TeamUserCardModel } from 'app/components/surfaces/Cards/TeamUserCard/model';
 import { ProjectPalette } from 'app/theme';
-import { useHistory, useParams } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import 'styled-components/macro';
 
 const Description = styled(Typography)`
   && {

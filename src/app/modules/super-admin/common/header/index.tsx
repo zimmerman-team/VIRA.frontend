@@ -1,15 +1,15 @@
-import React from 'react';
+import { Box, IconButton, InputBase, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { css } from 'styled-components/macro';
-import { Typography, IconButton, Box, InputBase } from '@material-ui/core';
-import { Add, Sort, Search } from '@material-ui/icons';
-import styled from 'styled-components/macro';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { ProjectPalette } from 'app/theme';
-import { Popover } from 'app/components/misc/Popover';
-import { SortOptionsModel } from '../../sub-modules/manage-users-teams/models';
 import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
+import ListItem from '@material-ui/core/ListItem';
+import { Add, Search, Sort } from '@material-ui/icons';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { Popover } from 'app/components/misc/Popover';
+import { ProjectPalette } from 'app/theme';
+import React from 'react';
+import 'styled-components/macro';
+import styled from 'styled-components';
+import { SortOptionsModel } from '../../sub-modules/manage-users-teams/models';
 
 const Header = styled.div`
   display: flex;
@@ -64,7 +64,7 @@ export function HeaderFragment(props: HeaderParams) {
     if (props.searchValue !== '' && !searchOpen) {
       setSearchOpen(true);
     }
-  }, [props.searchValue]);
+  }, [props.searchValue, searchOpen]);
 
   return (
     <React.Fragment>

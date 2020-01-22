@@ -1,18 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-param-reassign */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
 /* core */
-import React from 'react';
 import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
-import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
-/* utils */
-import get from 'lodash/get';
-import find from 'lodash/find';
-
 import { getInfoTHead } from 'app/components/datadisplay/Table/helpers';
 /* mock */
 import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
-import { GranteeListMock } from 'app/modules/list-module/mock';
 /* models */
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+import { GranteeListMock } from 'app/modules/list-module/mock';
+import React from 'react';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];
@@ -23,7 +22,7 @@ export const formatTableDataForProject = (data: any): any[] => {
       row.project_name,
       row.decision,
       row.decision_date,
-      row.released_amount, //Som van vrijgevallen
+      row.released_amount, // Som van vrijgevallen
       row.organisation.organisation_name
     );
     bigTempArray.push(tempArray);
@@ -111,7 +110,7 @@ export const formatTableDataForGrantee = (data: any): any[] => {
   const bigTempArray: any[][] = [];
   data.forEach((row: any) => {
     tempArray.push(
-      row.organisation_name + ' && ' + row._id,
+      `${row.organisation_name} && ${row._id}`,
       row.org_type ? row.org_type.name : '',
       row.place,
       row.country,
@@ -137,7 +136,7 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
           getInfoTHead('Grantee Name', 'info'),
         customBodyRender: (value, tableMeta, updateValue) => {
           if (value) {
-            let temp_value = value.split(' && ');
+            const temp_value = value.split(' && ');
             value = temp_value[0];
             updateValue = temp_value[1];
           }

@@ -1,22 +1,21 @@
-import 'styled-components/macro';
-/* core */
-import React from 'react';
-import get from 'lodash/get';
-
-/* project-comps */
-import {
-  getInfoTHead,
-  formatMoney,
-} from 'app/components/datadisplay/Table/helpers';
-import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { table9Data } from 'app/assets/data/insingerData';
+import { ButtonCellModule } from 'app/components/datadisplay/Table/common/ButtonCell';
 import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
-import { ButtonCellModule } from 'app/components/datadisplay/Table/common/ButtonCell';
-import MultiValuesCell from 'app/components/datadisplay/Table/common/MultiValuesCell';
-import { insingerData } from 'app/assets/data/insingerData';
-import { table9Data } from 'app/assets/data/insingerData';
+import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+/* project-comps */
+import {
+  formatMoney,
+  getInfoTHead,
+} from 'app/components/datadisplay/Table/helpers';
+import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { Checkbox } from 'app/components/inputs/checkboxes/Checkbox';
+import get from 'lodash/get';
+/* core */
+import React from 'react';
+import 'styled-components/macro';
 
 export const mockDataVar1: TableModuleModel = {
   title: 'Aggregated signatory data publication indicator values',
@@ -989,7 +988,7 @@ export const mockDataVar7: TableModuleModel = {
 
 export const mockDataVar8: TableModuleModel = {
   title: 'Projects',
-  data: [[]], //table9Data,
+  data: [[]], // table9Data,
   columns: [
     {
       name: 'ID',
@@ -1026,7 +1025,7 @@ export const mockDataVar8: TableModuleModel = {
                 }
               `}
               value={value}
-              link={'/projects/detail'}
+              link="/projects/detail"
             />
           );
         },
@@ -1038,7 +1037,7 @@ export const mockDataVar8: TableModuleModel = {
         filter: true,
         filterType: 'checkbox',
         customBodyRender: value => {
-          return <LinkCellModule value={value} link={''} />;
+          return <LinkCellModule value={value} link="" />;
         },
       },
     },
@@ -1109,7 +1108,7 @@ export const mockDataVar9: TableModuleModel = {
                 }
               `}
               value={value}
-              link={'/projects/detail'}
+              link="/projects/detail"
             />
           );
         },
@@ -1179,7 +1178,7 @@ export const mockDataVar10: TableModuleModel = {
                 }
               `}
               value={value}
-              link={'/projects/detail'}
+              link="/projects/detail"
             />
           );
         },

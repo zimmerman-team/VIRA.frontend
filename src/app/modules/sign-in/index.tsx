@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // @ts-nocheck
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -15,7 +16,7 @@ function SignIn(props: any) {
 
   useEffect(() => {
     snackbarAction(error);
-  }, [error]);
+  }, [error, snackbarAction]);
 
   const signInAction = () => {
     if (email.length > 0 && password.length > 0) {

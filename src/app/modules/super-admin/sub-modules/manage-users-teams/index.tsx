@@ -1,14 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* third-party */
-import React from 'react';
-import get from 'lodash/get';
-import { withRouter } from 'react-router-dom';
-import { RouteComponentProps } from 'react-router-dom';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { formatUserCards } from 'app/modules/super-admin//sub-modules/manage-users-teams/utils/formatUserCards';
 import { ManageUsersTeamsLayout } from 'app/modules/super-admin/sub-modules/manage-users-teams/layout';
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 /* project */
 import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
-import { formatUserCards } from 'app/modules/super-admin//sub-modules/manage-users-teams/utils/formatUserCards';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import get from 'lodash/get';
+import React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { formatTeamCards } from './utils/formatTeamCards';
 
 function ManageUsersF(props: RouteComponentProps) {
@@ -39,7 +39,7 @@ function ManageUsersF(props: RouteComponentProps) {
       socketName: 'getUserGroups',
       values: { user: storeUser },
     });
-  }, []);
+  }, [allTeamsAction, allUsersAction, storeUser]);
 
   function formatUsers() {
     const init =
@@ -77,7 +77,16 @@ function ManageUsersF(props: RouteComponentProps) {
   React.useEffect(() => {
     formatUsers();
     formatTeams();
-  }, [allUsersData, allTeamsData, sort, page, pageSize, search]);
+  }, [
+    allUsersData,
+    allTeamsData,
+    sort,
+    page,
+    pageSize,
+    search,
+    formatUsers,
+    formatTeams,
+  ]);
   React.useEffect(() => {
     if (get(props.match.params, 'id', '') === 'manage-teams') {
       allTeamsAction({
@@ -91,7 +100,14 @@ function ManageUsersF(props: RouteComponentProps) {
       });
     }
     deleteUserClear();
-  }, [deleteUserData]);
+  }, [
+    allTeamsAction,
+    allUsersAction,
+    deleteUserClear,
+    deleteUserData,
+    props.match.params,
+    storeUser,
+  ]);
 
   function onChangePage(
     event: React.MouseEvent<HTMLButtonElement> | null,

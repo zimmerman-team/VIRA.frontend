@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import 'styled-components/macro';
 import styled from 'styled-components';
@@ -21,7 +22,7 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
     <Box width="100%">
       {props.faqItems.map(question => (
         <MuiExpansionPanel
-          square={true}
+          square
           css={`
             margin: 8px !important;
             && {

@@ -1,10 +1,10 @@
-import React from 'react';
-import get from 'lodash/get';
-import 'styled-components/macro';
-import { ProjectPalette } from 'app/theme';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchResultItem } from 'app/modules/common/components/Search/common/ResultItemParams';
 import { SearchResultNavigation } from 'app/modules/common/components/Search/common/SearchResultNavigation';
-import { Box } from '@material-ui/core';
+import { ProjectPalette } from 'app/theme';
+import get from 'lodash/get';
+import React from 'react';
+import 'styled-components/macro';
 
 type Props = {
   width: number;

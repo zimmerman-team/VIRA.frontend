@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* todo: make this module more descriptive */
 import React, { useState, useEffect } from 'react';
 /* third-party */
@@ -39,10 +40,10 @@ function LoginCallback(props: any) {
         });
       })
       .catch((err: any) => setError(err.description));
-  }, []);
+  }, [props.auth, setUserAction, userDetailsAction]);
   useEffect(() => {
     props.history.replace('/');
-  }, [storeUser]);
+  }, [props.history, storeUser]);
 
   return (
     <div style={{ width: '100%', textAlign: 'center' }}>

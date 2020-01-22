@@ -1,16 +1,12 @@
-import React from 'react';
-import {
-  createStyles,
-  makeStyles,
-  withStyles,
-  Theme,
-} from '@material-ui/core/styles';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import MuiSelect from '@material-ui/core/Select';
-import InputBase from '@material-ui/core/InputBase';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { SelectItemModel } from 'app/components/inputs/select/model';
+import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

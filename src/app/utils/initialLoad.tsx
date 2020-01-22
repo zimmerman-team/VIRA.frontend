@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { useStoreActions } from 'app/state/store/hooks';
 
 export function InitialLoad() {
   const getUserRolesAction = useStoreActions(
@@ -30,5 +30,10 @@ export function InitialLoad() {
         values: {},
       });
     }
-  }, []);
+  }, [
+    getUserGroupsAction,
+    getUserRolesAction,
+    loadAuth0DBConnectionAction,
+    loadAuth0DBConnectionData,
+  ]);
 }

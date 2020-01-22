@@ -1,10 +1,8 @@
-import { Box, Typography } from '@material-ui/core';
-import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';
+/* eslint-disable no-console */
+import { Typography } from '@material-ui/core';
 import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
 import React from 'react';
 import 'styled-components/macro';
-import { InfoCaption } from './InfoCaption';
-import { FieldDescription } from './FieldDescription';
 
 export interface IntentTexFieldSingleLineParams {
   description: string;

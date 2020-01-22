@@ -1,35 +1,35 @@
-//cc:application base#;application routes
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// cc:application base#;application routes
 
-import React, { Suspense } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { PageLoader } from 'app/modules/common/page-loader';
-import { NoMatchPage } from 'app/modules/common/no-match-page';
 import auth from 'app/auth';
-import { UserModel } from 'app/state/api/interfaces';
-import { useStoreState } from 'app/state/store/hooks';
-import LandingLayout from 'app/modules/landing';
-import SignInModule from 'app/modules/sign-in';
-import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
-import { CreateReport } from 'app/modules/report';
-import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
+import { NoMatchPage } from 'app/modules/common/no-match-page';
+import { PageLoader } from 'app/modules/common/page-loader';
 import { GranteeDetailModule } from 'app/modules/detail-modules/grantee-detail';
+import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
-import { GranteeDetailLayout } from 'app/modules/detail-modules/grantee-detail/layout';
 import { Faqs } from 'app/modules/faq-module';
+import LandingLayout from 'app/modules/landing';
 import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
-import { SdgModule } from 'app/modules/sdg';
 import { PrivacyModule } from 'app/modules/privacy';
+import { CreateReport } from 'app/modules/report';
 import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
-import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-teams';
+import { SdgModule } from 'app/modules/sdg';
+import SignInModule from 'app/modules/sign-in';
 import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
-import { ManageTeamEditAdd } from 'app/modules/super-admin/sub-modules/manage-team-edit';
+import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
 import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account';
 import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
+import { ManageTeamEditAdd } from 'app/modules/super-admin/sub-modules/manage-team-edit';
+import ManageUser from 'app/modules/super-admin/sub-modules/manage-user';
 import { ManageUserEdit } from 'app/modules/super-admin/sub-modules/manage-user-edit';
 import { manageUserEditMock } from 'app/modules/super-admin/sub-modules/manage-user-edit/mock';
+import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-teams';
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
-import ManageUser from 'app/modules/super-admin/sub-modules/manage-user';
+import { UserModel } from 'app/state/api/interfaces';
+import { useStoreState } from 'app/state/store/hooks';
+import React, { Suspense } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { manageTeamEditAddMock } from './modules/super-admin/sub-modules/manage-team-edit/mock';
 
 /* todo: let's move this logic somewhere else */

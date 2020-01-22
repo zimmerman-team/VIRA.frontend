@@ -3,6 +3,8 @@
 /// <reference types="react" />
 /// <reference types="react-dom" />
 
+import { CSSProp } from 'styled-components';
+
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production' | 'test';
@@ -44,4 +46,10 @@ declare module '*.svg' {
 
   const src: string;
   export default src;
+}
+
+declare module 'styled-components' {
+  export interface DefaultTheme {
+    // Your theme stuff here
+  }
 }

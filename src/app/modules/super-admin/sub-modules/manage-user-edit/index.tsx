@@ -1,11 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // global
 import { Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import find from 'lodash/find';
-import get from 'lodash/get';
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-
 // aboslute
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { RadioButtonsGroup } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
@@ -15,7 +11,10 @@ import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { ManageUserEditModel } from 'app/modules/super-admin/sub-modules/manage-user-edit/model';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
-
+import find from 'lodash/find';
+import get from 'lodash/get';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 // direct
 import 'styled-components/macro';
 
@@ -108,7 +107,13 @@ function ManageUserEditF(props: ManageUserEditModel) {
       editUserClearAction();
       loadUserClearAction();
     };
-  }, []);
+  }, [
+    editUserClearAction,
+    loadUserAction,
+    loadUserClearAction,
+    props.match.params,
+    props.mode,
+  ]);
 
   React.useEffect(() => {
     if (editUserData) {
@@ -130,7 +135,15 @@ function ManageUserEditF(props: ManageUserEditModel) {
         }, 5000);
       }
     }
-  }, [editUserData]);
+  }, [
+    allUsersAction,
+    editUserClearAction,
+    editUserData,
+    loadUserAction,
+    props.match.params,
+    snackbarAction,
+    storeUser,
+  ]);
 
   React.useEffect(() => {
     if (addUserData) {
@@ -143,7 +156,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         setGroup('');
       }
     }
-  }, [addUserData]);
+  }, [addUserData, snackbarAction]);
 
   React.useEffect(() => {
     if (loadUserData && props.mode === 'edit') {
@@ -152,7 +165,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
       setEmail(get(loadUserData, 'email', ''));
       setRole(get(loadUserData, 'role', ''));
     }
-  }, [loadUserData]);
+  }, [loadUserData, props.mode]);
 
   function isSubmitDisabled() {
     if (props.mode === 'add') {

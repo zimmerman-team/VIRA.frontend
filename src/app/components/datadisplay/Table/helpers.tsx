@@ -1,24 +1,25 @@
+/* eslint-disable */
+/* eslint-disable no-plusplus */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-case-declarations */
 /* core */
-import React from 'react';
-
-/* third-party */
-import find from 'lodash/find';
-import sumBy from 'lodash/sumBy';
-import filter from 'lodash/filter';
-import indexOf from 'lodash/indexOf';
-import findIndex from 'lodash/findIndex';
 import { TableCell, TableRow } from '@material-ui/core';
-
 /* project-comps */
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
 import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
 import {
-  TableModuleModel,
   LocalTableStateModel,
+  TableModuleModel,
   TotalRowColModel,
 } from 'app/components/datadisplay/Table/model';
+import filter from 'lodash/filter';
+/* third-party */
+import find from 'lodash/find';
+import findIndex from 'lodash/findIndex';
+import indexOf from 'lodash/indexOf';
+import sumBy from 'lodash/sumBy';
 import { MUIDataTableState } from 'mui-datatables';
+import React from 'react';
 
 const nf = (currency: string) => {
   return new Intl.NumberFormat(undefined, {
@@ -29,7 +30,7 @@ const nf = (currency: string) => {
   });
 };
 
-//TODO: get rid of "any" types
+// TODO: get rid of "any" types
 /* method for getting the correct expandable table cell component depending on the table variant */
 export function getExpandableTableCell(
   type: string,
@@ -190,7 +191,7 @@ export function addConfig(
   setLocalTableState: Function,
   setTotalData: Function
 ) {
-  let options = configProps.options;
+  let { options } = configProps;
   if (configProps.totalCell) {
     options = {
       ...options,

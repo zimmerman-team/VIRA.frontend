@@ -1,13 +1,13 @@
-import React from 'react';
-import get from 'lodash/get';
-import 'styled-components/macro';
-import { useDebounce } from 'react-use';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 import { SearchField } from 'app/modules/common/components/Search/common/SearchField';
 import { SearchResult } from 'app/modules/common/components/Search/common/SearchResult';
 import { formatResults } from 'app/modules/common/components/Search/utils/formatResults';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { ProjectPalette } from 'app/theme';
+import get from 'lodash/get';
+import React from 'react';
+import { useDebounce } from 'react-use';
+import 'styled-components/macro';
 
 export function Search() {
   const [results, setResults] = React.useState({
@@ -72,7 +72,7 @@ export function Search() {
         all: [],
       });
     };
-  }, []);
+  }, [generalSearchClear]);
 
   const targetRef = React.useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });

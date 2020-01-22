@@ -1,18 +1,11 @@
-import 'styled-components/macro';
-import React from 'react';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import { Grid, Box } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import {
-  TextAreaMock,
-  PriorityOptionMock,
-} from '../indicator-verification/mock';
-import { IntentTexArea } from '../indicator-verification/common/IntentTextArea';
-import { PolicyPriorityOptions } from '../indicator-verification/common/PriorityOption';
-import { IntentTexField } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
-import { TextFielMock } from 'app/modules/report/sub-modules/outcomes/mock';
 import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
+import { IntentTexField } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
+import { TextFielMock } from 'app/modules/report/sub-modules/outcomes/mock';
+import React from 'react';
+import 'styled-components/macro';
 
 export const OutcomesLayout = () => (
   <React.Fragment>

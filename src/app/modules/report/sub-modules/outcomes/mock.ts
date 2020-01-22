@@ -1,5 +1,3 @@
-import React from 'react';
-import { IntentTextAreaParams } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextArea';
 import { IntentTextFieldParams } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
 
 export const TextFielMock: IntentTextFieldParams[] = [

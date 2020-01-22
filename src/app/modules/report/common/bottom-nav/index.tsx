@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import Grid from '@material-ui/core/Grid';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import React from 'react';
 import styled from 'styled-components';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import Grid from '@material-ui/core/Grid';
 
 type BottomNavModel = {
   next: Function;

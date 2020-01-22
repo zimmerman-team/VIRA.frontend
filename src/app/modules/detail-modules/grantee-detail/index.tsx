@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { useTitle } from 'react-use';
 import { useParams } from 'react-router-dom';
@@ -50,9 +51,9 @@ export function GranteeDetailModule(props: any) {
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
   );
-  const allProjectsClearAction = useStoreActions(
-    actions => actions.allProjects.clear
-  );
+  // const allProjectsClearAction = useStoreActions(
+  //   actions => actions.allProjects.clear
+  // );
   const granteeDetailData = useStoreState(state => state.orgDetail.data);
   const ProjectsData = useStoreState(state => state.allProjects.data);
   const loading = useStoreState(
@@ -68,14 +69,14 @@ export function GranteeDetailModule(props: any) {
       // allProjectsClearAction();
       granteeDetailClearAction();
     };
-  }, []);
+  }, [granteeDetailAction, granteeDetailClearAction, granteeID]);
 
   React.useEffect(() => {
     granteeDetailAction({
       socketName: 'allOrg',
       values: { id: granteeID },
     });
-  }, [granteeID]);
+  }, [granteeDetailAction, granteeID]);
 
   React.useEffect(() => {
     if (granteeDetailData) {
@@ -109,7 +110,7 @@ export function GranteeDetailModule(props: any) {
 
   React.useEffect(() => {
     baseTableForProject.data = projectTableData;
-  }, [projectTableData]);
+  }, [baseTableForProject.data, projectTableData]);
 
   React.useEffect(() => {
     if (granteeDetailData) {
@@ -120,7 +121,7 @@ export function GranteeDetailModule(props: any) {
         },
       });
     }
-  }, [granteeDetailData]);
+  }, [allProjectsAction, granteeDetailData]);
 
   return (
     <GranteeDetailLayout

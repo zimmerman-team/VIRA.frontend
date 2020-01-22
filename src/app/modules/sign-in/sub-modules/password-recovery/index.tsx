@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* third-party */
 import React from 'react';
 import get from 'lodash/get';
@@ -33,11 +34,11 @@ export function PasswordRecovery() {
   React.useEffect(() => {
     setMessage(get(storeActionData, 'message', ''));
     setTimeout(() => storeActionClear(), 10000);
-  }, [storeActionData]);
+  }, [storeActionClear, storeActionData]);
 
   React.useEffect(() => {
     return () => storeActionClear();
-  }, []);
+  }, [storeActionClear]);
 
   function onSubmit() {
     storeAction({

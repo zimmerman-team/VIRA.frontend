@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IconButton } from '@material-ui/core';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import { Delete, Edit } from '@material-ui/icons';
+import { IconCellModuleModel } from 'app/components/datadisplay/Table/model';
 import React from 'react';
 import styled from 'styled-components';
-
-import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
-import { Edit, Delete } from '@material-ui/icons';
-import { IconButton } from '@material-ui/core';
-import { IconCellModuleModel } from 'app/components/datadisplay/Table/model';
 
 const CustomIcon = styled(props => <SvgIcon {...props} />)``;
 

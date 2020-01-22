@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { NavigationButton } from 'app/modules/list-module/common/NavigationButton';
 import Box from '@material-ui/core/Box';
