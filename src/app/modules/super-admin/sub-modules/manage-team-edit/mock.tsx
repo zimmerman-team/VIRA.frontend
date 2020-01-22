@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 import {
   ManageTeamEditLayoutModel,
