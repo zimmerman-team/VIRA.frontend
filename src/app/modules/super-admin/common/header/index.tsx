@@ -64,7 +64,7 @@ export function HeaderFragment(props: HeaderParams) {
     if (props.searchValue !== '' && !searchOpen) {
       setSearchOpen(true);
     }
-  }, [props.searchValue, searchOpen]);
+  }, [props.searchValue]);
 
   return (
     <React.Fragment>

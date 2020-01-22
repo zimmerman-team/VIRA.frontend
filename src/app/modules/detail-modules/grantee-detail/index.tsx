@@ -69,14 +69,14 @@ export function GranteeDetailModule(props: any) {
       // allProjectsClearAction();
       granteeDetailClearAction();
     };
-  }, [granteeDetailAction, granteeDetailClearAction, granteeID]);
+  }, []);
 
   React.useEffect(() => {
     granteeDetailAction({
       socketName: 'allOrg',
       values: { id: granteeID },
     });
-  }, [granteeDetailAction, granteeID]);
+  }, [granteeID]);
 
   React.useEffect(() => {
     if (granteeDetailData) {
@@ -110,7 +110,7 @@ export function GranteeDetailModule(props: any) {
 
   React.useEffect(() => {
     baseTableForProject.data = projectTableData;
-  }, [baseTableForProject.data, projectTableData]);
+  }, [projectTableData]);
 
   React.useEffect(() => {
     if (granteeDetailData) {
@@ -121,7 +121,7 @@ export function GranteeDetailModule(props: any) {
         },
       });
     }
-  }, [allProjectsAction, granteeDetailData]);
+  }, [granteeDetailData]);
 
   return (
     <GranteeDetailLayout

@@ -107,13 +107,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
       editUserClearAction();
       loadUserClearAction();
     };
-  }, [
-    editUserClearAction,
-    loadUserAction,
-    loadUserClearAction,
-    props.match.params,
-    props.mode,
-  ]);
+  }, []);
 
   React.useEffect(() => {
     if (editUserData) {
@@ -135,15 +129,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         }, 5000);
       }
     }
-  }, [
-    allUsersAction,
-    editUserClearAction,
-    editUserData,
-    loadUserAction,
-    props.match.params,
-    snackbarAction,
-    storeUser,
-  ]);
+  }, [editUserData]);
 
   React.useEffect(() => {
     if (addUserData) {
@@ -156,7 +142,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         setGroup('');
       }
     }
-  }, [addUserData, snackbarAction]);
+  }, [addUserData]);
 
   React.useEffect(() => {
     if (loadUserData && props.mode === 'edit') {
@@ -165,7 +151,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
       setEmail(get(loadUserData, 'email', ''));
       setRole(get(loadUserData, 'role', ''));
     }
-  }, [loadUserData, props.mode]);
+  }, [loadUserData]);
 
   function isSubmitDisabled() {
     if (props.mode === 'add') {

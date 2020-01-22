@@ -52,7 +52,7 @@ export const ListModule = () => {
       socketName: 'allOrg',
       values: '',
     });
-  }, [allOrganisationsAction, allProjectsAction]);
+  }, []);
 
   // Format the projects on componentDidUpdate when allProjectsData change
   React.useEffect(() => {
@@ -60,7 +60,7 @@ export const ListModule = () => {
       ...baseTableForProject,
       data: formatTableDataForProject(get(allProjectsData, 'data', [])),
     });
-  }, [allProjectsData, baseTableForProject]);
+  }, [allProjectsData]);
 
   // Format the projects on componentDidUpdate when allOrganisationsData change
   React.useEffect(() => {
@@ -68,7 +68,7 @@ export const ListModule = () => {
       ...baseTableForGrantee,
       data: formatTableDataForGrantee(get(allOrganisationsData, 'data', [])),
     });
-  }, [allOrganisationsData, baseTableForGrantee]);
+  }, [allOrganisationsData]);
 
   return (
     <React.Fragment>

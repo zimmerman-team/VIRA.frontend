@@ -60,7 +60,11 @@ export const ProjectDetailLayout = (props: ProjectModel) => (
       {/*<StatItem {...ProjectStatMock[1]} />*/}
       <StatItem
         label="Project duration"
-        value={props.start_date + '-' + props.end_date}
+        value={
+          props.start_date.replace(/-/g, '.') +
+          ' - ' +
+          props.end_date.replace(/-/g, '.')
+        }
       />
     </Grid>
 

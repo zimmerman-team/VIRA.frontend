@@ -40,10 +40,10 @@ function LoginCallback(props: any) {
         });
       })
       .catch((err: any) => setError(err.description));
-  }, [props.auth, setUserAction, userDetailsAction]);
+  }, []);
   useEffect(() => {
     props.history.replace('/');
-  }, [props.history, storeUser]);
+  }, [storeUser]);
 
   return (
     <div style={{ width: '100%', textAlign: 'center' }}>

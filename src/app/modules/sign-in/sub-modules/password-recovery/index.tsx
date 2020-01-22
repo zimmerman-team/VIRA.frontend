@@ -34,11 +34,11 @@ export function PasswordRecovery() {
   React.useEffect(() => {
     setMessage(get(storeActionData, 'message', ''));
     setTimeout(() => storeActionClear(), 10000);
-  }, [storeActionClear, storeActionData]);
+  }, [storeActionData]);
 
   React.useEffect(() => {
     return () => storeActionClear();
-  }, [storeActionClear]);
+  }, []);
 
   function onSubmit() {
     storeAction({

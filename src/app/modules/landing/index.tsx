@@ -39,7 +39,7 @@ function LandingLayout() {
       socketName: 'allProject',
       values: '',
     });
-  }, [allProjectsAction]);
+  }, []);
 
   // Format the projects on componentDidUpdate when allProjectsData change
   React.useEffect(() => {
@@ -47,7 +47,7 @@ function LandingLayout() {
       ...baseTableForProject,
       data: formatTableDataForProject(get(allProjectsData, 'data', [])),
     });
-  }, [allProjectsData, baseTableForProject]);
+  }, [allProjectsData]);
 
   return (
     <React.Fragment>

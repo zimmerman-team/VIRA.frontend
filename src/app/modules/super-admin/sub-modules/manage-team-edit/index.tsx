@@ -64,15 +64,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
     }
 
     return () => addTeamClearAction();
-  }, [
-    addTeamClearAction,
-    allTeamsAction,
-    allTeamsData,
-    allUsersAction,
-    props.match.params,
-    props.mode,
-    storeUser,
-  ]);
+  }, []);
 
   // component did update on allUsersData
   React.useEffect(() => {
@@ -100,14 +92,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
     } else if (get(addTeamData, 'message', '') !== '') {
       snackbarAction(get(addTeamData, 'message', ''));
     }
-  }, [
-    addTeamClearAction,
-    addTeamData,
-    allTeamsAction,
-    props.mode,
-    snackbarAction,
-    storeUser,
-  ]);
+  }, [addTeamData]);
 
   React.useEffect(() => {
     if (currentTeam) {
@@ -127,7 +112,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
         )
       );
     }
-  }, [teamName, selectedIds, props.mode, currentTeam]);
+  }, [teamName, selectedIds]);
 
   function submit() {
     if (props.mode === 'add') {

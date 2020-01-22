@@ -16,7 +16,7 @@ function SignIn(props: any) {
 
   useEffect(() => {
     snackbarAction(error);
-  }, [error, snackbarAction]);
+  }, [error]);
 
   const signInAction = () => {
     if (email.length > 0 && password.length > 0) {

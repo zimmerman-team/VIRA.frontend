@@ -39,7 +39,7 @@ function ManageUsersF(props: RouteComponentProps) {
       socketName: 'getUserGroups',
       values: { user: storeUser },
     });
-  }, [allTeamsAction, allUsersAction, storeUser]);
+  }, []);
 
   function formatUsers() {
     const init =
@@ -77,16 +77,7 @@ function ManageUsersF(props: RouteComponentProps) {
   React.useEffect(() => {
     formatUsers();
     formatTeams();
-  }, [
-    allUsersData,
-    allTeamsData,
-    sort,
-    page,
-    pageSize,
-    search,
-    formatUsers,
-    formatTeams,
-  ]);
+  }, [allUsersData, allTeamsData, sort, page, pageSize, search]);
   React.useEffect(() => {
     if (get(props.match.params, 'id', '') === 'manage-teams') {
       allTeamsAction({
@@ -100,14 +91,7 @@ function ManageUsersF(props: RouteComponentProps) {
       });
     }
     deleteUserClear();
-  }, [
-    allTeamsAction,
-    allUsersAction,
-    deleteUserClear,
-    deleteUserData,
-    props.match.params,
-    storeUser,
-  ]);
+  }, [deleteUserData]);
 
   function onChangePage(
     event: React.MouseEvent<HTMLButtonElement> | null,

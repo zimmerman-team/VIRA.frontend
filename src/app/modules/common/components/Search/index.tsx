@@ -72,7 +72,7 @@ export function Search() {
         all: [],
       });
     };
-  }, [generalSearchClear]);
+  }, []);
 
   const targetRef = React.useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });

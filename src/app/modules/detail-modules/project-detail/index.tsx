@@ -31,7 +31,7 @@ export const ProjectDetailModule = (props: any) => {
       socketName: 'allProject',
       values: { project_number },
     });
-  }, [projectDetailAction, project_number]);
+  }, [project_number]);
 
   React.useEffect(() => {
     if (projectDetailData) {
