@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 // @ts-ignore
 const organisation = require('../models/Org');
+// @ts-ignore
 const category = require('../models/project_categroy');
 
 const ProjectSchema = new mongoose.Schema({

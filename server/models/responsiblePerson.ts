@@ -14,6 +14,7 @@ const PersonSchema = new mongoose.Schema({
   organisation: { type: mongoose.Schema.Types.ObjectId, ref: Organisation },
 });
 
+// @ts-ignore
 const responsible_person = (module.exports = mongoose.model(
   'responsiblePerson',
   PersonSchema
