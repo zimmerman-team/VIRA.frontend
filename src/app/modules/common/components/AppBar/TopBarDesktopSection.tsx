@@ -11,8 +11,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Search } from 'app/modules/common/components/Search/index';
 import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
-import { notifMock } from 'app/modules/common/components/Notifications/common/mock';
-import { NotificationContainer } from 'app/modules/common/components/Notifications';
+// import { notifMock } from 'app/modules/common/components/Notifications/common/mock';
+// import { NotificationContainer } from 'app/modules/common/components/Notifications';
 
 interface TopBarDesktopSectionParams {
   classes: Record<
@@ -95,7 +95,8 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           <SearchIcon />
         </IconButton>
       )}
-      <Popper
+      {/* notifications disabled for now */}
+      {/* <Popper
         open={open}
         anchorEl={anchorEl}
         placement={placement}
@@ -111,7 +112,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
             <NotificationContainer notificationItems={notifMock} />
           </div>
         </ClickAwayListener>
-      </Popper>
+      </Popper> */}
       <IconButton
         aria-label="show new notifications"
         color="primary"
