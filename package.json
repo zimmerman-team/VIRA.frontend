@@ -7,8 +7,6 @@
     "url": "https://github.com/zimmerman-zimmerman/zz-frontend-boilerplate.git"
   },
   "dependencies": {
-    "@aws-amplify/api": "latest",
-    "@aws-amplify/pubsub": "latest",
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.31",
@@ -85,9 +83,9 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "depcheck": "depcheck",
     "codecrumbs": "codecrumbs -e src/index.tsx -d src -p 1234 ",
-    "start-front": "react-scripts start",
     "start-back": "nodemon --watch 'server/' --exec ts-node --project 'nodetsconfig.json' server/server.ts",
-    "start": "yarn start-front & yarn start-back",
+    "start-fullstack": "yarn start & yarn start-back",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
