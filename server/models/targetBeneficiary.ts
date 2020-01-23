@@ -10,10 +10,10 @@ const targetBeneficiarySchema = new Schema({
 
 // @ts-ignore
 const targetBeneficiary = (module.exports = mongoose.model(
-  'targetBeneficiarySchema',
+  'targetBeneficiary',
   targetBeneficiarySchema
 ));
 
 module.exports.get = (callback: any, limit: any) => {
-  targetBeneficiarySchema.find(callback).limit(limit);
+  targetBeneficiary.find(callback).limit(limit);
 };

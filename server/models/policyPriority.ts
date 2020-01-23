@@ -9,10 +9,10 @@ const policyPrioritySchema = new Schema({
 
 // @ts-ignore
 const policyPriority = (module.exports = mongoose.model(
-  'policyPrioritySchema',
+  'policyPriority',
   policyPrioritySchema
 ));
 
 module.exports.get = (callback: any, limit: any) => {
-  policyPrioritySchema.find(callback).limit(limit);
+  policyPriority.find(callback).limit(limit);
 };

@@ -43,16 +43,16 @@ export function getReport(req: any, res: any) {
 
 // add report
 export function addReport(req: any, res: any) {
-  const { data } = req.query;
+  const data = req.query;
 
-  Project.findById(data.projectID, (err: any, project: any) => {
+  Project.findById(data.project, (err: any, project: any) => {
     if (err) {
       res.send(err);
     }
     targetBeneficiary
       .find({
         _id: {
-          $in: data.target_beneficiaries.map(item =>
+          $in: data.target_beneficiaries.map((item: any) =>
             mongoose.Types.ObjectId(item)
           ),
         },
@@ -64,7 +64,7 @@ export function addReport(req: any, res: any) {
         policyPriority
           .find({
             _id: {
-              $in: data.policy_priorities.map(item =>
+              $in: data.policy_priorities.map((item: any) =>
                 mongoose.Types.ObjectId(item)
               ),
             },
@@ -73,7 +73,7 @@ export function addReport(req: any, res: any) {
             if (err) {
               res.send(err);
             }
-            Location.find({
+            Location.findOne({
               long: data.location.long,
               lat: data.location.lat,
             }).exec((err: any, l: any) => {
@@ -89,10 +89,12 @@ export function addReport(req: any, res: any) {
               let report = new Report();
               report.project = project;
               report.location = location;
+              report.country = data.country;
               report.target_beneficiaries = tb;
               report.policy_priorities = pp;
               report.total_target_beneficiaries =
                 data.total_target_beneficiaries;
+              report.media = data.media;
               report.key_outcomes = data.key_outcomes;
               report.monitor_report_outcomes = data.monitor_report_outcomes;
               // report.media = data.media; // *** upload file and then store path here ***
@@ -104,15 +106,12 @@ export function addReport(req: any, res: any) {
 
               report.save((err: any, report: any) => {
                 if (err) {
-                  res.json(err);
+                  res(
+                    JSON.stringify({ status: 'error', message: err.message })
+                  );
                 }
-                if (err) {
-                  res.json(err);
-                }
-                res.json({
-                  message: 'new report successfully created.',
-                  data: report,
-                });
+
+                res(JSON.stringify({ status: 'success', data: report }));
               });
             });
           });
@@ -130,7 +129,7 @@ export function updateReport(req: any, res: any) {
       targetBeneficiary
         .find({
           _id: {
-            $in: data.target_beneficiaries.map(item =>
+            $in: data.target_beneficiaries.map((item: any) =>
               mongoose.Types.ObjectId(item)
             ),
           },
@@ -142,7 +141,7 @@ export function updateReport(req: any, res: any) {
           policyPriority
             .find({
               _id: {
-                $in: data.policy_priorities.map(item =>
+                $in: data.policy_priorities.map((item: any) =>
                   mongoose.Types.ObjectId(item)
                 ),
               },
@@ -164,7 +163,7 @@ export function updateReport(req: any, res: any) {
                 } else {
                   location = l;
                 }
-                found_report.project = project;
+                found_report.project = Project;
                 found_report.location = location;
                 found_report.target_beneficiaries = tb;
                 found_report.policy_priorities = pp;
