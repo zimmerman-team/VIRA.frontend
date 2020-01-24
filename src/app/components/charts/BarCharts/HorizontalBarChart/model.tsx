@@ -2,43 +2,51 @@
 import React from 'react';
 import { ColorSchemeType } from 'app/components/charts/BarCharts/common/colorUtil';
 import { ProjectPalette } from 'app/theme';
-export type HorizontalBarChartValueModel = {
-  name: string;
-  value: number | null;
-  percentage: number | null;
+
+export type BarChartLegendModel = {
+  label: string;
+  selected: boolean;
 };
 
+export type HorizontalBarChartValueModel = {
+  name: string;
+  value1: number | null;
+  value2?: number | null;
+  value3?: number | null;
+  value1Color: string;
+  value2Color?: string;
+  tooltip?: ChartTooltipItemModel;
+};
 export type HorizontalBarChartModel = {
   values: HorizontalBarChartValueModel[];
   colors?: ColorSchemeType;
+  chartLegends?: BarChartLegendModel[];
+  onChartLegendClick?: Function;
 };
 
 // todo: add BarSvgProps when axis/renderTick function declaration is included
 export const barModel: any = {
   data: [],
-  keys: ['percentage'],
+  minValue: 0,
+  keys: ['value1', 'value2'],
   indexBy: 'name',
-  margin: { top: 0, right: 50, bottom: 50, left: 200 },
+  margin: { top: 10, right: 50, bottom: 50, left: 200 },
   padding: 0,
+  groupedMode: 'stacked',
   layout: 'horizontal',
-  axisTop: null,
   axisRight: null,
   axisBottom: {
-    tickValues: 5,
     tickSize: 5,
     tickPadding: 5,
     tickRotation: 0,
-    legend: '',
-    legendOffset: -36,
-    format: (v: any) => `${v}%`,
+    legend: 'People',
+    legendOffset: 32,
+    legendPosition: 'middle',
   },
   axisLeft: {
     tickSize: 5,
     tickPadding: 5,
     tickRotation: 0,
-    legend: '',
-    legendPosition: 'middle',
-    legendOffset: -40,
     renderTick: ({ textX, value, x, y }) => {
       return (
         <g transform={`translate(${x},${y})`}>
@@ -49,17 +57,16 @@ export const barModel: any = {
               fontSize: 14,
               dominantBaseline: 'auto',
             }}
-            // x="-16%"
             textAnchor="start"
-            transform={`translate(-200, 0)`}
+            transform="translate(-200, -10)"
           >
             {value}
           </text>
           <line
             x1="0"
             x2="-200"
-            y1="10"
-            y2="10"
+            y1="0"
+            y2="0"
             style={{
               stroke: ProjectPalette.grey.A100,
               strokeWidth: 1,
@@ -74,13 +81,9 @@ export const barModel: any = {
   legends: [],
   motionStiffness: 90,
   motionDamping: 15,
-  colors: [],
-
+  colorBy: e => e.data[`${e.id}Color`],
   enableGridX: true,
   enableGridY: true,
-
-  maxValue: 100,
-
   theme: {
     axis: {
       ticks: {
@@ -103,4 +106,5 @@ export const barModel: any = {
       },
     },
   },
+  isInteractive: true,
 };

@@ -5,16 +5,19 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { StatItemDivider } from 'app/modules/landing/common/StatItemDivider';
+import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import { StatItem } from 'app/modules/common/components/StatItem';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
 import { Description } from 'app/modules/common/components/DescriptionParams';
-import { ProjectOutcomeCardMock } from 'app/modules/detail-modules/project-detail/mock';
+import {
+  ProjectOutcomeCardMock,
+  ProjectReportsMock,
+} from 'app/modules/detail-modules/project-detail/mock';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import TableModule from 'app/components/datadisplay/Table';
-import { ProjectReportsMock } from 'app/modules/detail-modules/project-detail/mock';
+
 import { ProjectModel } from 'app/modules/detail-modules/project-detail/model';
 import graph1 from 'app/assets/images/dummy_graph1.png';
 
@@ -45,9 +48,9 @@ export const ProjectDetailLayout = (props: ProjectModel) => (
     <Grid item container lg={6} direction="column">
       <TitleFragment
         title={props.project}
-        id={'project id: ' + props.project_id}
-        date={'*earliest and latest activity start dates'}
-        url_note={'Grantee Title and Link to it'}
+        id={`project id: ${props.project_id}`}
+        date="*earliest and latest activity start dates"
+        url_note="Grantee Title and Link to it"
         url={props.website}
       />
     </Grid>
@@ -55,16 +58,15 @@ export const ProjectDetailLayout = (props: ProjectModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* stat fragment */}
     <Grid item container lg={6} alignItems="center" wrap="nowrap">
-      <StatItem label="Total project amount" value={'€' + props.total_amount} />
+      <StatItem label="Total project amount" value={`€${props.total_amount}`} />
       <StatItemDivider />
-      {/*<StatItem {...ProjectStatMock[1]} />*/}
+      {/* <StatItem {...ProjectStatMock[1]} /> */}
       <StatItem
         label="Project duration"
-        value={
-          props.start_date.replace(/-/g, '.') +
-          ' - ' +
-          props.end_date.replace(/-/g, '.')
-        }
+        value={`${props.start_date.replace(
+          /-/g,
+          '.'
+        )} - ${props.end_date.replace(/-/g, '.')}`}
       />
     </Grid>
 
@@ -97,11 +99,11 @@ export const ProjectDetailLayout = (props: ProjectModel) => (
         </CardContent>
       </Card>
 
-      {/*<DummyKeyOutcomes
+      {/* <DummyKeyOutcomes
         css={`
           transform: scale(0.8);
         `}
-      />*/}
+      /> */}
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}

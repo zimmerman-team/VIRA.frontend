@@ -1,8 +1,8 @@
 import { ProjectPalette } from 'app/theme';
 
-export type ColorSchemeType = 'single' | 'multi';
+export type ColorSchemeType = 'single' | 'multi' | string[];
 
-export const colorScheme = (colors: string | undefined) => {
+export const colorScheme = (colors: string | string[] | undefined) => {
   if (colors === 'multi') {
     return [
       ProjectPalette.primary.main,
@@ -11,6 +11,9 @@ export const colorScheme = (colors: string | undefined) => {
       ProjectPalette.secondary.main,
       ProjectPalette.secondary.dark,
     ];
+  }
+  if (Array.isArray(colors)) {
+    return colors;
   }
   return ProjectPalette.primary.main;
 };
