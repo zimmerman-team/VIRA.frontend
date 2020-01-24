@@ -3,16 +3,27 @@ import 'styled-components/macro';
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components';
-
+import get from 'lodash/get';
 import { colorScheme } from 'app/components/charts/BarCharts/common/colorUtil';
 import Typography from '@material-ui/core/Typography';
 import {
   HorizontalBarChartModel,
   barModel,
+  BarChartLegendModel,
 } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import { ProjectPalette } from 'app/theme';
+import { useWindowSize } from 'react-use';
+import { getBarInnerLineWidth } from 'app/components/charts/BarCharts/utils/getBarInnerLineWidth';
+import {
+  ChartTooltip,
+  ChartTooltipItemModel,
+} from 'app/components/charts/BarCharts/common/ChartTooltip';
+import { getMaxBudgetValue } from 'app/components/charts/BarCharts/utils/getMaxBudgetValue';
+import { LegendControl } from 'app/components/charts/BarCharts/common/LegendControl';
+import find from 'lodash/find';
+import filter from 'lodash/filter';
 
-//TODO:
+// TODO:
 //  - Find a way to implement the colouring.
 //  - Discuss with designer, implementation is not 1on1 with design
 
@@ -39,6 +50,10 @@ const BarComponent = (props: {
   shouldRenderLabel?: any;
   labelColor?: any;
   borderColor?: any;
+  allData?: any;
+  containerWidth?: any;
+  showBar?: boolean;
+  showLine?: boolean;
 }) => {
   const {
     borderRadius,
@@ -53,36 +68,52 @@ const BarComponent = (props: {
     shouldRenderLabel,
     labelColor,
     borderColor,
+    allData,
+    containerWidth,
+    tooltip,
+    showBar,
+    showLine,
     ...fprops
   } = props;
+  const width = getBarInnerLineWidth(
+    allData,
+    fprops.data,
+    containerWidth - 250
+  );
   return (
     <g
       {...fprops}
-      /*css={`
-        transform: translate(10px, 10px);
-      `}*/
+      onMouseEnter={(e: any) => {
+        fprops.onMouseEnter();
+        showTooltip(tooltip(fprops.data.data.tooltip), e);
+      }}
+      onMouseLeave={(e: any) => {
+        fprops.onMouseLeave();
+        hideTooltip(tooltip(fprops.data.data.tooltip), e);
+      }}
     >
-      <rect
-        {...fprops}
-        // fill={props.color}
-        fill={ProjectPalette.secondary.dark}
-        css={`
-          transform: translate(10px, 10px);
-        `}
-        height="25px"
-      />
-      <text
-        x={15}
-        y={props.y + 26}
-        fontFamily="Inter"
-        fontSize="12px"
-        letterSpacing="0.42"
-        fontWeight="normal"
-        fill={ProjectPalette.common.white}
-      >
-        {props.data.data.percentage}% ({props.data.data.value}€ of{' '}
-        {props.data.data.value}€)
-      </text>
+      {showBar && <rect {...fprops} fill={props.color} height="25px" />}
+      {showLine && (
+        <>
+          <line
+            x1="0"
+            x2={width}
+            y1={props.y + 12}
+            y2={props.y + 12}
+            style={{
+              strokeWidth: 2,
+              stroke: ProjectPalette.secondary.main,
+            }}
+          />
+          <line
+            x1={width}
+            x2={width}
+            y1={props.y + 5}
+            y2={props.y + 19}
+            style={{ strokeWidth: 2, stroke: ProjectPalette.secondary.main }}
+          />
+        </>
+      )}
     </g>
   );
 };
@@ -91,6 +122,7 @@ const BarChart = styled(props => <ResponsiveBar {...props} />)``;
 
 const ChartContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 400px;
@@ -106,23 +138,96 @@ const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
   }
 `;
 
+const TopAxis = styled.div`
+  width: 100%;
+  display: flex;
+  padding-left: 200px;
+  flex-direction: row;
+  justify-content: space-between;
+  color: ${ProjectPalette.secondary.main};
+`;
+
+const Legends = styled.div`
+  display: flex;
+  align-self: flex-end;
+`;
+
 // https://nivo.rocks/bar/
-export const HorizontalBarChart = (props: HorizontalBarChartModel) => {
+export function HorizontalBarChart(props: HorizontalBarChartModel) {
+  const [containerWidth, setContainerWidth] = React.useState(0);
+  const containerRef: any = React.useRef();
+  const [maxBudgetVal, setMaxBudgetVal] = React.useState(0);
+
+  React.useLayoutEffect(() => {
+    if (containerRef) {
+      setContainerWidth(get(containerRef, 'current.offsetWidth', 0));
+    }
+  }, [useWindowSize().width]);
+
+  React.useEffect(() => {
+    setMaxBudgetVal(getMaxBudgetValue(props.values));
+  }, [props.values]);
+
+  const showBar = get(
+    find(props.chartLegends, { label: 'Target' }),
+    'selected',
+    true
+  );
+  const showLine = get(
+    find(props.chartLegends, { label: 'Budget' }),
+    'selected',
+    true
+  );
+
   function renderBarchart() {
     if (typeof props.values !== 'undefined' && props.values.length > 0) {
       return (
-        <BarChart
-          {...barModel}
-          colorBy="index"
-          data={props.values}
-          colors={colorScheme(props.colors)}
-          barComponent={BarComponent}
-        />
+        <>
+          {showLine && (
+            <TopAxis>
+              <div>0€</div>
+              <div>{maxBudgetVal}€</div>
+            </TopAxis>
+          )}
+          <BarChart
+            {...barModel}
+            data={props.values}
+            barComponent={(bProps: any) => (
+              <BarComponent
+                {...bProps}
+                showBar={showBar}
+                showLine={showLine}
+                allData={props.values}
+                containerWidth={containerWidth}
+              />
+            )}
+            colors={colorScheme(props.colors)}
+            tooltip={(tProps: any) => (
+              <ChartTooltip
+                {...tProps}
+                items={filter(tProps.items, (item: ChartTooltipItemModel) => {
+                  const foundLegend = find(
+                    props.chartLegends,
+                    (c: BarChartLegendModel) =>
+                      (item.label as string).indexOf(c.label) > -1
+                  );
+                  return foundLegend ? foundLegend.selected : true;
+                })}
+              />
+            )}
+            axisBottom={showBar ? barModel.axisBottom : null}
+          />
+          {props.chartLegends && (
+            <Legends>
+              {props.chartLegends.map(legend => (
+                <LegendControl {...legend} onClick={props.onChartLegendClick} />
+              ))}
+            </Legends>
+          )}
+        </>
       );
     }
-
     return <NoDataMessage>No data found</NoDataMessage>;
   }
-
-  return <ChartContainer>{renderBarchart()}</ChartContainer>;
-};
+  return <ChartContainer ref={containerRef}>{renderBarchart()}</ChartContainer>;
+}

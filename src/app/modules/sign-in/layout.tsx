@@ -1,9 +1,10 @@
+import React from 'react';
+import 'styled-components/macro';
+import { ProjectPalette } from 'app/theme';
 import { Container, Grid } from '@material-ui/core';
 import { GroupImage } from 'app/assets/images/group';
 import { InputForm } from 'app/modules/sign-in/common/InputForm';
 import { LayoutModel } from 'app/modules/sign-in/models';
-import { ProjectPalette } from 'app/theme';
-import React from 'react';
 
 // TODO: so a lot of code is repeated in recovery in sign in
 // TODO: Also the sign in flow should be outside of the generel wrapper component

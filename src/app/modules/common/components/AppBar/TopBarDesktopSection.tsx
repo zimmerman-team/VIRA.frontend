@@ -113,7 +113,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           </div>
         </ClickAwayListener>
       </Popper> */}
-      <IconButton
+      {/* <IconButton
         aria-label="show new notifications"
         color="primary"
         onClick={handleClick('bottom-end')}
@@ -121,7 +121,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         <Badge badgeContent={17} color="secondary">
           <NotificationsIcon />
         </Badge>
-      </IconButton>
+      </IconButton> */}
       <Popper
         open={openAccount}
         anchorEl={anchorElAccount}

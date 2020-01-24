@@ -30,7 +30,8 @@ import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { manageTeamEditAddMock } from './modules/super-admin/sub-modules/manage-team-edit/mock';
+import { TabNavMock } from 'app/modules/list-module/mock';
+import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -70,11 +71,14 @@ export function MainRoutes() {
         </Route>
 
         <Route exact path="/">
+          <Redirect to="/dashboard/priority-area/projects" />
+        </Route>
+        <Route exact path="/dashboard/:viz?/:list?">
           {redirectUnAuth(LandingLayout, storeUser)}
         </Route>
 
         <Route exact path="/list/:id">
-          {redirectUnAuth(ListModule, storeUser)}
+          {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
         </Route>
 
         <Route exact path="/projects/detail">

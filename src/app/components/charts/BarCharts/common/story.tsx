@@ -6,7 +6,7 @@ import Providers from 'app/Providers';
 
 storiesOf('Charts|Bar Charts/Common/', module).add('Chart Tooltip', () => (
   <Providers>
-    <ChartTooltip items={mock} />
+    <ChartTooltip title="Chart" items={mock} />
   </Providers>
 ));
 
@@ -14,11 +14,9 @@ const mock = [
   {
     label: 'Activities',
     value: 66,
-    color: '#666666',
   },
   {
     label: 'Non Activities',
     value: 33,
-    color: '#a23b23',
   },
 ];
