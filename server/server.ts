@@ -13,6 +13,10 @@ const orgTypeController = require('./controllers/OrgTypeControllerSocket');
 const projectCategoryController = require('./controllers/ProjectCategoryControllerSocket');
 const projectController = require('./controllers/ProjectControllerSocket');
 const responsiblePersonController = require('./controllers/ResponsiblePersonControllerSocket');
+const reportController = require('./controllers/ReportController');
+const policyPriority = require('./controllers/PolicyPriorityControllerSocket');
+const targetBeneficiary = require('./controllers/TargetBeneficiaryControllerSocket');
+const location = require('./controllers/LocationControllerSocket');
 import {
   getUser,
   getAllUsers,
@@ -204,6 +208,80 @@ IO.sockets.on('connection', (socket: any) => {
     responsiblePersonController.DelPerson({ query: data }, (res: any) =>
       fn(res)
     );
+  });
+  /* Policy Priority */
+  socket.on('allPolicyPriority', (data: any, fn: any) => {
+    policyPriority.allPolicyPriority({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('addPolicyPriority', (data: any, fn: any) => {
+    policyPriority.addPolicyPriority({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('onePolicyPriority', (data: any, fn: any) => {
+    policyPriority.onePolicyPriority({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('updatePolicyPriority', (data: any, fn: any) => {
+    policyPriority.updatePolicyPriority({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('delPolicyPriority', (data: any, fn: any) => {
+    policyPriority.delPolicyPriority({ query: data }, (res: any) => fn(res));
+  });
+  /* Target Beneficiary */
+  socket.on('allTargetBeneficiary', (data: any, fn: any) => {
+    targetBeneficiary.allTargetBeneficiary({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('oneTargetBeneficiary', (data: any, fn: any) => {
+    targetBeneficiary.oneTargetBeneficiary({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('addTargetBeneficiary', (data: any, fn: any) => {
+    targetBeneficiary.addTargetBeneficiary({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('updateTargetBeneficiary', (data: any, fn: any) => {
+    targetBeneficiary.updateTargetBeneficiary({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  socket.on('delTargetBeneficiary', (data: any, fn: any) => {
+    targetBeneficiary.delTargetBeneficiary({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
+  /* Location */
+  socket.on('allLocation', (data: any, fn: any) => {
+    location.allLocation({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('oneLocation', (data: any, fn: any) => {
+    location.oneLocation({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('addLocation', (data: any, fn: any) => {
+    location.addLocation({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('updateLocation', (data: any, fn: any) => {
+    location.updateLocation({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('delLocation', (data: any, fn: any) => {
+    location.delLocation({ query: data }, (res: any) => fn(res));
+  });
+  /* Report */
+  socket.on('allReport', (data: any, fn: any) => {
+    reportController.getReports({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('addReport', (data: any, fn: any) => {
+    reportController.addReport({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('updateReport', (data: any, fn: any) => {
+    reportController.updateReport({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('oneReport', (data: any, fn: any) => {
+    reportController.getReport({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('delReport', (data: any, fn: any) => {
+    reportController.deleteReport({ query: data }, (res: any) => fn(res));
   });
   /* General search */
   socket.on('search', (data: any, fn: any) => {
