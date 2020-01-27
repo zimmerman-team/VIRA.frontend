@@ -2,7 +2,7 @@ import 'styled-components/macro';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
-import { StatItemParams } from 'app/modules/landing/projectsMock';
+import { StatItemParams } from 'app/modules/landing/statsMock';
 import { ProjectPalette } from 'app/theme';
 
 export const StatItem = (props: StatItemParams) => (
@@ -22,7 +22,7 @@ export const StatItem = (props: StatItemParams) => (
         && {
           font-size: 36px;
           font-weight: 600;
-          color: ${ProjectPalette.secondary.dark};
+          color: ${ProjectPalette.primary.light};
         }
       `}
     >

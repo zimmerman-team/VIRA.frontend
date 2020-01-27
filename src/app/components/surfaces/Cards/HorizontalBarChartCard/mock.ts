@@ -1,3 +1,4 @@
+import { ProjectPalette } from 'app/theme';
 import { HorizontalBarChartCardModel } from 'app/components/surfaces/Cards/HorizontalBarChartCard/model';
 
 export const mockData: HorizontalBarChartCardModel = {
@@ -6,38 +7,157 @@ export const mockData: HorizontalBarChartCardModel = {
     values: [
       {
         name: 'Poverty reduction with a focus on youth and children',
-        value: 80000,
-        percentage: 80,
+        value1: 400,
+        value2: 1000,
+        value3: 90000,
+        value1Color: ProjectPalette.primary.main,
+        value2Color: ProjectPalette.grey[500],
+        tooltip: {
+          title: 'Poverty reduction with a focus on youth and children',
+          items: [
+            {
+              label: `Target (${((900 / 1000) * 100).toFixed(2)}%)`,
+              value: 1000,
+              percentage: ((900 / 1000) * 100).toFixed(2),
+            },
+            {
+              label: 'Budget',
+              value: 900000,
+            },
+          ],
+        },
       },
       {
         name: 'Refugees',
-        value: 35000,
-        percentage: 92,
+        value1: 400,
+        value2: 1000,
+        value3: 90000,
+        value1Color: ProjectPalette.primary.main,
+        value2Color: ProjectPalette.grey[500],
+        tooltip: {
+          title: 'Refugees',
+          items: [
+            {
+              label: `Target (${((900 / 1000) * 100).toFixed(2)}%)`,
+              value: 1000,
+              percentage: ((900 / 1000) * 100).toFixed(2),
+            },
+            {
+              label: 'Budget',
+              value: 900000,
+            },
+          ],
+        },
       },
       {
         name: 'The elderly',
-        value: 23000,
-        percentage: 67,
+        value1: 400,
+        value2: 1000,
+        value3: 90000,
+        value1Color: ProjectPalette.primary.main,
+        value2Color: ProjectPalette.grey[500],
+        tooltip: {
+          title: 'The elderly',
+          items: [
+            {
+              label: `Target (${((900 / 1000) * 100).toFixed(2)}%)`,
+              value: 1000,
+              percentage: ((900 / 1000) * 100).toFixed(2),
+            },
+            {
+              label: 'Budget',
+              value: 900000,
+            },
+          ],
+        },
       },
       {
         name: 'Prisoner rehabilitation',
-        value: 95000,
-        percentage: 15,
+        value1: 400,
+        value2: 1000,
+        value3: 90000,
+        value1Color: ProjectPalette.primary.main,
+        value2Color: ProjectPalette.grey[500],
+        tooltip: {
+          title: 'Prisoner rehabilitation',
+          items: [
+            {
+              label: `Target (${((900 / 1000) * 100).toFixed(2)}%)`,
+              value: 1000,
+              percentage: ((900 / 1000) * 100).toFixed(2),
+            },
+            {
+              label: 'Budget',
+              value: 900000,
+            },
+          ],
+        },
       },
       {
         name: 'Drug use',
-        value: 42000,
-        percentage: 100,
+        value1: 400,
+        value2: 1000,
+        value3: 90000,
+        value1Color: ProjectPalette.primary.main,
+        value2Color: ProjectPalette.grey[500],
+        tooltip: {
+          title: 'Drug use',
+          items: [
+            {
+              label: `Target (${((900 / 1000) * 100).toFixed(2)}%)`,
+              value: 1000,
+              percentage: ((900 / 1000) * 100).toFixed(2),
+            },
+            {
+              label: 'Budget',
+              value: 900000,
+            },
+          ],
+        },
       },
       {
         name: 'Prostitution',
-        value: 83000,
-        percentage: 110,
+        value1: 400,
+        value2: 1000,
+        value3: 90000,
+        value1Color: ProjectPalette.primary.main,
+        value2Color: ProjectPalette.grey[500],
+        tooltip: {
+          title: 'Prostitution',
+          items: [
+            {
+              label: `Target (${((900 / 1000) * 100).toFixed(2)}%)`,
+              value: 1000,
+              percentage: ((900 / 1000) * 100).toFixed(2),
+            },
+            {
+              label: 'Budget',
+              value: 900000,
+            },
+          ],
+        },
       },
       {
         name: 'Homelessness',
-        value: 83000,
-        percentage: 77,
+        value1: 400,
+        value2: 1000,
+        value3: 90000,
+        value1Color: ProjectPalette.primary.main,
+        value2Color: ProjectPalette.grey[500],
+        tooltip: {
+          title: 'Homelessness',
+          items: [
+            {
+              label: `Target (${((900 / 1000) * 100).toFixed(2)}%)`,
+              value: 1000,
+              percentage: ((900 / 1000) * 100).toFixed(2),
+            },
+            {
+              label: 'Budget',
+              value: 900000,
+            },
+          ],
+        },
       },
     ],
   },

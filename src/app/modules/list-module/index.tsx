@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
 import TableModule from 'app/components/datadisplay/Table';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { ReportListMock, TabNavMock } from 'app/modules/list-module/mock';
+import { ReportListMock } from 'app/modules/list-module/mock';
 import {
   formatTableDataForGrantee,
   formatTableDataForProject,
@@ -15,8 +15,13 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { useTitle } from 'react-use';
 import 'styled-components/macro';
+import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 
-export const ListModule = () => {
+type Props = {
+  tabNav: TabNavigatorParams;
+};
+
+export const ListModule = (props: Props) => {
   // set window title
   useTitle('M&E - Reports');
 
@@ -78,21 +83,21 @@ export const ListModule = () => {
       {/* ------------------------------------------------------------------ */}
       {/* projects table navigation */}
       <Grid item lg={3}>
-        <TabNavigator {...TabNavMock} />
+        <TabNavigator {...props.tabNav} />
       </Grid>
 
       {/* ------------------------------------------------------------------ */}
       {/* lists */}
       {/* ---------------------------------------------------------------------*/}
       <Grid item xs={12} lg={12}>
-        <Route path="/list/projects">
+        <Route path={props.tabNav.items[0].path}>
           <TableModule {...baseTableForProject} />
         </Route>
-        <Route path="/list/reports">
-          <TableModule {...ReportListMock} />
-        </Route>
-        <Route path="/list/grantees">
+        <Route path={props.tabNav.items[1].path}>
           <TableModule {...baseTableForGrantee} />
+        </Route>
+        <Route path={props.tabNav.items[2].path}>
+          <TableModule {...ReportListMock} />
         </Route>
       </Grid>
     </React.Fragment>
