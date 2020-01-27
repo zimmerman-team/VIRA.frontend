@@ -101,6 +101,7 @@ export function AppSideBar(props: AppSideBarParams) {
             index={index}
             open={props.open}
             key={navItem.label}
+            icon={navItem.icon}
           />
         ))}
       </List>
