@@ -26,7 +26,10 @@ export const ReportDetailLayout = () => (
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
     <Grid item lg={12}>
-      <BreadCrumbs {...GranteeBreadCrumbsMock} />
+      <BreadCrumbs
+        {...GranteeBreadCrumbsMock}
+        previousLocations={[{ label: 'Projects', url: '/' }]}
+      />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}

@@ -6,7 +6,7 @@ import { NoMatchPage } from 'app/modules/common/no-match-page';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { GranteeDetailModule } from 'app/modules/detail-modules/grantee-detail';
 import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
-import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
+import { ReportDetailModule } from 'app/modules/detail-modules/report-detail/index';
 import { Faqs } from 'app/modules/faq-module';
 import LandingLayout from 'app/modules/landing';
 import { ListModule } from 'app/modules/list-module';
@@ -85,7 +85,7 @@ export function MainRoutes() {
         </Route>
 
         <Route exact path="/reports/detail">
-          {redirectUnAuth(ReportDetailLayout, storeUser)}
+          {redirectUnAuth(ReportDetailModule, storeUser)}
         </Route>
 
         <Route path="/report">{redirectUnAuth(CreateReport, storeUser)}</Route>
