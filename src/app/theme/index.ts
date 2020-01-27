@@ -36,7 +36,7 @@ export const ProjectTextStyles = {
 
 export const ProjectPalette: ProjectPalette = {
   tonalOffset: 0.2,
-  background: { paper: '#fff', default: '#fafafa' },
+  background: { paper: '#fff', default: '#fff' },
   contrastThreshold: 3,
   grey: {
     '50': '#fafafa',

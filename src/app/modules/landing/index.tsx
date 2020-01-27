@@ -11,6 +11,7 @@ import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 
 // absolute
 import { ListModule } from 'app/modules/list-module';
+import { GeoMap } from 'app/components/charts/GeoMap';
 import { NavItemParams } from 'app/modules/common/consts';
 import { StatItem } from 'app/modules/landing/common/stats/StatItem';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
@@ -135,7 +136,9 @@ function LandingLayout(props: any) {
               setSelectedBubble={onBubbleSelect}
             />
           </Route>
-          <Route path="/dashboard/map">Map</Route>
+          <Route path="/dashboard/map">
+            <GeoMap />
+          </Route>
         </Grid>
       </React.Fragment>
 
