@@ -74,10 +74,15 @@ export function BubbleChart(props: Props) {
                     : 0.5};
                   &:hover {
                     opacity: 1;
+                    cursor: pointer;
                   }
                 `}
                 {...handlers}
-                onClick={_e => props.setSelectedBubble(node.id)}
+                onClick={_e =>
+                  props.setSelectedBubble(
+                    node.id === props.selectedBubble ? '' : node.id
+                  )
+                }
               />
             );
           }}
