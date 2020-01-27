@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 // @ts-nocheck
 import React from 'react';
 import find from 'lodash/find';
+import { Close } from '@material-ui/icons';
 import styled from 'styled-components/macro';
-import { Grid, Typography } from '@material-ui/core';
 import { ResponsiveBubbleHtml } from '@nivo/circle-packing';
+import { Grid, Typography, IconButton } from '@material-ui/core';
 
 type Props = {
   data: object;
@@ -12,14 +15,26 @@ type Props = {
 };
 
 const ChartContainer = styled.div`
-  display: flex;
   height: 600px;
+  display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 `;
 
 export function BubbleChart(props: Props) {
+  const detailContainerRef = React.createRef();
+
+  React.useEffect(() => {
+    if (props.selectedBubble !== '') {
+      detailContainerRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'start',
+      });
+    }
+  }, [props.selectedBubble]);
+
   return (
     <React.Fragment>
       <ChartContainer>
@@ -51,26 +66,42 @@ export function BubbleChart(props: Props) {
                   width: style.r * 2,
                   height: style.r * 2,
                   borderRadius: style.r,
-                  opacity:
-                    node.id === props.selectedBubble ||
-                    props.selectedBubble === ''
-                      ? 1
-                      : 0.5,
                 }}
-                // {...handlers}
-                onMouseEnter={e => props.setSelectedBubble(node.id)}
-                onMouseLeave={e => props.setSelectedBubble('')}
+                css={`
+                  opacity: ${node.id === props.selectedBubble ||
+                  props.selectedBubble === ''
+                    ? 1
+                    : 0.5};
+                  &:hover {
+                    opacity: 1;
+                  }
+                `}
+                {...handlers}
+                onClick={_e => props.setSelectedBubble(node.id)}
               />
             );
           }}
+          tooltip={tProps => <div>{tProps.id}</div>}
           colors={props.data.children.map(item => item.color)}
-          margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+          margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
         />
       </ChartContainer>
       {props.selectedBubble !== '' && (
         <Grid container spacing={6}>
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            css={`
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            `}
+            ref={detailContainerRef}
+          >
             <Typography variant="h6">{props.selectedBubble}</Typography>
+            <IconButton onClick={() => props.setSelectedBubble('')}>
+              <Close />
+            </IconButton>
           </Grid>
           {find(props.data.children, {
             name: props.selectedBubble,
