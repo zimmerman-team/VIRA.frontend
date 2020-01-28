@@ -13,6 +13,7 @@ const { Schema } = mongoose;
 
 const ReportSchema = new Schema({
   title: { type: String, required: false },
+  date: { type: String, required: true },
   location: {
     type: Schema.Types.ObjectId,
     ref: location,
@@ -20,19 +21,19 @@ const ReportSchema = new Schema({
     required: false,
   },
   country: { type: String, required: false },
-  total_target_beneficiaries: { type: Number, default: 0, required: true },
+  total_target_beneficiaries: { type: Number, default: 0, required: false },
   target_beneficiaries: [
     { type: Schema.Types.ObjectId, ref: targetBeneficiary, index: true },
   ],
   project: { type: Schema.Types.ObjectId, ref: project, index: true },
-  key_outcomes: { type: String, required: true },
-  monitor_report_outcomes: { type: String, required: true },
-  media: { type: String, required: true },
+  key_outcomes: { type: String, required: false },
+  monitor_report_outcomes: { type: String, required: false },
+  media: { type: String, required: false },
   policy_priorities: [{ type: Schema.Types.ObjectId, ref: policyPriority }],
-  key_implementation_challenges: { type: String, required: true },
-  other_project_outcomes: { type: String, required: true },
-  plans: { type: String, required: true },
-  other_comments: { type: String, required: true },
+  key_implementation_challenges: { type: String, required: false },
+  other_project_outcomes: { type: String, required: false },
+  plans: { type: String, required: false },
+  other_comments: { type: String, required: false },
 });
 
 ReportSchema.index({ '$**': 'text' });

@@ -21,7 +21,7 @@ import {
 // direct
 import 'styled-components/macro';
 
-export const ReportDetailLayout = () => (
+export const ReportDetailLayout = (props: any) => (
   <React.Fragment>
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
@@ -45,7 +45,10 @@ export const ReportDetailLayout = () => (
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item container lg={12} direction="column">
-      <TitleFragment {...ReportTitleMock} />
+      <TitleFragment
+        title={props.report ? props.report.title : null}
+        id={props.report ? props.report.id : null}
+      />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
@@ -61,7 +64,10 @@ export const ReportDetailLayout = () => (
     >
       <Grid item lg={12}>
         <Typography>Target beneficiaries</Typography>
-        <Typography>Total number: 889.080</Typography>
+        <Typography>
+          Total number:
+          {props.report ? props.report.total_target_beneficiaries : ''}
+        </Typography>
         <Typography>Typography</Typography>
       </Grid>
       <Box height="24px" width="100%" />
@@ -94,7 +100,14 @@ export const ReportDetailLayout = () => (
         <Typography>Prisoner rehabilitation / reintegration</Typography>
       </Grid>
       <Box height="24px" width="100%" />
-      <OutcomeCard {...ReportOutcomeCardMock[2]} />
+      <OutcomeCard
+        title="Contacts"
+        description={
+          props.grantee
+            ? `${props.grantee.place}, ${props.grantee.postcode}, ${props.grantee.country}`
+            : ''
+        }
+      />
       <OutcomeCard {...ReportOutcomeCardMock[3]} />
     </Grid>
 

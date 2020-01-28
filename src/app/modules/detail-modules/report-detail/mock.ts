@@ -25,10 +25,6 @@ export const ReportStatMock: StatParams[] = [
 
 export const ReportOutcomeCardMock: OutcomeCardParams[] = [
   {
-    title: 'Contacts',
-    description: ' Amsterda, 1396TH, Netherlands',
-  },
-  {
     title: 'Key outcomes',
     description:
       'Prisoners recidivism reduced through skills-training demonstrably improving their labor market access and retention upon release',

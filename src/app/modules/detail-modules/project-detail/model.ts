@@ -33,6 +33,25 @@ export interface ProjectModel {
   role: string;
 }
 
+export interface ReportModel {
+  id: string;
+  title: string;
+  date: string;
+  location: string;
+  country: string;
+  total_target_beneficiaries: number;
+  target_beneficiaries: string[];
+  project: string;
+  key_outcomes: string;
+  monitor_report_outcomes: string;
+  media: string;
+  policy_priorities: string[];
+  key_implementation_challenges: string;
+  other_project_outcomes: string;
+  plans: string;
+  other_comments: string;
+}
+
 export const projectMock: ProjectModel = {
   project_id: '2019084',
   project: 'Restyling, verbouwing en verduurzaming kerk Voorthuizen',
