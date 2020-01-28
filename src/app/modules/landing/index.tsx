@@ -1,15 +1,17 @@
 // global
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import get from 'lodash/get';
 import React from 'react';
 import { useTitle } from 'react-use';
+import get from 'lodash/get';
+import findIndex from 'lodash/findIndex';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import { Route, withRouter } from 'react-router-dom';
+import CardContent from '@material-ui/core/CardContent';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 
 // absolute
 import { ListModule } from 'app/modules/list-module';
+import { GeoMap } from 'app/components/charts/GeoMap';
 import { NavItemParams } from 'app/modules/common/consts';
 import { StatItem } from 'app/modules/landing/common/stats/StatItem';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
@@ -22,10 +24,11 @@ import {
 import { useStoreState } from 'app/state/store/hooks';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
 import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
+import { BubbleChart } from 'app/components/charts/Bubble';
+import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import find from 'lodash/find';
 import { Typography, Box } from '@material-ui/core';
 import { getNavTabItems } from './utils/getNavTabItems';
-import findIndex from 'lodash/findIndex';
 
 function LandingLayout(props: any) {
   // set window title
@@ -42,6 +45,7 @@ function LandingLayout(props: any) {
       selected: true,
     },
   ]);
+  const [selectedSDG, setSelectedSDG] = React.useState('');
   const allProjectsData = useStoreState(state => state.allProjects.data);
 
   React.useEffect(() => {
@@ -59,6 +63,10 @@ function LandingLayout(props: any) {
       ].selected;
       setBarChartLegends(prevBarChartLegends);
     }
+  }
+
+  function onBubbleSelect(bubble: string) {
+    setSelectedSDG(bubble);
   }
 
   return (
@@ -90,8 +98,7 @@ function LandingLayout(props: any) {
               find(
                 TabNavMockViz.items,
                 (item: NavItemParams) =>
-                  item.path.replace('/dashboard/', '') ===
-                  get(props.match.params, 'viz', '')
+                  item.path.split('/')[2] === get(props.match.params, 'viz', '')
               ),
               'label',
               'Priority Area'
@@ -122,8 +129,16 @@ function LandingLayout(props: any) {
               onChartLegendClick={onBarChartLegendClick}
             />
           </Route>
-          <Route path="/dashboard/sdgs">SDGs</Route>
-          <Route path="/dashboard/map">Map</Route>
+          <Route path="/dashboard/sdgs">
+            <BubbleChart
+              data={bubbleMockData}
+              selectedBubble={selectedSDG}
+              setSelectedBubble={onBubbleSelect}
+            />
+          </Route>
+          <Route path="/dashboard/map">
+            <GeoMap />
+          </Route>
         </Grid>
       </React.Fragment>
 
