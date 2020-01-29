@@ -30,6 +30,8 @@ import loadAuth0DBConnection from 'app/state/api/actionsReducers/loadAuth0DBConn
 import allTeams from 'app/state/api/actionsReducers/allTeams';
 import addTeam from 'app/state/api/actionsReducers/addTeam';
 import generalSearch from 'app/state/api/actionsReducers/generalSearch';
+import addReport from 'app/state/api/actionsReducers/addReport';
+import getReports from 'app/state/api/actionsReducers/getReports';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
@@ -64,6 +66,8 @@ export interface ApplicationStoreModel {
   allTeams: SocketAPIResonseInterface;
   addTeam: SocketAPIResonseInterface;
   generalSearch: SocketAPIResonseInterface;
+  addReport: SocketAPIResonseInterface;
+  getReports: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
@@ -85,6 +89,8 @@ const applicationStore: ApplicationStoreModel = {
   allTeams,
   addTeam,
   generalSearch,
+  addReport,
+  getReports,
 };
 
 export const appStore = createStore(applicationStore, {

@@ -8,6 +8,8 @@ import { FieldDescription } from './FieldDescription';
 
 export interface IntentTextFieldParams {
   description: string;
+  value: string;
+  setValue: Function;
   tooltip?: string;
   text?: string;
   explanation?: string;
@@ -21,9 +23,10 @@ export const IntentTexField = (props: IntentTextFieldParams) => (
     <Box width="100%" height="20px" />
     <SingleMultiLineTextField
       fullWidth
-      id={props.componentID}
       placeholder="Type"
-      setValue={() => console.info('value set')}
+      value={props.value}
+      id={props.componentID}
+      setValue={props.setValue}
     />
     {props.explanation && <InfoCaption text={props.explanation} />}
     <Box width="100%" height="30px" />

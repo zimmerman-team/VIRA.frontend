@@ -40,7 +40,7 @@ export const ProjectDetailLayout = (props: ProjectModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* button: generate report */}
     <Grid item xs={12} lg={6} container justify="flex-end">
-      <ContainedButton text="Generate Report" />
+      <ContainedButton text="Generate Report" onClick={props.generateReport} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}

@@ -31,6 +31,7 @@ export interface ProjectModel {
   login_email: string;
   sex: string;
   role: string;
+  generateReport: Function;
 }
 
 export const projectMock: ProjectModel = {
@@ -67,4 +68,5 @@ export const projectMock: ProjectModel = {
   login_email: 'penningmeester@ngkdeontmoeting.nl',
   sex: 'male',
   role: 'voorzitter kerkenraad',
+  generateReport: () => {},
 };

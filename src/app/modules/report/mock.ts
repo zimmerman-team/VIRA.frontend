@@ -4,29 +4,10 @@ import { NavItemParams } from 'app/modules/common/consts';
 export const breadcrumbs: BreadcrumbModel = {
   currentLocation: 'Report',
   previousLocations: [
-    { label: 'Projects', url: '/projects' },
+    { label: 'Projects', url: 'list/projects' },
     { label: 'Project Name', url: '/project-detail' },
   ],
 };
-
-export const tabs: NavItemParams[] = [
-  {
-    label: 'Outcomes',
-    path: 'outcomes',
-  },
-  {
-    label: 'Indicator and verification',
-    path: 'indicator-verification',
-  },
-  {
-    label: 'Challenges and plans',
-    path: 'challenges-plans',
-  },
-  {
-    label: 'Preview',
-    path: 'preview',
-  },
-];
 
 export const outcomeCheckboxes = [
   { label: 'Refugees', value: 'refugees' },
@@ -39,4 +20,27 @@ export const outcomeCheckboxes = [
   },
   { label: 'Homelessness', value: 'homelessness' },
   { label: 'Prisoner rehabilitation / reintegration', value: 'prisoner_rehab' },
+];
+
+export const tabs: NavItemParams[] = [
+  {
+    label: 'Outcomes',
+    path: 'outcomes',
+    disabled: false,
+  },
+  {
+    label: 'Indicator and verification',
+    path: 'indicator-verification',
+    disabled: true,
+  },
+  {
+    label: 'Challenges and plans',
+    path: 'challenges-plans',
+    disabled: true,
+  },
+  {
+    label: 'Preview',
+    path: 'preview',
+    disabled: true,
+  },
 ];

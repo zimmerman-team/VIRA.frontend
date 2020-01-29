@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import get from 'lodash/get';
 import { useTitle } from 'react-use';
-import { useParams } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 import { ProjectDetailLayout } from 'app/modules/detail-modules/project-detail/layout';
 import {
   projectMock,
@@ -11,8 +11,8 @@ import {
 
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 
-export const ProjectDetailModule = (props: any) => {
-  useTitle('M&E - Reports');
+const ProjectDetailModuleF = (props: any) => {
+  useTitle('M&E - Project detail');
 
   const projectNumber: any = useParams();
   const project_number: any = projectNumber.code;
@@ -32,6 +32,10 @@ export const ProjectDetailModule = (props: any) => {
       values: { project_number },
     });
   }, [project_number]);
+
+  function generateReport() {
+    props.history.push(`/report/${project_number}/outcomes`);
+  }
 
   React.useEffect(() => {
     if (projectDetailData) {
@@ -70,6 +74,9 @@ export const ProjectDetailModule = (props: any) => {
           login_email: 'penningmeester@ngkdeontmoeting.nl',
           sex: 'male',
           role: 'voorzitter kerkenraad',
+          generateReport: () => {
+            generateReport();
+          },
         });
       }
     }
@@ -77,3 +84,5 @@ export const ProjectDetailModule = (props: any) => {
 
   return <ProjectDetailLayout {...projectDetails} />;
 };
+
+export const ProjectDetailModule = withRouter(ProjectDetailModuleF);
