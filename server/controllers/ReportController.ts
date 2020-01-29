@@ -15,7 +15,7 @@ export function getReports(req: any, res: any) {
     .populate('policy_priorities')
     .exec((err: any, reports: any) => {
       if (err) {
-        res.send(err);
+        res(JSON.stringify({ status: 'error', message: err.message }));
       }
       res(JSON.stringify({ status: 'success', data: reports }));
     });
@@ -31,11 +31,9 @@ export function getReport(req: any, res: any) {
     .populate('policy_priorities')
     .exec((err: any, report: any) => {
       if (err) {
-        res.send(err);
+        res(JSON.stringify({ status: 'error', message: err.message }));
       }
-      res.json({
-        data: report,
-      });
+      res(JSON.stringify(report));
     });
 }
 
@@ -102,7 +100,9 @@ export function addReport(req: any, res: any) {
               // }
               let report = new Report();
               report.project = project;
+              report.title = data.title;
               // report.location = location;
+              report.date = new Date().toLocaleDateString();
               report.country = data.country;
               report.target_beneficiaries = tb;
               report.policy_priorities = pp;
@@ -134,39 +134,73 @@ export function addReport(req: any, res: any) {
 
 // update report
 export function updateReport(req: any, res: any) {
-  const { data } = req.query;
-  Report.findById(req.params._id, (err: any, found_report: any) => {
+  const data = req.query;
+  Report.findById(data._id, (err: any, found_report: any) => {
     if (err) {
       res.json(err);
     } else if (found_report) {
       targetBeneficiary
         .find({
           _id: {
-            $in: data.target_beneficiaries.map((item: any) =>
-              mongoose.Types.ObjectId(item)
-            ),
+            $in: data.target_beneficiaries
+              ? data.target_beneficiaries.map((item: any) =>
+                  mongoose.Types.ObjectId(item)
+                )
+              : [],
           },
         })
         .exec((err: any, tb: any) => {
           if (err) {
-            res.send(err);
+            found_report.title = data.title;
+            found_report.location = location;
+            found_report.date = new Date().toLocaleDateString();
+            found_report.total_target_beneficiaries =
+              data.total_target_beneficiaries;
+            found_report.key_outcomes = data.key_outcomes;
+            found_report.monitor_report_outcomes = data.monitor_report_outcomes;
+            // report.media = data.media; // *** upload file and then store path here ***
+            found_report.key_implementation_challenges =
+              data.key_implementation_challenges;
+            found_report.other_project_outcomes = data.other_project_outcomes;
+            found_report.plans = data.plans;
+            found_report.other_comments = data.other_comments;
           }
           policyPriority
             .find({
               _id: {
-                $in: data.policy_priorities.map((item: any) =>
-                  mongoose.Types.ObjectId(item)
-                ),
+                $in: data.policy_priorities
+                  ? data.policy_priorities.map((item: any) =>
+                      mongoose.Types.ObjectId(item)
+                    )
+                  : [],
               },
             })
             .exec((err: any, pp: any) => {
               if (err) {
-                res.send(err);
+                found_report.title = data.title;
+                found_report.location = location;
+                found_report.date = new Date().toLocaleDateString();
+                found_report.total_target_beneficiaries =
+                  data.total_target_beneficiaries;
+                found_report.key_outcomes = data.key_outcomes;
+                found_report.monitor_report_outcomes =
+                  data.monitor_report_outcomes;
+                // report.media = data.media; // *** upload file and then store path here ***
+                found_report.key_implementation_challenges =
+                  data.key_implementation_challenges;
+                found_report.other_project_outcomes =
+                  data.other_project_outcomes;
+                found_report.plans = data.plans;
+                found_report.other_comments = data.other_comments;
               }
-              Location.find({
-                long: data.location.long,
-                lat: data.location.lat,
-              }).exec((err: any, l: any) => {
+              Location.findOne(
+                data.location
+                  ? {
+                      long: data.location.long,
+                      lat: data.location.lat,
+                    }
+                  : {}
+              ).exec((err: any, l: any) => {
                 let location = null;
                 if (err) {
                   location = new Location({
@@ -176,8 +210,9 @@ export function updateReport(req: any, res: any) {
                 } else {
                   location = l;
                 }
-                found_report.project = Project;
+                found_report.title = data.title;
                 found_report.location = location;
+                found_report.date = new Date().toLocaleDateString();
                 found_report.target_beneficiaries = tb;
                 found_report.policy_priorities = pp;
                 found_report.total_target_beneficiaries =
@@ -195,15 +230,12 @@ export function updateReport(req: any, res: any) {
 
                 found_report.save((err: any, report: any) => {
                   if (err) {
-                    res.json(err);
+                    res(
+                      JSON.stringify({ status: 'error', message: err.message })
+                    );
                   }
-                  if (err) {
-                    res.json(err);
-                  }
-                  res.json({
-                    status: 'success',
-                    data: found_report,
-                  });
+
+                  res(JSON.stringify({ status: 'success', data: report }));
                 });
               });
             });

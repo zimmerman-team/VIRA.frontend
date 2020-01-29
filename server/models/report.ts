@@ -18,16 +18,15 @@ autoIncrement.initialize(connection);
 
 const ReportSchema = new Schema({
   title: { type: String, required: false },
-  location: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: location,
-      index: true,
-      required: false,
-    },
-  ],
+  date: { type: String, required: true },
+  location: {
+    type: Schema.Types.ObjectId,
+    ref: location,
+    index: true,
+    required: false,
+  },
   country: { type: String, required: false },
-  total_target_beneficiaries: { type: Number, default: 0, required: true },
+  total_target_beneficiaries: { type: Number, default: 0, required: false },
   target_beneficiaries: [
     { type: Schema.Types.ObjectId, ref: targetBeneficiary, index: true },
   ],

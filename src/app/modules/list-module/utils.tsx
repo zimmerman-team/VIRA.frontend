@@ -12,6 +12,7 @@ import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { GranteeListMock } from 'app/modules/list-module/mock';
 import React from 'react';
+import { ReportListMock } from 'app/modules/list-module/mock';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];
@@ -198,6 +199,61 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
         customHeadRender: (columnMeta, updateDirection) =>
           getInfoTHead('Website', 'info'),
         customFilterListRender: value => `Website: ${value}`,
+      },
+    },
+  ];
+
+  return tableConfig;
+};
+
+export const formatTableDataForReport = (data: any): any[] => {
+  let tempArray: any[] = [];
+  const bigTempArray: any[][] = [];
+  data.forEach((row: any) => {
+    tempArray.push(row._id, row.title, row.date);
+    bigTempArray.push(tempArray);
+    tempArray = [];
+  });
+
+  return bigTempArray;
+};
+export const getBaseTableForReport = (): TableModuleModel => {
+  const tableConfig = ReportListMock;
+  tableConfig.columns = [
+    {
+      name: 'ReportID',
+      options: {
+        sortDirection: 'asc',
+        filter: true,
+        filterType: 'dropdown',
+        customHeadRender: (columnMeta, updateDirection) =>
+          getInfoTHead('ReportID', 'info'),
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <LinkCellModule link={`/reports/${value}/detail`} value={value} />
+          );
+        },
+        customFilterListRender: value => `ReportID: ${value}`,
+      },
+    },
+    {
+      name: 'ReportTitle',
+      options: {
+        filter: true,
+        filterType: 'dropdown',
+        customHeadRender: (columnMeta, updateDirection) =>
+          getInfoTHead('ReportTitle', 'info'),
+        customFilterListRender: value => `ReportTitle: ${value}`,
+      },
+    },
+    {
+      name: 'Date',
+      options: {
+        filter: true,
+        filterType: 'dropdown',
+        customHeadRender: (columnMeta, updateDirection) =>
+          getInfoTHead('Date', 'info'),
+        customFilterListRender: value => `Date: ${value}`,
       },
     },
   ];

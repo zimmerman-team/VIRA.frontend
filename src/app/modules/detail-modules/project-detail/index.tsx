@@ -10,6 +10,10 @@ import {
 } from 'app/modules/detail-modules/project-detail/model';
 
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
+import { formatTableDataForProject } from 'app/modules/list-module/utils';
+import { formatTableDataForReport } from 'app/modules/list-module/utils';
+import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+import { getBaseTableForReport } from 'app/modules/list-module/utils';
 
 const ProjectDetailModuleF = (props: any) => {
   useTitle('M&E - Project detail');
@@ -18,6 +22,7 @@ const ProjectDetailModuleF = (props: any) => {
   const project_number: any = projectNumber.code;
   const projectDetail: ProjectModel = projectMock;
   const [projectDetails, setprojectDetails] = useState(projectDetail);
+  const baseTableForReport: TableModuleModel = getBaseTableForReport();
 
   const projectDetailAction = useStoreActions(
     actions => actions.projectDetail.fetch
@@ -25,12 +30,22 @@ const ProjectDetailModuleF = (props: any) => {
   const projectDetailData = useStoreState(
     actions => actions.projectDetail.data
   );
+  const projectDetailClearAction = useStoreActions(
+    actions => actions.projectDetail.clear
+  );
+  const ReportsData = useStoreState(state => state.allReports.data);
+  const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
+  const [reportTableData, setReportTableData] = useState([[]]);
 
   React.useEffect(() => {
     projectDetailAction({
       socketName: 'allProject',
       values: { project_number },
     });
+    return () => {
+      // allProjectsClearAction();
+      projectDetailClearAction();
+    };
   }, [project_number]);
 
   function generateReport() {
@@ -38,9 +53,16 @@ const ProjectDetailModuleF = (props: any) => {
   }
 
   React.useEffect(() => {
+    projectDetailAction({
+      socketName: 'allProject',
+      values: { project_number },
+    });
+  }, []);
+
+  React.useEffect(() => {
     if (projectDetailData) {
       const projectDetailRecord: any = get(projectDetailData, 'data', null);
-      if (projectDetailRecord) {
+      if (projectDetailRecord[0]) {
         setprojectDetails({
           project_id: projectDetailRecord[0].project_number,
           project: projectDetailRecord[0].project_name,
@@ -82,7 +104,36 @@ const ProjectDetailModuleF = (props: any) => {
     }
   }, [projectDetailData]);
 
-  return <ProjectDetailLayout {...projectDetails} />;
+  React.useEffect(() => {
+    if (ReportsData) {
+      setReportTableData(formatTableDataForReport(get(ReportsData, 'data')));
+    }
+  }, [ReportsData]);
+
+  React.useEffect(() => {
+    baseTableForReport.data = reportTableData;
+  }, [reportTableData]);
+
+  React.useEffect(() => {
+    if (projectDetailData) {
+      const projectDetailRecord = get(projectDetailData, 'data');
+      if (projectDetailRecord[0]) {
+        allReportsAction({
+          socketName: 'allReport',
+          values: {
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+      }
+    }
+  }, [projectDetailData]);
+
+  return (
+    <ProjectDetailLayout
+      projectDetail={projectDetails}
+      reportTable={baseTableForReport}
+    />
+  );
 };
 
 export const ProjectDetailModule = withRouter(ProjectDetailModuleF);

@@ -24,7 +24,9 @@ import getUserGroups from 'app/state/api/actionsReducers/getUserGroups';
 import allProjects from 'app/state/api/actionsReducers/allProjects';
 import allOrganisations from 'app/state/api/actionsReducers/allOrganisations';
 import projectDetail from 'app/state/api/actionsReducers/projectDetail';
+import reportDetail from 'app/state/api/actionsReducers/reportDetail';
 import orgDetail from 'app/state/api/actionsReducers/orgDetail';
+import allReports from 'app/state/api/actionsReducers/allReports';
 import forgetPassword from 'app/state/api/actionsReducers/forgetPassword';
 import loadAuth0DBConnection from 'app/state/api/actionsReducers/loadAuth0DBConnection';
 import allTeams from 'app/state/api/actionsReducers/allTeams';
@@ -54,8 +56,10 @@ export interface ApplicationStoreModel {
   getUserRoles: SocketAPIResonseInterface;
   getUserGroups: SocketAPIResonseInterface;
   allProjects: SocketAPIResonseInterface;
+  allReports: SocketAPIResonseInterface;
   allOrganisations: SocketAPIResonseInterface;
   projectDetail: SocketAPIResonseInterface;
+  reportDetail: SocketAPIResonseInterface;
   orgDetail: SocketAPIResonseInterface;
   allUsers: SocketAPIResonseInterface;
   loadUser: SocketAPIResonseInterface;
@@ -77,8 +81,10 @@ const applicationStore: ApplicationStoreModel = {
   userDetails,
   addUser,
   allProjects,
+  allReports,
   allOrganisations,
   projectDetail,
+  reportDetail,
   orgDetail,
   allUsers,
   loadUser,

@@ -7,7 +7,7 @@ import { NoMatchPage } from 'app/modules/common/no-match-page';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { GranteeDetailModule } from 'app/modules/detail-modules/grantee-detail';
 import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
-import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail';
+import { ReportDetailModule } from 'app/modules/detail-modules/report-detail';
 import { Faqs } from 'app/modules/faq-module';
 import LandingLayout from 'app/modules/landing';
 import { ListModule } from 'app/modules/list-module';
@@ -83,15 +83,15 @@ export function MainRoutes() {
           {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
         </Route>
 
-        <Route exact path="/projects/detail">
+        {/*<Route exact path="/projects/detail">
           {redirectUnAuth(ProjectDetailModule, storeUser)}
-        </Route>
+        </Route>*/}
         <Route exact path="/projects/:code/detail">
           {redirectUnAuth(ProjectDetailModule, storeUser)}
         </Route>
 
-        <Route exact path="/reports/detail">
-          {redirectUnAuth(ReportDetailLayout, storeUser)}
+        <Route exact path="/reports/:code/detail">
+          {redirectUnAuth(ReportDetailModule, storeUser)}
         </Route>
         <Route exact path="/reports/:code/detail">
           {redirectUnAuth(ReportDetailLayout, storeUser)}
