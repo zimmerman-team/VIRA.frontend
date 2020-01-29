@@ -10,15 +10,10 @@ import { StatItem } from 'app/modules/common/components/StatItem';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
 import { Description } from 'app/modules/common/components/DescriptionParams';
-import {
-  ProjectOutcomeCardMock,
-  ProjectReportsMock,
-} from 'app/modules/detail-modules/project-detail/mock';
+import { ProjectOutcomeCardMock } from 'app/modules/detail-modules/project-detail/mock';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import TableModule from 'app/components/datadisplay/Table';
-
-import { ProjectModel } from 'app/modules/detail-modules/project-detail/model';
 import graph1 from 'app/assets/images/dummy_graph1.png';
 
 export const ProjectDetailLayout = (props: any) => (
@@ -40,7 +35,10 @@ export const ProjectDetailLayout = (props: any) => (
     {/* ---------------------------------------------------------------------*/}
     {/* button: generate report */}
     <Grid item xs={12} lg={6} container justify="flex-end">
-      <ContainedButton text="Generate Report" onClick={props.generateReport} />
+      <ContainedButton
+        text="Generate Report"
+        onClick={props.projectDetail.generateReport}
+      />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
@@ -50,7 +48,7 @@ export const ProjectDetailLayout = (props: any) => (
         title={props.projectDetail.project}
         id={`project id: ${props.projectDetail.project_id}`}
         date="*earliest and latest activity start dates"
-        url_note="Grantee Title and Link to it"
+        url_note={props.projectDetail.organisation}
         url={props.projectDetail.website}
       />
     </Grid>

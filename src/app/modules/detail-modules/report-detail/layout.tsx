@@ -1,25 +1,19 @@
 // global
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { Typography, Box, Grid } from '@material-ui/core';
 
 // absolute
-import graph1 from 'app/assets/images/dummy_graph1.png';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
+import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
-import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import {
-  ReportOutcomeCardMock,
-  ReportTitleMock,
-} from 'app/modules/detail-modules/report-detail/mock';
+import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
+import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 
 // direct
 import 'styled-components/macro';
+import { ProjectPalette } from 'app/theme';
 
 export const ReportDetailLayout = (props: any) => (
   <React.Fragment>
@@ -27,8 +21,8 @@ export const ReportDetailLayout = (props: any) => (
     {/* breadcrumbs */}
     <Grid item lg={12}>
       <BreadCrumbs
-        {...GranteeBreadCrumbsMock}
-        previousLocations={[{ label: 'Projects', url: '/' }]}
+        currentLocation={props.report.title}
+        previousLocations={[{ label: 'Reports', url: '/list/reports' }]}
       />
     </Grid>
 
@@ -37,90 +31,162 @@ export const ReportDetailLayout = (props: any) => (
     <Grid item lg={6} />
 
     {/* ---------------------------------------------------------------------*/}
-    {/* button: generate report */}
-    <Grid item xs={12} lg={6} container justify="flex-end">
-      <ContainedButton text="Generate Report" />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item container lg={12} direction="column">
       <TitleFragment
-        title={props.report ? props.report.title : null}
-        id={props.report ? props.report.id : null}
+        note={props.report.date}
+        title={props.report.title}
+        url_note={props.report.project.name}
+        id={`Report ID: ${props.report.reportID}`}
+        url={`/projects/${props.report.project.id}/detail`}
       />
     </Grid>
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* outcome charts */}
     <Grid
       item
       container
       xs={12}
-      lg={6}
+      lg={12}
+      alignItems="flex-start"
+      justify="flex-start"
+      alignContent="flex-start"
+    >
+      <Grid item xs={12} md={6} lg={6}>
+        <Grid item container lg={12}>
+          <Grid item lg={12}>
+            <FieldDescription text="Target beneficiaries" />
+          </Grid>
+          <Box width="100%" height="24px" />
+          <Grid item lg={12}>
+            <IntentTexFieldSingleLine
+              type="number"
+              min={0}
+              disabled
+              setValue={() => {}}
+              value={props.report.total_target_beneficiaries}
+              description="Total number: "
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item xs={12} md={6} lg={6}>
+        <OutcomeCard title="Location" description={props.report.country} />
+      </Grid>
+    </Grid>
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* priority area chart */}
+    <Grid
+      item
+      container
+      xs={12}
+      lg={12}
+      alignItems="flex-start"
+      justify="flex-start"
+      alignContent="flex-start"
+    >
+      <FieldDescription text="Of which the beneficiaries will likely include approximately" />
+      <Box height="60px" width="100%" />
+      <Grid item lg={12}>
+        <HorizontalBarChart
+          {...mockData}
+          chartLegends={props.barChartLegends}
+          onChartLegendClick={props.onBarChartLegendClick}
+        />
+      </Grid>
+    </Grid>
+
+    <Box height="24px" width="100%" />
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* policy priorities */}
+    <Grid
+      item
+      container
+      xs={12}
+      lg={12}
       alignItems="flex-start"
       justify="flex-start"
       alignContent="flex-start"
     >
       <Grid item lg={12}>
-        <Typography>Target beneficiaries</Typography>
-        <Typography>
-          Total number:
-          {props.report ? props.report.total_target_beneficiaries : ''}
+        <Typography variant="subtitle2">
+          Policy priorities the project aims to support:
         </Typography>
-        <Typography>Typography</Typography>
       </Grid>
-      <Box height="24px" width="100%" />
-      <Grid item lg={12}>
-        <Card>
-          {/*<CardHeader title="Key outcomes" />*/}
-          <CardContent
+      <Box width="100%" height="10px" />
+      <Grid container spacing={4}>
+        {props.report.policy_priorities.map((p: any) => (
+          <Grid
+            item
+            lg={4}
             css={`
-              height: calc(100% - 34px);
-
-              img {
-                width: 100%;
-                height: auto;
-              }
+              display: flex;
             `}
           >
-            <img src={graph1} alt="graph" />
-          </CardContent>
-        </Card>
+            <div
+              css={`
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                margin-right: 20px;
+                background: ${ProjectPalette.common.white};
+                border: 5px solid ${ProjectPalette.secondary.main};
+              `}
+            />
+            <Typography>{p.name}</Typography>
+          </Grid>
+        ))}
       </Grid>
-      <Box height="24px" width="100%" />
-      <Grid item lg={12}>
-        <Typography>
-          Finally, please select which ones of these Insinger Foundation policy
-          priorities the project aims to support.
-        </Typography>
-      </Grid>
-      <Box height="24px" width="100%" />
-      <Grid item lg={12}>
-        <Typography>Prisoner rehabilitation / reintegration</Typography>
-      </Grid>
-      <Box height="24px" width="100%" />
-      <OutcomeCard
-        title="Contacts"
-        description={
-          props.grantee
-            ? `${props.grantee.place}, ${props.grantee.postcode}, ${props.grantee.country}`
-            : ''
-        }
-      />
-      <OutcomeCard {...ReportOutcomeCardMock[3]} />
     </Grid>
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* outcome cards */}
-    <Grid item container xs={12} lg={6}>
-      {ReportOutcomeCardMock.map(card => (
-        <OutcomeCard {...card} />
-      ))}
-    </Grid>
+    <Box height="24px" width="100%" />
 
     {/* ---------------------------------------------------------------------*/}
-    {/* reports list */}
-    <Grid item lg={12} />
+    {/* cards */}
+    <Grid
+      item
+      container
+      xs={12}
+      lg={12}
+      spacing={2}
+      alignItems="flex-start"
+      justify="flex-start"
+      alignContent="flex-start"
+    >
+      <Grid item xs={12} md={6} lg={6}>
+        <OutcomeCard
+          title="Key outcomes"
+          description={props.report.key_outcomes}
+        />
+      </Grid>
+      <Grid item xs={12} md={6} lg={6}>
+        <OutcomeCard
+          title="Key implementation challenges"
+          description={props.report.key_implementation_challenges}
+        />
+      </Grid>
+      <Grid item xs={12} md={6} lg={6}>
+        <OutcomeCard
+          title="Monitor and report on the outcomes"
+          description={props.report.monitor_report_outcomes}
+        />
+      </Grid>
+      <Grid item xs={12} md={6} lg={6}>
+        <OutcomeCard
+          title="Other project outcomes and observations"
+          description={props.report.other_project_outcomes}
+        />
+      </Grid>
+      <Grid item xs={12} md={6} lg={6}>
+        <OutcomeCard title="Future plans" description={props.report.plans} />
+      </Grid>
+      <Grid item xs={12} md={6} lg={6}>
+        <OutcomeCard
+          title="Other comments"
+          description={props.report.other_comments}
+        />
+      </Grid>
+    </Grid>
   </React.Fragment>
 );

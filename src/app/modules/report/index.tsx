@@ -188,6 +188,7 @@ function CreateReportFunc(props: any) {
         socketName: 'addReport',
         values: {
           data: {
+            title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
             policy_priorities: filter(policyPriorities, { value: true }).map(

@@ -30,7 +30,7 @@ export const ListModule = (props: Props) => {
     getBaseTableForGrantee()
   );
   const [baseTableForReport, setBaseTableForReport] = React.useState(
-    getBaseTableForReport()
+    getBaseTableForReport([])
   );
 
   // actions
@@ -81,7 +81,7 @@ export const ListModule = (props: Props) => {
   // Format the reports on componentDidUpdate when allReportsData change
   React.useEffect(() => {
     setBaseTableForReport({
-      ...baseTableForReport,
+      ...getBaseTableForReport(get(allReportsData, 'data', [])),
       data: formatTableDataForReport(get(allReportsData, 'data', [])),
     });
   }, [allReportsData]);

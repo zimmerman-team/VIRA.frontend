@@ -17,7 +17,7 @@ var connection = mongoose.createConnection(url);
 autoIncrement.initialize(connection);
 
 const ReportSchema = new Schema({
-  title: { type: String, required: false },
+  title: { type: String, required: true },
   date: { type: String, required: true },
   location: {
     type: Schema.Types.ObjectId,
@@ -25,8 +25,8 @@ const ReportSchema = new Schema({
     index: true,
     required: false,
   },
-  country: { type: String, required: false },
-  total_target_beneficiaries: { type: Number, default: 0, required: false },
+  country: { type: String, required: true },
+  total_target_beneficiaries: { type: Number, default: 0, required: true },
   target_beneficiaries: [
     { type: Schema.Types.ObjectId, ref: targetBeneficiary, index: true },
   ],
@@ -45,6 +45,7 @@ const ReportSchema = new Schema({
 ReportSchema.plugin(autoIncrement.plugin, {
   model: 'report',
   field: 'reportID',
+  startAt: 1000,
 });
 
 ReportSchema.index({ '$**': 'text' });

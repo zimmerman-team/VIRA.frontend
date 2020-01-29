@@ -13,6 +13,7 @@ export interface IntentTexFieldSingleLineParams {
   setValue: Function;
   type?: string;
   min?: number;
+  disabled?: boolean;
 }
 
 export const IntentTexFieldSingleLine = (
@@ -50,6 +51,7 @@ export const IntentTexFieldSingleLine = (
         css={`
           width: 90px;
         `}
+        disabled={props.disabled}
       />
     </div>
   </React.Fragment>

@@ -27,6 +27,7 @@ export function getReport(req: any, res: any) {
 
   Report.findById(id)
     .populate('location')
+    .populate('project')
     .populate('target_beneficiaries')
     .populate('policy_priorities')
     .exec((err: any, report: any) => {

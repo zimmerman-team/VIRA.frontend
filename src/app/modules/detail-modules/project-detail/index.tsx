@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import get from 'lodash/get';
@@ -10,7 +11,6 @@ import {
 } from 'app/modules/detail-modules/project-detail/model';
 
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
-import { formatTableDataForProject } from 'app/modules/list-module/utils';
 import { formatTableDataForReport } from 'app/modules/list-module/utils';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { getBaseTableForReport } from 'app/modules/list-module/utils';
@@ -22,7 +22,9 @@ const ProjectDetailModuleF = (props: any) => {
   const project_number: any = projectNumber.code;
   const projectDetail: ProjectModel = projectMock;
   const [projectDetails, setprojectDetails] = useState(projectDetail);
-  const baseTableForReport: TableModuleModel = getBaseTableForReport();
+  const [baseTableForReport, setBaseTableForReport] = React.useState(
+    getBaseTableForReport([])
+  );
 
   const projectDetailAction = useStoreActions(
     actions => actions.projectDetail.fetch
@@ -35,7 +37,6 @@ const ProjectDetailModuleF = (props: any) => {
   );
   const ReportsData = useStoreState(state => state.allReports.data);
   const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
-  const [reportTableData, setReportTableData] = useState([[]]);
 
   React.useEffect(() => {
     projectDetailAction({
@@ -67,7 +68,7 @@ const ProjectDetailModuleF = (props: any) => {
           project_id: projectDetailRecord[0].project_number,
           project: projectDetailRecord[0].project_name,
           project_description: projectDetailRecord[0].project_description,
-          category: projectDetailRecord[0].category.name,
+          category: get(projectDetailRecord[0].category, 'name', ''),
           duration: projectDetailRecord[0].duration,
           start_date: projectDetailRecord[0].start_date,
           end_date: projectDetailRecord[0].end_date,
@@ -77,7 +78,7 @@ const ProjectDetailModuleF = (props: any) => {
           allocated_amount: projectDetailRecord[0].allocated_amount,
           released_amount: projectDetailRecord[0].released_amount,
           paid_amount: projectDetailRecord[0].paid_amount,
-          organisation: projectDetailRecord[0].organisation.name,
+          organisation: projectDetailRecord[0].organisation.organisation_name,
           org_type: '',
           street: 'Postbus',
           house_number: '193',
@@ -106,17 +107,16 @@ const ProjectDetailModuleF = (props: any) => {
 
   React.useEffect(() => {
     if (ReportsData) {
-      setReportTableData(formatTableDataForReport(get(ReportsData, 'data')));
+      setBaseTableForReport({
+        ...getBaseTableForReport(get(ReportsData, 'data', [])),
+        data: formatTableDataForReport(get(ReportsData, 'data', [])),
+      });
     }
   }, [ReportsData]);
 
   React.useEffect(() => {
-    baseTableForReport.data = reportTableData;
-  }, [reportTableData]);
-
-  React.useEffect(() => {
     if (projectDetailData) {
-      const projectDetailRecord = get(projectDetailData, 'data');
+      const projectDetailRecord = get(projectDetailData, 'data', []);
       if (projectDetailRecord[0]) {
         allReportsAction({
           socketName: 'allReport',

@@ -13,6 +13,7 @@ import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { GranteeListMock } from 'app/modules/list-module/mock';
 import React from 'react';
 import { ReportListMock } from 'app/modules/list-module/mock';
+import find from 'lodash/find';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];
@@ -32,6 +33,7 @@ export const formatTableDataForProject = (data: any): any[] => {
 
   return bigTempArray;
 };
+
 export const getBaseTableForProject = (): TableModuleModel => {
   const tableConfig = mockDataVar8;
   tableConfig.columns = [
@@ -124,6 +126,7 @@ export const formatTableDataForGrantee = (data: any): any[] => {
 
   return bigTempArray;
 };
+
 export const getBaseTableForGrantee = (): TableModuleModel => {
   const tableConfig = GranteeListMock;
   tableConfig.columns = [
@@ -210,40 +213,53 @@ export const formatTableDataForReport = (data: any): any[] => {
   let tempArray: any[] = [];
   const bigTempArray: any[][] = [];
   data.forEach((row: any) => {
-    tempArray.push(row._id, row.title, row.date);
+    const splits = row.date.split('/');
+    tempArray.push(
+      row.reportID,
+      row.title,
+      `${splits[1]}-${splits[0]}-${splits[2]}`
+    );
     bigTempArray.push(tempArray);
     tempArray = [];
   });
 
   return bigTempArray;
 };
-export const getBaseTableForReport = (): TableModuleModel => {
+
+export const getBaseTableForReport = (data: any): TableModuleModel => {
   const tableConfig = ReportListMock;
   tableConfig.columns = [
     {
-      name: 'ReportID',
+      name: 'ID',
       options: {
         sortDirection: 'asc',
         filter: true,
         filterType: 'dropdown',
         customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('ReportID', 'info'),
+          getInfoTHead('ID', 'info'),
         customBodyRender: (value, tableMeta, updateValue) => {
+          const item = find(data, { reportID: value });
+          if (!item) {
+            return value;
+          }
           return (
-            <LinkCellModule link={`/reports/${value}/detail`} value={value} />
+            <LinkCellModule
+              value={value}
+              link={`/reports/${item._id}/detail`}
+            />
           );
         },
-        customFilterListRender: value => `ReportID: ${value}`,
+        customFilterListRender: value => `ID: ${value}`,
       },
     },
     {
-      name: 'ReportTitle',
+      name: 'Title',
       options: {
         filter: true,
         filterType: 'dropdown',
         customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('ReportTitle', 'info'),
-        customFilterListRender: value => `ReportTitle: ${value}`,
+          getInfoTHead('Title', 'info'),
+        customFilterListRender: value => `Title: ${value}`,
       },
     },
     {
