@@ -1,110 +1,92 @@
-// global
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import React from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useState } from 'react';
+import get from 'lodash/get';
+import { useTitle } from 'react-use';
+import { useParams } from 'react-router-dom';
+import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail/layout';
+import { useStoreActions } from 'app/state/store/hooks';
+import { useStoreState } from 'app/state/store/hooks';
+import { formatReportDetail } from './utils/formatReportDetail';
+import findIndex from 'lodash/findIndex';
 
-// absolute
-import graph1 from 'app/assets/images/dummy_graph1.png';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
-import { TitleFragment } from 'app/modules/common/components/TitleParams';
-import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import {
-  ReportOutcomeCardMock,
-  ReportTitleMock,
-} from 'app/modules/detail-modules/report-detail/mock';
+export const ReportDetailModule = () => {
+  useTitle('M&E Report detail');
+  const report_obj: any = useParams();
+  const report_id: any = report_obj.code;
+  const [reportDetails, setreportDetails] = useState({
+    id: '',
+    title: '',
+    date: '',
+    location: '',
+    country: '',
+    total_target_beneficiaries: 0,
+    target_beneficiaries: [],
+    project: {
+      name: '',
+      id: '',
+    },
+    key_outcomes: '',
+    monitor_report_outcomes: '',
+    media: '',
+    policy_priorities: [],
+    key_implementation_challenges: '',
+    other_project_outcomes: '',
+    plans: '',
+    other_comments: '',
+    reportID: '',
+  });
+  const [barChartLegends, setBarChartLegends] = React.useState([
+    {
+      label: 'Target',
+      selected: true,
+    },
+    {
+      label: 'Budget',
+      selected: true,
+    },
+  ]);
 
-// direct
-import 'styled-components/macro';
+  const reportDetailAction = useStoreActions(
+    actions => actions.reportDetail.fetch
+  );
+  const reportDetailClearData = useStoreActions(
+    actions => actions.reportDetail.clear
+  );
+  const reportDetailData = useStoreState(state => state.reportDetail.data);
 
-export const ReportDetailLayout = () => (
-  <React.Fragment>
-    {/* ---------------------------------------------------------------------*/}
-    {/* breadcrumbs */}
-    <Grid item lg={12}>
-      <BreadCrumbs {...GranteeBreadCrumbsMock} />
-    </Grid>
+  React.useEffect(() => {
+    return () => reportDetailClearData();
+  }, []);
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* helper grid */}
-    <Grid item lg={6} />
+  React.useEffect(() => {
+    reportDetailAction({
+      socketName: 'getReport',
+      values: { id: report_id },
+    });
+  }, [report_id]);
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* button: generate report */}
-    <Grid item xs={12} lg={6} container justify="flex-end">
-      <ContainedButton text="Generate Report" />
-    </Grid>
+  React.useEffect(() => {
+    if (reportDetailData) {
+      setreportDetails(formatReportDetail(reportDetailData));
+    }
+  }, [reportDetailData]);
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* title fragment */}
-    <Grid item container lg={12} direction="column">
-      <TitleFragment {...ReportTitleMock} />
-    </Grid>
+  function onBarChartLegendClick(legend: string) {
+    const prevBarChartLegends = [...barChartLegends];
+    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
+    if (legendIndex !== -1) {
+      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
+        legendIndex
+      ].selected;
+      setBarChartLegends(prevBarChartLegends);
+    }
+  }
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* outcome charts */}
-    <Grid
-      item
-      container
-      xs={12}
-      lg={6}
-      alignItems="flex-start"
-      justify="flex-start"
-      alignContent="flex-start"
-    >
-      <Grid item lg={12}>
-        <Typography>Target beneficiaries</Typography>
-        <Typography>Total number: 889.080</Typography>
-        <Typography>Typography</Typography>
-      </Grid>
-      <Box height="24px" width="100%" />
-      <Grid item lg={12}>
-        <Card>
-          {/*<CardHeader title="Key outcomes" />*/}
-          <CardContent
-            css={`
-              height: calc(100% - 34px);
-
-              img {
-                width: 100%;
-                height: auto;
-              }
-            `}
-          >
-            <img src={graph1} alt="graph" />
-          </CardContent>
-        </Card>
-      </Grid>
-      <Box height="24px" width="100%" />
-      <Grid item lg={12}>
-        <Typography>
-          Finally, please select which ones of these Insinger Foundation policy
-          priorities the project aims to support.
-        </Typography>
-      </Grid>
-      <Box height="24px" width="100%" />
-      <Grid item lg={12}>
-        <Typography>Prisoner rehabilitation / reintegration</Typography>
-      </Grid>
-      <Box height="24px" width="100%" />
-      <OutcomeCard {...ReportOutcomeCardMock[2]} />
-      <OutcomeCard {...ReportOutcomeCardMock[3]} />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* outcome cards */}
-    <Grid item container xs={12} lg={6}>
-      {ReportOutcomeCardMock.map(card => (
-        <OutcomeCard {...card} />
-      ))}
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* reports list */}
-    <Grid item lg={12} />
-  </React.Fragment>
-);
+  return (
+    <ReportDetailLayout
+      report={reportDetails}
+      barChartLegends={barChartLegends}
+      onBarChartLegendClick={onBarChartLegendClick}
+    />
+  );
+};

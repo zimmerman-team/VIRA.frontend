@@ -10,18 +10,13 @@ import { StatItem } from 'app/modules/common/components/StatItem';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
 import { Description } from 'app/modules/common/components/DescriptionParams';
-import {
-  ProjectOutcomeCardMock,
-  ProjectReportsMock,
-} from 'app/modules/detail-modules/project-detail/mock';
+import { ProjectOutcomeCardMock } from 'app/modules/detail-modules/project-detail/mock';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import TableModule from 'app/components/datadisplay/Table';
-
-import { ProjectModel } from 'app/modules/detail-modules/project-detail/model';
 import graph1 from 'app/assets/images/dummy_graph1.png';
 
-export const ProjectDetailLayout = (props: ProjectModel) => (
+export const ProjectDetailLayout = (props: any) => (
   <React.Fragment>
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
@@ -29,7 +24,7 @@ export const ProjectDetailLayout = (props: ProjectModel) => (
       <BreadCrumbs
         {...GranteeBreadCrumbsMock}
         previousLocations={[{ label: 'Projects', url: '/' }]}
-        currentLocation={props.project}
+        currentLocation={props.projectDetail.project}
       />
     </Grid>
 
@@ -40,33 +35,39 @@ export const ProjectDetailLayout = (props: ProjectModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* button: generate report */}
     <Grid item xs={12} lg={6} container justify="flex-end">
-      <ContainedButton text="Generate Report" />
+      <ContainedButton
+        text="Generate Report"
+        onClick={props.projectDetail.generateReport}
+      />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item container lg={6} direction="column">
       <TitleFragment
-        title={props.project}
-        id={`project id: ${props.project_id}`}
+        title={props.projectDetail.project}
+        id={`project id: ${props.projectDetail.project_id}`}
         date="*earliest and latest activity start dates"
-        url_note="Grantee Title and Link to it"
-        url={props.website}
+        url_note={props.projectDetail.organisation}
+        url={props.projectDetail.website}
       />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* stat fragment */}
     <Grid item container lg={6} alignItems="center" wrap="nowrap">
-      <StatItem label="Total project amount" value={`€${props.total_amount}`} />
+      <StatItem
+        label="Total project amount"
+        value={`€${props.projectDetail.total_amount}`}
+      />
       <StatItemDivider />
       {/* <StatItem {...ProjectStatMock[1]} /> */}
       <StatItem
         label="Project duration"
-        value={`${props.start_date.replace(
+        value={`${props.projectDetail.start_date.replace(
           /-/g,
           '.'
-        )} - ${props.end_date.replace(/-/g, '.')}`}
+        )} - ${props.projectDetail.end_date.replace(/-/g, '.')}`}
       />
     </Grid>
 
@@ -116,7 +117,7 @@ export const ProjectDetailLayout = (props: ProjectModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* reports */}
     <Grid item xs={12} lg={12}>
-      <TableModule {...ProjectReportsMock} />
+      <TableModule {...props.reportTable} />
     </Grid>
   </React.Fragment>
 );

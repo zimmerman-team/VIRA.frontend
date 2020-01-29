@@ -7,6 +7,10 @@ import styled from 'styled-components';
 type BottomNavModel = {
   next: Function;
   back: Function;
+  submit: Function;
+  nextDisabled: boolean;
+  backDisabled: boolean;
+  showSubmitBtn: boolean;
 };
 
 const Container = styled.div`
@@ -23,8 +27,19 @@ const Container = styled.div`
 
 export const BottomNav = (props: BottomNavModel) => (
   <Grid item container lg={12} justify="space-between">
-    <ContainedButton text="Back" onClick={props.back} />
-
-    <ContainedButton text="Next" onClick={props.next} />
+    <ContainedButton
+      text="Back"
+      onClick={props.back}
+      disabled={props.backDisabled}
+    />
+    {props.showSubmitBtn ? (
+      <ContainedButton text="Submit" onClick={props.submit} />
+    ) : (
+      <ContainedButton
+        text="Next"
+        onClick={props.next}
+        disabled={props.nextDisabled}
+      />
+    )}
   </Grid>
 );

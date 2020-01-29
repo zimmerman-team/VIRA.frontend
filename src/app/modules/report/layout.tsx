@@ -1,29 +1,18 @@
-import { Grid, Typography } from '@material-ui/core';
-import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
-import { NavItemParams } from 'app/modules/common/consts';
-import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
-import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { BottomNav } from 'app/modules/report/common/bottom-nav';
-import { ReportModuleRoutes } from 'app/modules/report/routes';
 import React from 'react';
 import 'styled-components/macro';
-
-type CreateReportLayoutModel = {
-  tabs: NavItemParams[];
-  changeRoute: Function;
-  initialTabIndex: number;
-  onNextBtnClick: Function;
-  onBackBtnClick: Function;
-  breadcrumbs: BreadcrumbModel;
-};
+import { Grid, Typography } from '@material-ui/core';
+import { ReportModuleRoutes } from 'app/modules/report/routes';
+import { BottomNav } from 'app/modules/report/common/bottom-nav';
+import { CreateReportLayoutModel } from 'app/modules/report/model';
+import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
+import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 
 export const CreateReportLayout = (props: CreateReportLayoutModel) => (
   <React.Fragment>
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
     <Grid item lg={12}>
-      <BreadCrumbs {...GranteeBreadCrumbsMock} />
+      <BreadCrumbs {...props.breadcrumbs} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
@@ -51,13 +40,27 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
       />
     </Grid>
     <Grid item xs={12} lg={12}>
-      <ReportModuleRoutes />
+      <ReportModuleRoutes
+        step2Enabled={props.step2Enabled}
+        step3Enabled={props.step3Enabled}
+        step4Enabled={props.step4Enabled}
+        outcomesProps={props.outcomesProps}
+        indicatorVerificationProps={props.indicatorVerificationProps}
+        challengesPlansProps={props.challengesPlansProps}
+      />
     </Grid>
 
     {/* <AddMediaLayout /> */}
 
     <Grid item xs={12} lg={12}>
-      <BottomNav next={props.onNextBtnClick} back={props.onBackBtnClick} />
+      <BottomNav
+        submit={props.submit}
+        next={props.onNextBtnClick}
+        back={props.onBackBtnClick}
+        showSubmitBtn={props.showSubmitBtn}
+        nextDisabled={props.nextBtnDisabled}
+        backDisabled={props.backBtnDisabled}
+      />
     </Grid>
   </React.Fragment>
 );

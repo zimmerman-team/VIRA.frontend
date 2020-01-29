@@ -66,10 +66,11 @@ export function AppSideBar(props: AppSideBarParams) {
               color: white;
               font-size: 16px;
               font-weight: 500;
+              letter-spacing: 8px;
               display: ${props.open ? 'flex' : 'none'};
             `}
           >
-            ME & E TOOL
+            M&E TOOL
           </div>
         ) : (
           <IconButton

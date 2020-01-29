@@ -12,6 +12,8 @@ import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { GranteeListMock } from 'app/modules/list-module/mock';
 import React from 'react';
+import { ReportListMock } from 'app/modules/list-module/mock';
+import find from 'lodash/find';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];
@@ -31,6 +33,7 @@ export const formatTableDataForProject = (data: any): any[] => {
 
   return bigTempArray;
 };
+
 export const getBaseTableForProject = (): TableModuleModel => {
   const tableConfig = mockDataVar8;
   tableConfig.columns = [
@@ -123,6 +126,7 @@ export const formatTableDataForGrantee = (data: any): any[] => {
 
   return bigTempArray;
 };
+
 export const getBaseTableForGrantee = (): TableModuleModel => {
   const tableConfig = GranteeListMock;
   tableConfig.columns = [
@@ -198,6 +202,74 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
         customHeadRender: (columnMeta, updateDirection) =>
           getInfoTHead('Website', 'info'),
         customFilterListRender: value => `Website: ${value}`,
+      },
+    },
+  ];
+
+  return tableConfig;
+};
+
+export const formatTableDataForReport = (data: any): any[] => {
+  let tempArray: any[] = [];
+  const bigTempArray: any[][] = [];
+  data.forEach((row: any) => {
+    const splits = row.date.split('/');
+    tempArray.push(
+      row.reportID,
+      row.title,
+      `${splits[1]}-${splits[0]}-${splits[2]}`
+    );
+    bigTempArray.push(tempArray);
+    tempArray = [];
+  });
+
+  return bigTempArray;
+};
+
+export const getBaseTableForReport = (data: any): TableModuleModel => {
+  const tableConfig = ReportListMock;
+  tableConfig.columns = [
+    {
+      name: 'ID',
+      options: {
+        sortDirection: 'asc',
+        filter: true,
+        filterType: 'dropdown',
+        customHeadRender: (columnMeta, updateDirection) =>
+          getInfoTHead('ID', 'info'),
+        customBodyRender: (value, tableMeta, updateValue) => {
+          const item = find(data, { reportID: value });
+          if (!item) {
+            return value;
+          }
+          return (
+            <LinkCellModule
+              value={value}
+              link={`/reports/${item._id}/detail`}
+            />
+          );
+        },
+        customFilterListRender: value => `ID: ${value}`,
+      },
+    },
+    {
+      name: 'Title',
+      options: {
+        filter: true,
+        filterType: 'dropdown',
+        customHeadRender: (columnMeta, updateDirection) =>
+          getInfoTHead('Title', 'info'),
+        customFilterListRender: value => `Title: ${value}`,
+      },
+    },
+    {
+      name: 'Date',
+      options: {
+        filter: true,
+        filterType: 'dropdown',
+        customHeadRender: (columnMeta, updateDirection) =>
+          getInfoTHead('Date', 'info'),
+        customFilterListRender: value => `Date: ${value}`,
       },
     },
   ];
