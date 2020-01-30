@@ -151,7 +151,10 @@ function LandingLayout(props: any) {
         </Grid>
       </React.Fragment>
 
-      <Box width="100%" height="120px" />
+      <Hidden smDown>
+        <Box width="100%" height="86px" />
+      </Hidden>
+      <Box width="100%" height="34px" />
 
       <ListModule
         tabNav={getNavTabItems(

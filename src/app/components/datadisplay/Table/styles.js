@@ -50,6 +50,10 @@ export const CustomStyleDataTable = {
       [class*='MUIDataTableBodyRow'] {
         border: solid 1px rgba(198, 198, 198, 0.2);
       }
+
+      [class*='MUIDataTableToolbar-titleText'] {
+        text-align: left;
+      }
     }
   `,
   variant9: css`
@@ -128,6 +132,10 @@ export const CustomStyleDataTable = {
           font-weight: 600;
         }
       }
+
+      [class*='MUIDataTableToolbar-titleText'] {
+        text-align: left;
+      }
     }
   `,
 
@@ -196,6 +204,10 @@ export const CustomStyleDataTable = {
         > a {
           font-weight: 600;
         }
+      }
+
+      [class*='MUIDataTableToolbar-titleText'] {
+        text-align: left;
       }
     }
   `,

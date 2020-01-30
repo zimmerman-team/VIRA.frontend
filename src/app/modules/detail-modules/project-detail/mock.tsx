@@ -108,7 +108,7 @@ export const ProjectReportsMock: TableModuleModel = {
     rowHover: false,
     pagination: false,
     viewColumns: true,
-    responsive: 'scrollFullHeight',
+    responsive: 'scroll',
     filterType: 'checkbox',
     selectableRows: 'none',
   },
