@@ -5,7 +5,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components';
 import get from 'lodash/get';
 import { colorScheme } from 'app/components/charts/BarCharts/common/colorUtil';
-import Typography from '@material-ui/core/Typography';
+import { useMediaQuery, Typography } from '@material-ui/core';
 import {
   HorizontalBarChartModel,
   barModel,
@@ -157,6 +157,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
   const [containerWidth, setContainerWidth] = React.useState(0);
   const containerRef: any = React.useRef();
   const [maxBudgetVal, setMaxBudgetVal] = React.useState(0);
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   React.useLayoutEffect(() => {
     if (containerRef) {
@@ -178,6 +179,10 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
     'selected',
     true
   );
+
+  if (isMobileWidth) {
+    barModel.axisBottom.tickValues = 3;
+  }
 
   function renderBarchart() {
     if (typeof props.values !== 'undefined' && props.values.length > 0) {
