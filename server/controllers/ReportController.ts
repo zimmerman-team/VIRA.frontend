@@ -111,7 +111,7 @@ export function addReport(req: any, res: any) {
                 data.total_target_beneficiaries;
               report.key_outcomes = data.key_outcomes;
               report.monitor_report_outcomes = data.monitor_report_outcomes;
-              // report.media = data.media; // *** upload file and then store path here ***
+              report.media = data.media;
               report.key_implementation_challenges =
                 data.key_implementation_challenges;
               report.other_project_outcomes = data.other_project_outcomes;

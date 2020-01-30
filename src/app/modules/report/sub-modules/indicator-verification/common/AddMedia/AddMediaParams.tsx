@@ -1,31 +1,51 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import 'styled-components/macro';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
+import { ProjectPalette } from 'app/theme';
+import { MediaModel } from 'app/modules/report/model';
 
 export interface AddMediaParams {
   name: string;
-  items: string[];
+  items: MediaModel;
+  onClose: Function;
+  onChange: Function;
+  onSaveMedia: Function;
 }
+
 interface AddMediaNavItemParams {
   text: string;
+  onClick: Function;
+  active: boolean;
 }
+
 export const AddMediaNavItem = (props: AddMediaNavItemParams) => (
   <div
+    onClick={() => props.onClick(props.text.toLowerCase())}
     css={`
-      color: white;
+      cursor: pointer;
+      padding: 0 15px;
       font-size: 14px;
       font-weight: 600;
       line-height: 1.71;
       letter-spacing: 1.25px;
-      cursor: pointer;
+      color: ${ProjectPalette.common.white};
+      background: ${props.active
+        ? ProjectPalette.secondary.main
+        : 'transparent'};
     `}
   >
     {props.text}
   </div>
 );
-export const AddMediaNavContainer = () => (
+
+export const AddMediaNavContainer = (props: {
+  selectedTab: string;
+  onClick: Function;
+}) => (
   <div
     css={`
       background-color: #20293c;
@@ -35,20 +55,34 @@ export const AddMediaNavContainer = () => (
       width: 300px;
       height: 35px;
       padding: 5px;
-      padding-left: 15px;
-      padding-right: 15px;
     `}
   >
-    <AddMediaNavItem text="Label" />
-    <AddMediaNavItem text="Video" />
-    <AddMediaNavItem text="Picture" />
+    <AddMediaNavItem
+      text="Sound"
+      active={props.selectedTab === 'sound'}
+      onClick={props.onClick}
+    />
+    <AddMediaNavItem
+      text="Video"
+      active={props.selectedTab === 'video'}
+      onClick={props.onClick}
+    />
+    <AddMediaNavItem
+      text="Picture"
+      active={props.selectedTab === 'picture'}
+      onClick={props.onClick}
+    />
   </div>
 );
+
 export interface AddMediaButtonParams {
   text: string;
+  onClick: Function;
 }
+
 export const AddMediaButton = (props: AddMediaButtonParams) => (
   <div
+    onClick={() => props.onClick()}
     css={`
       font-size: 14px;
       font-weight: 600;
@@ -67,10 +101,11 @@ export const AddMediaButton = (props: AddMediaButtonParams) => (
     {props.text}
   </div>
 );
-export const AddMediaInputField = () => (
+
+export const AddMediaInputField = (props: { text: string }) => (
   <Grid
     item
-    lg={10}
+    lg={12}
     css={`
       display: flex;
       border: solid 1px #30c2b0;
@@ -78,17 +113,20 @@ export const AddMediaInputField = () => (
       height: 35px;
       justify-content: flex-start;
       align-items: center;
-      color: white;
+      color: ${ProjectPalette.common.white};
+      margin-bottom: 12px;
       font-size: 12px;
       line-height: 1.33;
       letter-spacing: 0.42px;
       padding-left: 10px;
+      overflow: hidden;
     `}
   >
-    1939u8r482391
+    {props.text}
   </Grid>
 );
-export const AddMediaInputFieldLabel = () => (
+
+export const AddMediaInputFieldLabel = (props: { text: string }) => (
   <Grid
     item
     lg={12}
@@ -97,34 +135,81 @@ export const AddMediaInputFieldLabel = () => (
       font-weight: 300;
       color: #ffffff;
       height: 35px;
+      text-transform: capitalize;
     `}
   >
-    Picture
+    {props.text}
   </Grid>
 );
 
-export const AddMediaBigButton = () => (
-  <div
-    css={`
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #20293c;
-      width: 300px;
-      height: 260px;
-      font-size: 16px;
-      font-weight: 300;
-      line-height: 1.5;
-      letter-spacing: 0.5px;
-      color: white;
-    `}
-  >
-    Add Picture
-  </div>
-);
+export const AddMediaBigButton = (props: {
+  text: string;
+  onChange: Function;
+}) => {
+  const getAcceptString = () => {
+    if (props.text === 'picture') {
+      return 'image/*';
+    }
+    if (props.text === 'video') {
+      return 'video/*';
+    }
+    if (props.text === 'sound') {
+      return 'audio/*';
+    }
+    return '';
+  };
 
-export const AddMediaCloseButton = () => (
+  return (
+    <>
+      <label
+        htmlFor="file-input"
+        css={`
+          display: flex;
+          justify-content: center;
+        `}
+      >
+        <div
+          css={`
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #20293c;
+            width: 300px;
+            height: 250px;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+            color: ${ProjectPalette.common.white};
+          `}
+        >
+          Add {props.text}
+        </div>
+      </label>
+      <input
+        id="file-input"
+        css={`
+          display: none;
+        `}
+        type="file"
+        name="file"
+        accept={getAcceptString()}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          props.onChange(e, props.text)
+        }
+      />
+    </>
+  );
+};
+
+export interface AddMediaCloseButtonParams {
+  onClick: Function;
+}
+
+export const AddMediaCloseButton = (props: AddMediaCloseButtonParams) => (
   <div
+    onClick={() => props.onClick()}
     css={`
       width: 20px;
       height: 20px;

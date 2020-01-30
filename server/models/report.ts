@@ -33,7 +33,7 @@ const ReportSchema = new Schema({
   project: { type: Schema.Types.ObjectId, ref: project, index: true },
   key_outcomes: { type: String, required: true },
   monitor_report_outcomes: { type: String, required: true },
-  media: { type: String, required: false },
+  media: [{ type: String, required: false }],
   policy_priorities: [{ type: Schema.Types.ObjectId, ref: policyPriority }],
   key_implementation_challenges: { type: String, required: true },
   other_project_outcomes: { type: String, required: true },

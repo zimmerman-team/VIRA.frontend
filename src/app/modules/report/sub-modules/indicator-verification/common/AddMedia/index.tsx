@@ -13,81 +13,100 @@ import {
   AddMediaTitle,
 } from './AddMediaParams';
 
-export const AddMediaLayout = (props: AddMediaParams) => (
-  <React.Fragment>
-    <Grid
-      item
-      container
-      xs={12}
-      lg={8}
-      css={`
-        background-color: #2f3b52;
-      `}
-      spacing={4}
-    >
+export const AddMediaLayout = (props: AddMediaParams) => {
+  const [selectedTab, setSelectedTab]: [
+    'picture' | 'video' | 'sound',
+    Function
+  ] = React.useState('picture');
+  const filesToShow: any[] = [];
+  for (let i = 0; i < props.items[selectedTab].length; i++) {
+    filesToShow.push(props.items[selectedTab][i]);
+  }
+  return (
+    <React.Fragment>
       <Grid
         item
         container
-        lg={12}
-        justify="flex-end"
+        xs={12}
+        lg={6}
         css={`
-          && {
-            padding-bottom: 0;
-          }
+          background-color: #2f3b52;
         `}
+        spacing={4}
       >
-        <AddMediaCloseButton />
-      </Grid>
-      <Grid
-        item
-        lg={12}
-        css={`
-          && {
-            padding-top: 0;
-          }
-        `}
-      >
-        <AddMediaTitle />
-      </Grid>
-      <Grid
-        item
-        container
-        lg={12}
-        justify="center"
-        alignItems="center"
-        css={`
-          && {
-            padding-top: 0;
-          }
-        `}
-      >
-        <AddMediaNavContainer />
-      </Grid>
-      <Grid item container lg={12}>
-        <Grid item lg={6} justify="center" alignItems="center">
-          <AddMediaBigButton />
+        <Grid
+          item
+          container
+          lg={12}
+          justify="flex-end"
+          css={`
+            && {
+              padding-bottom: 0;
+            }
+          `}
+        >
+          <AddMediaCloseButton onClick={props.onClose} />
         </Grid>
         <Grid
           item
           container
-          lg={6}
-          justify="flex-start"
-          alignItems="flex-start"
-          direction="row"
+          xs={12}
           css={`
-            height: 70px;
+            && {
+              margin: 0;
+              padding: 40px;
+            }
           `}
+          spacing={4}
         >
-          <AddMediaInputFieldLabel />
-          <AddMediaInputField />
+          <Grid
+            item
+            lg={12}
+            css={`
+              && {
+                padding-top: 0;
+              }
+            `}
+          >
+            <AddMediaTitle />
+          </Grid>
+          <Grid item container lg={12} justify="center" alignItems="center">
+            <AddMediaNavContainer
+              selectedTab={selectedTab}
+              onClick={setSelectedTab}
+            />
+          </Grid>
+          <Grid item container lg={12} justify="center">
+            <Grid item lg={5} justify="center" alignItems="center">
+              <AddMediaBigButton text={selectedTab} onChange={props.onChange} />
+            </Grid>
+            {filesToShow.length > 0 && (
+              <Grid
+                item
+                container
+                lg={5}
+                justify="flex-start"
+                alignItems="flex-start"
+                direction="row"
+                css={`
+                  height: 70px;
+                `}
+              >
+                <AddMediaInputFieldLabel text={selectedTab} />
+                {filesToShow.map(file => (
+                  <AddMediaInputField text={file.name} />
+                ))}
+              </Grid>
+            )}
+          </Grid>
         </Grid>
         <Grid item container lg={12} justify="flex-end">
-          <Grid item container lg={4} justify="space-between">
-            <AddMediaButton text="Cancel" />
-            <AddMediaButton text="Save" />
+          <Grid item container xs={8} md={6} lg={4} justify="space-around">
+            <AddMediaButton text="Cancel" onClick={props.onClose} />
+            <AddMediaButton text="Save" onClick={props.onSaveMedia} />
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
-  </React.Fragment>
-);
+    </React.Fragment>
+  );
+};
