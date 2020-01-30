@@ -5,6 +5,7 @@ const orgTypeController = require('./controllers/OrgTypeController');
 const projectCategoryController = require('./controllers/ProjectCategoryController.ts');
 const responsiblePersonController = require('./controllers/ResponsiblePersonController');
 const SearchController = require('./controllers/SearchController');
+import { uploadFiles } from './utils/upload';
 
 router.get('/', (req: any, res: any) => {
   res.json({ status: 200, message: 'api working' });
@@ -66,6 +67,8 @@ router
   .get(responsiblePersonController.onePeron)
   .put(responsiblePersonController.UpdatePerson)
   .delete(responsiblePersonController.DelPerson);
+
+router.route('/upload').post(uploadFiles);
 
 module.exports = router;
 

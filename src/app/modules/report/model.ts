@@ -6,6 +6,12 @@ export type BeneficiaryCountsModel = {
   value: number | boolean;
 };
 
+export type MediaModel = {
+  sound: never[];
+  video: never[];
+  picture: never[];
+};
+
 export type OutcomesPropsModel = {
   title: string;
   setTitle: Function;
@@ -22,10 +28,13 @@ export type IndicatorVerificationPropsModel = {
   setKeyOutcomes: Function;
   monRepOutcomes: string;
   setMonRepOutcomes: Function;
-  media: any;
+  media: MediaModel;
   setMedia: Function;
+  onSaveMedia: Function;
   policyPriorities: BeneficiaryCountsModel[];
   setPolicyPriorities: Function;
+  openMediaModal: boolean;
+  setOpenMediaModal: Function;
 };
 
 export type ChallengesPlansPropsModel = {

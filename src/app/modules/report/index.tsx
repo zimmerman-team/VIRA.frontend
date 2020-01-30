@@ -13,6 +13,7 @@ import { validateIndVerFields } from './utils/validateIndVerFields';
 import { getTabs } from './utils/getTabs';
 import { validateOutcomeFields } from './utils/validateOutcomeFields';
 import { validateChallengesPlans } from './utils/validateChallengesPlans';
+import { uploadFiles } from './utils/uploadFiles';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -27,7 +28,10 @@ function CreateReportFunc(props: any) {
 
   // Outcomes state
   const [title, setTitle] = React.useState('');
-  const [country, setCountry] = React.useState({ label: '', value: '' });
+  const [country, setCountry] = React.useState({
+    label: '',
+    value: '',
+  });
   const [tarBenTotal, setTarBenTotal] = React.useState(0);
   const [beneficiaryCounts, setBeneficiaryCounts] = React.useState([
     {
@@ -55,7 +59,13 @@ function CreateReportFunc(props: any) {
   // Indicator and verification state
   const [keyOutcomes, setKeyOutcomes] = React.useState('');
   const [monRepOutcomes, setMonRepOutcomes] = React.useState('');
-  const [media, setMedia] = React.useState(undefined);
+  const [media, setMedia] = React.useState({
+    sound: [],
+    video: [],
+    picture: [],
+  });
+  const [mediaAdded, setMediaAdded] = React.useState([]);
+  const [openMediaModal, setOpenMediaModal] = React.useState(false);
   const [policyPriorities, setPolicyPriorities] = React.useState([
     {
       name: 'Refugees',
@@ -98,6 +108,9 @@ function CreateReportFunc(props: any) {
     actions => actions.allProjects.fetch
   );
   const addReportAction = useStoreActions(actions => actions.addReport.fetch);
+  const snackbarAction = useStoreActions(
+    actions => actions.syncVariables.setSnackbar
+  );
   // redux data
   const allProjectsData = useStoreState(state =>
     get(state.allProjects.data, 'data', [])
@@ -163,6 +176,36 @@ function CreateReportFunc(props: any) {
     }
   };
 
+  const onAddMedia = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: 'picture' | 'video' | 'sound'
+  ) => {
+    if (media[type]) {
+      const newFiles: any = media[type];
+      for (let i = 0; i < get(e, 'target.files.length', 0); i++) {
+        newFiles.push(get(e, 'target.files', [])[i]);
+      }
+      setMedia({ ...media, [type]: newFiles });
+    }
+  };
+
+  const onSaveMediaCB = (data: any) => {
+    setMediaAdded(data);
+    setOpenMediaModal(false);
+    snackbarAction('Files upload completed');
+  };
+
+  const onSaveMediaError = (err: any) => {
+    snackbarAction('Something went wrong. Please try again');
+  };
+
+  const onSaveMedia = () => {
+    const files = [...media.picture, ...media.video, ...media.sound];
+    if (files.length > 0) {
+      uploadFiles(files, onSaveMediaCB, onSaveMediaError);
+    }
+  };
+
   const step2Enabled = validateOutcomeFields(
     title,
     country.label,
@@ -198,6 +241,7 @@ function CreateReportFunc(props: any) {
               long: 0,
               lat: 0,
             },
+            media: mediaAdded.map((m: any) => m.path),
             country: country.label,
             total_target_beneficiaries: tarBenTotal,
             key_outcomes: keyOutcomes,
@@ -246,9 +290,12 @@ function CreateReportFunc(props: any) {
         monRepOutcomes,
         setMonRepOutcomes,
         media,
-        setMedia,
+        setMedia: onAddMedia,
+        onSaveMedia,
         policyPriorities,
         setPolicyPriorities,
+        openMediaModal,
+        setOpenMediaModal,
       }}
       challengesPlansProps={{
         keyImplChallenges,

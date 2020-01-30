@@ -1,11 +1,12 @@
 import 'styled-components/macro';
 import React from 'react';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, Modal } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { IntentTexArea } from './common/IntentTextArea';
 import { PolicyPriorityOptions } from './common/PriorityOption';
 import { IndicatorVerificationPropsModel } from '../../model';
+import { AddMediaLayout } from './common/AddMedia';
 
 export const IndicatorVerificationLayout = (
   props: IndicatorVerificationPropsModel
@@ -35,8 +36,35 @@ export const IndicatorVerificationLayout = (
     </Grid>
 
     <Grid item lg={2}>
-      <ContainedButton text="Add media (Optional)" icon={<GetAppIcon />} />
+      <ContainedButton
+        text="Add media (Optional)"
+        icon={<GetAppIcon />}
+        onClick={() => props.setOpenMediaModal(true)}
+      />
     </Grid>
+
+    <Modal
+      open={props.openMediaModal}
+      onClose={() => props.setOpenMediaModal(false)}
+    >
+      <div
+        css={`
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `}
+      >
+        <AddMediaLayout
+          name="name"
+          items={props.media}
+          onChange={props.setMedia}
+          onSaveMedia={props.onSaveMedia}
+          onClose={() => props.setOpenMediaModal(false)}
+        />
+      </div>
+    </Modal>
 
     <Box width="100%" height="24px" />
     {/* ---------------------------------------------------------------------*/}
