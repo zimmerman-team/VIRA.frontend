@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { Palette } from '@material-ui/core/styles/createPalette';
 
 import {
@@ -103,13 +103,12 @@ export const ProjectTypography: TypographyOptions = {
     fontFamily: TextStyle.fontFamily,
     fontSize: `${3.5}rem`,
     fontWeight: TextStyle.fontWeightRegular,
-    lineHeight: '64px',
+    lineHeight: '1.14',
   },
   h3: {
     fontFamily: TextStyle.fontFamily,
     fontSize: `${3}rem`,
     fontWeight: TextStyle.fontWeightMedium,
-    lineHeight: 'normal',
     letterSpacing: 'normal',
     fontStyle: 'normal',
   },
@@ -154,7 +153,7 @@ export const ProjectTypography: TypographyOptions = {
   caption: {
     color: ProjectPalette.primary.light,
     fontFamily: TextStyle.fontFamily,
-    lineHeight: `${1.375}em`,
+    lineHeight: `1.31`,
     fontSize: `${0.6}rem`,
     fontWeight: TextStyle.fontWeightBold,
   },
@@ -169,13 +168,13 @@ export const ProjectTypography: TypographyOptions = {
   body2: {
     color: ProjectPalette.text.primary,
     fontFamily: TextStyle.fontFamily,
-    lineHeight: `${1.71429}em`,
+    lineHeight: `1.71`,
     fontSize: `${0.875}rem`,
     fontWeight: 500,
   },
 };
 
-export default createMuiTheme({
+export const theme = createMuiTheme({
   overrides: {
     // Name of the component ⚛️
     // MuiCssBaseline: {
@@ -279,3 +278,5 @@ export default createMuiTheme({
   spacing: 8,
   palette: ProjectPalette,
 });
+
+export default responsiveFontSizes(theme);
