@@ -8,7 +8,7 @@ import { ProjectPalette } from 'app/theme';
 export const StatItem = (props: StatItemParams) => (
   <Grid
     item
-    sm={12}
+    xs={4}
     lg={4}
     css={`
       display: flex;
@@ -23,6 +23,12 @@ export const StatItem = (props: StatItemParams) => (
           font-size: 36px;
           font-weight: 600;
           color: ${ProjectPalette.primary.light};
+          text-align: center;
+
+          @media (max-width: 600px) {
+            font-size: 14px;
+            color: ${ProjectPalette.text.primary};
+          }
         }
       `}
     >
@@ -34,6 +40,12 @@ export const StatItem = (props: StatItemParams) => (
           font-size: 20px;
           font-weight: 500;
           color: black;
+          text-align: center;
+
+          @media (max-width: 600px) {
+            font-size: 14px;
+            color: ${ProjectPalette.text.primary};
+          }
         }
       `}
     >

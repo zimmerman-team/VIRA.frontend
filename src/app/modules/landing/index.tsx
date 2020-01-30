@@ -1,20 +1,21 @@
 // global
 import React from 'react';
 import { useTitle } from 'react-use';
-import get from 'lodash/get';
-import findIndex from 'lodash/findIndex';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
+import { get, findIndex, find } from 'lodash';
 import { Route, withRouter } from 'react-router-dom';
-import CardContent from '@material-ui/core/CardContent';
-import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
+import css from 'styled-components/macro';
 
 // absolute
+import {
+  Grid,
+  Typography,
+  Box,
+  Hidden,
+  useMediaQuery,
+} from '@material-ui/core';
 import { ListModule } from 'app/modules/list-module';
 import { GeoMap } from 'app/components/charts/GeoMap';
 import { NavItemParams } from 'app/modules/common/consts';
-import { StatItem } from 'app/modules/landing/common/stats/StatItem';
-import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import {
   statsMock,
   StatItemParams,
@@ -26,13 +27,14 @@ import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBa
 import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 import { BubbleChart } from 'app/components/charts/Bubble';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
-import find from 'lodash/find';
-import { Typography, Box } from '@material-ui/core';
 import { getNavTabItems } from './utils/getNavTabItems';
+import { StatCard } from 'app/modules/common/components/cards/StatCard';
+import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 
 function LandingLayout(props: any) {
   // set window title
   useTitle('M&E - Dashboard');
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   const [stats, setStats] = React.useState(statsMock);
   const [barChartLegends, setBarChartLegends] = React.useState([
@@ -74,44 +76,51 @@ function LandingLayout(props: any) {
       {/* -------------------------------------------------------------- */}
       {/* stat items */}
 
-      <Grid item sm={12} lg={12}>
-        <Card>
-          <CardContent>
-            <Grid container direction="row" alignItems="center" wrap="nowrap">
-              {stats.map(stat => (
-                <React.Fragment key={stat.type}>
-                  <StatItem amount={stat.amount} type={stat.type} />
-                  <StatItemDivider />
-                </React.Fragment>
-              ))}
-            </Grid>
-          </CardContent>
-        </Card>
+      <Grid item xs={12}>
+        <StatCard stats={stats} />
       </Grid>
 
-      <Box width="100%" height="48px" />
+      <Hidden smDown>
+        <Box width="100%" height="48px" />
+      </Hidden>
 
       <React.Fragment>
-        <Grid item lg={9}>
-          <Typography variant="h6">
-            {get(
-              find(
-                TabNavMockViz.items,
-                (item: NavItemParams) =>
-                  item.path.split('/')[2] === get(props.match.params, 'viz', '')
-              ),
-              'label',
-              'Priority Area'
-            )}
-          </Typography>
-        </Grid>
-        <Grid item lg={3}>
-          <TabNavigator
-            {...getNavTabItems(
-              TabNavMockViz,
-              get(props.match.params, 'list', '')
-            )}
-          />
+        <Grid container item>
+          <Grid
+            item
+            xs={12}
+            sm={9}
+            css={`
+              order: ${isMobileWidth ? 1 : 0};
+              margin-top: ${isMobileWidth ? '28px' : 0};
+            `}
+          >
+            <Typography variant="h4">
+              {get(
+                find(
+                  TabNavMockViz.items,
+                  (item: NavItemParams) =>
+                    item.path.split('/')[2] ===
+                    get(props.match.params, 'viz', '')
+                ),
+                'label',
+                'Priority Area'
+              )}
+            </Typography>
+          </Grid>
+
+          <Hidden smUp>
+            <Grid item xs={3} />
+          </Hidden>
+
+          <Grid item xs={9} sm={3}>
+            <TabNavigator
+              {...getNavTabItems(
+                TabNavMockViz,
+                get(props.match.params, 'list', '')
+              )}
+            />
+          </Grid>
         </Grid>
 
         <Grid item xs={12} lg={12}>
