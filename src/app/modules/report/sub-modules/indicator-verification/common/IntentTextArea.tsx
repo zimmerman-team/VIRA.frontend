@@ -12,6 +12,8 @@ export interface IntentTextAreaParams {
   text?: string;
   explanation?: string;
   componentID?: string;
+  value: string;
+  setValue: Function;
 }
 
 export const IntentTexArea = (props: IntentTextAreaParams) => (
@@ -22,9 +24,10 @@ export const IntentTexArea = (props: IntentTextAreaParams) => (
     <SingleMultiLineTextField
       fullWidth
       multiline
-      id={''}
       placeholder="Type"
-      setValue={() => console.info('value set')}
+      value={props.value}
+      id={props.componentID}
+      setValue={props.setValue}
     />
     {props.explanation && <InfoCaption text={props.explanation} />}
     <Box width="100%" height="30px" />

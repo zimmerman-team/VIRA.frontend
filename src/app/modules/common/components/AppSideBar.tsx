@@ -119,7 +119,6 @@ export function AppSideBar(props: AppSideBarParams) {
             </IconButton>
           )}
         </div>
-
         <List
           css={`
             background-color: ${ProjectPalette.primary.main};

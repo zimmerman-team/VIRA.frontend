@@ -11,25 +11,25 @@ export interface RouteItemParams {
   button?: ReactChild;
 }
 
-const ReportRouteConfig: RouteItemParams[] = [
-  {
-    label: 'Outcomes',
-    path: '/report/create/outcomes',
-    module: <OutcomesLayout />,
-  },
-  {
-    label: 'Indicator and Verification',
-    path: '/report/create/indicator-verification',
-    module: <IndicatorVerificationLayout />,
-  },
-  {
-    label: 'Challenges and Plans',
-    path: '/report/create/challenges-plans',
-    module: <ChallengesPlansLayout />,
-  },
-  {
-    label: 'Preview',
-    path: '/reports/create/preview',
-    module: <PreviewLayout />,
-  },
-];
+// const ReportRouteConfig: RouteItemParams[] = [
+//   {
+//     label: 'Outcomes',
+//     path: '/report/create/outcomes',
+//     module: <OutcomesLayout />,
+//   },
+//   {
+//     label: 'Indicator and Verification',
+//     path: '/report/create/indicator-verification',
+//     module: <IndicatorVerificationLayout />,
+//   },
+//   {
+//     label: 'Challenges and Plans',
+//     path: '/report/create/challenges-plans',
+//     module: <ChallengesPlansLayout />,
+//   },
+//   {
+//     label: 'Preview',
+//     path: '/reports/create/preview',
+//     module: <PreviewLayout />,
+//   },
+// ];

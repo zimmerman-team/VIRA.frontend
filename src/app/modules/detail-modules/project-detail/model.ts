@@ -31,6 +31,26 @@ export interface ProjectModel {
   login_email: string;
   sex: string;
   role: string;
+  generateReport: Function;
+}
+
+export interface ReportModel {
+  id: string;
+  title: string;
+  date: string;
+  location: string;
+  country: string;
+  total_target_beneficiaries: number;
+  target_beneficiaries: string[];
+  project: string;
+  key_outcomes: string;
+  monitor_report_outcomes: string;
+  media: string;
+  policy_priorities: string[];
+  key_implementation_challenges: string;
+  other_project_outcomes: string;
+  plans: string;
+  other_comments: string;
 }
 
 export const projectMock: ProjectModel = {
@@ -67,4 +87,5 @@ export const projectMock: ProjectModel = {
   login_email: 'penningmeester@ngkdeontmoeting.nl',
   sex: 'male',
   role: 'voorzitter kerkenraad',
+  generateReport: () => {},
 };

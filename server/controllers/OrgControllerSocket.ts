@@ -36,7 +36,7 @@ export function oneOrg(req: any, res: any) {
       if (err) {
         res(JSON.stringify({ status: 'error', message: err.message }));
       }
-      res(JSON.stringify(org));
+      res(JSON.stringify({ data: org }));
     });
 }
 

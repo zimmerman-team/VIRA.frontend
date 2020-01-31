@@ -271,6 +271,9 @@ IO.sockets.on('connection', (socket: any) => {
   socket.on('allReport', (data: any, fn: any) => {
     reportController.getReports({ query: data }, (res: any) => fn(res));
   });
+  socket.on('getReport', (data: any, fn: any) => {
+    reportController.getReport({ query: data }, (res: any) => fn(res));
+  });
   socket.on('addReport', (data: any, fn: any) => {
     reportController.addReport({ query: data }, (res: any) => fn(res));
   });

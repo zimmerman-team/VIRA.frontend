@@ -24,12 +24,16 @@ import getUserGroups from 'app/state/api/actionsReducers/getUserGroups';
 import allProjects from 'app/state/api/actionsReducers/allProjects';
 import allOrganisations from 'app/state/api/actionsReducers/allOrganisations';
 import projectDetail from 'app/state/api/actionsReducers/projectDetail';
+import reportDetail from 'app/state/api/actionsReducers/reportDetail';
 import orgDetail from 'app/state/api/actionsReducers/orgDetail';
+import allReports from 'app/state/api/actionsReducers/allReports';
 import forgetPassword from 'app/state/api/actionsReducers/forgetPassword';
 import loadAuth0DBConnection from 'app/state/api/actionsReducers/loadAuth0DBConnection';
 import allTeams from 'app/state/api/actionsReducers/allTeams';
 import addTeam from 'app/state/api/actionsReducers/addTeam';
 import generalSearch from 'app/state/api/actionsReducers/generalSearch';
+import addReport from 'app/state/api/actionsReducers/addReport';
+import getReports from 'app/state/api/actionsReducers/getReports';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
@@ -52,8 +56,10 @@ export interface ApplicationStoreModel {
   getUserRoles: SocketAPIResonseInterface;
   getUserGroups: SocketAPIResonseInterface;
   allProjects: SocketAPIResonseInterface;
+  allReports: SocketAPIResonseInterface;
   allOrganisations: SocketAPIResonseInterface;
   projectDetail: SocketAPIResonseInterface;
+  reportDetail: SocketAPIResonseInterface;
   orgDetail: SocketAPIResonseInterface;
   allUsers: SocketAPIResonseInterface;
   loadUser: SocketAPIResonseInterface;
@@ -64,6 +70,8 @@ export interface ApplicationStoreModel {
   allTeams: SocketAPIResonseInterface;
   addTeam: SocketAPIResonseInterface;
   generalSearch: SocketAPIResonseInterface;
+  addReport: SocketAPIResonseInterface;
+  getReports: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
@@ -73,8 +81,10 @@ const applicationStore: ApplicationStoreModel = {
   userDetails,
   addUser,
   allProjects,
+  allReports,
   allOrganisations,
   projectDetail,
+  reportDetail,
   orgDetail,
   allUsers,
   loadUser,
@@ -85,6 +95,8 @@ const applicationStore: ApplicationStoreModel = {
   allTeams,
   addTeam,
   generalSearch,
+  addReport,
+  getReports,
 };
 
 export const appStore = createStore(applicationStore, {

@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React from 'react';
 import 'styled-components/macro';
 import { Marker } from 'react-map-gl';
@@ -11,7 +14,7 @@ type Props = {
   latitude: number;
   maxValue: number;
   longitude: number;
-  onClick: Function;
+  onClick?: Function;
 };
 
 function getWidth(value: number, maxValue: number) {
@@ -29,7 +32,10 @@ export function MapPin(props: Props) {
       longitude={parseFloat(props.longitude.toString())}
     >
       <div
-        onClick={() => props.onClick([props.longitude, props.latitude])}
+        role="button"
+        onClick={() =>
+          props.onClick && props.onClick([props.longitude, props.latitude])
+        }
         css={`
           width: ${width}px;
           height: ${width}px;

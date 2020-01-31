@@ -13,15 +13,17 @@ export interface MultilineTextfieldParams extends InputBaseProps {
   id?: string;
   label?: string;
   bigLabel?: boolean;
-  value?: string;
+  value?: string | number;
   defaultValue?: string;
   setValue?: Function;
   variant?: string;
   multiline?: boolean;
   placeholder?: string;
+  type?: string;
+  min?: number;
 }
 
-const Input = withStyles((theme: Theme) =>
+export const Input = withStyles((theme: Theme) =>
   createStyles({
     root: {
       'label + &': {
@@ -67,13 +69,21 @@ function renderLabel(props) {
 }
 
 export const SingleMultiLineTextField = (props: MultilineTextfieldParams) => {
+  const { setValue, min, ...inputProps } = props;
   return (
     <FormControl fullWidth={props.fullWidth}>
       {renderLabel(props)}
       <Input
-        {...props}
+        {...inputProps}
+        inputProps={{ min }}
         placeholder={props.placeholder}
-        onChange={e => props.setValue(e.target.value)}
+        onChange={e =>
+          setValue(
+            props.type === 'number'
+              ? parseInt(e.target.value, 10)
+              : e.target.value
+          )
+        }
       />
     </FormControl>
   );

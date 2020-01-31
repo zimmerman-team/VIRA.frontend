@@ -1,4 +1,12 @@
 import React from 'react';
+import 'styled-components/macro';
+import filter from 'lodash/filter';
+import { ProjectPalette } from 'app/theme';
+import {
+  OutcomesPropsModel,
+  IndicatorVerificationPropsModel,
+  ChallengesPlansPropsModel,
+} from 'app/modules/report/model';
 import { Grid, Typography, Box } from '@material-ui/core';
 import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
 
@@ -8,9 +16,11 @@ export interface InfoTextCompParams {
   title: string;
   description: string;
 }
+
 export const InfoTextComp = (props: InfoTextCompParams) => (
   <React.Fragment>
-    <Typography>{props.title}</Typography>
+    <Typography variant="subtitle2">{props.title}</Typography>
+    <Box width="100%" height="10px" />
     <Typography>{props.description}</Typography>
   </React.Fragment>
 );
@@ -20,9 +30,21 @@ export const InfoTextAreaComp = (props: InfoTextCompParams) => (
     <Grid item lg={12}>
       <Typography variant="subtitle2">{props.title}</Typography>
     </Grid>
-
-    <Grid item lg={12}>
-      <SingleMultiLineTextField fullWidth defaultValue={props.description} />
+    <Box width="100%" height="10px" />
+    <Grid
+      item
+      lg={12}
+      css={`
+        input {
+          color: #000 !important;
+        }
+      `}
+    >
+      <SingleMultiLineTextField
+        disabled
+        fullWidth
+        defaultValue={props.description}
+      />
     </Grid>
   </Grid>
 );
@@ -77,47 +99,134 @@ export const InfoTextAreaMock: InfoTextCompParams[] = [
   },
 ];
 
-export const PreviewLayout = () => (
+type Props = {
+  step2Enabled: boolean;
+  step3Enabled: boolean;
+  step4Enabled: boolean;
+  outcomesProps: OutcomesPropsModel;
+  indicatorVerificationProps: IndicatorVerificationPropsModel;
+  challengesPlansProps: ChallengesPlansPropsModel;
+};
+
+export const PreviewLayout = (props: Props) => (
   <React.Fragment>
     {/* -------------------------------------------------------------- */}
     <Grid item lg={12}>
-      <InfoTextComp {...InfoTextMock[0]} />
+      <InfoTextComp title="Title" description={props.outcomesProps.title} />
     </Grid>
-
     <Spacer />
 
     {/* -------------------------------------------------------------- */}
     <Grid item lg={12}>
-      <InfoTextComp {...InfoTextMock[1]} />
+      <InfoTextComp
+        title="Country"
+        description={props.outcomesProps.country.label}
+      />
     </Grid>
-
     <Spacer />
+
     {/* -------------------------------------------------------------- */}
     <Grid item lg={12}>
-      <InfoTextComp {...InfoTextMock[2]} />
+      <InfoTextComp
+        title="Target beneficiaries"
+        description={`Total number: ${props.outcomesProps.tarBenTotal}`}
+      />
     </Grid>
-
     <Spacer />
+
     {/* -------------------------------------------------------------- */}
     <Grid item lg={12}>
-      <Typography>
+      <Typography variant="subtitle2">
         Of which the beneficiaries will likely include approximately
       </Typography>
-      <Typography>Children/Young people: 1</Typography>
-      <Typography>Elderly: 1</Typography>
-      <Typography>Women: 1</Typography>
-      <Typography>Refugees: 1</Typography>
-      <Typography>Low income individuals: 1</Typography>
     </Grid>
-
+    <Box width="100%" height="10px" />
+    <Grid container spacing={4}>
+      {props.outcomesProps.beneficiaryCounts.map(b => (
+        <Grid item lg={4}>
+          <Typography>
+            {b.name}: {b.value}
+          </Typography>
+        </Grid>
+      ))}
+    </Grid>
     <Spacer />
-    {/* -------------------------------------------------------------- */}
 
-    {InfoTextAreaMock.map(item => (
-      <React.Fragment>
-        <InfoTextAreaComp {...item} />
-        <Spacer />
-      </React.Fragment>
-    ))}
+    {/* -------------------------------------------------------------- */}
+    <InfoTextAreaComp
+      title="Please describe the key outcomes the project aims to achieve"
+      description={props.indicatorVerificationProps.keyOutcomes}
+    />
+    <Spacer />
+
+    {/* -------------------------------------------------------------- */}
+    <InfoTextAreaComp
+      title="Please tell us how you intend to monitor and report on the outcomes"
+      description={props.indicatorVerificationProps.monRepOutcomes}
+    />
+    <Spacer />
+
+    {/* -------------------------------------------------------------- */}
+    <Grid item lg={12}>
+      <Typography variant="subtitle2">
+        Finally, please select which ones of these Insinger Foundation policy
+        priorities the project aims to support.
+      </Typography>
+    </Grid>
+    <Box width="100%" height="10px" />
+    <Grid container spacing={4}>
+      {filter(props.indicatorVerificationProps.policyPriorities, {
+        value: true,
+      }).map(b => (
+        <Grid
+          item
+          lg={4}
+          css={`
+            display: flex;
+          `}
+        >
+          <div
+            css={`
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              margin-right: 20px;
+              background: ${ProjectPalette.common.white};
+              border: 5px solid ${ProjectPalette.secondary.main};
+            `}
+          />
+          <Typography>{b.name}</Typography>
+        </Grid>
+      ))}
+    </Grid>
+    <Spacer />
+
+    {/* -------------------------------------------------------------- */}
+    <InfoTextAreaComp
+      title="Key implementation challenges"
+      description={props.challengesPlansProps.keyImplChallenges}
+    />
+    <Spacer />
+
+    {/* -------------------------------------------------------------- */}
+    <InfoTextAreaComp
+      title="Other project outcomes and observations"
+      description={props.challengesPlansProps.otherProjOutObs}
+    />
+    <Spacer />
+
+    {/* -------------------------------------------------------------- */}
+    <InfoTextAreaComp
+      title="Future plans"
+      description={props.challengesPlansProps.futurePlans}
+    />
+    <Spacer />
+
+    {/* -------------------------------------------------------------- */}
+    <InfoTextAreaComp
+      title="Other comments"
+      description={props.challengesPlansProps.otherComms}
+    />
+    <Spacer />
   </React.Fragment>
 );

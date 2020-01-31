@@ -18,6 +18,8 @@ export const NavigationButton = (props: NavItemParams) => {
       css={`
         && {
           text-decoration: none;
+          opacity: ${props.disabled ? 0.6 : 1};
+          pointer-events: ${props.disabled ? 'none' : 'all'};
         }
       `}
     >
