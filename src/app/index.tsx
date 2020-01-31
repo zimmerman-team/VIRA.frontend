@@ -27,7 +27,6 @@ export function App() {
   };
 
   const isLoggedIn = Boolean(useStoreState(state => state.syncVariables.user));
-
   return (
     <div className={classes.root}>
       {!isLoggedIn ? (
@@ -39,8 +38,8 @@ export function App() {
             open={open}
             theme={theme}
             handleDrawerClose={handleDrawerClose}
+            handleDrawerOpen={handleDrawerOpen}
           />
-
           <AppSideBar
             classes={classes}
             open={open}

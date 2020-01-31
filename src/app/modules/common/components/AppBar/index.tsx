@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Theme } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-import Toolbar from '@material-ui/core/Toolbar';
+import { Menu } from '@material-ui/icons';
+import {
+  Theme,
+  Hidden,
+  useMediaQuery,
+  Toolbar,
+  IconButton,
+  AppBar,
+} from '@material-ui/core';
 import { MobileRendering } from 'app/modules/common/components/AppBar/MobileRenderingParams';
 import { TopBarDesktopSection } from 'app/modules/common/components/AppBar/TopBarDesktopSection';
 import { TopBarMobileSection } from 'app/modules/common/components/AppBar/TopBarMobileSection';
@@ -31,6 +36,7 @@ interface PrimarySearchAppBarParams {
   theme: Theme;
 
   handleDrawerClose: () => void;
+  handleDrawerOpen: () => void;
 }
 
 export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
@@ -42,6 +48,7 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
   ] = React.useState<null | HTMLElement>(null);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -70,27 +77,46 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
           css={`
             && {
               padding-left: 0;
+              padding-right: ${isMobileWidth ? 0 : '16px'};
             }
           `}
         >
-          {props.open ? (
-            <IconButton
-              onClick={props.handleDrawerClose}
-              css={`
-                && {
-                  background-color: ${ProjectPalette.primary.main};
-                  border-radius: 0;
-                  padding: 0;
-                  width: 36px;
-                  height: 36px;
-                }
-              `}
-            >
-              <IconMenuToggle />
-            </IconButton>
-          ) : (
-            <div />
-          )}
+          {/* Mobile Appbar Open/Close button*/}
+          <Hidden smUp>
+            {props.open ? (
+              <div />
+            ) : (
+              <IconButton onClick={props.handleDrawerOpen}>
+                <Menu
+                  fontSize="large"
+                  css={`
+                    color: ${ProjectPalette.grey.A400};
+                  `}
+                />
+              </IconButton>
+            )}
+          </Hidden>
+
+          <Hidden smDown>
+            {props.open ? (
+              <IconButton
+                onClick={props.handleDrawerClose}
+                css={`
+                  && {
+                    background-color: ${ProjectPalette.primary.main};
+                    border-radius: 0;
+                    padding: 0;
+                    width: 36px;
+                    height: 36px;
+                  }
+                `}
+              >
+                <IconMenuToggle />
+              </IconButton>
+            ) : (
+              <div />
+            )}
+          </Hidden>
           {/* {TopBarSearchSection(classes)} */}
           <div className={classes.grow} />
           {TopBarDesktopSection({

@@ -51,7 +51,7 @@ export const ProjectPalette: ProjectPalette = {
     '900': '#a1a3a6',
     A700: '#a1aebd',
     A100: '#d5d5d5',
-    A400: '#303030',
+    A400: '#20293c',
     A200: '#aaaaaa',
   },
   text: {
