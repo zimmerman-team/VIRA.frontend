@@ -6523,7 +6523,7 @@ es6-iterator@2.0.3, es6-iterator@~2.0.3:
     es5-ext "^0.10.35"
     es6-symbol "^3.1.1"
 
-es6-promise@^4.2.8:
+es6-promise@^4.0.5, es6-promise@^4.2.8:
   version "4.2.8"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.8.tgz#4eb21594c972bc40553d276e510539143db53e0a"
   integrity sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==
@@ -10457,6 +10457,14 @@ mapbox-gl@^1.0.0:
     tinyqueue "^2.0.0"
     vt-pbf "^3.1.1"
 
+mapbox@^1.0.0-beta10:
+  version "1.0.0-beta10"
+  resolved "https://registry.yarnpkg.com/mapbox/-/mapbox-1.0.0-beta10.tgz#037561bcb95cbdc066d1dff7e2ce1d6c8539cb8e"
+  integrity sha1-A3VhvLlcvcBm0d/34s4dbIU5y44=
+  dependencies:
+    es6-promise "^4.0.5"
+    rest "^2.0.0"
+
 markdown-to-jsx@^6.9.1, markdown-to-jsx@^6.9.3:
   version "6.10.3"
   resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-6.10.3.tgz#7f0946684acd321125ff2de7fd258a9b9c7c40b7"
@@ -12021,6 +12029,11 @@ pnp-webpack-plugin@1.5.0:
   dependencies:
     ts-pnp "^1.1.2"
 
+point-in-polygon@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/point-in-polygon/-/point-in-polygon-0.0.0.tgz#09130fc5cdef218de5f9bdf0e6c4a3b2e1beae51"
+  integrity sha1-CRMPxc3vIY3l+b3w5sSjsuG+rlE=
+
 polished@^3.3.1:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/polished/-/polished-3.4.2.tgz#b4780dad81d64df55615fbfc77acb52fd17d88cd"
@@ -13147,6 +13160,11 @@ raw-loader@^3.1.0:
     loader-utils "^1.1.0"
     schema-utils "^2.0.1"
 
+rbush@^1.3.2:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/rbush/-/rbush-1.4.3.tgz#7874e2d38911d2719ea27731d32445da5ec4394c"
+  integrity sha1-eHTi04kR0nGeoncx0yRF2l7EOUw=
+
 rc-align@^2.4.0, rc-align@^2.4.1:
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/rc-align/-/rc-align-2.4.5.tgz#c941a586f59d1017f23a428f0b468663fb7102ab"
@@ -13782,6 +13800,14 @@ react-map-gl@^5.2.1:
     prop-types "^15.7.2"
     react-virtualized-auto-sizer "^1.0.2"
     viewport-mercator-project "^6.2.3 || ^7.0.1"
+
+react-mapbox-gl-geocoder@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-mapbox-gl-geocoder/-/react-mapbox-gl-geocoder-1.1.0.tgz#f07e27a1329db711ec5843fbf1b78dbdc5930c9a"
+  integrity sha512-U8fVUlj7Sb19KOgkKvfr3MPuqiGZ+ldHwwfo4BxBv7cyr397PQ/0o2XiC/Nz4PvN7dbIFHz7JfuVaq/MFZ5oHw==
+  dependencies:
+    mapbox "^1.0.0-beta10"
+    viewport-mercator-project "^6.0.0"
 
 react-measure@^2.2.4:
   version "2.3.0"
@@ -14576,6 +14602,11 @@ resolve@^1.1.6, resolve@^1.10.0, resolve@^1.11.0, resolve@^1.11.1, resolve@^1.12
   integrity sha512-+hTmAldEGE80U2wJJDC1lebb5jWqvTYAfm3YZ1ckk1gBr0MnCqUKlwK1e+anaFljIl+F5tR5IoZcm4ZDA1zMQw==
   dependencies:
     path-parse "^1.0.6"
+
+rest@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/rest/-/rest-2.0.0.tgz#6dfadf66a405c49cfbd5b4bd25b59fd29cd861bc"
+  integrity sha1-bfrfZqQFxJz71bS9JbWf0pzYYbw=
 
 restore-cursor@^2.0.0:
   version "2.0.0"
@@ -16707,6 +16738,14 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
+viewport-mercator-project@^6.0.0:
+  version "6.2.3"
+  resolved "https://registry.yarnpkg.com/viewport-mercator-project/-/viewport-mercator-project-6.2.3.tgz#4122040f51ef9553fa41a46bcc6502977b3909c6"
+  integrity sha512-QQb0/qCLlP4DdfbHHSWVYXpghB2wkLIiiZQnoelOB59mXKQSyZVxjreq1S+gaBJFpcGkWEcyVtre0+2y2DTl/Q==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    gl-matrix "^3.0.0"
+
 "viewport-mercator-project@^6.2.3 || ^7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/viewport-mercator-project/-/viewport-mercator-project-7.0.1.tgz#9d7248072f2cbb122f93b63d2b346a5763b8d79a"
@@ -17017,6 +17056,14 @@ whatwg-url@^7.0.0:
     lodash.sortby "^4.7.0"
     tr46 "^1.0.1"
     webidl-conversions "^4.0.2"
+
+which-country@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/which-country/-/which-country-1.0.0.tgz#22cd4b0132a399f69b88791d8b4bbe72f2f20f47"
+  integrity sha1-Is1LATKjmfabiHkdi0u+cvLyD0c=
+  dependencies:
+    point-in-polygon "0.0.0"
+    rbush "^1.3.2"
 
 which-module@^2.0.0:
   version "2.0.0"

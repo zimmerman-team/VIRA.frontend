@@ -69,6 +69,26 @@ async function getPolicyPriorities(data: any) {
   });
 }
 
+async function getLocation(data: any) {
+  return new Promise((resolve, reject) => {
+    Location.findOne({
+      long: data.long,
+      lat: data.lat,
+    }).exec((err: any, l: any) => {
+      if (!l) {
+        new Location({
+          long: data.long,
+          lat: data.lat,
+        }).save((err: any, newLocation: any) => {
+          resolve(newLocation);
+        });
+      } else {
+        resolve(l);
+      }
+    });
+  });
+}
+
 // add report
 export function addReport(req: any, res: any) {
   const { data } = req.query;
@@ -86,23 +106,12 @@ export function addReport(req: any, res: any) {
             if (err) {
               res(JSON.stringify({ status: 'error', message: err.message }));
             }
-            Location.findOne({
-              long: data.location.long,
-              lat: data.location.lat,
-            }).exec((err: any, l: any) => {
-              // let location = null;
-              // if (err) {
-              //   location = new Location({
-              //     long: data.location.long,
-              //     lat: data.location.lat,
-              //   });
-              // } else {
-              //   location = l;
-              // }
+            getLocation(data.location).then((location: any) => {
               let report = new Report();
               report.project = project;
               report.title = data.title;
-              // report.location = location;
+              report.location = location;
+              report.place_name = data.place_name;
               report.date = new Date().toLocaleDateString();
               report.country = data.country;
               report.target_beneficiaries = tb;

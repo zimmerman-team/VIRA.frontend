@@ -14,6 +14,7 @@ import { getTabs } from './utils/getTabs';
 import { validateOutcomeFields } from './utils/validateOutcomeFields';
 import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { uploadFiles } from './utils/uploadFiles';
+import { LocationModel } from './model';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -32,6 +33,10 @@ function CreateReportFunc(props: any) {
     label: '',
     value: '',
   });
+  const [location, setLocation]: [
+    LocationModel | null,
+    Function
+  ] = React.useState(null);
   const [tarBenTotal, setTarBenTotal] = React.useState(0);
   const [beneficiaryCounts, setBeneficiaryCounts] = React.useState([
     {
@@ -152,6 +157,12 @@ function CreateReportFunc(props: any) {
     }
   }, [addReportData]);
 
+  React.useEffect(() => {
+    if (location && get(location, 'country.label', '') !== '') {
+      setCountry(get(location, 'country') as { label: string; value: string });
+    }
+  }, [location]);
+
   const onTabChange = (tabIndex: number) => {
     props.history.push(tabs[tabIndex].path);
   };
@@ -237,12 +248,15 @@ function CreateReportFunc(props: any) {
             policy_priorities: filter(policyPriorities, { value: true }).map(
               p => p.name
             ),
-            location: {
-              long: 0,
-              lat: 0,
-            },
+            location: location
+              ? {
+                  long: (location as LocationModel).longitude,
+                  lat: (location as LocationModel).latitude,
+                }
+              : null,
             media: mediaAdded.map((m: any) => m.path),
             country: country.label,
+            place_name: location ? (location as LocationModel).place : null,
             total_target_beneficiaries: tarBenTotal,
             key_outcomes: keyOutcomes,
             monitor_report_outcomes: monRepOutcomes,
@@ -279,6 +293,8 @@ function CreateReportFunc(props: any) {
         setTitle,
         country,
         setCountry,
+        location,
+        setLocation,
         tarBenTotal,
         setTarBenTotal,
         beneficiaryCounts,

@@ -40,6 +40,7 @@ const ReportSchema = new Schema({
   plans: { type: String, required: true },
   other_comments: { type: String, required: true },
   reportID: { type: Number, required: true },
+  place_name: { type: String, required: false },
 });
 
 ReportSchema.plugin(autoIncrement.plugin, {

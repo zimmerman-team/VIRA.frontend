@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 export function formatReportDetail(reportDetailRecord: any) {
   const splits = reportDetailRecord.date.split('/');
   const date = `${splits[1]}.${splits[0]}.${splits[2]}`;
@@ -8,6 +9,7 @@ export function formatReportDetail(reportDetailRecord: any) {
     location: reportDetailRecord.location,
     country: reportDetailRecord.country,
     total_target_beneficiaries: reportDetailRecord.total_target_beneficiaries,
+    place: reportDetailRecord.place_name || reportDetailRecord.country,
     target_beneficiaries: reportDetailRecord.target_beneficiaries,
     project: {
       name: reportDetailRecord.project.project_name,

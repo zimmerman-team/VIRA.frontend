@@ -23,7 +23,7 @@ export interface MultilineTextfieldParams extends InputBaseProps {
   min?: number;
 }
 
-const Input = withStyles((theme: Theme) =>
+export const Input = withStyles((theme: Theme) =>
   createStyles({
     root: {
       'label + &': {
