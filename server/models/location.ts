@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const locationSchema = new Schema({
-  long: { type: String, required: true },
-  lat: { type: String, required: true },
+  long: { type: Number, required: true },
+  lat: { type: Number, required: true },
 });
 
 // @ts-ignore

@@ -70,7 +70,7 @@ export const ReportDetailLayout = (props: any) => (
         </Grid>
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
-        <OutcomeCard title="Location" description={props.report.country} />
+        <OutcomeCard title="Location" description={props.report.place} />
       </Grid>
     </Grid>
 

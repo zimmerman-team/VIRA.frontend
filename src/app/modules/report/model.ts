@@ -12,6 +12,16 @@ export type MediaModel = {
   picture: never[];
 };
 
+export type LocationModel = {
+  longitude: number;
+  latitude: number;
+  country: {
+    label: string;
+    value: string;
+  };
+  place: string | null;
+};
+
 export type OutcomesPropsModel = {
   title: string;
   setTitle: Function;
@@ -21,6 +31,8 @@ export type OutcomesPropsModel = {
   setTarBenTotal: Function;
   beneficiaryCounts: BeneficiaryCountsModel[];
   setBeneficiaryCounts: Function;
+  location: LocationModel | null;
+  setLocation: Function;
 };
 
 export type IndicatorVerificationPropsModel = {

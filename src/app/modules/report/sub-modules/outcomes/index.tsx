@@ -1,11 +1,12 @@
 import React from 'react';
 import 'styled-components/macro';
-import { Box, Grid } from '@material-ui/core';
-// import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { Box, Grid, Typography } from '@material-ui/core';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
 import { IntentTexField } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 import { OutcomesPropsModel } from 'app/modules/report/model';
+import { GeoMap } from 'app/components/charts/GeoMap';
 import { Autocomplete } from './common/Autocomplete';
 
 export const OutcomesLayout = (props: OutcomesPropsModel) => {
@@ -23,12 +24,39 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         />
       </Grid>
 
-      <Grid item container lg={12} alignItems="center">
-        <Autocomplete
-          description="Country"
-          value={props.country}
-          setValue={props.setCountry}
-        />
+      <Grid item container lg={12} justify="space-between">
+        <Grid item lg={5}>
+          <Autocomplete
+            description="Country"
+            value={props.country}
+            setValue={props.setCountry}
+          />
+        </Grid>
+        <Grid item lg={6}>
+          <FieldDescription text="Select exact location (optional)" />
+          <Box width="100%" height="14px" />
+          <GeoMap
+            noData
+            height={300}
+            pointSelection={props.location}
+            setPointSelection={props.setLocation}
+          />
+          {props.location && (
+            <>
+              <Box width="100%" height="14px" />
+              <div>
+                <Typography>{props.location?.place}</Typography>
+                <Typography>Longitude: {props.location?.longitude}</Typography>
+                <Typography>Latitude: {props.location?.latitude}</Typography>
+              </div>
+              <Box width="100%" height="14px" />
+              <ContainedButton
+                text="Remove"
+                onClick={() => props.setLocation(null)}
+              />
+            </>
+          )}
+        </Grid>
       </Grid>
 
       {/* <Grid item lg={2}>
