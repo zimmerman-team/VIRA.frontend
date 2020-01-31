@@ -1,8 +1,9 @@
+import path from 'path';
 const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: function(req: any, file: any, cb: any) {
-    cb(null, 'media');
+    cb(null, path.resolve(__dirname, '../../media'));
   },
   filename: function(req: any, file: any, cb: any) {
     cb(null, Date.now() + '-' + file.originalname);
