@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
 import { Box, InputBase } from '@material-ui/core';
-import { countries } from 'app/assets/data/countries';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import { getInputGeneralStyle } from 'app/components/inputs/common/mock';
 import {
@@ -18,6 +19,7 @@ export interface AutocompleteParams {
   value: { label: string; value: string };
   setValue: Function;
   text?: string;
+  values: any[];
 }
 
 const Input = withStyles((theme: Theme) =>
@@ -83,7 +85,7 @@ export const Autocomplete = (props: AutocompleteParams) => {
   } = useAutocomplete({
     value: props.value,
     id: 'autocomplete-countries',
-    options: countries,
+    options: props.values,
     getOptionLabel: option => option.label,
   });
 
@@ -101,10 +103,9 @@ export const Autocomplete = (props: AutocompleteParams) => {
       {groupedOptions.length > 0 ? (
         <ul className={classes.listbox} {...getListboxProps()}>
           {groupedOptions.map((option, index) => {
-            const optionProps = getOptionProps({ option, index });
+            const optionProps: any = getOptionProps({ option, index });
             const onClick = (e: any) => {
               props.setValue(option);
-              // @ts-ignore
               optionProps.onClick(e);
             };
             return (
@@ -119,7 +120,6 @@ export const Autocomplete = (props: AutocompleteParams) => {
           })}
         </ul>
       ) : null}
-      <Box width="100%" height="30px" />
     </div>
   );
 };

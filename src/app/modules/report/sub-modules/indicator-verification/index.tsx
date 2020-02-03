@@ -4,7 +4,6 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import { Grid, Box, Modal } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { IntentTexArea } from './common/IntentTextArea';
-import { PolicyPriorityOptions } from './common/PriorityOption';
 import { IndicatorVerificationPropsModel } from '../../model';
 import { AddMediaLayout } from './common/AddMedia';
 
@@ -67,15 +66,5 @@ export const IndicatorVerificationLayout = (
     </Modal>
 
     <Box width="100%" height="24px" />
-    {/* ---------------------------------------------------------------------*/}
-    {/* options */}
-    <Grid item lg={12}>
-      <PolicyPriorityOptions
-        options={props.policyPriorities}
-        onChange={props.setPolicyPriorities}
-        // explanation="For each priority selected, the relevant SDGs appear and can be selected based on our mapping"
-        description="Finally, please select which ones of these Insinger Foundation policy priorities the project aims to support."
-      />
-    </Grid>
   </React.Fragment>
 );

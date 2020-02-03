@@ -21,7 +21,7 @@ import {
   TabNavMockViz,
   TabNavMockList,
 } from 'app/modules/landing/statsMock';
-import { useStoreState } from 'app/state/store/hooks';
+import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
 import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 import { BubbleChart } from 'app/components/charts/Bubble';
@@ -29,6 +29,7 @@ import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import find from 'lodash/find';
 import { Typography, Box } from '@material-ui/core';
 import { getNavTabItems } from './utils/getNavTabItems';
+import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 
 function LandingLayout(props: any) {
   // set window title
@@ -46,7 +47,13 @@ function LandingLayout(props: any) {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
+  const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
+  const ppVizData = useStoreState(state => state.getPPVizData.data);
   const allProjectsData = useStoreState(state => state.allProjects.data);
+
+  React.useEffect(() => {
+    getPPVizData({ socketName: 'getPolicyPriorityBarChart', values: {} });
+  }, []);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];
@@ -118,6 +125,9 @@ function LandingLayout(props: any) {
           <Route path="/dashboard" exact>
             <HorizontalBarChart
               {...mockData}
+              values={
+                ((ppVizData as unknown) as HorizontalBarChartValueModel[]) || []
+              }
               chartLegends={barChartLegends}
               onChartLegendClick={onBarChartLegendClick}
             />
@@ -125,6 +135,9 @@ function LandingLayout(props: any) {
           <Route path="/dashboard/priority-area">
             <HorizontalBarChart
               {...mockData}
+              values={
+                ((ppVizData as unknown) as HorizontalBarChartValueModel[]) || []
+              }
               chartLegends={barChartLegends}
               onChartLegendClick={onBarChartLegendClick}
             />

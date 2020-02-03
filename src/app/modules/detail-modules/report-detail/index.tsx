@@ -28,12 +28,13 @@ export const ReportDetailModule = () => {
     key_outcomes: '',
     monitor_report_outcomes: '',
     media: '',
-    policy_priorities: [],
+    policy_priority: {},
     key_implementation_challenges: '',
     other_project_outcomes: '',
     plans: '',
     other_comments: '',
     reportID: '',
+    barChartData: [],
   });
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
@@ -67,6 +68,7 @@ export const ReportDetailModule = () => {
 
   React.useEffect(() => {
     if (reportDetailData) {
+      // @ts-ignore
       setreportDetails(formatReportDetail(reportDetailData));
     }
   }, [reportDetailData]);

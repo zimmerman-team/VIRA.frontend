@@ -30,7 +30,7 @@ export const IntentTexFieldSingleLine = (
     >
       <Typography
         css={`
-          width: 60%;
+          width: ${props.description.length > 0 ? '60%' : 0};
           font-size: 14px;
           line-height: 1.71;
           letter-spacing: 0.25px;

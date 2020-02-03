@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { IntentTextAreaParams } from './common/IntentTextArea';
 import { PriorityOptionParams } from './common/PriorityOption';
 

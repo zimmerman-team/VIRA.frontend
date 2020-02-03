@@ -125,7 +125,6 @@ const ChartContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 400px;
 `;
 
 const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
@@ -215,12 +214,17 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
                 })}
               />
             )}
+            maxValue={props.maxValue || 'auto'}
             axisBottom={showBar ? barModel.axisBottom : null}
           />
           {props.chartLegends && (
             <Legends>
               {props.chartLegends.map(legend => (
-                <LegendControl {...legend} onClick={props.onChartLegendClick} />
+                <LegendControl
+                  {...legend}
+                  key={legend.label}
+                  onClick={props.onChartLegendClick}
+                />
               ))}
             </Legends>
           )}
@@ -229,5 +233,16 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
     }
     return <NoDataMessage>No data found</NoDataMessage>;
   }
-  return <ChartContainer ref={containerRef}>{renderBarchart()}</ChartContainer>;
+  return (
+    <ChartContainer
+      ref={containerRef}
+      css={`
+        height: ${props.values.length > 1
+          ? `${props.values.length * 80}px`
+          : '100px'};
+      `}
+    >
+      {renderBarchart()}
+    </ChartContainer>
+  );
 }

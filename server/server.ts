@@ -8,6 +8,7 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 let url = 'mongodb://localhost:27017/insinger';
 const router = express.Router();
+const VizController = require('./controllers/VizController');
 const orgController = require('./controllers/OrgControllerSocket');
 const orgTypeController = require('./controllers/OrgTypeControllerSocket');
 const projectCategoryController = require('./controllers/ProjectCategoryControllerSocket');
@@ -180,6 +181,11 @@ IO.sockets.on('connection', (socket: any) => {
   socket.on('updateProject', (data: any, fn: any) => {
     projectController.UpdateProject({ query: data }, (res: any) => fn(res));
   });
+  socket.on('getProjectBudgetData', (data: any, fn: any) => {
+    projectController.getProjectBudgetData({ query: data }, (res: any) =>
+      fn(res)
+    );
+  });
   /* Responsible person */
   socket.on('delProject', (data: any, fn: any) => {
     projectController.DelProject({ query: data }, (res: any) => fn(res));
@@ -289,6 +295,12 @@ IO.sockets.on('connection', (socket: any) => {
   /* General search */
   socket.on('search', (data: any, fn: any) => {
     generalSearchSocketAPI({ query: data }, (res: any) => fn(res));
+  });
+  /* Viz */
+  socket.on('getPolicyPriorityBarChart', (data: any, fn: any) => {
+    VizController.getPolicyPriorityBarChart({ query: data }, (res: any) =>
+      fn(res)
+    );
   });
 });
 

@@ -14,6 +14,7 @@ import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/moc
 // direct
 import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
+import get from 'lodash/get';
 
 export const ReportDetailLayout = (props: any) => (
   <React.Fragment>
@@ -68,6 +69,8 @@ export const ReportDetailLayout = (props: any) => (
             />
           </Grid>
         </Grid>
+        <Box height="40px" width="100%" />
+        <FieldDescription text="Of which the beneficiaries will likely include approximately" />
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
         <OutcomeCard title="Location" description={props.report.place} />
@@ -85,62 +88,35 @@ export const ReportDetailLayout = (props: any) => (
       justify="flex-start"
       alignContent="flex-start"
     >
-      <FieldDescription text="Of which the beneficiaries will likely include approximately" />
-      <Box height="60px" width="100%" />
+      <Typography
+        variant="h5"
+        css={`
+          font-size: 20px;
+          font-weight: 600;
+        `}
+      >
+        Insinger Foundation policy priorities
+      </Typography>
+      <Box height="80px" width="100%" />
       <Grid item lg={12}>
         <HorizontalBarChart
-          {...mockData}
+          maxValue={
+            get(props.report.barChartData[0], 'value1', 0) +
+            get(props.report.barChartData[0], 'value2', 0)
+          }
+          values={props.report.barChartData}
           chartLegends={props.barChartLegends}
           onChartLegendClick={props.onBarChartLegendClick}
+          colors={[
+            ProjectPalette.primary.main,
+            ProjectPalette.grey[500],
+            '#05c985',
+          ]}
         />
       </Grid>
     </Grid>
 
-    <Box height="24px" width="100%" />
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* policy priorities */}
-    <Grid
-      item
-      container
-      xs={12}
-      lg={12}
-      alignItems="flex-start"
-      justify="flex-start"
-      alignContent="flex-start"
-    >
-      <Grid item lg={12}>
-        <Typography variant="subtitle2">
-          Policy priorities the project aims to support:
-        </Typography>
-      </Grid>
-      <Box width="100%" height="10px" />
-      <Grid container spacing={4}>
-        {props.report.policy_priorities.map((p: any) => (
-          <Grid
-            item
-            lg={4}
-            css={`
-              display: flex;
-            `}
-          >
-            <div
-              css={`
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                margin-right: 20px;
-                background: ${ProjectPalette.common.white};
-                border: 5px solid ${ProjectPalette.secondary.main};
-              `}
-            />
-            <Typography>{p.name}</Typography>
-          </Grid>
-        ))}
-      </Grid>
-    </Grid>
-
-    <Box height="24px" width="100%" />
+    <Box height="32px" width="100%" />
 
     {/* ---------------------------------------------------------------------*/}
     {/* cards */}

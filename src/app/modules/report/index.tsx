@@ -38,6 +38,7 @@ function CreateReportFunc(props: any) {
     Function
   ] = React.useState(null);
   const [tarBenTotal, setTarBenTotal] = React.useState(0);
+  const [tarBenTotal2, setTarBenTotal2] = React.useState(0);
   const [beneficiaryCounts, setBeneficiaryCounts] = React.useState([
     {
       name: 'Children/Young people',
@@ -60,6 +61,11 @@ function CreateReportFunc(props: any) {
       value: 0,
     },
   ]);
+  const [policyPriority, setPolicyPriority] = React.useState({
+    label: '',
+    value: '',
+  });
+  const [budget, setBudget] = React.useState(0);
 
   // Indicator and verification state
   const [keyOutcomes, setKeyOutcomes] = React.useState('');
@@ -71,36 +77,6 @@ function CreateReportFunc(props: any) {
   });
   const [mediaAdded, setMediaAdded] = React.useState([]);
   const [openMediaModal, setOpenMediaModal] = React.useState(false);
-  const [policyPriorities, setPolicyPriorities] = React.useState([
-    {
-      name: 'Refugees',
-      value: false,
-    },
-    {
-      name: 'Drug use',
-      value: false,
-    },
-    {
-      name: 'The Elderly',
-      value: false,
-    },
-    {
-      name: 'Prostitution',
-      value: false,
-    },
-    {
-      name: 'Poverty reduction with a focus on youth and children',
-      value: false,
-    },
-    {
-      name: 'Homelessness',
-      value: false,
-    },
-    {
-      name: 'Prisoner rehabilitation / reintegration',
-      value: false,
-    },
-  ]);
 
   // Challenges and plans
   const [keyImplChallenges, setKetImplChallenges] = React.useState('');
@@ -116,11 +92,17 @@ function CreateReportFunc(props: any) {
   const snackbarAction = useStoreActions(
     actions => actions.syncVariables.setSnackbar
   );
+  const projectBudgetDataAction = useStoreActions(
+    actions => actions.projectBudgetData.fetch
+  );
   // redux data
   const allProjectsData = useStoreState(state =>
     get(state.allProjects.data, 'data', [])
   );
   const addReportData = useStoreState(state => state.addReport.data);
+  const projectBudgetData = useStoreState(
+    state => state.projectBudgetData.data
+  );
 
   React.useEffect(() => {
     setInitialTabIndex(
@@ -145,6 +127,10 @@ function CreateReportFunc(props: any) {
       });
     }
     setProjectData();
+    projectBudgetDataAction({
+      socketName: 'getProjectBudgetData',
+      values: { projectID: props.match.params.projectID },
+    });
   }, []);
 
   React.useEffect(() => {
@@ -221,11 +207,13 @@ function CreateReportFunc(props: any) {
     title,
     country.label,
     tarBenTotal,
-    beneficiaryCounts
+    beneficiaryCounts,
+    policyPriority.label,
+    budget,
+    get(projectBudgetData, 'data.remainBudget', 0)
   );
   const step3Enabled =
-    step2Enabled &&
-    validateIndVerFields(keyOutcomes, monRepOutcomes, policyPriorities);
+    step2Enabled && validateIndVerFields(keyOutcomes, monRepOutcomes);
 
   const step4Enabled =
     step3Enabled &&
@@ -245,9 +233,7 @@ function CreateReportFunc(props: any) {
             title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priorities: filter(policyPriorities, { value: true }).map(
-              p => p.name
-            ),
+            policy_priority: policyPriority.label,
             location: location
               ? {
                   long: (location as LocationModel).longitude,
@@ -258,6 +244,8 @@ function CreateReportFunc(props: any) {
             country: country.label,
             place_name: location ? (location as LocationModel).place : null,
             total_target_beneficiaries: tarBenTotal,
+            total_target_beneficiaries_commited: tarBenTotal2,
+            budget,
             key_outcomes: keyOutcomes,
             monitor_report_outcomes: monRepOutcomes,
             key_implementation_challenges: keyImplChallenges,
@@ -296,9 +284,16 @@ function CreateReportFunc(props: any) {
         location,
         setLocation,
         tarBenTotal,
+        tarBenTotal2,
         setTarBenTotal,
+        setTarBenTotal2,
+        policyPriority,
+        setPolicyPriority,
         beneficiaryCounts,
         setBeneficiaryCounts,
+        budget,
+        setBudget,
+        remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
       }}
       indicatorVerificationProps={{
         keyOutcomes,
@@ -308,8 +303,6 @@ function CreateReportFunc(props: any) {
         media,
         setMedia: onAddMedia,
         onSaveMedia,
-        policyPriorities,
-        setPolicyPriorities,
         openMediaModal,
         setOpenMediaModal,
       }}
@@ -331,11 +324,13 @@ function CreateReportFunc(props: any) {
           beneficiaryCounts,
           keyOutcomes,
           monRepOutcomes,
-          policyPriorities,
           keyImplChallenges,
           otherProjOutObs,
           futurePlans,
           otherComms,
+          budget,
+          policyPriority,
+          remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
         })
       }
       backBtnDisabled={!isNavBtnEnabled('back', initialTabIndex, {})}
