@@ -1,17 +1,17 @@
 import 'styled-components/macro';
 import React, { ReactChild } from 'react';
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import { Grid, Box, Container, useMediaQuery } from '@material-ui/core';
 
 interface PageWrapperParams {
   children: ReactChild;
 }
 
 export function PageWrapper(props: PageWrapperParams) {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <Container maxWidth="lg">
-      <Box height="100px" />
+      {isMobileWidth ? <Box height="80px" /> : <Box height="100px" />}
       <Grid container spacing={4}>
         {props.children}
       </Grid>

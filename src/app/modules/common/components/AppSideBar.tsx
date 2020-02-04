@@ -1,11 +1,17 @@
 import 'styled-components/macro';
 import React from 'react';
 import { Theme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
+import {
+  Drawer,
+  IconButton,
+  List,
+  useMediaQuery,
+  Hidden,
+  Backdrop,
+} from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 import { SidebarNavButton } from 'app/modules/common/components/SidebarNavButton';
 import clsx from 'clsx';
-import IconButton from '@material-ui/core/IconButton';
 import { ProjectPalette } from 'app/theme';
 import { IconMenuOpen } from 'app/modules/common/icons/IconMenuOpen';
 import { NavItemParams } from 'app/modules/common/consts';
@@ -34,78 +40,114 @@ interface AppSideBarParams {
 }
 
 export function AppSideBar(props: AppSideBarParams) {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
-    <Drawer
-      variant="permanent"
-      open={props.open}
-      className={clsx(props.classes.drawer, {
-        [props.classes.drawerOpen]: props.open,
-        [props.classes.drawerClose]: !props.open,
-      })}
-      classes={{
-        paper: clsx({
+    <>
+      <Drawer
+        variant={isMobileWidth ? 'temporary' : 'permanent'}
+        transitionDuration={isMobileWidth ? 0 : undefined}
+        open={props.open}
+        className={clsx(props.classes.drawer, {
           [props.classes.drawerOpen]: props.open,
           [props.classes.drawerClose]: !props.open,
-        }),
-      }}
-    >
-      <div
-        className={props.classes.drawerHeader}
+        })}
+        classes={{
+          paper: clsx({
+            [props.classes.drawerOpen]: props.open,
+            [props.classes.drawerClose]: !props.open,
+          }),
+        }}
         css={`
-          && {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          display: ${isMobileWidth && !props.open ? 'none' : ''};
+        `}
+      >
+        <div
+          className={props.classes.drawerHeader}
+          css={`
+            && {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: ${ProjectPalette.primary.main};
+            }
+          `}
+        >
+          {props.open ? (
+            <>
+              <div
+                css={`
+                  color: white;
+                  font-size: 16px;
+                  font-weight: 500;
+                  display: ${props.open ? 'flex' : 'none'};
+                  padding-left: ${isMobileWidth ? '45px' : 0};
+                `}
+              >
+                ME & E TOOL
+              </div>
+              <Hidden smUp>
+                <IconButton
+                  onClick={props.handleDrawerClose}
+                  css={`
+                    position: relative;
+                    left: 32px;
+                  `}
+                >
+                  <Close
+                    css={`
+                      fill: white;
+                    `}
+                  />
+                </IconButton>
+              </Hidden>
+            </>
+          ) : (
+            <IconButton
+              onClick={props.handleDrawerOpen}
+              css={`
+                && {
+                  background-color: ${ProjectPalette.primary.main};
+                  border-radius: 0;
+                  padding: 0;
+                  width: 54px;
+                  height: 36px;
+                }
+              `}
+            >
+              <IconMenuOpen />
+            </IconButton>
+          )}
+        </div>
+        <List
+          css={`
             background-color: ${ProjectPalette.primary.main};
-          }
-        `}
-      >
-        {props.open ? (
-          <div
-            css={`
-              color: white;
-              font-size: 16px;
-              font-weight: 500;
-              letter-spacing: 8px;
-              display: ${props.open ? 'flex' : 'none'};
-            `}
-          >
-            M&E TOOL
-          </div>
-        ) : (
-          <IconButton
-            onClick={props.handleDrawerOpen}
-            css={`
-              && {
-                background-color: ${ProjectPalette.primary.main};
-                border-radius: 0;
-                padding: 0;
-                width: 54px;
-                height: 36px;
-              }
-            `}
-          >
-            <IconMenuOpen />
-          </IconButton>
-        )}
-      </div>
-
-      <List
-        css={`
-          background-color: ${ProjectPalette.primary.main};
-        `}
-      >
-        {props.navItems.map((navItem, index) => (
-          <SidebarNavButton
-            text={navItem.label}
-            path={navItem.path}
-            index={index}
-            open={props.open}
-            key={navItem.label}
-            icon={navItem.icon}
-          />
-        ))}
-      </List>
-    </Drawer>
+          `}
+        >
+          {props.navItems.map((navItem, index) => (
+            <SidebarNavButton
+              text={navItem.label}
+              path={navItem.path}
+              index={index}
+              open={props.open}
+              key={navItem.label}
+              icon={navItem.icon}
+            />
+          ))}
+        </List>
+      </Drawer>
+      <Hidden smUp>
+        <Backdrop
+          open={props.open}
+          timeout={600}
+          css={`
+            && {
+              opacity: 0.1 !important;
+              background-color: ${ProjectPalette.common.white};
+            }
+          `}
+        />
+      </Hidden>
+    </>
   );
 }

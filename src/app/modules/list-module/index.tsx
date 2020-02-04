@@ -89,11 +89,11 @@ export const ListModule = (props: Props) => {
   return (
     <React.Fragment>
       {/* using this element as an helper */}
-      <Grid item lg={9} />
+      <Grid item xs={3} sm={9} />
 
       {/* ------------------------------------------------------------------ */}
       {/* projects table navigation */}
-      <Grid item lg={3}>
+      <Grid item xs={9} sm={3}>
         <TabNavigator {...props.tabNav} />
       </Grid>
 

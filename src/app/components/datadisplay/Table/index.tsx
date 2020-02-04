@@ -9,6 +9,7 @@ import {
   addConfig,
   calculateTotalRow,
 } from 'app/components/datadisplay/Table/helpers';
+import styled from 'styled-components';
 
 const TableModule = (props: TableModuleModel) => {
   const [totalData, setTotalData] = React.useState({});
@@ -28,13 +29,23 @@ const TableModule = (props: TableModuleModel) => {
     prevAction: '',
     rowsPerPage: 10,
   });
+
   const options = addConfig(
     props,
     localTableState,
     setLocalTableState,
     setTotalData
   );
-  return <TableLayout {...props} options={options} />;
+
+  const VerticalScrollHelper = styled.div`
+    overflow-x: scroll;
+  `;
+
+  return (
+    <VerticalScrollHelper>
+      <TableLayout {...props} options={options} />
+    </VerticalScrollHelper>
+  );
 };
 
 export default TableModule;

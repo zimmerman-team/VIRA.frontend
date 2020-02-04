@@ -38,7 +38,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
   const tableConfig = mockDataVar8;
   tableConfig.columns = [
     {
-      name: 'Projecnummer',
+      name: 'Projectnummer',
       options: {
         sortDirection: 'asc',
         filter: true,

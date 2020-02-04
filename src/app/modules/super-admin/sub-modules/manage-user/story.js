@@ -1,7 +1,7 @@
 import React from 'react';
 import Providers from 'app/Providers';
-import { ManageUserLayout } from 'app/modules/super-admin/sub-modules/manague-user/layout';
-import { managueUserLayoutMock } from 'app/modules/super-admin/sub-modules/manague-user/mock';
+import { ManageUserLayout } from 'app/modules/super-admin/sub-modules/manage-user/layout';
+import { managueUserLayoutMock } from 'app/modules/super-admin/sub-modules/manage-user/mock';
 
 export default {
   component: ManageUserLayout,
