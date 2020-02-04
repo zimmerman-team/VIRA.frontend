@@ -12,7 +12,7 @@ export function getReports(req: any, res: any) {
   Report.find(projectID ? { project: projectID } : {})
     .populate('location')
     .populate('target_beneficiaries')
-    .populate('policy_priorities')
+    .populate('policy_priority')
     .exec((err: any, reports: any) => {
       if (err) {
         res(JSON.stringify({ status: 'error', message: err.message }));
@@ -29,7 +29,7 @@ export function getReport(req: any, res: any) {
     .populate('location')
     .populate('project')
     .populate('target_beneficiaries')
-    .populate('policy_priorities')
+    .populate('policy_priority')
     .exec((err: any, report: any) => {
       if (err) {
         res(JSON.stringify({ status: 'error', message: err.message }));
@@ -38,12 +38,12 @@ export function getReport(req: any, res: any) {
     });
 }
 
-async function getPolicyPriorities(data: any) {
+async function getPolicyPriority(data: any) {
   return new Promise((resolve, reject) => {
     const result: any = [];
     let count = 0;
-    const totalCount = data.length;
-    data.forEach((item: any) => {
+    const totalCount = [data].length;
+    [data].forEach((item: any) => {
       policyPriority.findOne({ name: item }).exec((err: any, priority: any) => {
         if (err || !priority) {
           policyPriority.create({ name: item }, (err2: any, priority2: any) => {
@@ -53,7 +53,7 @@ async function getPolicyPriorities(data: any) {
               result.push(priority2);
               count++;
               if (count === totalCount) {
-                resolve(result);
+                resolve(result[0]);
               }
             }
           });
@@ -61,7 +61,7 @@ async function getPolicyPriorities(data: any) {
           result.push(priority);
           count++;
           if (count === totalCount) {
-            resolve(result);
+            resolve(result[0]);
           }
         }
       });
@@ -93,7 +93,7 @@ async function getLocation(data: any) {
 export function addReport(req: any, res: any) {
   const { data } = req.query;
 
-  getPolicyPriorities(data.policy_priorities).then(pp => {
+  getPolicyPriority(data.policy_priority).then(pp => {
     Project.findOne(
       { project_number: data.project },
       (err: any, project: any) => {
@@ -115,9 +115,13 @@ export function addReport(req: any, res: any) {
               report.date = new Date().toLocaleDateString();
               report.country = data.country;
               report.target_beneficiaries = tb;
-              report.policy_priorities = pp;
+              report.policy_priority = pp;
+              report.budget = data.budget;
               report.total_target_beneficiaries =
                 data.total_target_beneficiaries;
+              report.total_target_beneficiaries_commited =
+                data.total_target_beneficiaries_commited;
+              report.budget = data.budget;
               report.key_outcomes = data.key_outcomes;
               report.monitor_report_outcomes = data.monitor_report_outcomes;
               report.media = data.media;
@@ -178,8 +182,8 @@ export function updateReport(req: any, res: any) {
           policyPriority
             .find({
               _id: {
-                $in: data.policy_priorities
-                  ? data.policy_priorities.map((item: any) =>
+                $in: data.policy_priority
+                  ? data.policy_priority.map((item: any) =>
                       mongoose.Types.ObjectId(item)
                     )
                   : [],
@@ -224,7 +228,7 @@ export function updateReport(req: any, res: any) {
                 found_report.location = location;
                 found_report.date = new Date().toLocaleDateString();
                 found_report.target_beneficiaries = tb;
-                found_report.policy_priorities = pp;
+                found_report.policy_priority = pp;
                 found_report.total_target_beneficiaries =
                   data.total_target_beneficiaries;
                 found_report.key_outcomes = data.key_outcomes;

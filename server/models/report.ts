@@ -30,11 +30,17 @@ const ReportSchema = new Schema({
   target_beneficiaries: [
     { type: Schema.Types.ObjectId, ref: targetBeneficiary, index: true },
   ],
+  total_target_beneficiaries_commited: {
+    type: Number,
+    default: 0,
+    required: false,
+  },
   project: { type: Schema.Types.ObjectId, ref: project, index: true },
   key_outcomes: { type: String, required: true },
   monitor_report_outcomes: { type: String, required: true },
   media: [{ type: String, required: false }],
-  policy_priorities: [{ type: Schema.Types.ObjectId, ref: policyPriority }],
+  policy_priority: { type: Schema.Types.ObjectId, ref: policyPriority },
+  budget: { type: Number, required: true },
   key_implementation_challenges: { type: String, required: true },
   other_project_outcomes: { type: String, required: true },
   plans: { type: String, required: true },

@@ -18,14 +18,13 @@ export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
         data.title,
         data.country,
         data.tarBenTotal,
-        data.beneficiaryCounts
+        data.beneficiaryCounts,
+        data.policyPriority,
+        data.budget,
+        data.remainBudget
       );
     case 1:
-      return validateIndVerFields(
-        data.keyOutcomes,
-        data.monRepOutcomes,
-        data.policyPriorities
-      );
+      return validateIndVerFields(data.keyOutcomes, data.monRepOutcomes);
     case 2:
       return validateChallengesPlans(
         data.keyImplChallenges,

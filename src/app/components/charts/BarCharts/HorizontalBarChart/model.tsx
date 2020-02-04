@@ -18,6 +18,7 @@ export type HorizontalBarChartValueModel = {
   tooltip?: ChartTooltipItemModel;
 };
 export type HorizontalBarChartModel = {
+  maxValue?: number;
   values: HorizontalBarChartValueModel[];
   colors?: ColorSchemeType;
   chartLegends?: BarChartLegendModel[];

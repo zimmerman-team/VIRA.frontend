@@ -20,7 +20,7 @@ export interface InfoTextCompParams {
 export const InfoTextComp = (props: InfoTextCompParams) => (
   <React.Fragment>
     <Typography variant="subtitle2">{props.title}</Typography>
-    <Box width="100%" height="10px" />
+    <Box width="100%" height={props.title === '' ? '35px' : '10px'} />
     <Typography>{props.description}</Typography>
   </React.Fragment>
 );
@@ -126,11 +126,19 @@ export const PreviewLayout = (props: Props) => (
     <Spacer />
 
     {/* -------------------------------------------------------------- */}
-    <Grid item lg={12}>
-      <InfoTextComp
-        title="Target beneficiaries"
-        description={`Total number: ${props.outcomesProps.tarBenTotal}`}
-      />
+    <Grid item container lg={12}>
+      <Grid item sm={12} md={6} lg={4}>
+        <InfoTextComp
+          title="Target beneficiaries"
+          description={`Total target number: ${props.outcomesProps.tarBenTotal}`}
+        />
+      </Grid>
+      <Grid item sm={12} md={6} lg={4}>
+        <InfoTextComp
+          title=""
+          description={`Total number commited: ${props.outcomesProps.tarBenTotal2}`}
+        />
+      </Grid>
     </Grid>
     <Spacer />
 
@@ -174,30 +182,24 @@ export const PreviewLayout = (props: Props) => (
       </Typography>
     </Grid>
     <Box width="100%" height="10px" />
-    <Grid container spacing={4}>
-      {filter(props.indicatorVerificationProps.policyPriorities, {
-        value: true,
-      }).map(b => (
-        <Grid
-          item
-          lg={4}
-          css={`
-            display: flex;
-          `}
-        >
-          <div
-            css={`
-              width: 20px;
-              height: 20px;
-              border-radius: 50%;
-              margin-right: 20px;
-              background: ${ProjectPalette.common.white};
-              border: 5px solid ${ProjectPalette.secondary.main};
-            `}
-          />
-          <Typography>{b.name}</Typography>
-        </Grid>
-      ))}
+    <Grid
+      item
+      lg={12}
+      css={`
+        display: flex;
+      `}
+    >
+      <div
+        css={`
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          margin-right: 20px;
+          background: ${ProjectPalette.common.white};
+          border: 5px solid ${ProjectPalette.secondary.main};
+        `}
+      />
+      <Typography>{props.outcomesProps.policyPriority.label}</Typography>
     </Grid>
     <Spacer />
 

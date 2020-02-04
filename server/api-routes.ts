@@ -5,6 +5,7 @@ const orgTypeController = require('./controllers/OrgTypeController');
 const projectCategoryController = require('./controllers/ProjectCategoryController.ts');
 const responsiblePersonController = require('./controllers/ResponsiblePersonController');
 const SearchController = require('./controllers/SearchController');
+const VizController = require('./controllers/VizController');
 import { uploadFiles } from './utils/upload';
 
 router.get('/', (req: any, res: any) => {
@@ -69,6 +70,8 @@ router
   .delete(responsiblePersonController.DelPerson);
 
 router.route('/upload').post(uploadFiles);
+
+router.route('/getpp').get(VizController.getPolicyPriorityBarChartAPI);
 
 module.exports = router;
 

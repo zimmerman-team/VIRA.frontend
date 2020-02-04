@@ -29,10 +29,17 @@ export type OutcomesPropsModel = {
   setCountry: Function;
   tarBenTotal: number;
   setTarBenTotal: Function;
+  tarBenTotal2: number;
+  setTarBenTotal2: Function;
   beneficiaryCounts: BeneficiaryCountsModel[];
   setBeneficiaryCounts: Function;
   location: LocationModel | null;
   setLocation: Function;
+  policyPriority: { label: string; value: string };
+  setPolicyPriority: Function;
+  budget: number;
+  setBudget: Function;
+  remainBudget: number;
 };
 
 export type IndicatorVerificationPropsModel = {
@@ -43,8 +50,6 @@ export type IndicatorVerificationPropsModel = {
   media: MediaModel;
   setMedia: Function;
   onSaveMedia: Function;
-  policyPriorities: BeneficiaryCountsModel[];
-  setPolicyPriorities: Function;
   openMediaModal: boolean;
   setOpenMediaModal: Function;
 };

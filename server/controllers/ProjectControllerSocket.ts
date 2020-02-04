@@ -1,4 +1,6 @@
 const Project = require('../models/project');
+import sumBy from 'lodash/sumBy';
+const Report = require('../models/report');
 const project_categroy = require('../models/project_categroy');
 const organisation = require('../models/Org');
 
@@ -236,6 +238,49 @@ export function DelProject(req: any, res: any) {
             message: project,
           })
         );
+      }
+    }
+  );
+}
+
+export function getProjectBudgetData(req: any, res: any) {
+  const { projectID } = req.query;
+
+  Project.findOne({ project_number: projectID.toString() }).exec(
+    (err: any, project: any) => {
+      if (err) {
+        console.log(err);
+        res(JSON.stringify({ status: 'error', message: err.message }));
+      }
+      if (project) {
+        Report.find({ project: project })
+          .select('budget')
+          .populate('policy_priority')
+          .exec((err: any, reports: any) => {
+            if (reports) {
+              const totUsedBudget = sumBy(reports, 'budget');
+              res(
+                JSON.stringify({
+                  status: 'success',
+                  data: {
+                    totBudget: project.total_amount,
+                    remainBudget: project.total_amount - totUsedBudget,
+                  },
+                })
+              );
+            }
+            res(
+              JSON.stringify({
+                status: 'success',
+                data: {
+                  totBudget: project.total_amount,
+                  remainBudget: project.total_amount,
+                },
+              })
+            );
+          });
+      } else {
+        res(JSON.stringify({ status: 'error', message: 'Project not found' }));
       }
     }
   );

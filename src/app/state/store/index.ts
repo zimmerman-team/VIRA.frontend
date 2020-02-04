@@ -34,6 +34,8 @@ import addTeam from 'app/state/api/actionsReducers/addTeam';
 import generalSearch from 'app/state/api/actionsReducers/generalSearch';
 import addReport from 'app/state/api/actionsReducers/addReport';
 import getReports from 'app/state/api/actionsReducers/getReports';
+import getPPVizData from 'app/state/api/actionsReducers/getPPVizData';
+import projectBudgetData from 'app/state/api/actionsReducers/projectBudgetData';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
@@ -72,6 +74,8 @@ export interface ApplicationStoreModel {
   generalSearch: SocketAPIResonseInterface;
   addReport: SocketAPIResonseInterface;
   getReports: SocketAPIResonseInterface;
+  getPPVizData: SocketAPIResonseInterface;
+  projectBudgetData: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
@@ -97,6 +101,8 @@ const applicationStore: ApplicationStoreModel = {
   generalSearch,
   addReport,
   getReports,
+  getPPVizData,
+  projectBudgetData,
 };
 
 export const appStore = createStore(applicationStore, {

@@ -77,7 +77,7 @@ export const ChartTooltip = (props: ChartTooltipModel) => {
       <Title variant="subtitle2">{props.title}</Title>
       <Divider />
       {props.items.map((item: ChartTooltipItemModel, index: number) => (
-        <React.Fragment>
+        <React.Fragment key={item.label}>
           <Item
             css={`
               margin-bottom: ${item.percentage ? '8px' : 0};

@@ -1,4 +1,6 @@
 /* eslint-disable no-underscore-dangle */
+import { ProjectPalette } from 'app/theme';
+
 export function formatReportDetail(reportDetailRecord: any) {
   const splits = reportDetailRecord.date.split('/');
   const date = `${splits[1]}.${splits[0]}.${splits[2]}`;
@@ -18,12 +20,56 @@ export function formatReportDetail(reportDetailRecord: any) {
     key_outcomes: reportDetailRecord.key_outcomes,
     monitor_report_outcomes: reportDetailRecord.monitor_report_outcomes,
     media: reportDetailRecord.media,
-    policy_priorities: reportDetailRecord.policy_priorities,
+    policy_priority: reportDetailRecord.policy_priority,
     key_implementation_challenges:
       reportDetailRecord.key_implementation_challenges,
     other_project_outcomes: reportDetailRecord.other_project_outcomes,
     plans: reportDetailRecord.plans,
     other_comments: reportDetailRecord.other_comments,
     reportID: reportDetailRecord.reportID,
+    barChartData: [
+      {
+        name: reportDetailRecord.policy_priority.name,
+        value1: reportDetailRecord.total_target_beneficiaries_commited,
+        value2:
+          reportDetailRecord.total_target_beneficiaries -
+            reportDetailRecord.total_target_beneficiaries_commited <
+          0
+            ? (reportDetailRecord.total_target_beneficiaries -
+                reportDetailRecord.total_target_beneficiaries_commited) *
+              -1
+            : reportDetailRecord.total_target_beneficiaries -
+              reportDetailRecord.total_target_beneficiaries_commited,
+        value3: reportDetailRecord.budget,
+        value1Color: ProjectPalette.primary.main,
+        value2Color: '#05c985',
+        tooltip: {
+          title: reportDetailRecord.policy_priority.name,
+          items: [
+            {
+              label: `Target (${(
+                (reportDetailRecord.total_target_beneficiaries_commited /
+                  reportDetailRecord.total_target_beneficiaries) *
+                100
+              ).toFixed(2)}%)`,
+              value: reportDetailRecord.total_target_beneficiaries,
+              percentage: (
+                (reportDetailRecord.total_target_beneficiaries_commited /
+                  reportDetailRecord.total_target_beneficiaries) *
+                100
+              ).toFixed(2),
+            },
+            {
+              label: 'Budget',
+              value: reportDetailRecord.budget.toLocaleString(undefined, {
+                currency: 'EUR',
+                currencyDisplay: 'symbol',
+                style: 'currency',
+              }),
+            },
+          ],
+        },
+      },
+    ],
   };
 }
