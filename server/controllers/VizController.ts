@@ -81,17 +81,15 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
             groupedData[key],
             'total_target_beneficiaries_commited'
           );
+          const totDiff = totTarget - totCommitted;
           const totBudget = sumBy(groupedData[key], 'budget');
           result.push({
             name: key,
-            value1: totCommitted,
-            value2:
-              totTarget - totCommitted < 0
-                ? (totTarget - totCommitted) * -1
-                : totTarget - totCommitted,
+            value1: Math.min(totTarget, totCommitted),
+            value2: totDiff < 0 ? totDiff * -1 : totDiff,
             value3: totBudget,
             value1Color: ProjectPalette.primary.main,
-            value2Color: '#05c985',
+            value2Color: totDiff > 0 ? ProjectPalette.grey[500] : '#05c985',
             tooltip: {
               title: key,
               items: [

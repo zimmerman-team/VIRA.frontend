@@ -140,7 +140,7 @@ const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
 const TopAxis = styled.div`
   width: 100%;
   display: flex;
-  padding-left: 200px;
+  padding-left: 140px;
   flex-direction: row;
   justify-content: space-between;
   color: ${ProjectPalette.secondary.main};
@@ -185,6 +185,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
 
   function renderBarchart() {
     if (typeof props.values !== 'undefined' && props.values.length > 0) {
+      console.log(props.maxValue);
       return (
         <>
           {showLine && (

@@ -32,6 +32,8 @@ import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import { getNewReportsCount } from './utils/getNewReportsCount';
+import { ProjectPalette } from 'app/theme';
+import uniqBy from 'lodash/uniqBy';
 
 function LandingLayout(props: any) {
   // set window title
@@ -143,20 +145,46 @@ function LandingLayout(props: any) {
         <Grid item xs={12} lg={12}>
           <Route path="/dashboard" exact>
             <HorizontalBarChart
-              {...mockData}
+              colors={[
+                ProjectPalette.primary.main,
+                ...uniqBy(
+                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
+                    [],
+                  'value2Color'
+                ).map((item: any) => item.value2Color),
+              ]}
               values={
                 ((ppVizData as unknown) as HorizontalBarChartValueModel[]) || []
               }
+              maxValue={Math.max(
+                ...(
+                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
+                  []
+                ).map((item: any) => item.value1 + item.value2)
+              )}
               chartLegends={barChartLegends}
               onChartLegendClick={onBarChartLegendClick}
             />
           </Route>
           <Route path="/dashboard/priority-area">
             <HorizontalBarChart
-              {...mockData}
+              colors={[
+                ProjectPalette.primary.main,
+                ...uniqBy(
+                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
+                    [],
+                  'value2Color'
+                ).map((item: any) => item.value2Color),
+              ]}
               values={
                 ((ppVizData as unknown) as HorizontalBarChartValueModel[]) || []
               }
+              maxValue={Math.max(
+                ...(
+                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
+                  []
+                ).map((item: any) => item.value1 + item.value2)
+              )}
               chartLegends={barChartLegends}
               onChartLegendClick={onBarChartLegendClick}
             />
