@@ -126,6 +126,7 @@ export function getUser(req: any, res: any) {
             groups: get(response, '[1].data', []),
             role: get(response, '[2].data[0].name', ''),
             username: get(response, '[0].data.nickname', ''),
+            lastLogin: get(response, '[0].data.last_login', ''),
           };
           return res(JSON.stringify(data));
         })
