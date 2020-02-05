@@ -9,12 +9,13 @@ import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
+
+import { ProjectPalette } from 'app/theme';
+import get from 'lodash/get';
+import uniqBy from 'lodash/uniqBy';
 
 // direct
 import 'styled-components/macro';
-import { ProjectPalette } from 'app/theme';
-import get from 'lodash/get';
 
 export const ReportDetailLayout = (props: any) => (
   <React.Fragment>
@@ -109,8 +110,9 @@ export const ReportDetailLayout = (props: any) => (
           onChartLegendClick={props.onBarChartLegendClick}
           colors={[
             ProjectPalette.primary.main,
-            ProjectPalette.grey[500],
-            '#05c985',
+            ...uniqBy(props.report.barChartData, 'value2Color').map(
+              (item: any) => item.value2Color
+            ),
           ]}
         />
       </Grid>
