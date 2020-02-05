@@ -9,7 +9,6 @@ import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 
 // direct
 import 'styled-components/macro';

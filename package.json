@@ -113,7 +113,11 @@
       "airbnb-typescript-prettier"
     ],
     "rules": {
-      "import/prefer-default-export": 0
+      "import/prefer-default-export": 0,
+      "react-hooks/exhaustive-deps": 0,
+      "@typescript-eslint/no-explicit-any": 0,
+      "@typescript-eslint/ban-ts-ignore ": 0,
+      "@typescript-eslint/no-unused-vars": 0
     },
     "overrides": [
       {
@@ -121,10 +125,18 @@
           "**/*.ts?(x)"
         ],
         "rules": {
+          "no-shadow": "off",
           "no-unused-vars": "off",
           "react/destructuring-assignment": 0,
           "react/jsx-fragments": 0,
-          "react/jsx-props-no-spreading": 0
+          "react/jsx-props-no-spreading": 0,
+          "react-hooks/exhaustive-deps": 0,
+          "@typescript-eslint/no-explicit-any": 0,
+          "@typescript-eslint/ban-ts-ignore ": 0,
+          "@typescript-eslint/no-unused-vars": 0,
+          "@typescript-eslint/no-empty-function": 0,
+          "no-underscore-dangle": "off",
+          "no-useless-escape": "off"
         }
       }
     ]

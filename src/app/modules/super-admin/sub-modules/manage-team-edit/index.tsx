@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import useTitle from 'react-use/lib/useTitle';

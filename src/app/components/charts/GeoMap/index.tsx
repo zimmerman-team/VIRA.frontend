@@ -1,9 +1,10 @@
+/* eslint-disable no-shadow */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-nocheck
 import 'styled-components/macro';
 import React from 'react';
 import get from 'lodash/get';
-// @ts-ignore
 import wc from 'which-country';
-// @ts-ignore
 import Geocoder from 'react-mapbox-gl-geocoder';
 import ReactMapGL, {
   Source,
@@ -20,8 +21,8 @@ import { LocationModel } from 'app/modules/report/model';
 import { countries } from 'app/assets/data/countries';
 import find from 'lodash/find';
 import { Input } from 'app/components/inputs/textfields/PasswordTextField';
-import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 import { ProjectPalette } from 'app/theme';
+import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 
 type Props = {
   width?: number;

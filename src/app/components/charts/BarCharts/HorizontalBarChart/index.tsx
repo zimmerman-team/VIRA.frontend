@@ -1,5 +1,4 @@
 import 'styled-components/macro';
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components';

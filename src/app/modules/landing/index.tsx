@@ -3,7 +3,7 @@ import React from 'react';
 import { useTitle } from 'react-use';
 import { get, findIndex, find } from 'lodash';
 import { Route, withRouter } from 'react-router-dom';
-import css from 'styled-components/macro';
+import 'styled-components/macro';
 
 // absolute
 import {
@@ -27,10 +27,10 @@ import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBa
 import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 import { BubbleChart } from 'app/components/charts/Bubble';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
-import { getNavTabItems } from './utils/getNavTabItems';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
+import { getNavTabItems } from './utils/getNavTabItems';
 
 function LandingLayout(props: any) {
   // set window title
