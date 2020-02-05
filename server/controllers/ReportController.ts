@@ -71,21 +71,25 @@ async function getPolicyPriority(data: any) {
 
 async function getLocation(data: any) {
   return new Promise((resolve, reject) => {
-    Location.findOne({
-      long: data.long,
-      lat: data.lat,
-    }).exec((err: any, l: any) => {
-      if (!l) {
-        new Location({
-          long: data.long,
-          lat: data.lat,
-        }).save((err: any, newLocation: any) => {
-          resolve(newLocation);
-        });
-      } else {
-        resolve(l);
-      }
-    });
+    if (data) {
+      Location.findOne({
+        long: data.long,
+        lat: data.lat,
+      }).exec((err: any, l: any) => {
+        if (!l) {
+          new Location({
+            long: data.long,
+            lat: data.lat,
+          }).save((err: any, newLocation: any) => {
+            resolve(newLocation);
+          });
+        } else {
+          resolve(l);
+        }
+      });
+    } else {
+      resolve(null);
+    }
   });
 }
 

@@ -31,6 +31,7 @@ import { getNavTabItems } from './utils/getNavTabItems';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
+import { getNewReportsCount } from './utils/getNewReportsCount';
 
 function LandingLayout(props: any) {
   // set window title
@@ -52,6 +53,8 @@ function LandingLayout(props: any) {
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
   const ppVizData = useStoreState(state => state.getPPVizData.data);
   const allProjectsData = useStoreState(state => state.allProjects.data);
+  const allReportsData = useStoreState(state => state.allReports.data);
+  const userDetails = useStoreState(state => state.userDetails.data);
 
   React.useEffect(() => {
     getPPVizData({ socketName: 'getPolicyPriorityBarChart', values: {} });
@@ -61,7 +64,14 @@ function LandingLayout(props: any) {
     const updatedStats: StatItemParams[] = [...stats];
     updatedStats[0].amount = get(allProjectsData, 'data', []).length;
     setStats(updatedStats);
-  }, [allProjectsData]);
+    updatedStats[1].amount = getNewReportsCount(
+      get(allReportsData, 'data', []),
+      userDetails
+    );
+    setStats(updatedStats);
+    updatedStats[2].amount = get(allReportsData, 'data', []).length;
+    setStats(updatedStats);
+  }, [allProjectsData, allReportsData]);
 
   function onBarChartLegendClick(legend: string) {
     const prevBarChartLegends = [...barChartLegends];
