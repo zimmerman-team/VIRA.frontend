@@ -1,7 +1,10 @@
+import find from 'lodash/find';
 import sumBy from 'lodash/sumBy';
+import sortBy from 'lodash/sortBy';
 import groupBy from 'lodash/groupBy';
 const Report = require('../models/report');
 import { ProjectPalette } from '../../src/app/theme';
+import { policyPriorities } from '../../src/app/modules/report/sub-modules/outcomes/mock';
 
 export function getPolicyPriorityBarChartAPI(req: any, res: any) {
   Report.find({})
@@ -112,9 +115,25 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
             },
           });
         });
+        policyPriorities.forEach((priority: any) => {
+          const foundPriority = find(result, {
+            name: priority.label,
+          });
+          if (!foundPriority) {
+            result.push({
+              name: priority.label,
+              value1: 0,
+              value2: 0,
+              value3: 0,
+              value1Color: ProjectPalette.primary.main,
+              value2Color: ProjectPalette.grey[500],
+              tooltip: {},
+            });
+          }
+        });
       } else {
         res(JSON.stringify([]));
       }
-      res(JSON.stringify(result));
+      res(JSON.stringify(sortBy(result, 'name').reverse()));
     });
 }
