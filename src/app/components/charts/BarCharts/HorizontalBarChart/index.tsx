@@ -91,14 +91,16 @@ const BarComponent = (props: {
         hideTooltip(tooltip(fprops.data.data.tooltip), e);
       }}
     >
-      {showBar && <rect {...fprops} fill={props.color} height="25px" />}
+      {showBar && (
+        <rect {...fprops} y={fprops.y + 10} fill={props.color} height="25px" />
+      )}
       {showLine && (
         <>
           <line
             x1="0"
             x2={width}
-            y1={props.y + 12}
-            y2={props.y + 12}
+            y1={props.y + 22}
+            y2={props.y + 22}
             style={{
               strokeWidth: 2,
               stroke: ProjectPalette.secondary.main,
@@ -107,8 +109,8 @@ const BarComponent = (props: {
           <line
             x1={width}
             x2={width}
-            y1={props.y + 5}
-            y2={props.y + 19}
+            y1={props.y + 15}
+            y2={props.y + 29}
             style={{ strokeWidth: 2, stroke: ProjectPalette.secondary.main }}
           />
         </>
@@ -139,7 +141,7 @@ const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
 const TopAxis = styled.div`
   width: 100%;
   display: flex;
-  padding-left: 200px;
+  padding-left: 140px;
   flex-direction: row;
   justify-content: space-between;
   color: ${ProjectPalette.secondary.main};
@@ -184,6 +186,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
 
   function renderBarchart() {
     if (typeof props.values !== 'undefined' && props.values.length > 0) {
+      console.log(props.maxValue);
       return (
         <>
           {showLine && (

@@ -4,6 +4,10 @@ import { ProjectPalette } from 'app/theme';
 export function formatReportDetail(reportDetailRecord: any) {
   const splits = reportDetailRecord.date.split('/');
   const date = `${splits[1]}.${splits[0]}.${splits[2]}`;
+  const targetVal: number = reportDetailRecord.total_target_beneficiaries;
+  const commitedVal: number =
+    reportDetailRecord.total_target_beneficiaries_commited;
+  const diffVal: number = targetVal - commitedVal;
   return {
     id: reportDetailRecord._id,
     title: reportDetailRecord.title,
@@ -30,19 +34,11 @@ export function formatReportDetail(reportDetailRecord: any) {
     barChartData: [
       {
         name: reportDetailRecord.policy_priority.name,
-        value1: reportDetailRecord.total_target_beneficiaries_commited,
-        value2:
-          reportDetailRecord.total_target_beneficiaries -
-            reportDetailRecord.total_target_beneficiaries_commited <
-          0
-            ? (reportDetailRecord.total_target_beneficiaries -
-                reportDetailRecord.total_target_beneficiaries_commited) *
-              -1
-            : reportDetailRecord.total_target_beneficiaries -
-              reportDetailRecord.total_target_beneficiaries_commited,
+        value1: Math.min(targetVal, commitedVal),
+        value2: diffVal < 0 ? diffVal * -1 : diffVal,
         value3: reportDetailRecord.budget,
         value1Color: ProjectPalette.primary.main,
-        value2Color: '#05c985',
+        value2Color: diffVal > 0 ? ProjectPalette.grey[500] : '#05c985',
         tooltip: {
           title: reportDetailRecord.policy_priority.name,
           items: [

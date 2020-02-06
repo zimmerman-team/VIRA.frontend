@@ -1,7 +1,10 @@
+import find from 'lodash/find';
 import sumBy from 'lodash/sumBy';
+import sortBy from 'lodash/sortBy';
 import groupBy from 'lodash/groupBy';
 const Report = require('../models/report');
 import { ProjectPalette } from '../../src/app/theme';
+import { policyPriorities } from '../../src/app/modules/report/sub-modules/outcomes/mock';
 
 export function getPolicyPriorityBarChartAPI(req: any, res: any) {
   Report.find({})
@@ -81,17 +84,15 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
             groupedData[key],
             'total_target_beneficiaries_commited'
           );
+          const totDiff = totTarget - totCommitted;
           const totBudget = sumBy(groupedData[key], 'budget');
           result.push({
             name: key,
-            value1: totCommitted,
-            value2:
-              totTarget - totCommitted < 0
-                ? (totTarget - totCommitted) * -1
-                : totTarget - totCommitted,
+            value1: Math.min(totTarget, totCommitted),
+            value2: totDiff < 0 ? totDiff * -1 : totDiff,
             value3: totBudget,
             value1Color: ProjectPalette.primary.main,
-            value2Color: '#05c985',
+            value2Color: totDiff > 0 ? ProjectPalette.grey[500] : '#05c985',
             tooltip: {
               title: key,
               items: [
@@ -114,9 +115,25 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
             },
           });
         });
+        policyPriorities.forEach((priority: any) => {
+          const foundPriority = find(result, {
+            name: priority.label,
+          });
+          if (!foundPriority) {
+            result.push({
+              name: priority.label,
+              value1: 0,
+              value2: 0,
+              value3: 0,
+              value1Color: ProjectPalette.primary.main,
+              value2Color: ProjectPalette.grey[500],
+              tooltip: {},
+            });
+          }
+        });
       } else {
         res(JSON.stringify([]));
       }
-      res(JSON.stringify(result));
+      res(JSON.stringify(sortBy(result, 'name').reverse()));
     });
 }

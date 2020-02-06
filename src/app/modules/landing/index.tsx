@@ -30,7 +30,10 @@ import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
+import uniqBy from 'lodash/uniqBy';
 import { getNavTabItems } from './utils/getNavTabItems';
+import { getNewReportsCount } from './utils/getNewReportsCount';
+import { ProjectPalette } from 'app/theme';
 
 function LandingLayout(props: any) {
   // set window title
@@ -52,6 +55,8 @@ function LandingLayout(props: any) {
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
   const ppVizData = useStoreState(state => state.getPPVizData.data);
   const allProjectsData = useStoreState(state => state.allProjects.data);
+  const allReportsData = useStoreState(state => state.allReports.data);
+  const userDetails = useStoreState(state => state.userDetails.data);
 
   React.useEffect(() => {
     getPPVizData({ socketName: 'getPolicyPriorityBarChart', values: {} });
@@ -61,7 +66,14 @@ function LandingLayout(props: any) {
     const updatedStats: StatItemParams[] = [...stats];
     updatedStats[0].amount = get(allProjectsData, 'data', []).length;
     setStats(updatedStats);
-  }, [allProjectsData]);
+    updatedStats[1].amount = getNewReportsCount(
+      get(allReportsData, 'data', []),
+      userDetails
+    );
+    setStats(updatedStats);
+    updatedStats[2].amount = get(allReportsData, 'data', []).length;
+    setStats(updatedStats);
+  }, [allProjectsData, allReportsData]);
 
   function onBarChartLegendClick(legend: string) {
     const prevBarChartLegends = [...barChartLegends];
@@ -133,20 +145,46 @@ function LandingLayout(props: any) {
         <Grid item xs={12} lg={12}>
           <Route path="/dashboard" exact>
             <HorizontalBarChart
-              {...mockData}
+              colors={[
+                ProjectPalette.primary.main,
+                ...uniqBy(
+                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
+                    [],
+                  'value2Color'
+                ).map((item: any) => item.value2Color),
+              ]}
               values={
                 ((ppVizData as unknown) as HorizontalBarChartValueModel[]) || []
               }
+              maxValue={Math.max(
+                ...(
+                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
+                  []
+                ).map((item: any) => item.value1 + item.value2)
+              )}
               chartLegends={barChartLegends}
               onChartLegendClick={onBarChartLegendClick}
             />
           </Route>
           <Route path="/dashboard/priority-area">
             <HorizontalBarChart
-              {...mockData}
+              colors={[
+                ProjectPalette.primary.main,
+                ...uniqBy(
+                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
+                    [],
+                  'value2Color'
+                ).map((item: any) => item.value2Color),
+              ]}
               values={
                 ((ppVizData as unknown) as HorizontalBarChartValueModel[]) || []
               }
+              maxValue={Math.max(
+                ...(
+                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
+                  []
+                ).map((item: any) => item.value1 + item.value2)
+              )}
               chartLegends={barChartLegends}
               onChartLegendClick={onBarChartLegendClick}
             />
