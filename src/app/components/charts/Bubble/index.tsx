@@ -74,15 +74,15 @@ export function BubbleChart(props: Props) {
                     : 0.5};
                   &:hover {
                     opacity: 1;
-                    cursor: pointer;
+                    // cursor: pointer;
                   }
                 `}
                 {...handlers}
-                onClick={_e =>
-                  props.setSelectedBubble(
-                    node.id === props.selectedBubble ? '' : node.id
-                  )
-                }
+                // onClick={_e =>
+                //   props.setSelectedBubble(
+                //     node.id === props.selectedBubble ? '' : node.id
+                //   )
+                // }
               />
             );
           }}
@@ -108,9 +108,11 @@ export function BubbleChart(props: Props) {
               <Close />
             </IconButton>
           </Grid>
-          {find(props.data.children, {
-            name: props.selectedBubble,
-          }).priorityAreas.map(item => (
+          {(
+            find(props.data.children, {
+              name: props.selectedBubble,
+            }).priorityAreas || []
+          ).map(item => (
             <Grid item>
               {item.name}
               <span
