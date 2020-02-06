@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link as RouteLink } from 'react-router-dom';
+import 'styled-components/macro';
 
 /* components */
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
@@ -31,7 +32,16 @@ const Form = styled.div`
 export const InputForm = (props: LayoutModel) => {
   return (
     <Form>
-      <Typography variant="h3">Sign in</Typography>
+      <Typography
+        variant="h3"
+        css={`
+          @media (max-width: 768px) {
+            color: white;
+          }
+        `}
+      >
+        Sign in
+      </Typography>
       <Box height="41px" />
       <FormSingleLineField
         fullWidth
@@ -51,7 +61,16 @@ export const InputForm = (props: LayoutModel) => {
         setShowPass={props.setShowPass}
         data-testid="login-password"
       />
-      <Link to="/recover-password">Forgot password</Link>
+      <Link
+        to="/recover-password"
+        css={`
+          @media (max-width: 768px) {
+            color: white;
+          }
+        `}
+      >
+        Forgot password
+      </Link>
       <Grid item xs={3}>
         <ContainedButton
           text="Sign in"

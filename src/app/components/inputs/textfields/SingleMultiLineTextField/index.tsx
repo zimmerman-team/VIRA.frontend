@@ -49,6 +49,10 @@ export const BigInputLabel = styled(props => <Typography {...props} />)`
     font-size: 1.125rem;
     font-weight: 500;
     margin-bottom: 14px;
+
+    @media (max-width: 768px) {
+      color: white;
+    }
   }
 `;
 
