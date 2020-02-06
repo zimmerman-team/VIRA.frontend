@@ -63,8 +63,8 @@ export function BubbleChart(props: Props) {
                   background: node.color,
                   top: style.y - style.r,
                   left: style.x - style.r,
-                  width: style.r * 2,
-                  height: style.r * 2,
+                  width: style.r * 1.5,
+                  height: style.r * 1.5,
                   borderRadius: style.r,
                 }}
                 css={`
