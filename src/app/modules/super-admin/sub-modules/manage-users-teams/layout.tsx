@@ -1,36 +1,46 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { css } from 'styled-components/macro';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { PageModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/common';
+import { AdminManageOverviewModule } from 'app/modules/super-admin/sub-modules/manage-users-teams/common';
 import { Route } from 'react-router-dom';
 import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 import { PageLoader } from 'app/modules/common/page-loader';
+import { Typography, Hidden } from '@material-ui/core';
 
 export const ManageUsersTeamsLayout = (props: ManageUsersTeamsLayoutModel) => (
   <React.Fragment>
     {props.loading && <PageLoader />}
     {/* ---------------------------------------------------------------------*/}
     {/* Breadcrumbs */}
-    <Grid item lg={12}>
-      <BreadCrumbs {...props.breadcrumbs} />
+    <Grid item xs={12} lg={10}>
+      {/* <BreadCrumbs {...props.breadcrumbs} /> */}
+      <Typography
+        variant="subtitle1"
+        css={`
+          color: #00000073;
+          font-size: 14px;
+        `}
+      >
+        Manage
+      </Typography>
     </Grid>
-
-    {/* using this element as an helper */}
-    <Grid item lg={10} />
 
     {/* ------------------------------------------------------------------ */}
     {/* projects table navigation */}
-    <Grid item lg={2}>
-      <TabNavigator {...props.tabNavigator} />
-    </Grid>
+    <Hidden smDown>
+      <Grid item lg={2}>
+        <TabNavigator {...props.tabNavigator} />
+      </Grid>
+    </Hidden>
 
     <Route path="/super-admin/manage-users">
-      <PageModel {...props.pageModule} urlParam="manage-users" />
+      <AdminManageOverviewModule {...props.pageModule} />
     </Route>
 
     <Route path="/super-admin/manage-teams">
-      <PageModel {...props.teamPageModule} urlParam="manage-teams" />
+      <AdminManageOverviewModule {...props.teamPageModule} />
     </Route>
   </React.Fragment>
 );

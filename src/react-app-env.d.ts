@@ -45,9 +45,3 @@ declare module '*.svg' {
   const src: string;
   export default src;
 }
-
-declare module 'styled-components' {
-  export interface DefaultTheme {
-    // Your theme stuff here
-  }
-}
