@@ -27,9 +27,6 @@ export const ManageUsersTeamsLayout = (props: ManageUsersTeamsLayoutModel) => (
       </Typography>
     </Grid>
 
-    {/* using this element as an helper */}
-    <Grid item lg={10} />
-
     {/* ------------------------------------------------------------------ */}
     {/* projects table navigation */}
     <Grid item lg={2}>
