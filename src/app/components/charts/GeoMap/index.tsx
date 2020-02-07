@@ -26,6 +26,7 @@ import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 import Cluster from './common/MapCluster';
 import { ClusterElement } from './common/MapCluster/ClusterElement';
 import { MapControls } from './common/MapControls';
+import { getRandomKey } from 'app/utils/getRandomKey';
 
 type Props = {
   data?: any;
@@ -222,7 +223,7 @@ export function GeoMap(props: Props) {
             {mapRef.current && (
               <Cluster
                 map={mapRef.current.getMap()}
-                radius={160}
+                radius={15}
                 extent={512}
                 nodeSize={22}
                 minZoom={viewport.minZoom}
@@ -235,7 +236,7 @@ export function GeoMap(props: Props) {
               >
                 {(props.data.mapMarkers || []).map((m: any) => (
                   <MapPin
-                    key={m.name}
+                    key={getRandomKey()}
                     name={m.name}
                     value={m.value}
                     latitude={m.latitude}

@@ -19,6 +19,7 @@ import indexOf from 'lodash/indexOf';
 import sumBy from 'lodash/sumBy';
 import { MUIDataTableState } from 'mui-datatables';
 import React from 'react';
+import { getRandomKey } from 'app/utils/getRandomKey';
 
 const nf = (currency: string) => {
   return new Intl.NumberFormat(undefined, {
@@ -74,7 +75,7 @@ export function checkAndAddTotalRow(
 /* method for getting table header cell with an info icon hover tooltip */
 export function getInfoTHead(value: string, infoText: string): React.ReactNode {
   return (
-    <TableCell variant="head">
+    <TableCell variant="head" key={getRandomKey()}>
       <InfoCellModule value={value} info={infoText} />
     </TableCell>
   );
