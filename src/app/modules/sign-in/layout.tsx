@@ -21,6 +21,7 @@ export const SignInLayout = (props: LayoutModel) => {
         <Grid
           item
           lg={6}
+          md={6}
           css={`
             height: 100vh;
             display: flex;
@@ -38,14 +39,11 @@ export const SignInLayout = (props: LayoutModel) => {
         item
         xs={12}
         lg={6}
+        md={6}
         css={`
           display: flex;
           justify-content: center;
           align-items: center;
-
-          @media (max-width: 768px) {
-            background-color: #242e42;
-          }
         `}
       >
         <Container maxWidth="sm">
