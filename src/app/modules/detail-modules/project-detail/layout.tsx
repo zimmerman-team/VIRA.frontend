@@ -35,7 +35,7 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* button: generate report */}
-    <Hidden smDown>
+    <Hidden xsDown>
       <Grid item xs={12} lg={6} container justify="flex-end">
         <ContainedButton
           text="Generate Report"
@@ -58,7 +58,7 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* mobile button: generate report */}
-    <Hidden mdUp>
+    <Hidden smUp>
       <Grid item xs={12}>
         <ContainedButton
           text="Generate Report"
@@ -93,7 +93,7 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* outcome charts */}
-    <Grid item xs={12} lg={6}>
+    <Grid item xs={12} md={6} lg={6}>
       <Card
         css={`
           height: 315px;
@@ -123,7 +123,7 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* outcome cards */}
-    <Grid item container xs={12} lg={6}>
+    <Grid item container xs={12} md={6} lg={6}>
       <OutcomeCard {...ProjectOutcomeCardMock[0]} />
       <OutcomeCard {...ProjectOutcomeCardMock[1]} />
     </Grid>

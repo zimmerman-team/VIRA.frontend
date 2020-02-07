@@ -33,7 +33,7 @@ export const GranteeDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* outcome charts */}
-    <Grid item xs={12} lg={6}>
+    <Grid item xs={12} md={6} lg={6}>
       <Card>
         <CardHeader title="Key outcomes" />
         <CardContent>charts</CardContent>
@@ -42,7 +42,7 @@ export const GranteeDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* contact card */}
-    <Grid item xs={12} lg={6}>
+    <Grid item xs={12} md={6} lg={6}>
       <ContactsCard {...props.contact} />
     </Grid>
 

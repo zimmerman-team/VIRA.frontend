@@ -1,46 +1,15 @@
-import { Box, IconButton, InputBase, Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { IconButton, InputBase } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { Add, Search, Sort } from '@material-ui/icons';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { Search, Sort } from '@material-ui/icons';
 import { Popover } from 'app/components/misc/Popover';
 import { ProjectPalette } from 'app/theme';
 import React from 'react';
-import 'styled-components/macro';
-import styled from 'styled-components';
+// import 'styled-components/macro';
+import { css } from 'styled-components/macro';
 import { SortOptionsModel } from '../../sub-modules/manage-users-teams/models';
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 10px 12px 12px 24px;
-  margin-bottom: 19.5px;
-`;
-
-const Title = styled(Typography)`
-  && {
-    font-size: 1.4285714285714286rem;
-  }
-`;
-
-const IconLabelButton = styled(ContainedButton)`
-  && {
-    width: 100%;
-    height: 50px;
-    font-size: 1.1428571428571428rem;
-    letter-spacing: 0.15px;
-    svg {
-      width: 24px;
-      height: 24px;
-      margin-right: 16px;
-    }
-  }
-`;
-
-const ButtonIcon = styled(IconButton)`
+const ButtonIconStyle: any = css`
   color: #a1aebd;
   :hover {
     color: ${ProjectPalette.secondary.light};
@@ -48,16 +17,13 @@ const ButtonIcon = styled(IconButton)`
 `;
 
 export type HeaderParams = {
-  title: string;
-  buttonLabel: string;
-  buttonClick?: Function;
   sortOptions?: SortOptionsModel[];
   onSortChange?: Function;
   onSearchChange?: Function;
   searchValue?: string;
 };
 
-export function HeaderFragment(props: HeaderParams) {
+export const AdminManageOverviewToolbar = (props: HeaderParams) => {
   const [searchOpen, setSearchOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -67,77 +33,67 @@ export function HeaderFragment(props: HeaderParams) {
   }, [props.searchValue]);
 
   return (
-    <React.Fragment>
-      <Header>
-        <Title variant="h6">{props.title}</Title>
-        <Box
-          width="100%"
-          display="flex"
-          alignItems="center"
-          justifyContent="flex-end"
-        >
-          {searchOpen && (
-            <InputBase
-              autoFocus
-              onBlur={() => props.searchValue === '' && setSearchOpen(false)}
-              css={`
-                height: 30px;
-                margin-left: 20px;
-                input {
-                  height: 100%;
-                  background-color: #f0f3f7;
-                  padding-left: 15px;
-                  padding-right: 15px;
-                  font-size: 16px;
-                  font-weight: 300;
-                  line-height: 1.5;
-                  letter-spacing: 0.5px;
-                }
-              `}
-              fullWidth
-              inputProps={{ 'aria-label': 'subject' }}
-              value={props.searchValue}
-              onChange={e =>
-                props.onSearchChange && props.onSearchChange(e.target.value)
-              }
-            />
-          )}
-          {!searchOpen && (
-            <ButtonIcon onClick={() => setSearchOpen(true)}>
-              <Search />
-            </ButtonIcon>
-          )}
-          <Popover
-            component={
-              <ButtonIcon>
-                <Sort />
-              </ButtonIcon>
+    <div
+      css={`
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      `}
+    >
+      {searchOpen && (
+        <InputBase
+          autoFocus
+          onBlur={() => props.searchValue === '' && setSearchOpen(false)}
+          css={`
+            height: 30px;
+            margin-left: 20px;
+            input {
+              height: 100%;
+              background-color: #f0f3f7;
+              padding-left: 15px;
+              padding-right: 15px;
+              font-size: 16px;
+              font-weight: 300;
+              line-height: 1.5;
+              letter-spacing: 0.5px;
             }
-            content={[
-              <List key="list">
-                {(props.sortOptions || []).map(option => (
-                  <ListItem
-                    button
-                    key={option.value}
-                    onClick={() =>
-                      props.onSortChange && props.onSortChange(option.value)
-                    }
-                  >
-                    {option.label}
-                  </ListItem>
-                ))}
-              </List>,
-            ]}
-          />
-        </Box>
-      </Header>
-      <Grid item container lg={2}>
-        <IconLabelButton
-          text={props.buttonLabel}
-          icon={<Add />}
-          onClick={props.buttonClick}
+          `}
+          fullWidth
+          inputProps={{ 'aria-label': 'subject' }}
+          value={props.searchValue}
+          onChange={e =>
+            props.onSearchChange && props.onSearchChange(e.target.value)
+          }
         />
-      </Grid>
-    </React.Fragment>
+      )}
+      {!searchOpen && (
+        <IconButton css={ButtonIconStyle} onClick={() => setSearchOpen(true)}>
+          <Search />
+        </IconButton>
+      )}
+      <Popover
+        component={
+          <IconButton css={ButtonIconStyle}>
+            <Sort />
+          </IconButton>
+        }
+        content={[
+          <List key="list">
+            {(props.sortOptions || []).map(option => (
+              <ListItem
+                button
+                key={option.value}
+                onClick={() =>
+                  props.onSortChange && props.onSortChange(option.value)
+                }
+              >
+                {option.label}
+              </ListItem>
+            ))}
+          </List>,
+        ]}
+      />
+    </div>
   );
-}
+};
