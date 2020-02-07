@@ -54,12 +54,18 @@ function LandingLayout(props: any) {
   const [selectedSDG, setSelectedSDG] = React.useState('');
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
   const ppVizData = useStoreState(state => state.getPPVizData.data);
+  const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
+  const SDGVizData = useStoreState(state => state.getSDGVizData.data);
   const allProjectsData = useStoreState(state => state.allProjects.data);
   const allReportsData = useStoreState(state => state.allReports.data);
   const userDetails = useStoreState(state => state.userDetails.data);
 
   React.useEffect(() => {
     getPPVizData({ socketName: 'getPolicyPriorityBarChart', values: {} });
+    getSDGVizData({
+      socketName: 'getSDGBubbleChart',
+      values: {},
+    });
   }, []);
 
   React.useEffect(() => {
@@ -191,7 +197,7 @@ function LandingLayout(props: any) {
           </Route>
           <Route path="/dashboard/sdgs">
             <BubbleChart
-              data={bubbleMockData}
+              data={{ ...bubbleMockData, children: SDGVizData }}
               selectedBubble={selectedSDG}
               setSelectedBubble={onBubbleSelect}
             />

@@ -1,10 +1,14 @@
+import get from 'lodash/get';
 import find from 'lodash/find';
 import sumBy from 'lodash/sumBy';
 import sortBy from 'lodash/sortBy';
 import groupBy from 'lodash/groupBy';
+import consts from '../config/consts';
 const Report = require('../models/report');
 import { ProjectPalette } from '../../src/app/theme';
 import { policyPriorities } from '../../src/app/modules/report/sub-modules/outcomes/mock';
+
+const ppToSdg = consts.ppToSdg;
 
 export function getPolicyPriorityBarChartAPI(req: any, res: any) {
   Report.find({})
@@ -136,4 +140,72 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
       }
       res(JSON.stringify(sortBy(result, 'name').reverse()));
     });
+}
+
+export function getSDGBubbleChart(req: any, res: any) {
+  // if (req.query.user_email) {
+  //   ResponsiblePerson.find({ email: req.query.user_email }).exec(
+  //     (err: any, persons: any) => {
+  //       if (persons) {
+  //         Project.find({
+  //           $or: persons.map((person: any) => ({
+  //             responsible_person: new ObjectId(person._id),
+  //           })),
+  //         }).exec((err: any, projects: any) => {
+  //           if (projects) {
+  //             Report.find({
+  //               $or: projects.map((p: any) => ({
+  //                 project: new ObjectId(p._id),
+  //               })),
+  //             })
+  //               .select('policy_priority budget')
+  //               .populate('policy_priority')
+  //               .exec((err: any, data: any) => {
+  //                 const result: any[] = [];
+  //                 if (data) {
+  //                   const groupedData = groupBy(data, 'policy_priority.name');
+  //                   Object.keys(groupedData).forEach(key => {
+  //                     const sdg = get(ppToSdg, `${[key]}`, null);
+  //                     if (sdg) {
+  //                       result.push({
+  //                         name: sdg.name,
+  //                         color: sdg.color,
+  //                         loc: sumBy(groupedData[key], 'budget'),
+  //                       });
+  //                     }
+  //                   });
+  //                 } else {
+  //                   res(JSON.stringify([]));
+  //                 }
+  //                 res(JSON.stringify(sortBy(result, 'name').reverse()));
+  //               });
+  //           }
+  //         });
+  //       }
+  //     }
+  //   );
+  // } else {
+  Report.find({})
+    .select('policy_priority budget')
+    .populate('policy_priority')
+    .exec((err: any, data: any) => {
+      const result: any[] = [];
+      if (data) {
+        const groupedData = groupBy(data, 'policy_priority.name');
+        Object.keys(groupedData).forEach(key => {
+          const sdg = get(ppToSdg, `${[key]}`, null);
+          if (sdg) {
+            result.push({
+              name: sdg.name,
+              color: sdg.color,
+              loc: sumBy(groupedData[key], 'budget'),
+            });
+          }
+        });
+      } else {
+        res(JSON.stringify([]));
+      }
+      res(JSON.stringify(sortBy(result, 'name').reverse()));
+    });
+  // }
 }
