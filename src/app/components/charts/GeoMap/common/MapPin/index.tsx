@@ -7,6 +7,7 @@ import { Marker } from 'react-map-gl';
 import { ProjectPalette } from 'app/theme';
 
 const MAX_WIDTH = 22;
+const MIN_WIDTH = 12;
 
 type Props = {
   name: string;
@@ -18,7 +19,8 @@ type Props = {
 };
 
 function getWidth(value: number, maxValue: number) {
-  return (((value * 100) / maxValue) * MAX_WIDTH) / 100;
+  const width = (((value * 100) / maxValue) * MAX_WIDTH) / 100;
+  return width < MIN_WIDTH ? MIN_WIDTH : width;
 }
 
 export function MapPin(props: Props) {

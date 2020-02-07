@@ -25,6 +25,7 @@ import { ProjectPalette } from 'app/theme';
 import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 import Cluster from './common/MapCluster';
 import { ClusterElement } from './common/MapCluster/ClusterElement';
+import { MapControls } from './common/MapControls';
 
 type Props = {
   data?: any;
@@ -65,18 +66,18 @@ export function GeoMap(props: Props) {
     [get(props.data, 'mapMarkers', [])]
   );
 
-  function onMapPinClick(coordinates: number[]) {
-    if (coordinates.length === 2) {
-      setViewport(prev => ({
-        ...prev,
-        zoom: 4,
-        longitude: coordinates[0],
-        latitude: coordinates[1],
-        transitionInterpolator: new LinearInterpolator(),
-        transitionDuration: 1000,
-      }));
-    }
-  }
+  // function onMapPinClick(coordinates: number[]) {
+  //   if (coordinates.length === 2) {
+  //     setViewport(prev => ({
+  //       ...prev,
+  //       zoom: 4,
+  //       longitude: coordinates[0],
+  //       latitude: coordinates[1],
+  //       transitionInterpolator: new LinearInterpolator(),
+  //       transitionDuration: 1000,
+  //     }));
+  //   }
+  // }
 
   React.useEffect(() => {
     if (!props.pointSelection) {
@@ -142,10 +143,31 @@ export function GeoMap(props: Props) {
     }));
   }
 
+  function handleZoomIn() {
+    setViewport(prev => ({
+      ...prev,
+      zoom: prev.zoom + 0.5,
+      transitionInterpolator: new LinearInterpolator(),
+      transitionDuration: 500,
+    }));
+  }
+
+  function handleZoomOut() {
+    if (viewport.zoom - 0.5 >= viewport.minZoom) {
+      setViewport(prev => ({
+        ...prev,
+        zoom: prev.zoom - 0.5,
+        transitionInterpolator: new LinearInterpolator(),
+        transitionDuration: 500,
+      }));
+    }
+  }
+
   return (
     <div
       css={`
         width: 100%;
+        position: relative;
       `}
       ref={containerRef}
     >
@@ -237,6 +259,7 @@ export function GeoMap(props: Props) {
           />
         )}
       </ReactMapGL>
+      <MapControls zoomIn={handleZoomIn} zoomOut={handleZoomOut} />
     </div>
   );
 }
