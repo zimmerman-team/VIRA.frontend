@@ -1,6 +1,7 @@
 import 'styled-components/macro';
 import React from 'react';
 import get from 'lodash/get';
+import find from 'lodash/find';
 // @ts-ignore
 import wc from 'which-country';
 // @ts-ignore
@@ -10,20 +11,22 @@ import ReactMapGL, {
   Layer,
   LinearInterpolator,
   PointerEvent,
+  InteractiveMap,
 } from 'react-map-gl';
-import { mockData } from 'app/components/charts/GeoMap/mock';
 import { MapPin } from 'app/components/charts/GeoMap/common/MapPin';
 import mapStyle from 'app/components/charts/GeoMap/common/style/style.json';
 import mapStyle2 from 'app/components/charts/GeoMap/common/style/style2.json';
 import geoJSON from 'app/components/charts/GeoMap/common/style/geojson.json';
 import { LocationModel } from 'app/modules/report/model';
 import { countries } from 'app/assets/data/countries';
-import find from 'lodash/find';
 import { Input } from 'app/components/inputs/textfields/PasswordTextField';
-import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 import { ProjectPalette } from 'app/theme';
+import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
+import Cluster from './common/MapCluster';
+import { ClusterElement } from './common/MapCluster/ClusterElement';
 
 type Props = {
+  data?: any;
   width?: number;
   height?: number;
   noData?: boolean;
@@ -32,8 +35,9 @@ type Props = {
 };
 
 export function GeoMap(props: Props) {
+  const mapRef: React.RefObject<InteractiveMap> = React.useRef(null);
   const [maxPinValue, setMaxPinValue] = React.useState(
-    Math.max(...mockData.mapMarkers.map(m => m.value))
+    Math.max(...get(props.data, 'mapMarkers', []).map((m: any) => m.value))
   );
   const containerRef: React.RefObject<HTMLDivElement> = React.createRef();
   const [viewport, setViewport] = React.useState({
@@ -51,6 +55,14 @@ export function GeoMap(props: Props) {
       width: get(containerRef.current, 'offsetWidth', 0),
     }));
   }, [get(containerRef.current, 'offsetWidth', 0)]);
+
+  React.useEffect(
+    () =>
+      setMaxPinValue(
+        Math.max(...get(props.data, 'mapMarkers', []).map((m: any) => m.value))
+      ),
+    [get(props.data, 'mapMarkers', [])]
+  );
 
   function onMapPinClick(coordinates: number[]) {
     if (coordinates.length === 2) {
@@ -114,6 +126,21 @@ export function GeoMap(props: Props) {
     }));
   }
 
+  function handleClusterClick(
+    zoom: number,
+    longitude: number,
+    latitude: number
+  ) {
+    setViewport((prev: any) => ({
+      ...prev,
+      zoom,
+      longitude,
+      latitude,
+      transitionInterpolator: new LinearInterpolator(),
+      transitionDuration: 1000,
+    }));
+  }
+
   return (
     <div
       css={`
@@ -147,36 +174,55 @@ export function GeoMap(props: Props) {
         />
       )}
       <ReactMapGL
+        ref={mapRef}
         {...viewport}
         onViewportChange={setViewport}
         mapStyle={props.noData ? mapStyle2 : mapStyle}
         onClick={props.noData ? onMapClick : undefined}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >
-        {!props.noData && (
+        {!props.noData && props.data && (
           <>
-            <Source
-              type="geojson"
-              data={
-                mockData.countryFeatures as
-                  | GeoJSON.Feature<GeoJSON.Geometry>
-                  | GeoJSON.FeatureCollection<GeoJSON.Geometry>
-                  | string
-              }
-            >
-              <Layer {...geoJSON} />
-            </Source>
-            {mockData.mapMarkers.map((m: any) => (
-              <MapPin
-                key={m.name}
-                name={m.name}
-                value={m.value}
-                latitude={m.latitude}
-                maxValue={maxPinValue}
-                longitude={m.longitude}
-                onClick={onMapPinClick}
-              />
-            ))}
+            {props.data.countryFeatures && (
+              <Source
+                type="geojson"
+                data={
+                  props.data.countryFeatures as
+                    | GeoJSON.Feature<GeoJSON.Geometry>
+                    | GeoJSON.FeatureCollection<GeoJSON.Geometry>
+                    | string
+                }
+              >
+                <Layer {...geoJSON} />
+              </Source>
+            )}
+            {mapRef.current && (
+              <Cluster
+                map={mapRef.current.getMap()}
+                radius={160}
+                extent={512}
+                nodeSize={22}
+                minZoom={viewport.minZoom}
+                element={(clusterProps: any) => (
+                  <ClusterElement
+                    {...clusterProps}
+                    onClick={handleClusterClick}
+                  />
+                )}
+              >
+                {(props.data.mapMarkers || []).map((m: any) => (
+                  <MapPin
+                    key={m.name}
+                    name={m.name}
+                    value={m.value}
+                    latitude={m.latitude}
+                    maxValue={maxPinValue}
+                    longitude={m.longitude}
+                    // onClick={onMapPinClick}
+                  />
+                ))}
+              </Cluster>
+            )}
           </>
         )}
         {props.noData && props.pointSelection && (

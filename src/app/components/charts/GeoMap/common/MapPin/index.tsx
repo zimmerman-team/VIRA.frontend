@@ -6,7 +6,7 @@ import 'styled-components/macro';
 import { Marker } from 'react-map-gl';
 import { ProjectPalette } from 'app/theme';
 
-const MAX_WIDTH = 15;
+const MAX_WIDTH = 22;
 
 type Props = {
   name: string;

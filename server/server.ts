@@ -305,6 +305,9 @@ IO.sockets.on('connection', (socket: any) => {
   socket.on('getSDGBubbleChart', (data: any, fn: any) => {
     VizController.getSDGBubbleChart({ query: data }, (res: any) => fn(res));
   });
+  socket.on('getGeoMapData', (data: any, fn: any) => {
+    VizController.getGeoMapData({ query: data }, (res: any) => fn(res));
+  });
 });
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });

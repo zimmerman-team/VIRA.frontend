@@ -2145,6 +2145,11 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
+"@turf/helpers@^6.1.4":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.1.4.tgz#d6fd7ebe6782dd9c87dca5559bda5c48ae4c3836"
+  integrity sha512-vJvrdOZy1ngC7r3MDA7zIGSoIgyrkWcGnNIEaqn/APmw+bVLF2gAW7HIsdTxd12s5wQMqEpqIQrmrbRRZ0xC7g==
+
 "@types/auth0-js@^9.10.6":
   version "9.12.1"
   resolved "https://registry.yarnpkg.com/@types/auth0-js/-/auth0-js-9.12.1.tgz#940ac7e9547c247b789310fc2f195b9070800446"
@@ -10811,10 +10816,10 @@ mixin-object@^2.0.1:
     for-in "^0.1.3"
     is-extendable "^0.1.1"
 
-mjolnir.js@^2.2.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/mjolnir.js/-/mjolnir.js-2.3.0.tgz#192e66fb21b9e81521ee3ac71676e2a3fa678dec"
-  integrity sha512-ungiyxsr+E/M6/76e/K3Ut98QbuEO3UhvC3ucHplDkOpA1x7TeAm01hpP3E8bDsYFrkPk4PCUVJEuirZWguxEA==
+mjolnir.js@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/mjolnir.js/-/mjolnir.js-2.4.0.tgz#247f1640d8382c07c3030595f7957e1a5383b6e4"
+  integrity sha512-0WyWlc5EzdZ7eD0Fjy1DarzJpknesJaMJ6P0c6gDlbotfj3GRzv0odTXfTVVMm9WxEQSUzxosdnPqnd0SDxIyA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     hammerjs "^2.0.8"
@@ -13789,14 +13794,14 @@ react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-map-gl@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-5.2.1.tgz#a56977987be8d844c9cec90a0668d6f9e928e930"
-  integrity sha512-8o8WhCIhOS90FfEEnXJDcylnq0qZPdsMaQVW0qBVY9GYbnRJQlCw6ZTusg0rgmCYmbXKWA1ApuKnA7PrpXRxlQ==
+react-map-gl@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-5.2.2.tgz#e086fb59d1335d4e7654560e8aa97c5dfbb51a0b"
+  integrity sha512-HYW8EC5ikXiaWQi4gGpiXSZ7KNQVC2I25YkuUAzcV747SYZ2feuegmBXKDtZ9ewNDvpWaWlC/gl8Vq77b/llZw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     mapbox-gl "^1.0.0"
-    mjolnir.js "^2.2.0"
+    mjolnir.js "^2.4.0"
     prop-types "^15.7.2"
     react-virtualized-auto-sizer "^1.0.2"
     viewport-mercator-project "^6.2.3 || ^7.0.1"
