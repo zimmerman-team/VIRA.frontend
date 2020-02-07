@@ -6,14 +6,25 @@ import { PageModel } from 'app/modules/super-admin/sub-modules/manage-users-team
 import { Route } from 'react-router-dom';
 import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 import { PageLoader } from 'app/modules/common/page-loader';
+import { Typography } from '@material-ui/core';
 
 export const ManageUsersTeamsLayout = (props: ManageUsersTeamsLayoutModel) => (
   <React.Fragment>
     {props.loading && <PageLoader />}
     {/* ---------------------------------------------------------------------*/}
     {/* Breadcrumbs */}
-    <Grid item lg={12}>
-      <BreadCrumbs {...props.breadcrumbs} />
+
+    <Grid item xs={12} lg={10}>
+      {/* <BreadCrumbs {...props.breadcrumbs} /> */}
+      <Typography
+        variant="subtitle1"
+        css={`
+          color: #00000073;
+          font-size: 14px;
+        `}
+      >
+        Manage
+      </Typography>
     </Grid>
 
     {/* using this element as an helper */}
