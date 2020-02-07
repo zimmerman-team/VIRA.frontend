@@ -1,6 +1,7 @@
 // @ts-nocheck
 // cc:application base#;application providers
 import React, { ReactNode } from 'react';
+
 import theme from 'app/theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { StoreProvider } from 'easy-peasy';
@@ -19,13 +20,13 @@ function Providers(props: ProviderProps) {
   return (
     /* material ui theme provider */
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       {/* redux store provider */}
       <StoreProvider store={appStore}>
         {/* TODO: check why persistor throws error with encryptor */}
 
         <PersistGate loading={null} persistor={persistor}>
           <ClientContextProvider client={Client}>
-            <CssBaseline />
             {/* react router */}
             <Router>{props.children}</Router>
           </ClientContextProvider>

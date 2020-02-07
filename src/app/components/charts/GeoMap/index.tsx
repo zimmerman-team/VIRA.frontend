@@ -1,10 +1,11 @@
+/* eslint-disable no-shadow */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-nocheck
 import 'styled-components/macro';
 import React from 'react';
 import get from 'lodash/get';
 import find from 'lodash/find';
-// @ts-ignore
 import wc from 'which-country';
-// @ts-ignore
 import Geocoder from 'react-mapbox-gl-geocoder';
 import ReactMapGL, {
   Source,

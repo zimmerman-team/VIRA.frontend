@@ -15,6 +15,7 @@ import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import TableModule from 'app/components/datadisplay/Table';
 import graph1 from 'app/assets/images/dummy_graph1.png';
+import { Hidden } from '@material-ui/core';
 
 export const ProjectDetailLayout = (props: any) => (
   <React.Fragment>
@@ -34,12 +35,14 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* button: generate report */}
-    <Grid item xs={12} lg={6} container justify="flex-end">
-      <ContainedButton
-        text="Generate Report"
-        onClick={props.projectDetail.generateReport}
-      />
-    </Grid>
+    <Hidden smDown>
+      <Grid item xs={12} lg={6} container justify="flex-end">
+        <ContainedButton
+          text="Generate Report"
+          onClick={props.projectDetail.generateReport}
+        />
+      </Grid>
+    </Hidden>
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
@@ -52,6 +55,17 @@ export const ProjectDetailLayout = (props: any) => (
         url={props.projectDetail.website}
       />
     </Grid>
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* mobile button: generate report */}
+    <Hidden mdUp>
+      <Grid item xs={12}>
+        <ContainedButton
+          text="Generate Report"
+          onClick={props.projectDetail.generateReport}
+        />
+      </Grid>
+    </Hidden>
 
     {/* ---------------------------------------------------------------------*/}
     {/* stat fragment */}

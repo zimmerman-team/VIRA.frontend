@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
-import get from 'lodash/get';
 import { useTitle } from 'react-use';
 import { useParams } from 'react-router-dom';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail/layout';
-import { useStoreActions } from 'app/state/store/hooks';
-import { useStoreState } from 'app/state/store/hooks';
-import { formatReportDetail } from './utils/formatReportDetail';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import findIndex from 'lodash/findIndex';
+import { formatReportDetail } from './utils/formatReportDetail';
 
 export const ReportDetailModule = () => {
   useTitle('M&E Report detail');

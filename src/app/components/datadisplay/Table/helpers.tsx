@@ -1,7 +1,6 @@
-/* eslint-disable */
-/* eslint-disable no-plusplus */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-case-declarations */
+/* eslint-disable no-plusplus */
+
 /* core */
 import { TableCell, TableRow } from '@material-ui/core';
 /* project-comps */

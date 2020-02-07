@@ -1,7 +1,7 @@
+/* eslint-disable no-plusplus */
 import React from 'react';
 import get from 'lodash/get';
 import find from 'lodash/find';
-import filter from 'lodash/filter';
 import { useTitle } from 'react-use';
 import findIndex from 'lodash/findIndex';
 import { withRouter } from 'react-router-dom';

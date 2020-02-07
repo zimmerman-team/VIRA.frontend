@@ -1,6 +1,5 @@
 import React from 'react';
 import 'styled-components/macro';
-import filter from 'lodash/filter';
 import { ProjectPalette } from 'app/theme';
 import {
   OutcomesPropsModel,

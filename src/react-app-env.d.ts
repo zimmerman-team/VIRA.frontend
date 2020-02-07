@@ -3,8 +3,6 @@
 /// <reference types="react" />
 /// <reference types="react-dom" />
 
-import { CSSProp } from 'styled-components';
-
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production' | 'test';

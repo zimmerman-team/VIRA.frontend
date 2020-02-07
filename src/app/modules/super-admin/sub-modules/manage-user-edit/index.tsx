@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // global
 import { Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
