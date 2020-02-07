@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react';
-import styled from 'styled-components';
+import { css } from 'styled-components/macro';
 import Button from '@material-ui/core/Button';
 import { ProjectPalette } from 'app/theme';
 
@@ -11,9 +11,14 @@ type Props = {
   onClick?: any;
 };
 
-const BaseContainedButton = styled(props => <Button {...props} />)`
+const BaseContainedButtonStyle = css`
   padding: 12px 15px !important;
   box-shadow: none !important;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
   &:hover {
     background-color: ${ProjectPalette.secondary.light} !important;
   }
@@ -32,7 +37,8 @@ export const ContainedButton = (props: Props) => {
   const { text, disabled, ...other } = props;
 
   return (
-    <BaseContainedButton
+    <Button
+      css={BaseContainedButtonStyle}
       variant="contained"
       color="secondary"
       disabled={disabled}
@@ -43,6 +49,6 @@ export const ContainedButton = (props: Props) => {
         {props.icon && props.icon}
         {text}
       </>
-    </BaseContainedButton>
+    </Button>
   );
 };

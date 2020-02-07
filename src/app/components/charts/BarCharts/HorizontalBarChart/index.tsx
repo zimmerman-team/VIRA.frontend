@@ -186,7 +186,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
 
   function renderBarchart() {
     if (typeof props.values !== 'undefined' && props.values.length > 0) {
-      console.log(props.maxValue);
+      // console.log(props.maxValue);
       return (
         <>
           {showLine && (

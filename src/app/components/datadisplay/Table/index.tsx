@@ -11,6 +11,10 @@ import {
 } from 'app/components/datadisplay/Table/helpers';
 import styled from 'styled-components';
 
+const VerticalScrollHelper = styled.div`
+  overflow-x: scroll;
+`;
+
 const TableModule = (props: TableModuleModel) => {
   const [totalData, setTotalData] = React.useState({});
 
@@ -36,10 +40,6 @@ const TableModule = (props: TableModuleModel) => {
     setLocalTableState,
     setTotalData
   );
-
-  const VerticalScrollHelper = styled.div`
-    overflow-x: scroll;
-  `;
 
   return (
     <VerticalScrollHelper>

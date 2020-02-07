@@ -31,9 +31,9 @@ import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import uniqBy from 'lodash/uniqBy';
+import { ProjectPalette } from 'app/theme';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { getNewReportsCount } from './utils/getNewReportsCount';
-import { ProjectPalette } from 'app/theme';
 
 function LandingLayout(props: any) {
   // set window title
