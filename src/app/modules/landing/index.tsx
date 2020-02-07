@@ -53,12 +53,14 @@ function LandingLayout(props: any) {
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
-  const ppVizData = useStoreState(state => state.getPPVizData.data);
   const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
+  const getGeoMapData = useStoreActions(actions => actions.getGeoMapData.fetch);
+  const ppVizData = useStoreState(state => state.getPPVizData.data);
   const SDGVizData = useStoreState(state => state.getSDGVizData.data);
   const allProjectsData = useStoreState(state => state.allProjects.data);
   const allReportsData = useStoreState(state => state.allReports.data);
   const userDetails = useStoreState(state => state.userDetails.data);
+  const geoMapData = useStoreState(state => state.getGeoMapData.data);
 
   React.useEffect(() => {
     getPPVizData({ socketName: 'getPolicyPriorityBarChart', values: {} });
@@ -66,6 +68,7 @@ function LandingLayout(props: any) {
       socketName: 'getSDGBubbleChart',
       values: {},
     });
+    getGeoMapData({ socketName: 'getGeoMapData', values: {} });
   }, []);
 
   React.useEffect(() => {
@@ -203,7 +206,7 @@ function LandingLayout(props: any) {
             />
           </Route>
           <Route path="/dashboard/map">
-            <GeoMap />
+            <GeoMap data={geoMapData} />
           </Route>
         </Grid>
       </React.Fragment>

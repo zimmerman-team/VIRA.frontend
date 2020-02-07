@@ -2,11 +2,13 @@ import get from 'lodash/get';
 import find from 'lodash/find';
 import sumBy from 'lodash/sumBy';
 import sortBy from 'lodash/sortBy';
+import filter from 'lodash/filter';
 import groupBy from 'lodash/groupBy';
 import consts from '../config/consts';
 const Report = require('../models/report');
 import { ProjectPalette } from '../../src/app/theme';
 import { policyPriorities } from '../../src/app/modules/report/sub-modules/outcomes/mock';
+import { countryFeaturesData } from '../config/countryFeatures';
 
 const ppToSdg = consts.ppToSdg;
 
@@ -208,4 +210,26 @@ export function getSDGBubbleChart(req: any, res: any) {
       res(JSON.stringify(sortBy(result, 'name').reverse()));
     });
   // }
+}
+
+export function getGeoMapData(req: any, res: any) {
+  Report.find({ location: { $ne: null } })
+    .select('location budget place_name country')
+    .populate('location')
+    .exec((err: any, data: any) => {
+      // console.log(data);
+      const mapMarkers = data.map((item: any) => ({
+        name: item.place_name || item.country,
+        longitude: item.location.long,
+        latitude: item.location.lat,
+        value: item.budget,
+      }));
+      const countryFeatures = {
+        ...countryFeaturesData,
+        features: filter(countryFeaturesData.features, f =>
+          find(data, { country: f.properties.name })
+        ),
+      };
+      res(JSON.stringify({ mapMarkers, countryFeatures }));
+    });
 }

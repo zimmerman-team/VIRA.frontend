@@ -2171,6 +2171,11 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
+"@turf/helpers@^6.1.4":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.1.4.tgz#d6fd7ebe6782dd9c87dca5559bda5c48ae4c3836"
+  integrity sha512-vJvrdOZy1ngC7r3MDA7zIGSoIgyrkWcGnNIEaqn/APmw+bVLF2gAW7HIsdTxd12s5wQMqEpqIQrmrbRRZ0xC7g==
+
 "@types/auth0-js@^9.10.6":
   version "9.12.3"
   resolved "https://registry.yarnpkg.com/@types/auth0-js/-/auth0-js-9.12.3.tgz#1d1b73ee4affd48dc986b36277e14fb4c998027d"
@@ -14303,7 +14308,7 @@ react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-map-gl@^5.2.1:
+react-map-gl@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-5.2.2.tgz#e086fb59d1335d4e7654560e8aa97c5dfbb51a0b"
   integrity sha512-HYW8EC5ikXiaWQi4gGpiXSZ7KNQVC2I25YkuUAzcV747SYZ2feuegmBXKDtZ9ewNDvpWaWlC/gl8Vq77b/llZw==
