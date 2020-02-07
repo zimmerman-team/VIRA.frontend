@@ -3,6 +3,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { ProjectPalette } from 'app/theme';
+import { Hidden } from '@material-ui/core';
 
 export interface TitleParams {
   title: string;
@@ -22,6 +23,7 @@ const style: any[] = [
 
     @media (max-width: 768px) {
       font-size: 25px;
+      line-height: 1.3;
     }
   `,
   // id style
@@ -44,7 +46,6 @@ const style: any[] = [
     font-size: 12px;
     line-height: 1.33;
     letter-spacing: 2px;
-
     a {
       text-decoration: none;
       color: ${ProjectPalette.secondary.main};
@@ -58,8 +59,7 @@ export const TitleFragment = (props: TitleParams) => {
       {/* ---------------------------- */}
       {/* title */}
       <Typography css={style[0]}>{props.title}</Typography>
-      <Box height="10px" />
-
+      <Box height="15px" />
       {/* ---------------------------- */}
       {/* id */}
       {props.id && (
