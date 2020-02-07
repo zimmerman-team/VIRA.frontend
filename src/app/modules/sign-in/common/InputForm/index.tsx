@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link as RouteLink } from 'react-router-dom';
+import 'styled-components/macro';
 
 /* components */
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';

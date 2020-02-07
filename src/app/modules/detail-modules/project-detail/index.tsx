@@ -11,9 +11,10 @@ import {
 } from 'app/modules/detail-modules/project-detail/model';
 
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
-import { formatTableDataForReport } from 'app/modules/list-module/utils';
-import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import { getBaseTableForReport } from 'app/modules/list-module/utils';
+import {
+  formatTableDataForReport,
+  getBaseTableForReport,
+} from 'app/modules/list-module/utils';
 
 const ProjectDetailModuleF = (props: any) => {
   useTitle('M&E - Project detail');

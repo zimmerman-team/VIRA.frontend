@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { useTitle } from 'react-use';
 import { useParams } from 'react-router-dom';

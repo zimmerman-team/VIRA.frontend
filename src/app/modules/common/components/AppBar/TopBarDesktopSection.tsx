@@ -1,18 +1,13 @@
 import React from 'react';
 import 'styled-components/macro';
-// import Grid from '@material-ui/core/Grid';
-import Badge from '@material-ui/core/Badge';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useEventListener } from 'app/utils/useEventListener';
 import { Account } from 'app/modules/common/components/Account';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Search } from 'app/modules/common/components/Search/index';
 import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
-// import { notifMock } from 'app/modules/common/components/Notifications/common/mock';
-// import { NotificationContainer } from 'app/modules/common/components/Notifications';
 
 interface TopBarDesktopSectionParams {
   classes: Record<

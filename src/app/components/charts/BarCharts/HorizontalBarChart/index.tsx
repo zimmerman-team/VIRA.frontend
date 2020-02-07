@@ -1,5 +1,4 @@
 import 'styled-components/macro';
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components';
@@ -187,7 +186,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
 
   function renderBarchart() {
     if (typeof props.values !== 'undefined' && props.values.length > 0) {
-      console.log(props.maxValue);
+      // console.log(props.maxValue);
       return (
         <>
           {showLine && (
