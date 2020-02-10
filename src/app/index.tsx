@@ -28,8 +28,8 @@ export function App() {
 
   const isLoggedIn = Boolean(useStoreState(state => state.syncVariables.user));
   return (
-    <div className={classes.root}>
-      {!isLoggedIn ? (
+    <React.Fragment>
+      {/* {!isLoggedIn ? (
         <MainRoutes />
       ) : (
         <>
@@ -47,14 +47,14 @@ export function App() {
             handleDrawerOpen={handleDrawerOpen}
             theme={theme}
             navItems={NavItems}
-          />
+          /> */}
 
-          <PageWrapper>
-            <MainRoutes />
-          </PageWrapper>
-        </>
+      <PageWrapper>
+        <MainRoutes />
+      </PageWrapper>
+      {/* </>
       )}
-      <PositionedSnackbar />
-    </div>
+      <PositionedSnackbar /> */}
+    </React.Fragment>
   );
 }

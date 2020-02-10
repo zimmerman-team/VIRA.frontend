@@ -24,7 +24,6 @@
     "config",
     ".storybook",
     "node_modules",
-    "**/story.tsx",
     "**/*.spec.ts",
     "@nivo/bar",
     ".vscode",
