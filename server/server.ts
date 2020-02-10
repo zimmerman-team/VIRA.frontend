@@ -6,7 +6,6 @@ const helmet = require('helmet');
 let apiRouter = require('./api-routes');
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
-let url = 'mongodb://localhost:27017/insinger';
 const router = express.Router();
 const VizController = require('./controllers/VizController');
 const orgController = require('./controllers/OrgControllerSocket');
@@ -310,7 +309,10 @@ IO.sockets.on('connection', (socket: any) => {
   });
 });
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.REACT_APP_MONGO_DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 var db = mongoose.connection;
 if (!db) {
   console.log('Error connecting to database.');

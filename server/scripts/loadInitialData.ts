@@ -1,5 +1,6 @@
 // @ts-nocheck
 // base
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 // models
@@ -14,12 +15,9 @@ const fs = require('fs');
 const csvtojson = require('csvtojson');
 import groupBy from 'lodash/groupBy';
 
-// consts
-const url = 'mongodb://localhost:27017/insinger';
-
 // connect to mongodb
 const db = mongoose.connect(
-  url,
+  process.env.REACT_APP_MONGO_DB_URL,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err: any, client: any) => {
     if (err) {
