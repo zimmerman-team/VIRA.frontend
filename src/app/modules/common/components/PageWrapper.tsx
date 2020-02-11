@@ -17,8 +17,8 @@ export function PageWrapper(props: PageWrapperParams) {
       `}
       maxWidth="lg"
     >
+      {isMobileWidth ? <Box height="80px" /> : <Box height="100px" />}
       <Grid container spacing={4}>
-        {/* {isMobileWidth ? <Box height="80px" /> : <Box height="100px" />} */}
         {props.children}
       </Grid>
     </Container>

@@ -15,7 +15,7 @@ import { useStoreState } from 'app/state/store/hooks';
 export function App() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   InitialLoad();
 
   const handleDrawerOpen = () => {
@@ -29,7 +29,7 @@ export function App() {
   const isLoggedIn = Boolean(useStoreState(state => state.syncVariables.user));
   return (
     <React.Fragment>
-      {/* {!isLoggedIn ? (
+      {!isLoggedIn ? (
         <MainRoutes />
       ) : (
         <>
@@ -47,14 +47,14 @@ export function App() {
             handleDrawerOpen={handleDrawerOpen}
             theme={theme}
             navItems={NavItems}
-          /> */}
+          />
 
-      <PageWrapper>
-        <MainRoutes />
-      </PageWrapper>
-      {/* </>
+          <PageWrapper>
+            <MainRoutes />
+          </PageWrapper>
+        </>
       )}
-      <PositionedSnackbar /> */}
+      <PositionedSnackbar />
     </React.Fragment>
   );
 }
