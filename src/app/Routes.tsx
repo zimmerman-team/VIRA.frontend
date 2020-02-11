@@ -61,126 +61,126 @@ export function MainRoutes() {
   const userRoles = useStoreState(state => state.getUserRoles.data);
   const userGroups = useStoreState(state => state.getUserGroups.data);
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Switch>
-        <Route exact path="/login">
-          {redirectAuth(storeUser)}
-        </Route>
+    // <Suspense fallback={<PageLoader />}>
+    <Switch>
+      <Route exact path="/login">
+        {redirectAuth(storeUser)}
+      </Route>
 
-        <Route exact path="/recover-password">
-          <PasswordRecovery />
-        </Route>
+      <Route exact path="/recover-password">
+        <PasswordRecovery />
+      </Route>
 
-        <Route exact path="/">
-          <Redirect to="/dashboard/priority-area/projects" />
-        </Route>
-        <Route exact path="/dashboard/:viz?/:list?">
-          {redirectUnAuth(LandingLayout, storeUser)}
-        </Route>
+      <Route exact path="/">
+        <Redirect to="/dashboard/priority-area/projects" />
+      </Route>
+      <Route exact path="/dashboard/:viz?/:list?">
+        {redirectUnAuth(LandingLayout, storeUser)}
+      </Route>
 
-        <Route exact path="/list/:id">
-          {useTitle('M&E - List')}
-          {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
-        </Route>
+      <Route exact path="/list/:id">
+        {useTitle('M&E - List')}
+        {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
+      </Route>
 
-        <Route exact path="/projects/:code/detail">
-          {redirectUnAuth(ProjectDetailModule, storeUser)}
-        </Route>
+      <Route exact path="/projects/:code/detail">
+        {redirectUnAuth(ProjectDetailModule, storeUser)}
+      </Route>
 
-        <Route exact path="/reports/:code/detail">
-          {redirectUnAuth(ReportDetailModule, storeUser)}
-        </Route>
+      <Route exact path="/reports/:code/detail">
+        {redirectUnAuth(ReportDetailModule, storeUser)}
+      </Route>
 
-        <Route path="/report/:projectID">
-          {redirectUnAuth(CreateReport, storeUser)}
-        </Route>
+      <Route path="/report/:projectID">
+        {redirectUnAuth(CreateReport, storeUser)}
+      </Route>
 
-        <Route exact path="/grantees/detail">
-          {redirectUnAuth(GranteeDetailModule, storeUser)}
-        </Route>
-        <Route exact path="/grantee/:code/detail">
-          {redirectUnAuth(GranteeDetailModule, storeUser)}
-        </Route>
+      <Route exact path="/grantees/detail">
+        {redirectUnAuth(GranteeDetailModule, storeUser)}
+      </Route>
+      <Route exact path="/grantee/:code/detail">
+        {redirectUnAuth(GranteeDetailModule, storeUser)}
+      </Route>
 
-        <Route exact path="/if-priority-area">
-          {redirectUnAuth(PriorityAreaModule, storeUser)}
-        </Route>
+      <Route exact path="/if-priority-area">
+        {redirectUnAuth(PriorityAreaModule, storeUser)}
+      </Route>
 
-        <Route exact path="/sdg">
-          {redirectUnAuth(SdgModule, storeUser)}
-        </Route>
+      <Route exact path="/sdg">
+        {redirectUnAuth(SdgModule, storeUser)}
+      </Route>
 
-        <Route exact path="/faq">
-          {redirectUnAuth(Faqs, storeUser)}
-        </Route>
+      <Route exact path="/faq">
+        {redirectUnAuth(Faqs, storeUser)}
+      </Route>
 
-        <Route exact path="/privacy">
-          {redirectUnAuth(PrivacyModule, storeUser)}
-        </Route>
+      <Route exact path="/privacy">
+        {redirectUnAuth(PrivacyModule, storeUser)}
+      </Route>
 
-        <Route exact path="/notFound">
-          <NoMatchPage />
-        </Route>
+      <Route exact path="/notFound">
+        <NoMatchPage />
+      </Route>
 
-        <Route exact path="/callback">
-          <LoginCallbackModule auth={auth} />
-        </Route>
+      <Route exact path="/callback">
+        <LoginCallbackModule auth={auth} />
+      </Route>
 
-        <Route exact path="/submitted">
-          {redirectUnAuth(SubmittedLayout, storeUser)}
-        </Route>
+      <Route exact path="/submitted">
+        {redirectUnAuth(SubmittedLayout, storeUser)}
+      </Route>
 
-        <Route path="/super-admin/manage-teams/edit/:id">
-          {redirectUnAuth(ManageTeamEditAdd, storeUser, {
-            ...manageTeamEditAddMock,
-            mode: 'edit',
-            breadcrumbs: {
-              ...manageTeamEditAddMock.breadcrumbs,
-              currentLocation: 'Edit',
+      <Route path="/super-admin/manage-teams/edit/:id">
+        {redirectUnAuth(ManageTeamEditAdd, storeUser, {
+          ...manageTeamEditAddMock,
+          mode: 'edit',
+          breadcrumbs: {
+            ...manageTeamEditAddMock.breadcrumbs,
+            currentLocation: 'Edit',
+          },
+        })}
+      </Route>
+
+      <Route path="/super-admin/manage-teams/add">
+        {redirectUnAuth(ManageTeamEditAdd, storeUser, manageTeamEditAddMock)}
+      </Route>
+
+      <Route exact path="/super-admin/:id">
+        {redirectUnAuth(ManageUsers, storeUser, manageUsersTeamsLayoutMock)}
+      </Route>
+
+      <Route path="/super-admin/manage-user">
+        {redirectUnAuth(ManageUser, storeUser)}
+      </Route>
+
+      <Route path="/super-admin/manage-account">
+        {redirectUnAuth(ManageAccount, storeUser, manageAccountMock)}
+      </Route>
+
+      <Route path="/super-admin/manage-users/edit/:id">
+        {redirectUnAuth(ManageUserEdit, storeUser, manageUserEditMock)}
+      </Route>
+
+      <Route path="/super-admin/manage-users/add">
+        {redirectUnAuth(ManageUserEdit, storeUser, {
+          ...manageUserEditMock,
+          breadcrumbs: {
+            ...manageUserEditMock.breadcrumbs,
+            currentLocation: 'Add',
+          },
+          mode: 'add',
+          form: {
+            ...manageUserEditMock.form,
+            radioButtonGroup: {
+              title: 'User Role',
+              items:
+                userRoles || manageUserEditMock.form.radioButtonGroup.items,
             },
-          })}
-        </Route>
-
-        <Route path="/super-admin/manage-teams/add">
-          {redirectUnAuth(ManageTeamEditAdd, storeUser, manageTeamEditAddMock)}
-        </Route>
-
-        <Route exact path="/super-admin/:id">
-          {redirectUnAuth(ManageUsers, storeUser, manageUsersTeamsLayoutMock)}
-        </Route>
-
-        <Route path="/super-admin/manage-user">
-          {redirectUnAuth(ManageUser, storeUser)}
-        </Route>
-
-        <Route path="/super-admin/manage-account">
-          {redirectUnAuth(ManageAccount, storeUser, manageAccountMock)}
-        </Route>
-
-        <Route path="/super-admin/manage-users/edit/:id">
-          {redirectUnAuth(ManageUserEdit, storeUser, manageUserEditMock)}
-        </Route>
-
-        <Route path="/super-admin/manage-users/add">
-          {redirectUnAuth(ManageUserEdit, storeUser, {
-            ...manageUserEditMock,
-            breadcrumbs: {
-              ...manageUserEditMock.breadcrumbs,
-              currentLocation: 'Add',
-            },
-            mode: 'add',
-            form: {
-              ...manageUserEditMock.form,
-              radioButtonGroup: {
-                title: 'User Role',
-                items:
-                  userRoles || manageUserEditMock.form.radioButtonGroup.items,
-              },
-              selectOptions: userGroups,
-            },
-          })}
-        </Route>
-      </Switch>
-    </Suspense>
+            selectOptions: userGroups,
+          },
+        })}
+      </Route>
+    </Switch>
+    // </Suspense>
   );
 }

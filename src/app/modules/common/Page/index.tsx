@@ -23,9 +23,9 @@ const MainGrid = styled(Grid)`
 `;
 const MainContainer = styled(Container)`
   height: 100vh;
-  // overflow-y: auto;
-  // max-height: 100vh;
-  // min-height: 100vh;
+  /* // overflow-y: auto; */
+  /* // max-height: 100vh; */
+  /* // min-height: 100vh; */
   padding-top: 40px;
 `;
 
