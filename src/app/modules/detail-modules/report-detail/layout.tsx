@@ -1,9 +1,7 @@
 // global
 import React from 'react';
-import { Typography, Box, Grid, Hidden } from '@material-ui/core';
-
+import { Box, Grid } from '@material-ui/core';
 // absolute
-import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
@@ -19,7 +17,6 @@ import 'styled-components/macro';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import graph1 from 'app/assets/images/dummy_graph1.png';
 
 export const ReportDetailLayout = (props: any) => (
   <React.Fragment>
@@ -31,12 +28,6 @@ export const ReportDetailLayout = (props: any) => (
         previousLocations={[{ label: 'Reports', url: '/list/reports' }]}
       />
     </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* helper grid */}
-    <Hidden smDown>
-      <Grid item lg={6} />
-    </Hidden>
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
@@ -100,8 +91,6 @@ export const ReportDetailLayout = (props: any) => (
         </CardContent>
       </Card>
     </Grid>
-
-    <Box height="32px" width="100%" />
 
     {/* ---------------------------------------------------------------------*/}
     {/* cards */}
