@@ -18,7 +18,7 @@ jobs:
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-dev/; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S service supervisorctl restart insinger-dev"
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-dev/; git checkout .; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-dev"
 
   deploy-test:
     docker:
@@ -31,7 +31,7 @@ jobs:
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-test/; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S service supervisor restart insinger-test"
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-test/; git checkout .; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-test"
 
   deploy-staging:
     docker:
@@ -44,7 +44,7 @@ jobs:
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-staging/; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S service supervisor restart insinger-staging"
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-staging/; git checkout .; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-staging"
 
   load_envs:
     docker:
