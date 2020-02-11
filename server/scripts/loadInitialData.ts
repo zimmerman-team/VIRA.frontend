@@ -1,5 +1,6 @@
 // @ts-nocheck
 // base
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 // models
@@ -13,13 +14,15 @@ const ResponsiblePerson = require('../models/responsiblePerson');
 const fs = require('fs');
 const csvtojson = require('csvtojson');
 import groupBy from 'lodash/groupBy';
-
-// consts
-const url = 'mongodb://localhost:27017/insinger';
+import {
+  modifyOrganisation,
+  modifyResponsiblePerson,
+  modifyProject,
+} from '../utils/script';
 
 // connect to mongodb
 const db = mongoose.connect(
-  url,
+  process.env.REACT_APP_MONGO_DB_URL,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err: any, client: any) => {
     if (err) {
@@ -73,8 +76,8 @@ async function checkAndAddOrgTypes(data: any) {
     let count = 0;
     const totalCount = Object.keys(groupedOrgTypes).length;
     Object.keys(groupedOrgTypes).forEach((key: any) => {
-      OrgType.findOne({ name: key }).then((err: any, org: any) => {
-        if (!org) {
+      OrgType.findOne({ name: key }).then((orgType: any, err: any) => {
+        if (!orgType) {
           new OrgType({
             name: key,
             description: key,
@@ -84,6 +87,11 @@ async function checkAndAddOrgTypes(data: any) {
               resolve();
             }
           });
+        } else {
+          count++;
+          if (count === totalCount) {
+            resolve();
+          }
         }
       });
     });
@@ -98,11 +106,12 @@ async function checkAndAddOrgs(data: any) {
     Object.keys(groupedOrgs).forEach((key: any) => {
       const org = groupedOrgs[key][0];
       Organisation.findOne({ organisation_name: key }).then(
-        (err: any, fOrg: any) => {
-          if (!fOrg) {
-            OrgType.findOne({
-              name: org.org_type,
-            }).then((orgType: any, err: any) => {
+        (fOrg: any, err: any) => {
+          OrgType.findOne({
+            name: org.org_type,
+          }).then((orgType: any, err3: any) => {
+            err3 && console.log(err3);
+            if (!fOrg) {
               new Organisation({
                 organisation_name: key,
                 org_type: orgType,
@@ -120,8 +129,17 @@ async function checkAndAddOrgs(data: any) {
                   resolve();
                 }
               });
-            });
-          }
+            } else {
+              modifyOrganisation(fOrg, { ...org, orgType: orgType }).then(
+                () => {
+                  count++;
+                  if (count === totalCount) {
+                    resolve();
+                  }
+                }
+              );
+            }
+          });
         }
       );
     });
@@ -139,11 +157,11 @@ async function checkAndAddResponsinblePersons(data: any) {
         ResponsiblePerson.findOne({
           email: keyEmail,
           family_name: person.family_name,
-        }).then((err: any, fPerson: any) => {
-          if (!fPerson) {
-            Organisation.findOne({
-              organisation_name: person.organisation,
-            }).then((organisation: any) => {
+        }).then((fPerson: any, err: any) => {
+          Organisation.findOne({
+            organisation_name: person.organisation,
+          }).then((organisation: any) => {
+            if (!fPerson) {
               new ResponsiblePerson({
                 family_name: person.family_name,
                 initials: person.initial,
@@ -160,8 +178,18 @@ async function checkAndAddResponsinblePersons(data: any) {
                   resolve();
                 }
               });
-            });
-          }
+            } else {
+              modifyResponsiblePerson(fPerson, {
+                ...person,
+                Organisation: organisation,
+              }).then(() => {
+                count++;
+                if (count === totalCount) {
+                  resolve();
+                }
+              });
+            }
+          });
         });
       });
     });
@@ -199,13 +227,13 @@ async function checkAndAddProjects(data: any) {
     const totalCount = data.length;
     data.forEach((project: any) => {
       Project.findOne({ project_number: project.project_id }).then(
-        (fProject: any, err: any) => {
-          if (!fProject) {
-            Organisation.findOne({
-              organisation_name: project.organisation,
-            }).then((organisation: any, err: any) => {
-              ProjectCategory.findOne({ name: project.category }).then(
-                (category: any, err: any) => {
+        (fProject: any, err1: any) => {
+          Organisation.findOne({
+            organisation_name: project.organisation,
+          }).then((organisation: any, err: any) => {
+            ProjectCategory.findOne({ name: project.category }).then(
+              (category: any, err: any) => {
+                if (!fProject) {
                   new Project({
                     project_number: project.project_id,
                     project_name: project.project,
@@ -227,10 +255,21 @@ async function checkAndAddProjects(data: any) {
                       resolve();
                     }
                   });
+                } else {
+                  modifyProject(fProject, {
+                    ...project,
+                    Organisation: organisation,
+                    Category: category,
+                  }).then(() => {
+                    count++;
+                    if (count === totalCount) {
+                      resolve();
+                    }
+                  });
                 }
-              );
-            });
-          }
+              }
+            );
+          });
         }
       );
     });
@@ -243,22 +282,18 @@ function start() {
   csvtojson()
     .fromFile(`${__dirname}/insinger_data.csv`)
     .then((csvData: any) => {
-      emptyDB()
+      checkAndAddOrgTypes(csvData)
         .then(() => {
-          checkAndAddOrgTypes(csvData)
+          checkAndAddOrgs(csvData)
             .then(() => {
-              checkAndAddOrgs(csvData)
+              checkAndAddResponsinblePersons(csvData)
                 .then(() => {
-                  checkAndAddResponsinblePersons(csvData)
+                  checkAndAddProjectCategories(csvData)
                     .then(() => {
-                      checkAndAddProjectCategories(csvData)
-                        .then(() => {
-                          checkAndAddProjects(csvData).then(() => {
-                            console.log('exit');
-                            process.exit(0);
-                          });
-                        })
-                        .catch(err => console.log(err));
+                      checkAndAddProjects(csvData).then(() => {
+                        console.log('exit');
+                        process.exit(0);
+                      });
                     })
                     .catch(err => console.log(err));
                 })

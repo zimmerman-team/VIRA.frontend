@@ -1,3 +1,4 @@
+require('dotenv').config();
 // @ts-ignore
 const mongoose = require('mongoose');
 const autoIncrement = require('mongoose-auto-increment');
@@ -12,8 +13,7 @@ const project = require('../models/project');
 // @ts-ignore
 const { Schema } = mongoose;
 
-let url = 'mongodb://localhost:27017/insinger';
-var connection = mongoose.createConnection(url);
+var connection = mongoose.createConnection(process.env.REACT_APP_MONGO_DB_URL);
 autoIncrement.initialize(connection);
 
 const ReportSchema = new Schema({
