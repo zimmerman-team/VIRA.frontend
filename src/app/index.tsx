@@ -28,7 +28,7 @@ export function App() {
 
   const isLoggedIn = Boolean(useStoreState(state => state.syncVariables.user));
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       {!isLoggedIn ? (
         <MainRoutes />
       ) : (
@@ -55,6 +55,6 @@ export function App() {
         </>
       )}
       <PositionedSnackbar />
-    </React.Fragment>
+    </div>
   );
 }
