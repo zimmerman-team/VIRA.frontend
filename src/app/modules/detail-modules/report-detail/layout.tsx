@@ -43,7 +43,7 @@ export const ReportDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* Target beneficiaries */}
-    <Grid item xs={12} md={6} lg={6}>
+    <Grid item xs={12} sm={6} md={6} lg={6}>
       <Card>
         <CardHeader title="Target beneficiaries" />
 
@@ -62,13 +62,13 @@ export const ReportDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* Location */}
-    <Grid item xs={12} md={6} lg={6}>
+    <Grid item xs={12} sm={6} md={6} lg={6}>
       <OutcomeCard title="Location" description={props.report.place} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* Insinger Foundation policy priorities */}
-    <Grid item xs={12} md={6} lg={12}>
+    <Grid item xs={12} md={12} lg={12}>
       <Card>
         <CardHeader title="Insinger Foundation policy priorities" />
         <Box height="20px" width="100%" />
@@ -94,34 +94,35 @@ export const ReportDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* cards */}
-    <Grid item xs={12} md={6} lg={6}>
+    {/* todo: optimise */}
+    <Grid item xs={12} sm={6} md={6} lg={6}>
       <OutcomeCard
         title="Key outcomes"
         description={props.report.key_outcomes}
       />
     </Grid>
-    <Grid item xs={12} md={6} lg={6}>
+    <Grid item xs={12} sm={6} md={6} lg={6}>
       <OutcomeCard
         title="Key implementation challenges"
         description={props.report.key_implementation_challenges}
       />
     </Grid>
-    <Grid item xs={12} md={6} lg={6}>
+    <Grid item xs={12} sm={6} md={6} lg={6}>
       <OutcomeCard
         title="Monitor and report on the outcomes"
         description={props.report.monitor_report_outcomes}
       />
     </Grid>
-    <Grid item xs={12} md={6} lg={6}>
+    <Grid item xs={12} sm={6} md={6} lg={6}>
       <OutcomeCard
         title="Other project outcomes and observations"
         description={props.report.other_project_outcomes}
       />
     </Grid>
-    <Grid item xs={12} md={6} lg={6}>
+    <Grid item xs={12} sm={6} md={6} lg={6}>
       <OutcomeCard title="Future plans" description={props.report.plans} />
     </Grid>
-    <Grid item xs={12} md={6} lg={6}>
+    <Grid item xs={12} sm={6} md={6} lg={6}>
       <OutcomeCard
         title="Other comments"
         description={props.report.other_comments}
