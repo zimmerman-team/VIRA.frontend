@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+// import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import { Palette } from '@material-ui/core/styles/createPalette';
 
 import {
@@ -279,4 +280,5 @@ export const theme = createMuiTheme({
   palette: ProjectPalette,
 });
 
-export default responsiveFontSizes(theme);
+// export default responsiveFontSizes(theme);
+export default theme;

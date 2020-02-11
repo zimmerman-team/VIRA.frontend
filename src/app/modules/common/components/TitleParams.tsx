@@ -19,11 +19,12 @@ const style: any[] = [
   // title style
   css`
     font-size: 48px;
-    font-weight: 600;
+    font-weight: 400;
 
     @media (max-width: 768px) {
       font-size: 25px;
       line-height: 1.3;
+      font-weight: 600;
     }
   `,
   // id style

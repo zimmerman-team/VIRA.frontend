@@ -9,6 +9,7 @@ import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 
 export const CreateReportLayout = (props: CreateReportLayoutModel) => (
   <React.Fragment>
+    {/* <Grid item container xs={12} lg={12} spacing={4}> */}
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
     <Grid item lg={12}>
@@ -39,16 +40,15 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
         initialTabIndex={props.initialTabIndex}
       />
     </Grid>
-    <Grid item xs={12} lg={12}>
-      <ReportModuleRoutes
-        step2Enabled={props.step2Enabled}
-        step3Enabled={props.step3Enabled}
-        step4Enabled={props.step4Enabled}
-        outcomesProps={props.outcomesProps}
-        indicatorVerificationProps={props.indicatorVerificationProps}
-        challengesPlansProps={props.challengesPlansProps}
-      />
-    </Grid>
+
+    <ReportModuleRoutes
+      step2Enabled={props.step2Enabled}
+      step3Enabled={props.step3Enabled}
+      step4Enabled={props.step4Enabled}
+      outcomesProps={props.outcomesProps}
+      indicatorVerificationProps={props.indicatorVerificationProps}
+      challengesPlansProps={props.challengesPlansProps}
+    />
 
     {/* <AddMediaLayout /> */}
 
@@ -62,5 +62,6 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
         backDisabled={props.backBtnDisabled}
       />
     </Grid>
+    {/* </Grid> */}
   </React.Fragment>
 );

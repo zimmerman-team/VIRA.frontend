@@ -15,17 +15,17 @@ export type MediaModel = {
 export type LocationModel = {
   longitude: number;
   latitude: number;
-  country: {
+  country?: {
     label: string;
     value: string;
   };
-  place: string | null;
+  place?: string | null;
 };
 
 export type OutcomesPropsModel = {
   title: string;
   setTitle: Function;
-  country: { label: string; value: string };
+  country: { label: string; value: string; iso3?: string };
   setCountry: Function;
   tarBenTotal: number;
   setTarBenTotal: Function;

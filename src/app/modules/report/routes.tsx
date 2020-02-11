@@ -28,9 +28,14 @@ interface Props extends RouteComponentProps {
 const ReportModuleRoutesF = (props: Props) => {
   return (
     <React.Fragment>
+      {/* ---------------------------------------------------------------------*/}
+      {/* outcomes */}
       <Route exact path="/report/:projectID/outcomes">
         <OutcomesLayout {...props.outcomesProps} />
       </Route>
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* indicator & verification */}
       <Route exact path="/report/:projectID/indicator-verification">
         {props.step2Enabled ? (
           <IndicatorVerificationLayout {...props.indicatorVerificationProps} />
@@ -40,6 +45,9 @@ const ReportModuleRoutesF = (props: Props) => {
           />
         )}
       </Route>
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* challenges & plans */}
       <Route exact path="/report/:projectID/challenges-plans">
         {props.step3Enabled ? (
           <ChallengesPlansLayout {...props.challengesPlansProps} />
@@ -49,6 +57,9 @@ const ReportModuleRoutesF = (props: Props) => {
           />
         )}
       </Route>
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* preview */}
       <Route exact path="/report/:projectID/preview">
         {props.step4Enabled ? (
           <PreviewLayout {...props} />

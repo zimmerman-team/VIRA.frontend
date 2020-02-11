@@ -18,8 +18,19 @@ export interface IntentTextAreaParams {
 
 export const IntentTexArea = (props: IntentTextAreaParams) => (
   <React.Fragment>
-    <FieldDescription text={props.description} />
-    {props.tooltip && <Tooltip tip={props.tooltip} />}
+    <div
+      css={`
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 768px) {
+          align-items: flex-start;
+        }
+      `}
+    >
+      <FieldDescription text={props.description} />
+      {props.tooltip && <Tooltip tip={props.tooltip} />}
+    </div>
     <Box width="100%" height="20px" />
     <SingleMultiLineTextField
       fullWidth
@@ -29,7 +40,11 @@ export const IntentTexArea = (props: IntentTextAreaParams) => (
       id={props.componentID}
       setValue={props.setValue}
     />
-    {props.explanation && <InfoCaption text={props.explanation} />}
-    <Box width="100%" height="30px" />
+    {props.explanation && (
+      <React.Fragment>
+        <InfoCaption text={props.explanation} />{' '}
+        <Box width="100%" height="30px" />{' '}
+      </React.Fragment>
+    )}
   </React.Fragment>
 );

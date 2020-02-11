@@ -21,7 +21,7 @@ export const ProjectDetailLayout = (props: any) => (
   <React.Fragment>
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
-    <Grid item lg={12}>
+    <Grid item xs={12} lg={12}>
       <BreadCrumbs
         {...GranteeBreadCrumbsMock}
         previousLocations={[{ label: 'Projects', url: '/' }]}
@@ -31,7 +31,9 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* helper grid */}
-    <Grid item lg={6} />
+    <Hidden smDown>
+      <Grid item lg={6} />
+    </Hidden>
 
     {/* ---------------------------------------------------------------------*/}
     {/* button: generate report */}
@@ -46,7 +48,7 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
-    <Grid item container lg={6} direction="column">
+    <Grid item xs={12} lg={6}>
       <TitleFragment
         title={props.projectDetail.project}
         id={`project id: ${props.projectDetail.project_id}`}
@@ -69,7 +71,7 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* stat fragment */}
-    <Grid item container lg={6} alignItems="center" wrap="nowrap">
+    <Grid item container xs={12} lg={6} alignItems="center" wrap="nowrap">
       <StatItem
         label="Total project amount"
         value={`€${props.projectDetail.total_amount}`}
@@ -113,12 +115,6 @@ export const ProjectDetailLayout = (props: any) => (
           <img src={graph1} alt="graph" />
         </CardContent>
       </Card>
-
-      {/* <DummyKeyOutcomes
-        css={`
-          transform: scale(0.8);
-        `}
-      /> */}
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
