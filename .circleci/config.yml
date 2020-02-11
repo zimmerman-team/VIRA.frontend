@@ -17,8 +17,8 @@ jobs:
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-dev/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-dev"
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-dev/; git checkout .; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-dev"
 
   deploy-test:
     docker:
@@ -30,8 +30,8 @@ jobs:
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-test/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-test"
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-test/; git checkout .; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-test"
 
   deploy-staging:
     docker:
@@ -43,8 +43,8 @@ jobs:
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-staging/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-staging"
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-staging/; git checkout .; git pull; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-staging"
 
   load_envs:
     docker:
