@@ -54,25 +54,25 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
-        name: Load environment variables based on branch
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
-            echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
-          elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-            echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
-            echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
-          else
-            echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
-            echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
-          fi
-          source $BASH_ENV
+          name: Load environment variables based on branch
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
+            else
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
+            fi
+            source $BASH_ENV
 
 workflows:
   build-and-test:
