@@ -2,16 +2,15 @@
 
 import React from 'react';
 import Providers from 'app/Providers';
-import { SdgModule } from 'app/modules/report/sub-modules/indicator-verification';
 import { Container, Grid } from '@material-ui/core';
+import { SignInLayout } from 'app/modules/sign-in/layout';
+export default { title: 'Sign In ' };
 
-export default { title: 'Report ' };
-
-export const addMedia = () => (
+export const SignIn = () => (
   <Providers>
     <Container maxWidth="lg">
-      <Grid containrt spacing={4}>
-        <SdgModule />
+      <Grid container spacing={4}>
+        <SignInLayout />
       </Grid>
     </Container>
   </Providers>

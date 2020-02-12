@@ -2,16 +2,15 @@
 
 import React from 'react';
 import Providers from 'app/Providers';
-import { SdgModule } from 'app/modules/report/sub-modules/indicator-verification';
 import { Container, Grid } from '@material-ui/core';
+import LandingLayout from 'app/modules/landing/index';
+export default { title: 'Landing ' };
 
-export default { title: 'Report ' };
-
-export const addMedia = () => (
+export const layout = () => (
   <Providers>
     <Container maxWidth="lg">
-      <Grid containrt spacing={4}>
-        <SdgModule />
+      <Grid container spacing={4}>
+        <LandingLayout />
       </Grid>
     </Container>
   </Providers>
