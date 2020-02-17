@@ -1,7 +1,8 @@
 import React from 'react';
 import Providers from 'app/Providers';
-import { mockData } from 'app/modules/super-admin/sub-modules/manage-account/mock';
+import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
 import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account/index';
+import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 
 export default {
   component: ManageAccount,
@@ -10,6 +11,8 @@ export default {
 
 export const text = () => (
   <Providers>
-    <ManageAccount {...mockData} />
+    <PageWrapper>
+      <ManageAccount {...manageAccountMock} />
+    </PageWrapper>
   </Providers>
 );

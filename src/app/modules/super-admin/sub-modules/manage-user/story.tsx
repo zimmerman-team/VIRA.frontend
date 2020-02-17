@@ -1,7 +1,8 @@
 import React from 'react';
 import Providers from 'app/Providers';
 import { ManageUserLayout } from 'app/modules/super-admin/sub-modules/manage-user/layout';
-import { managueUserLayoutMock } from 'app/modules/super-admin/sub-modules/manage-user/mock';
+import { manageUserLayoutMock } from 'app/modules/super-admin/sub-modules/manage-user/mock';
+import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 
 export default {
   component: ManageUserLayout,
@@ -10,6 +11,8 @@ export default {
 
 export const text = () => (
   <Providers>
-    <ManageUserLayout {...managueUserLayoutMock} />
+    <PageWrapper>
+      <ManageUserLayout {...manageUserLayoutMock} />
+    </PageWrapper>
   </Providers>
 );

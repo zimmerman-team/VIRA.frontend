@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React from 'react';
 import Providers from 'app/Providers';
-import { PasswordRecoveryLayout } from 'app/modules/sign-in/sub-modules/password-recovery/layout';
+import { PasswordRecoveryLayout } from './index';
 
 export default {
   component: PasswordRecoveryLayout,

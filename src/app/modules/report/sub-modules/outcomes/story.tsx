@@ -10,7 +10,7 @@ export default { title: 'Report ' };
 export const reportOutcomes = () => (
   <Providers>
     <Container maxWidth="lg">
-      <Grid containrt spacing={4}>
+      <Grid container spacing={4}>
         <OutcomesLayout {...mock} />
       </Grid>
     </Container>

@@ -1,7 +1,8 @@
 import React from 'react';
 import Providers from 'app/Providers';
-import { mockData } from 'app/modules/super-admin/sub-modules/manage-user-edit/mock';
+import { manageUserEditMock } from 'app/modules/super-admin/sub-modules/manage-user-edit/mock';
 import { ManageUserEdit } from 'app/modules/super-admin/sub-modules/manage-user-edit/index';
+import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 
 export default {
   component: ManageUserEdit,
@@ -10,6 +11,8 @@ export default {
 
 export const text = () => (
   <Providers>
-    <ManageUserEdit {...mockData} />
+    <PageWrapper>
+      <ManageUserEdit {...manageUserEditMock} />
+    </PageWrapper>
   </Providers>
 );
