@@ -28,7 +28,7 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
         bigLabel
         id={'Edit Title'}
         value={props.title}
-        label={'Edit Title'}
+        label={`${props.mode === 'edit' ? 'Edit' : 'Add'} title`}
         setValue={props.setTitle}
       />
     </Grid>

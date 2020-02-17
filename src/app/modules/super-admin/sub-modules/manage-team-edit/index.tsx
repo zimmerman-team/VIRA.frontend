@@ -168,6 +168,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
     },
     submit,
     submitEnabled,
+    mode: props.mode,
   };
 
   return <ManageTeamEditLayout {...layoutProps} />;

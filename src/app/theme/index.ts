@@ -209,6 +209,16 @@ export const theme = createMuiTheme({
         boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
       },
     },
+    MUIDataTableHeadCell: {
+      root: {
+        fontWeight: 400,
+      },
+    },
+    MUIDataTableToolbar: {
+      root: {
+        paddingLeft: 27,
+      },
+    },
   },
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg', 'xl'],

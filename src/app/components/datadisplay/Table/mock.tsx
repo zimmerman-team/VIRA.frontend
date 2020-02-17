@@ -569,11 +569,6 @@ export const mockDataVar5: TableModuleModel = {
       name: 'Operational funds available',
       options: {
         filter: false,
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead(
-            'Operational funds available',
-            'Operational funds available'
-          ),
         customBodyRender: (value, tableMeta, updateValue) => {
           if (value && value > 0) return formatMoney(value);
           return 'No data';
@@ -584,11 +579,6 @@ export const mockDataVar5: TableModuleModel = {
       name: 'Disbursements & expenditure',
       options: {
         filter: false,
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead(
-            'Disbursements & expenditure',
-            'Disbursements & expenditure'
-          ),
         customBodyRender: (value, tableMeta, updateValue) => {
           if (value && value > 0) return formatMoney(value);
           return 'No data';
@@ -599,8 +589,6 @@ export const mockDataVar5: TableModuleModel = {
       name: 'Rating',
       options: {
         filter: false,
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Rating', 'Rating'),
       },
     },
   ],

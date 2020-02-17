@@ -4,7 +4,7 @@ import { Link as RouteLink } from 'react-router-dom';
 
 export const Container = styled.div`
   width: 272px;
-  height: 369px;
+  height: 400px;
   display: flex;
   color: #ffffff;
   padding: 32px 51px;

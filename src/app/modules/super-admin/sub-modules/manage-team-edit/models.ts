@@ -16,4 +16,5 @@ export type ManageTeamEditLayoutModel = {
   loading: boolean;
   submit: Function;
   submitEnabled: boolean;
+  mode: string;
 };
