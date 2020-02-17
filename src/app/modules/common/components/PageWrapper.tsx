@@ -12,9 +12,9 @@ export function PageWrapper(props: PageWrapperParams) {
   return (
     <Container
       css={`
-        padding: 0 24px;
+        padding: 0 16px;
       `}
-      maxWidth="xl"
+      maxWidth="lg"
     >
       {isMobileWidth ? <Box height="80px" /> : <Box height="100px" />}
       <Grid container spacing={4}>
