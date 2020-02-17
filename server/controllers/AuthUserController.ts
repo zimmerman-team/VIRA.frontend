@@ -222,7 +222,7 @@ export function editUser(req: any, res: any) {
           },
           app_metadata: {
             authorization: {
-              roles: [{ name: role }],
+              roles: [role],
             },
           },
           connection: 'insinger-database-connection',
@@ -235,7 +235,7 @@ export function editUser(req: any, res: any) {
       )
       .then(response => {
         if (response.status === 200 || response.status === 201) {
-          if (userId !== prevRoleId) {
+          if (roleId !== prevRoleId) {
             roleId !== '' && assignRoleToUser(userId, roleId);
             prevRoleId !== '' &&
               roleId !== '' &&
