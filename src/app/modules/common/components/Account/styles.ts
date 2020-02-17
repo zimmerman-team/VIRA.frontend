@@ -45,6 +45,11 @@ export const Button = styled.div`
     cursor: pointer;
     background: #ffffff;
     color: ${ProjectPalette.primary.main};
+
+    a {
+      cursor: pointer;
+      color: ${ProjectPalette.primary.main};
+    }
   }
 
   a {

@@ -14,6 +14,9 @@ export function Account() {
   const storeUserName = useStoreState(state =>
     get(state.syncVariables.user, 'name', '')
   );
+  const userID = useStoreState(state =>
+    get(state.syncVariables.user, '_id', '')
+  );
   const clearUser = useStoreActions(actions => actions.syncVariables.clearUser);
   const avatar = storeUserName
     .split(' ')
@@ -28,7 +31,9 @@ export function Account() {
       <Button>
         <Link to="/super-admin/manage-teams">Manage teams & users</Link>
       </Button>
-      <Button>Manage your account</Button>
+      <Button>
+        <Link to={`/manage-account/${userID}`}>Manage your account</Link>
+      </Button>
       <Button onClick={() => auth.signOut().then(() => clearUser())}>
         Sign out
       </Button>
