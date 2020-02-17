@@ -17,7 +17,7 @@ export default { title: 'Report ' };
 export const challengesAndPlans = () => (
   <Providers>
     <Container maxWidth="lg">
-      <Grid containrt spacing={4}>
+      <Grid container spacing={4}>
         <div>
           <ChallengesPlansLayout {...mock} />
         </div>

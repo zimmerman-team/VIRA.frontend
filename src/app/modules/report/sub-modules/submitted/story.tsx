@@ -12,7 +12,7 @@ export default { title: 'Report ' };
 export const submitReport = () => (
   <Providers>
     <Container maxWidth="lg">
-      <Grid containrt spacing={4}>
+      <Grid container spacing={4}>
         <SubmittedLayout />
       </Grid>
     </Container>

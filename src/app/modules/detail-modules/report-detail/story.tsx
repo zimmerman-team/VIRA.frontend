@@ -111,7 +111,7 @@ export default { title: 'Report ' };
 export const reportDetail = () => (
   <Providers>
     <Container maxWidth="lg">
-      <Grid containrt spacing={4}>
+      <Grid container spacing={4}>
         <ReportDetailModule {...mock} />
       </Grid>
     </Container>

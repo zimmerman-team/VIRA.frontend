@@ -3,15 +3,14 @@
 import React from 'react';
 import Providers from 'app/Providers';
 import { Container, Grid } from '@material-ui/core';
-import { SubmittedLayout } from './index';
+import { SignInLayout } from 'app/modules/sign-in/layout';
+export default { title: 'Sign In ' };
 
-export default { title: 'Report ' };
-
-export const submitReport = () => (
+export const SignIn = () => (
   <Providers>
     <Container maxWidth="lg">
       <Grid container spacing={4}>
-        <SubmittedLayout />
+        <SignInLayout />
       </Grid>
     </Container>
   </Providers>

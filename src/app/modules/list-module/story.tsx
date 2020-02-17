@@ -3,15 +3,15 @@
 import React from 'react';
 import Providers from 'app/Providers';
 import { Container, Grid } from '@material-ui/core';
-import { SubmittedLayout } from './index';
+import { ListModule } from 'app/modules/list-module/index';
+import { TabNavMock } from 'app/modules/list-module/mock';
+export default { title: 'List ' };
 
-export default { title: 'Report ' };
-
-export const submitReport = () => (
+export const layout = () => (
   <Providers>
     <Container maxWidth="lg">
       <Grid container spacing={4}>
-        <SubmittedLayout />
+        <ListModule tabNav={TabNavMock} />
       </Grid>
     </Container>
   </Providers>

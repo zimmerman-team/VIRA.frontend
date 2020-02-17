@@ -77,7 +77,7 @@ const BarComponent = (props: {
   const width = getBarInnerLineWidth(
     allData,
     fprops.data,
-    containerWidth - 250
+    containerWidth - 170
   );
   return (
     <g

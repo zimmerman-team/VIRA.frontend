@@ -23,7 +23,7 @@ export function formatResults(data: any) {
   data.reports.forEach((report: any) => {
     results.reports.push({
       title: report.title,
-      link: `/report/${report._id}/detail`,
+      link: `/reports/${report._id}/detail`,
     } as never);
   });
 
