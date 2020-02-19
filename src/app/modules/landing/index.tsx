@@ -59,6 +59,7 @@ function LandingLayout(props: any) {
   const SDGVizData = useStoreState(state => state.getSDGVizData.data);
   const allProjectsData = useStoreState(state => state.allProjects.data);
   const allReportsData = useStoreState(state => state.allReports.data);
+  const allGranteesData = useStoreState(state => state.allOrganisations.data);
   const userDetails = useStoreState(state => state.userDetails.data);
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
 
@@ -75,10 +76,7 @@ function LandingLayout(props: any) {
     const updatedStats: StatItemParams[] = [...stats];
     updatedStats[0].amount = get(allProjectsData, 'data', []).length;
     setStats(updatedStats);
-    updatedStats[1].amount = getNewReportsCount(
-      get(allReportsData, 'data', []),
-      userDetails
-    );
+    updatedStats[1].amount = get(allGranteesData, 'data', []).length;
     setStats(updatedStats);
     updatedStats[2].amount = get(allReportsData, 'data', []).length;
     setStats(updatedStats);
