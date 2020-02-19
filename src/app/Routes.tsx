@@ -83,7 +83,7 @@ export function MainRoutes() {
         {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
       </Route>
 
-      <Route exact path="/projects/:code/detail">
+      <Route exact path="/projects/:code/detail/:viz?">
         {redirectUnAuth(ProjectDetailModule, storeUser)}
       </Route>
 

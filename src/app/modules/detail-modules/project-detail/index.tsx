@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import get from 'lodash/get';
+import { get, findIndex } from 'lodash';
 import { useTitle } from 'react-use';
 import { useParams, withRouter } from 'react-router-dom';
 import { ProjectDetailLayout } from 'app/modules/detail-modules/project-detail/layout';
@@ -26,6 +26,17 @@ const ProjectDetailModuleF = (props: any) => {
   const [baseTableForReport, setBaseTableForReport] = React.useState(
     getBaseTableForReport([])
   );
+  const [barChartLegends, setBarChartLegends] = React.useState([
+    {
+      label: 'Target',
+      selected: true,
+    },
+    {
+      label: 'Budget',
+      selected: true,
+    },
+  ]);
+  const [selectedSDG, setSelectedSDG] = React.useState('');
 
   const projectDetailAction = useStoreActions(
     actions => actions.projectDetail.fetch
@@ -38,6 +49,12 @@ const ProjectDetailModuleF = (props: any) => {
   );
   const ReportsData = useStoreState(state => state.allReports.data);
   const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
+  const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
+  const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
+  const getGeoMapData = useStoreActions(actions => actions.getGeoMapData.fetch);
+  const ppVizData = useStoreState(state => state.getPPVizData.data);
+  const SDGVizData = useStoreState(state => state.getSDGVizData.data);
+  const geoMapData = useStoreState(state => state.getGeoMapData.data);
 
   React.useEffect(() => {
     projectDetailAction({
@@ -125,14 +142,55 @@ const ProjectDetailModuleF = (props: any) => {
             projectID: projectDetailRecord[0]._id,
           },
         });
+        getPPVizData({
+          socketName: 'getPolicyPriorityBarChart',
+          values: {
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getSDGVizData({
+          socketName: 'getSDGBubbleChart',
+          values: {
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getGeoMapData({
+          socketName: 'getGeoMapData',
+          values: {
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
       }
     }
   }, [projectDetailData]);
+
+  function onBarChartLegendClick(legend: string) {
+    const prevBarChartLegends = [...barChartLegends];
+    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
+    if (legendIndex !== -1) {
+      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
+        legendIndex
+      ].selected;
+      setBarChartLegends(prevBarChartLegends);
+    }
+  }
+
+  function onBubbleSelect(bubble: string) {
+    setSelectedSDG(bubble);
+  }
 
   return (
     <ProjectDetailLayout
       projectDetail={projectDetails}
       reportTable={baseTableForReport}
+      ppVizData={ppVizData}
+      barChartLegends={barChartLegends}
+      onBarChartLegendClick={onBarChartLegendClick}
+      SDGVizData={SDGVizData}
+      selectedSDG={selectedSDG}
+      onBubbleSelect={onBubbleSelect}
+      geoMapData={geoMapData}
+      match={props.match}
     />
   );
 };
