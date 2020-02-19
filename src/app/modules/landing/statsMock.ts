@@ -29,10 +29,12 @@ export const navItemMockViz: NavItemParams[] = [
   {
     label: 'SDGs',
     path: '/dashboard/sdgs/-',
+    spacing: 23,
   },
   {
     label: 'Map',
     path: '/dashboard/map/-',
+    spacing: 31,
   },
 ];
 
@@ -48,10 +50,12 @@ export const navItemMockList: NavItemParams[] = [
   {
     label: 'Grantee',
     path: '/dashboard/-/grantees',
+    spacing: 44,
   },
   {
     label: 'Reports',
     path: '/dashboard/-/reports',
+    spacing: 44,
   },
 ];
 

@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { NavItemParams } from 'app/modules/common/consts';
-
 export const NavigationButton = (props: NavItemParams) => {
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.up('md'));
@@ -14,12 +13,15 @@ export const NavigationButton = (props: NavItemParams) => {
   return (
     <NavLink
       to={props.path}
-      activeStyle={{ borderBottom: '4px solid #25baa4' }}
+      activeStyle={{
+        borderBottom: '4px solid #25baa4',
+      }}
       css={`
         && {
           text-decoration: none;
           opacity: ${props.disabled ? 0.6 : 1};
           pointer-events: ${props.disabled ? 'none' : 'all'};
+          margin-left: ${props.spacing ? props.spacing : 0}px;
         }
       `}
     >

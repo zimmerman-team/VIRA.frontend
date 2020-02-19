@@ -3,6 +3,7 @@ export function getNavTabItems(mockItems: any, replaceParam: any) {
     items: mockItems.items.map((item: any) => ({
       label: item.label,
       path: item.path.replace('/-', `/${replaceParam}`),
+      spacing: item.spacing,
     })),
   };
 }

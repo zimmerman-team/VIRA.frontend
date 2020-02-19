@@ -26,13 +26,14 @@ export function TabNavigator(props: TabNavigatorParams) {
     }
   };
   return (
-    <Box display="flex" flexDirection="row" justifyContent="space-between">
+    <Box display="flex" flexDirection="row" justifyContent="flex-end">
       {props.items.map(item => (
         <NavigationButton
           key={item.label}
           path={item.path}
           label={item.label}
           disabled={item.disabled}
+          spacing={item.spacing}
         />
       ))}
     </Box>

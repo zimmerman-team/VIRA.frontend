@@ -13,10 +13,12 @@ export const navItemMock: NavItemParams[] = [
   {
     label: 'Grantee',
     path: '/list/grantees',
+    spacing: 44,
   },
   {
     label: 'Reports',
     path: '/list/reports',
+    spacing: 44,
   },
 ];
 
