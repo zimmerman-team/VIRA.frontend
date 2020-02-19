@@ -67,5 +67,6 @@ export function formatReportDetail(reportDetailRecord: any) {
         },
       },
     ],
+    budget: reportDetailRecord.budget,
   };
 }

@@ -33,37 +33,34 @@ export const ReportDetailLayout = (props: any) => (
     {/* title fragment */}
     <Grid item xs={12} lg={12}>
       <TitleFragment
+        note={props.report.date}
         title={props.report.title}
         id={`Report ID: ${props.report.reportID}`}
-        note={props.report.date}
-        url_note={props.report.project.name}
         url={`/projects/${props.report.project.id}/detail`}
+        url_note={`${props.report.project.name}`}
+        stats={[
+          {
+            label: 'Target beneficiaries',
+            value: parseInt(props.report.total_target_beneficiaries || '', 10)
+              .toLocaleString(undefined, {
+                currency: 'EUR',
+                currencyDisplay: 'symbol',
+                style: 'currency',
+              })
+              .replace('.00', ''),
+          },
+          {
+            label: 'Budget',
+            value: parseInt(props.report.budget || '', 10)
+              .toLocaleString(undefined, {
+                currency: 'EUR',
+                currencyDisplay: 'symbol',
+                style: 'currency',
+              })
+              .replace('.00', ''),
+          },
+        ]}
       />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* Target beneficiaries */}
-    <Grid item xs={12} sm={6} md={6} lg={6}>
-      <Card>
-        <CardHeader title="Target beneficiaries" />
-
-        <CardContent>
-          <IntentTexFieldSingleLine
-            type="number"
-            min={0}
-            disabled
-            setValue={() => {}}
-            value={props.report.total_target_beneficiaries}
-            description="Total number: "
-          />
-        </CardContent>
-      </Card>
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* Location */}
-    <Grid item xs={12} sm={6} md={6} lg={6}>
-      <OutcomeCard title="Location" description={props.report.place} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
@@ -95,34 +92,34 @@ export const ReportDetailLayout = (props: any) => (
     {/* ---------------------------------------------------------------------*/}
     {/* cards */}
     {/* todo: optimise */}
-    <Grid item xs={12} sm={6} md={6} lg={6}>
+    <Grid item lg={12}>
       <OutcomeCard
         title="Key outcomes"
         description={props.report.key_outcomes}
       />
     </Grid>
-    <Grid item xs={12} sm={6} md={6} lg={6}>
-      <OutcomeCard
-        title="Key implementation challenges"
-        description={props.report.key_implementation_challenges}
-      />
-    </Grid>
-    <Grid item xs={12} sm={6} md={6} lg={6}>
+    <Grid item lg={12}>
       <OutcomeCard
         title="Monitor and report on the outcomes"
         description={props.report.monitor_report_outcomes}
       />
     </Grid>
-    <Grid item xs={12} sm={6} md={6} lg={6}>
+    <Grid item lg={12}>
+      <OutcomeCard
+        title="Key implementation challenges"
+        description={props.report.key_implementation_challenges}
+      />
+    </Grid>
+    <Grid item lg={12}>
       <OutcomeCard
         title="Other project outcomes and observations"
         description={props.report.other_project_outcomes}
       />
     </Grid>
-    <Grid item xs={12} sm={6} md={6} lg={6}>
+    <Grid item lg={12}>
       <OutcomeCard title="Future plans" description={props.report.plans} />
     </Grid>
-    <Grid item xs={12} sm={6} md={6} lg={6}>
+    <Grid item lg={12}>
       <OutcomeCard
         title="Other comments"
         description={props.report.other_comments}

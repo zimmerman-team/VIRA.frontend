@@ -15,9 +15,7 @@ export interface TitleParams {
   url_note?: string;
   url?: string;
   description?: string;
-  total_amount?: string;
-  start_date?: string;
-  end_date?: string;
+  stats?: { label: string; value: string }[];
 }
 
 const style: any[] = [
@@ -98,25 +96,14 @@ export const TitleFragment = (props: TitleParams) => {
         </Grid>
         {/* ---------------------------------------------------------------------*/}
         {/* stat fragment */}
-        {props.total_amount && (
+        {props.stats && (
           <Grid item container xs={12} lg={6} alignItems="center" wrap="nowrap">
-            <StatItem
-              label="Total project amount"
-              value={parseInt(props.total_amount || '', 10)
-                .toLocaleString(undefined, {
-                  currency: 'EUR',
-                  currencyDisplay: 'symbol',
-                  style: 'currency',
-                })
-                .replace('.00', '')}
-            />
-            <StatItemDivider />
-            <StatItem
-              label="Project duration"
-              value={`${(props.start_date || '').replace(/-/g, '.')} - ${(
-                props.end_date || ''
-              ).replace(/-/g, '.')}`}
-            />
+            {(props.stats || []).map((stat: any, index: number) => (
+              <React.Fragment>
+                <StatItem label={stat.label} value={stat.value} />
+                {index < (props.stats || []).length - 1 && <StatItemDivider />}
+              </React.Fragment>
+            ))}
           </Grid>
         )}
       </Grid>

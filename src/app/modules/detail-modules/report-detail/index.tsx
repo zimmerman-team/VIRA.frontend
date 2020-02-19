@@ -36,6 +36,7 @@ export const ReportDetailModule = () => {
     other_comments: '',
     reportID: '',
     barChartData: [],
+    budget: 0,
   });
   const [barChartLegends, setBarChartLegends] = React.useState([
     {

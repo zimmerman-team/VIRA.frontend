@@ -55,9 +55,25 @@ export const ProjectDetailLayout = (props: any) => (
         date="*earliest and latest activity start dates"
         url_note={props.projectDetail.organisation}
         url={props.projectDetail.website}
-        total_amount={props.projectDetail.total_amount}
-        start_date={props.projectDetail.start_date}
-        end_date={props.projectDetail.end_date}
+        stats={[
+          {
+            label: 'Total project amount',
+            value: parseInt(props.projectDetail.total_amount || '', 10)
+              .toLocaleString(undefined, {
+                currency: 'EUR',
+                currencyDisplay: 'symbol',
+                style: 'currency',
+              })
+              .replace('.00', ''),
+          },
+          {
+            label: 'Project duration',
+            value: `${(props.projectDetail.start_date || '').replace(
+              /-/g,
+              '.'
+            )} - ${(props.projectDetail.end_date || '').replace(/-/g, '.')}`,
+          },
+        ]}
       />
     </Grid>
 
