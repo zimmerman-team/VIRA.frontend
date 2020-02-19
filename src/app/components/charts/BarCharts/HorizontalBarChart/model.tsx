@@ -25,22 +25,21 @@ export type HorizontalBarChartModel = {
   onChartLegendClick?: Function;
 };
 
-// todo: add BarSvgProps when axis/renderTick function declaration is included
+// todo: add BarSvgProps when<Box height={'62px'} width={'1px'} /> axis/renderTick function declaration is included
 export const barModel: any = {
   data: [],
   minValue: 0,
   keys: ['value1', 'value2'],
   indexBy: 'name',
-  margin: { top: 10, right: 30, bottom: 50, left: 140 },
+  margin: { top: 10, right: 30, bottom: 50, left: 256 },
   padding: 0,
   groupedMode: 'stacked',
   layout: 'horizontal',
   axisRight: null,
   axisBottom: {
-    tickSize: 5,
+    tickSize: 0,
     tickPadding: 5,
     tickRotation: 0,
-    legend: 'People',
     legendOffset: 32,
     legendPosition: 'middle',
   },
@@ -59,13 +58,13 @@ export const barModel: any = {
               dominantBaseline: 'auto',
             }}
             textAnchor="start"
-            transform="translate(-140, -10)"
+            transform="translate(-256, -10)"
           >
-            {getTspanGroups(value, 18)}
+            {getTspanGroups(value, 30)}
           </text>
           <line
             x1="0"
-            x2="-140"
+            x2="-256"
             y1="0"
             y2="0"
             style={{
@@ -91,7 +90,9 @@ export const barModel: any = {
         text: {
           fontWeight: 500,
           fontFamily: 'Inter',
-          fontSize: 11,
+          fontSize: 14,
+          color: '#6f7173',
+          fill: '#6f7173',
           dominantBaseline: 'auto',
         },
         line: {
@@ -160,7 +161,7 @@ const getTspanGroups = (
     children.push(
       <tspan x={0} dy={dy} key={i}>
         {// if on the second line, and that line's length is within 3 of the max length, add ellipsis
-        2 === i && allLines.length > 3
+        2 === i && allLines.length > 2
           ? lineText.slice(0, maxLineLength - 3) + '...'
           : lineText}
       </tspan>

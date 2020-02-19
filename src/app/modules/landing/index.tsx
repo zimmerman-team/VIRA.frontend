@@ -59,6 +59,7 @@ function LandingLayout(props: any) {
   const SDGVizData = useStoreState(state => state.getSDGVizData.data);
   const allProjectsData = useStoreState(state => state.allProjects.data);
   const allReportsData = useStoreState(state => state.allReports.data);
+  const allGranteesData = useStoreState(state => state.allOrganisations.data);
   const userDetails = useStoreState(state => state.userDetails.data);
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
 
@@ -75,10 +76,7 @@ function LandingLayout(props: any) {
     const updatedStats: StatItemParams[] = [...stats];
     updatedStats[0].amount = get(allProjectsData, 'data', []).length;
     setStats(updatedStats);
-    updatedStats[1].amount = getNewReportsCount(
-      get(allReportsData, 'data', []),
-      userDetails
-    );
+    updatedStats[1].amount = get(allGranteesData, 'data', []).length;
     setStats(updatedStats);
     updatedStats[2].amount = get(allReportsData, 'data', []).length;
     setStats(updatedStats);
@@ -109,7 +107,7 @@ function LandingLayout(props: any) {
       </Grid>
 
       <Hidden smDown>
-        <Box width="100%" height="48px" />
+        <Box width="100%" height="12px" />
       </Hidden>
 
       <React.Fragment>
@@ -123,7 +121,14 @@ function LandingLayout(props: any) {
               margin-top: ${isMobileWidth ? '28px' : 0};
             `}
           >
-            <Typography variant="h4">
+            <Typography
+              variant="h4"
+              css={`
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 1.5;
+              `}
+            >
               {get(
                 find(
                   TabNavMockViz.items,
@@ -148,6 +153,7 @@ function LandingLayout(props: any) {
                 get(props.match.params, 'list', '')
               )}
             />
+            <Box height={'62px'} width={'1px'} />
           </Grid>
         </Grid>
 
@@ -214,7 +220,7 @@ function LandingLayout(props: any) {
       <Hidden smDown>
         <Box width="100%" height="86px" />
       </Hidden>
-      <Box width="100%" height="34px" />
+      <Box width="100%" height="18px" />
 
       <ListModule
         tabNav={getNavTabItems(

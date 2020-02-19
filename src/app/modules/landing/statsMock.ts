@@ -8,7 +8,7 @@ export const statsMock: StatItemParams[] = [
   },
   {
     amount: 0,
-    type: 'New Reports',
+    type: 'Grantees',
   },
   {
     amount: 0,
