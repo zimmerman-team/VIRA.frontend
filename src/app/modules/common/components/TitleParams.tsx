@@ -98,25 +98,27 @@ export const TitleFragment = (props: TitleParams) => {
         </Grid>
         {/* ---------------------------------------------------------------------*/}
         {/* stat fragment */}
-        <Grid item container xs={12} lg={6} alignItems="center" wrap="nowrap">
-          <StatItem
-            label="Total project amount"
-            value={parseInt(props.total_amount || '', 10)
-              .toLocaleString(undefined, {
-                currency: 'EUR',
-                currencyDisplay: 'symbol',
-                style: 'currency',
-              })
-              .replace('.00', '')}
-          />
-          <StatItemDivider />
-          <StatItem
-            label="Project duration"
-            value={`${(props.start_date || '').replace(/-/g, '.')} - ${(
-              props.end_date || ''
-            ).replace(/-/g, '.')}`}
-          />
-        </Grid>
+        {props.total_amount && (
+          <Grid item container xs={12} lg={6} alignItems="center" wrap="nowrap">
+            <StatItem
+              label="Total project amount"
+              value={parseInt(props.total_amount || '', 10)
+                .toLocaleString(undefined, {
+                  currency: 'EUR',
+                  currencyDisplay: 'symbol',
+                  style: 'currency',
+                })
+                .replace('.00', '')}
+            />
+            <StatItemDivider />
+            <StatItem
+              label="Project duration"
+              value={`${(props.start_date || '').replace(/-/g, '.')} - ${(
+                props.end_date || ''
+              ).replace(/-/g, '.')}`}
+            />
+          </Grid>
+        )}
       </Grid>
     </React.Fragment>
   );
