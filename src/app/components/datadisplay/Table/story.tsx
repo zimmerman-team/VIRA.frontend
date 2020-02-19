@@ -23,9 +23,17 @@ const projectTableConfig = getBaseTableForProject();
 const data = [
   [
     1123123,
-    'Ondersteuning kerkelijke huisvesting',
-    'Toekenning',
     '11-6-2018',
+    'Toekenning',
+    'Ondersteuning kerkelijke huisvesting',
+    null,
+    'Christian Family International',
+  ],
+  [
+    1123123,
+    '11-6-2018',
+    'Toekenning',
+    'Ondersteuning kerkelijke huisvesting',
     null,
     'Christian Family International',
   ],
