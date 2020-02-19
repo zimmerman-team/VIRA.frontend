@@ -19,7 +19,7 @@ export function sendMail(
   client
     .sendEmailWithTemplate({
       TemplateId: 15721543,
-      From: 'insinger@zimmermanzimmerman.nl',
+      From: 'no-reply@insingerstichting.nl',
       To: email,
       TemplateModel: { app: 'M&E Insinger', name, surname, link },
       Attachments: [
@@ -49,7 +49,7 @@ export function sendMail(
 export function sendForgotPassMail(email: string, link: string) {
   return client.sendEmailWithTemplate({
     TemplateId: 15847923,
-    From: 'insinger@zimmermanzimmerman.nl',
+    From: 'no-reply@insingerstichting.nl',
     To: email,
     TemplateModel: { app: 'M&E Insinger', link },
     Attachments: [

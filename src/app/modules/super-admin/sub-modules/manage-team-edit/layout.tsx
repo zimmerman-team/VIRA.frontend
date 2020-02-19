@@ -46,7 +46,7 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => (
         text="Save"
         onClick={props.submit}
         disabled={!props.submitEnabled}
-        css={{ position: 'absolute', bottom: 32 }}
+        // css={{ position: 'fixed', bottom: 32 }}
       />
     </Grid>
   </React.Fragment>

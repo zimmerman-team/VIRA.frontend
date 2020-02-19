@@ -87,6 +87,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           prevRoleId,
           roleId,
           role,
+          groups: get(loadUserData, 'groups', []),
         },
       });
     }
