@@ -29,6 +29,9 @@ function ManageUsersF(props: RouteComponentProps) {
   const deleteUserClear = useStoreActions(actions => actions.deleteUser.clear);
   const allTeamsAction = useStoreActions(actions => actions.allTeams.fetch);
   const allTeamsData = useStoreState(state => state.allTeams.data);
+  const userGroupsAction = useStoreActions(
+    actions => actions.getUserGroups.fetch
+  );
 
   React.useEffect(() => {
     allUsersAction({
@@ -84,6 +87,7 @@ function ManageUsersF(props: RouteComponentProps) {
         socketName: 'getUserGroups',
         values: { user: storeUser },
       });
+      userGroupsAction({ socketName: 'getUserGroups', values: {} });
     } else {
       allUsersAction({
         socketName: 'getAllUsers',
