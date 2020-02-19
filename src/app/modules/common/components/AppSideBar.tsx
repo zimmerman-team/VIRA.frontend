@@ -15,6 +15,7 @@ import clsx from 'clsx';
 import { ProjectPalette } from 'app/theme';
 import { IconMenuOpen } from 'app/modules/common/icons/IconMenuOpen';
 import { NavItemParams } from 'app/modules/common/consts';
+import { Logo } from 'app/assets/icons/Logo';
 
 interface AppSideBarParams {
   classes: Record<
@@ -77,14 +78,14 @@ export function AppSideBar(props: AppSideBarParams) {
             <>
               <div
                 css={`
-                  color: white;
-                  font-size: 16px;
                   font-weight: 500;
+                  padding-top: 24px;
+                  padding-bottom: 36px;
                   display: ${props.open ? 'flex' : 'none'};
                   padding-left: ${isMobileWidth ? '45px' : 0};
                 `}
               >
-                ME & E TOOL
+                <Logo />
               </div>
               <Hidden smUp>
                 <IconButton
@@ -121,6 +122,7 @@ export function AppSideBar(props: AppSideBarParams) {
         </div>
         <List
           css={`
+            padding-left: ${props.open ? '42px' : 0};
             background-color: ${ProjectPalette.primary.main};
           `}
         >

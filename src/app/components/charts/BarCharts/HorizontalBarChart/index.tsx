@@ -126,7 +126,6 @@ const ChartContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 380px !important;
 `;
 
 const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
@@ -254,9 +253,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
     <ChartContainer
       ref={containerRef}
       css={`
-        height: ${props.values.length > 1
-          ? `${props.values.length * 80}px`
-          : '100px'};
+        height: ${props.values.length > 1 ? '380px' : '130px'};
       `}
     >
       {renderBarchart()}

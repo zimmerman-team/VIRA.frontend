@@ -87,7 +87,7 @@ export function MainRoutes() {
         {redirectUnAuth(ProjectDetailModule, storeUser)}
       </Route>
 
-      <Route exact path="/reports/:code/detail">
+      <Route exact path="/reports/:code/detail/:viz?">
         {redirectUnAuth(ReportDetailModule, storeUser)}
       </Route>
 
