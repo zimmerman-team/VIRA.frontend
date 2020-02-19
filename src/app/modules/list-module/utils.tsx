@@ -4,7 +4,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
 /* core */
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+import {
+  LinkCellModule,
+  ExternalLinkCellModule,
+} from 'app/components/datadisplay/Table/common/LinkCell';
 import { getInfoTHead } from 'app/components/datadisplay/Table/helpers';
 /* mock */
 import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
@@ -67,7 +70,6 @@ export const getBaseTableForProject = (): TableModuleModel => {
         filter: true,
         filterType: 'dropdown',
         customBodyRender: (value, tableMeta, updateValue) => {
-          console.log(tableMeta);
           return (
             <LinkCellModule
               link={`/projects/${tableMeta.rowData[0]}/detail`}
@@ -164,6 +166,11 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'checkbox',
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <ExternalLinkCellModule extLink={true} link={value} value={value} />
+          );
+        },
         customFilterListRender: value => `email: ${value}`,
       },
     },
@@ -172,6 +179,11 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'checkbox',
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <ExternalLinkCellModule extLink={true} link={value} value={value} />
+          );
+        },
         customFilterListRender: value => `Website: ${value}`,
       },
     },

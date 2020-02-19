@@ -4,7 +4,7 @@ import { table9Data } from 'app/assets/data/insingerData';
 import { ButtonCellModule } from 'app/components/datadisplay/Table/common/ButtonCell';
 import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 /* project-comps */
 import {
   formatMoney,
@@ -1121,7 +1121,7 @@ export const mockDataVar9: TableModuleModel = {
   options: {
     print: false,
     search: true,
-    filter: true,
+    filter: false,
     download: false,
     rowHover: false,
     pagination: true,

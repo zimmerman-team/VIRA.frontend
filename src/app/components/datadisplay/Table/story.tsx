@@ -16,11 +16,14 @@ import {
   mockDataVar8,
   mockDataVar9,
 } from './mock';
-import { getBaseTableForProject } from 'app/modules/list-module/utils';
+import {
+  getBaseTableForProject,
+  getBaseTableForGrantee,
+} from 'app/modules/list-module/utils';
 export default { title: 'Components ' };
 
 const projectTableConfig = getBaseTableForProject();
-const data = [
+const projectData = [
   [
     1123123,
     '11-6-2018',
@@ -38,13 +41,48 @@ const data = [
     'Christian Family International',
   ],
 ];
-projectTableConfig.data = data;
+projectTableConfig.data = projectData;
 
 export const LandingProjectTable = () => (
   <Providers>
     <Container maxWidth="lg">
       <Grid container spacing={4}>
-        <Table {...projectTableConfig} />
+        <Grid item>
+          <Table {...projectTableConfig} />
+        </Grid>
+      </Grid>
+    </Container>
+  </Providers>
+);
+
+const granteeTableConfig = getBaseTableForGrantee();
+const granteeData = [
+  [
+    'Alpha Nederland',
+    'Stichting',
+    'Driebergen-Rijsenburg',
+    'Nederland',
+    'info@alphanederland.org',
+    'www.alphanederland.org',
+  ],
+  [
+    'Alpha Nederland',
+    'Stichting',
+    'Driebergen-Rijsenburg',
+    'Nederland',
+    'info@alphanederland.org',
+    'www.alphanederland.org',
+  ],
+];
+granteeTableConfig.data = granteeData;
+
+export const GranteeProjectTable = () => (
+  <Providers>
+    <Container maxWidth="lg">
+      <Grid container spacing={4}>
+        <Grid item>
+          <Table {...granteeTableConfig} />
+        </Grid>
       </Grid>
     </Container>
   </Providers>
