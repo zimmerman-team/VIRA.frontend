@@ -20,6 +20,7 @@ export const NavigationButton = (props: NavItemParams) => {
           text-decoration: none;
           opacity: ${props.disabled ? 0.6 : 1};
           pointer-events: ${props.disabled ? 'none' : 'all'};
+          color: #6f7173;
         }
       `}
     >
@@ -37,7 +38,7 @@ export const NavigationButton = (props: NavItemParams) => {
         lineHeight="1.5"
         letterSpacing="1.25px"
         textAlign="center"
-        color="black"
+        color="#6f7173"
       >
         {props.label}
       </Box>

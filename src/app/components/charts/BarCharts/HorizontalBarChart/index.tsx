@@ -92,25 +92,25 @@ const BarComponent = (props: {
       }}
     >
       {showBar && (
-        <rect {...fprops} y={fprops.y + 10} fill={props.color} height="25px" />
+        <rect {...fprops} y={fprops.y - 2} fill={props.color} height="25px" />
       )}
       {showLine && (
         <>
           <line
             x1="0"
-            x2={width}
-            y1={props.y + 22}
-            y2={props.y + 22}
+            x2={width > 962 ? 962 : width}
+            y1={props.y + 11}
+            y2={props.y + 11}
             style={{
               strokeWidth: 2,
               stroke: ProjectPalette.secondary.main,
             }}
           />
           <line
-            x1={width}
-            x2={width}
-            y1={props.y + 15}
-            y2={props.y + 29}
+            x1={width > 962 ? 962 : width}
+            x2={width > 962 ? 962 : width}
+            y1={props.y + 3}
+            y2={props.y + 19}
             style={{ strokeWidth: 2, stroke: ProjectPalette.secondary.main }}
           />
         </>
@@ -126,6 +126,7 @@ const ChartContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 380px !important;
 `;
 
 const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
@@ -141,10 +142,18 @@ const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
 const TopAxis = styled.div`
   width: 100%;
   display: flex;
-  padding-left: 140px;
+  padding-left: 256px;
   flex-direction: row;
   justify-content: space-between;
   color: ${ProjectPalette.secondary.main};
+`;
+
+const TopAxisValue = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.71;
+  letter-spacing: 0.25px;
+  color: #6f7173;
 `;
 
 const Legends = styled.div`
@@ -191,8 +200,8 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
         <>
           {showLine && (
             <TopAxis>
-              <div>0€</div>
-              <div>{maxBudgetVal}€</div>
+              <TopAxisValue>0€</TopAxisValue>
+              <TopAxisValue>{maxBudgetVal}€</TopAxisValue>
             </TopAxis>
           )}
           <BarChart
@@ -211,6 +220,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
             tooltip={(tProps: any) => (
               <ChartTooltip
                 {...tProps}
+                maxValue={props.maxValue}
                 items={filter(tProps.items, (item: ChartTooltipItemModel) => {
                   const foundLegend = find(
                     props.chartLegends,

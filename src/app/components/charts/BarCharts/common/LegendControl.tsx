@@ -19,6 +19,9 @@ export function LegendControl(props: Props) {
         font-size: 14px;
         cursor: pointer;
         margin-right: 12px;
+        font-weight: bold;
+        line-height: 1.71;
+        letter-spacing: 0.25px;
         align-items: center;
       `}
     >
