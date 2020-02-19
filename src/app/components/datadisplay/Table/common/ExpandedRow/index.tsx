@@ -7,7 +7,7 @@ import { ExpendedRowModel } from './model';
 import { CellItem, LinkContainer, RowContainer } from './style';
 
 /* components */
-import LinkCellModule from '../LinkCell';
+import { LinkCellModule } from '../LinkCell';
 
 export const ExpandedRow = (props: ExpendedRowModel) => {
   return (

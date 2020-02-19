@@ -28,8 +28,15 @@ export const CustomStyleDataTable = {
 
       [class*='MUIDataTableHeadCell-root'] {
         font-size: 12px;
-        padding: 13px 24px;
+        font-weight: normal;
+        letter-spacing: 0.42px;
+        line-height: 1.33;
+        padding: 17px 24px;
         color: rgba(1, 1, 10, 0.6);
+      }
+
+      [class*='MUIDataTableHeadCell-root']:nth-child(2) {
+        width: 132px;
       }
 
       [class*='MUIDataTableBodyCell'] {
@@ -45,6 +52,20 @@ export const CustomStyleDataTable = {
 
       [class*='MuiTableCell-root'] {
         border-bottom: 0 white solid !important;
+      }
+
+      [class*='MUIDataTableBodyCell'] {
+        padding: 13px 24px;
+        color: ${ProjectPalette.common.black};
+        font-size: 14px;
+        font-weight: normal;
+        > a {
+          font-weight: 600;
+        }
+      }
+
+      [class*='MUIDataTableHeadCell-sortAction'] {
+        line-height: 1;
       }
 
       [class*='MUIDataTableBodyRow'] {

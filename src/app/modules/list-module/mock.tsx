@@ -1,4 +1,4 @@
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import { mockDataVar8 as mockDatatable } from 'app/components/datadisplay/Table/mock';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { NavItemParams } from 'app/modules/common/consts';
@@ -132,13 +132,13 @@ export const GranteeListMock: TableModuleModel = {
     },
   ],
   options: {
-    print: true,
+    print: false,
     search: true,
-    filter: true,
-    download: true,
+    filter: false,
+    download: false,
     rowHover: true,
     pagination: true,
-    viewColumns: true,
+    viewColumns: false,
     responsive: 'scrollFullHeight',
     filterType: 'checkbox',
     selectableRows: 'none',
