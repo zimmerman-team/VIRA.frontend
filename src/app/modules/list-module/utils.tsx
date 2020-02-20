@@ -218,18 +218,6 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
         sortDirection: 'asc',
         filter: true,
         filterType: 'dropdown',
-        customBodyRender: (value, tableMeta, updateValue) => {
-          const item = find(data, { reportID: value });
-          if (!item) {
-            return value;
-          }
-          return (
-            <LinkCellModule
-              value={value}
-              link={`/reports/${item._id}/detail`}
-            />
-          );
-        },
         customFilterListRender: value => `ID: ${value}`,
       },
     },
@@ -239,6 +227,14 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
         filter: true,
         filterType: 'dropdown',
         customFilterListRender: value => `Title: ${value}`,
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <LinkCellModule
+              link={`/projects/${tableMeta.rowData[0]}/detail`}
+              value={value}
+            />
+          );
+        },
       },
     },
     {
