@@ -12,7 +12,7 @@ import findIndex from 'lodash/findIndex';
 import { formatReportDetail } from './utils/formatReportDetail';
 
 export const ReportDetailModuleF = (props: any) => {
-  useTitle('M&E Report detail');
+  useTitle('Monitoring & Evaluation Tool  Report detail');
   const report_obj: any = useParams();
   const report_id: any = report_obj.code;
   const [reportDetails, setreportDetails] = useState({

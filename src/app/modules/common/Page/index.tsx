@@ -30,7 +30,7 @@ const MainContainer = styled(Container)`
 `;
 
 const Page = (props: PageProps) => {
-  useTitle(`M&E - ${props.title}`);
+  useTitle(`Monitoring & Evaluation Tool  - ${props.title}`);
 
   return (
     <MainContainer maxWidth={props.maxWidth}>

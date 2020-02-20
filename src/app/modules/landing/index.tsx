@@ -37,7 +37,7 @@ import { getNewReportsCount } from './utils/getNewReportsCount';
 
 function LandingLayout(props: any) {
   // set window title
-  useTitle('M&E - Dashboard');
+  useTitle('Monitoring & Evaluation Tool  - Dashboard');
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   const [stats, setStats] = React.useState(statsMock);

@@ -28,7 +28,7 @@ import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 export function GranteeDetailModule(props: any) {
   const params: any = useParams();
   const granteeID: any = params.code;
-  useTitle('M&E - Grantee detail');
+  useTitle('Monitoring & Evaluation Tool  - Grantee detail');
   const granteeTitleMock: TitleParams = GranteeTitleMock;
   const breadcrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
   const descriptionMock: DescriptionParams = GranteeDescriptionMock;

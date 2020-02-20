@@ -20,7 +20,7 @@ const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
 
 function CreateReportFunc(props: any) {
-  useTitle('M&E - Create report');
+  useTitle('Monitoring & Evaluation Tool  - Create report');
   // state
   const [project, setProject] = React.useState(undefined);
   const [initialTabIndex, setInitialTabIndex] = React.useState(

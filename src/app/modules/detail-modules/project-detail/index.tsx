@@ -17,7 +17,7 @@ import {
 } from 'app/modules/list-module/utils';
 
 const ProjectDetailModuleF = (props: any) => {
-  useTitle('M&E - Project detail');
+  useTitle('Monitoring & Evaluation Tool  - Project detail');
 
   const projectNumber: any = useParams();
   const project_number: any = projectNumber.code;

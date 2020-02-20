@@ -79,7 +79,7 @@ export function MainRoutes() {
       </Route>
 
       <Route exact path="/list/:id">
-        {useTitle('M&E - List')}
+        {useTitle('Monitoring & Evaluation Tool  - List')}
         {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
       </Route>
 
