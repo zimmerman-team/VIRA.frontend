@@ -87,7 +87,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           onClickAway={handleClickSearch}
         >
           <div className={props.classes.searchDesktop}>
-            <Search />
+            <Search handleResultClick={() => setOpenSearch(false)} />
           </div>
         </ClickAwayListener>
       ) : (
