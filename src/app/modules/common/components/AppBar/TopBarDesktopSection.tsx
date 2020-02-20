@@ -139,7 +139,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           }}
         >
           <div>
-            <Account />
+            <Account handleClick={() => setOpenAccount(false)} />
           </div>
         </ClickAwayListener>
       </Popper>

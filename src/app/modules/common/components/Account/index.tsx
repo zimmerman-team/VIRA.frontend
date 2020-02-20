@@ -10,7 +10,11 @@ import {
   Link,
 } from 'app/modules/common/components/Account/styles';
 
-export function Account() {
+type AccountProps = {
+  handleClick: any;
+};
+
+export const Account = (props: AccountProps) => {
   const storeUserName = useStoreState(state =>
     get(state.syncVariables.user, 'name', '')
   );
@@ -29,18 +33,26 @@ export function Account() {
       <Typography variant="subtitle2">{storeUserName}</Typography>
       <Box height="32px" />
       <Button>
-        <Link to="/super-admin/manage-teams">Manage teams & users</Link>
+        <Link to="/super-admin/manage-teams" onClick={props.handleClick}>
+          Manage teams & users
+        </Link>
       </Button>
       <Button>
-        <Link to={`/manage-account/${userID}`}>Manage your account</Link>
+        <Link to={`/manage-account/${userID}`} onClick={props.handleClick}>
+          Manage your account
+        </Link>
       </Button>
       <Button onClick={() => auth.signOut().then(() => clearUser())}>
         Sign out
       </Button>
       <Box height="24px" />
-      <Link to="/privacy">Privacy Policy</Link>
+      <Link to="/privacy" onClick={props.handleClick}>
+        Privacy Policy
+      </Link>
       <Box height="8px" />
-      <Link to="/terms">Terms</Link>
+      <Link to="/terms" onClick={props.handleClick}>
+        Terms
+      </Link>
     </Container>
   );
-}
+};
