@@ -51,18 +51,14 @@ export function BreadCrumbs(props: BreadcrumbModel) {
       data-testid="BreadCrumbs"
     >
       {props.previousLocations.map(previousLocation => (
-        // <NavLink
-        //   strict
-        //   css={PreviousLinkStyle}
-        //   to={previousLocation.url}
-        //   key={previousLocation.label}
-        // >
-        //   {previousLocation.label}
-        // </NavLink>
-
-        <Typography css={PreviousLinkStyle} variant="subtitle2">
+        <NavLink
+          strict
+          css={PreviousLinkStyle}
+          to={previousLocation.url}
+          key={previousLocation.label}
+        >
           {previousLocation.label}
-        </Typography>
+        </NavLink>
       ))}
 
       <Typography css={CurrentLinkStyle} variant="subtitle2">
