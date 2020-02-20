@@ -222,7 +222,7 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
       },
     },
     {
-      name: 'Title',
+      name: 'Title of Reports',
       options: {
         filter: true,
         filterType: 'dropdown',

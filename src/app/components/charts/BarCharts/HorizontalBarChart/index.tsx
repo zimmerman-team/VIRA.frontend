@@ -77,7 +77,7 @@ const BarComponent = (props: {
   const width = getBarInnerLineWidth(
     allData,
     fprops.data,
-    containerWidth - 170
+    containerWidth - 286 // subtracted value should align with margin left + right in model.tsx
   );
   return (
     <g
@@ -98,7 +98,7 @@ const BarComponent = (props: {
         <>
           <line
             x1="0"
-            x2={width > 962 ? 962 : width}
+            x2={width}
             y1={props.y + 11}
             y2={props.y + 11}
             style={{
@@ -107,8 +107,8 @@ const BarComponent = (props: {
             }}
           />
           <line
-            x1={width > 962 ? 962 : width}
-            x2={width > 962 ? 962 : width}
+            x1={width}
+            x2={width}
             y1={props.y + 3}
             y2={props.y + 19}
             style={{ strokeWidth: 2, stroke: ProjectPalette.secondary.main }}
