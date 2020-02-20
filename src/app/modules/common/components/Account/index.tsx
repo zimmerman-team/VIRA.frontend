@@ -7,7 +7,9 @@ import {
   Container,
   Avatar,
   Button,
+  ButtonPrimary,
   Link,
+  Username,
 } from 'app/modules/common/components/Account/styles';
 
 type AccountProps = {
@@ -30,7 +32,8 @@ export const Account = (props: AccountProps) => {
   return (
     <Container>
       <Avatar>{avatar.toUpperCase()}</Avatar>
-      <Typography variant="subtitle2">{storeUserName}</Typography>
+      <Box height="17px" />
+      <Username variant="subtitle2">{storeUserName}</Username>
       <Box height="32px" />
       <Button>
         <Link to="/super-admin/manage-teams" onClick={props.handleClick}>
@@ -42,16 +45,12 @@ export const Account = (props: AccountProps) => {
           Manage your account
         </Link>
       </Button>
-      <Button onClick={() => auth.signOut().then(() => clearUser())}>
+      <ButtonPrimary onClick={() => auth.signOut().then(() => clearUser())}>
         Sign out
-      </Button>
-      <Box height="24px" />
+      </ButtonPrimary>
+      <Box height="14px" />
       <Link to="/privacy" onClick={props.handleClick}>
-        Privacy Policy
-      </Link>
-      <Box height="8px" />
-      <Link to="/terms" onClick={props.handleClick}>
-        Terms
+        Privacy Policy and Terms
       </Link>
     </Container>
   );
