@@ -4,11 +4,15 @@ import TableModule from 'app/components/datadisplay/Table';
 import { ContactsCard } from 'app/components/surfaces/Cards/ContactsCard';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { Description } from 'app/modules/common/components/DescriptionParams';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { PageLoader } from 'app/modules/common/page-loader';
+import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
+import { ProjectPalette } from 'app/theme';
+import get from 'lodash/get';
+import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
+import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
+import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
+import { TabNavMockViz } from 'app/modules/detail-modules/grantee-detail/mock';
 
 export const GranteeDetailLayout = (props: any) => (
   <React.Fragment>
@@ -21,23 +25,14 @@ export const GranteeDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
-    <Grid item container lg={6} direction="column">
+    <Grid item container lg={12} direction="column">
       <TitleFragment {...props.title} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* project description */}
-    <Grid item xs={12} lg={12}>
+    <Grid item xs={12} lg={6}>
       <Description {...props.description} />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* outcome charts */}
-    <Grid item xs={12} md={6} lg={6}>
-      <Card>
-        <CardHeader title="Key outcomes" />
-        <CardContent>charts</CardContent>
-      </Card>
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
@@ -46,6 +41,19 @@ export const GranteeDetailLayout = (props: any) => (
       <ContactsCard {...props.contact} />
     </Grid>
 
+    <Grid item lg={12}>
+      <HorizontalBarChart
+        {...mockData}
+        chartLegends={props.barChartLegends}
+        onChartLegendClick={props.onBarChartLegendClick}
+      />
+    </Grid>
+
+    {/*<Grid item xs={9} sm={3}>*/}
+    {/*  <TabNavigator*/}
+    {/*    {...getNavTabItems(TabNavMockViz, get(props.match.params, 'code', ''))}*/}
+    {/*  />*/}
+    {/*</Grid>*/}
     {/* ---------------------------------------------------------------------*/}
     {/* projects */}
     <Grid item xs={12} lg={12}>

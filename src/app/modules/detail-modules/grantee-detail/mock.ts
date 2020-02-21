@@ -6,6 +6,8 @@ import { DescriptionParams } from 'app/modules/common/components/DescriptionPara
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { ContactsCardModel } from 'app/components/surfaces/Cards/ContactsCard/model';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
+import { NavItemParams } from 'app/modules/common/consts';
+import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 
 export const GranteeBreadCrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
 
@@ -21,3 +23,18 @@ export const GranteeDescriptionMock: DescriptionParams = {
 export const GranteeContactCardMock: ContactsCardModel = mockDataContactsCard;
 
 export const GranteeProjectListMock: TableModuleModel = mockDatatable;
+
+export const navItemMockViz: NavItemParams[] = [
+  {
+    label: 'Projects',
+    path: '/grantee/-/detail/projects',
+  },
+  {
+    label: 'Reports',
+    path: '/grantee/-/detail/reports',
+  },
+];
+
+export const TabNavMockViz: TabNavigatorParams = {
+  items: navItemMockViz,
+};
