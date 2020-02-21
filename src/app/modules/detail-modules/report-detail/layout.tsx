@@ -206,9 +206,9 @@ export const ReportDetailLayout = (props: any) => (
         description={props.report.monitor_report_outcomes}
       />
     </Grid>
-    {props.report.media.picture.length > 0 && (
+    {props.report.media.length > 0 && (
       <Grid item lg={12}>
-        <OutcomeCard title="Media" media={props.report.media.picture} />
+        <OutcomeCard title="Media" media={props.report.media} />
       </Grid>
     )}
     <Grid item lg={12}>
