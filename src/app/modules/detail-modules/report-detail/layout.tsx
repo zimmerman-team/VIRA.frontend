@@ -9,6 +9,7 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import { get, find, uniqBy } from 'lodash';
+
 // absolute
 import { BubbleChart } from 'app/components/charts/Bubble';
 import { GeoMap } from 'app/components/charts/GeoMap';
@@ -21,14 +22,12 @@ import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
 import { ProjectPalette } from 'app/theme';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 
 // direct
 import 'styled-components/macro';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
+import { SingleLineGridList } from 'app/components/layout/GridList/singleLineGridList';
+import { mock } from 'app/components/layout/GridList/singleLineGridList/mock';
 
 export const ReportDetailLayout = (props: any) => (
   <React.Fragment>
@@ -89,7 +88,12 @@ export const ReportDetailLayout = (props: any) => (
             margin-top: ${useMediaQuery('(max-width: 600px)') ? '28px' : 0};
           `}
         >
-          <Typography variant="h6">
+          <Typography
+            variant="h6"
+            css={`
+              font-size: 20px;
+            `}
+          >
             {get(
               find(
                 TabNavMockViz.items,
@@ -202,6 +206,12 @@ export const ReportDetailLayout = (props: any) => (
         description={props.report.monitor_report_outcomes}
       />
     </Grid>
+    {/*Testable with mock data*/}
+    {props.report.tileData && (
+      <Grid item lg={12}>
+        <OutcomeCard title="Media" gallery={props.report.tileData} />
+      </Grid>
+    )}
     <Grid item lg={12}>
       <OutcomeCard
         title="Key implementation challenges"
