@@ -230,7 +230,7 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
         customBodyRender: (value, tableMeta, updateValue) => {
           return (
             <LinkCellModule
-              link={`/projects/${tableMeta.rowData[0]}/detail`}
+              link={`/projects/${tableMeta.rowData[0]}/detail/priority-area`}
               value={value}
             />
           );
