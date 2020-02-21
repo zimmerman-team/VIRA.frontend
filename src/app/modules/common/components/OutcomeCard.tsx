@@ -16,7 +16,7 @@ import {
 export interface OutcomeCardParams {
   title: string;
   description?: string;
-  gallery?: SingleLineGridListProps;
+  media?: SingleLineGridListProps;
 }
 const styles: any = {
   cardHeader: css`
@@ -45,7 +45,7 @@ const styles: any = {
 export const OutcomeCard = (props: OutcomeCardParams) => {
   return (
     <Grid item lg={12}>
-      <Card css={props.gallery ? styles.card : null}>
+      <Card css={props.media ? styles.card : null}>
         <CardHeader title={props.title} css={styles.cardHeader} />
         <CardContent>
           {props.description && (
@@ -53,8 +53,8 @@ export const OutcomeCard = (props: OutcomeCardParams) => {
               {props.description}
             </Typography>
           )}
-          {props.gallery && (
-            <SingleLineGridList tileData={props.gallery.tileData} />
+          {props.media && (
+            <SingleLineGridList tileData={props.media.tileData} />
           )}
         </CardContent>
       </Card>

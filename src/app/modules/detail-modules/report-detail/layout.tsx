@@ -206,10 +206,9 @@ export const ReportDetailLayout = (props: any) => (
         description={props.report.monitor_report_outcomes}
       />
     </Grid>
-    {/*Testable with mock data*/}
-    {props.report.tileData && (
+    {props.report.media.picture.length > 0 && (
       <Grid item lg={12}>
-        <OutcomeCard title="Media" gallery={props.report.tileData} />
+        <OutcomeCard title="Media" media={props.report.media.picture} />
       </Grid>
     )}
     <Grid item lg={12}>

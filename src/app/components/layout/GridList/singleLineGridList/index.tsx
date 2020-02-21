@@ -1,14 +1,6 @@
-// @ts-nocheck
 import React from 'react';
 import { css } from 'styled-components/macro';
-import Button from '@material-ui/core/Button';
-import { ProjectPalette } from 'app/theme';
-import {
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  Typography,
-} from '@material-ui/core';
+import { GridList, GridListTile } from '@material-ui/core';
 
 export type SingleLineGridListProps = {
   tileData: TileData[];
@@ -24,7 +16,7 @@ const styles: any = {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    //overflow: hidden;
+    //overflow: hidden; => todo: style our own scrollbar
   `,
   gridList: css`
     && {

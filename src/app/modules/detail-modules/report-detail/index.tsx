@@ -29,7 +29,7 @@ export const ReportDetailModuleF = (props: any) => {
     },
     key_outcomes: '',
     monitor_report_outcomes: '',
-    media: '',
+    media: [],
     policy_priority: {},
     key_implementation_challenges: '',
     other_project_outcomes: '',
@@ -37,7 +37,6 @@ export const ReportDetailModuleF = (props: any) => {
     other_comments: '',
     reportID: '',
     barChartData: [],
-    tileData: [],
     budget: 0,
   });
   const [barChartLegends, setBarChartLegends] = React.useState([

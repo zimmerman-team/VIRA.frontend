@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import Providers from 'app/Providers';
 import { Container, Grid } from '@material-ui/core';
