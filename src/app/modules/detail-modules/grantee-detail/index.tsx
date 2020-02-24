@@ -24,11 +24,14 @@ import {
   formatTableDataForProject,
 } from 'app/modules/list-module/utils';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+import { AppConfig } from 'app/data';
 
 export function GranteeDetailModule(props: any) {
+  // set window title
+  useTitle(`${AppConfig.appTitleLong} Grantee detail`);
+
   const params: any = useParams();
   const granteeID: any = params.code;
-  useTitle('Monitoring & Evaluation Tool  - Grantee detail');
   const granteeTitleMock: TitleParams = GranteeTitleMock;
   const breadcrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
   const descriptionMock: DescriptionParams = GranteeDescriptionMock;

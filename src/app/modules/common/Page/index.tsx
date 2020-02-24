@@ -6,6 +6,7 @@ import { Container, Grid, Box, Typography } from '@material-ui/core';
 import styled from 'styled-components/macro';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
+import { AppConfig } from 'app/data';
 
 export type PageProps = {
   title?: string;
@@ -30,7 +31,8 @@ const MainContainer = styled(Container)`
 `;
 
 const Page = (props: PageProps) => {
-  useTitle(`Monitoring & Evaluation Tool  - ${props.title}`);
+  // set window title
+  useTitle(`${AppConfig.appTitleLong} ${props.title}`);
 
   return (
     <MainContainer maxWidth={props.maxWidth}>
