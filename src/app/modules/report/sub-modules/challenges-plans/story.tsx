@@ -1,9 +1,8 @@
 // @ts-nocheck
 
 import React from 'react';
-import Providers from 'app/Providers';
 import { ChallengesPlansLayout } from './index';
-import { Container, Grid } from '@material-ui/core';
+import { StoryWrapper } from '@storybook/addons';
 
 const mock = {
   keyImplChallenges: 'field 1',
@@ -12,16 +11,10 @@ const mock = {
   otherComms: 'lorem ipsum other',
 };
 
-export default { title: 'Report ' };
+export default { title: 'Report' };
 
 export const challengesAndPlans = () => (
-  <Providers>
-    <Container maxWidth="lg">
-      <Grid container spacing={4}>
-        <div>
-          <ChallengesPlansLayout {...mock} />
-        </div>
-      </Grid>
-    </Container>
-  </Providers>
+  <StoryWrapper>
+    <ChallengesPlansLayout {...mock} />
+  </StoryWrapper>
 );
