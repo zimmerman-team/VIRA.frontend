@@ -28,7 +28,7 @@ export interface TableModuleModel {
   expandableData?: any[][][] | undefined;
   totalRowColsDef?: TotalRowColModel[];
   changeTableRowColor?: number;
-  cssVariant?: 'standard' | 'variant9' | 'variant10';
+  cssVariant?: 'standard' | 'variant9' | 'variant10' | 'reportsVariant';
   // infoItems?: TableInfoItemModel[];
 }
 
@@ -38,6 +38,7 @@ export interface TableLayoutModel {
   columns: MUIDataTableColumnDef[];
   options: MUIDataTableOptions;
   changeTableRowColor?: number;
+  cssVariant?: 'standard' | 'variant9' | 'variant10' | 'reportsVariant';
 }
 
 export interface InfoCellModuleModel {

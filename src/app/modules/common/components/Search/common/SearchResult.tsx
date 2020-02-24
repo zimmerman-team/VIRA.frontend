@@ -11,6 +11,7 @@ type Props = {
   results: object;
   resultType: string;
   changeResultType: Function;
+  handleResultClick: any;
 };
 
 export const SearchResult = (props: Props) => (
@@ -51,7 +52,11 @@ export const SearchResult = (props: Props) => (
     >
       {get(props.results, `[${props.resultType}]`, []).map(
         (resultItem: any) => (
-          <SearchResultItem text={resultItem.title} link={resultItem.link} />
+          <SearchResultItem
+            text={resultItem.title}
+            link={resultItem.link}
+            handleResultClick={props.handleResultClick}
+          />
         )
       )}
     </div>

@@ -1,6 +1,8 @@
 import 'styled-components/macro';
 import React, { ReactChild } from 'react';
 import { Grid, Box, Container, useMediaQuery } from '@material-ui/core';
+import { useRouteMatch } from 'react-router-dom';
+import { ProjectPalette } from 'app/theme';
 
 interface PageWrapperParams {
   children: ReactChild;

@@ -16,8 +16,10 @@ import {
   getBaseTableForReport,
 } from 'app/modules/list-module/utils';
 
+import { AppConfig } from 'app/data';
+
 const ProjectDetailModuleF = (props: any) => {
-  useTitle('M&E - Project detail');
+  useTitle(`${AppConfig.appTitleLong} Project detail`);
 
   const projectNumber: any = useParams();
   const project_number: any = projectNumber.code;

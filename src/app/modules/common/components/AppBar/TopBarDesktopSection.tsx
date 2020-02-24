@@ -87,7 +87,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           onClickAway={handleClickSearch}
         >
           <div className={props.classes.searchDesktop}>
-            <Search />
+            <Search handleResultClick={() => setOpenSearch(false)} />
           </div>
         </ClickAwayListener>
       ) : (
@@ -139,7 +139,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           }}
         >
           <div>
-            <Account />
+            <Account handleClick={() => setOpenAccount(false)} />
           </div>
         </ClickAwayListener>
       </Popper>

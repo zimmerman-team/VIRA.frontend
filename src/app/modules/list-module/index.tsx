@@ -108,7 +108,7 @@ export const ListModule = (props: Props) => {
           <TableModule {...baseTableForGrantee} />
         </Route>
         <Route path={props.tabNav.items[2].path}>
-          <TableModule {...baseTableForReport} />
+          <TableModule {...baseTableForReport} cssVariant={'reportsVariant'} />
         </Route>
       </Grid>
     </React.Fragment>
