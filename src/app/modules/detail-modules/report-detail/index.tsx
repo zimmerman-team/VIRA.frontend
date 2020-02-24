@@ -31,7 +31,7 @@ export const ReportDetailModuleF = (props: any) => {
     },
     key_outcomes: '',
     monitor_report_outcomes: '',
-    media: '',
+    media: [],
     policy_priority: {},
     key_implementation_challenges: '',
     other_project_outcomes: '',
