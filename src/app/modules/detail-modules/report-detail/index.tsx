@@ -10,9 +10,11 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import get from 'lodash/get';
 import findIndex from 'lodash/findIndex';
 import { formatReportDetail } from './utils/formatReportDetail';
+import { AppConfig } from 'app/data';
 
 export const ReportDetailModuleF = (props: any) => {
-  useTitle('M&E Report detail');
+  useTitle(`${AppConfig.appTitleLong}  Report detail`);
+
   const report_obj: any = useParams();
   const report_id: any = report_obj.code;
   const [reportDetails, setreportDetails] = useState({
