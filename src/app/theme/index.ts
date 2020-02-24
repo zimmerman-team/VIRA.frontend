@@ -41,7 +41,7 @@ export const ProjectPalette: ProjectPalette = {
   contrastThreshold: 3,
   grey: {
     '50': '#fafafa',
-    '100': '#f5f5f5',
+    '100': '#f7f7f7',
     '200': '#eeeeee',
     '300': '#e0e0e0',
     '400': '#bdbdbd',

@@ -21,8 +21,10 @@ export interface TitleParams {
 const style: any[] = [
   // title style
   css`
-    font-size: 36px;
-    font-weight: 400;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: 0.25px;
+    line-height: normal;
 
     @media (max-width: 768px) {
       font-size: 25px;
