@@ -3,7 +3,6 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { ProjectPalette } from 'app/theme';
-import { Hidden } from '@material-ui/core';
 
 export interface TitleParams {
   title: string;

@@ -5,14 +5,13 @@
 /* eslint-disable no-nested-ternary */
 /* core */
 import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
-import { getInfoTHead } from 'app/components/datadisplay/Table/helpers';
 /* mock */
 import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
 /* models */
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import { GranteeListMock } from 'app/modules/list-module/mock';
+import { GranteeListMock, ReportListMock } from 'app/modules/list-module/mock';
 import React from 'react';
-import { ReportListMock } from 'app/modules/list-module/mock';
+
 import find from 'lodash/find';
 
 export const formatTableDataForProject = (data: any): any[] => {

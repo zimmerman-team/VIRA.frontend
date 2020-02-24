@@ -22,11 +22,11 @@ import { LocationModel } from 'app/modules/report/model';
 import { countries } from 'app/assets/data/countries';
 import { Input } from 'app/components/inputs/textfields/PasswordTextField';
 import { ProjectPalette } from 'app/theme';
+import { getRandomKey } from 'app/utils/getRandomKey';
 import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 import Cluster from './common/MapCluster';
 import { ClusterElement } from './common/MapCluster/ClusterElement';
 import { MapControls } from './common/MapControls';
-import { getRandomKey } from 'app/utils/getRandomKey';
 
 type Props = {
   data?: any;

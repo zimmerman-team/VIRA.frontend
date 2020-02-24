@@ -7,7 +7,6 @@ import { css } from 'styled-components/macro';
 
 import { ProjectPalette } from 'app/theme';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
-import { NavLink } from 'react-router-dom';
 
 const mobFontSize = '12px;';
 

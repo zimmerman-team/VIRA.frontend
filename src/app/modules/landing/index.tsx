@@ -153,7 +153,7 @@ function LandingLayout(props: any) {
                 get(props.match.params, 'list', '')
               )}
             />
-            <Box height={'62px'} width={'1px'} />
+            <Box height="62px" width="1px" />
           </Grid>
         </Grid>
 

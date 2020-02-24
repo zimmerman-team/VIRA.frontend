@@ -4,7 +4,7 @@
 import auth from 'app/auth';
 import { useTitle } from 'react-use';
 import { NoMatchPage } from 'app/modules/common/no-match-page';
-import { PageLoader } from 'app/modules/common/page-loader';
+// import { PageLoader } from 'app/modules/common/page-loader';
 import { GranteeDetailModule } from 'app/modules/detail-modules/grantee-detail';
 import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
 import { ReportDetailModule } from 'app/modules/detail-modules/report-detail';
@@ -29,7 +29,7 @@ import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-te
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { TabNavMock } from 'app/modules/list-module/mock';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
