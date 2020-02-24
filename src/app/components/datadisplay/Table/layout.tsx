@@ -12,6 +12,8 @@ function setTableVariant(cssVariant: string) {
       return CustomStyleDataTable.variant9;
     case 'variant10':
       return CustomStyleDataTable.variant10;
+    case 'reportsVariant':
+      return CustomStyleDataTable.reportsVariant;
     default:
       return CustomStyleDataTable.standard;
   }
