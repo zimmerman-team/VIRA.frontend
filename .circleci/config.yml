@@ -31,6 +31,19 @@ jobs:
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
 
+  deploy-storybook:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: yarn build-storybook
+      - run: eval ssh-agent -s
+      - run: sudo apt install rsync
+      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: rsync -O -ave ssh ~/project/storybook-static zz@206.189.241.202:~/insinger-dev
+
   deploy-production:
     docker:
       - image: circleci/node:12.14.1-stretch-browsers
@@ -65,21 +78,21 @@ workflows:
       # post-steps:
       # - store_test_results:
       # path: cypress/results
-      - deploy-test:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: feature/
-      - deploy-staging:
+      #- deploy-test:
+      #    requires:
+      #      - cypress/install
+      #    filters:
+      #      branches:
+      #        only: feature/
+      - deploy-storybook:
           requires:
             - cypress/install
           filters:
             branches:
               only: develop
-      - deploy-production:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: master
+      #- deploy-production:
+      #    requires:
+      #      - cypress/install
+      #    filters:
+      #      branches:
+      #        only: master
