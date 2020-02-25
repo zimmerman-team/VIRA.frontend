@@ -6,8 +6,6 @@ import { IntentTexArea } from 'app/modules/report/sub-modules/indicator-verifica
 import { ChallengeAreaMock } from './mock';
 
 export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
-  console.log(props);
-
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}

@@ -1,12 +1,10 @@
 // @ts-nocheck
 
 import React from 'react';
-import { SignInLayout } from 'app/modules/sign-in/layout';
-import { StoryWrapper } from 'app/utils/StoryWrapper';
+import { SignInLayout } from './layout';
 
 export default {
-  title: `sign in`,
-  decorators: [storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>],
+  title: `modules | Authentication`,
 };
 
-export const SignInOut = () => <SignInLayout />;
+export const SignIn = () => <SignInLayout />;

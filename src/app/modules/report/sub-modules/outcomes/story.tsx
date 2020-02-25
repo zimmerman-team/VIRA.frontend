@@ -1,18 +1,8 @@
 // @ts-nocheck
 
 import React from 'react';
-import Providers from 'app/Providers';
-import { Container, Grid } from '@material-ui/core';
-import { OutcomesLayout } from './index';
+import { OutcomesLayout } from '.';
 
-export default { title: 'Report ' };
+export default { title: 'modules | Report ' };
 
-export const reportOutcomes = () => (
-  <Providers>
-    <Container maxWidth="lg">
-      <Grid container spacing={4}>
-        <OutcomesLayout {...mock} />
-      </Grid>
-    </Container>
-  </Providers>
-);
+export const reportOutcomes = () => <OutcomesLayout />;

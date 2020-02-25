@@ -1,9 +1,7 @@
 // @ts-nocheck
 
 import React from 'react';
-import Providers from 'app/Providers';
-import { ReportDetailModule } from './index';
-import { Container, Grid } from '@material-ui/core';
+import { ReportDetailModule } from '.';
 
 const mock = {
   report: {
@@ -108,12 +106,4 @@ const mock = {
 
 export default { title: 'Report ' };
 
-export const reportDetail = () => (
-  <Providers>
-    <Container maxWidth="lg">
-      <Grid container spacing={4}>
-        <ReportDetailModule {...mock} />
-      </Grid>
-    </Container>
-  </Providers>
-);
+export const reportDetail = () => <ReportDetailModule {...mock} />;

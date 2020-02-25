@@ -2,11 +2,9 @@
 
 import React from 'react';
 import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
-import { StoryWrapper } from 'app/utils/StoryWrapper';
 
 export default {
-  title: `Report`,
-  decorators: [storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>],
+  title: `modules | Report`,
 };
 
 export const indicatorVerification = () => <IndicatorVerificationLayout />;
