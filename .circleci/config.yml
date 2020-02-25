@@ -42,7 +42,7 @@ jobs:
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-      - run: rsync -O -ave ssh ~/project/storybook-static zz@206.189.241.202:~/insinger-staging
+      - run: rsync -O -ave ssh ~/project/storybook-static zz@206.189.241.202:~/insinger-storybook
 
   deploy-production:
     docker:
