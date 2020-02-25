@@ -87,6 +87,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           prevRoleId,
           roleId,
           role,
+          groups: get(loadUserData, 'groups', []),
         },
       });
     }
@@ -219,25 +220,27 @@ function ManageUserEditF(props: ManageUserEditModel) {
         />
         <Box width="100%" height="32px" />
 
-        <Grid container>
-          <Grid item xs={12} md={12} lg={6} xl={6}>
-            <RadioButtonsGroup
-              value={role}
-              onChange={(e: any) => setRole(e.target.value)}
-              {...props.form.radioButtonGroup}
-            />
-          </Grid>
-          {props.mode === 'add' && (
+        {!props.editSelf && (
+          <Grid container>
             <Grid item xs={12} md={12} lg={6} xl={6}>
-              <Select
-                title="Select team"
-                selectedItem={group}
-                items={props.form.selectOptions}
-                onChange={(e: any) => setGroup(e.target.value)}
+              <RadioButtonsGroup
+                value={role}
+                onChange={(e: any) => setRole(e.target.value)}
+                {...props.form.radioButtonGroup}
               />
             </Grid>
-          )}
-        </Grid>
+            {props.mode === 'add' && (
+              <Grid item xs={12} md={12} lg={6} xl={6}>
+                <Select
+                  title="Select team"
+                  selectedItem={group}
+                  items={props.form.selectOptions}
+                  onChange={(e: any) => setGroup(e.target.value)}
+                />
+              </Grid>
+            )}
+          </Grid>
+        )}
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}

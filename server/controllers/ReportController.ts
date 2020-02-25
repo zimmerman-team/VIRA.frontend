@@ -4,6 +4,9 @@ const Project = require('../models/project');
 const Location = require('../models/location');
 const policyPriority = require('../models/policyPriority');
 const targetBeneficiary = require('../models/targetBeneficiary');
+import { countryFeaturesData } from '../config/countryFeatures';
+import find from 'lodash/find';
+import filter from 'lodash/filter';
 
 // get all reports or reports of a project
 export function getReports(req: any, res: any) {
@@ -34,7 +37,26 @@ export function getReport(req: any, res: any) {
       if (err) {
         res(JSON.stringify({ status: 'error', message: err.message }));
       }
-      res(JSON.stringify(report));
+      const mapData = {
+        mapMarkers: report.location
+          ? [
+              {
+                name: report.place_name || report.country,
+                longitude: report.location.long,
+                latitude: report.location.lat,
+                value: report.budget,
+              },
+            ]
+          : [],
+        countryFeatures: {
+          ...countryFeaturesData,
+          features: filter(
+            countryFeaturesData.features,
+            f => report.country === f.properties.name
+          ),
+        },
+      };
+      res(JSON.stringify({ report: report, mapData: mapData }));
     });
 }
 

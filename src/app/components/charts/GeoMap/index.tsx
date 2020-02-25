@@ -179,7 +179,7 @@ export function GeoMap(props: Props) {
 
             > div {
               width: 100%;
-              margin: 5px 0 12px 0;
+              margin: 0 0 20px 0;
             }
 
             .react-geocoder-results {

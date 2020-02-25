@@ -5,7 +5,7 @@
 import { TableCell, TableRow } from '@material-ui/core';
 /* project-comps */
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import {
   LocalTableStateModel,
   TableModuleModel,

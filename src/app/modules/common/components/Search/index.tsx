@@ -9,7 +9,11 @@ import React from 'react';
 import { useDebounce } from 'react-use';
 import 'styled-components/macro';
 
-export function Search() {
+type SearchProps = {
+  handleResultClick: any;
+};
+
+export const Search = (props: SearchProps) => {
   const [results, setResults] = React.useState({
     projects: [],
     grantees: [],
@@ -115,6 +119,7 @@ export function Search() {
       </div>
       {value.length > 0 && (
         <SearchResult
+          handleResultClick={props.handleResultClick}
           results={results}
           resultType={resultType}
           width={dimensions.width}
@@ -123,4 +128,4 @@ export function Search() {
       )}
     </div>
   );
-}
+};

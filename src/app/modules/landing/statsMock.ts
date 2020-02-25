@@ -5,20 +5,24 @@ export const statsMock: StatItemParams[] = [
   {
     amount: 0,
     type: 'Projects',
+    path: '/list/projects',
   },
   {
     amount: 0,
-    type: 'New Reports',
+    type: 'Grantees',
+    path: '/list/grantees',
   },
   {
     amount: 0,
     type: 'Total Reports',
+    path: '/list/reports',
   },
 ];
 
 export interface StatItemParams {
   amount: number;
   type: string;
+  path: string;
 }
 
 export const navItemMockViz: NavItemParams[] = [

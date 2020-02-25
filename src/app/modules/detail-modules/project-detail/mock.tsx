@@ -6,7 +6,7 @@ import { OutcomeCardParams } from 'app/modules/common/components/OutcomeCard';
 import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 
 export const ProjectTitleMock: TitleParams = {
   title: 'Project Title',

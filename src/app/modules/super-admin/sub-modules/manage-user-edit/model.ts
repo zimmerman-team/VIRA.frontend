@@ -13,4 +13,5 @@ export type ManageUserEditModel = RouteComponentProps & {
     selectOptions: SelectItemModel[];
   };
   mode: string;
+  editSelf?: boolean;
 };

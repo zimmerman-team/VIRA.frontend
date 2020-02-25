@@ -7,12 +7,21 @@ import {
   Container,
   Avatar,
   Button,
+  ButtonPrimary,
   Link,
+  Username,
 } from 'app/modules/common/components/Account/styles';
 
-export function Account() {
+type AccountProps = {
+  handleClick: any;
+};
+
+export const Account = (props: AccountProps) => {
   const storeUserName = useStoreState(state =>
     get(state.syncVariables.user, 'name', '')
+  );
+  const userID = useStoreState(state =>
+    get(state.syncVariables.user, '_id', '')
   );
   const clearUser = useStoreActions(actions => actions.syncVariables.clearUser);
   const avatar = storeUserName
@@ -23,19 +32,26 @@ export function Account() {
   return (
     <Container>
       <Avatar>{avatar.toUpperCase()}</Avatar>
-      <Typography variant="subtitle2">{storeUserName}</Typography>
+      <Box height="17px" />
+      <Username variant="subtitle2">{storeUserName}</Username>
       <Box height="32px" />
       <Button>
-        <Link to="/super-admin/manage-teams">Manage teams & users</Link>
+        <Link to="/super-admin/manage-teams" onClick={props.handleClick}>
+          Manage teams & users
+        </Link>
       </Button>
-      <Button>Manage your account</Button>
-      <Button onClick={() => auth.signOut().then(() => clearUser())}>
+      <Button>
+        <Link to={`/manage-account/${userID}`} onClick={props.handleClick}>
+          Manage your account
+        </Link>
+      </Button>
+      <ButtonPrimary onClick={() => auth.signOut().then(() => clearUser())}>
         Sign out
-      </Button>
-      <Box height="24px" />
-      <Link to="/privacy">Privacy Policy</Link>
-      <Box height="8px" />
-      <Link to="/terms">Terms</Link>
+      </ButtonPrimary>
+      <Box height="14px" />
+      <Link to="/privacy" onClick={props.handleClick}>
+        Privacy Policy and Terms
+      </Link>
     </Container>
   );
-}
+};

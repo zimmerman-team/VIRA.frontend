@@ -1,7 +1,7 @@
 import 'styled-components/macro';
 import React from 'react';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import { Grid, Box, Modal } from '@material-ui/core';
+import { Grid, Box, Modal, Hidden } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { IntentTexArea } from './common/IntentTextArea';
 import { IndicatorVerificationPropsModel } from '../../model';
@@ -12,8 +12,8 @@ export const IndicatorVerificationLayout = (
 ) => (
   <React.Fragment>
     {/* ---------------------------------------------------------------------*/}
-    {/* textareas */}
-    <Grid item container lg={12} alignItems="center">
+    {/* textarea 1 */}
+    <Grid item xs={12} lg={12}>
       <IntentTexArea
         componentID="indVer1"
         value={props.keyOutcomes}
@@ -23,7 +23,15 @@ export const IndicatorVerificationLayout = (
       />
     </Grid>
 
-    <Grid item container lg={12} alignItems="center">
+    {/* ---------------------------------------------------------------------*/}
+    {/* only show on mobile 1 */}
+    <Hidden mdUp>
+      <Box height="40px" />
+    </Hidden>
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* textarea 1 */}
+    <Grid item xs={12} lg={12}>
       <IntentTexArea
         componentID="indVer2"
         value={props.monRepOutcomes}
@@ -34,7 +42,9 @@ export const IndicatorVerificationLayout = (
       />
     </Grid>
 
-    <Grid item lg={2}>
+    {/* ---------------------------------------------------------------------*/}
+    {/* add media button 1 */}
+    <Grid item xs={12} lg={12}>
       <ContainedButton
         text="Add media (Optional)"
         icon={<GetAppIcon />}
@@ -42,6 +52,8 @@ export const IndicatorVerificationLayout = (
       />
     </Grid>
 
+    {/* ---------------------------------------------------------------------*/}
+    {/* add media modal 1 */}
     <Modal
       open={props.openMediaModal}
       onClose={() => props.setOpenMediaModal(false)}

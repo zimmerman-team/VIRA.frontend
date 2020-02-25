@@ -7,7 +7,7 @@ export const StatItemDivider = () => (
     css={`
       height: 58px;
       width: 1px;
-      background-color: ${ProjectPalette.secondary.main};
+      background-color: ${ProjectPalette.grey[200]};
       &:last-child {
         display: none;
       }

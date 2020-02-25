@@ -25,6 +25,7 @@ export const manageTeamEditLayoutMock: ManageTeamEditLayoutModel = {
   loading: false,
   submitEnabled: false,
   submit: () => {},
+  mode: 'add',
 };
 
 export const manageTeamEditAddMock: ManageEditAddTeamModel = {

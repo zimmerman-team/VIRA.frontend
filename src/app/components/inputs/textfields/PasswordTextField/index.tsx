@@ -24,6 +24,7 @@ export const Input = withStyles((theme: Theme) =>
     root: {
       'label + &': {
         marginTop: theme.spacing(3),
+        backgroundColor: '#f0f3f7',
       },
     },
     input: getInputGeneralStyle(theme),

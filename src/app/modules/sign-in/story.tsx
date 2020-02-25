@@ -1,13 +1,10 @@
+// @ts-nocheck
+
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+import { SignInLayout } from './layout';
 
-import { SignIn } from '.';
-import Providers from 'app/Providers';
+export default {
+  title: `modules | Authentication`,
+};
 
-storiesOf('Modules|Sign in', module).add('layout', () => (
-  <div style={{ width: '100%', height: '100%' }}>
-    <Providers>
-      <SignIn />
-    </Providers>
-  </div>
-));
+export const signIn = () => <SignInLayout />;

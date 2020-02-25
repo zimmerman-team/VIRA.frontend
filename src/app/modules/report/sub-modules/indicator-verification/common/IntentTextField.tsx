@@ -28,7 +28,11 @@ export const IntentTexField = (props: IntentTextFieldParams) => (
       id={props.componentID}
       setValue={props.setValue}
     />
-    {props.explanation && <InfoCaption text={props.explanation} />}
-    <Box width="100%" height="30px" />
+    {props.explanation && (
+      <React.Fragment>
+        <InfoCaption text={props.explanation} />{' '}
+        <Box width="100%" height="30px" />
+      </React.Fragment>
+    )}
   </React.Fragment>
 );

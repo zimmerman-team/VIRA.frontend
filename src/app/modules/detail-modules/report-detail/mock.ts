@@ -1,3 +1,5 @@
+import { NavItemParams } from 'app/modules/common/consts';
+import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import { TitleParams } from 'app/modules/common/components/TitleParams';
 import { StatParams } from 'app/modules/common/components/StatItem';
 import { OutcomeCardParams } from 'app/modules/common/components/OutcomeCard';
@@ -49,4 +51,23 @@ export const ReportOutcomeCardMock: OutcomeCardParams[] = [
 export const DescriptionMock: DescriptionParams = {
   project_description:
     'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',
+};
+
+export const navItemMockViz: NavItemParams[] = [
+  {
+    label: 'Priority Area',
+    path: '/reports/-/detail/priority-area',
+  },
+  {
+    label: 'SDGs',
+    path: '/reports/-/detail/sdgs',
+  },
+  {
+    label: 'Map',
+    path: '/reports/-/detail/map',
+  },
+];
+
+export const TabNavMockViz: TabNavigatorParams = {
+  items: navItemMockViz,
 };

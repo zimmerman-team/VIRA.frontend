@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+// import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import { Palette } from '@material-ui/core/styles/createPalette';
 
 import {
@@ -41,7 +42,7 @@ export const ProjectPalette: ProjectPalette = {
   grey: {
     '50': '#fafafa',
     '100': '#f5f5f5',
-    '200': '#eeeeee',
+    '200': '#e8e8e8',
     '300': '#e0e0e0',
     '400': '#bdbdbd',
     '500': '#9e9e9e',
@@ -208,6 +209,16 @@ export const theme = createMuiTheme({
         boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
       },
     },
+    MUIDataTableHeadCell: {
+      root: {
+        fontWeight: 400,
+      },
+    },
+    MUIDataTableToolbar: {
+      root: {
+        paddingLeft: 27,
+      },
+    },
   },
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg', 'xl'],
@@ -279,4 +290,5 @@ export const theme = createMuiTheme({
   palette: ProjectPalette,
 });
 
-export default responsiveFontSizes(theme);
+// export default responsiveFontSizes(theme);
+export default theme;

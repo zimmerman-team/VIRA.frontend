@@ -209,7 +209,16 @@ export function deleteUser(req: any, res: any) {
 }
 
 export function editUser(req: any, res: any) {
-  const { userId, email, name, surname, role, roleId, prevRoleId } = req.query;
+  const {
+    userId,
+    email,
+    name,
+    surname,
+    role,
+    roleId,
+    prevRoleId,
+    groups,
+  } = req.query;
   getAccessToken('management').then(token => {
     axios
       .patch(
@@ -222,7 +231,8 @@ export function editUser(req: any, res: any) {
           },
           app_metadata: {
             authorization: {
-              roles: [{ name: role }],
+              roles: [role],
+              groups: [groups],
             },
           },
           connection: 'insinger-database-connection',
@@ -235,7 +245,7 @@ export function editUser(req: any, res: any) {
       )
       .then(response => {
         if (response.status === 200 || response.status === 201) {
-          if (userId !== prevRoleId) {
+          if (roleId !== prevRoleId) {
             roleId !== '' && assignRoleToUser(userId, roleId);
             prevRoleId !== '' &&
               roleId !== '' &&

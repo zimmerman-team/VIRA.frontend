@@ -15,7 +15,7 @@ import { useStoreState } from 'app/state/store/hooks';
 export function App() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   InitialLoad();
 
   const handleDrawerOpen = () => {
