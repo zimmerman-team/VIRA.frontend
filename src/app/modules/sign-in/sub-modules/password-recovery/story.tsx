@@ -4,7 +4,7 @@ import React from 'react';
 import { PasswordRecoveryLayout } from './layout';
 
 export default {
-  title: 'modules | Password Recovery',
+  title: 'modules | Authentication',
 };
 
 export const passwordRecoveryLayout = () => <PasswordRecoveryLayout />;

@@ -3,7 +3,7 @@ import { ManageUserLayout } from './layout';
 import { manageUserLayoutMock } from './mock';
 
 export default {
-  title: 'module | Administration',
+  title: 'modules | Administration',
 };
 
 export const manageUsers = () => <ManageUserLayout {...manageUserLayoutMock} />;
