@@ -72,7 +72,9 @@ export function getPolicyPriorityBarChartAPI(req: any, res: any) {
 }
 
 export function getPolicyPriorityBarChart(req: any, res: any) {
-  Report.find({})
+  const { projectID } = req.query;
+
+  Report.find(projectID ? { project: projectID } : {})
     .select(
       'policy_priority total_target_beneficiaries total_target_beneficiaries_commited budget'
     )
@@ -145,6 +147,8 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
 }
 
 export function getSDGBubbleChart(req: any, res: any) {
+  const { projectID } = req.query;
+
   // if (req.query.user_email) {
   //   ResponsiblePerson.find({ email: req.query.user_email }).exec(
   //     (err: any, persons: any) => {
@@ -187,7 +191,7 @@ export function getSDGBubbleChart(req: any, res: any) {
   //     }
   //   );
   // } else {
-  Report.find({})
+  Report.find(projectID ? { project: projectID } : {})
     .select('policy_priority budget')
     .populate('policy_priority')
     .exec((err: any, data: any) => {
@@ -213,7 +217,11 @@ export function getSDGBubbleChart(req: any, res: any) {
 }
 
 export function getGeoMapData(req: any, res: any) {
-  Report.find({ location: { $ne: null } })
+  const { projectID } = req.query;
+  const rQ = projectID
+    ? { project: projectID, location: { $ne: null } }
+    : { location: { $ne: null } };
+  Report.find(rQ)
     .select('location budget place_name country')
     .populate('location')
     .exec((err: any, data: any) => {

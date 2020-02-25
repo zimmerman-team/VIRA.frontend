@@ -42,7 +42,7 @@ export const ProjectPalette: ProjectPalette = {
   grey: {
     '50': '#fafafa',
     '100': '#f5f5f5',
-    '200': '#eeeeee',
+    '200': '#e8e8e8',
     '300': '#e0e0e0',
     '400': '#bdbdbd',
     '500': '#9e9e9e',
@@ -207,6 +207,16 @@ export const theme = createMuiTheme({
     MuiCard: {
       root: {
         boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
+      },
+    },
+    MUIDataTableHeadCell: {
+      root: {
+        fontWeight: 400,
+      },
+    },
+    MUIDataTableToolbar: {
+      root: {
+        paddingLeft: 27,
       },
     },
   },

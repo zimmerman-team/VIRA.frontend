@@ -7,10 +7,12 @@ import { Typography } from '@material-ui/core';
 interface ResultItemParams {
   text: string;
   link: string;
+  handleResultClick: any;
 }
 
 export const SearchResultItem = (props: ResultItemParams) => (
   <div
+    onClick={props.handleResultClick}
     css={`
       margin: 8px 0;
       display: flex;

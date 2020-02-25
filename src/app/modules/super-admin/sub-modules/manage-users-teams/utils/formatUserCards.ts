@@ -17,9 +17,10 @@ export function formatUserCards(
       const title = item.user_metadata
         ? `${item.user_metadata.firstName} ${item.user_metadata.lastName}`
         : item.name;
-      const role = item.app_metadata
+      let role = item.app_metadata
         ? get(item.app_metadata, 'authorization.roles[0]', '-')
         : '-';
+      role = role.name || role;
       return {
         _id: item.user_id,
         title,

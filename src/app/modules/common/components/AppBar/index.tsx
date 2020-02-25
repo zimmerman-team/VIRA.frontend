@@ -72,6 +72,9 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
         className={clsx(props.classes.appBar, {
           [props.classes.appBarShift]: props.open,
         })}
+        css={`
+          box-shadow: none !important;
+        `}
       >
         <Toolbar
           css={`

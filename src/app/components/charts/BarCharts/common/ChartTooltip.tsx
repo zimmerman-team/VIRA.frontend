@@ -10,7 +10,7 @@ const ContentContainer = styled.div`
   border-radius: 2px;
   flex-direction: column;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-  background: ${ProjectPalette.primary.light};
+  background: #242e42;
 `;
 
 const Divider = styled.div`
@@ -51,7 +51,7 @@ const ProgressBarContainer = styled.div`
   height: 4px;
   border-radius: 2px;
   margin-bottom: 2px;
-  background: ${ProjectPalette.primary.main};
+  background: #2a465c;
 `;
 
 const ProgressBar = styled.div`

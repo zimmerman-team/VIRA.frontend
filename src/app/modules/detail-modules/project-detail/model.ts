@@ -1,3 +1,6 @@
+import { NavItemParams } from 'app/modules/common/consts';
+import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
+
 export interface ProjectModel {
   project_id: string;
   project: string;
@@ -88,4 +91,23 @@ export const projectMock: ProjectModel = {
   sex: 'male',
   role: 'voorzitter kerkenraad',
   generateReport: () => {},
+};
+
+export const navItemMockViz: NavItemParams[] = [
+  {
+    label: 'Priority Area',
+    path: '/projects/-/detail/priority-area',
+  },
+  {
+    label: 'SDGs',
+    path: '/projects/-/detail/sdgs',
+  },
+  {
+    label: 'Map',
+    path: '/projects/-/detail/map',
+  },
+];
+
+export const TabNavMockViz: TabNavigatorParams = {
+  items: navItemMockViz,
 };

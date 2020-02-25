@@ -2,12 +2,14 @@ import React from 'react';
 import 'styled-components/macro';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useEventListener } from 'app/utils/useEventListener';
 import { Account } from 'app/modules/common/components/Account';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Search } from 'app/modules/common/components/Search/index';
 import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
+import { ProjectPalette } from 'app/theme';
+import { useStoreState } from 'app/state/store/hooks';
+import get from 'lodash/get';
 
 interface TopBarDesktopSectionParams {
   classes: Record<
@@ -70,6 +72,13 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
     }
   });
 
+  const avatar = useStoreState(state =>
+    get(state.syncVariables.user, 'name', '')
+  )
+    .split(' ')
+    .map(i => i.slice(0, 1))
+    .join('');
+
   return (
     <div className={props.classes.sectionDesktop}>
       {openSearch ? (
@@ -78,7 +87,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           onClickAway={handleClickSearch}
         >
           <div className={props.classes.searchDesktop}>
-            <Search />
+            <Search handleResultClick={() => setOpenSearch(false)} />
           </div>
         </ClickAwayListener>
       ) : (
@@ -130,7 +139,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           }}
         >
           <div>
-            <Account />
+            <Account handleClick={() => setOpenAccount(false)} />
           </div>
         </ClickAwayListener>
       </Popper>
@@ -142,7 +151,21 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         color="primary"
         onClick={handleClickAccount('bottom-end')}
       >
-        <AccountCircle />
+        <div
+          css={`
+            width: 24px;
+            height: 24px;
+            display: flex;
+            font-size: 12px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: ${ProjectPalette.common.white};
+            background: ${ProjectPalette.secondary.main};
+          `}
+        >
+          {avatar}
+        </div>
       </IconButton>
     </div>
   );

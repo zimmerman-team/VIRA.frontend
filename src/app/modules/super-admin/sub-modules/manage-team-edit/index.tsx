@@ -30,6 +30,9 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
   );
   const allTeamsData = useStoreState(state => state.allTeams.data);
   const allTeamsAction = useStoreActions(actions => actions.allTeams.fetch);
+  const userGroupsAction = useStoreActions(
+    actions => actions.getUserGroups.fetch
+  );
 
   // local state
   const [teamName, setTeamName] = React.useState('');
@@ -82,6 +85,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
           socketName: 'getUserGroups',
           values: { user: storeUser },
         });
+        userGroupsAction({ socketName: 'getUserGroups', values: {} });
       }
       setTimeout(() => {
         snackbarAction('');
@@ -168,6 +172,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
     },
     submit,
     submitEnabled,
+    mode: props.mode,
   };
 
   return <ManageTeamEditLayout {...layoutProps} />;

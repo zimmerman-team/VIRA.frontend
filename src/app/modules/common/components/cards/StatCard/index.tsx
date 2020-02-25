@@ -25,7 +25,7 @@ export const StatCard = (props: StatsCard) => {
     <Grid container direction="row" alignItems="center" wrap="nowrap">
       {props.stats.map(stat => (
         <React.Fragment key={stat.type}>
-          <StatItem amount={stat.amount} type={stat.type} />
+          <StatItem amount={stat.amount} type={stat.type} path={stat.path} />
           <StatItemDivider />
         </React.Fragment>
       ))}

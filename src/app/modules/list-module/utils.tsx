@@ -4,7 +4,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
 /* core */
-import LinkCellModule from 'app/components/datadisplay/Table/common/LinkCell';
+import {
+  LinkCellModule,
+  ExternalLinkCellModule,
+} from 'app/components/datadisplay/Table/common/LinkCell';
 import { getInfoTHead } from 'app/components/datadisplay/Table/helpers';
 /* mock */
 import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
@@ -21,10 +24,9 @@ export const formatTableDataForProject = (data: any): any[] => {
   data.forEach((row: any) => {
     tempArray.push(
       row.project_number,
-      row.project_name,
-      row.decision,
       row.decision_date,
-      row.released_amount, // Som van vrijgevallen
+      row.decision,
+      row.project_name,
       row.organisation.organisation_name
     );
     bigTempArray.push(tempArray);
@@ -38,68 +40,51 @@ export const getBaseTableForProject = (): TableModuleModel => {
   const tableConfig = mockDataVar8;
   tableConfig.columns = [
     {
-      name: 'Projectnummer',
+      name: 'ID',
       options: {
         sortDirection: 'asc',
         filter: true,
         filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Projectnummer', 'info'),
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <LinkCellModule link={`/projects/${value}/detail`} value={value} />
-          );
-        },
-        customFilterListRender: value => `Projectnummer: ${value}`,
+        customFilterListRender: value => `ID: ${value}`,
       },
     },
     {
-      name: 'ProjectTitle',
+      name: 'Decision date',
+      options: {
+        filter: true,
+        filterType: 'checkbox',
+        customFilterListRender: value => `Decision date: ${value}`,
+      },
+    },
+    {
+      name: 'Decision',
       options: {
         filter: true,
         filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('ProjectTitle', 'info'),
+        customFilterListRender: value => `Decision: ${value}`,
+      },
+    },
+    {
+      name: 'Project title',
+      options: {
+        filter: true,
+        filterType: 'dropdown',
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <LinkCellModule
+              link={`/projects/${tableMeta.rowData[0]}/detail`}
+              value={value}
+            />
+          );
+        },
         customFilterListRender: value => `ProjectTitle: ${value}`,
       },
     },
     {
-      name: 'Besluit',
-      options: {
-        filter: true,
-        filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Besluit', 'info'),
-        customFilterListRender: value => `Besluit: ${value}`,
-      },
-    },
-    {
-      name: 'Datum besluit',
+      name: 'Organisation',
       options: {
         filter: true,
         filterType: 'checkbox',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Datum besluit', 'info'),
-        customFilterListRender: value => `Datum besluit: ${value}`,
-      },
-    },
-    {
-      name: 'Som van vrijgevallen',
-      options: {
-        filter: true,
-        filterType: 'checkbox',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Som van vrijgevallen', 'info'),
-        customFilterListRender: value => `Som van vrijgevallen: ${value}`,
-      },
-    },
-    {
-      name: 'Organisatie',
-      options: {
-        filter: true,
-        filterType: 'checkbox',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Organisatie', 'info'),
         customFilterListRender: value => `Organisatie: ${value}`,
       },
     },
@@ -136,8 +121,6 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
         sortDirection: 'asc',
         filter: true,
         filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Grantee Name', 'info'),
         customBodyRender: (value, tableMeta, updateValue) => {
           if (value) {
             const temp_value = value.split(' && ');
@@ -159,8 +142,6 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Grantee Type', 'info'),
         customFilterListRender: value => `Grantee Type: ${value}`,
       },
     },
@@ -169,8 +150,6 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Place', 'info'),
         customFilterListRender: value => `Place: ${value}`,
       },
     },
@@ -179,8 +158,6 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Country', 'info'),
         customFilterListRender: value => `Country: ${value}`,
       },
     },
@@ -189,8 +166,11 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('email', 'info'),
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <ExternalLinkCellModule extLink={true} link={value} value={value} />
+          );
+        },
         customFilterListRender: value => `email: ${value}`,
       },
     },
@@ -199,8 +179,11 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Website', 'info'),
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <ExternalLinkCellModule extLink={true} link={value} value={value} />
+          );
+        },
         customFilterListRender: value => `Website: ${value}`,
       },
     },
@@ -235,31 +218,23 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
         sortDirection: 'asc',
         filter: true,
         filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('ID', 'info'),
-        customBodyRender: (value, tableMeta, updateValue) => {
-          const item = find(data, { reportID: value });
-          if (!item) {
-            return value;
-          }
-          return (
-            <LinkCellModule
-              value={value}
-              link={`/reports/${item._id}/detail`}
-            />
-          );
-        },
         customFilterListRender: value => `ID: ${value}`,
       },
     },
     {
-      name: 'Title',
+      name: 'Title of Reports',
       options: {
         filter: true,
         filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Title', 'info'),
         customFilterListRender: value => `Title: ${value}`,
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <LinkCellModule
+              link={`/projects/${tableMeta.rowData[0]}/detail/priority-area`}
+              value={value}
+            />
+          );
+        },
       },
     },
     {
@@ -267,8 +242,6 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customHeadRender: (columnMeta, updateDirection) =>
-          getInfoTHead('Date', 'info'),
         customFilterListRender: value => `Date: ${value}`,
       },
     },
