@@ -6,6 +6,16 @@ export default {
   title: 'modules | Faqs ',
 };
 
-export const faqLayout = () => (
+export const desktopLayout = () => (
   <FaqsLayout title={mockData.title} faqItems={mockData.faqItems} />
 );
+
+export const mobileLayout = () => (
+  <FaqsLayout title={mockData.title} faqItems={mockData.faqItems} />
+);
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

@@ -5,4 +5,12 @@ import LandingLayout from '.';
 
 export default { title: 'modules | Landing ' };
 
-export const landingLayout = () => <LandingLayout />;
+export const desktopLayout = () => <LandingLayout />;
+
+export const mobileLayout = () => <LandingLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};
