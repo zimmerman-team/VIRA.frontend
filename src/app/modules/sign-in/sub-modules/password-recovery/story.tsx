@@ -4,7 +4,15 @@ import React from 'react';
 import { PasswordRecoveryLayout } from './layout';
 
 export default {
-  title: 'modules | Authentication',
+  title: 'modules | Authentication / Password Recovery',
 };
 
-export const passwordRecoveryLayout = () => <PasswordRecoveryLayout />;
+export const desktopLayout = () => <PasswordRecoveryLayout />;
+
+export const mobileLayout = () => <PasswordRecoveryLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

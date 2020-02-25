@@ -3,9 +3,19 @@ import { ManageTeamEditLayout } from './layout';
 import { manageTeamEditLayoutMock } from './mock';
 
 export default {
-  title: 'modules | Administration',
+  title: 'modules | Administration / Edit Teams',
 };
 
-export const editTeams = () => (
+export const desktopLayout = () => (
   <ManageTeamEditLayout {...manageTeamEditLayoutMock} />
 );
+
+export const mobileLayout = () => (
+  <ManageTeamEditLayout {...manageTeamEditLayoutMock} />
+);
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

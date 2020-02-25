@@ -3,6 +3,14 @@
 import React from 'react';
 import { OutcomesLayout } from '.';
 
-export default { title: 'modules | Report ' };
+export default { title: 'modules | Report / Outcomes' };
 
-export const reportOutcomes = () => <OutcomesLayout />;
+export const desktopLayout = () => <OutcomesLayout />;
+
+export const mobileLayout = () => <OutcomesLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

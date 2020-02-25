@@ -3,7 +3,15 @@ import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-ac
 import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account/index';
 
 export default {
-  title: 'modules | Administration',
+  title: 'modules | Administration / Manage Account',
 };
 
-export const manageAccount = () => <ManageAccount {...manageAccountMock} />;
+export const desktopLayout = () => <ManageAccount {...manageAccountMock} />;
+
+export const mobileLayout = () => <ManageAccount {...manageAccountMock} />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

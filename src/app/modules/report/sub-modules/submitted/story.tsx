@@ -3,11 +3,19 @@
 // @ts-nocheck
 
 import React from 'react';
-import { SubmittedLayout } from './index';
+import { SubmittedLayout } from '.';
 
-export default { title: 'modules | Report ' };
+export default { title: 'modules | Report / Submitted' };
 
-export const submitReport = () => <SubmittedLayout />;
+export const desktopLayout = () => <SubmittedLayout />;
+
+export const mobileLayout = () => <SubmittedLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};
 
 const test = {
   report: {

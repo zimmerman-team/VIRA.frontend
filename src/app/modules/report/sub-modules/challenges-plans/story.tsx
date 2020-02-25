@@ -10,6 +10,14 @@ const mock = {
   otherComms: 'lorem ipsum other',
 };
 
-export default { title: 'modules | Report ' };
+export default { title: 'modules | Report / Challenges & Plans' };
 
-export const challengesAndPlans = () => <ChallengesPlansLayout {...mock} />;
+export const desktopLayout = () => <ChallengesPlansLayout />;
+
+export const mobileLayout = () => <ChallengesPlansLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

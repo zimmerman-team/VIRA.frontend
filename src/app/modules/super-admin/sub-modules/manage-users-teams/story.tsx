@@ -3,9 +3,19 @@ import { ManageUsersTeamsLayout } from './layout';
 import { manageUsersTeamsLayoutMock } from './mock';
 
 export default {
-  title: 'modules | Administration',
+  title: 'modules | Administration / Users & Teams',
 };
 
-export const usersAndTeams = () => (
+export const desktopLayout = () => (
   <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />
 );
+
+export const mobileLayout = () => (
+  <ManageUsersTeamsLayout {...manageUsersTeamsLayoutMock} />
+);
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

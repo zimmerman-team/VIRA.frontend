@@ -4,7 +4,15 @@ import React from 'react';
 import { SignInLayout } from './layout';
 
 export default {
-  title: `modules | Authentication`,
+  title: `modules | Authentication / Sign In`,
 };
 
-export const signIn = () => <SignInLayout />;
+export const desktopLayout = () => <SignInLayout />;
+
+export const mobileLayout = () => <SignInLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};
