@@ -5,7 +5,7 @@
 import React from 'react';
 import { SubmittedLayout } from './index';
 
-export default { title: 'Report ' };
+export default { title: 'modules | Report ' };
 
 export const submitReport = () => <SubmittedLayout />;
 

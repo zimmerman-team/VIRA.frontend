@@ -4,6 +4,6 @@ import React from 'react';
 import { ListModule } from '.';
 import { TabNavMock } from './mock';
 
-export default { title: 'List ' };
+export default { title: 'modules | List ' };
 
-export const layout = () => <ListModule tabNav={TabNavMock} />;
+export const listModule = () => <ListModule tabNav={TabNavMock} />;

@@ -7,4 +7,4 @@ export default {
   title: `modules | Authentication`,
 };
 
-export const SignIn = () => <SignInLayout />;
+export const signIn = () => <SignInLayout />;

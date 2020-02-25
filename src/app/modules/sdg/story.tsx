@@ -5,4 +5,4 @@ import { SdgModule } from '.';
 
 export default { title: 'modules | SDG' };
 
-export const layout = () => <SdgModule />;
+export const sdgModule = () => <SdgModule />;

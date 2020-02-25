@@ -3,6 +3,6 @@
 import React from 'react';
 import { PreviewLayout } from '.';
 
-export default { title: 'module | Preview ' };
+export default { title: 'modules | Preview ' };
 
-export const submitReport = () => <PreviewLayout />;
+export const previewLayout = () => <PreviewLayout />;

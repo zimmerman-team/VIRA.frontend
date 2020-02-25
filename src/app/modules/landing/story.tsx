@@ -3,6 +3,6 @@
 import React from 'react';
 import LandingLayout from '.';
 
-export default { title: 'Landing ' };
+export default { title: 'modules | Landing ' };
 
-export const layout = () => <LandingLayout />;
+export const landingLayout = () => <LandingLayout />;

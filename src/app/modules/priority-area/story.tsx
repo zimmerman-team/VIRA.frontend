@@ -3,6 +3,6 @@
 import React from 'react';
 import { PriorityAreaModule } from '.';
 
-export default { title: 'Priority Area ' };
+export default { title: 'modules | Priority Area' };
 
-export const layout = () => <PriorityAreaModule />;
+export const priorityAreaModule = () => <PriorityAreaModule />;

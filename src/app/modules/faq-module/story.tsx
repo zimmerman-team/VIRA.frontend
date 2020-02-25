@@ -3,9 +3,9 @@ import { FaqsLayout } from './layout';
 import { mockData } from './mock';
 
 export default {
-  title: 'Faqs ',
+  title: 'modules | Faqs ',
 };
 
-export const layout = () => (
+export const faqLayout = () => (
   <FaqsLayout title={mockData.title} faqItems={mockData.faqItems} />
 );

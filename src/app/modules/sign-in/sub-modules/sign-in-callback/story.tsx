@@ -4,7 +4,7 @@ import { PasswordRecoveryLayout } from './index';
 
 export default {
   component: PasswordRecoveryLayout,
-  title: 'Password Recovery',
+  title: 'modules | Authentication',
 };
 
-export const text = () => <PasswordRecoveryLayout />;
+export const passwordRecov = () => <PasswordRecoveryLayout />;

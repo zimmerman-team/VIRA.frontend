@@ -3,7 +3,6 @@ import { ManageUsersTeamsLayout } from './layout';
 import { manageUsersTeamsLayoutMock } from './mock';
 
 export default {
-  component: ManageUsersTeamsLayout,
   title: 'modules | Administration',
 };
 

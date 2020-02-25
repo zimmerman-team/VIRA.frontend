@@ -104,6 +104,6 @@ const mock = {
   onBarChartLegendClick: 'onBarChartLegendClick',
 };
 
-export default { title: 'Report ' };
+export default { title: 'modules | Report ' };
 
 export const reportDetail = () => <ReportDetailModule {...mock} />;
