@@ -206,12 +206,12 @@ function CreateReportFunc(props: any) {
 
   const step2Enabled = validateOutcomeFields(
     title,
-    country.label,
-    tarBenTotal,
-    beneficiaryCounts,
-    policyPriority.label,
-    budget,
-    get(projectBudgetData, 'data.remainBudget', 0)
+    country.label
+    // tarBenTotal,
+    // beneficiaryCounts,
+    // policyPriority.label,
+    // budget,
+    // get(projectBudgetData, 'data.remainBudget', 0)
   );
   const step3Enabled =
     step2Enabled && validateIndVerFields(keyOutcomes, monRepOutcomes);
@@ -284,17 +284,17 @@ function CreateReportFunc(props: any) {
         setCountry,
         location,
         setLocation,
-        tarBenTotal,
-        tarBenTotal2,
-        setTarBenTotal,
-        setTarBenTotal2,
-        policyPriority,
-        setPolicyPriority,
-        beneficiaryCounts,
-        setBeneficiaryCounts,
-        budget,
-        setBudget,
-        remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
+        tarBenTotal, //
+        tarBenTotal2, //
+        setTarBenTotal, //
+        setTarBenTotal2, //
+        policyPriority, //
+        setPolicyPriority, //
+        beneficiaryCounts, //
+        setBeneficiaryCounts, //
+        budget, //
+        setBudget, //
+        remainBudget: get(projectBudgetData, 'data.remainBudget', 0), //
       }}
       indicatorVerificationProps={{
         keyOutcomes,

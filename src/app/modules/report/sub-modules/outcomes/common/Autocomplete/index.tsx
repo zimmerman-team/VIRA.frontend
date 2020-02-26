@@ -15,7 +15,7 @@ import {
 import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
 
 export interface AutocompleteParams {
-  description: string;
+  description?: string;
   value: { label: string; value: string };
   setValue: Function;
   text?: string;
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: 0,
       padding: 0,
       zIndex: 1,
-      position: 'absolute',
+      position: 'relative',
       listStyle: 'none',
       backgroundColor: theme.palette.background.paper,
       overflow: 'auto',
@@ -97,8 +97,13 @@ export const Autocomplete = (props: AutocompleteParams) => {
         position: relative;
       `}
     >
-      <FieldDescription text={props.description} />
-      <Box width="100%" height="20px" />
+      {props.description && (
+        <>
+          <FieldDescription text={props.description} />
+          <Box width="100%" height="20px" />
+        </>
+      )}
+
       <Input fullWidth {...getInputProps()} placeholder="Type" />
       {groupedOptions.length > 0 ? (
         <ul className={classes.listbox} {...getListboxProps()}>

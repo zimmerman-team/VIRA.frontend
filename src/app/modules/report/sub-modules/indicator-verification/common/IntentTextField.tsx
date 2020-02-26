@@ -7,7 +7,8 @@ import { InfoCaption } from './InfoCaption';
 import { FieldDescription } from './FieldDescription';
 
 export interface IntentTextFieldParams {
-  description: string;
+  description?: string;
+  placeholder?: string;
   value: string;
   setValue: Function;
   tooltip?: string;
@@ -18,12 +19,16 @@ export interface IntentTextFieldParams {
 
 export const IntentTexField = (props: IntentTextFieldParams) => (
   <React.Fragment>
-    <FieldDescription text={props.description} />
-    {props.tooltip && <Tooltip tip={props.tooltip} />}
-    <Box width="100%" height="20px" />
+    {props.description && (
+      <>
+        <FieldDescription text={props.description} />
+        {props.tooltip && <Tooltip tip={props.tooltip} />}
+        <Box width="100%" height="20px" />
+      </>
+    )}
     <SingleMultiLineTextField
       fullWidth
-      placeholder="Type"
+      placeholder={props.placeholder}
       value={props.value}
       id={props.componentID}
       setValue={props.setValue}

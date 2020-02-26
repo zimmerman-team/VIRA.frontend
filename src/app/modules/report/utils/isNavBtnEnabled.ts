@@ -16,12 +16,12 @@ export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
     case 0:
       return validateOutcomeFields(
         data.title,
-        data.country,
-        data.tarBenTotal,
-        data.beneficiaryCounts,
-        data.policyPriority,
-        data.budget,
-        data.remainBudget
+        data.country
+        // data.tarBenTotal,
+        // data.beneficiaryCounts,
+        // data.policyPriority,
+        // data.budget,
+        // data.remainBudget
       );
     case 1:
       return validateIndVerFields(data.keyOutcomes, data.monRepOutcomes);
