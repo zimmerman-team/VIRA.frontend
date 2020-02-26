@@ -66,7 +66,7 @@ export const TitleFragment = (props: TitleParams) => {
       {/* title */}
       <Typography css={style[0]}>{props.title}</Typography>
       <Box height="15px" />
-      <Grid container xs={12} lg={12}>
+      <Grid item container xs={12} lg={12}>
         <Grid item xs={12} lg={6}>
           {/* ---------------------------- */}
           {/* id */}

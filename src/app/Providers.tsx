@@ -11,6 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { appStore, persistor } from 'app/state/store';
 import { Client } from 'app/state/api/Client';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import '../index.css';
 
 type ProviderProps = {
   children?: ReactNode;

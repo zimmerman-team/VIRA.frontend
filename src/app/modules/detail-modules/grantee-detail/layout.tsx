@@ -12,14 +12,17 @@ import get from 'lodash/get';
 import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
-import { TabNavMockViz } from 'app/modules/detail-modules/grantee-detail/mock';
+import {
+  TabNavMockViz,
+  GranteeParams,
+} from 'app/modules/detail-modules/grantee-detail/mock';
 
-export const GranteeDetailLayout = (props: any) => (
+export const GranteeDetailLayout = (props: GranteeParams) => (
   <React.Fragment>
-    {props.loading && <PageLoader />}
+    {/* {props.loading && <PageLoader />} */}
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
-    <Grid item lg={12}>
+    <Grid item xs={12} sm={12} md={12} lg={12}>
       <BreadCrumbs {...props.breadcrumbs} />
     </Grid>
 
@@ -49,11 +52,6 @@ export const GranteeDetailLayout = (props: any) => (
       />
     </Grid>
 
-    {/*<Grid item xs={9} sm={3}>*/}
-    {/*  <TabNavigator*/}
-    {/*    {...getNavTabItems(TabNavMockViz, get(props.match.params, 'code', ''))}*/}
-    {/*  />*/}
-    {/*</Grid>*/}
     {/* ---------------------------------------------------------------------*/}
     {/* projects */}
     <Grid item xs={12} lg={12}>

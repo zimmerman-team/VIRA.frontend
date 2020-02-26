@@ -24,7 +24,7 @@ export const StoryWrapper = (props: StoryWrapperParams) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  // InitialLoad();
+  InitialLoad();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -35,28 +35,26 @@ export const StoryWrapper = (props: StoryWrapperParams) => {
   };
 
   return (
-    <Providers>
-      <div className={classes.root}>
-        <PrimarySearchAppBar
-          classes={classes}
-          open={open}
-          theme={theme}
-          handleDrawerClose={handleDrawerClose}
-          handleDrawerOpen={handleDrawerOpen}
-        />
-        <AppSideBar
-          classes={classes}
-          open={open}
-          handleDrawerClose={handleDrawerClose}
-          handleDrawerOpen={handleDrawerOpen}
-          theme={theme}
-          navItems={NavItems}
-        />
+    <div className={classes.root}>
+      <PrimarySearchAppBar
+        classes={classes}
+        open={open}
+        theme={theme}
+        handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
+      />
+      <AppSideBar
+        classes={classes}
+        open={open}
+        handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
+        theme={theme}
+        navItems={NavItems}
+      />
 
-        <PageWrapper>{props.children}</PageWrapper>
+      <PageWrapper>{props.children}</PageWrapper>
 
-        <PositionedSnackbar />
-      </div>
-    </Providers>
+      <PositionedSnackbar />
+    </div>
   );
 };

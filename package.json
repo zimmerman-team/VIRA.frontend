@@ -53,6 +53,7 @@
   "devDependencies": {
     "@degjs/storybook-addon-taffy": "^1.0.3",
     "@storybook/addon-actions": "^5.3.12",
+    "@storybook/addon-console": "^1.2.1",
     "@storybook/addon-links": "^5.3.12",
     "@storybook/addon-viewport": "^5.3.14",
     "@storybook/addons": "^5.3.12",
