@@ -1,17 +1,16 @@
 // @ts-nocheck
 
 import React from 'react';
-import Providers from 'app/Providers';
-import { Container, Grid } from '@material-ui/core';
-import { PrivacyModule } from 'app/modules/privacy/index';
-export default { title: 'Privacy ' };
+import { PrivacyModule } from '.';
 
-export const layout = () => (
-  <Providers>
-    <Container maxWidth="lg">
-      <Grid container spacing={4}>
-        <PrivacyModule />
-      </Grid>
-    </Container>
-  </Providers>
-);
+export default { title: 'modules | Privacy ' };
+
+export const desktopLayout = () => <PrivacyModule />;
+
+export const mobileLayout = () => <PrivacyModule />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

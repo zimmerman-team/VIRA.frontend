@@ -1,18 +1,21 @@
 import React from 'react';
-import Providers from 'app/Providers';
-import { ManageUserLayout } from 'app/modules/super-admin/sub-modules/manage-user/layout';
-import { manageUserLayoutMock } from 'app/modules/super-admin/sub-modules/manage-user/mock';
-import { PageWrapper } from 'app/modules/common/components/PageWrapper';
+import { ManageUserLayout } from './layout';
+import { manageUserLayoutMock } from './mock';
 
 export default {
-  component: ManageUserLayout,
-  title: 'Manage Team Edit',
+  title: 'modules | Administration / Manage User',
 };
 
-export const text = () => (
-  <Providers>
-    <PageWrapper>
-      <ManageUserLayout {...manageUserLayoutMock} />
-    </PageWrapper>
-  </Providers>
+export const desktopLayout = () => (
+  <ManageUserLayout {...manageUserLayoutMock} />
 );
+
+export const mobileLayout = () => (
+  <ManageUserLayout {...manageUserLayoutMock} />
+);
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

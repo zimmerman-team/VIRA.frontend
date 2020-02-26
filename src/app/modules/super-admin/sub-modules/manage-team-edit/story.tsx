@@ -1,18 +1,21 @@
 import React from 'react';
-import Providers from 'app/Providers';
-import { ManageTeamEditLayout } from 'app/modules/super-admin/sub-modules/manage-team-edit/layout';
-import { manageTeamEditLayoutMock } from 'app/modules/super-admin/sub-modules/manage-team-edit/mock';
-import { PageWrapper } from 'app/modules/common/components/PageWrapper';
+import { ManageTeamEditLayout } from './layout';
+import { manageTeamEditLayoutMock } from './mock';
 
 export default {
-  component: ManageTeamEditLayout,
-  title: 'Manage Team Edit',
+  title: 'modules | Administration / Edit Teams',
 };
 
-export const text = () => (
-  <Providers>
-    <PageWrapper>
-      <ManageTeamEditLayout {...manageTeamEditLayoutMock} />
-    </PageWrapper>
-  </Providers>
+export const desktopLayout = () => (
+  <ManageTeamEditLayout {...manageTeamEditLayoutMock} />
 );
+
+export const mobileLayout = () => (
+  <ManageTeamEditLayout {...manageTeamEditLayoutMock} />
+);
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

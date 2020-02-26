@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 import { StatItemParams } from 'app/modules/landing/statsMock';
 import { ProjectPalette } from 'app/theme';
+import { Link } from 'react-router-dom';
 
 export const StatItem = (props: StatItemParams) => (
   <Grid
@@ -17,39 +18,48 @@ export const StatItem = (props: StatItemParams) => (
       flex-direction: column;
     `}
   >
-    <Typography
+    <Link
+      to={props.path}
       css={`
         && {
-          font-size: 36px;
-          font-weight: 600;
-          color: ${ProjectPalette.primary.light};
-          text-align: center;
-
-          @media (max-width: 600px) {
-            font-size: 14px;
-            color: ${ProjectPalette.text.primary};
-          }
+          text-decoration: none;
         }
       `}
     >
-      {props.amount}
-    </Typography>
-    <Typography
-      css={`
-        && {
-          font-size: 20px;
-          font-weight: 500;
-          color: black;
-          text-align: center;
+      <Typography
+        css={`
+          && {
+            font-size: 36px;
+            font-weight: 600;
+            color: ${ProjectPalette.primary.light};
+            text-align: center;
 
-          @media (max-width: 600px) {
-            font-size: 14px;
-            color: ${ProjectPalette.text.primary};
+            @media (max-width: 600px) {
+              font-size: 14px;
+              color: ${ProjectPalette.text.primary};
+            }
           }
-        }
-      `}
-    >
-      {props.type}
-    </Typography>
+        `}
+      >
+        {props.amount}
+      </Typography>
+      <Typography
+        css={`
+          && {
+            font-size: 20px;
+            font-weight: 500;
+            color: black;
+            text-align: center;
+
+            @media (max-width: 600px) {
+              font-size: 14px;
+              color: ${ProjectPalette.text.primary};
+            }
+          }
+        `}
+      >
+        {props.type}
+      </Typography>
+    </Link>
   </Grid>
 );

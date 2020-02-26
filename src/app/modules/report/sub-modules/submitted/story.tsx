@@ -3,21 +3,19 @@
 // @ts-nocheck
 
 import React from 'react';
-import Providers from 'app/Providers';
-import { Container, Grid } from '@material-ui/core';
-import { SubmittedLayout } from './index';
+import { SubmittedLayout } from '.';
 
-export default { title: 'Report ' };
+export default { title: 'modules | Report / Submitted' };
 
-export const submitReport = () => (
-  <Providers>
-    <Container maxWidth="lg">
-      <Grid container spacing={4}>
-        <SubmittedLayout />
-      </Grid>
-    </Container>
-  </Providers>
-);
+export const desktopLayout = () => <SubmittedLayout />;
+
+export const mobileLayout = () => <SubmittedLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};
 
 const test = {
   report: {

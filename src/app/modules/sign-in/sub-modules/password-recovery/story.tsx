@@ -1,16 +1,18 @@
 // @ts-nocheck
 
 import React from 'react';
-import Providers from 'app/Providers';
-import { PasswordRecoveryLayout } from 'app/modules/sign-in/sub-modules/password-recovery/layout';
+import { PasswordRecoveryLayout } from './layout';
 
 export default {
-  component: PasswordRecoveryLayout,
-  title: 'Password Recovery',
+  title: 'modules | Authentication / Password Recovery',
 };
 
-export const text = () => (
-  <Providers>
-    <PasswordRecoveryLayout />
-  </Providers>
-);
+export const desktopLayout = () => <PasswordRecoveryLayout />;
+
+export const mobileLayout = () => <PasswordRecoveryLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

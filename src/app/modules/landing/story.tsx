@@ -1,17 +1,16 @@
 // @ts-nocheck
 
 import React from 'react';
-import Providers from 'app/Providers';
-import { Container, Grid } from '@material-ui/core';
-import LandingLayout from 'app/modules/landing/index';
-export default { title: 'Landing ' };
+import LandingLayout from '.';
 
-export const layout = () => (
-  <Providers>
-    <Container maxWidth="lg">
-      <Grid container spacing={4}>
-        <LandingLayout />
-      </Grid>
-    </Container>
-  </Providers>
-);
+export default { title: 'modules | Landing ' };
+
+export const desktopLayout = () => <LandingLayout />;
+
+export const mobileLayout = () => <LandingLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

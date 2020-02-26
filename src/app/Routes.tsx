@@ -33,6 +33,7 @@ import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { TabNavMock } from 'app/modules/list-module/mock';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
+import { AppConfig } from 'app/data';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -79,7 +80,7 @@ export function MainRoutes() {
       </Route>
 
       <Route exact path="/list/:id">
-        {useTitle('M&E - List')}
+        {useTitle(`${AppConfig.appTitleLong} List`)}
         {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
       </Route>
 

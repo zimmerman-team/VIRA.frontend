@@ -25,11 +25,14 @@ import {
 } from 'app/modules/list-module/utils';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import findIndex from 'lodash/findIndex';
+import { AppConfig } from 'app/data';
 
 export function GranteeDetailModule(props: any) {
+  // set window title
+  useTitle(`${AppConfig.appTitleLong} Grantee detail`);
+
   const params: any = useParams();
   const granteeID: any = params.code;
-  useTitle('M&E - Grantee detail');
   const granteeTitleMock: TitleParams = GranteeTitleMock;
   const breadcrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
   const descriptionMock: DescriptionParams = GranteeDescriptionMock;

@@ -1,18 +1,17 @@
 import React from 'react';
-import Providers from 'app/Providers';
 import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
 import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account/index';
-import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 
 export default {
-  component: ManageAccount,
-  title: 'Manage Account Layout',
+  title: 'modules | Administration / Manage Account',
 };
 
-export const text = () => (
-  <Providers>
-    <PageWrapper>
-      <ManageAccount {...manageAccountMock} />
-    </PageWrapper>
-  </Providers>
-);
+export const desktopLayout = () => <ManageAccount {...manageAccountMock} />;
+
+export const mobileLayout = () => <ManageAccount {...manageAccountMock} />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

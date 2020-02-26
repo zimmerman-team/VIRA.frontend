@@ -15,12 +15,13 @@ import { validateOutcomeFields } from './utils/validateOutcomeFields';
 import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { uploadFiles } from './utils/uploadFiles';
 import { LocationModel } from './model';
+import { AppConfig } from 'app/data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
 
 function CreateReportFunc(props: any) {
-  useTitle('M&E - Create report');
+  useTitle(`${AppConfig.appTitleLong} Create report`);
   // state
   const [project, setProject] = React.useState(undefined);
   const [initialTabIndex, setInitialTabIndex] = React.useState(

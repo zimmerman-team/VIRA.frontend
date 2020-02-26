@@ -1,9 +1,7 @@
 // @ts-nocheck
 
 import React from 'react';
-import Providers from 'app/Providers';
-import { ChallengesPlansLayout } from './index';
-import { Container, Grid } from '@material-ui/core';
+import { ChallengesPlansLayout } from '.';
 
 const mock = {
   keyImplChallenges: 'field 1',
@@ -12,16 +10,14 @@ const mock = {
   otherComms: 'lorem ipsum other',
 };
 
-export default { title: 'Report ' };
+export default { title: 'modules | Report / Challenges & Plans' };
 
-export const challengesAndPlans = () => (
-  <Providers>
-    <Container maxWidth="lg">
-      <Grid container spacing={4}>
-        <div>
-          <ChallengesPlansLayout {...mock} />
-        </div>
-      </Grid>
-    </Container>
-  </Providers>
-);
+export const desktopLayout = () => <ChallengesPlansLayout />;
+
+export const mobileLayout = () => <ChallengesPlansLayout />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

@@ -1,14 +1,21 @@
 import React from 'react';
-import Providers from 'app/Providers';
-import { mockData } from './mock';
 import { FaqsLayout } from './layout';
+import { mockData } from './mock';
 
 export default {
-  title: 'Faqs ',
+  title: 'modules | Faqs ',
 };
 
-export const layout = () => (
-  <Providers>
-    <FaqsLayout title={mockData.title} faqItems={mockData.faqItems} />
-  </Providers>
+export const desktopLayout = () => (
+  <FaqsLayout title={mockData.title} faqItems={mockData.faqItems} />
 );
+
+export const mobileLayout = () => (
+  <FaqsLayout title={mockData.title} faqItems={mockData.faqItems} />
+);
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

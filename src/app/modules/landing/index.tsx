@@ -32,14 +32,15 @@ import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import uniqBy from 'lodash/uniqBy';
 import { ProjectPalette } from 'app/theme';
+import { AppConfig } from 'app/data';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { getNewReportsCount } from './utils/getNewReportsCount';
 
 function LandingLayout(props: any) {
   // set window title
-  useTitle('M&E - Dashboard');
-  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+  useTitle(`${AppConfig.appTitleLong} Dashboard`);
 
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [stats, setStats] = React.useState(statsMock);
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
@@ -153,7 +154,7 @@ function LandingLayout(props: any) {
                 get(props.match.params, 'list', '')
               )}
             />
-            <Box height={'62px'} width={'1px'} />
+            <Box height="62px" width="1px" />
           </Grid>
         </Grid>
 
