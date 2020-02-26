@@ -4,7 +4,8 @@ export function getTabs(
   tabs: NavItemParams[],
   step2Enabled: boolean,
   step3Enabled: boolean,
-  step4Enabled: boolean
+  step4Enabled: boolean,
+  step5Enabled: boolean
 ) {
   return tabs.map((tab: NavItemParams, index: number) => {
     let value = false;
@@ -19,6 +20,9 @@ export function getTabs(
     }
     if (index === 3) {
       value = step4Enabled;
+    }
+    if (index === 5) {
+      value = step5Enabled;
     }
     return { ...tab, disabled: !value };
   });

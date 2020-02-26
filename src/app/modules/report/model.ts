@@ -27,14 +27,28 @@ export type OutcomesPropsModel = {
   setTitle: Function;
   country: { label: string; value: string; iso3?: string };
   setCountry: Function;
+  location: LocationModel | null;
+  setLocation: Function;
+  // tarBenTotal: number;
+  // setTarBenTotal: Function;
+  // tarBenTotal2: number;
+  // setTarBenTotal2: Function;
+  // beneficiaryCounts: BeneficiaryCountsModel[];
+  // setBeneficiaryCounts: Function;
+  // policyPriority: { label: string; value: string };
+  // setPolicyPriority: Function;
+  // budget: number;
+  // setBudget: Function;
+  // remainBudget: number;
+};
+
+export type PolicyPrioritiesPropsModel = {
   tarBenTotal: number;
   setTarBenTotal: Function;
   tarBenTotal2: number;
   setTarBenTotal2: Function;
   beneficiaryCounts: BeneficiaryCountsModel[];
   setBeneficiaryCounts: Function;
-  location: LocationModel | null;
-  setLocation: Function;
   policyPriority: { label: string; value: string };
   setPolicyPriority: Function;
   budget: number;
@@ -73,6 +87,7 @@ export type CreateReportLayoutModel = {
   onBackBtnClick: Function;
   breadcrumbs: BreadcrumbModel;
   outcomesProps: OutcomesPropsModel;
+  policyPrioritiesProps: PolicyPrioritiesPropsModel;
   indicatorVerificationProps: IndicatorVerificationPropsModel;
   challengesPlansProps: ChallengesPlansPropsModel;
   nextBtnDisabled: boolean;
@@ -80,6 +95,7 @@ export type CreateReportLayoutModel = {
   step2Enabled: boolean;
   step3Enabled: boolean;
   step4Enabled: boolean;
+  step5Enabled: boolean;
   showSubmitBtn: boolean;
   submit: Function;
 };

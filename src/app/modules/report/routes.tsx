@@ -6,6 +6,7 @@ import {
   OutcomesPropsModel,
   IndicatorVerificationPropsModel,
   ChallengesPlansPropsModel,
+  PolicyPrioritiesPropsModel,
 } from 'app/modules/report/model';
 import {
   Route,
@@ -15,12 +16,15 @@ import {
 } from 'react-router-dom';
 import { ChallengesPlansLayout } from 'app/modules/report/sub-modules/challenges-plans';
 import { IndicatorVerificationLayout } from 'app/modules/report/sub-modules/indicator-verification';
+import { PolicyPrioritiesLayout } from 'app/modules/report/sub-modules/policy-priorities';
 
 interface Props extends RouteComponentProps {
   step2Enabled: boolean;
   step3Enabled: boolean;
   step4Enabled: boolean;
+  step5Enabled: boolean;
   outcomesProps: OutcomesPropsModel;
+  policyPrioritiesProps: PolicyPrioritiesPropsModel;
   indicatorVerificationProps: IndicatorVerificationPropsModel;
   challengesPlansProps: ChallengesPlansPropsModel;
 }
@@ -35,9 +39,21 @@ const ReportModuleRoutesF = (props: Props) => {
       </Route>
 
       {/* ---------------------------------------------------------------------*/}
+      {/* policy priorities */}
+      <Route exact path="/report/:projectID/policy-priorities">
+        {props.step2Enabled ? (
+          <PolicyPrioritiesLayout {...props.policyPrioritiesProps} />
+        ) : (
+          <Redirect
+            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes`}
+          />
+        )}
+      </Route>
+
+      {/* ---------------------------------------------------------------------*/}
       {/* indicator & verification */}
       <Route exact path="/report/:projectID/indicator-verification">
-        {props.step2Enabled ? (
+        {props.step3Enabled ? (
           <IndicatorVerificationLayout {...props.indicatorVerificationProps} />
         ) : (
           <Redirect
@@ -49,7 +65,7 @@ const ReportModuleRoutesF = (props: Props) => {
       {/* ---------------------------------------------------------------------*/}
       {/* challenges & plans */}
       <Route exact path="/report/:projectID/challenges-plans">
-        {props.step3Enabled ? (
+        {props.step4Enabled ? (
           <ChallengesPlansLayout {...props.challengesPlansProps} />
         ) : (
           <Redirect
@@ -61,7 +77,7 @@ const ReportModuleRoutesF = (props: Props) => {
       {/* ---------------------------------------------------------------------*/}
       {/* preview */}
       <Route exact path="/report/:projectID/preview">
-        {props.step4Enabled ? (
+        {props.step5Enabled ? (
           <PreviewLayout {...props} />
         ) : (
           <Redirect

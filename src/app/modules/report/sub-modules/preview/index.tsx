@@ -3,6 +3,7 @@ import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
 import {
   OutcomesPropsModel,
+  PolicyPrioritiesPropsModel,
   IndicatorVerificationPropsModel,
   ChallengesPlansPropsModel,
 } from 'app/modules/report/model';
@@ -102,7 +103,9 @@ type Props = {
   step2Enabled: boolean;
   step3Enabled: boolean;
   step4Enabled: boolean;
+  step5Enabled: boolean;
   outcomesProps: OutcomesPropsModel;
+  policyPrioritiesProps: PolicyPrioritiesPropsModel;
   indicatorVerificationProps: IndicatorVerificationPropsModel;
   challengesPlansProps: ChallengesPlansPropsModel;
 };
@@ -129,13 +132,13 @@ export const PreviewLayout = (props: Props) => (
       <Grid item sm={12} md={6} lg={4}>
         <InfoTextComp
           title="Target beneficiaries"
-          description={`Total target number: ${props.outcomesProps.tarBenTotal}`}
+          description={`Total target number: ${props.policyPrioritiesProps.tarBenTotal}`}
         />
       </Grid>
       <Grid item sm={12} md={6} lg={4}>
         <InfoTextComp
           title=""
-          description={`Total number commited: ${props.outcomesProps.tarBenTotal2}`}
+          description={`Total number commited: ${props.policyPrioritiesProps.tarBenTotal2}`}
         />
       </Grid>
     </Grid>
@@ -149,7 +152,7 @@ export const PreviewLayout = (props: Props) => (
     </Grid>
     <Box width="100%" height="10px" />
     <Grid container spacing={4}>
-      {props.outcomesProps.beneficiaryCounts.map(b => (
+      {props.policyPrioritiesProps.beneficiaryCounts.map(b => (
         <Grid item lg={4}>
           <Typography>
             {b.name}: {b.value}
@@ -198,7 +201,9 @@ export const PreviewLayout = (props: Props) => (
           border: 5px solid ${ProjectPalette.secondary.main};
         `}
       />
-      <Typography>{props.outcomesProps.policyPriority.label}</Typography>
+      <Typography>
+        {props.policyPrioritiesProps.policyPriority.label}
+      </Typography>
     </Grid>
     <Spacer />
 

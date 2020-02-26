@@ -8,26 +8,11 @@ import {
   CardHeader,
   Card,
   CardContent,
-  Button,
 } from '@material-ui/core';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
-import { IntentTexField } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
+import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
+import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
+import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
-import { OutcomesPropsModel } from 'app/modules/report/model';
-import { GeoMap } from 'app/components/charts/GeoMap';
-import { countries } from 'app/assets/data/countries';
-import { Autocomplete } from './common/Autocomplete';
-
-const locMock = {
-  longitude: 4.895168,
-  latitude: 52.370216,
-};
-
-const locMock2 = {
-  longitude: 4.895168,
-  latitude: 40.370216,
-};
 
 const styles: any = {
   card: css`
@@ -41,79 +26,113 @@ const styles: any = {
     padding-left: 12px;
     padding-top: 12px;
   `,
+  input: css`
+    [class*='-input'] {
+      width: 90px;
+    }
+  `,
+  test: css`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  `,
 };
 
-export const OutcomesLayout = (props: OutcomesPropsModel) => {
+export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
-      {/* title */}
-      <Grid item xs={12} md={12} lg={6}>
+      {/* Policy Priorities */}
+      <Grid item xs={12} md={12} lg={4}>
         <Card css={styles.card}>
           <CardHeader
             css={styles.cardHeader}
-            title={'Please provide a title for your report'}
+            title={'Insinger Foundation policy priorities'}
           />
           <CardContent css={styles.cardContent}>
-            <IntentTexField
-              value={props.title}
-              componentID="outcome1"
-              setValue={props.setTitle}
-            />
-          </CardContent>
-        </Card>
-      </Grid>
-
-      {/* ---------------------------------------------------------------------*/}
-      {/* location */}
-      <Grid item xs={12} md={12} lg={6}>
-        <Card>
-          <CardHeader css={styles.cardHeader} title={'Add location'} />
-          <CardContent css={styles.cardContent}>
             <Autocomplete
-              values={countries}
-              value={props.country}
-              setValue={props.setCountry}
+              values={policyPriorities}
+              value={props.policyPriority}
+              setValue={props.setPolicyPriority}
             />
-            <Box width="100%" height="8px" />
             <Typography variant="body2" color="secondary">
-              In which of the following geographical locations will the project
-              be implemented
+              For each priority selected, the relevant SDGs appear and can be
+              selected based on our mapping
             </Typography>
-            {/*<Hidden smDown>*/}
-            {/*  <Box width="100%" height="30px" />*/}
-            {/*</Hidden>*/}
           </CardContent>
         </Card>
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
-      {/* exact location */}
-      <Grid item xs={12} md={12} lg={6}>
-        <Card>
-          <CardHeader title={'Select Exact Location'} />
-          <CardContent>
-            <GeoMap
-              noData
-              height={265}
-              pointSelection={props.location}
-              setPointSelection={props.setLocation}
+      {/* Budget */}
+      <Grid item xs={12} md={6} lg={4}>
+        <Card css={styles.card}>
+          <CardHeader css={styles.cardHeader} title={'Budget'} />
+          <CardContent css={styles.cardContent}>
+            <IntentTexFieldSingleLine
+              type="number"
+              min={0}
+              value={props.budget}
+              setValue={props.setBudget}
+              description=""
             />
-            {props.location && (
-              <>
-                <Box width="100%" height="14px" />
-                <div>
-                  <Typography>
-                    {props.location?.latitude}, {props.location?.longitude}
-                  </Typography>
-                </div>
-                <Box width="100%" height="14px" />
-                <ContainedButton
-                  text="Remove"
-                  onClick={() => props.setLocation(null)}
-                />
-              </>
-            )}
+            <Typography variant="body2" color="secondary">
+              Remaning fot this project: {props.remainBudget}€
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/*/!* ---------------------------------------------------------------------*!/*/}
+      {/*/!* Target beneficiaries *!/*/}
+      <Grid item sm={12} md={6} lg={4}>
+        <Card css={styles.card}>
+          <CardHeader css={styles.cardHeader} title={'Target Beneficiaries'} />
+          <CardContent css={styles.cardContent}>
+            <IntentTexFieldSingleLine
+              type="number"
+              min={0}
+              value={props.tarBenTotal}
+              description=""
+              setValue={props.setTarBenTotal}
+            />
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/*/!* ---------------------------------------------------------------------*!/*/}
+      {/*/!* Of which the beneficiaries will likely include approximately *!/*/}
+      <Grid item sm={12} md={8} lg={8}>
+        <Card css={styles.card}>
+          <CardHeader
+            css={styles.cardHeader}
+            title={
+              'Of which the beneficiaries will likely include approximately'
+            }
+          />
+          <CardContent css={styles.cardContent}>
+            <div css={styles.test}>
+              {props.beneficiaryCounts.map((item: any, index: number) => (
+                <Grid item xs={12} lg={4} key={item.name}>
+                  <IntentTexFieldSingleLine
+                    type="number"
+                    min={0}
+                    value={item.value}
+                    description={item.name}
+                    setValue={(v: number) => {
+                      const values = [...props.beneficiaryCounts];
+                      values[index].value = v;
+                      props.setBeneficiaryCounts(values);
+                    }}
+                    smallWidth
+                  />
+                </Grid>
+              ))}
+            </div>
+            <Typography variant="body2" color="secondary">
+              For each priority selected, the relevant SDGs appear and can be
+              selected based on our mapping
+            </Typography>
           </CardContent>
         </Card>
       </Grid>

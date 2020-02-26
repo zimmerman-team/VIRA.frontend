@@ -45,13 +45,14 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
       step2Enabled={props.step2Enabled}
       step3Enabled={props.step3Enabled}
       step4Enabled={props.step4Enabled}
+      step5Enabled={props.step5Enabled}
       outcomesProps={props.outcomesProps}
+      policyPrioritiesProps={props.policyPrioritiesProps}
       indicatorVerificationProps={props.indicatorVerificationProps}
       challengesPlansProps={props.challengesPlansProps}
     />
 
     {/* <AddMediaLayout /> */}
-
     <Grid item xs={12} lg={12}>
       <BottomNav
         submit={props.submit}

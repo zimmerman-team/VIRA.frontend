@@ -6,6 +6,7 @@ import { ProjectPalette } from 'app/theme';
 import { Box, InputBase } from '@material-ui/core';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import { getInputGeneralStyle } from 'app/components/inputs/common/mock';
+import { ExpandMore } from '@material-ui/icons';
 import {
   Theme,
   withStyles,
@@ -104,7 +105,12 @@ export const Autocomplete = (props: AutocompleteParams) => {
         </>
       )}
 
-      <Input fullWidth {...getInputProps()} placeholder="Type" />
+      <Input
+        fullWidth
+        {...getInputProps()}
+        placeholder="Type"
+        endAdornment={<ExpandMore />}
+      />
       {groupedOptions.length > 0 ? (
         <ul className={classes.listbox} {...getListboxProps()}>
           {groupedOptions.map((option, index) => {

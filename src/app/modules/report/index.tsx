@@ -13,6 +13,7 @@ import { validateIndVerFields } from './utils/validateIndVerFields';
 import { getTabs } from './utils/getTabs';
 import { validateOutcomeFields } from './utils/validateOutcomeFields';
 import { validateChallengesPlans } from './utils/validateChallengesPlans';
+import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
 import { uploadFiles } from './utils/uploadFiles';
 import { LocationModel } from './model';
 import { AppConfig } from 'app/data';
@@ -38,6 +39,8 @@ function CreateReportFunc(props: any) {
     LocationModel | null,
     Function
   ] = React.useState(null);
+
+  // Policy Priorities
   const [tarBenTotal, setTarBenTotal] = React.useState(0);
   const [tarBenTotal2, setTarBenTotal2] = React.useState(0);
   const [beneficiaryCounts, setBeneficiaryCounts] = React.useState([
@@ -204,19 +207,22 @@ function CreateReportFunc(props: any) {
     }
   };
 
-  const step2Enabled = validateOutcomeFields(
-    title,
-    country.label
-    // tarBenTotal,
-    // beneficiaryCounts,
-    // policyPriority.label,
-    // budget,
-    // get(projectBudgetData, 'data.remainBudget', 0)
-  );
+  const step2Enabled = validateOutcomeFields(title, country.label);
+
   const step3Enabled =
-    step2Enabled && validateIndVerFields(keyOutcomes, monRepOutcomes);
+    step2Enabled &&
+    validatePolicyPrioritiesFields(
+      tarBenTotal,
+      beneficiaryCounts,
+      policyPriority.label,
+      budget,
+      get(projectBudgetData, 'data.remainBudget', 0)
+    );
 
   const step4Enabled =
+    step3Enabled && validateIndVerFields(keyOutcomes, monRepOutcomes);
+
+  const step5Enabled =
     step3Enabled &&
     validateChallengesPlans(
       keyImplChallenges,
@@ -226,7 +232,7 @@ function CreateReportFunc(props: any) {
     );
 
   const onSubmit = () => {
-    if (step2Enabled && step3Enabled && step4Enabled) {
+    if (step2Enabled && step3Enabled && step4Enabled && step5Enabled) {
       addReportAction({
         socketName: 'addReport',
         values: {
@@ -262,7 +268,13 @@ function CreateReportFunc(props: any) {
   return (
     <CreateReportLayout
       submit={onSubmit}
-      tabs={getTabs(tabs, step2Enabled, step3Enabled, step4Enabled)}
+      tabs={getTabs(
+        tabs,
+        step2Enabled,
+        step3Enabled,
+        step4Enabled,
+        step5Enabled
+      )}
       breadcrumbs={{
         currentLocation: 'Report',
         previousLocations: [
@@ -284,17 +296,19 @@ function CreateReportFunc(props: any) {
         setCountry,
         location,
         setLocation,
-        tarBenTotal, //
-        tarBenTotal2, //
-        setTarBenTotal, //
-        setTarBenTotal2, //
-        policyPriority, //
-        setPolicyPriority, //
-        beneficiaryCounts, //
-        setBeneficiaryCounts, //
-        budget, //
-        setBudget, //
-        remainBudget: get(projectBudgetData, 'data.remainBudget', 0), //
+      }}
+      policyPrioritiesProps={{
+        tarBenTotal,
+        tarBenTotal2,
+        setTarBenTotal,
+        setTarBenTotal2,
+        policyPriority,
+        setPolicyPriority,
+        beneficiaryCounts,
+        setBeneficiaryCounts,
+        budget,
+        setBudget,
+        remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
       }}
       indicatorVerificationProps={{
         keyOutcomes,
@@ -338,6 +352,7 @@ function CreateReportFunc(props: any) {
       step2Enabled={step2Enabled}
       step3Enabled={step3Enabled}
       step4Enabled={step4Enabled}
+      step5Enabled={step5Enabled}
       showSubmitBtn={props.location.pathname.split('/')[3] === 'preview'}
     />
   );
