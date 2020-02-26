@@ -8,6 +8,18 @@ export const styles: any = {
       [class*='MuiStepConnector-line'] {
         border-color: ${ProjectPalette.secondary.main};
       }
+
+      [class*='MuiStepper-root'] {
+        padding: 0;
+      }
+
+      [class*='MuiStep-horizontal']:first-child {
+        padding-left: 0;
+      }
+
+      [class*='MuiStep-horizontal']:last-child {
+        padding-right: 0;
+      }
     }
   `,
   step: css`

@@ -23,4 +23,6 @@ export const mock: StepperProps = {
       disabled: true,
     },
   ],
+  initialTabIndex: 0,
+  onStepChange: () => {},
 };
