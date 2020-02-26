@@ -27,6 +27,7 @@ export function App() {
   };
 
   const isLoggedIn = Boolean(useStoreState(state => state.syncVariables.user));
+
   return (
     <div className={classes.root}>
       {!isLoggedIn ? (

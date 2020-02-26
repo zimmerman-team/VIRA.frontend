@@ -51,8 +51,10 @@
     "which-country": "^1.0.0"
   },
   "devDependencies": {
+    "@degjs/storybook-addon-taffy": "^1.0.3",
     "@storybook/addon-actions": "^5.3.12",
     "@storybook/addon-links": "^5.3.12",
+    "@storybook/addon-viewport": "^5.3.14",
     "@storybook/addons": "^5.3.12",
     "@storybook/csf": "^0.0.1",
     "@storybook/preset-create-react-app": "^1.5.2",
@@ -93,6 +95,7 @@
     "source-map-explorer": "^2.1.0",
     "storybook-addon-playroom": "^1.0.0",
     "storybook-chromatic": "^3.5.2",
+    "storybook-vrhythm": "^0.0.4",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2"
   },

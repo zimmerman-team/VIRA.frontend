@@ -104,6 +104,14 @@ const mock = {
   onBarChartLegendClick: 'onBarChartLegendClick',
 };
 
-export default { title: 'modules | Report ' };
+export default { title: 'modules | Report Detail ' };
 
-export const reportDetail = () => <ReportDetailModule {...mock} />;
+export const desktopLayout = () => <ReportDetailModule {...mock} />;
+
+export const mobileLayout = () => <ReportDetailModule {...mock} />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};

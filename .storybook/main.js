@@ -8,6 +8,7 @@ module.exports = {
     // '@storybook/preset-typescript',
     '@storybook/addon-actions',
     '@storybook/addon-links',
+    '@storybook/addon-viewport/register',
   ],
   // decorators: [storyFn => <div>{storyFn()}</div>],
 };

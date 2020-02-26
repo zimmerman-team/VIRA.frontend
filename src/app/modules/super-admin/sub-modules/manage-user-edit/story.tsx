@@ -3,7 +3,15 @@ import { manageUserEditMock } from './mock';
 import { ManageUserEdit } from '.';
 
 export default {
-  title: 'modules | Administration',
+  title: 'modules | Administration / Edit User',
 };
 
-export const editUser = () => <ManageUserEdit {...manageUserEditMock} />;
+export const desktopLayout = () => <ManageUserEdit {...manageUserEditMock} />;
+
+export const mobileLayout = () => <ManageUserEdit {...manageUserEditMock} />;
+
+mobileLayout.story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobileGeneral' },
+  },
+};
