@@ -1,5 +1,6 @@
 import get from 'lodash/get';
 import find from 'lodash/find';
+import minBy from 'lodash/minBy';
 import sumBy from 'lodash/sumBy';
 import sortBy from 'lodash/sortBy';
 import filter from 'lodash/filter';
@@ -192,25 +193,44 @@ export function getSDGBubbleChart(req: any, res: any) {
   //   );
   // } else {
   Report.find(projectID ? { project: projectID } : {})
-    .select('policy_priority budget')
+    .select(
+      'policy_priority total_target_beneficiaries total_target_beneficiaries_commited budget'
+    )
     .populate('policy_priority')
     .exec((err: any, data: any) => {
-      const result: any[] = [];
-      if (data) {
-        const groupedData = groupBy(data, 'policy_priority.name');
-        Object.keys(groupedData).forEach(key => {
-          const sdg = get(ppToSdg, `${[key]}`, null);
-          if (sdg) {
-            result.push({
-              name: sdg.name,
-              color: sdg.color,
-              loc: sumBy(groupedData[key], 'budget'),
-            });
-          }
-        });
-      } else {
-        res(JSON.stringify([]));
-      }
+      let result: any[] = [];
+      const groupedData = groupBy(data, 'policy_priority.name');
+      Object.keys(ppToSdg).forEach(key => {
+        const sdg = get(ppToSdg, `${[key]}`, null);
+        const pp = get(groupedData, `${[key]}`, null);
+        if (pp) {
+          const totTarget = sumBy(pp, 'total_target_beneficiaries');
+          const totCommitted = sumBy(pp, 'total_target_beneficiaries_commited');
+          const totBudget = sumBy(pp, 'budget');
+          result.push({
+            ppName: key,
+            name: sdg.name,
+            color: sdg.color,
+            number: sdg.number,
+            targetValue: totTarget,
+            targetPercentage: (totCommitted / totTarget) * 100,
+            loc: totBudget,
+          });
+        } else {
+          result.push({
+            ppName: key,
+            name: sdg.name,
+            color: sdg.color,
+            number: sdg.number,
+            opacity: 0.2,
+          });
+        }
+      });
+      const minValue = minBy(result, 'loc').loc;
+      result = result.map((r: any) => ({
+        ...r,
+        loc: !r.loc ? minValue : r.loc,
+      }));
       res(JSON.stringify(sortBy(result, 'name').reverse()));
     });
   // }

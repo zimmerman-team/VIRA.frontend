@@ -46,7 +46,7 @@ const Value = styled(props => <Typography {...props} />)`
   }
 `;
 
-const ProgressBarContainer = styled.div`
+export const ProgressBarContainer = styled.div`
   width: 100%;
   height: 4px;
   border-radius: 2px;
@@ -54,7 +54,7 @@ const ProgressBarContainer = styled.div`
   background: #2a465c;
 `;
 
-const ProgressBar = styled.div`
+export const ProgressBar = styled.div`
   height: 4px;
   border-radius: 2px;
   background: ${ProjectPalette.secondary.main};
