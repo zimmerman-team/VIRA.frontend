@@ -17,18 +17,29 @@ import {
   GranteeParams,
 } from 'app/modules/detail-modules/grantee-detail/mock';
 
+console.log('joejoe', process.env.DEV_ENVIRONMENT);
+console.log(process.env.DEV_ENVIRONMENT);
 export const GranteeDetailLayout = (props: GranteeParams) => (
   <React.Fragment>
     {/* {props.loading && <PageLoader />} */}
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
-    <Grid item xs={12} sm={12} md={12} lg={12}>
+    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <BreadCrumbs {...props.breadcrumbs} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
-    <Grid item container lg={12} direction="column">
+    <Grid
+      item
+      container
+      xs={12}
+      sm={12}
+      md={12}
+      lg={12}
+      xl={12}
+      direction="column"
+    >
       <TitleFragment {...props.title} />
     </Grid>
 
@@ -44,7 +55,7 @@ export const GranteeDetailLayout = (props: GranteeParams) => (
       <ContactsCard {...props.contact} />
     </Grid>
 
-    <Grid item lg={12}>
+    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <HorizontalBarChart
         {...mockData}
         chartLegends={props.barChartLegends}
@@ -54,7 +65,7 @@ export const GranteeDetailLayout = (props: GranteeParams) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* projects */}
-    <Grid item xs={12} lg={12}>
+    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <TableModule {...props.projectTable} />
     </Grid>
   </React.Fragment>

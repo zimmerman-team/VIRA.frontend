@@ -151,7 +151,7 @@ export function GranteeDetailModule(props: any) {
   return (
     <GranteeDetailLayout
       match={props.match}
-      loading={loading}
+      // loading={loading}
       title={granteeTitle}
       breadcrumbs={breadCrumb}
       description={description}
