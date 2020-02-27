@@ -16,9 +16,8 @@ import {
   TabNavMockViz,
   GranteeParams,
 } from 'app/modules/detail-modules/grantee-detail/mock';
+import { Typography } from '@material-ui/core';
 
-console.log('joejoe', process.env.DEV_ENVIRONMENT);
-console.log(process.env.DEV_ENVIRONMENT);
 export const GranteeDetailLayout = (props: GranteeParams) => (
   <React.Fragment>
     {/* {props.loading && <PageLoader />} */}
@@ -55,6 +54,11 @@ export const GranteeDetailLayout = (props: GranteeParams) => (
       <ContactsCard {...props.contact} />
     </Grid>
 
+    {/* ---------------------------------------------------------------------*/}
+    {/* priority area */}
+    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+      <Typography>Priority Area</Typography>
+    </Grid>
     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <HorizontalBarChart
         {...mockData}
