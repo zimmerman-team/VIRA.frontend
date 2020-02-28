@@ -4,6 +4,7 @@ import { LegendListItem, LegendListItemProps } from './LegendListItem';
 
 export type LegendListProps = {
   items: { name: string; loc: number; color: string }[];
+  activeBubble: string;
 };
 
 export function LegendList(props: LegendListProps) {
@@ -30,6 +31,7 @@ export function LegendList(props: LegendListProps) {
           name={item.name}
           loc={item.loc}
           color={item.color}
+          active={props.activeBubble === item.name}
         />
       ))}
     </ul>

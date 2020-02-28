@@ -4,13 +4,15 @@
 import React from 'react';
 import find from 'lodash/find';
 import minBy from 'lodash/minBy';
-import { Grid } from '@material-ui/core';
+import { ProjectPalette } from 'app/theme';
 import styled from 'styled-components/macro';
 import { ResponsiveBubbleHtml } from '@nivo/circle-packing';
-import { ProjectPalette } from 'app/theme';
+import { Grid, Card as MuiCard } from '@material-ui/core';
+import CardContent from '@material-ui/core/CardContent';
 import { LegendList } from './common/LegendList';
 import { BubbleInfoBlock } from './common/BubbleInfoBlock';
 import { otherSdgs } from './mock';
+import { ChartTooltip } from '../BarCharts/common/ChartTooltip';
 
 type Props = {
   data: object;
@@ -25,6 +27,20 @@ const ChartContainer = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
+`;
+
+const Card = styled(props => <MuiCard {...props} />)`
+  && {
+    box-shadow: 0 0 2px 1px rgba(130, 136, 148, 0.08);
+  }
+`;
+
+const Content = styled(props => <CardContent {...props} />)`
+  display: flex;
+  flex-direction: column;
+  && {
+    padding: 24px 0px 8px 24px !important;
+  }
 `;
 
 export function BubbleChart(props: Props) {
@@ -48,94 +64,139 @@ export function BubbleChart(props: Props) {
     }
   }, [props.selectedBubble]);
 
-  // console.log(contRef.current ? contRef.current.getBoundingClientRect() : '');
-
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} lg={3}>
-        <LegendList items={[...props.data.children, ...otherSdgs]} />
-      </Grid>
-      <Grid item xs={12} lg={9}>
-        <ChartContainer ref={contRef}>
-          <ResponsiveBubbleHtml
-            leavesOnly
-            value="loc"
-            padding={60}
-            identity="name"
-            root={{
-              ...props.data,
-              children: [
-                ...props.data.children,
-                ...otherSdgs.map(os => ({ ...os, loc: minValue })),
-              ],
-            }}
-            isZoomable={false}
-            enableLabel={false}
-            colorBy={v => v.color}
-            nodeComponent={({ node, style, handlers }) => {
-              if (style.r <= 0) return null;
-              return (
-                <div
-                  id={(node.data && node.data.id
-                    ? node.data.id
-                    : node.id
-                  ).replace(/[^\w]/gi, '-')}
-                  style={{
-                    position: 'absolute',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: node.color,
-                    top: style.y - style.r,
-                    left: style.x - style.r,
-                    width: style.r * 2.3,
-                    height: style.r * 2.3,
-                    borderRadius: '50%',
-                    opacity: node.data.opacity || 1,
-                    color: ProjectPalette.common.white,
-                    cursor:
-                      node.data.opacity === undefined ? 'pointer' : 'initial',
-                  }}
-                  {...handlers}
-                  onClick={_e =>
-                    node.data.opacity === undefined &&
-                    props.setSelectedBubble(node.id)
-                  }
-                >
-                  <svg
-                    css={`
-                      width: 70%;
-                    `}
-                    viewBox="0 0 56 18"
-                  >
-                    <text
-                      x="50%"
-                      y="50%"
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      fill={ProjectPalette.common.white}
+    <Card>
+      <Content>
+        <Grid container spacing={3}>
+          <Grid item xs={12} lg={3}>
+            <LegendList
+              activeBubble={props.selectedBubble}
+              items={[...props.data.children, ...otherSdgs]}
+            />
+          </Grid>
+          <Grid item xs={12} lg={9}>
+            <ChartContainer ref={contRef}>
+              <ResponsiveBubbleHtml
+                leavesOnly
+                value="loc"
+                padding={60}
+                identity="name"
+                root={{
+                  ...props.data,
+                  children: [
+                    ...props.data.children,
+                    ...otherSdgs.map(os => ({ ...os, loc: minValue })),
+                  ],
+                }}
+                isZoomable={false}
+                enableLabel={false}
+                colorBy={v => v.color}
+                nodeComponent={({ node, style, handlers }) => {
+                  if (style.r <= 0) return null;
+                  return (
+                    <div
+                      id={(node.data && node.data.id
+                        ? node.data.id
+                        : node.id
+                      ).replace(/[^\w]/gi, '-')}
+                      style={{
+                        position: 'absolute',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: node.color,
+                        top: style.y - style.r,
+                        left: style.x - style.r,
+                        width: style.r * 2.3,
+                        height: style.r * 2.3,
+                        borderRadius: '50%',
+                        opacity: node.data.opacity || 1,
+                        color: ProjectPalette.common.white,
+                        cursor:
+                          node.data.opacity === undefined
+                            ? 'pointer'
+                            : 'initial',
+                      }}
+                      {...handlers}
+                      onClick={_e =>
+                        node.data.opacity === undefined &&
+                        props.setSelectedBubble(node.id)
+                      }
                     >
-                      SDG {node.data.number}
-                    </text>
-                  </svg>
-                </div>
-              );
-            }}
-            tooltip={tProps => <div>{tProps.id}</div>}
-            colors={props.data.children.map(item => item.color)}
-            margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-          />
-        </ChartContainer>
-        {selectedBubbleObj && (
-          <BubbleInfoBlock
-            name={selectedBubbleObj.ppName}
-            targetValue={selectedBubbleObj.targetValue}
-            budgetValue={selectedBubbleObj.loc}
-            targetPercentage={selectedBubbleObj.targetPercentage}
-            budgetPercentage={0}
-          />
-        )}
-      </Grid>
-    </Grid>
+                      <svg
+                        css={`
+                          width: 70%;
+                        `}
+                        viewBox="0 0 56 18"
+                      >
+                        <text
+                          x="50%"
+                          y="50%"
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                          fill={ProjectPalette.common.white}
+                        >
+                          SDG {node.data.number}
+                        </text>
+                      </svg>
+                    </div>
+                  );
+                }}
+                tooltip={tProps => {
+                  if (tProps.data.opacity === 0.2) {
+                    return null;
+                  }
+                  return (
+                    <ChartTooltip
+                      title={tProps.id}
+                      items={[
+                        {
+                          label: `Target (${tProps.data.targetPercentage.toFixed(
+                            2
+                          )}%)`,
+                          value: tProps.data.targetValue,
+                          percentage: tProps.data.targetPercentage,
+                        },
+                        {
+                          label: 'Budget',
+                          value: tProps.data.loc
+                            .toLocaleString(undefined, {
+                              currency: 'EUR',
+                              currencyDisplay: 'symbol',
+                              style: 'currency',
+                            })
+                            .replace('.00', ''),
+                        },
+                      ]}
+                    />
+                  );
+                }}
+                colors={props.data.children.map(item => item.color)}
+                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                theme={{
+                  tooltip: {
+                    container: {
+                      padding: 0,
+                    },
+                    basic: {
+                      padding: 0,
+                    },
+                  },
+                }}
+              />
+            </ChartContainer>
+            {selectedBubbleObj && (
+              <BubbleInfoBlock
+                name={selectedBubbleObj.ppName}
+                targetValue={selectedBubbleObj.targetValue}
+                budgetValue={selectedBubbleObj.loc}
+                targetPercentage={selectedBubbleObj.targetPercentage}
+                budgetPercentage={0}
+              />
+            )}
+          </Grid>
+        </Grid>
+      </Content>
+    </Card>
   );
 }

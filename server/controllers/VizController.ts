@@ -231,7 +231,7 @@ export function getSDGBubbleChart(req: any, res: any) {
         ...r,
         loc: !r.loc ? minValue : r.loc,
       }));
-      res(JSON.stringify(sortBy(result, 'name').reverse()));
+      res(JSON.stringify(sortBy(result, 'number')));
     });
   // }
 }

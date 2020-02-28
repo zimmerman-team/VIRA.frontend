@@ -5,6 +5,7 @@ export type LegendListItemProps = {
   name: string;
   loc: number;
   color: string;
+  active?: boolean;
 };
 
 export function LegendListItem(props: LegendListItemProps) {
@@ -31,6 +32,7 @@ export function LegendListItem(props: LegendListItemProps) {
       <div
         css={`
           max-width: calc(100% - 18px);
+          font-weight: ${props.active ? 'bold' : 'normal'};
         `}
       >
         {props.name}
