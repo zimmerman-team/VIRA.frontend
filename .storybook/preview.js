@@ -56,7 +56,11 @@ const customViewports = {
   },
 };
 
-addDecorator(storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>);
+addDecorator(StoryFn => (
+  <StoryWrapper>
+    <StoryFn />
+  </StoryWrapper>
+));
 
 addParameters({
   viewport: {

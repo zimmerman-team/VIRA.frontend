@@ -61,7 +61,6 @@ function LandingLayout(props: any) {
   const allProjectsData = useStoreState(state => state.allProjects.data);
   const allReportsData = useStoreState(state => state.allReports.data);
   const allGranteesData = useStoreState(state => state.allOrganisations.data);
-  const userDetails = useStoreState(state => state.userDetails.data);
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
 
   React.useEffect(() => {
@@ -154,7 +153,9 @@ function LandingLayout(props: any) {
                 get(props.match.params, 'list', '')
               )}
             />
-            <Box height="62px" width="1px" />
+            <Hidden smUp>
+              <Box height="62px" width="1px" />
+            </Hidden>
           </Grid>
         </Grid>
 
