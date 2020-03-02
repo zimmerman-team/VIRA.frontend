@@ -59,7 +59,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       overflow: 'auto',
       maxHeight: 300,
-      border: '1px solid rgba(0,0,0,.25)',
+      borderRadius: 2,
+      boxShadow:
+        '0 4px 14px -2px rgba(130, 136, 148, 0.28), 0 0 2px 0 rgba(130, 136, 148, 0.22)',
       '& li[data-focus="true"]': {
         cursor: 'pointer',
         color: ProjectPalette.common.white,
@@ -71,7 +73,9 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     listitem: {
-      padding: 5,
+      padding: 6,
+      fontSize: 14,
+      fontWeight: 'normal',
     },
   })
 );
@@ -119,7 +123,22 @@ export const Autocomplete = (props: AutocompleteParams) => {
         }
       />
       {groupedOptions.length > 0 ? (
-        <ul className={classes.listbox} {...getListboxProps()}>
+        <ul
+          className={classes.listbox}
+          {...getListboxProps()}
+          css={`
+            &::-webkit-scrollbar {
+              width: 6px;
+              border-radius: 50%;
+            }
+            &::-webkit-scrollbar-track {
+              background: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+              background: ${ProjectPalette.grey[400]};
+            }
+          `}
+        >
           {groupedOptions.map((option, index) => {
             const optionProps: any = getOptionProps({ option, index });
             const onClick = (e: any) => {

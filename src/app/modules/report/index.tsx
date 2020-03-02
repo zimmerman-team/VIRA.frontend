@@ -70,6 +70,7 @@ function CreateReportFunc(props: any) {
     value: '',
   });
   const [budget, setBudget] = React.useState(0);
+  const [insContribution, setInsContribution] = React.useState(0);
 
   // Indicator and verification state
   const [keyOutcomes, setKeyOutcomes] = React.useState('');
@@ -216,7 +217,8 @@ function CreateReportFunc(props: any) {
       beneficiaryCounts,
       policyPriority.label,
       budget,
-      get(projectBudgetData, 'data.remainBudget', 0)
+      get(projectBudgetData, 'data.remainBudget', 0),
+      insContribution
     );
 
   const step4Enabled =
@@ -253,6 +255,7 @@ function CreateReportFunc(props: any) {
             total_target_beneficiaries: tarBenTotal,
             total_target_beneficiaries_commited: tarBenTotal2,
             budget,
+            insContribution,
             key_outcomes: keyOutcomes,
             monitor_report_outcomes: monRepOutcomes,
             key_implementation_challenges: keyImplChallenges,
@@ -309,6 +312,8 @@ function CreateReportFunc(props: any) {
         budget,
         setBudget,
         remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
+        insContribution,
+        setInsContribution,
       }}
       indicatorVerificationProps={{
         keyOutcomes,
@@ -346,6 +351,7 @@ function CreateReportFunc(props: any) {
           budget,
           policyPriority,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
+          insContribution,
         })
       }
       backBtnDisabled={!isNavBtnEnabled('back', initialTabIndex, {})}

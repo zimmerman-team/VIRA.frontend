@@ -54,6 +54,8 @@ export type PolicyPrioritiesPropsModel = {
   budget: number;
   setBudget: Function;
   remainBudget: number;
+  insContribution: number;
+  setInsContribution: Function;
 };
 
 export type IndicatorVerificationPropsModel = {

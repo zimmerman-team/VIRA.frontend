@@ -7,8 +7,8 @@ import groupBy from 'lodash/groupBy';
 import consts from '../config/consts';
 const Report = require('../models/report');
 import { ProjectPalette } from '../../src/app/theme';
-import { policyPriorities } from '../../src/app/modules/report/sub-modules/outcomes/mock';
 import { countryFeaturesData } from '../config/countryFeatures';
+import { policyPriorities } from '../../src/app/modules/report/sub-modules/policy-priorities/mock';
 
 const ppToSdg = consts.ppToSdg;
 
