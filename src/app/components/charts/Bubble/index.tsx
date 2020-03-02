@@ -71,6 +71,7 @@ export function BubbleChart(props: Props) {
           <Grid item xs={12} lg={3}>
             <LegendList
               activeBubble={props.selectedBubble}
+              setActiveBubble={props.setSelectedBubble}
               items={[...props.data.children, ...otherSdgs]}
             />
           </Grid>

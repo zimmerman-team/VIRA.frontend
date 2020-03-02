@@ -3,8 +3,9 @@ import 'styled-components/macro';
 import { LegendListItem, LegendListItemProps } from './LegendListItem';
 
 export type LegendListProps = {
-  items: { name: string; loc: number; color: string }[];
+  items: { name: string; loc: number; color: string; opacity?: number }[];
   activeBubble: string;
+  setActiveBubble: Function;
 };
 
 export function LegendList(props: LegendListProps) {
@@ -31,6 +32,8 @@ export function LegendList(props: LegendListProps) {
           name={item.name}
           loc={item.loc}
           color={item.color}
+          opacity={item.opacity}
+          onClick={props.setActiveBubble}
           active={props.activeBubble === item.name}
         />
       ))}

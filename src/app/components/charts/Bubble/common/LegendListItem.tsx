@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import 'styled-components/macro';
 
@@ -5,7 +7,9 @@ export type LegendListItemProps = {
   name: string;
   loc: number;
   color: string;
+  opacity?: number;
   active?: boolean;
+  onClick?: Function;
 };
 
 export function LegendListItem(props: LegendListItemProps) {
@@ -17,8 +21,12 @@ export function LegendListItem(props: LegendListItemProps) {
         min-height: 24px;
         align-items: center;
         margin-bottom: 16px;
-        opacity: ${props.loc === 0 ? 0.2 : 1};
+        opacity: ${props.opacity || 1};
+        cursor: ${!props.opacity ? 'pointer' : 'default'};
       `}
+      onClick={() =>
+        props.onClick && !props.opacity && props.onClick(props.name)
+      }
     >
       <div
         css={`
