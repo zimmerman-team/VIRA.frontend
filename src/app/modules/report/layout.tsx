@@ -5,7 +5,7 @@ import { ReportModuleRoutes } from 'app/modules/report/routes';
 import { BottomNav } from 'app/modules/report/common/bottom-nav';
 import { CreateReportLayoutModel } from 'app/modules/report/model';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
+import { HorizontalStepper } from 'app/components/navigation/HorizontalStepper';
 
 export const CreateReportLayout = (props: CreateReportLayoutModel) => (
   <React.Fragment>
@@ -34,9 +34,9 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item xs={12} lg={12}>
-      <TabNavigator
-        items={props.tabs}
-        onTabChange={props.changeRoute}
+      <HorizontalStepper
+        steps={props.tabs}
+        onStepChange={props.changeRoute}
         initialTabIndex={props.initialTabIndex}
       />
     </Grid>
