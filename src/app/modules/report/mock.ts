@@ -29,7 +29,7 @@ export const tabs: NavItemParams[] = [
     disabled: false,
   },
   {
-    label: 'Privacy Priorities',
+    label: 'Policy Priorities',
     path: 'policy-priorities',
     disabled: true,
   },

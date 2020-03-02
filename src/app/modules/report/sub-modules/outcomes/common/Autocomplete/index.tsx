@@ -30,6 +30,7 @@ const Input = withStyles((theme: Theme) =>
         marginTop: theme.spacing(3),
         color: ProjectPalette.text.primary,
       },
+      backgroundColor: '#f0f3f7',
     },
     input: getInputGeneralStyle(theme),
     inputMultiline: {
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: 0,
       padding: 0,
       zIndex: 1,
-      position: 'relative',
+      position: 'absolute',
       listStyle: 'none',
       backgroundColor: theme.palette.background.paper,
       overflow: 'auto',
@@ -109,7 +110,13 @@ export const Autocomplete = (props: AutocompleteParams) => {
         fullWidth
         {...getInputProps()}
         placeholder="Type"
-        endAdornment={<ExpandMore />}
+        endAdornment={
+          <ExpandMore
+            css={`
+              margin-right: 10px;
+            `}
+          />
+        }
       />
       {groupedOptions.length > 0 ? (
         <ul className={classes.listbox} {...getListboxProps()}>

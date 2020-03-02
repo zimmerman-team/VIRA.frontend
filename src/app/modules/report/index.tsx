@@ -30,10 +30,10 @@ function CreateReportFunc(props: any) {
   );
 
   // Outcomes state
-  const [title, setTitle] = React.useState('');
+  const [title, setTitle] = React.useState('a');
   const [country, setCountry] = React.useState({
-    label: '',
-    value: '',
+    label: 'a',
+    value: 'a',
   });
   const [location, setLocation]: [
     LocationModel | null,
@@ -153,7 +153,7 @@ function CreateReportFunc(props: any) {
     }
   }, [location]);
 
-  const onTabChange = (tabIndex: number) => {
+  const onStepChange = (tabIndex: number) => {
     props.history.push(tabs[tabIndex].path);
   };
 
@@ -163,7 +163,7 @@ function CreateReportFunc(props: any) {
       props.match.params.projectID
     );
     if (currTabIndex !== tabs.length - 1 && currTabIndex > -1) {
-      onTabChange(currTabIndex + 1);
+      onStepChange(currTabIndex + 1);
     }
   };
 
@@ -173,7 +173,7 @@ function CreateReportFunc(props: any) {
       props.match.params.projectID
     );
     if (currTabIndex !== tabs.length && currTabIndex > 0) {
-      onTabChange(currTabIndex - 1);
+      onStepChange(currTabIndex - 1);
     }
   };
 
@@ -285,7 +285,7 @@ function CreateReportFunc(props: any) {
           },
         ],
       }}
-      changeRoute={onTabChange}
+      changeRoute={onStepChange}
       onNextBtnClick={onNextBtnClick}
       onBackBtnClick={onBackBtnClick}
       initialTabIndex={initialTabIndex}

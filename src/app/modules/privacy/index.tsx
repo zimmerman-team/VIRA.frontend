@@ -2,12 +2,14 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
-import { privacyDescriptionMock } from 'app/modules/privacy/mock';
-import { PrivacyModuleItemsMock } from 'app/modules/privacy/mock';
-import { cookieDescriptionMock } from 'app/modules/privacy/mock';
-import { CookieItemsMock } from 'app/modules/privacy/mock';
 import { css } from 'styled-components/macro';
 import { Box } from '@material-ui/core';
+import {
+  privacyDescriptionMock,
+  PrivacyModuleItemsMock,
+  cookieDescriptionMock,
+  CookieItemsMock,
+} from 'app/modules/privacy/mock';
 
 /* todo: this module is a it convoluted, let's refactor asap */
 const style: any = {
@@ -33,30 +35,45 @@ export const PrivacyModule = () => (
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item container xs={12} lg={12}>
-      <TitleFragment title="Privacy Policy" />
+      <TitleFragment title="Insinger Stichting Privacy Verklaring" />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* content */}
     <Grid item xs={12} lg={12}>
       <Typography css={style.description}>{privacyDescriptionMock}</Typography>
-      <Box height={'32px'} width={'100%'} />
+      <Box height="32px" width="100%" />
     </Grid>
     {PrivacyModuleItemsMock.map((privacyItem, index) => (
       <Grid item xs={12} lg={12}>
         <Typography css={style.paragraphTitle}>
-          {index + 1 + '. ' + privacyItem.title}
+          {`${index + 1}. ${privacyItem.title}`}
         </Typography>
         <Typography css={style.paragraphBody}>
           {privacyItem.description}
         </Typography>
+        {privacyItem.listItems &&
+          privacyItem.listItems.map((lItem: any) => (
+            <>
+              <Typography css={style.paragraphBody}>
+                {lItem.description}
+              </Typography>
+              <ul>
+                {lItem.items.map((item: string) => (
+                  <li>
+                    <Typography css={style.paragraphBody}>{item}</Typography>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))}
       </Grid>
     ))}
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item container xs={12} lg={12}>
-      <Box height={'32px'} width={'100%'} />
+      <Box height="32px" width="100%" />
       <TitleFragment title="Cookie Policy" />
     </Grid>
 
