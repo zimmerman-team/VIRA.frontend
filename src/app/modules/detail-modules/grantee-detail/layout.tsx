@@ -1,5 +1,6 @@
+// @ts-nocheck
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+
 import TableModule from 'app/components/datadisplay/Table';
 import { ContactsCard } from 'app/components/surfaces/Cards/ContactsCard';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
@@ -16,7 +17,10 @@ import {
   TabNavMockViz,
   GranteeParams,
 } from 'app/modules/detail-modules/grantee-detail/mock';
-import { Typography } from '@material-ui/core';
+import { Typography, Box, Grid } from '@material-ui/core';
+import { css } from 'styled-components/macro';
+import { ListModule } from 'app/modules/list-module';
+import { TabNavMockList } from 'app/modules/landing/statsMock';
 
 export const GranteeDetailLayout = (props: GranteeParams) => (
   <React.Fragment>
@@ -57,7 +61,19 @@ export const GranteeDetailLayout = (props: GranteeParams) => (
     {/* ---------------------------------------------------------------------*/}
     {/* priority area */}
     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-      <Typography>Priority Area</Typography>
+      <Typography
+        css={`
+          color: #000000;
+          line-height: 1.5;
+          font-size: 20px;
+          font-family: Inter;
+          font-weight: 600;
+          height: 30px;
+          width: 191px;
+        `}
+      >
+        Priority Area
+      </Typography>
     </Grid>
     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
       <HorizontalBarChart
@@ -69,8 +85,8 @@ export const GranteeDetailLayout = (props: GranteeParams) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* projects */}
-    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-      <TableModule {...props.projectTable} />
-    </Grid>
+
+    <Box width="100%" height="50px" />
+    <ListModule tabNav={getNavTabItems(TabNavMockList, 'viz')} />
   </React.Fragment>
 );

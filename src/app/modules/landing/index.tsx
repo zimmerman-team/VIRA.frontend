@@ -1,7 +1,9 @@
 // global
 import React from 'react';
 import { useTitle } from 'react-use';
-import { get, findIndex, find } from 'lodash';
+import get from 'lodash/get';
+import findIndex from 'lodash/findIndex';
+import find from 'lodash/find';
 import { Route, withRouter } from 'react-router-dom';
 import 'styled-components/macro';
 
