@@ -29,6 +29,11 @@ export const tabs: NavItemParams[] = [
     disabled: false,
   },
   {
+    label: 'Policy Priorities',
+    path: 'policy-priorities',
+    disabled: true,
+  },
+  {
     label: 'Indicator and verification',
     path: 'indicator-verification',
     disabled: true,

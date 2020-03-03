@@ -41,6 +41,7 @@ const ReportSchema = new Schema({
   media: [{ type: String, required: false }],
   policy_priority: { type: Schema.Types.ObjectId, ref: policyPriority },
   budget: { type: Number, required: true },
+  insContribution: { type: Number, required: true },
   key_implementation_challenges: { type: String, required: true },
   other_project_outcomes: { type: String, required: true },
   plans: { type: String, required: true },

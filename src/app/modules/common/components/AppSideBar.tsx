@@ -122,6 +122,7 @@ export function AppSideBar(props: AppSideBarParams) {
         </div>
         <List
           css={`
+            overflow-x: hidden;
             padding-left: ${props.open ? '42px' : 0};
             background-color: ${ProjectPalette.primary.main};
           `}

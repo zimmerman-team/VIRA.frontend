@@ -6,6 +6,7 @@ import { ProjectPalette } from 'app/theme';
 import { Box, InputBase } from '@material-ui/core';
 import useAutocomplete from '@material-ui/lab/useAutocomplete';
 import { getInputGeneralStyle } from 'app/components/inputs/common/mock';
+import { ExpandMore } from '@material-ui/icons';
 import {
   Theme,
   withStyles,
@@ -15,7 +16,7 @@ import {
 import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
 
 export interface AutocompleteParams {
-  description: string;
+  description?: string;
   value: { label: string; value: string };
   setValue: Function;
   text?: string;
@@ -29,6 +30,7 @@ const Input = withStyles((theme: Theme) =>
         marginTop: theme.spacing(3),
         color: ProjectPalette.text.primary,
       },
+      backgroundColor: '#f0f3f7',
     },
     input: getInputGeneralStyle(theme),
     inputMultiline: {
@@ -57,7 +59,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       overflow: 'auto',
       maxHeight: 300,
-      border: '1px solid rgba(0,0,0,.25)',
+      borderRadius: 2,
+      boxShadow:
+        '0 4px 14px -2px rgba(130, 136, 148, 0.28), 0 0 2px 0 rgba(130, 136, 148, 0.22)',
       '& li[data-focus="true"]': {
         cursor: 'pointer',
         color: ProjectPalette.common.white,
@@ -69,7 +73,9 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     listitem: {
-      padding: 5,
+      padding: 6,
+      fontSize: 14,
+      fontWeight: 'normal',
     },
   })
 );
@@ -97,11 +103,42 @@ export const Autocomplete = (props: AutocompleteParams) => {
         position: relative;
       `}
     >
-      <FieldDescription text={props.description} />
-      <Box width="100%" height="20px" />
-      <Input fullWidth {...getInputProps()} placeholder="Type" />
+      {props.description && (
+        <>
+          <FieldDescription text={props.description} />
+          <Box width="100%" height="20px" />
+        </>
+      )}
+
+      <Input
+        fullWidth
+        {...getInputProps()}
+        placeholder="Type"
+        endAdornment={
+          <ExpandMore
+            css={`
+              margin-right: 10px;
+            `}
+          />
+        }
+      />
       {groupedOptions.length > 0 ? (
-        <ul className={classes.listbox} {...getListboxProps()}>
+        <ul
+          className={classes.listbox}
+          {...getListboxProps()}
+          css={`
+            &::-webkit-scrollbar {
+              width: 6px;
+              border-radius: 50%;
+            }
+            &::-webkit-scrollbar-track {
+              background: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+              background: ${ProjectPalette.grey[400]};
+            }
+          `}
+        >
           {groupedOptions.map((option, index) => {
             const optionProps: any = getOptionProps({ option, index });
             const onClick = (e: any) => {

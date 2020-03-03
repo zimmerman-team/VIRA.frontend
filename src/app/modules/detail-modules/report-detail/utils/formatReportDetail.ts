@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import get from 'lodash/get';
 import { ProjectPalette } from 'app/theme';
+import { getMediaTileData } from './getMediaTileData';
 
 const ppToSdg = {
   'Poverty reduction with a focus on youth and children': {
@@ -68,7 +69,7 @@ export function formatReportDetail(data: any) {
     },
     key_outcomes: reportDetailRecord.key_outcomes,
     monitor_report_outcomes: reportDetailRecord.monitor_report_outcomes,
-    media: reportDetailRecord.media,
+    media: getMediaTileData(reportDetailRecord.media),
     policy_priority: reportDetailRecord.policy_priority,
     key_implementation_challenges:
       reportDetailRecord.key_implementation_challenges,

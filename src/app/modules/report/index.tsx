@@ -2,20 +2,22 @@
 import React from 'react';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import filter from 'lodash/filter';
 import { useTitle } from 'react-use';
 import findIndex from 'lodash/findIndex';
 import { withRouter } from 'react-router-dom';
 import { tabs } from 'app/modules/report/mock';
 import { CreateReportLayout } from 'app/modules/report/layout';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { AppConfig } from 'app/data';
 import { isNavBtnEnabled } from './utils/isNavBtnEnabled';
 import { validateIndVerFields } from './utils/validateIndVerFields';
 import { getTabs } from './utils/getTabs';
 import { validateOutcomeFields } from './utils/validateOutcomeFields';
 import { validateChallengesPlans } from './utils/validateChallengesPlans';
+import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
 import { uploadFiles } from './utils/uploadFiles';
 import { LocationModel } from './model';
-import { AppConfig } from 'app/data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -38,6 +40,8 @@ function CreateReportFunc(props: any) {
     LocationModel | null,
     Function
   ] = React.useState(null);
+
+  // Policy Priorities
   const [tarBenTotal, setTarBenTotal] = React.useState(0);
   const [tarBenTotal2, setTarBenTotal2] = React.useState(0);
   const [beneficiaryCounts, setBeneficiaryCounts] = React.useState([
@@ -67,12 +71,13 @@ function CreateReportFunc(props: any) {
     value: '',
   });
   const [budget, setBudget] = React.useState(0);
+  const [insContribution, setInsContribution] = React.useState(0);
 
   // Indicator and verification state
   const [keyOutcomes, setKeyOutcomes] = React.useState('');
   const [monRepOutcomes, setMonRepOutcomes] = React.useState('');
   const [media, setMedia] = React.useState({
-    sound: [],
+    document: [],
     video: [],
     picture: [],
   });
@@ -176,7 +181,7 @@ function CreateReportFunc(props: any) {
 
   const onAddMedia = (
     e: React.ChangeEvent<HTMLInputElement>,
-    type: 'picture' | 'video' | 'sound'
+    type: 'picture' | 'video' | 'document'
   ) => {
     if (media[type]) {
       const newFiles: any = media[type];
@@ -185,6 +190,16 @@ function CreateReportFunc(props: any) {
       }
       setMedia({ ...media, [type]: newFiles });
     }
+  };
+
+  const removeMedia = (
+    name: string,
+    type: 'picture' | 'video' | 'document'
+  ) => {
+    setMedia({
+      ...media,
+      [type]: filter(media[type], (m: any) => m.name !== name),
+    });
   };
 
   const onSaveMediaCB = (data: any) => {
@@ -198,26 +213,30 @@ function CreateReportFunc(props: any) {
   };
 
   const onSaveMedia = () => {
-    const files = [...media.picture, ...media.video, ...media.sound];
+    const files = [...media.picture, ...media.video, ...media.document];
     if (files.length > 0) {
       uploadFiles(files, onSaveMediaCB, onSaveMediaError);
     }
   };
 
-  const step2Enabled = validateOutcomeFields(
-    title,
-    country.label,
-    tarBenTotal,
-    beneficiaryCounts,
-    policyPriority.label,
-    budget,
-    get(projectBudgetData, 'data.remainBudget', 0)
-  );
+  const step2Enabled = validateOutcomeFields(title, country.label);
+
   const step3Enabled =
-    step2Enabled && validateIndVerFields(keyOutcomes, monRepOutcomes);
+    step2Enabled &&
+    validatePolicyPrioritiesFields(
+      tarBenTotal,
+      beneficiaryCounts,
+      policyPriority.label,
+      budget,
+      get(projectBudgetData, 'data.remainBudget', 0),
+      insContribution
+    );
 
   const step4Enabled =
-    step3Enabled &&
+    step3Enabled && validateIndVerFields(keyOutcomes, monRepOutcomes);
+
+  const step5Enabled =
+    step4Enabled &&
     validateChallengesPlans(
       keyImplChallenges,
       otherProjOutObs,
@@ -226,7 +245,7 @@ function CreateReportFunc(props: any) {
     );
 
   const onSubmit = () => {
-    if (step2Enabled && step3Enabled && step4Enabled) {
+    if (step2Enabled && step3Enabled && step4Enabled && step5Enabled) {
       addReportAction({
         socketName: 'addReport',
         values: {
@@ -247,6 +266,7 @@ function CreateReportFunc(props: any) {
             total_target_beneficiaries: tarBenTotal,
             total_target_beneficiaries_commited: tarBenTotal2,
             budget,
+            insContribution,
             key_outcomes: keyOutcomes,
             monitor_report_outcomes: monRepOutcomes,
             key_implementation_challenges: keyImplChallenges,
@@ -262,7 +282,13 @@ function CreateReportFunc(props: any) {
   return (
     <CreateReportLayout
       submit={onSubmit}
-      tabs={getTabs(tabs, step2Enabled, step3Enabled, step4Enabled)}
+      tabs={getTabs(
+        tabs,
+        step2Enabled,
+        step3Enabled,
+        step4Enabled,
+        step5Enabled
+      )}
       breadcrumbs={{
         currentLocation: 'Report',
         previousLocations: [
@@ -284,6 +310,8 @@ function CreateReportFunc(props: any) {
         setCountry,
         location,
         setLocation,
+      }}
+      policyPrioritiesProps={{
         tarBenTotal,
         tarBenTotal2,
         setTarBenTotal,
@@ -295,6 +323,8 @@ function CreateReportFunc(props: any) {
         budget,
         setBudget,
         remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
+        insContribution,
+        setInsContribution,
       }}
       indicatorVerificationProps={{
         keyOutcomes,
@@ -306,6 +336,7 @@ function CreateReportFunc(props: any) {
         onSaveMedia,
         openMediaModal,
         setOpenMediaModal,
+        removeMedia,
       }}
       challengesPlansProps={{
         keyImplChallenges,
@@ -332,12 +363,14 @@ function CreateReportFunc(props: any) {
           budget,
           policyPriority,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
+          insContribution,
         })
       }
       backBtnDisabled={!isNavBtnEnabled('back', initialTabIndex, {})}
       step2Enabled={step2Enabled}
       step3Enabled={step3Enabled}
       step4Enabled={step4Enabled}
+      step5Enabled={step5Enabled}
       showSubmitBtn={props.location.pathname.split('/')[3] === 'preview'}
     />
   );
