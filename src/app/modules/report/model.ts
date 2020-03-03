@@ -7,7 +7,7 @@ export type BeneficiaryCountsModel = {
 };
 
 export type MediaModel = {
-  sound: never[];
+  document: never[];
   video: never[];
   picture: never[];
 };
@@ -68,6 +68,7 @@ export type IndicatorVerificationPropsModel = {
   onSaveMedia: Function;
   openMediaModal: boolean;
   setOpenMediaModal: Function;
+  removeMedia: Function;
 };
 
 export type ChallengesPlansPropsModel = {

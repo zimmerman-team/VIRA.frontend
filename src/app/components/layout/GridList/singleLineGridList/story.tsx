@@ -10,9 +10,7 @@ export const SingleLineGridList = () => (
   <Providers>
     <Container maxWidth="lg">
       <Grid container spacing={4}>
-        <Grid item>
-          <Component {...mock} />
-        </Grid>
+        <Grid item>{/* <Component {...mock} /> */}</Grid>
       </Grid>
     </Container>
   </Providers>

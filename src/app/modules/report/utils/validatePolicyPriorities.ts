@@ -11,7 +11,7 @@ export function validatePolicyPrioritiesFields(
   if (policyPriority === '') {
     return false;
   }
-  if (tarBenTotal === 0 || tarBenTotal !== sumBy(beneficiaryCounts, 'value')) {
+  if (tarBenTotal === 0 || tarBenTotal < sumBy(beneficiaryCounts, 'value')) {
     return false;
   }
   if (budget === 0) {

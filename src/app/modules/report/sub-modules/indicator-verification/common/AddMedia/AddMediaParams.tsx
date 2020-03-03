@@ -58,8 +58,8 @@ export const AddMediaNavContainer = (props: {
     `}
   >
     <AddMediaNavItem
-      text="Sound"
-      active={props.selectedTab === 'sound'}
+      text="Document"
+      active={props.selectedTab === 'document'}
       onClick={props.onClick}
     />
     <AddMediaNavItem
@@ -153,8 +153,8 @@ export const AddMediaBigButton = (props: {
     if (props.text === 'video') {
       return 'video/*';
     }
-    if (props.text === 'sound') {
-      return 'audio/*';
+    if (props.text === 'document') {
+      return 'application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf';
     }
     return '';
   };
@@ -192,6 +192,7 @@ export const AddMediaBigButton = (props: {
         css={`
           display: none;
         `}
+        multiple
         type="file"
         name="file"
         accept={getAcceptString()}

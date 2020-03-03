@@ -1,6 +1,6 @@
 import { SingleLineGridListProps } from 'app/components/layout/GridList/singleLineGridList/index';
 
-export const mock: SingleLineGridListProps = {
+export const mock = {
   tileData: [
     {
       img: 'https://picsum.photos/257/153',

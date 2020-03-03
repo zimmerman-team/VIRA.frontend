@@ -35,7 +35,7 @@ export const IntentTexArea = (props: IntentTextAreaParams) => (
     <SingleMultiLineTextField
       fullWidth
       multiline
-      placeholder="Type"
+      // placeholder="Type"
       value={props.value}
       id={props.componentID}
       setValue={props.setValue}

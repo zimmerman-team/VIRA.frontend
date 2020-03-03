@@ -15,7 +15,7 @@ import {
 
 export const AddMediaLayout = (props: AddMediaParams) => {
   const [selectedTab, setSelectedTab]: [
-    'picture' | 'video' | 'sound',
+    'picture' | 'video' | 'document',
     Function
   ] = React.useState('picture');
   const filesToShow: any[] = [];
@@ -94,7 +94,7 @@ export const AddMediaLayout = (props: AddMediaParams) => {
               >
                 <AddMediaInputFieldLabel text={selectedTab} />
                 {filesToShow.map(file => (
-                  <AddMediaInputField text={file.name} />
+                  <AddMediaInputField key={file.name} text={file.name} />
                 ))}
               </Grid>
             )}

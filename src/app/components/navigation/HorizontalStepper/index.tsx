@@ -16,7 +16,7 @@ type Step = {
 };
 
 export const HorizontalStepper = (props: StepperProps) => {
-  const steps = props.steps;
+  const { steps } = props;
   const [activeStep, setActiveStep] = React.useState(
     props.initialTabIndex || 0
   );
@@ -32,7 +32,7 @@ export const HorizontalStepper = (props: StepperProps) => {
       <Stepper activeStep={activeStep}>
         {steps.map((step, index) => {
           return (
-            <Step css={styles.step}>
+            <Step css={styles.step} key={step.label}>
               <StepLabel css={styles.stepLabel}>{step.label}</StepLabel>
             </Step>
           );

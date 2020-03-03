@@ -2,12 +2,14 @@
 import React from 'react';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import filter from 'lodash/filter';
 import { useTitle } from 'react-use';
 import findIndex from 'lodash/findIndex';
 import { withRouter } from 'react-router-dom';
 import { tabs } from 'app/modules/report/mock';
 import { CreateReportLayout } from 'app/modules/report/layout';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { AppConfig } from 'app/data';
 import { isNavBtnEnabled } from './utils/isNavBtnEnabled';
 import { validateIndVerFields } from './utils/validateIndVerFields';
 import { getTabs } from './utils/getTabs';
@@ -16,7 +18,6 @@ import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
 import { uploadFiles } from './utils/uploadFiles';
 import { LocationModel } from './model';
-import { AppConfig } from 'app/data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -30,10 +31,10 @@ function CreateReportFunc(props: any) {
   );
 
   // Outcomes state
-  const [title, setTitle] = React.useState('a');
+  const [title, setTitle] = React.useState('');
   const [country, setCountry] = React.useState({
-    label: 'a',
-    value: 'a',
+    label: '',
+    value: '',
   });
   const [location, setLocation]: [
     LocationModel | null,
@@ -76,7 +77,7 @@ function CreateReportFunc(props: any) {
   const [keyOutcomes, setKeyOutcomes] = React.useState('');
   const [monRepOutcomes, setMonRepOutcomes] = React.useState('');
   const [media, setMedia] = React.useState({
-    sound: [],
+    document: [],
     video: [],
     picture: [],
   });
@@ -180,7 +181,7 @@ function CreateReportFunc(props: any) {
 
   const onAddMedia = (
     e: React.ChangeEvent<HTMLInputElement>,
-    type: 'picture' | 'video' | 'sound'
+    type: 'picture' | 'video' | 'document'
   ) => {
     if (media[type]) {
       const newFiles: any = media[type];
@@ -189,6 +190,16 @@ function CreateReportFunc(props: any) {
       }
       setMedia({ ...media, [type]: newFiles });
     }
+  };
+
+  const removeMedia = (
+    name: string,
+    type: 'picture' | 'video' | 'document'
+  ) => {
+    setMedia({
+      ...media,
+      [type]: filter(media[type], (m: any) => m.name !== name),
+    });
   };
 
   const onSaveMediaCB = (data: any) => {
@@ -202,7 +213,7 @@ function CreateReportFunc(props: any) {
   };
 
   const onSaveMedia = () => {
-    const files = [...media.picture, ...media.video, ...media.sound];
+    const files = [...media.picture, ...media.video, ...media.document];
     if (files.length > 0) {
       uploadFiles(files, onSaveMediaCB, onSaveMediaError);
     }
@@ -225,7 +236,7 @@ function CreateReportFunc(props: any) {
     step3Enabled && validateIndVerFields(keyOutcomes, monRepOutcomes);
 
   const step5Enabled =
-    step3Enabled &&
+    step4Enabled &&
     validateChallengesPlans(
       keyImplChallenges,
       otherProjOutObs,
@@ -325,6 +336,7 @@ function CreateReportFunc(props: any) {
         onSaveMedia,
         openMediaModal,
         setOpenMediaModal,
+        removeMedia,
       }}
       challengesPlansProps={{
         keyImplChallenges,

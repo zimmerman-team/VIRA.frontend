@@ -1,103 +1,14 @@
 import React from 'react';
 import 'styled-components/macro';
-import { ProjectPalette } from 'app/theme';
+import { Grid } from '@material-ui/core';
 import {
   OutcomesPropsModel,
   PolicyPrioritiesPropsModel,
   IndicatorVerificationPropsModel,
   ChallengesPlansPropsModel,
+  BeneficiaryCountsModel,
 } from 'app/modules/report/model';
-import { Grid, Typography, Box } from '@material-ui/core';
-import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
-
-const Spacer = () => <Box width="100%" height="35px" />;
-
-export interface InfoTextCompParams {
-  title: string;
-  description: string;
-}
-
-export const InfoTextComp = (props: InfoTextCompParams) => (
-  <React.Fragment>
-    <Typography variant="subtitle2">{props.title}</Typography>
-    <Box width="100%" height={props.title === '' ? '35px' : '10px'} />
-    <Typography>{props.description}</Typography>
-  </React.Fragment>
-);
-
-export const InfoTextAreaComp = (props: InfoTextCompParams) => (
-  <Grid item container lg={12} spacing={1}>
-    <Grid item lg={12}>
-      <Typography variant="subtitle2">{props.title}</Typography>
-    </Grid>
-    <Box width="100%" height="10px" />
-    <Grid
-      item
-      lg={12}
-      css={`
-        input {
-          color: #000 !important;
-        }
-      `}
-    >
-      <SingleMultiLineTextField
-        disabled
-        fullWidth
-        defaultValue={props.description}
-      />
-    </Grid>
-  </Grid>
-);
-
-export const InfoTextMock: InfoTextCompParams[] = [
-  {
-    title: 'Title',
-    description: 'Title name',
-  },
-  {
-    title: 'Project location',
-    description: 'Amsterda, 1396TH, Netherlands',
-  },
-  {
-    title: 'Of which the beneficiaries will likely include approximately',
-    description: 'Prisoner rehabilitation / reintegration',
-  },
-];
-
-export const InfoTextAreaMock: InfoTextCompParams[] = [
-  {
-    title: 'Please describe the key outcomes the project aims to achieve',
-    description:
-      'Prisoners recidivism reduced through skills-training demonstrably improving their labor market access and retention upon release',
-  },
-  {
-    title:
-      'Please tell us how you intend to monitor and report on the outcomes',
-    description:
-      'Number of prisoners obtaining a Tertiary and Vocational Education certificate, labor market connection after one year after the release from prison',
-  },
-  {
-    title:
-      'Finally, please select which ones of these Insinger Foundation policy priorities the project aims to support.',
-    description: 'Prisoner rehabilitation / reintegration',
-  },
-  {
-    title: 'Key implementation challenges',
-    description: 'Total number: 5',
-  },
-  {
-    title: 'Other project outcomes and observations',
-    description: 'Total number: 5',
-  },
-  {
-    title: 'Future plans',
-    description: 'Total number: 5',
-  },
-  {
-    title: 'Other comments',
-    description: 'Total number: 5',
-  },
-];
+import { PreviewCard } from './common/PreviewCard';
 
 type Props = {
   step2Enabled: boolean;
@@ -111,128 +22,102 @@ type Props = {
 };
 
 export const PreviewLayout = (props: Props) => (
-  <React.Fragment>
-    {/* -------------------------------------------------------------- */}
-    <Grid item lg={12}>
-      <InfoTextComp title="Title" description={props.outcomesProps.title} />
-    </Grid>
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <Grid item lg={12}>
-      <InfoTextComp
-        title="Country"
-        description={props.outcomesProps.country.label}
+  <Grid container spacing={4}>
+    <Grid item xs={12} lg={6}>
+      <PreviewCard
+        title="Please provide a title for your report"
+        content={props.outcomesProps.title}
       />
     </Grid>
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <Grid item container lg={12}>
-      <Grid item sm={12} md={6} lg={4}>
-        <InfoTextComp
-          title="Target beneficiaries"
-          description={`Total target number: ${props.policyPrioritiesProps.tarBenTotal}`}
-        />
-      </Grid>
-      <Grid item sm={12} md={6} lg={4}>
-        <InfoTextComp
-          title=""
-          description={`Total number commited: ${props.policyPrioritiesProps.tarBenTotal2}`}
-        />
-      </Grid>
+    <Grid item xs={12} lg={6}>
+      <PreviewCard
+        title="Add Location"
+        content={props.outcomesProps.country.label}
+        explanation="In which of the following geographical locations will the project be implemented"
+      />
     </Grid>
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <Grid item lg={12}>
-      <Typography variant="subtitle2">
-        Of which the beneficiaries will likely include approximately
-      </Typography>
+    <Grid item xs={12} lg={6}>
+      <PreviewCard
+        title="Insinger Foundation policy priorities"
+        tooltip="Insinger Foundation policy priorities"
+        content={props.policyPrioritiesProps.policyPriority.label}
+        explanation="For each priority selected, the relevant SDGs appear and can be selected based on our mapping"
+      />
     </Grid>
-    <Box width="100%" height="10px" />
-    <Grid container spacing={4}>
-      {props.policyPrioritiesProps.beneficiaryCounts.map(b => (
-        <Grid item lg={4}>
-          <Typography>
-            {b.name}: {b.value}
-          </Typography>
-        </Grid>
-      ))}
+    <Grid item xs={12} lg={6}>
+      <PreviewCard
+        title="Budget"
+        tooltip="Budget"
+        content={props.policyPrioritiesProps.budget}
+      />
     </Grid>
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <InfoTextAreaComp
-      title="Please describe the key outcomes the project aims to achieve"
-      description={props.indicatorVerificationProps.keyOutcomes}
-    />
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <InfoTextAreaComp
-      title="Please tell us how you intend to monitor and report on the outcomes"
-      description={props.indicatorVerificationProps.monRepOutcomes}
-    />
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <Grid item lg={12}>
-      <Typography variant="subtitle2">
-        Finally, please select which ones of these Insinger Foundation policy
-        priorities the project aims to support.
-      </Typography>
+    <Grid item xs={12} lg={6}>
+      <PreviewCard
+        title="Target beneficiaries"
+        tooltip="Target beneficiaries"
+        content={props.policyPrioritiesProps.tarBenTotal}
+      />
     </Grid>
-    <Box width="100%" height="10px" />
-    <Grid
-      item
-      lg={12}
+    <Grid item xs={12} lg={6}>
+      <PreviewCard
+        title="Of which the beneficiaries will likely include approximately"
+        tooltip="Of which the beneficiaries will likely include approximately"
+        content={props.policyPrioritiesProps.beneficiaryCounts.map(
+          (b: BeneficiaryCountsModel) => `${b.name}: ${b.value}`
+        )}
+      />
+    </Grid>
+    <Grid item xs={12} lg={12}>
+      <PreviewCard
+        title="Please describe the key outcomes the project aims to achieve"
+        tooltip="Please describe the key outcomes the project aims to achieve"
+        content={props.indicatorVerificationProps.keyOutcomes}
+      />
+    </Grid>
+    <Grid item xs={12} lg={12}>
+      <PreviewCard
+        title="Please tell us how you intend to monitor and report on the outcomes listed above"
+        tooltip="Please tell us how you intend to monitor and report on the outcomes listed above"
+        content={props.indicatorVerificationProps.monRepOutcomes}
+      />
+    </Grid>
+    <Grid item xs={12} lg={12}>
+      <PreviewCard
+        title="Key implementation challenges"
+        tooltip="Key implementation challenges"
+        content={props.challengesPlansProps.keyImplChallenges}
+        explanation="Please indicate the key implementation challenges experience and how these were addressed"
+      />
+    </Grid>
+    <Grid item xs={12} lg={12}>
+      <PreviewCard
+        title="Other project outcomes and observations"
+        tooltip="Other project outcomes and observations"
+        content={props.challengesPlansProps.otherProjOutObs}
+        explanation="Did the project achieve any other unexpected (positive or negative) outcomes"
+      />
+    </Grid>
+    <Grid item xs={12} lg={12}>
+      <PreviewCard
+        title="Future plans"
+        tooltip="Future plans"
+        content={props.challengesPlansProps.futurePlans}
+        explanation="Are you likely to apply for funding for future activities from the Insinger Foundation within the next 1-2 years?"
+      />
+    </Grid>
+    <Grid item xs={12} lg={12}>
+      <PreviewCard
+        title="Other comments"
+        tooltip="Other comments"
+        content={props.challengesPlansProps.otherComms}
+        explanation="Please let us know if you want to share other observations or comments with the Insinger Foundation"
+      />
+    </Grid>
+    <div
       css={`
-        display: flex;
+        width: 100%;
+        height: 54px;
       `}
-    >
-      <div
-        css={`
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          margin-right: 20px;
-          background: ${ProjectPalette.common.white};
-          border: 5px solid ${ProjectPalette.secondary.main};
-        `}
-      />
-      <Typography>
-        {props.policyPrioritiesProps.policyPriority.label}
-      </Typography>
-    </Grid>
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <InfoTextAreaComp
-      title="Key implementation challenges"
-      description={props.challengesPlansProps.keyImplChallenges}
     />
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <InfoTextAreaComp
-      title="Other project outcomes and observations"
-      description={props.challengesPlansProps.otherProjOutObs}
-    />
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <InfoTextAreaComp
-      title="Future plans"
-      description={props.challengesPlansProps.futurePlans}
-    />
-    <Spacer />
-
-    {/* -------------------------------------------------------------- */}
-    <InfoTextAreaComp
-      title="Other comments"
-      description={props.challengesPlansProps.otherComms}
-    />
-    <Spacer />
-  </React.Fragment>
+  </Grid>
 );
