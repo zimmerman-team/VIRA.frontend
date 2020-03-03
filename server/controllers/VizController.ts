@@ -226,7 +226,7 @@ export function getSDGBubbleChart(req: any, res: any) {
           });
         }
       });
-      const minValue = minBy(result, 'loc').loc;
+      const minValue = get(minBy(result, 'loc'), 'loc', 0);
       result = result.map((r: any) => ({
         ...r,
         loc: !r.loc ? minValue : r.loc,
