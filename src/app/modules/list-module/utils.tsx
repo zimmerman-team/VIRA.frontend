@@ -8,7 +8,6 @@ import {
   LinkCellModule,
   ExternalLinkCellModule,
 } from 'app/components/datadisplay/Table/common/LinkCell';
-import { getInfoTHead } from 'app/components/datadisplay/Table/helpers';
 /* mock */
 import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
 /* models */
@@ -16,6 +15,7 @@ import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { GranteeListMock } from 'app/modules/list-module/mock';
 import React from 'react';
 import { ReportListMock } from 'app/modules/list-module/mock';
+import get from 'lodash/get';
 import find from 'lodash/find';
 
 export const formatTableDataForProject = (data: any): any[] => {
@@ -167,9 +167,7 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
         filter: true,
         filterType: 'checkbox',
         customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <ExternalLinkCellModule extLink={true} link={value} value={value} />
-          );
+          return <ExternalLinkCellModule extLink link={value} value={value} />;
         },
         customFilterListRender: value => `email: ${value}`,
       },
@@ -180,9 +178,7 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
         filter: true,
         filterType: 'checkbox',
         customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <ExternalLinkCellModule extLink={true} link={value} value={value} />
-          );
+          return <ExternalLinkCellModule extLink link={value} value={value} />;
         },
         customFilterListRender: value => `Website: ${value}`,
       },
@@ -228,9 +224,14 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
         filterType: 'dropdown',
         customFilterListRender: value => `Title: ${value}`,
         customBodyRender: (value, tableMeta, updateValue) => {
+          const id = get(
+            find(data, { reportID: tableMeta.rowData[0] }),
+            '_id',
+            ''
+          );
           return (
             <LinkCellModule
-              link={`/projects/${tableMeta.rowData[0]}/detail/priority-area`}
+              link={`/reports/${id}/detail/priority-area`}
               value={value}
             />
           );
