@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import { useTitle } from 'react-use';
 import { useParams } from 'react-router-dom';

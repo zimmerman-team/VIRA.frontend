@@ -4,6 +4,13 @@ import { StoryWrapper } from '../src/app/utils/StoryWrapper';
 import Providers from '../src/app/Providers';
 import { withConsole } from '@storybook/addon-console';
 
+import { DocsPage } from 'storybook-addon-deps/blocks';
+
+addParameters({
+  docs: { page: DocsPage, inlineStories: true },
+  dependencies: { withStoriesOnly: false, hideEmpty: true },
+});
+
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));
 
 const customViewports = {

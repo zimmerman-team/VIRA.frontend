@@ -38,10 +38,18 @@ import { AppConfig } from 'app/data';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { getNewReportsCount } from './utils/getNewReportsCount';
 
+export interface Joejoe {
+  /** prop1 description */
+  prop1: string;
+}
+
+/**
+ * Landing layout.
+ */
 function LandingLayout(props: any) {
   // set window title
   useTitle(`${AppConfig.appTitleLong} Dashboard`);
-
+  /** prop1 description */
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [stats, setStats] = React.useState(statsMock);
   const [barChartLegends, setBarChartLegends] = React.useState([
