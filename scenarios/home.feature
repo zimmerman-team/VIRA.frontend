@@ -60,4 +60,21 @@ Feature: Home page
               And the projects list should contain projects
 
 
+        Scenario: I click on the project stats
+            Given I am on the "homepage"
+             When I click on the project stats item
+             Then I should be redirected to the projects page
+
+
+        Scenario: I click on the grantees stats
+            Given I am on the "homepage"
+             When I click on the grantees stats item
+             Then I should be redirected to the grantees page
+
+
+        Scenario: I click on the reports stats
+            Given I am on the "homepage"
+             When I click on the reports stats item
+             Then I should be redirected to the reports page
+
 

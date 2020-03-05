@@ -95,6 +95,7 @@
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-styled-components": "^1.10.7",
     "codecrumbs": "^1.7.3",
+    "cypress": "^4.1.0",
     "depcheck": "^0.9.2",
     "eslint-config-airbnb-typescript-prettier": "^1.4.2",
     "eslint-config-prettier": "^6.10.0",
@@ -128,7 +129,8 @@
     "storybook": "start-storybook -p 9009 -s public --ci process.env.DEV_ENVIRONMENT=isolated",
     "build-storybook": "build-storybook -s public",
     "init-data": "ts-node --project 'nodetsconfig.json' server/scripts/loadInitialData.ts",
-    "chromatic": "chromatic"
+    "chromatic": "chromatic",
+    "cypress:open": "cypress open"
   },
   "babelMacros": {
     "styledComponents": {
