@@ -4590,6 +4590,11 @@ async-validator@~1.11.3:
   resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.11.5.tgz#9d43cf49ef6bb76be5442388d19fb9a6e47597ea"
   integrity sha512-XNtCsMAeAH1pdLMEg1z8/Bb3a8cdCbui9QbJATRFHHHW5kT6+NPI3zSVQUXgikTFITzsg+kYY5NTWhM2Orwt9w==
 
+async-wait-until@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/async-wait-until/-/async-wait-until-1.2.4.tgz#55a6c29145b8037742a629b0ae0b69b5e2988404"
+  integrity sha512-H7ZR3cu1THxrJiDgevu+PgbyT0o5P/9nsCZj70ckruJCMWt/UOQmGo65wKWvEQN69MJk140x5/Z01ZQjzfwyOw==
+
 async@0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/async/-/async-0.9.0.tgz#ac3613b1da9bed1b47510bb4651b8931e47146c7"
@@ -7280,7 +7285,7 @@ cypress-cucumber-preprocessor@^1.2.2:
     ps-node "^0.1.6"
     through "^2.3.8"
 
-cypress-image-snapshot@3.1.1:
+cypress-image-snapshot@3.1.1, cypress-image-snapshot@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/cypress-image-snapshot/-/cypress-image-snapshot-3.1.1.tgz#cb7242d8086e0d4cbb7f333f927f71cdb5ff9971"
   integrity sha512-r+rjnljehx45qhhV9M/lBsg34Ibys9JWSbPFo9ktV6ovnpxiZSh9GYM/SXEvtJoEonRF51M/Gn2G6J3UlaV6Dg==
@@ -7900,6 +7905,18 @@ diffie-hellman@^5.0.0:
     bn.js "^4.1.0"
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
+
+"dill@https://github.com/fsteinbauer/dill":
+  version "1.2.7"
+  resolved "https://github.com/fsteinbauer/dill#c97ca3310a3ebef2c94263dad6cb7240c6df1ad2"
+  dependencies:
+    async-wait-until "^1.2.4"
+    chokidar "^3.3.0"
+    cypress-image-snapshot "^3.1.1"
+    glob "^7.1.4"
+    hex-rgb "^4.1.0"
+    picklejs "git+https://github.com/hoverinc/picklejs.git"
+    ws "^7.1.2"
 
 dir-glob@2.0.0:
   version "2.0.0"
@@ -10390,6 +10407,11 @@ hex-rgb@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/hex-rgb/-/hex-rgb-3.0.0.tgz#bdff98ce1c18daec8ed87797fe13b02831a9515a"
   integrity sha512-iWOUTZu7KQGhErV8JfTQDH5F/M2D0HVd0sexS4Grg4e4RYAiN3c4jfpPqKgfedqeebKcNZBl2z3zlgCtFjpFJQ==
+
+hex-rgb@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/hex-rgb/-/hex-rgb-4.1.0.tgz#2d5d3a2943bd40e7dc9b0d5b98903d7d17035967"
+  integrity sha512-n7xsIfyBkFChITGPh6FLtxNzAt2HxZLcQIY9hYH4gm2gmMQJHMguMH3E+jnmvUbSTF5QrmFnGab5Ippi+D7e/g==
 
 hide-powered-by@1.1.0:
   version "1.1.0"
@@ -15323,6 +15345,17 @@ phin@^2.9.1:
   version "2.9.3"
   resolved "https://registry.yarnpkg.com/phin/-/phin-2.9.3.tgz#f9b6ac10a035636fb65dfc576aaaa17b8743125c"
   integrity sha512-CzFr90qM24ju5f88quFC/6qohjC144rehe5n6DH900lgXmUe86+xCKc10ev56gRKC4/BkHUoG4uSiQgBiIXwDA==
+
+"picklejs@git+https://github.com/hoverinc/picklejs.git":
+  version "0.101.0"
+  resolved "git+https://github.com/hoverinc/picklejs.git#019ff0cc67efd73198b0319a596db721ea4a29e5"
+  dependencies:
+    cypress-cucumber-preprocessor "^1.2.2"
+    cypress-image-snapshot "3.1.1"
+    hex-rgb "^3.0.0"
+    pluralize "^7.0.0"
+    wdio-visual-regression-service "^0.9.0"
+    words-to-numbers "^1.5.1"
 
 "picklejs@https://github.com/fsteinbauer/picklejs":
   version "0.101.0"

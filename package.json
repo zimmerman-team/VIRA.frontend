@@ -55,7 +55,8 @@
     "styled-components": "^5.0.1",
     "supercluster": "^7.0.0",
     "ts-node": "^8.6.2",
-    "which-country": "^1.0.0"
+    "which-country": "^1.0.0",
+    "dill": "https://github.com/fsteinbauer/dill"
   },
   "devDependencies": {
     "@degjs/storybook-addon-taffy": "^1.0.3",

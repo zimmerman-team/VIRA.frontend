@@ -19,3 +19,19 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 };
+
+// const pickle = require('picklejs/cypress/plugin');
+
+// module.exports = pickle;
+const cucumber = require('cypress-cucumber-preprocessor').default;
+const {
+  addMatchImageSnapshotPlugin,
+} = require('cypress-image-snapshot/plugin');
+
+const dill = require('dill');
+
+module.exports = (on, config) => {
+  addMatchImageSnapshotPlugin(on);
+  on('file:preprocessor', cucumber());
+  dill();
+};

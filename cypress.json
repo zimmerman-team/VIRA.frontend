@@ -1,3 +1,5 @@
 {
-  "projectId": "whmos3"
+  "projectId": "whmos3",
+  "stepDefinitions": "**/*.steps",
+  "stepDefinitionTemp": "cypress/steps-compiled.json"
 }
