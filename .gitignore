@@ -71,3 +71,4 @@ build/
 .vscode/settings.json
 
 media/
+cypress/videos/*
