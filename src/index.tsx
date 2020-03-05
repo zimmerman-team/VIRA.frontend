@@ -14,9 +14,10 @@ import * as LogRocket from 'logrocket';
 import * as serviceWorker from './serviceWorker';
 
 LogRocket.init('zimmerman-zimmerman/insinger-me-tool');
-LogRocket.identify('123456', {
-  name: `${process.env.LOGROCKET_USER}`,
-  email: `${process.env.LOGROCKET_USER_MAIL}`,
+LogRocket.identify('jim@zimmermanzimmerman.nl', {
+  // name: `${process.env.LOGROCKET_USER}`,
+  // name: 'Jim Fung',
+  // email: 'jim@zimmermanzimmerman.nl',
 
   // Add your own custom user variables here, ie:
   subscriptionType: 'pro',

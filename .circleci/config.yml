@@ -30,6 +30,13 @@ jobs:
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
+      - run: curl https://api.rollbar.com/api/1/deploy/ \
+          -F access_token='ACCESS-TOKEN' \
+          -F environment=production \
+          -F revision=$CIRCLE_SHA1 \
+          -F rollbar_username=jim-14 \
+          -F local_username=$CIRCLE_USERNAME \
+          -F comment='Deploy with bug'
 
   deploy-storybook:
     docker:
