@@ -94,9 +94,9 @@ workflows:
       - deploy-staging:
           requires:
             - cypress/install
-          filters:
-            branches:
-              only: develop
+          # filters:
+          # branches:
+          # only: develop
 
       - deploy-storybook:
           requires:
