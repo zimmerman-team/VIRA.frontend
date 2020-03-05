@@ -97,6 +97,7 @@
     "fork-ts-checker-webpack-plugin": "^4.0.5",
     "husky": "^4.2.3",
     "paths.macro": "^2.0.2",
+    "picklejs": "https://github.com/fsteinbauer/picklejs",
     "prettier": "^1.19.1",
     "react-docgen-typescript-loader": "^3.6.0",
     "react-is": "^16.13.0",
