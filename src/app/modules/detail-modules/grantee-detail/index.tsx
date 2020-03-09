@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import { useTitle } from 'react-use';
 import { useParams } from 'react-router-dom';
@@ -24,6 +25,7 @@ import {
   formatTableDataForProject,
 } from 'app/modules/list-module/utils';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+import findIndex from 'lodash/findIndex';
 import { AppConfig } from 'app/data';
 
 export function GranteeDetailModule(props: any) {
@@ -125,14 +127,39 @@ export function GranteeDetailModule(props: any) {
     }
   }, [granteeDetailData]);
 
+  const [barChartLegends, setBarChartLegends] = React.useState([
+    {
+      label: 'Target',
+      selected: true,
+    },
+    {
+      label: 'Budget',
+      selected: true,
+    },
+  ]);
+
+  function onBarChartLegendClick(legend: string) {
+    const prevBarChartLegends = [...barChartLegends];
+    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
+    if (legendIndex !== -1) {
+      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
+        legendIndex
+      ].selected;
+      setBarChartLegends(prevBarChartLegends);
+    }
+  }
+
   return (
     <GranteeDetailLayout
-      loading={loading}
+      match={props.match}
+      // loading={loading}
       title={granteeTitle}
       breadcrumbs={breadCrumb}
       description={description}
       contact={contact}
       projectTable={baseTableForProject}
+      barChartLegends={barChartLegends}
+      onBarChartLegendClick={onBarChartLegendClick}
     />
   );
 }

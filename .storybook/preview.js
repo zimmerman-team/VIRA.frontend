@@ -1,18 +1,17 @@
 import { addDecorator, addParameters } from '@storybook/react';
 import React from 'react';
 import { StoryWrapper } from '../src/app/utils/StoryWrapper';
-import { withTaffy } from '@degjs/storybook-addon-taffy';
-import StorybookVRhythm from 'storybook-vrhythm';
+import Providers from '../src/app/Providers';
+import { withConsole } from '@storybook/addon-console';
 
-// addDecorator(StorybookVRhythm);
+import { DocsPage } from 'storybook-addon-deps/blocks';
 
-// addParameters({
-//   vrhythm: {
-//     color: 'rgba(178,86,18,0.5)',
-//     lineHeight: '16px',
-//     offset: 0,
-//   },
-// });
+addParameters({
+  docs: { page: DocsPage, inlineStories: true },
+  dependencies: { withStoriesOnly: false, hideEmpty: true },
+});
+
+addDecorator((storyFn, context) => withConsole()(storyFn)(context));
 
 const customViewports = {
   desktopSmall: {
@@ -56,15 +55,15 @@ const customViewports = {
   },
 };
 
-addDecorator(StoryFn => (
-  <StoryWrapper>
-    <StoryFn />
-  </StoryWrapper>
+addDecorator(storyFn => (
+  <Providers>
+    <StoryWrapper>{storyFn()}</StoryWrapper>
+  </Providers>
 ));
 
 addParameters({
   viewport: {
     viewports: customViewports, // newViewports would be an ViewportMap. (see below for examples)
-    defaultViewport: 'desktopGeneral',
+    defaultViewport: 'desktopSmall',
   },
 });

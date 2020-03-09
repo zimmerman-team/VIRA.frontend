@@ -70,7 +70,8 @@ build/
 
 .vscode/settings.json
 
-media/*
+
+media/
+cypress/videos/*
 public/media/*
 
-!.gitignore

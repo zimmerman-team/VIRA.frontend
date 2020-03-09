@@ -13,6 +13,7 @@ export const Description = (props: DescriptionParams) => {
         && {
           line-height: 1.71;
           letter-spacing: 0.25px;
+          font-weight: 400;
           color: ${ProjectPalette.common.black};
         }
       `}

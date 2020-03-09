@@ -4,6 +4,7 @@ import { createStore } from 'easy-peasy';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
+import * as LogRocket from 'logrocket';
 
 /* interfaces */
 import {
@@ -116,6 +117,7 @@ export const appStore = createStore(applicationStore, {
     // TODO: check why persistor throws error with encryptor
     return persistReducer(persistConfig, reducer);
   },
+  middleware: [LogRocket.reduxMiddleware()],
 });
 
 export const persistor = persistStore(appStore);

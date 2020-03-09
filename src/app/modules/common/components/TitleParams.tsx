@@ -6,6 +6,7 @@ import { ProjectPalette } from 'app/theme';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import { StatItem } from 'app/modules/common/components/StatItem';
 import Grid from '@material-ui/core/Grid';
+import { Hidden } from '@material-ui/core';
 
 export interface TitleParams {
   title: string;
@@ -66,49 +67,72 @@ export const TitleFragment = (props: TitleParams) => {
       {/* title */}
       <Typography css={style[0]}>{props.title}</Typography>
       <Box height="15px" />
-      <Grid container xs={12} lg={12}>
-        <Grid item xs={12} lg={6}>
-          {/* ---------------------------- */}
-          {/* id */}
-          {props.id && (
-            <React.Fragment>
-              <Typography css={style[1]}>{props.id}</Typography>
-              <Box height="10px" />
-            </React.Fragment>
-          )}
+      {/* todo: add identifier to hide or show */}
+      <Hidden mdUp>
+        <Grid
+          css={`
+            outline: 2px solid green;
+          `}
+          item
+          container
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+        >
+          <Grid item xs={12} lg={6}>
+            {/* ---------------------------- */}
+            {/* id */}
+            {props.id && (
+              <React.Fragment>
+                <Typography css={style[1]}>{props.id}</Typography>
+                <Box height="10px" />
+              </React.Fragment>
+            )}
 
-          {/* ---------------------------- */}
-          {/* note */}
-          {props.note && (
-            <React.Fragment>
-              <Typography css={style[2]}>{props.note}</Typography>
-              <Box height="10px" />
-            </React.Fragment>
-          )}
+            {/* ---------------------------- */}
+            {/* note */}
+            {props.note && (
+              <React.Fragment>
+                <Typography css={style[2]}>{props.note}</Typography>
+                <Box height="10px" />
+              </React.Fragment>
+            )}
 
-          {/* ---------------------------- */}
-          {/* url */}
-          {props.url && (
-            <Typography css={style[3]}>
-              <a href={props.url} target="_blank" rel="noopener noreferrer">
-                {props.url_note}
-              </a>
-            </Typography>
+            {/* ---------------------------- */}
+            {/* url */}
+            {props.url && (
+              <Typography css={style[3]}>
+                <a href={props.url} target="_blank" rel="noopener noreferrer">
+                  {props.url_note}
+                </a>
+              </Typography>
+            )}
+          </Grid>
+          {/* ---------------------------------------------------------------------*/}
+          {/* stat fragment */}
+          {props.stats && (
+            <Grid
+              item
+              container
+              xs={12}
+              lg={6}
+              alignItems="center"
+              wrap="nowrap"
+            >
+              {(props.stats || []).map((stat: any, index: number) => (
+                <React.Fragment>
+                  <StatItem label={stat.label} value={stat.value} />
+                  {index < (props.stats || []).length - 1 && (
+                    <StatItemDivider />
+                  )}
+                </React.Fragment>
+              ))}
+            </Grid>
           )}
         </Grid>
-        {/* ---------------------------------------------------------------------*/}
-        {/* stat fragment */}
-        {props.stats && (
-          <Grid item container xs={12} lg={6} alignItems="center" wrap="nowrap">
-            {(props.stats || []).map((stat: any, index: number) => (
-              <React.Fragment>
-                <StatItem label={stat.label} value={stat.value} />
-                {index < (props.stats || []).length - 1 && <StatItemDivider />}
-              </React.Fragment>
-            ))}
-          </Grid>
-        )}
-      </Grid>
+      </Hidden>
     </React.Fragment>
   );
 };

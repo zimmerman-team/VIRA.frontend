@@ -112,33 +112,56 @@ workflows:
       # post-steps:
       # - store_test_results:
       # path: cypress/results
-      - deploy-dev:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: /feature\/.*/
-      - deploy-test:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: develop
-      - deploy-staging:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: master
-      - deploy-storybook:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: develop
+      #- deploy-test:
+
+   #   - deploy-dev:
+    #      requires:
+     #       - cypress/install
+      #    filters:
+       #     branches:
+        #      only: /feature\/.*/
+     # - deploy-test:
+      #    requires:
+       #     - cypress/install
+        #  filters:
+         #   branches:
+          #    only: develop
+    #  - deploy-staging:
+     #     requires:
+      #      - cypress/install
+       #   filters:
+        #    branches:
+         #     only: master
+     # - deploy-storybook:
+      #    requires:
+       #     - cypress/install
+        #  filters:
+         #   branches:
+          #    only: develop
       #- deploy-production:
+
       #    requires:
       #      - cypress/install
       #    filters:
       #      branches:
-      #        only: master
+
+      #        only: feature/
+      # - deploy-staging:
+      # requires:
+      # - cypress/install
+      # filters:
+      # branches:
+      # only: develop
+    #  - deploy-storybook:
+    #     requires:
+    #       - cypress/install
+    # filters:
+    # branches:
+    # only: develop
+    #- deploy-production:
+    #    requires:
+    #      - cypress/install
+    #    filters:
+    #      branches:
+    #        only: master
+
