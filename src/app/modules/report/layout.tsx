@@ -1,11 +1,11 @@
 import React from 'react';
 import 'styled-components/macro';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Box } from '@material-ui/core';
 import { ReportModuleRoutes } from 'app/modules/report/routes';
 import { BottomNav } from 'app/modules/report/common/bottom-nav';
 import { CreateReportLayoutModel } from 'app/modules/report/model';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
-import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
+import { HorizontalStepper } from 'app/components/navigation/HorizontalStepper';
 
 export const CreateReportLayout = (props: CreateReportLayoutModel) => (
   <React.Fragment>
@@ -25,6 +25,8 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
           font-size: 20px;
           font-weight: 500;
           line-height: 28px;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #e8e8e8;
         `}
       >
         Report
@@ -34,23 +36,25 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item xs={12} lg={12}>
-      <TabNavigator
-        items={props.tabs}
-        onTabChange={props.changeRoute}
+      <HorizontalStepper
+        steps={props.tabs}
+        onStepChange={props.changeRoute}
         initialTabIndex={props.initialTabIndex}
       />
     </Grid>
+
+    <Box width="100%" height="40px" />
 
     <ReportModuleRoutes
       step2Enabled={props.step2Enabled}
       step3Enabled={props.step3Enabled}
       step4Enabled={props.step4Enabled}
+      step5Enabled={props.step5Enabled}
       outcomesProps={props.outcomesProps}
+      policyPrioritiesProps={props.policyPrioritiesProps}
       indicatorVerificationProps={props.indicatorVerificationProps}
       challengesPlansProps={props.challengesPlansProps}
     />
-
-    {/* <AddMediaLayout /> */}
 
     <Grid item xs={12} lg={12}>
       <BottomNav

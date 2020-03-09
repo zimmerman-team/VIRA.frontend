@@ -14,6 +14,8 @@ export interface IntentTexFieldSingleLineParams {
   type?: string;
   min?: number;
   disabled?: boolean;
+  smallWidth?: boolean;
+  fullWidth?: boolean;
 }
 
 export const IntentTexFieldSingleLine = (
@@ -42,14 +44,15 @@ export const IntentTexFieldSingleLine = (
       </Typography>
 
       <SingleMultiLineTextField
-        fullWidth
         value={props.value}
         id={props.componentID}
         setValue={props.setValue}
+        fullWidth={props.fullWidth}
         type={props.type || 'text'}
         min={props.min}
         css={`
-          width: 90px;
+          width: ${props.smallWidth ? '88px' : ''};
+          height: ${props.smallWidth ? '32px' : ''};
         `}
         disabled={props.disabled}
       />

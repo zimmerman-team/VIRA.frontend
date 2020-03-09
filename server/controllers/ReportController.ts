@@ -148,6 +148,7 @@ export function addReport(req: any, res: any) {
               report.total_target_beneficiaries_commited =
                 data.total_target_beneficiaries_commited;
               report.budget = data.budget;
+              report.insContribution = data.insContribution;
               report.key_outcomes = data.key_outcomes;
               report.monitor_report_outcomes = data.monitor_report_outcomes;
               report.media = data.media;

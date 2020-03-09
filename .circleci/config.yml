@@ -7,6 +7,19 @@ version: 2.1
 #   - ssh_target
 #   - ssh_path
 jobs:
+  deploy-dev:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: eval ssh-agent -s
+      - run: sudo apt install rsync
+      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-dev/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-dev"
+      - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
+
   deploy-test:
     docker:
       - image: circleci/node:12.14.1-stretch-browsers
@@ -17,19 +30,8 @@ jobs:
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-test/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-test"
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
-
-  deploy-staging:
-    docker:
-      - image: circleci/node:12.14.1-stretch-browsers
-    working_directory: ~/project
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: eval ssh-agent -s
-      - run: sudo apt install rsync
-      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-      - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
 
   deploy-storybook:
     docker:
@@ -44,7 +46,7 @@ jobs:
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run: rsync -O -ave ssh ~/project/storybook-static zz@206.189.241.202:~/insinger-storybook
 
-  deploy-production:
+  deploy-staging:
     docker:
       - image: circleci/node:12.14.1-stretch-browsers
     working_directory: ~/project
@@ -54,12 +56,44 @@ jobs:
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-staging/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install; echo '"$SSH_STAGING_PASS"' | sudo -S supervisorctl restart insinger-staging"
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
+
+  load_envs:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Load environment variables based on branch
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
+            else
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
+            fi
+            source $BASH_ENV
 
 workflows:
   build-and-test:
     jobs:
+      - load_envs
       - cypress/install:
+          requires:
+            - load_envs
           executor: cypress/base-12-6-0
           yarn: true
           build: yarn build
@@ -79,10 +113,38 @@ workflows:
       # - store_test_results:
       # path: cypress/results
       #- deploy-test:
+
+   #   - deploy-dev:
+    #      requires:
+     #       - cypress/install
+      #    filters:
+       #     branches:
+        #      only: /feature\/.*/
+     # - deploy-test:
+      #    requires:
+       #     - cypress/install
+        #  filters:
+         #   branches:
+          #    only: develop
+    #  - deploy-staging:
+     #     requires:
+      #      - cypress/install
+       #   filters:
+        #    branches:
+         #     only: master
+     # - deploy-storybook:
+      #    requires:
+       #     - cypress/install
+        #  filters:
+         #   branches:
+          #    only: develop
+      #- deploy-production:
+
       #    requires:
       #      - cypress/install
       #    filters:
       #      branches:
+
       #        only: feature/
       # - deploy-staging:
       # requires:
@@ -102,3 +164,4 @@ workflows:
     #    filters:
     #      branches:
     #        only: master
+

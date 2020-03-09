@@ -11,6 +11,7 @@ export const FieldDescription = (props: FieldDescriptionParams) => (
     color="textPrimary"
     css={`
       line-height: 1.3 !important;
+      font-size: 17.5px !important;
     `}
   >
     {props.text}

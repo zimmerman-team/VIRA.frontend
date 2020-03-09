@@ -1,14 +1,8 @@
 // global
 import React from 'react';
 import { Route } from 'react-router-dom';
-import {
-  Box,
-  Grid,
-  Hidden,
-  Typography,
-  useMediaQuery,
-} from '@material-ui/core';
 import { get, find, uniqBy } from 'lodash';
+import { Grid, Hidden, Typography, useMediaQuery } from '@material-ui/core';
 
 // absolute
 import { BubbleChart } from 'app/components/charts/Bubble';
@@ -208,7 +202,7 @@ export const ReportDetailLayout = (props: any) => (
     </Grid>
     {props.report.media.length > 0 && (
       <Grid item lg={12}>
-        <OutcomeCard title="Media" media={props.report.media} />
+        <OutcomeCard title="Media" media={{ tileData: props.report.media }} />
       </Grid>
     )}
     <Grid item lg={12}>
