@@ -84,22 +84,21 @@ workflows:
       #    filters:
       #      branches:
       #        only: feature/
-      - deploy-staging:
-          requires:
-            - cypress/install
-          filters:
-          branches:
-          only: develop
-
-      - deploy-storybook:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: develop
-      #- deploy-production:
-      #    requires:
-      #      - cypress/install
-      #    filters:
-      #      branches:
-      #        only: master
+      # - deploy-staging:
+      # requires:
+      # - cypress/install
+      # filters:
+      # branches:
+      # only: develop
+    #  - deploy-storybook:
+    #     requires:
+    #       - cypress/install
+    # filters:
+    # branches:
+    # only: develop
+    #- deploy-production:
+    #    requires:
+    #      - cypress/install
+    #    filters:
+    #      branches:
+    #        only: master

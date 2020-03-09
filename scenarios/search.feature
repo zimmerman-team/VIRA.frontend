@@ -21,3 +21,16 @@ Feature: Search
              When search field is active
              Then I click outside of the
               And the search field is closed
+
+
+        Scenario: i click on item in search result
+            Given i am "logged in" as "user"
+             When i click on "search button"
+             Then the "search field" should be "visible"
+              And i type "Amsterdam" in the "search fields"
+             Then i should see "search result"
+             Then i select "projects tab" of "search result"
+              And i click on the "first item" in "search result"
+             Then i should be redirected to the "project detail page"
+
+            
