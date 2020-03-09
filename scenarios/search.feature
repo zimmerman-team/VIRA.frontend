@@ -23,7 +23,7 @@ Feature: Search
               And the search field is closed
 
 
-        Scenario: i click on item in search result
+        Scenario: i click on a project in search result
             Given i am "logged in" as "user"
              When i click on "search button"
              Then the "search field" should be "visible"
@@ -32,5 +32,37 @@ Feature: Search
              Then i select "projects tab" of "search result"
               And i click on the "first item" in "search result"
              Then i should be redirected to the "project detail page"
+
+
+        Scenario: i click on a grantee in search result
+            Given i am "logged in" as "user"
+             When i click on "search button"
+             Then the "search field" should be "visible"
+              And i type "Amsterdam" in the "search fields"
+             Then i should see "search result"
+             Then i select "grantees tab" of "search result"
+              And i click on the "first item" in "search result"
+             Then i should be redirected to the "grantee detail page"
+
+        Scenario: i click on a report in search result
+            Given i am "logged in" as "user"
+             When i click on "search button"
+             Then the "search field" should be "visible"
+              And i type "Amsterdam" in the "search fields"
+             Then i should see "search result"
+             Then i select "reports tab" of "search result"
+              And i click on the "first item" in "search result"
+             Then i should be redirected to the "grantee detail page"
+
+
+        Scenario: i click on an item in search result
+            Given i am "logged in" as "user"
+             When i click on "search button"
+             Then the "search field" should be "visible"
+              And i type "Amsterdam" in the "search fields"
+             Then i should see "search result"
+             Then i select "all tab" of "search result"
+              And i click on the "first item" in "search result"
+             Then i should be redirected to the "grantee detail page"
 
             
