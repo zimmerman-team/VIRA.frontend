@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 // @ts-nocheck
 import React from 'react';
+import get from 'lodash/get';
 import find from 'lodash/find';
 import minBy from 'lodash/minBy';
 import { ProjectPalette } from 'app/theme';
@@ -50,7 +51,7 @@ export function BubbleChart(props: Props) {
 
   React.useEffect(() => {
     if (props.data.children) {
-      setMinValue(minBy(props.data.children, 'loc').loc);
+      setMinValue(get(minBy(props.data.children, 'loc'), 'loc', 0));
     }
   }, [props.data]);
 
