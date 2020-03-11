@@ -6,10 +6,10 @@ import { ProjectPalette } from 'app/theme';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import { StatItem } from 'app/modules/common/components/StatItem';
 import Grid from '@material-ui/core/Grid';
-import { Hidden } from '@material-ui/core';
 
 export interface TitleParams {
   title: string;
+  showMoreThanTitle?: boolean;
   id?: string;
   date?: string;
   note?: string;
@@ -67,20 +67,8 @@ export const TitleFragment = (props: TitleParams) => {
       {/* title */}
       <Typography css={style[0]}>{props.title}</Typography>
       <Box height="15px" />
-      {/* todo: add identifier to hide or show */}
-      <Hidden mdUp>
-        <Grid
-          css={`
-            outline: 2px solid green;
-          `}
-          item
-          container
-          xs={12}
-          sm={12}
-          md={12}
-          lg={12}
-          xl={12}
-        >
+      {props.showMoreThanTitle && (
+        <Grid item container xs={12} sm={12} md={12} lg={12} xl={12}>
           <Grid item xs={12} lg={6}>
             {/* ---------------------------- */}
             {/* id */}
@@ -132,7 +120,7 @@ export const TitleFragment = (props: TitleParams) => {
             </Grid>
           )}
         </Grid>
-      </Hidden>
+      )}
     </React.Fragment>
   );
 };

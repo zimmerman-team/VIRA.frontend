@@ -38,6 +38,7 @@ export const ReportDetailLayout = (props: any) => (
     {/* title fragment */}
     <Grid item xs={12} lg={12}>
       <TitleFragment
+        showMoreThanTitle
         note={props.report.date}
         title={props.report.title}
         id={`Report ID: ${props.report.reportID}`}

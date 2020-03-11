@@ -54,6 +54,30 @@ export function formatReportDetail(data: any) {
     `${[reportDetailRecord.policy_priority.name]}`,
     null
   );
+  const bubbleChartData = [];
+  if (sdg) {
+    bubbleChartData.push({
+      name: sdg.name,
+      color: sdg.color,
+      loc: reportDetailRecord.budget,
+      ppName: reportDetailRecord.policy_priority.name,
+      number: sdg.number,
+      targetValue: reportDetailRecord.total_target_beneficiaries,
+      targetPercentage:
+        (reportDetailRecord.total_target_beneficiaries_commited /
+          reportDetailRecord.total_target_beneficiaries) *
+        100,
+    });
+    Object.keys(ppToSdg).forEach((ppKey: string) => {
+      if (get(ppToSdg, `[${ppKey}].name`, '') !== sdg.name) {
+        bubbleChartData.push({
+          ...get(ppToSdg, `[${ppKey}]`, {}),
+          ppName: ppKey,
+          opacity: 0.2,
+        });
+      }
+    });
+  }
   return {
     id: reportDetailRecord._id,
     title: reportDetailRecord.title,
@@ -114,15 +138,7 @@ export function formatReportDetail(data: any) {
       },
     ],
     budget: reportDetailRecord.budget,
-    bubbleChartData: sdg
-      ? [
-          {
-            name: sdg.name,
-            color: sdg.color,
-            loc: reportDetailRecord.budget,
-          },
-        ]
-      : [],
+    bubbleChartData,
     mapData: data.mapData,
   };
 }
