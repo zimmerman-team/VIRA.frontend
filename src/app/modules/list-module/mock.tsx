@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import { mockDataVar8 as mockDatatable } from 'app/components/datadisplay/Table/mock';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';

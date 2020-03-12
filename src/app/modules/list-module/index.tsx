@@ -1,27 +1,41 @@
-import Grid from '@material-ui/core/Grid';
+// @ts-nocheck
+/* eslint-disable default-case */
+import { Grid, Tabs, Tab } from '@material-ui/core';
+import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import TableModule from 'app/components/datadisplay/Table';
-import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import {
   formatTableDataForGrantee,
   formatTableDataForProject,
+  formatTableDataForReport,
   getBaseTableForGrantee,
   getBaseTableForProject,
+  getBaseTableForReport,
 } from 'app/modules/list-module/utils';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 /* utils */
 import get from 'lodash/get';
 import React from 'react';
-import { Route } from 'react-router-dom';
-import 'styled-components/macro';
-import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
-import { getBaseTableForReport } from 'app/modules/list-module/utils';
-import { formatTableDataForReport } from 'app/modules/list-module/utils';
+import { css } from 'styled-components/macro';
 
-type Props = {
+import { useEffectOnce } from 'react-use';
+
+import { useRouteMatch } from 'react-router-dom';
+import {
+  useStyles,
+  TabStyle,
+  a11yProps,
+  TabPanel,
+} from './common/TabPanelProps';
+
+type ListModuleParams = {
   tabNav: TabNavigatorParams;
+  hideProjects?: boolean;
+  hideGrantees?: boolean;
+  hideReports?: boolean;
+  focus?: number;
 };
 
-export const ListModule = (props: Props) => {
+export const ListModule = (props: ListModuleParams) => {
   // set state
   const [baseTableForProject, setBaseTableForProject] = React.useState(
     getBaseTableForProject()
@@ -86,30 +100,54 @@ export const ListModule = (props: Props) => {
     });
   }, [allReportsData]);
 
+  const classes = useStyles();
+  const [value, setValue] = React.useState(props.focus ? props.focus : 0);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const TabData = props.tabNav && props.tabNav.items;
+
   return (
     <React.Fragment>
-      {/* using this element as an helper */}
-      <Grid item xs={3} sm={9} />
+      {/* tab navigation */}
+      <Grid container item lg={12} justify="flex-end">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+        >
+          {!props.hideProjects && (
+            <Tab css={TabStyle} label="Projects" {...a11yProps(0)} />
+          )}
 
-      {/* ------------------------------------------------------------------ */}
-      {/* projects table navigation */}
-      <Grid item xs={9} sm={3}>
-        <TabNavigator {...props.tabNav} />
+          {!props.hideGrantees && (
+            <Tab css={TabStyle} label="Grantees" {...a11yProps(1)} />
+          )}
+
+          {!props.hideReports && (
+            <Tab css={TabStyle} label="Reports" {...a11yProps(2)} />
+          )}
+        </Tabs>
       </Grid>
 
-      {/* ------------------------------------------------------------------ */}
-      {/* lists */}
-      {/* ---------------------------------------------------------------------*/}
-      <Grid item xs={12} lg={12}>
-        <Route path={props.tabNav.items[0].path}>
+      {/* tab content */}
+      <Grid item lg={12}>
+        <TabPanel value={value} index={0}>
+          {/* projects table */}
           <TableModule {...baseTableForProject} />
-        </Route>
-        <Route path={props.tabNav.items[1].path}>
+        </TabPanel>
+
+        <TabPanel value={value} index={1}>
+          {/* grantees table */}
           <TableModule {...baseTableForGrantee} />
-        </Route>
-        <Route path={props.tabNav.items[2].path}>
-          <TableModule {...baseTableForReport} cssVariant={'reportsVariant'} />
-        </Route>
+        </TabPanel>
+
+        <TabPanel value={value} index={2}>
+          {/* reports table */}
+          <TableModule {...baseTableForReport} cssVariant="reportsVariant" />
+        </TabPanel>
       </Grid>
     </React.Fragment>
   );

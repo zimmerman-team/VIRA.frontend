@@ -1,3 +1,4 @@
+// @ts-nocheck
 // global
 import React from 'react';
 import { useTitle } from 'react-use';

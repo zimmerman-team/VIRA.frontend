@@ -87,6 +87,6 @@ export const GranteeDetailLayout = (props: GranteeParams) => (
     {/* projects */}
 
     <Box width="100%" height="50px" />
-    <ListModule tabNav={getNavTabItems(TabNavMockList, 'viz')} />
+    <ListModule hideGrantees tabNav={getNavTabItems(TabNavMockList, 'viz')} />
   </React.Fragment>
 );

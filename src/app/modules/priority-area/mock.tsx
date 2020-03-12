@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { NavItemParams } from 'app/modules/common/consts';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 
