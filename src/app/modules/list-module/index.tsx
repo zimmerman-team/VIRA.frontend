@@ -107,27 +107,6 @@ export const ListModule = (props: ListModuleParams) => {
     setValue(newValue);
   };
 
-  // const currentPage = useRouteMatch('/list/:id').params.id;
-
-  // const curPage = (currentPage && currentPage) || 'projects';
-
-  // useEffectOnce(() => {
-  //   console.log(currentPage);
-  //   switch (currentPage) {
-  //     case 'projects':
-  //       setValue(0);
-  //       break;
-  //     case 'grantees':
-  //       setValue(1);
-  //       break;
-  //     case 'reports':
-  //       setValue(2);
-  //       break;
-  //     default:
-  //       setValue(0);
-  //   }
-  // });
-
   const TabData = props.tabNav && props.tabNav.items;
 
   return (
