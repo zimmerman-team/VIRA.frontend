@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable default-case */
 import { Grid, Tabs, Tab } from '@material-ui/core';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
@@ -15,16 +16,16 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import get from 'lodash/get';
 import React from 'react';
 import { css } from 'styled-components/macro';
+
+import { useEffectOnce } from 'react-use';
+
+import { useRouteMatch } from 'react-router-dom';
 import {
   useStyles,
   TabStyle,
   a11yProps,
   TabPanel,
 } from './common/TabPanelProps';
-
-import { useEffectOnce } from 'react-use';
-
-import { useRouteMatch } from 'react-router-dom';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;

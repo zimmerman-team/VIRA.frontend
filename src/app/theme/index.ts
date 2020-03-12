@@ -188,15 +188,41 @@ export const theme = createMuiTheme({
       },
     },
     MuiTabs: {
+      root: { height: '30px!important', minHeight: 'initial!important' },
+      fixed: { height: '30px' },
       indicator: {
         height: '4px',
       },
     },
+    MuiButtonBase: {
+      root: {
+        width: 'initial',
+        minWidth: 'initial',
+        // focusRipple: false,
+        // disableRipple: true,
+        padding: '0px!important',
+      },
+    },
     MuiTab: {
+      root: {
+        width: 'initial',
+        minWidth: 'initial!important',
+        marginLeft: '50px!important',
+        // marginRight: '24px!important',
+        minHeight: 'initial!important',
+      },
+      // selected: { display: 'none' },
       wrapper: {
         color: ProjectPalette.common.black,
         fontWeight: 600,
         fontSize: '14px',
+        // width: 'initial',
+        // minWidth: 'initial',
+      },
+    },
+    MuiTouchRipple: {
+      root: {
+        display: 'none',
       },
     },
     MuiCardHeader: {

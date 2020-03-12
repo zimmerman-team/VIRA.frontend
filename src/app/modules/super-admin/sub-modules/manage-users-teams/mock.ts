@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { mockData as TeamUserCardMock } from 'app/components/surfaces/Cards/TeamUserCard/mock';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
