@@ -1,5 +1,6 @@
 import 'styled-components/macro';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Theme } from '@material-ui/core/styles';
 import {
   Drawer,
@@ -85,7 +86,9 @@ export function AppSideBar(props: AppSideBarParams) {
                   padding-left: ${isMobileWidth ? '45px' : 0};
                 `}
               >
-                <Logo />
+                <NavLink to="/">
+                  <Logo />
+                </NavLink>
               </div>
               <Hidden smUp>
                 <IconButton

@@ -99,6 +99,12 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           <SearchIcon />
         </IconButton>
       )}
+      <div
+        css={`
+          display: flex;
+          width: 10px;
+        `}
+      />
       {/* notifications disabled for now */}
       {/* <Popper
         open={open}
