@@ -8,6 +8,7 @@ import get from 'lodash/get';
 import React from 'react';
 import { useDebounce } from 'react-use';
 import 'styled-components/macro';
+import { setDefaultResultType } from './utils/setDefaultResultType';
 
 type SearchProps = {
   handleResultClick: any;
@@ -63,6 +64,14 @@ export const Search = (props: SearchProps) => {
           reports: [],
         })
       )
+    );
+    setDefaultResultType(
+      get(generalSearchData, 'data', {
+        projects: [],
+        organisations: [],
+        reports: [],
+      }),
+      setResultType
     );
   }, [generalSearchData]);
 
