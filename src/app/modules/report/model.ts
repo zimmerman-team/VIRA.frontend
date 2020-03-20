@@ -101,4 +101,5 @@ export type CreateReportLayoutModel = {
   step5Enabled: boolean;
   showSubmitBtn: boolean;
   submit: Function;
+  loading: boolean;
 };

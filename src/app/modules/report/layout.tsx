@@ -6,10 +6,12 @@ import { BottomNav } from 'app/modules/report/common/bottom-nav';
 import { CreateReportLayoutModel } from 'app/modules/report/model';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { HorizontalStepper } from 'app/components/navigation/HorizontalStepper';
+import { PageLoader } from '../common/page-loader';
 
 export const CreateReportLayout = (props: CreateReportLayoutModel) => (
   <React.Fragment>
     {/* <Grid item container xs={12} lg={12} spacing={4}> */}
+    {props.loading && <PageLoader />}
     {/* ---------------------------------------------------------------------*/}
     {/* breadcrumbs */}
     <Grid item lg={12}>
