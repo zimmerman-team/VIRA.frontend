@@ -102,5 +102,6 @@ export type CreateReportLayoutModel = {
   showSubmitBtn: boolean;
   showDraftSubmitBtn: boolean;
   submit: Function;
+  loading: boolean;
   saveDraft: Function;
 };

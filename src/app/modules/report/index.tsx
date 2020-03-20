@@ -20,6 +20,7 @@ import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
 import { uploadFiles } from './utils/uploadFiles';
 import { LocationModel } from './model';
+import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -98,6 +99,9 @@ function CreateReportFunc(props: any) {
     actions => actions.allProjects.fetch
   );
   const addReportAction = useStoreActions(actions => actions.addReport.fetch);
+  const addReportClearAction = useStoreActions(
+    actions => actions.addReport.clear
+  );
   const snackbarAction = useStoreActions(
     actions => actions.syncVariables.setSnackbar
   );
@@ -115,10 +119,13 @@ function CreateReportFunc(props: any) {
     get(state.allProjects.data, 'data', [])
   );
   const addReportData = useStoreState(state => state.addReport.data);
+  const addReportLoading = useStoreState(state => state.addReport.loading);
   const projectBudgetData = useStoreState(
     state => state.projectBudgetData.data
   );
   const reportDetailData = useStoreState(state => state.reportDetail.data);
+
+  useWindowUnloadEffect(addReportClearAction, true);
 
   React.useEffect(() => {
     setInitialTabIndex(
@@ -426,6 +433,7 @@ function CreateReportFunc(props: any) {
 
   return (
     <CreateReportLayout
+      loading={addReportLoading}
       submit={onSubmit}
       saveDraft={onDraftSubmit}
       tabs={getTabs(

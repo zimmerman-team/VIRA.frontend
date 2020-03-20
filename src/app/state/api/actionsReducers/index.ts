@@ -51,7 +51,10 @@ export const socketAPIModel = <QueryModel, ResponseModel>(): ApiModel<
     state.success = false;
   }),
   clear: action(state => {
+    state.loading = false;
+    state.success = false;
     state.data = null;
+    state.errorData = null;
   }),
   fetch: thunk(async (actions, query: RequestValues<QueryModel>) => {
     actions.onRequest();

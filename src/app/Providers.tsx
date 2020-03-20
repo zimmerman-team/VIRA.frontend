@@ -17,9 +17,9 @@ import { Client } from 'app/state/api/Client';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import '../index.css';
 
-import { JssProvider } from 'react-jss';
-import { create } from 'jss';
-import preset from 'jss-preset-default';
+// import { JssProvider } from 'react-jss';
+// import { create } from 'jss';
+// import preset from 'jss-preset-default';
 // import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 
 // const jss = create(preset());
