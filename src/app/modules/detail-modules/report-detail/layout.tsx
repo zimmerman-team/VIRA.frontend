@@ -23,6 +23,7 @@ import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import 'styled-components/macro';
 import { SingleLineGridList } from 'app/components/layout/GridList/singleLineGridList';
 import { mock } from 'app/components/layout/GridList/singleLineGridList/mock';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 
 export const ReportDetailLayout = (props: any) => (
   <React.Fragment>
@@ -34,6 +35,14 @@ export const ReportDetailLayout = (props: any) => (
         previousLocations={[{ label: 'Reports', url: '/list/reports' }]}
       />
     </Grid>
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* button: generate report */}
+    <Hidden xsDown>
+      <Grid lg={12} container justify="flex-end">
+        <ContainedButton text="Edit Report" onClick={props.editReport} />
+      </Grid>
+    </Hidden>
 
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
@@ -70,6 +79,14 @@ export const ReportDetailLayout = (props: any) => (
         height: 32px;
       `}
     />
+
+    {/* ---------------------------------------------------------------------*/}
+    {/* button: generate report */}
+    <Hidden smUp>
+      <Grid container xs={12}>
+        <ContainedButton text="Edit Report" onClick={props.editReport} />
+      </Grid>
+    </Hidden>
 
     {/* ---------------------------------------------------------------------*/}
     {/* charts */}

@@ -59,11 +59,13 @@ export const CreateReportLayout = (props: CreateReportLayoutModel) => (
     <Grid item xs={12} lg={12}>
       <BottomNav
         submit={props.submit}
+        saveDraft={props.saveDraft}
         next={props.onNextBtnClick}
         back={props.onBackBtnClick}
         showSubmitBtn={props.showSubmitBtn}
         nextDisabled={props.nextBtnDisabled}
         backDisabled={props.backBtnDisabled}
+        showDraftSubmitBtn={props.showDraftSubmitBtn}
       />
     </Grid>
     {/* </Grid> */}

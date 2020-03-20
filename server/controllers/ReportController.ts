@@ -14,6 +14,7 @@ export function getReports(req: any, res: any) {
 
   Report.find(projectID ? { project: projectID } : {})
     .populate('location')
+    .populate('project')
     .populate('target_beneficiaries')
     .populate('policy_priority')
     .exec((err: any, reports: any) => {
@@ -37,26 +38,28 @@ export function getReport(req: any, res: any) {
       if (err) {
         res(JSON.stringify({ status: 'error', message: err.message }));
       }
-      const mapData = {
-        mapMarkers: report.location
-          ? [
-              {
-                name: report.place_name || report.country,
-                longitude: report.location.long,
-                latitude: report.location.lat,
-                value: report.budget,
-              },
-            ]
-          : [],
-        countryFeatures: {
-          ...countryFeaturesData,
-          features: filter(
-            countryFeaturesData.features,
-            f => report.country === f.properties.name
-          ),
-        },
-      };
-      res(JSON.stringify({ report: report, mapData: mapData }));
+      if (report) {
+        const mapData = {
+          mapMarkers: report.location
+            ? [
+                {
+                  name: report.place_name || report.country,
+                  longitude: report.location.long,
+                  latitude: report.location.lat,
+                  value: report.budget,
+                },
+              ]
+            : [],
+          countryFeatures: {
+            ...countryFeaturesData,
+            features: filter(
+              countryFeaturesData.features,
+              f => report.country === f.properties.name
+            ),
+          },
+        };
+        res(JSON.stringify({ report: report, mapData: mapData }));
+      }
     });
 }
 
@@ -68,17 +71,24 @@ async function getPolicyPriority(data: any) {
     [data].forEach((item: any) => {
       policyPriority.findOne({ name: item }).exec((err: any, priority: any) => {
         if (err || !priority) {
-          policyPriority.create({ name: item }, (err2: any, priority2: any) => {
-            if (err2) {
-              console.log('err2', err2);
-            } else {
-              result.push(priority2);
-              count++;
-              if (count === totalCount) {
-                resolve(result[0]);
+          if (item === '') {
+            resolve(null);
+          } else {
+            policyPriority.create(
+              { name: item },
+              (err2: any, priority2: any) => {
+                if (err2) {
+                  console.log('err2', err2);
+                } else {
+                  result.push(priority2);
+                  count++;
+                  if (count === totalCount) {
+                    resolve(result[0]);
+                  }
+                }
               }
-            }
-          });
+            );
+          }
         } else {
           result.push(priority);
           count++;
@@ -133,6 +143,7 @@ export function addReport(req: any, res: any) {
               res(JSON.stringify({ status: 'error', message: err.message }));
             }
             getLocation(data.location).then((location: any) => {
+              // console.log(pp);
               let report = new Report();
               report.project = project;
               report.title = data.title;
@@ -157,6 +168,7 @@ export function addReport(req: any, res: any) {
               report.other_project_outcomes = data.other_project_outcomes;
               report.plans = data.plans;
               report.other_comments = data.other_comments;
+              report.isDraft = data.isDraft ? data.isDraft : false;
               report.save((err: any, report: any) => {
                 if (err) {
                   res(
@@ -170,6 +182,113 @@ export function addReport(req: any, res: any) {
         );
       }
     );
+  });
+}
+
+async function removeTargetBeneficiaries(data: any) {
+  return new Promise((resolve, reject) => {
+    if (data) {
+      targetBeneficiary.deleteMany({ _id: data }, (err1: any, result: any) => {
+        if (err1) {
+          resolve('failure');
+        }
+        resolve('success');
+      });
+    } else {
+      resolve('success');
+    }
+  });
+}
+
+// async function removePolicyPriorities(data: any) {
+//   return new Promise((resolve, reject) => {
+//     if (data) {
+//       policyPriority.deleteMany({ _id: data }, (err1: any, result: any) => {
+//         if (err1) {
+//           resolve('failure');
+//         }
+//         resolve('success');
+//       });
+//     } else {
+//       resolve('success');
+//     }
+//   });
+// }
+
+// edit report
+export function editReport(req: any, res: any) {
+  const { data } = req.query;
+
+  Report.findById(data.rid, (err: any, report: any) => {
+    if (err) {
+      res(JSON.stringify({ status: 'error', message: err.message }));
+    }
+    if (report) {
+      removeTargetBeneficiaries(report.targetBeneficiaries).then(
+        (result: any) => {
+          // removePolicyPriorities(report.policy_priority).then(
+          //   (result1: any) => {
+          getPolicyPriority(data.policy_priority).then(pp => {
+            targetBeneficiary.create(
+              data.target_beneficiaries,
+              (err3: any, tb: any) => {
+                if (err3) {
+                  res(
+                    JSON.stringify({
+                      status: 'error',
+                      message: err3.message,
+                    })
+                  );
+                }
+                getLocation(data.location).then((location: any) => {
+                  report.title = data.title;
+                  report.location = location;
+                  report.place_name = data.place_name;
+                  report.date = new Date().toLocaleDateString();
+                  report.country = data.country;
+                  report.target_beneficiaries = tb;
+                  report.policy_priority = pp;
+                  report.budget = data.budget;
+                  report.total_target_beneficiaries =
+                    data.total_target_beneficiaries;
+                  report.total_target_beneficiaries_commited =
+                    data.total_target_beneficiaries_commited;
+                  report.budget = data.budget;
+                  report.insContribution = data.insContribution;
+                  report.key_outcomes = data.key_outcomes;
+                  report.monitor_report_outcomes = data.monitor_report_outcomes;
+                  report.media = data.media;
+                  report.key_implementation_challenges =
+                    data.key_implementation_challenges;
+                  report.other_project_outcomes = data.other_project_outcomes;
+                  report.plans = data.plans;
+                  report.other_comments = data.other_comments;
+                  report.isDraft = data.isDraft ? data.isDraft : false;
+                  report.save((err5: any, updatedRep: any) => {
+                    if (err5) {
+                      res(
+                        JSON.stringify({
+                          status: 'error',
+                          message: err5.message,
+                        })
+                      );
+                    }
+                    res(
+                      JSON.stringify({
+                        status: 'success',
+                        data: updatedRep,
+                      })
+                    );
+                  });
+                });
+              }
+            );
+          });
+          //   }
+          // );
+        }
+      );
+    }
   });
 }
 

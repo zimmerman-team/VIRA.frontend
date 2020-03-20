@@ -15,7 +15,7 @@ export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
   }
   switch (tabIndex) {
     case 0:
-      return validateOutcomeFields(data.title, data.country);
+      return validateOutcomeFields(data.title, data.country.label);
     case 1:
       return validatePolicyPrioritiesFields(
         data.tarBenTotal,

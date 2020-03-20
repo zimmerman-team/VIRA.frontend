@@ -6,7 +6,12 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 
-function SubmittedLayoutF(props: RouteComponentProps) {
+interface Props extends RouteComponentProps {
+  message: string;
+  showGoToBtn: boolean;
+}
+
+function SubmittedLayoutF(props: Props) {
   const [reportID, setReportID] = React.useState('');
   // redux actions
   const addReportDataClear = useStoreActions(
@@ -38,12 +43,10 @@ function SubmittedLayoutF(props: RouteComponentProps) {
     >
       <Grid item lg={12} justify="center" alignItems="center">
         <Typography variant="subtitle2">
-          {reportID !== ''
-            ? 'Your report has been sent'
-            : 'Something went wrong'}
+          {reportID !== '' ? props.message : 'Something went wrong'}
         </Typography>
         <Box width="100%" height="39px" />
-        {reportID !== '' && (
+        {reportID !== '' && props.showGoToBtn && (
           <ContainedButton text="Go to report" onClick={goToReport} />
         )}
       </Grid>

@@ -128,7 +128,17 @@ export function MainRoutes() {
       </Route>
 
       <Route exact path="/submitted">
-        {redirectUnAuth(SubmittedLayout, storeUser)}
+        {redirectUnAuth(SubmittedLayout, storeUser, {
+          message: 'Your report has been sent',
+          showGoToBtn: true,
+        })}
+      </Route>
+
+      <Route exact path="/draft-submitted">
+        {redirectUnAuth(SubmittedLayout, storeUser, {
+          message: 'Your report has been saved as a draft ',
+          showGoToBtn: false,
+        })}
       </Route>
 
       <Route path="/super-admin/manage-teams/edit/:id">

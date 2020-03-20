@@ -10,6 +10,8 @@ import { tabs } from 'app/modules/report/mock';
 import { CreateReportLayout } from 'app/modules/report/layout';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { AppConfig } from 'app/data';
+import { useQuery } from 'app/utils/useQuery';
+import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
 import { isNavBtnEnabled } from './utils/isNavBtnEnabled';
 import { validateIndVerFields } from './utils/validateIndVerFields';
 import { getTabs } from './utils/getTabs';
@@ -24,6 +26,7 @@ const getTabIndex = (pathname: string, projectID: string): number =>
 
 function CreateReportFunc(props: any) {
   useTitle(`${AppConfig.appTitleLong} Create report`);
+  const query = useQuery();
   // state
   const [project, setProject] = React.useState(undefined);
   const [initialTabIndex, setInitialTabIndex] = React.useState(
@@ -101,6 +104,12 @@ function CreateReportFunc(props: any) {
   const projectBudgetDataAction = useStoreActions(
     actions => actions.projectBudgetData.fetch
   );
+  const reportDetailAction = useStoreActions(
+    actions => actions.reportDetail.fetch
+  );
+  const reportDetailClearAction = useStoreActions(
+    actions => actions.reportDetail.clear
+  );
   // redux data
   const allProjectsData = useStoreState(state =>
     get(state.allProjects.data, 'data', [])
@@ -109,6 +118,7 @@ function CreateReportFunc(props: any) {
   const projectBudgetData = useStoreState(
     state => state.projectBudgetData.data
   );
+  const reportDetailData = useStoreState(state => state.reportDetail.data);
 
   React.useEffect(() => {
     setInitialTabIndex(
@@ -126,6 +136,12 @@ function CreateReportFunc(props: any) {
   }
 
   React.useEffect(() => {
+    if (query.get('rid')) {
+      reportDetailAction({
+        socketName: 'getReport',
+        values: { id: query.get('rid') },
+      });
+    }
     if (allProjectsData.length === 0) {
       allProjectsAction({
         socketName: 'allProject',
@@ -137,7 +153,79 @@ function CreateReportFunc(props: any) {
       socketName: 'getProjectBudgetData',
       values: { projectID: props.match.params.projectID },
     });
+    return () => reportDetailClearAction();
   }, []);
+
+  React.useEffect(() => {
+    if (get(reportDetailData, 'report', null)) {
+      setTitle(get(reportDetailData, 'report.title', ''));
+      setCountry({
+        label: get(reportDetailData, 'report.country', ''),
+        value: get(reportDetailData, 'report.country', ''),
+      });
+      setLocation(
+        get(reportDetailData, 'report.location', null)
+          ? {
+              longitude: get(reportDetailData, 'report.location.long', 0),
+              latitude: get(reportDetailData, 'report.location.lat', 0),
+            }
+          : null
+      );
+      setTarBenTotal(
+        get(reportDetailData, 'report.total_target_beneficiaries', 0)
+      );
+      setTarBenTotal2(
+        get(reportDetailData, 'report.total_target_beneficiaries_commited', 0)
+      );
+      setBeneficiaryCounts(
+        get(
+          reportDetailData,
+          'report.target_beneficiaries',
+          []
+        ).map((b: any) => ({ name: b.name, value: b.value }))
+      );
+      setPolicyPriority({
+        label: get(reportDetailData, 'report.policy_priority.name', ''),
+        value: get(reportDetailData, 'report.policy_priority.name', ''),
+      });
+      if (get(reportDetailData, 'report.media', []).length > 0) {
+        const media = getMediaTileData(
+          get(reportDetailData, 'report.media', [])
+        );
+        const initMedia = {
+          document: [],
+          video: [],
+          picture: [],
+        };
+        media.forEach((m: any) => {
+          get(initMedia, `[${m.type}]`, []).push({
+            name: m.name,
+            size: Math.random(),
+          });
+        });
+        setMedia(initMedia);
+        setMediaAdded(
+          get(reportDetailData, 'report.media', []).map((m: any) => ({
+            path: m,
+          }))
+        );
+      }
+      setBudget(get(reportDetailData, 'report.budget', 0));
+      setInsContribution(get(reportDetailData, 'report.insContribution', 0));
+      setKeyOutcomes(get(reportDetailData, 'report.key_outcomes', ''));
+      setMonRepOutcomes(
+        get(reportDetailData, 'report.monitor_report_outcomes', '')
+      );
+      setKetImplChallenges(
+        get(reportDetailData, 'report.key_implementation_challenges', '')
+      );
+      setOtherProjOutObs(
+        get(reportDetailData, 'report.other_project_outcomes', '')
+      );
+      setFuturePlans(get(reportDetailData, 'report.plans', ''));
+      setOtherComms(get(reportDetailData, 'report.other_comments', ''));
+    }
+  }, [reportDetailData]);
 
   React.useEffect(() => {
     setProjectData();
@@ -145,7 +233,8 @@ function CreateReportFunc(props: any) {
 
   React.useEffect(() => {
     if (get(addReportData, 'status', '') === 'success') {
-      props.history.push('/submitted');
+      const isDraft = get(addReportData, 'data.isDraft', false);
+      props.history.push(`/${isDraft ? 'draft-' : ''}submitted`);
     }
   }, [addReportData]);
 
@@ -156,7 +245,8 @@ function CreateReportFunc(props: any) {
   }, [location]);
 
   const onStepChange = (tabIndex: number) => {
-    props.history.push(tabs[tabIndex].path);
+    const rid = query.get('rid');
+    props.history.push(`${tabs[tabIndex].path}${rid ? `?rid=${rid}` : ''}`);
   };
 
   const onNextBtnClick = () => {
@@ -200,10 +290,19 @@ function CreateReportFunc(props: any) {
       ...media,
       [type]: filter(media[type], (m: any) => m.name !== name),
     });
+    setMediaAdded((prevData: never[]) => {
+      return filter(prevData, (d: any) => {
+        const splits = d.path.split('/');
+        const itemname = splits[splits.length - 1].split('-')[1];
+        return itemname !== name;
+      }) as never[];
+    });
   };
 
   const onSaveMediaCB = (data: any) => {
-    setMediaAdded(data);
+    setMediaAdded((prevData: never[]) => {
+      return [...prevData, ...data] as never[];
+    });
     setOpenMediaModal(false);
     snackbarAction('Files upload completed');
   };
@@ -218,6 +317,8 @@ function CreateReportFunc(props: any) {
       uploadFiles(files, onSaveMediaCB, onSaveMediaError);
     }
   };
+
+  const draftSubmitEnabled = title.length > 0 || country.label.length > 0;
 
   const step2Enabled = validateOutcomeFields(title, country.label);
 
@@ -246,10 +347,12 @@ function CreateReportFunc(props: any) {
 
   const onSubmit = () => {
     if (step2Enabled && step3Enabled && step4Enabled && step5Enabled) {
+      const rid = query.get('rid');
       addReportAction({
-        socketName: 'addReport',
+        socketName: rid ? 'editReport' : 'addReport',
         values: {
           data: {
+            rid,
             title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
@@ -273,6 +376,48 @@ function CreateReportFunc(props: any) {
             other_project_outcomes: otherProjOutObs,
             plans: futurePlans,
             other_comments: otherComms,
+            isDraft: false,
+          },
+        },
+      });
+    }
+  };
+
+  const onDraftSubmit = () => {
+    if (draftSubmitEnabled) {
+      const rid = query.get('rid');
+      addReportAction({
+        socketName: rid ? 'editReport' : 'addReport',
+        values: {
+          data: {
+            rid,
+            title: title === '' ? ' ' : title,
+            project: props.match.params.projectID,
+            target_beneficiaries: beneficiaryCounts,
+            policy_priority: policyPriority.label,
+            location: location
+              ? {
+                  long: (location as LocationModel).longitude,
+                  lat: (location as LocationModel).latitude,
+                }
+              : null,
+            media: mediaAdded.map((m: any) => m.path),
+            country: country.label === '' ? ' ' : country.label,
+            place_name: location ? (location as LocationModel).place : null,
+            total_target_beneficiaries: tarBenTotal,
+            total_target_beneficiaries_commited: tarBenTotal2,
+            budget,
+            insContribution,
+            key_outcomes: keyOutcomes === '' ? ' ' : keyOutcomes,
+            monitor_report_outcomes:
+              monRepOutcomes === '' ? ' ' : monRepOutcomes,
+            key_implementation_challenges:
+              keyImplChallenges === '' ? ' ' : keyImplChallenges,
+            other_project_outcomes:
+              otherProjOutObs === '' ? ' ' : otherProjOutObs,
+            plans: futurePlans === '' ? ' ' : futurePlans,
+            other_comments: otherComms === '' ? ' ' : otherComms,
+            isDraft: true,
           },
         },
       });
@@ -282,6 +427,7 @@ function CreateReportFunc(props: any) {
   return (
     <CreateReportLayout
       submit={onSubmit}
+      saveDraft={onDraftSubmit}
       tabs={getTabs(
         tabs,
         step2Enabled,
@@ -371,6 +517,7 @@ function CreateReportFunc(props: any) {
       step3Enabled={step3Enabled}
       step4Enabled={step4Enabled}
       step5Enabled={step5Enabled}
+      showDraftSubmitBtn={draftSubmitEnabled}
       showSubmitBtn={props.location.pathname.split('/')[3] === 'preview'}
     />
   );
