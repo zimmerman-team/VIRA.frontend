@@ -182,8 +182,8 @@ export const theme = createMuiTheme({
       // Name of the rule
       '@global': {
         '*, *::before, *::after': {
-          transition: 'none !important',
           /* todo: commented because it messes up the search progress bar */
+          // transition: 'none !important',
           // animation: 'none !important',
         },
       },
@@ -201,7 +201,7 @@ export const theme = createMuiTheme({
         minWidth: 'initial',
         // focusRipple: false,
         // disableRipple: true,
-        padding: '0px!important',
+        // padding: '0px!important',
       },
     },
     MuiTab: {
@@ -211,6 +211,7 @@ export const theme = createMuiTheme({
         marginLeft: '50px!important',
         // marginRight: '24px!important',
         minHeight: 'initial!important',
+        padding: '0px 0px 6px 0px',
       },
       // selected: { display: 'none' },
       wrapper: {

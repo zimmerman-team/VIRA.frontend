@@ -8,6 +8,6 @@ export function formatUserTable(data: any) {
     const role = item.app_metadata
       ? get(item.app_metadata, 'authorization.roles[0]', '-')
       : '-';
-    return [item.user_id, title, role, item.user_id];
+    return [item.user_id, title, role.name || role, item.user_id];
   });
 }

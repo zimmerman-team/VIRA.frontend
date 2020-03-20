@@ -6,7 +6,7 @@ import theme from 'app/theme';
 import {
   ThemeProvider,
   StylesProvider,
-  createGenerateClassName,
+  // createGenerateClassName,
 } from '@material-ui/core/styles';
 import { StoreProvider } from 'easy-peasy';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -17,9 +17,9 @@ import { Client } from 'app/state/api/Client';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import '../index.css';
 
-import { JssProvider } from 'react-jss';
-import { create } from 'jss';
-import preset from 'jss-preset-default';
+// import { JssProvider } from 'react-jss';
+// import { create } from 'jss';
+// import preset from 'jss-preset-default';
 // import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 
 // const jss = create(preset());
@@ -31,10 +31,10 @@ type ProviderProps = {
   children?: ReactNode;
 };
 
-const generateClassName = createGenerateClassName({
-  dangerouslyUseGlobalCSS: true,
-  productionPrefix: 'production',
-});
+// const generateClassName = createGenerateClassName({
+//   dangerouslyUseGlobalCSS: true,
+//   productionPrefix: 'production',
+// });
 
 function Providers(props: ProviderProps) {
   return (
@@ -49,7 +49,7 @@ function Providers(props: ProviderProps) {
         <PersistGate loading={null} persistor={persistor}>
           <ClientContextProvider client={Client}>
             {/* react router */}
-            <StylesProvider generateClassName={generateClassName}>
+            <StylesProvider>
               <Router>{props.children}</Router>
             </StylesProvider>
           </ClientContextProvider>
