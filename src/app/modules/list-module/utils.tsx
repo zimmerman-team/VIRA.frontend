@@ -224,15 +224,16 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
         filterType: 'dropdown',
         customFilterListRender: value => `Title: ${value}`,
         customBodyRender: (value, tableMeta, updateValue) => {
-          const id = get(
-            find(data, { reportID: tableMeta.rowData[0] }),
-            '_id',
-            ''
-          );
+          const rowAllData = find(data, { reportID: tableMeta.rowData[0] });
+          const id = get(rowAllData, '_id', '');
+          const isDraft = get(rowAllData, 'isDraft', false);
+          const link = isDraft
+            ? `/report/${rowAllData.project.project_number}/outcomes?rid=${id}`
+            : `/reports/${id}/detail/priority-area`;
           return (
             <LinkCellModule
-              link={`/reports/${id}/detail/priority-area`}
-              value={value}
+              link={link}
+              value={`${value}${isDraft ? ' [Draft]' : ''}`}
             />
           );
         },

@@ -2,15 +2,17 @@
 import Grid from '@material-ui/core/Grid';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 type BottomNavModel = {
   next: Function;
   back: Function;
   submit: Function;
+  saveDraft: Function;
   nextDisabled: boolean;
   backDisabled: boolean;
   showSubmitBtn: boolean;
+  showDraftSubmitBtn: boolean;
 };
 
 const Container = styled.div`
@@ -32,14 +34,27 @@ export const BottomNav = (props: BottomNavModel) => (
       onClick={props.back}
       disabled={props.backDisabled}
     />
-    {props.showSubmitBtn ? (
-      <ContainedButton text="Submit" onClick={props.submit} />
-    ) : (
-      <ContainedButton
-        text="Next"
-        onClick={props.next}
-        disabled={props.nextDisabled}
-      />
-    )}
+    <div>
+      {props.showDraftSubmitBtn && (
+        <React.Fragment>
+          <ContainedButton text="Save as Draft" onClick={props.saveDraft} />
+          <div
+            css={`
+              width: 24px;
+              display: inline-flex;
+            `}
+          />
+        </React.Fragment>
+      )}
+      {props.showSubmitBtn ? (
+        <ContainedButton text="Submit" onClick={props.submit} />
+      ) : (
+        <ContainedButton
+          text="Next"
+          onClick={props.next}
+          disabled={props.nextDisabled}
+        />
+      )}
+    </div>
   </Grid>
 );

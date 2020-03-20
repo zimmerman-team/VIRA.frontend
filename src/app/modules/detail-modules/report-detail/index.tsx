@@ -96,10 +96,17 @@ export const ReportDetailModuleF = (props: any) => {
     setSelectedSDG(bubble);
   }
 
+  function editReport() {
+    props.history.push(
+      `/report/${reportDetails.project.id}/outcomes?rid=${reportDetails.id}`
+    );
+  }
+
   return (
     <ReportDetailLayout
       match={props.match}
       report={reportDetails}
+      editReport={editReport}
       selectedSDG={selectedSDG}
       onBubbleSelect={onBubbleSelect}
       barChartLegends={barChartLegends}

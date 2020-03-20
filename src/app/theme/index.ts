@@ -183,7 +183,8 @@ export const theme = createMuiTheme({
       '@global': {
         '*, *::before, *::after': {
           transition: 'none !important',
-          animation: 'none !important',
+          /* todo: commented because it messes up the search progress bar */
+          // animation: 'none !important',
         },
       },
     },

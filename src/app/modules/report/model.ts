@@ -100,6 +100,8 @@ export type CreateReportLayoutModel = {
   step4Enabled: boolean;
   step5Enabled: boolean;
   showSubmitBtn: boolean;
+  showDraftSubmitBtn: boolean;
   submit: Function;
   loading: boolean;
+  saveDraft: Function;
 };

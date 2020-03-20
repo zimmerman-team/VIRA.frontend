@@ -39,7 +39,11 @@ const ReportSchema = new Schema({
   key_outcomes: { type: String, required: true },
   monitor_report_outcomes: { type: String, required: true },
   media: [{ type: String, required: false }],
-  policy_priority: { type: Schema.Types.ObjectId, ref: policyPriority },
+  policy_priority: {
+    type: Schema.Types.ObjectId,
+    ref: policyPriority,
+    required: false,
+  },
   budget: { type: Number, required: true },
   insContribution: { type: Number, required: true },
   key_implementation_challenges: { type: String, required: true },
@@ -48,6 +52,7 @@ const ReportSchema = new Schema({
   other_comments: { type: String, required: true },
   reportID: { type: Number, required: true },
   place_name: { type: String, required: false },
+  isDraft: { type: Boolean, default: false, required: true },
 });
 
 ReportSchema.plugin(autoIncrement.plugin, {
