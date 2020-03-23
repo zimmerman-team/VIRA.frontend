@@ -24,6 +24,7 @@ import 'styled-components/macro';
 import { SingleLineGridList } from 'app/components/layout/GridList/singleLineGridList';
 import { mock } from 'app/components/layout/GridList/singleLineGridList/mock';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { Viztabs } from 'app/modules/common/components/Viztabs';
 
 export const ReportDetailLayout = (props: any) => (
   <React.Fragment>
@@ -32,7 +33,7 @@ export const ReportDetailLayout = (props: any) => (
     <Grid item xs={12} lg={12}>
       <BreadCrumbs
         currentLocation={props.report.title}
-        previousLocations={[{ label: 'Reports', url: '/list/reports' }]}
+        previousLocations={[{ label: 'Reports', url: '/list/2' }]}
       />
     </Grid>
 
@@ -90,119 +91,18 @@ export const ReportDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* charts */}
-    <React.Fragment>
-      <Grid container item>
-        <Grid
-          item
-          xs={12}
-          sm={9}
-          css={`
-            order: ${useMediaQuery('(max-width: 600px)') ? 1 : 0};
-            margin-top: ${useMediaQuery('(max-width: 600px)') ? '28px' : 0};
-          `}
-        >
-          <Typography
-            variant="h6"
-            css={`
-              font-size: 20px;
-            `}
-          >
-            {get(
-              find(
-                TabNavMockViz.items,
-                (item: NavItemParams) =>
-                  item.path.split('/')[2] === get(props.match.params, 'viz', '')
-              ),
-              'label',
-              'Insinger Foundation policy priorities'
-            ).replace('Priority Area', 'Insinger Foundation policy priorities')}
-          </Typography>
-        </Grid>
-
-        <Hidden smUp>
-          <Grid item xs={3} />
-        </Hidden>
-
-        <Grid item xs={9} sm={3}>
-          <TabNavigator
-            {...getNavTabItems(
-              TabNavMockViz,
-              get(props.match.params, 'code', '')
-            )}
-          />
-        </Grid>
-      </Grid>
-
-      <div
-        css={`
-          width: 100%;
-          height: 32px;
-        `}
-      />
-
-      <Grid item xs={12} lg={12}>
-        <Route
-          path={`/reports/${get(props.match.params, 'code', '')}/detail`}
-          exact
-        >
-          <HorizontalBarChart
-            maxValue={
-              get(props.report.barChartData[0], 'value1', 0) +
-              get(props.report.barChartData[0], 'value2', 0)
-            }
-            values={props.report.barChartData}
-            chartLegends={props.barChartLegends}
-            onChartLegendClick={props.onBarChartLegendClick}
-            colors={[
-              ProjectPalette.primary.main,
-              ...uniqBy(props.report.barChartData, 'value2Color').map(
-                (item: any) => item.value2Color
-              ),
-            ]}
-          />
-        </Route>
-        <Route
-          path={`/reports/${get(
-            props.match.params,
-            'code',
-            ''
-          )}/detail/priority-area`}
-          exact
-        >
-          <HorizontalBarChart
-            maxValue={
-              get(props.report.barChartData[0], 'value1', 0) +
-              get(props.report.barChartData[0], 'value2', 0)
-            }
-            values={props.report.barChartData}
-            chartLegends={props.barChartLegends}
-            onChartLegendClick={props.onBarChartLegendClick}
-            colors={[
-              ProjectPalette.primary.main,
-              ...uniqBy(props.report.barChartData, 'value2Color').map(
-                (item: any) => item.value2Color
-              ),
-            ]}
-          />
-        </Route>
-        <Route
-          path={`/reports/${get(props.match.params, 'code', '')}/detail/sdgs`}
-          exact
-        >
-          <BubbleChart
-            selectedBubble={props.selectedSDG}
-            setSelectedBubble={props.onBubbleSelect}
-            data={{ ...bubbleMockData, children: props.report.bubbleChartData }}
-          />
-        </Route>
-        <Route
-          path={`/reports/${get(props.match.params, 'code', '')}/detail/map`}
-          exact
-        >
-          <GeoMap data={props.report.mapData} />
-        </Route>
-      </Grid>
-    </React.Fragment>
+    <Viztabs
+      barChartData={props.report.barChartData}
+      barChartLegends={props.barChartLegends}
+      onBarChartLegendClick={props.onBarChartLegendClick}
+      bubbleChartData={{
+        ...bubbleMockData,
+        children: props.report.bubbleChartData,
+      }}
+      selectedBubble={props.selectedSDG}
+      onBubbleSelect={props.onBubbleSelect}
+      geoMapData={props.report.mapData}
+    />
 
     {/* ---------------------------------------------------------------------*/}
     {/* cards */}

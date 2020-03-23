@@ -7,7 +7,7 @@ export const currentLocation = 'ActionAid UK';
 export const previousLocations: LocationModel[] = [
   {
     label: 'Grantees',
-    url: '/',
+    url: '/list/1',
   },
 ];
 export const mockData: BreadcrumbModel = {

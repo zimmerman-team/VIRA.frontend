@@ -1,8 +1,6 @@
 // @ts-nocheck
 import 'styled-components/macro';
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { get, find, uniqBy } from 'lodash';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
@@ -11,18 +9,9 @@ import { ProjectOutcomeCardMock } from 'app/modules/detail-modules/project-detai
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { GranteeBreadCrumbsMock } from 'app/modules/detail-modules/grantee-detail/mock';
 import TableModule from 'app/components/datadisplay/Table';
-import { Hidden, Typography, useMediaQuery } from '@material-ui/core';
-import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { Route } from 'react-router-dom';
-import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { BubbleChart } from 'app/components/charts/Bubble';
-import { TabNavMockViz } from 'app/modules/detail-modules/project-detail/model';
-import { GeoMap } from 'app/components/charts/GeoMap';
-import { NavItemParams } from 'app/modules/common/consts';
-import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
+import { Grid, Hidden } from '@material-ui/core';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
-import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
-import { ProjectPalette } from 'app/theme';
+import { Viztabs } from 'app/modules/common/components/Viztabs';
 
 export const ProjectDetailLayout = (props: any) => (
   <React.Fragment>
@@ -31,7 +20,7 @@ export const ProjectDetailLayout = (props: any) => (
     <Grid item xs={12} lg={6}>
       <BreadCrumbs
         {...GranteeBreadCrumbsMock}
-        previousLocations={[{ label: 'Projects', url: '/' }]}
+        previousLocations={[{ label: 'Projects', url: '/list' }]}
         currentLocation={props.projectDetail.project}
       />
     </Grid>
@@ -97,121 +86,15 @@ export const ProjectDetailLayout = (props: any) => (
 
     {/* ---------------------------------------------------------------------*/}
     {/* charts */}
-    <React.Fragment>
-      <Grid container item>
-        <Grid
-          item
-          xs={12}
-          sm={9}
-          css={`
-            order: ${useMediaQuery('(max-width: 600px)') ? 1 : 0};
-            margin-top: ${useMediaQuery('(max-width: 600px)') ? '28px' : 0};
-          `}
-        >
-          <Typography variant="h4">
-            {get(
-              find(
-                TabNavMockViz.items,
-                (item: NavItemParams) =>
-                  item.path.split('/')[2] === get(props.match.params, 'viz', '')
-              ),
-              'label',
-              'Priority Area'
-            )}
-          </Typography>
-        </Grid>
-
-        <Hidden smUp>
-          <Grid item xs={3} />
-        </Hidden>
-
-        <Grid item xs={9} sm={3}>
-          <TabNavigator
-            {...getNavTabItems(
-              TabNavMockViz,
-              get(props.match.params, 'code', '')
-            )}
-          />
-        </Grid>
-      </Grid>
-
-      <Grid item xs={12} lg={12}>
-        <Route
-          path={`/projects/${get(props.match.params, 'code', '')}/detail`}
-          exact
-        >
-          <HorizontalBarChart
-            colors={[
-              ProjectPalette.primary.main,
-              ...uniqBy(
-                ((props.ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-                  [],
-                'value2Color'
-              ).map((item: any) => item.value2Color),
-            ]}
-            values={
-              ((props.ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-              []
-            }
-            maxValue={Math.max(
-              ...(
-                ((props.ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-                []
-              ).map((item: any) => item.value1 + item.value2)
-            )}
-            chartLegends={props.barChartLegends}
-            onChartLegendClick={props.onBarChartLegendClick}
-          />
-        </Route>
-        <Route
-          path={`/projects/${get(
-            props.match.params,
-            'code',
-            ''
-          )}/detail/priority-area`}
-          exact
-        >
-          <HorizontalBarChart
-            colors={[
-              ProjectPalette.primary.main,
-              ...uniqBy(
-                ((props.ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-                  [],
-                'value2Color'
-              ).map((item: any) => item.value2Color),
-            ]}
-            values={
-              ((props.ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-              []
-            }
-            maxValue={Math.max(
-              ...(
-                ((props.ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-                []
-              ).map((item: any) => item.value1 + item.value2)
-            )}
-            chartLegends={props.barChartLegends}
-            onChartLegendClick={props.onBarChartLegendClick}
-          />
-        </Route>
-        <Route
-          path={`/projects/${get(props.match.params, 'code', '')}/detail/sdgs`}
-          exact
-        >
-          <BubbleChart
-            data={{ ...bubbleMockData, children: props.SDGVizData }}
-            selectedBubble={props.selectedSDG}
-            setSelectedBubble={props.onBubbleSelect}
-          />
-        </Route>
-        <Route
-          path={`/projects/${get(props.match.params, 'code', '')}/detail/map`}
-          exact
-        >
-          <GeoMap data={props.geoMapData} />
-        </Route>
-      </Grid>
-    </React.Fragment>
+    <Viztabs
+      barChartData={props.ppVizData}
+      barChartLegends={props.barChartLegends}
+      onBarChartLegendClick={props.onBarChartLegendClick}
+      bubbleChartData={{ ...bubbleMockData, children: props.SDGVizData }}
+      selectedBubble={props.selectedSDG}
+      onBubbleSelect={props.onBubbleSelect}
+      geoMapData={props.geoMapData}
+    />
 
     {/* ---------------------------------------------------------------------*/}
     {/* outcome cards */}

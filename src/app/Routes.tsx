@@ -73,22 +73,23 @@ export function MainRoutes() {
       </Route>
 
       <Route exact path="/">
-        <Redirect to="/dashboard/priority-area/projects" />
+        <Redirect to="/dashboard" />
       </Route>
-      <Route exact path="/dashboard/:viz?/:list?">
+
+      <Route exact path="/dashboard">
         {redirectUnAuth(LandingLayout, storeUser)}
       </Route>
 
-      <Route exact path="/list/:id">
+      <Route exact path="/list/:id?">
         {useTitle(`${AppConfig.appTitleLong} List`)}
         {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
       </Route>
 
-      <Route exact path="/projects/:code/detail/:viz?">
+      <Route exact path="/projects/:code">
         {redirectUnAuth(ProjectDetailModule, storeUser)}
       </Route>
 
-      <Route exact path="/reports/:code/detail/:viz?">
+      <Route exact path="/reports/:code">
         {redirectUnAuth(ReportDetailModule, storeUser)}
       </Route>
 
