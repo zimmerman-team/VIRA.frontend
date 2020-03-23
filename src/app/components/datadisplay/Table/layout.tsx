@@ -1,36 +1,49 @@
 // @ts-nocheck
 import React from 'react';
+import 'styled-components/macro';
 import MUIDataTable from 'mui-datatables';
 import { TableLayoutModel } from 'app/components/datadisplay/Table/model';
 import { changeTableRowColor } from 'app/components/datadisplay/Table/helpers';
-import 'styled-components/macro';
-import { CustomStyleDataTable } from 'app/components/datadisplay/Table/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { standard } from 'app/components/datadisplay/Table/style/standard';
+import { variant9 } from 'app/components/datadisplay/Table/style/variant9';
+import { variant10 } from 'app/components/datadisplay/Table/style/variant10';
+import { reportsVariant } from 'app/components/datadisplay/Table/style/reportsVariant';
 
 function setTableVariant(cssVariant: string) {
   switch (cssVariant) {
     case 'variant9':
-      return CustomStyleDataTable.variant9;
+      return variant9;
     case 'variant10':
-      return CustomStyleDataTable.variant10;
+      return variant10;
     case 'reportsVariant':
-      return CustomStyleDataTable.reportsVariant;
+      return reportsVariant;
     default:
-      return CustomStyleDataTable.standard;
+      return standard;
   }
 }
 
 export const TableLayout = (props: TableLayoutModel) => {
   React.useEffect(() => {
-    props.changeTableRowColor && changeTableRowColor(props.changeTableRowColor);
+    if (props.changeTableRowColor) {
+      changeTableRowColor(props.changeTableRowColor);
+    }
   }, [props.changeTableRowColor]);
 
   return (
-    <MUIDataTable
-      data={props.data}
-      title={props.title}
-      options={props.options}
-      columns={props.columns}
-      css={setTableVariant(props.cssVariant)}
-    />
+    <MuiThemeProvider theme={setTableVariant(props.cssVariant)}>
+      <MUIDataTable
+        data={props.data}
+        title={props.title}
+        options={props.options}
+        columns={props.columns}
+        css={`
+          && {
+            box-shadow: none;
+            border-color: white;
+          }
+        `}
+      />
+    </MuiThemeProvider>
   );
 };
