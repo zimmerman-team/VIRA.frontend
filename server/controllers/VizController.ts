@@ -7,6 +7,7 @@ import filter from 'lodash/filter';
 import groupBy from 'lodash/groupBy';
 import consts from '../config/consts';
 const Report = require('../models/report');
+import { isArray } from '../utils/general';
 import { ProjectPalette } from '../../src/app/theme';
 import { countryFeaturesData } from '../config/countryFeatures';
 import { policyPriorities } from '../../src/app/modules/report/sub-modules/policy-priorities/mock';
@@ -75,7 +76,17 @@ export function getPolicyPriorityBarChartAPI(req: any, res: any) {
 export function getPolicyPriorityBarChart(req: any, res: any) {
   const { projectID } = req.query;
 
-  Report.find(projectID ? { project: projectID } : {})
+  let query = {};
+
+  if (projectID) {
+    if (isArray(projectID)) {
+      query = { project: { $in: projectID } };
+    } else {
+      query = { project: projectID };
+    }
+  }
+
+  Report.find(query)
     .select(
       'policy_priority total_target_beneficiaries total_target_beneficiaries_commited budget isDraft'
     )
@@ -154,6 +165,16 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
 export function getSDGBubbleChart(req: any, res: any) {
   const { projectID } = req.query;
 
+  let query = {};
+
+  if (projectID) {
+    if (isArray(projectID)) {
+      query = { project: { $in: projectID } };
+    } else {
+      query = { project: projectID };
+    }
+  }
+
   // if (req.query.user_email) {
   //   ResponsiblePerson.find({ email: req.query.user_email }).exec(
   //     (err: any, persons: any) => {
@@ -196,7 +217,7 @@ export function getSDGBubbleChart(req: any, res: any) {
   //     }
   //   );
   // } else {
-  Report.find(projectID ? { project: projectID } : {})
+  Report.find(query)
     .select(
       'policy_priority total_target_beneficiaries total_target_beneficiaries_commited budget isDraft'
     )
@@ -243,10 +264,16 @@ export function getSDGBubbleChart(req: any, res: any) {
 
 export function getGeoMapData(req: any, res: any) {
   const { projectID } = req.query;
-  const rQ = projectID
-    ? { project: projectID, location: { $ne: null } }
-    : { location: { $ne: null } };
-  Report.find(rQ)
+  let query: any = { location: { $ne: null } };
+
+  if (projectID) {
+    if (isArray(projectID)) {
+      query = { project: { $in: projectID }, location: { $ne: null } };
+    } else {
+      query = { project: projectID, location: { $ne: null } };
+    }
+  }
+  Report.find(query)
     .select('location budget place_name country isDraft')
     .populate('location')
     .exec((err: any, rawData: any) => {

@@ -55,14 +55,26 @@ export function GranteeDetailModule(props: any) {
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
   );
-  // const allProjectsClearAction = useStoreActions(
-  //   actions => actions.allProjects.clear
-  // );
+  const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
   const granteeDetailData = useStoreState(state => state.orgDetail.data);
   const ProjectsData = useStoreState(state => state.allProjects.data);
+  const ReportsData = useStoreState(state => state.allReports.data);
   const loading = useStoreState(
-    state => state.orgDetail.loading || state.allProjects.loading
+    state =>
+      state.orgDetail.loading ||
+      state.allProjects.loading ||
+      state.allReports.loading ||
+      state.getPPVizData.loading ||
+      state.getSDGVizData.loading ||
+      state.getGeoMapData.loading
   );
+  const [selectedSDG, setSelectedSDG] = React.useState('');
+  const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
+  const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
+  const getGeoMapData = useStoreActions(actions => actions.getGeoMapData.fetch);
+  const ppVizData = useStoreState(state => state.getPPVizData.data);
+  const SDGVizData = useStoreState(state => state.getSDGVizData.data);
+  const geoMapData = useStoreState(state => state.getGeoMapData.data);
 
   React.useEffect(() => {
     granteeDetailAction({
@@ -84,6 +96,12 @@ export function GranteeDetailModule(props: any) {
 
   React.useEffect(() => {
     if (granteeDetailData) {
+      allProjectsAction({
+        socketName: 'allProject',
+        values: {
+          organisation_name: get(granteeDetailData, 'data').organisation_name,
+        },
+      });
       setGranteeTitle({
         title: get(granteeDetailData, 'data').organisation_name,
       });
@@ -108,24 +126,38 @@ export function GranteeDetailModule(props: any) {
 
   React.useEffect(() => {
     if (ProjectsData) {
-      setProjectTableData(formatTableDataForProject(get(ProjectsData, 'data')));
+      const projects = get(ProjectsData, 'data');
+      setProjectTableData(formatTableDataForProject(projects));
+      getPPVizData({
+        socketName: 'getPolicyPriorityBarChart',
+        values: {
+          projectID: projects.map((p: any) => p._id),
+        },
+      });
+      getSDGVizData({
+        socketName: 'getSDGBubbleChart',
+        values: {
+          projectID: projects.map((p: any) => p._id),
+        },
+      });
+      getGeoMapData({
+        socketName: 'getGeoMapData',
+        values: {
+          projectID: projects.map((p: any) => p._id),
+        },
+      });
+      allReportsAction({
+        socketName: 'allReport',
+        values: {
+          projectID: projects.map((p: any) => p._id),
+        },
+      });
     }
   }, [ProjectsData]);
 
   React.useEffect(() => {
     baseTableForProject.data = projectTableData;
   }, [projectTableData]);
-
-  React.useEffect(() => {
-    if (granteeDetailData) {
-      allProjectsAction({
-        socketName: 'allProject',
-        values: {
-          organisation_name: get(granteeDetailData, 'data').organisation_name,
-        },
-      });
-    }
-  }, [granteeDetailData]);
 
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
@@ -149,15 +181,23 @@ export function GranteeDetailModule(props: any) {
     }
   }
 
+  function onBubbleSelect(bubble: string) {
+    setSelectedSDG(bubble);
+  }
+
   return (
     <GranteeDetailLayout
       match={props.match}
-      // loading={loading}
+      loading={loading}
       title={granteeTitle}
       breadcrumbs={breadCrumb}
       description={description}
       contact={contact}
-      projectTable={baseTableForProject}
+      ppVizData={ppVizData}
+      SDGVizData={SDGVizData}
+      selectedSDG={selectedSDG}
+      onBubbleSelect={onBubbleSelect}
+      geoMapData={geoMapData}
       barChartLegends={barChartLegends}
       onBarChartLegendClick={onBarChartLegendClick}
     />

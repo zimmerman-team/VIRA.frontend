@@ -5,14 +5,24 @@ const Location = require('../models/location');
 const policyPriority = require('../models/policyPriority');
 const targetBeneficiary = require('../models/targetBeneficiary');
 import { countryFeaturesData } from '../config/countryFeatures';
-import find from 'lodash/find';
 import filter from 'lodash/filter';
+import { isArray } from '../utils/general';
 
 // get all reports or reports of a project
 export function getReports(req: any, res: any) {
   const { projectID } = req.query;
 
-  Report.find(projectID ? { project: projectID } : {})
+  let query = {};
+
+  if (projectID) {
+    if (isArray(projectID)) {
+      query = { project: { $in: projectID } };
+    } else {
+      query = { project: projectID };
+    }
+  }
+
+  Report.find(query)
     .populate('location')
     .populate('project')
     .populate('target_beneficiaries')

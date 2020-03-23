@@ -82,7 +82,10 @@ export function MainRoutes() {
 
       <Route exact path="/list/:id?">
         {useTitle(`${AppConfig.appTitleLong} List`)}
-        {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
+        {redirectUnAuth(ListModule, storeUser, {
+          tabNav: TabNavMock,
+          loadData: true,
+        })}
       </Route>
 
       <Route exact path="/projects/:code">
