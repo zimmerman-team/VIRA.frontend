@@ -4,7 +4,8 @@ import { RadioButtonsGroupModel } from 'app/components/inputs/radiobuttons/Radio
 import { RouteComponentProps } from 'react-router-dom';
 
 export type ManageUserEditModel = RouteComponentProps & {
-  breadcrumbs: BreadcrumbModel;
+  title?: string;
+  breadcrumbs?: BreadcrumbModel;
   form: {
     firstName?: string;
     lastName?: string;

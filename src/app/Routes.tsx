@@ -198,11 +198,9 @@ export function MainRoutes() {
 
       <Route path="/manage-account/:id">
         {redirectUnAuth(ManageUserEdit, storeUser, {
+          title: 'Manage Your Account',
           ...manageUserEditMock,
-          breadcrumbs: {
-            ...manageUserEditMock.breadcrumbs,
-            currentLocation: 'Account',
-          },
+          breadcrumbs: null,
           editSelf: true,
         })}
       </Route>

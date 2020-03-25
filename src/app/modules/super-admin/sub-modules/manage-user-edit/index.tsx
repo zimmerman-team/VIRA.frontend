@@ -1,5 +1,5 @@
 // global
-import { Box, useMediaQuery } from '@material-ui/core';
+import { Box, Typography, useMediaQuery } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 // aboslute
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
@@ -184,12 +184,22 @@ function ManageUserEditF(props: ManageUserEditModel) {
 
       {/* ---------------------------------------------------------------------*/}
       {/* breadcrumbs */}
-      <Grid item lg={12}>
-        <BreadCrumbs
-          currentLocation={props.breadcrumbs.currentLocation}
-          previousLocations={props.breadcrumbs.previousLocations}
-        />
-      </Grid>
+      {props.breadcrumbs && (
+        <Grid item lg={12}>
+          <BreadCrumbs
+            currentLocation={props.breadcrumbs.currentLocation}
+            previousLocations={props.breadcrumbs.previousLocations}
+          />
+        </Grid>
+      )}
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* title fragment */}
+      {props.title && (
+        <Grid item container lg={6} direction="column">
+          <Typography variant={'h6'}>{props.title}</Typography>
+        </Grid>
+      )}
 
       {/* ---------------------------------------------------------------------*/}
       {/* form */}
