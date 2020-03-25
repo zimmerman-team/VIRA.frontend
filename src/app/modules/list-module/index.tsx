@@ -30,6 +30,7 @@ type ListModuleParams = {
   hideGrantees?: boolean;
   hideReports?: boolean;
   focus?: number;
+  loadData?: boolean;
 };
 
 export const ListModule = (props: ListModuleParams) => {
@@ -63,15 +64,17 @@ export const ListModule = (props: ListModuleParams) => {
 
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
-    allProjectsAction({
-      socketName: 'allProject',
-      values: '',
-    });
-    allOrganisationsAction({
-      socketName: 'allOrg',
-      values: '',
-    });
-    allReportsAction({ socketName: 'allReport', values: '' });
+    if (props.loadData) {
+      allProjectsAction({
+        socketName: 'allProject',
+        values: '',
+      });
+      allOrganisationsAction({
+        socketName: 'allOrg',
+        values: '',
+      });
+      allReportsAction({ socketName: 'allReport', values: '' });
+    }
   }, []);
 
   // Format the projects on componentDidUpdate when allProjectsData change
@@ -125,15 +128,15 @@ export const ListModule = (props: ListModuleParams) => {
           aria-label="simple tabs example"
         >
           {!props.hideProjects && (
-            <Tab css={TabStyle} label="Projects" {...a11yProps(0)} />
+            <Tab value={0} css={TabStyle} label="Projects" {...a11yProps(0)} />
           )}
 
           {!props.hideGrantees && (
-            <Tab css={TabStyle} label="Grantees" {...a11yProps(1)} />
+            <Tab value={1} css={TabStyle} label="Grantees" {...a11yProps(1)} />
           )}
 
           {!props.hideReports && (
-            <Tab css={TabStyle} label="Reports" {...a11yProps(2)} />
+            <Tab value={2} css={TabStyle} label="Reports" {...a11yProps(2)} />
           )}
         </Tabs>
       </Grid>

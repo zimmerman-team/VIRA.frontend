@@ -119,6 +119,7 @@ function LandingLayout(props: any) {
       <Box width="100%" height="18px" />
 
       <ListModule
+        loadData
         tabNav={getNavTabItems(
           TabNavMockList,
           get(props.match.params, 'viz', '')

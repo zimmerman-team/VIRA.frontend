@@ -7,7 +7,7 @@ export const manageUserEditMock: ManageUserEditModel = {
     previousLocations: [
       {
         label: 'Manage',
-        url: '/super-admin/manage-user',
+        url: '/super-admin/manage-users',
       },
     ],
   },
