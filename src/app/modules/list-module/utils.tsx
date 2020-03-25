@@ -72,7 +72,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
         customBodyRender: (value, tableMeta, updateValue) => {
           return (
             <LinkCellModule
-              link={`/projects/${tableMeta.rowData[0]}/detail/priority-area`}
+              link={`/projects/${tableMeta.rowData[0]}`}
               value={value}
             />
           );
@@ -229,7 +229,7 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
           const isDraft = get(rowAllData, 'isDraft', false);
           const link = isDraft
             ? `/report/${rowAllData.project.project_number}/outcomes?rid=${id}`
-            : `/reports/${id}/detail/priority-area`;
+            : `/reports/${id}`;
           return (
             <LinkCellModule
               link={link}

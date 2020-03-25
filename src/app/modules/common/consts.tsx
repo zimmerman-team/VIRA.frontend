@@ -20,17 +20,17 @@ export const NavItems: NavItemParams[] = [
   },
   {
     label: 'Projects',
-    path: '/list/projects',
+    path: '/list/0',
     icon: <IconProjects />,
   },
   {
     label: 'Grantees',
-    path: '/list/grantees',
+    path: '/list/1',
     icon: <IconGrantees />,
   },
   {
     label: 'Reports',
-    path: '/list/reports',
+    path: '/list/2',
     icon: <IconReports />,
   },
   {

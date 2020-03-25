@@ -12,14 +12,11 @@ import {
   getBaseTableForReport,
 } from 'app/modules/list-module/utils';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { useParams } from 'react-router-dom';
 /* utils */
 import get from 'lodash/get';
 import React from 'react';
-import { css } from 'styled-components/macro';
-
-import { useEffectOnce } from 'react-use';
-
-import { useRouteMatch } from 'react-router-dom';
+import 'styled-components/macro';
 import {
   useStyles,
   TabStyle,
@@ -36,6 +33,7 @@ type ListModuleParams = {
 };
 
 export const ListModule = (props: ListModuleParams) => {
+  const { id } = useParams();
   // set state
   const [baseTableForProject, setBaseTableForProject] = React.useState(
     getBaseTableForProject()
@@ -100,8 +98,16 @@ export const ListModule = (props: ListModuleParams) => {
     });
   }, [allReportsData]);
 
+  React.useEffect(() => {
+    if (parseInt(id, 10) < 3) {
+      setValue(parseInt(id, 10));
+    }
+  }, [id]);
+
   const classes = useStyles();
-  const [value, setValue] = React.useState(props.focus ? props.focus : 0);
+  const [value, setValue] = React.useState(
+    props.focus || parseInt(id, 10) ? props.focus || parseInt(id, 10) : 0
+  );
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
