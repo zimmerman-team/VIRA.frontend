@@ -332,6 +332,7 @@ server.listen(process.env.REACT_APP_BACKEND_PORT, () =>
 router.get('/redirectToHome', (req: any, res: any) => {
   res.redirect(`${process.env.REACT_APP_PROJECT_URL}/`);
 });
+
 app.use('/api', router);
 
 export {};
