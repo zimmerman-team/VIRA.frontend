@@ -1,0 +1,26 @@
+{
+  "change_password": {
+    "button": "Send",
+    "new_password": "New Password",
+    "repeat_password": "Repeat New Password",
+    "title": "Change password"
+  },
+  "recover_password": {
+    "button": "Send",
+    "email": "Your email",
+    "title": "Recover password"
+  },
+  "sign_in": {
+    "button": "Sign in",
+    "email": "Your email",
+    "password": "Password",
+    "title": "Sign in"
+  },
+  "sign_up": {
+    "button": "Sign up",
+    "email": "Your email",
+    "password": "Password",
+    "repeat_password": "Repeat password",
+    "title": "Sign up"
+  }
+}

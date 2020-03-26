@@ -1,0 +1,26 @@
+{
+  "change_password": {
+    "button": "Sturen",
+    "new_password": "Nieuw wachtwoord",
+    "repeat_password": "Herhaal nieuw wachtwoord",
+    "title": "Wachtwoord wijzigen"
+  },
+  "recover_password": {
+    "button": "Sturen",
+    "email": "Jouw email",
+    "title": "Herstel wachtwoord"
+  },
+  "sign_in": {
+    "button": "Aanmelden",
+    "email": "Jouw email",
+    "password": "Wachtwoord",
+    "title": "Aanmelden"
+  },
+  "sign_up": {
+    "button": "Inschrijven",
+    "email": "Jouw email",
+    "password": "Wachtwoord",
+    "repeat_password": "Herhaal wachtwoord",
+    "title": "Inschrijven"
+  }
+}
