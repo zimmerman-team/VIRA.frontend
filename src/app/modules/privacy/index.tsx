@@ -69,27 +69,5 @@ export const PrivacyModule = () => (
           ))}
       </Grid>
     ))}
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* title fragment */}
-    <Grid item container xs={12} lg={12}>
-      <Box height="32px" width="100%" />
-      <TitleFragment title="Cookie Policy" />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* content */}
-    <Grid item xs={12} lg={12}>
-      <Typography css={style.description}>{cookieDescriptionMock}</Typography>
-    </Grid>
-
-    <Grid item xs={12} lg={12}>
-      <Typography css={style.paragraphTitle}>
-        {CookieItemsMock.title}
-      </Typography>
-      <Typography css={style.paragraphBody}>
-        {CookieItemsMock.description}
-      </Typography>
-    </Grid>
   </React.Fragment>
 );
