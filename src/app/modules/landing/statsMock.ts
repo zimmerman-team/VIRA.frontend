@@ -6,17 +6,17 @@ export const statsMock: StatItemParams[] = [
   {
     amount: 0,
     type: 'Projects',
-    path: '/list/projects',
+    path: '/list/0',
   },
   {
     amount: 0,
     type: 'Grantees',
-    path: '/list/grantees',
+    path: '/list/1',
   },
   {
     amount: 0,
     type: 'Total Reports',
-    path: '/list/reports',
+    path: '/list/2',
   },
 ];
 
