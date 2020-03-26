@@ -333,10 +333,6 @@ router.get('/redirectToHome', (req: any, res: any) => {
   res.redirect(`${process.env.REACT_APP_PROJECT_URL}/`);
 });
 
-router.get('/redirectToList', (req: any, res: any) => {
-  res.redirect(`${process.env.REACT_APP_PROJECT_URL}/list`);
-});
-
 app.use('/api', router);
 
 export {};
