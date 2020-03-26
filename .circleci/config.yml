@@ -114,19 +114,19 @@ workflows:
       # path: cypress/results
       # - deploy-test:
 
-     - deploy-dev:
-         requires:
-           - cypress/install
-         filters:
-           branches:
-             only: /feature\/.*/
-     - deploy-test:
-         requires:
-           - cypress/install
-         filters:
-           branches:
-             only: develop
-     - deploy-staging:
+      - deploy-dev:
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: /feature\/.*/
+      - deploy-test:
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: develop
+      - deploy-staging:
          requires:
            - cypress/install
          filters:
