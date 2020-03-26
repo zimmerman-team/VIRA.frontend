@@ -28,7 +28,7 @@ function SubmittedLayoutF(props: Props) {
   }, []);
 
   function goToReport() {
-    props.history.push(`/reports/${reportID}/detail`);
+    props.history.push(`/reports/${reportID}`);
   }
 
   return (
