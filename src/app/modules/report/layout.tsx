@@ -1,6 +1,6 @@
 import React from 'react';
 import 'styled-components/macro';
-import { Grid, Typography, Box } from '@material-ui/core';
+import { Grid, Typography, Box, Hidden } from '@material-ui/core';
 import { ReportModuleRoutes } from 'app/modules/report/routes';
 import { BottomNav } from 'app/modules/report/common/bottom-nav';
 import { CreateReportLayoutModel } from 'app/modules/report/model';
@@ -45,8 +45,9 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
           initialTabIndex={props.initialTabIndex}
         />
       </Grid>
-
-      <Box width="100%" height="40px" />
+      <Hidden smDown>
+        <Box width="100%" height="40px" />
+      </Hidden>
 
       <ReportModuleRoutes
         step2Enabled={props.step2Enabled}
