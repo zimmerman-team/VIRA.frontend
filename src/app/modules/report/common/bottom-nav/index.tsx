@@ -28,33 +28,37 @@ const Container = styled.div`
 `;
 
 export const BottomNav = (props: BottomNavModel) => (
-  <Grid item container lg={12} justify="space-between">
-    <ContainedButton
-      text="Back"
-      onClick={props.back}
-      disabled={props.backDisabled}
-    />
-    <div>
-      {props.showDraftSubmitBtn && (
-        <React.Fragment>
-          <ContainedButton text="Save as Draft" onClick={props.saveDraft} />
-          <div
-            css={`
-              width: 24px;
-              display: inline-flex;
-            `}
+  <Grid container item xs={12} lg={12} justify="space-between">
+    <Grid item>
+      <ContainedButton
+        text="Back"
+        onClick={props.back}
+        disabled={props.backDisabled}
+      />
+    </Grid>
+    <Grid item>
+      <div>
+        {props.showDraftSubmitBtn && (
+          <React.Fragment>
+            <ContainedButton text="Save as Draft" onClick={props.saveDraft} />
+            <div
+              css={`
+                width: 24px;
+                display: inline-flex;
+              `}
+            />
+          </React.Fragment>
+        )}
+        {props.showSubmitBtn ? (
+          <ContainedButton text="Submit" onClick={props.submit} />
+        ) : (
+          <ContainedButton
+            text="Next"
+            onClick={props.next}
+            disabled={props.nextDisabled}
           />
-        </React.Fragment>
-      )}
-      {props.showSubmitBtn ? (
-        <ContainedButton text="Submit" onClick={props.submit} />
-      ) : (
-        <ContainedButton
-          text="Next"
-          onClick={props.next}
-          disabled={props.nextDisabled}
-        />
-      )}
-    </div>
+        )}
+      </div>
+    </Grid>
   </Grid>
 );

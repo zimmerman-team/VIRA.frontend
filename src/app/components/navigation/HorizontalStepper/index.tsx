@@ -1,5 +1,5 @@
 import React from 'react';
-import { Step, StepLabel, Stepper } from '@material-ui/core';
+import { Step, StepLabel, Stepper, useMediaQuery } from '@material-ui/core';
 import { styles } from 'app/components/navigation/HorizontalStepper/styles';
 import 'styled-components/macro';
 
@@ -16,6 +16,7 @@ type Step = {
 };
 
 export const HorizontalStepper = (props: StepperProps) => {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const { steps } = props;
   const [activeStep, setActiveStep] = React.useState(
     props.initialTabIndex || 0
@@ -28,13 +29,18 @@ export const HorizontalStepper = (props: StepperProps) => {
   }, [props.initialTabIndex]);
 
   return (
-    <div css={styles.container}>
+    <div
+      css={isMobileWidth ? styles.mobileContainer : styles.container}
+      id={'test'}
+    >
       <Stepper activeStep={activeStep}>
         {steps.map((step, index) => {
           return (
-            <Step css={styles.step} key={step.label}>
-              <StepLabel css={styles.stepLabel}>{step.label}</StepLabel>
-            </Step>
+            <div id={`test-${index}`}>
+              <Step css={styles.step} key={step.label}>
+                <StepLabel css={styles.stepLabel}>{step.label}</StepLabel>
+              </Step>
+            </div>
           );
         })}
       </Stepper>

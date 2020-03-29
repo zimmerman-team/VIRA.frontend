@@ -22,6 +22,26 @@ export const styles: any = {
       }
     }
   `,
+  mobileContainer: css`
+    width: 1080px;
+    && {
+      [class*='MuiStepConnector-line'] {
+        border-color: ${ProjectPalette.secondary.main};
+      }
+
+      [class*='MuiStepper-root'] {
+        padding: 0;
+      }
+
+      [class*='MuiStep-horizontal']:first-child {
+        padding-left: 0;
+      }
+
+      [class*='MuiStep-horizontal']:last-child {
+        padding-right: 0;
+      }
+    }
+  `,
   step: css`
   //Inactive state
   &&{
