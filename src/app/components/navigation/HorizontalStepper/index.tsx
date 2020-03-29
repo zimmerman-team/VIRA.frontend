@@ -25,22 +25,30 @@ export const HorizontalStepper = (props: StepperProps) => {
   React.useEffect(() => {
     if (props.initialTabIndex !== undefined) {
       setActiveStep(props.initialTabIndex);
+      isMobileWidth && scrollToStep(props.initialTabIndex);
     }
   }, [props.initialTabIndex]);
 
+  function scrollToStep(index: number) {
+    const element = document.getElementById(`step-${index}`);
+
+    if (element != null) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'start',
+      });
+    }
+  }
+
   return (
-    <div
-      css={isMobileWidth ? styles.mobileContainer : styles.container}
-      id={'test'}
-    >
+    <div css={isMobileWidth ? styles.mobileContainer : styles.container}>
       <Stepper activeStep={activeStep}>
         {steps.map((step, index) => {
           return (
-            <div id={`test-${index}`}>
-              <Step css={styles.step} key={step.label}>
-                <StepLabel css={styles.stepLabel}>{step.label}</StepLabel>
-              </Step>
-            </div>
+            <Step id={`step-${index}`} css={styles.step} key={step.label}>
+              <StepLabel css={styles.stepLabel}>{step.label}</StepLabel>
+            </Step>
           );
         })}
       </Stepper>

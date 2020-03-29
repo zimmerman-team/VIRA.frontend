@@ -9,11 +9,6 @@ import { HorizontalStepper } from 'app/components/navigation/HorizontalStepper';
 import { PageLoader } from '../common/page-loader';
 
 export function CreateReportLayout(props: CreateReportLayoutModel) {
-  var element = document.getElementById('test-3');
-
-  if (element != null) {
-    element.scrollIntoView({ block: 'end' });
-  }
   return (
     <React.Fragment>
       {/* <Grid item container xs={12} lg={12} spacing={4}> */}
