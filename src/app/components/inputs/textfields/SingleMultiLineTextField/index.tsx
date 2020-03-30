@@ -49,10 +49,7 @@ export const BigInputLabel = styled(props => <Typography {...props} />)`
     font-size: 1.125rem;
     font-weight: 500;
     margin-bottom: 14px;
-
-    @media (max-width: 768px) {
-      color: white;
-    }
+    color: ${ProjectPalette.text.primary};
   }
 `;
 
@@ -74,6 +71,7 @@ function renderLabel(props) {
 
 export const SingleMultiLineTextField = (props: MultilineTextfieldParams) => {
   const { setValue, min, ...inputProps } = props;
+
   return (
     <FormControl fullWidth={props.fullWidth}>
       {renderLabel(props)}

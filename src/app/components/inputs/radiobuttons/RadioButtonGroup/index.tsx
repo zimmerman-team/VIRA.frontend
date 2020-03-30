@@ -28,7 +28,7 @@ const CustomFormControl = styled(props => <FormControl {...props} />)`
   > div {
     width: 100%;
     > label {
-      width: 33%;
+      width: 100%;
       font-weight: normal;
       margin-bottom: 9px;
     }
