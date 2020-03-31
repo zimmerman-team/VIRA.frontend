@@ -1,9 +1,10 @@
 const Project = require('../models/project');
 import sumBy from 'lodash/sumBy';
 const Report = require('../models/report');
-const project_categroy = require('../models/project_categroy');
-const organisation = require('../models/Org');
+const ProjectCat = require('../models/project_categroy');
+const Organisation = require('../models/Org');
 
+// get all projects
 export function allProject(req: any, res: any) {
   if (!req.query.project_number) {
     Project.get((err: any, project: any) => {
@@ -80,8 +81,7 @@ export function allProject(req: any, res: any) {
   }
 }
 
-//get one project
-
+// get a project
 export function oneProject(req: any, res: any) {
   Project.findById(req.query.id)
     .populate('category', 'name')
@@ -94,135 +94,120 @@ export function oneProject(req: any, res: any) {
     });
 }
 
-//add a project
-
-export function addProject(req: any, res: any) {
-  project_categroy.findOne(
-    { name: req.query.category },
-    (err: any, category: any) => {
-      if (category) {
-        let project = new Project();
-        project.project_number = req.query.project_number;
-        project.project_name = req.query.project_name;
-        project.project_description = req.query.project_description;
-        project.duration = req.query.duration;
-        project.start_date = req.query.start_date;
-        project.end_date = req.query.end_date;
-        project.total_amount = req.query.total_amount;
-        project.decision_date = req.query.decision_date;
-        project.decision = req.query.decision;
-        project.allocated_amount = req.query.allocated_amount;
-        project.released_amount = req.query.released_amount;
-        project.paid_amount = req.query.paid_amount;
-        project.category = category;
-        //save project
-
-        project.save((err: any, project: any) => {
-          if (err) {
-            res(JSON.stringify({ status: 'error', message: err.message }));
-          }
-          organisation.findOne(
-            { organisation_name: req.query.organisation },
-            (err: any, org: any) => {
-              project.organisation = org;
-              project.save((err: any, project: any) => {
-                if (err) {
-                  res(
-                    JSON.stringify({ status: 'error', message: err.message })
-                  );
-                }
-                res(
-                  JSON.stringify({
-                    message: 'new project successfully created.',
-                    data: project,
-                  })
-                );
-              });
-            }
-          );
-        });
-      } else if (!category) {
-        let project = new Project();
-        project.project_number = req.query.project_number;
-        project.project_name = req.query.project_name;
-        project.project_description = req.query.project_description;
-        project.duration = req.query.duration;
-        project.start_date = req.query.start_date;
-        project.end_date = req.query.end_date;
-        project.total_amount = req.query.total_amount;
-        project.decision_date = req.query.decision_date;
-        project.decision = req.query.decision;
-        project.allocated_amount = req.query.allocated_amount;
-        project.released_amount = req.query.released_amount;
-        project.paid_amount = req.query.paid_amount;
-
-        //save project
-
-        project.save((err: any, project: any) => {
-          if (err) {
-            res(JSON.stringify({ status: 'error', message: err.message }));
-          }
-          organisation.findOne(
-            { organisation_name: req.query.organisation },
-            (err: any, org: any) => {
-              project.organisation = org;
-              project.save((err: any, project: any) => {
-                if (err) {
-                  res(
-                    JSON.stringify({ status: 'error', message: err.message })
-                  );
-                }
-                res(
-                  JSON.stringify({
-                    message: 'new project successfully created.',
-                    data: project,
-                  })
-                );
-              });
-            }
-          );
-        });
-      }
-    }
-  );
-}
-
-//update project
-
-export function UpdateProject(req: any, res: any) {
-  Project.findById(req.query.id, (err: any, found_project: any) => {
-    if (err) {
-      res.json(err);
-    } else if (found_project) {
-      found_project.project_number = req.query.project_number;
-      found_project.project_name = req.query.project_name;
-      found_project.project_description = req.query.project_description;
-      found_project.duration = req.query.duration;
-      found_project.start_date = req.query.start_date;
-      found_project.end_date = req.query.end_date;
-      found_project.total_amount = req.query.total_amount;
-      found_project.decision_date = req.query.decision_date;
-      found_project.decision = req.query.decision;
-      found_project.allocated_amount = req.query.allocated_amount;
-      found_project.released_amount = req.query.released_amount;
-      found_project.paid_amount = req.query.paid_amount;
-      found_project.organisation = req.query.organanisation;
-
-      found_project.save((err: any) => {
-        if (err) {
-          res(JSON.stringify({ status: 'error', message: err.message }));
+async function getProjectCategory(name: string) {
+  return new Promise((resolve, reject) => {
+    if (name) {
+      ProjectCat.findOne({
+        name: name,
+      }).exec((err: any, category: any) => {
+        if (!category) {
+          new ProjectCat({
+            name: name,
+            description: name,
+          }).save((err: any, newCategory: any) => {
+            resolve(newCategory);
+          });
+        } else {
+          resolve(category);
         }
-        res(JSON.stringify({ status: 'success', data: found_project }));
       });
     } else {
-      res(JSON.stringify({ status: 'fail', message: 'project not found' }));
+      resolve(null);
     }
   });
 }
 
-//delete
+async function getOrganisation(id: string) {
+  return new Promise((resolve, reject) => {
+    if (id) {
+      Organisation.findById(id, (err: any, organisation: any) => {
+        resolve(organisation);
+      });
+    } else {
+      resolve(null);
+    }
+  });
+}
 
-export function DelProject(req: any, res: any) {
+// add a project
+export function addProject(req: any, res: any) {
+  getProjectCategory(req.query.category).then(category => {
+    getOrganisation(req.query.orgId).then(organisation => {
+      let project = new Project();
+      project.project_number = req.query.project_number;
+      project.project_name = req.query.project_name;
+      project.project_description = req.query.project_description;
+      project.duration = req.query.duration;
+      project.start_date = req.query.start_date;
+      project.end_date = req.query.end_date;
+      project.total_amount = req.query.total_amount;
+      project.decision_date = req.query.decision_date;
+      project.decision = req.query.decision;
+      project.allocated_amount = req.query.allocated_amount;
+      project.released_amount = req.query.released_amount;
+      project.paid_amount = req.query.paid_amount;
+      project.category = category;
+      project.organisation = organisation;
+      project.save((err: any, project: any) => {
+        if (err) {
+          res(JSON.stringify({ status: 'error', message: err.message }));
+        } else {
+          res(
+            JSON.stringify({
+              message: 'new project successfully created.',
+              data: project,
+            })
+          );
+        }
+      });
+    });
+  });
+}
+
+// edit a project
+export function editProject(req: any, res: any) {
+  Project.findById(req.query.id, (err: any, project: any) => {
+    if (err) {
+      res(JSON.stringify({ status: 'error', message: err.message }));
+    } else if (project) {
+      getProjectCategory(req.query.category).then(category => {
+        getOrganisation(req.query.orgId).then(organisation => {
+          project.project_number = req.query.project_number;
+          project.project_name = req.query.project_name;
+          project.project_description = req.query.project_description;
+          project.duration = req.query.duration;
+          project.start_date = req.query.start_date;
+          project.end_date = req.query.end_date;
+          project.total_amount = req.query.total_amount;
+          project.decision_date = req.query.decision_date;
+          project.decision = req.query.decision;
+          project.allocated_amount = req.query.allocated_amount;
+          project.released_amount = req.query.released_amount;
+          project.paid_amount = req.query.paid_amount;
+          project.category = category || project.category;
+          project.organisation = organisation || project.organisation;
+          project.save((err: any, updProject: any) => {
+            if (err) {
+              res(JSON.stringify({ status: 'error', message: err.message }));
+            } else {
+              res(
+                JSON.stringify({
+                  message: 'project successfully updated.',
+                  data: updProject,
+                })
+              );
+            }
+          });
+        });
+      });
+    } else {
+      res(JSON.stringify({ status: 'error', message: 'project not found' }));
+    }
+  });
+}
+
+// delete a project
+export function deleteProject(req: any, res: any) {
   Project.deleteOne(
     {
       _id: req.query.id,
@@ -233,8 +218,7 @@ export function DelProject(req: any, res: any) {
       } else {
         res(
           JSON.stringify({
-            status:
-              project.deletedCount + ' organisation successfully deleted.',
+            status: 'project successfully deleted.',
             message: project,
           })
         );
@@ -243,6 +227,7 @@ export function DelProject(req: any, res: any) {
   );
 }
 
+// get project budget data
 export function getProjectBudgetData(req: any, res: any) {
   const { projectID } = req.query;
 
