@@ -7,9 +7,11 @@ import { Pagination } from 'app/components/misc/TablePagination';
 import { PageModuleModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 import { Add } from '@material-ui/icons';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { useTranslation } from 'react-i18next';
 
 export const AdminManageOverviewLayout = (props: PageModuleModel) => {
   const history = useHistory();
+  const { t, i18n } = useTranslation();
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -23,7 +25,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
           align-items: center;
         `}
       >
-        <Typography variant="h6">{props.title}</Typography>
+        <Typography variant="h6">{t(props.title)}</Typography>
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
@@ -42,7 +44,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
 
       <Grid item xs={12} lg={12}>
         <ContainedButton
-          text={`Add ${props.title.slice(0, props.title.length - 1)}`}
+          text={`${t('Add')} ${props.title.slice(0, props.title.length - 1)}`}
           icon={<Add />}
           onClick={() => {
             history.push(`${history.location.pathname}/add`);

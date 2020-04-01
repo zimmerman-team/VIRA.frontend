@@ -11,10 +11,11 @@
     "title": "Herstel wachtwoord"
   },
   "sign_in": {
-    "button": "Aanmelden",
-    "email": "Jouw email",
+    "button": "Log in",
+    "email": "E-mail",
+    "forgot_password": "Wachtwoord opvragen",
     "password": "Wachtwoord",
-    "title": "Aanmelden"
+    "title": "Log in"
   },
   "sign_up": {
     "button": "Inschrijven",

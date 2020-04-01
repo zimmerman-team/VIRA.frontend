@@ -1,4 +1,4 @@
-<babeledit_project be_version="2.6.1" version="1.2">
+<babeledit_project version="1.2" be_version="2.6.1">
     <!--
 
     BabelEdit project file
@@ -15,6 +15,136 @@
     <folder_node>
         <name></name>
         <children>
+            <file_node>
+                <name>charts</name>
+                <children>
+                    <folder_node>
+                        <name>items</name>
+                        <children>
+                            <concept_node>
+                                <name>drug_use</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>elderly</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>homelessness</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>poverty</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>prisoner</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>prostitution</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>refugees</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                        </children>
+                    </folder_node>
+                </children>
+                <filename></filename>
+            </file_node>
             <file_node>
                 <name>faq</name>
                 <children>
@@ -253,30 +383,171 @@
                 <name>home</name>
                 <children>
                     <folder_node>
+                        <name>chart_nav</name>
+                        <children>
+                            <concept_node>
+                                <name>map</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>priority_area</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>sdg</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                        </children>
+                    </folder_node>
+                    <folder_node>
                         <name>dashboard</name>
                         <children>
-                            <folder_node>
+                            <concept_node>
+                                <name>grantees</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
                                 <name>projects</name>
-                                <children>
-                                    <concept_node>
-                                        <name>label</name>
-                                        <definition_loaded>false</definition_loaded>
-                                        <description></description>
-                                        <comment></comment>
-                                        <default_text></default_text>
-                                        <translations>
-                                            <translation>
-                                                <language>en-US</language>
-                                                <approved>true</approved>
-                                            </translation>
-                                            <translation>
-                                                <language>nl-NL</language>
-                                                <approved>true</approved>
-                                            </translation>
-                                        </translations>
-                                    </concept_node>
-                                </children>
-                            </folder_node>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>reports</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                        </children>
+                    </folder_node>
+                    <folder_node>
+                        <name>overview_nav</name>
+                        <children>
+                            <concept_node>
+                                <name>grantees</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>projects</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>reports</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
                         </children>
                     </folder_node>
                 </children>
@@ -297,11 +568,11 @@
                                 <translations>
                                     <translation>
                                         <language>en-US</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                     <translation>
                                         <language>nl-NL</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                 </translations>
                             </concept_node>
@@ -314,11 +585,11 @@
                                 <translations>
                                     <translation>
                                         <language>en-US</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                     <translation>
                                         <language>nl-NL</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                 </translations>
                             </concept_node>
@@ -331,11 +602,11 @@
                                 <translations>
                                     <translation>
                                         <language>en-US</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                     <translation>
                                         <language>nl-NL</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                 </translations>
                             </concept_node>
@@ -348,11 +619,11 @@
                                 <translations>
                                     <translation>
                                         <language>en-US</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                     <translation>
                                         <language>nl-NL</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                 </translations>
                             </concept_node>
@@ -370,11 +641,11 @@
                                 <translations>
                                     <translation>
                                         <language>en-US</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                     <translation>
                                         <language>nl-NL</language>
-                                        <approved>false</approved>
+                                        <approved>true</approved>
                                     </translation>
                                 </translations>
                             </concept_node>
@@ -448,6 +719,23 @@
                                     <translation>
                                         <language>nl-NL</language>
                                         <approved>false</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>forgot_password</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>true</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>nl-NL</language>
+                                        <approved>true</approved>
                                     </translation>
                                 </translations>
                             </concept_node>

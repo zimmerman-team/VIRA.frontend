@@ -3300,6 +3300,13 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
+"@types/i18next-xhr-backend@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@types/i18next-xhr-backend/-/i18next-xhr-backend-1.4.2.tgz#e3849b77e77daa1504f02269b1c192dc0e86e507"
+  integrity sha512-uykS5BvdSoN+G7j7D19xzR12pEVkWmUrIEIxMsj2brVVzjc3gIthWCQKYqbe/b1q87SLbWb/ZHN9bR4qxi1H6A==
+  dependencies:
+    i18next-xhr-backend "*"
+
 "@types/invariant@^2.2.29", "@types/invariant@^2.2.30":
   version "2.2.31"
   resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.31.tgz#4444c03004f215289dbca3856538434317dd28b2"
@@ -10713,6 +10720,13 @@ i18next-browser-languagedetector@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-4.0.2.tgz#eb02535cc5e57dd534fc60abeede05a3823a8551"
   integrity sha512-AK4IZ3XST4HIKShgpB2gOFeDPrMOnZx56GLA6dGo/8rvkiczIlq05lV8w77c3ShEZxtTZeUVRI4Q/cBFFVXS/w==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+
+i18next-xhr-backend@*, i18next-xhr-backend@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/i18next-xhr-backend/-/i18next-xhr-backend-3.2.2.tgz#769124441461b085291f539d91864e3691199178"
+  integrity sha512-OtRf2Vo3IqAxsttQbpjYnmMML12IMB5e0fc5B7qKJFLScitYaXa1OhMX0n0X/3vrfFlpHL9Ro/H+ps4Ej2j7QQ==
   dependencies:
     "@babel/runtime" "^7.5.5"
 

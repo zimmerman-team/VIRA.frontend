@@ -38,6 +38,7 @@ import { ProjectPalette } from 'app/theme';
 import { AppConfig } from 'app/data';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { getNewReportsCount } from './utils/getNewReportsCount';
+import { useTranslation } from 'react-i18next';
 
 export interface Joejoe {
   /** prop1 description */
@@ -48,6 +49,8 @@ export interface Joejoe {
  * Landing layout.
  */
 function LandingLayout(props: any) {
+  const { t, i18n } = useTranslation();
+
   // set window title
   useTitle(`${AppConfig.appTitleLong} Dashboard`);
   /** prop1 description */
@@ -140,15 +143,17 @@ function LandingLayout(props: any) {
                 line-height: 1.5;
               `}
             >
-              {get(
-                find(
-                  TabNavMockViz.items,
-                  (item: NavItemParams) =>
-                    item.path.split('/')[2] ===
-                    get(props.match.params, 'viz', '')
-                ),
-                'label',
-                'Priority Area'
+              {t(
+                get(
+                  find(
+                    TabNavMockViz.items,
+                    (item: NavItemParams) =>
+                      item.path.split('/')[2] ===
+                      get(props.match.params, 'viz', '')
+                  ),
+                  'label',
+                  'Priority Area'
+                )
               )}
             </Typography>
           </Grid>

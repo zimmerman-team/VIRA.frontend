@@ -27,6 +27,8 @@ import {
   TabPanel,
 } from './common/TabPanelProps';
 
+import { useTranslation } from 'react-i18next';
+
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
   hideProjects?: boolean;
@@ -108,6 +110,7 @@ export const ListModule = (props: ListModuleParams) => {
   };
 
   const TabData = props.tabNav && props.tabNav.items;
+  const { t, i18n } = useTranslation();
 
   return (
     <React.Fragment>
@@ -119,15 +122,15 @@ export const ListModule = (props: ListModuleParams) => {
           aria-label="simple tabs example"
         >
           {!props.hideProjects && (
-            <Tab css={TabStyle} label="Projects" {...a11yProps(0)} />
+            <Tab css={TabStyle} label={t('Projects')} {...a11yProps(0)} />
           )}
 
           {!props.hideGrantees && (
-            <Tab css={TabStyle} label="Grantees" {...a11yProps(1)} />
+            <Tab css={TabStyle} label={t('Grantees')} {...a11yProps(1)} />
           )}
 
           {!props.hideReports && (
-            <Tab css={TabStyle} label="Reports" {...a11yProps(2)} />
+            <Tab css={TabStyle} label={t('Reports')} {...a11yProps(2)} />
           )}
         </Tabs>
       </Grid>

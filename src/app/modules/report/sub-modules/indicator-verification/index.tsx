@@ -14,6 +14,7 @@ import { IntentTexArea } from './common/IntentTextArea';
 import { IndicatorVerificationPropsModel } from '../../model';
 import { AddMediaLayout } from './common/AddMedia';
 import { MediaBlock } from './common/MediaBlock';
+import { useTranslation } from 'react-i18next';
 
 const styles: any = {
   card: css`
@@ -34,6 +35,7 @@ const styles: any = {
 export const IndicatorVerificationLayout = (
   props: IndicatorVerificationPropsModel
 ) => {
+  const { t, i18n } = useTranslation();
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -45,8 +47,12 @@ export const IndicatorVerificationLayout = (
               componentID="indVer1"
               value={props.keyOutcomes}
               setValue={props.setKeyOutcomes}
-              tooltip="Please describe the key outcomes the project aims to achieve"
-              description="Please describe the key outcomes the project aims to achieve"
+              tooltip={t(
+                'Please describe the key outcomes the project aims to achieve'
+              )}
+              description={t(
+                'Please describe the key outcomes the project aims to achieve'
+              )}
             />
           </CardContent>
         </Card>
@@ -63,13 +69,17 @@ export const IndicatorVerificationLayout = (
               componentID="indVer2"
               value={props.monRepOutcomes}
               setValue={props.setMonRepOutcomes}
-              tooltip="Please tell us how you intend to monitor and report on the outcomes listed above"
-              description="Please tell us how you intend to monitor and report on the outcomes listed above"
+              tooltip={t(
+                'Please tell us how you intend to monitor and report on the outcomes listed above'
+              )}
+              description={t(
+                'Please tell us how you intend to monitor and report on the outcomes listed above'
+              )}
             />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              If you have baseline data (the data you track progress against)
-              and a means of verification (how you intend to obtain the data and
-              from which sources) please also provide that information.
+              {t(
+                'If you have baseline data (the data you track progress against) and a means of verification (how you intend to obtain the data and from which sources) please also provide that information.'
+              )}
             </Typography>
           </CardContent>
         </Card>
@@ -80,7 +90,7 @@ export const IndicatorVerificationLayout = (
       {/* add media button 1 */}
       <Grid item xs={12} lg={12}>
         <ContainedButton
-          text="Add media (Optional)"
+          text={t('Add media (Optional)')}
           icon={<GetAppIcon />}
           onClick={() => props.setOpenMediaModal(true)}
         />
@@ -106,7 +116,7 @@ export const IndicatorVerificationLayout = (
           `}
         >
           <AddMediaLayout
-            name="name"
+            name={t('name')}
             items={props.media}
             onChange={props.setMedia}
             onSaveMedia={props.onSaveMedia}

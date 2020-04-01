@@ -13,6 +13,7 @@
   "sign_in": {
     "button": "Sign in",
     "email": "Your email",
+    "forgot_password": "Forgot password",
     "password": "Password",
     "title": "Sign in"
   },

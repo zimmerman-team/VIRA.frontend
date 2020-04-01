@@ -21,72 +21,77 @@ import { Typography, Box, Grid } from '@material-ui/core';
 import { css } from 'styled-components/macro';
 import { ListModule } from 'app/modules/list-module';
 import { TabNavMockList } from 'app/modules/landing/statsMock';
+import { useTranslation } from 'react-i18next';
 
-export const GranteeDetailLayout = (props: GranteeParams) => (
-  <React.Fragment>
-    {/* {props.loading && <PageLoader />} */}
-    {/* ---------------------------------------------------------------------*/}
-    {/* breadcrumbs */}
-    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-      <BreadCrumbs {...props.breadcrumbs} />
-    </Grid>
+export const GranteeDetailLayout = (props: GranteeParams) => {
+  const { t, i18n } = useTranslation();
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* title fragment */}
-    <Grid
-      item
-      container
-      xs={12}
-      sm={12}
-      md={12}
-      lg={12}
-      xl={12}
-      direction="column"
-    >
-      <TitleFragment {...props.title} />
-    </Grid>
+  return (
+    <React.Fragment>
+      {/* {props.loading && <PageLoader />} */}
+      {/* ---------------------------------------------------------------------*/}
+      {/* breadcrumbs */}
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        <BreadCrumbs {...props.breadcrumbs} />
+      </Grid>
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* project description */}
-    <Grid item xs={12} lg={6}>
-      <Description {...props.description} />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* contact card */}
-    <Grid item xs={12} md={6} lg={6}>
-      <ContactsCard {...props.contact} />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* priority area */}
-    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-      <Typography
-        css={`
-          color: #000000;
-          line-height: 1.5;
-          font-size: 20px;
-          font-family: Inter;
-          font-weight: 600;
-          height: 30px;
-          width: 191px;
-        `}
+      {/* ---------------------------------------------------------------------*/}
+      {/* title fragment */}
+      <Grid
+        item
+        container
+        xs={12}
+        sm={12}
+        md={12}
+        lg={12}
+        xl={12}
+        direction="column"
       >
-        Priority Area
-      </Typography>
-    </Grid>
-    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-      <HorizontalBarChart
-        {...mockData}
-        chartLegends={props.barChartLegends}
-        onChartLegendClick={props.onBarChartLegendClick}
-      />
-    </Grid>
+        <TitleFragment {...props.title} />
+      </Grid>
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* projects */}
+      {/* ---------------------------------------------------------------------*/}
+      {/* project description */}
+      <Grid item xs={12} lg={6}>
+        <Description {...props.description} />
+      </Grid>
 
-    <Box width="100%" height="50px" />
-    <ListModule hideGrantees tabNav={getNavTabItems(TabNavMockList, 'viz')} />
-  </React.Fragment>
-);
+      {/* ---------------------------------------------------------------------*/}
+      {/* contact card */}
+      <Grid item xs={12} md={6} lg={6}>
+        <ContactsCard {...props.contact} />
+      </Grid>
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* priority area */}
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        <Typography
+          css={`
+            color: #000000;
+            line-height: 1.5;
+            font-size: 20px;
+            font-family: Inter;
+            font-weight: 600;
+            height: 30px;
+            width: 191px;
+          `}
+        >
+          {t('Priority Area')}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        <HorizontalBarChart
+          {...mockData}
+          chartLegends={props.barChartLegends}
+          onChartLegendClick={props.onBarChartLegendClick}
+        />
+      </Grid>
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* projects */}
+
+      <Box width="100%" height="50px" />
+      <ListModule hideGrantees tabNav={getNavTabItems(TabNavMockList, 'viz')} />
+    </React.Fragment>
+  );
+};

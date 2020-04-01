@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-destructuring */
@@ -17,6 +18,10 @@ import React from 'react';
 import { ReportListMock } from 'app/modules/list-module/mock';
 import get from 'lodash/get';
 import find from 'lodash/find';
+// import { useTranslation, Translation } from 'react-i18next';
+import { useTranslation, Translation } from 'react-i18next';
+// import i18n from '../i18n'
+import i18n from 'app/languages';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];
@@ -38,6 +43,8 @@ export const formatTableDataForProject = (data: any): any[] => {
 
 export const getBaseTableForProject = (): TableModuleModel => {
   const tableConfig = mockDataVar8;
+  // const { t, i18n } = useTranslation();
+
   tableConfig.columns = [
     {
       name: 'ID',
@@ -49,7 +56,8 @@ export const getBaseTableForProject = (): TableModuleModel => {
       },
     },
     {
-      name: 'Decision date',
+      name: i18n.t('Decision date'),
+      // name: t('Decision date'),
       options: {
         filter: true,
         filterType: 'checkbox',
@@ -58,6 +66,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
     },
     {
       name: 'Decision',
+      // name: t('Decision'),
       options: {
         filter: true,
         filterType: 'dropdown',
@@ -66,6 +75,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
     },
     {
       name: 'Project title',
+      // name: t('Project title'),
       options: {
         filter: true,
         filterType: 'dropdown',
@@ -82,6 +92,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
     },
     {
       name: 'Organisation',
+      // name: t('Organisation'),
       options: {
         filter: true,
         filterType: 'checkbox',
@@ -114,9 +125,12 @@ export const formatTableDataForGrantee = (data: any): any[] => {
 
 export const getBaseTableForGrantee = (): TableModuleModel => {
   const tableConfig = GranteeListMock;
+  // const { t, i18n } = useTranslation();
+
   tableConfig.columns = [
     {
       name: 'Grantee Name',
+      // name: t('Grantee Name'),
       options: {
         sortDirection: 'asc',
         filter: true,
@@ -139,6 +153,7 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
     },
     {
       name: 'Grantee Type',
+      // name: t('Grantee Type'),
       options: {
         filter: true,
         filterType: 'dropdown',
@@ -147,6 +162,7 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
     },
     {
       name: 'Place',
+      // name: t('Place'),
       options: {
         filter: true,
         filterType: 'dropdown',
@@ -155,6 +171,7 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
     },
     {
       name: 'Country',
+      // name: t('Country'),
       options: {
         filter: true,
         filterType: 'checkbox',
@@ -163,6 +180,7 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
     },
     {
       name: 'Email',
+      // name: t('Email'),
       options: {
         filter: true,
         filterType: 'checkbox',
@@ -174,6 +192,7 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
     },
     {
       name: 'Website',
+      // name: t('Website'),
       options: {
         filter: true,
         filterType: 'checkbox',
@@ -206,7 +225,9 @@ export const formatTableDataForReport = (data: any): any[] => {
 };
 
 export const getBaseTableForReport = (data: any): TableModuleModel => {
+  // const t = i18n.t;
   const tableConfig = ReportListMock;
+
   tableConfig.columns = [
     {
       name: 'ID',
@@ -218,7 +239,8 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
       },
     },
     {
-      name: 'Title of Reports',
+      name: i18n.t('Title of Reports'),
+      // name: t('Title of Reports'),
       options: {
         filter: true,
         filterType: 'dropdown',
@@ -241,10 +263,11 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
     },
     {
       name: 'Date',
+      // name: t('Date'),
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `Date: ${value}`,
+        customFilterListRender: value => `${t('Date')}: ${value}`,
       },
     },
   ];

@@ -3,6 +3,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { ProjectPalette } from 'app/theme';
+import { useTranslation } from 'react-i18next';
 
 export interface StatParams {
   label: string;
@@ -10,6 +11,7 @@ export interface StatParams {
 }
 
 export const StatItem = (props: StatParams) => {
+  const { t, i18n } = useTranslation();
   return (
     <Grid
       item
@@ -29,7 +31,7 @@ export const StatItem = (props: StatParams) => {
           }
         `}
       >
-        {props.label}
+        {t(props.label)}
       </Typography>
       <Typography
         css={`

@@ -113,9 +113,12 @@ export const ReportDetailLayout = (props: any) => (
                 (item: NavItemParams) =>
                   item.path.split('/')[2] === get(props.match.params, 'viz', '')
               ),
-              'label',
-              'Insinger Foundation policy priorities'
-            ).replace('Priority Area', 'Insinger Foundation policy priorities')}
+              t('label'),
+              t('Insinger Foundation policy priorities')
+            ).replace(
+              t('Priority Area'),
+              t('Insinger Foundation policy priorities')
+            )}
           </Typography>
         </Grid>
 
@@ -209,39 +212,42 @@ export const ReportDetailLayout = (props: any) => (
     {/* todo: optimise */}
     <Grid item lg={12}>
       <OutcomeCard
-        title="Key outcomes"
+        title={t('Key outcomes')}
         description={props.report.key_outcomes}
       />
     </Grid>
     <Grid item lg={12}>
       <OutcomeCard
-        title="Monitor and report on the outcomes"
+        title={t('Monitor and report on the outcomes')}
         description={props.report.monitor_report_outcomes}
       />
     </Grid>
     {props.report.media.length > 0 && (
       <Grid item lg={12}>
-        <OutcomeCard title="Media" media={{ tileData: props.report.media }} />
+        <OutcomeCard
+          title={t('Media')}
+          media={{ tileData: props.report.media }}
+        />
       </Grid>
     )}
     <Grid item lg={12}>
       <OutcomeCard
-        title="Key implementation challenges"
+        title={t('Key implementation challenges')}
         description={props.report.key_implementation_challenges}
       />
     </Grid>
     <Grid item lg={12}>
       <OutcomeCard
-        title="Other project outcomes and observations"
+        title={t('Other project outcomes and observations')}
         description={props.report.other_project_outcomes}
       />
     </Grid>
     <Grid item lg={12}>
-      <OutcomeCard title="Future plans" description={props.report.plans} />
+      <OutcomeCard title={t('Future plans')} description={props.report.plans} />
     </Grid>
     <Grid item lg={12}>
       <OutcomeCard
-        title="Other comments"
+        title={t('Other comments')}
         description={props.report.other_comments}
       />
     </Grid>

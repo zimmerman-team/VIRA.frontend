@@ -5,6 +5,7 @@ import { Grid, Typography, Box } from '@material-ui/core';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { useTranslation } from 'react-i18next';
 
 interface Props extends RouteComponentProps {
   message: string;
@@ -31,6 +32,8 @@ function SubmittedLayoutF(props: Props) {
     props.history.push(`/reports/${reportID}/detail`);
   }
 
+  const { t, i18n } = useTranslation();
+
   return (
     <Grid
       container
@@ -43,11 +46,11 @@ function SubmittedLayoutF(props: Props) {
     >
       <Grid item lg={12} justify="center" alignItems="center">
         <Typography variant="subtitle2">
-          {reportID !== '' ? props.message : 'Something went wrong'}
+          {reportID !== '' ? props.message : t('Something went wrong')}
         </Typography>
         <Box width="100%" height="39px" />
         {reportID !== '' && props.showGoToBtn && (
-          <ContainedButton text="Go to report" onClick={goToReport} />
+          <ContainedButton text={t('Go to report')} onClick={goToReport} />
         )}
       </Grid>
     </Grid>

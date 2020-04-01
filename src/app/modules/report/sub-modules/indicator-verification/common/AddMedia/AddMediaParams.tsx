@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import { ProjectPalette } from 'app/theme';
 import { MediaModel } from 'app/modules/report/model';
+import { useTranslation } from 'react-i18next';
 
 export interface AddMediaParams {
   name: string;
@@ -80,27 +81,30 @@ export interface AddMediaButtonParams {
   onClick: Function;
 }
 
-export const AddMediaButton = (props: AddMediaButtonParams) => (
-  <div
-    onClick={() => props.onClick()}
-    css={`
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.71;
-      letter-spacing: 1.25px;
-      color: white;
-      width: 112px;
-      height: 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #30c2b0;
-      cursor: pointer;
-    `}
-  >
-    {props.text}
-  </div>
-);
+export const AddMediaButton = (props: AddMediaButtonParams) => {
+  const { t, i18n } = useTranslation();
+  return (
+    <div
+      onClick={() => props.onClick()}
+      css={`
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.71;
+        letter-spacing: 1.25px;
+        color: white;
+        width: 112px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #30c2b0;
+        cursor: pointer;
+      `}
+    >
+      {t(props.text)}
+    </div>
+  );
+};
 
 export const AddMediaInputField = (props: { text: string }) => (
   <Grid
@@ -226,14 +230,17 @@ export const AddMediaCloseButton = (props: AddMediaCloseButtonParams) => (
   </div>
 );
 
-export const AddMediaTitle = () => (
-  <Typography
-    css={`
-      color: white;
-      font-size: 20px;
-      font-weight: 300;
-    `}
-  >
-    Add Media
-  </Typography>
-);
+export const AddMediaTitle = () => {
+  const { t, i18n } = useTranslation();
+  return (
+    <Typography
+      css={`
+        color: white;
+        font-size: 20px;
+        font-weight: 300;
+      `}
+    >
+      {t('Add Media')}
+    </Typography>
+  );
+};

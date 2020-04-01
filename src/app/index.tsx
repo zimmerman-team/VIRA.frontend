@@ -1,3 +1,4 @@
+// @ts-nocheck
 // cc:application base#;application index
 
 import React from 'react';
@@ -11,8 +12,17 @@ import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 import { PositionedSnackbar } from 'app/components/datadisplay/snackbar';
 import { InitialLoad } from 'app/utils/initialLoad';
 import { useStoreState } from 'app/state/store/hooks';
+import 'styled-components/macro';
+
+import { useTranslation } from 'react-i18next';
 
 export function App() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -30,6 +40,18 @@ export function App() {
 
   return (
     <div className={classes.root}>
+      <div
+        css={`
+          position: fixed;
+          top: 0;
+          right: 0;
+          z-index: 20000;
+        `}
+      >
+        <button onClick={() => changeLanguage('nl')}>nl</button>
+        <button onClick={() => changeLanguage('en')}>en</button>
+      </div>
+
       {!isLoggedIn ? (
         <MainRoutes />
       ) : (

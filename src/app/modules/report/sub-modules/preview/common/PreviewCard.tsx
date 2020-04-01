@@ -3,6 +3,7 @@ import { css } from 'styled-components/macro';
 import { Grid, Card, CardContent, Typography } from '@material-ui/core';
 import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';
 import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   title: string;
@@ -35,30 +36,33 @@ const styles: any = {
   `,
 };
 
-export const PreviewCard = (props: Props) => (
-  <Card css={styles.card}>
-    <div css={styles.header}>
-      <FieldDescription text={props.title} />
-      {props.tooltip && <Tooltip tip={props.tooltip} />}
-    </div>
-    <div css={styles.spacer} />
-    <CardContent css={styles.cardContent}>
-      {typeof props.content === 'string' ||
-      typeof props.content === 'number' ? (
-        props.content
-      ) : (
-        <Grid container spacing={2}>
-          {props.content.map((item: string) => (
-            <Grid item key={item} xs={12} lg={6}>
-              {item}
-            </Grid>
-          ))}
-        </Grid>
-      )}
+export const PreviewCard = (props: Props) => {
+  const { t, i18n } = useTranslation();
+  return (
+    <Card css={styles.card}>
+      <div css={styles.header}>
+        <FieldDescription text={t(props.title)} />
+        {props.tooltip && <Tooltip tip={t(props.tooltip)} />}
+      </div>
       <div css={styles.spacer} />
-      <Typography variant="body2" color="secondary" css={styles.infoText}>
-        {props.explanation}
-      </Typography>
-    </CardContent>
-  </Card>
-);
+      <CardContent css={styles.cardContent}>
+        {typeof props.content === 'string' ||
+        typeof props.content === 'number' ? (
+          props.content
+        ) : (
+          <Grid container spacing={2}>
+            {props.content.map((item: string) => (
+              <Grid item key={item} xs={12} lg={6}>
+                {item}
+              </Grid>
+            ))}
+          </Grid>
+        )}
+        <div css={styles.spacer} />
+        <Typography variant="body2" color="secondary" css={styles.infoText}>
+          {t(props.explanation)}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};

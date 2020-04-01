@@ -3,6 +3,7 @@ import 'styled-components/macro';
 import { IconDashBoard } from 'app/modules/common/icons/IconDashBoard';
 import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface SidebarNavButtonParams extends RouteComponentProps {
   text: string;
@@ -28,6 +29,7 @@ function isNavLinkActive(props: any) {
 
 function SidebarNavButtonF(props: SidebarNavButtonParams): JSX.Element {
   const [isActive, setIsActive] = React.useState(false);
+  const { t, i18n } = useTranslation();
 
   React.useEffect(() => {
     setIsActive(isNavLinkActive(props));
@@ -73,7 +75,7 @@ function SidebarNavButtonF(props: SidebarNavButtonParams): JSX.Element {
               font-weight: ${isActive ? 'bold' : 300};
             }
           `}
-          primary={props.text}
+          primary={t(props.text)}
         />
       </ListItem>
     </NavLink>
