@@ -7,6 +7,7 @@ import {
   CardHeader,
   Card,
   CardContent,
+  useMediaQuery,
 } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { IntentTexField } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
@@ -37,9 +38,14 @@ const styles: any = {
     padding-left: 12px;
     padding-top: 12px;
   `,
+  gridMobile: css`
+    padding-top: 0 !important;
+  `,
 };
 
 export const OutcomesLayout = (props: OutcomesPropsModel) => {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -62,7 +68,13 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* location */}
-      <Grid item xs={12} md={12} lg={6}>
+      <Grid
+        item
+        xs={12}
+        md={12}
+        lg={6}
+        css={isMobileWidth && styles.gridMobile}
+      >
         <Card
           css={`
             overflow: visible;
@@ -86,7 +98,13 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* exact location */}
-      <Grid item xs={12} md={12} lg={6}>
+      <Grid
+        item
+        xs={12}
+        md={12}
+        lg={6}
+        css={isMobileWidth && styles.gridMobile}
+      >
         <Card>
           <CardHeader title="Select Exact Location" />
           <CardContent>
