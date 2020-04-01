@@ -6,6 +6,9 @@ import {
   CardHeader,
   Card,
   CardContent,
+  useMediaQuery,
+  Hidden,
+  Box,
 } from '@material-ui/core';
 import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
 import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
@@ -40,9 +43,13 @@ const styles: any = {
     opacity: 0.2;
     pointer-events: none;
   `,
+  gridMobile: css`
+    padding-top: 0 !important;
+  `,
 };
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [isBlur, setIsBlur] = React.useState(false);
 
   React.useEffect(() => {
@@ -69,12 +76,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               value={props.policyPriority}
               setValue={props.setPolicyPriority}
             />
-            <div
-              css={`
-                width: 100%;
-                height: 24px;
-              `}
-            />
+            <Box height="24px" width="100%" />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
               For each priority selected, the relevant SDGs appear and can be
               selected based on our mapping
@@ -85,7 +87,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* Budget */}
-      <Grid item xs={12} md={6} lg={4}>
+      <Grid item xs={12} md={6} lg={4} css={isMobileWidth && styles.gridMobile}>
         <Card css={styles.card}>
           <CardHeader css={styles.cardHeader} title="Budget" />
           <CardContent css={styles.cardContent}>
@@ -97,12 +99,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               setValue={props.setBudget}
               description=""
             />
-            <div
-              css={`
-                width: 100%;
-                height: 24px;
-              `}
-            />
+            <Box height="24px" width="100%" />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
               Remaning fot this project: {props.remainBudget}€
             </Typography>
@@ -111,8 +108,8 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
-      {/* Budget */}
-      <Grid item xs={12} md={6} lg={4}>
+      {/* Insinger contribution */}
+      <Grid item xs={12} md={6} lg={4} css={isMobileWidth && styles.gridMobile}>
         <Card css={styles.card}>
           <CardHeader css={styles.cardHeader} title="Insinger Contribution" />
           <CardContent css={styles.cardContent}>
@@ -124,12 +121,9 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               setValue={props.setInsContribution}
               description=""
             />
-            <div
-              css={`
-                width: 100%;
-                height: 24px;
-              `}
-            />
+
+            <Box height="24px" width="100%" />
+
             <Typography variant="body2" color="secondary" css={styles.infoText}>
               Remaning fot this project: {props.remainBudget}€
             </Typography>
@@ -137,12 +131,9 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         </Card>
       </Grid>
 
-      <div
-        css={`
-          width: 100%;
-          height: 80px;
-        `}
-      />
+      <Hidden smDown>
+        <Box height="80px" width="100%" />
+      </Hidden>
 
       {/* /!* ---------------------------------------------------------------------*!/ */}
       {/* /!* Target beneficiaries *!/ */}
@@ -178,16 +169,20 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           </Card>
         </Grid>
 
-        <div
-          css={`
-            width: 100%;
-            height: 80px;
-          `}
-        />
+        <Hidden smDown>
+          <Box height="80px" width="100%" />
+        </Hidden>
 
         {/* /!* ---------------------------------------------------------------------*!/ */}
         {/* /!* Of which the beneficiaries will likely include approximately *!/ */}
-        <Grid item container sm={12} md={10} lg={8}>
+        <Grid
+          item
+          container
+          sm={12}
+          md={10}
+          lg={8}
+          css={isMobileWidth && styles.gridMobile}
+        >
           <Card css={styles.card}>
             <CardHeader
               css={styles.cardHeader}

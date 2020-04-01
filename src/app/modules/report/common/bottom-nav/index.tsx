@@ -40,6 +40,7 @@ const mobileButton: any = css`
   && {
     max-height: 48px;
     min-height: 48px;
+    max-width: 132px;
   }
 `;
 

@@ -1,6 +1,12 @@
 import React from 'react';
 import { css } from 'styled-components/macro';
-import { Grid, Card, CardContent, Typography } from '@material-ui/core';
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  useMediaQuery,
+} from '@material-ui/core';
 import { ChallengesPlansPropsModel } from 'app/modules/report/model';
 import { IntentTexArea } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextArea';
 import { ChallengeAreaMock } from './mock';
@@ -20,9 +26,14 @@ const styles: any = {
   infoText: css`
     bottom: 0;
   `,
+  gridMobile: css`
+    padding-top: 0 !important;
+  `,
 };
 
 export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -42,7 +53,14 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item container lg={12} alignItems="center">
+
+      <Grid
+        item
+        container
+        lg={12}
+        alignItems="center"
+        css={isMobileWidth && styles.gridMobile}
+      >
         <Card css={styles.card}>
           <CardContent css={styles.cardContent}>
             <IntentTexArea
@@ -57,7 +75,14 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item container lg={12} alignItems="center">
+
+      <Grid
+        item
+        container
+        lg={12}
+        alignItems="center"
+        css={isMobileWidth && styles.gridMobile}
+      >
         <Card css={styles.card}>
           <CardContent css={styles.cardContent}>
             <IntentTexArea
@@ -72,7 +97,14 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item container lg={12} alignItems="center">
+
+      <Grid
+        item
+        container
+        lg={12}
+        alignItems="center"
+        css={isMobileWidth && styles.gridMobile}
+      >
         <Card css={styles.card}>
           <CardContent css={styles.cardContent}>
             <IntentTexArea
