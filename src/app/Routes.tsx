@@ -4,7 +4,6 @@
 import auth from 'app/auth';
 import { useTitle } from 'react-use';
 import { NoMatchPage } from 'app/modules/common/no-match-page';
-import { PageLoader } from 'app/modules/common/page-loader';
 import { GranteeDetailModule } from 'app/modules/detail-modules/grantee-detail';
 import { ProjectDetailModule } from 'app/modules/detail-modules/project-detail';
 import { ReportDetailModule } from 'app/modules/detail-modules/report-detail';
@@ -19,10 +18,7 @@ import { SdgModule } from 'app/modules/sdg';
 import SignInModule from 'app/modules/sign-in';
 import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
 import LoginCallbackModule from 'app/modules/sign-in/sub-modules/sign-in-callback';
-import { ManageAccount } from 'app/modules/super-admin/sub-modules/manage-account';
-import { manageAccountMock } from 'app/modules/super-admin/sub-modules/manage-account/mock';
 import { ManageTeamEditAdd } from 'app/modules/super-admin/sub-modules/manage-team-edit';
-import ManageUser from 'app/modules/super-admin/sub-modules/manage-user';
 import { ManageUserEdit } from 'app/modules/super-admin/sub-modules/manage-user-edit';
 import { manageUserEditMock } from 'app/modules/super-admin/sub-modules/manage-user-edit/mock';
 import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-teams';
@@ -73,22 +69,26 @@ export function MainRoutes() {
       </Route>
 
       <Route exact path="/">
-        <Redirect to="/dashboard/priority-area/projects" />
+        <Redirect to="/dashboard" />
       </Route>
-      <Route exact path="/dashboard/:viz?/:list?">
+
+      <Route exact path="/dashboard">
         {redirectUnAuth(LandingLayout, storeUser)}
       </Route>
 
-      <Route exact path="/list/:id">
+      <Route exact path="/list/:id?">
         {useTitle(`${AppConfig.appTitleLong} List`)}
-        {redirectUnAuth(ListModule, storeUser, { tabNav: TabNavMock })}
+        {redirectUnAuth(ListModule, storeUser, {
+          tabNav: TabNavMock,
+          loadData: true,
+        })}
       </Route>
 
-      <Route exact path="/projects/:code/detail/:viz?">
+      <Route exact path="/projects/:code">
         {redirectUnAuth(ProjectDetailModule, storeUser)}
       </Route>
 
-      <Route exact path="/reports/:code/detail/:viz?">
+      <Route exact path="/reports/:code">
         {redirectUnAuth(ReportDetailModule, storeUser)}
       </Route>
 
@@ -160,14 +160,6 @@ export function MainRoutes() {
         {redirectUnAuth(ManageUsers, storeUser, manageUsersTeamsLayoutMock)}
       </Route>
 
-      <Route path="/super-admin/manage-user">
-        {redirectUnAuth(ManageUser, storeUser)}
-      </Route>
-
-      <Route path="/super-admin/manage-account">
-        {redirectUnAuth(ManageAccount, storeUser, manageAccountMock)}
-      </Route>
-
       <Route path="/super-admin/manage-users/edit/:id">
         {redirectUnAuth(ManageUserEdit, storeUser, manageUserEditMock)}
       </Route>
@@ -194,11 +186,9 @@ export function MainRoutes() {
 
       <Route path="/manage-account/:id">
         {redirectUnAuth(ManageUserEdit, storeUser, {
+          title: 'Manage Your Account',
           ...manageUserEditMock,
-          breadcrumbs: {
-            ...manageUserEditMock.breadcrumbs,
-            currentLocation: 'Account',
-          },
+          breadcrumbs: null,
           editSelf: true,
         })}
       </Route>

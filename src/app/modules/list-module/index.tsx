@@ -1,6 +1,8 @@
 // @ts-nocheck
 /* eslint-disable default-case */
+import React from 'react';
 import { Grid, Tabs, Tab } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import TableModule from 'app/components/datadisplay/Table';
 import {
@@ -12,14 +14,10 @@ import {
   getBaseTableForReport,
 } from 'app/modules/list-module/utils';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { useParams } from 'react-router-dom';
 /* utils */
 import get from 'lodash/get';
-import React from 'react';
-import { css } from 'styled-components/macro';
-
-import { useEffectOnce } from 'react-use';
-
-import { useRouteMatch } from 'react-router-dom';
+import 'styled-components/macro';
 import {
   useStyles,
   TabStyle,
@@ -27,17 +25,17 @@ import {
   TabPanel,
 } from './common/TabPanelProps';
 
-import { useTranslation } from 'react-i18next';
-
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
   hideProjects?: boolean;
   hideGrantees?: boolean;
   hideReports?: boolean;
   focus?: number;
+  loadData?: boolean;
 };
 
 export const ListModule = (props: ListModuleParams) => {
+  const { id } = useParams();
   // set state
   const [baseTableForProject, setBaseTableForProject] = React.useState(
     getBaseTableForProject()
@@ -67,15 +65,17 @@ export const ListModule = (props: ListModuleParams) => {
 
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
-    allProjectsAction({
-      socketName: 'allProject',
-      values: '',
-    });
-    allOrganisationsAction({
-      socketName: 'allOrg',
-      values: '',
-    });
-    allReportsAction({ socketName: 'allReport', values: '' });
+    if (props.loadData) {
+      allProjectsAction({
+        socketName: 'allProject',
+        values: '',
+      });
+      allOrganisationsAction({
+        socketName: 'allOrg',
+        values: '',
+      });
+      allReportsAction({ socketName: 'allReport', values: '' });
+    }
   }, []);
 
   // Format the projects on componentDidUpdate when allProjectsData change
@@ -102,8 +102,16 @@ export const ListModule = (props: ListModuleParams) => {
     });
   }, [allReportsData]);
 
+  React.useEffect(() => {
+    if (parseInt(id, 10) < 3) {
+      setValue(parseInt(id, 10));
+    }
+  }, [id]);
+
   const classes = useStyles();
-  const [value, setValue] = React.useState(props.focus ? props.focus : 0);
+  const [value, setValue] = React.useState(
+    props.focus || parseInt(id, 10) ? props.focus || parseInt(id, 10) : 0
+  );
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -122,15 +130,30 @@ export const ListModule = (props: ListModuleParams) => {
           aria-label="simple tabs example"
         >
           {!props.hideProjects && (
-            <Tab css={TabStyle} label={t('Projects')} {...a11yProps(0)} />
+            <Tab
+              value={0}
+              css={TabStyle}
+              label={t('Projects')}
+              {...a11yProps(0)}
+            />
           )}
 
           {!props.hideGrantees && (
-            <Tab css={TabStyle} label={t('Grantees')} {...a11yProps(1)} />
+            <Tab
+              value={1}
+              css={TabStyle}
+              label={t('Grantees')}
+              {...a11yProps(1)}
+            />
           )}
 
           {!props.hideReports && (
-            <Tab css={TabStyle} label={t('Reports')} {...a11yProps(2)} />
+            <Tab
+              value={2}
+              css={TabStyle}
+              label={t('Reports')}
+              {...a11yProps(2)}
+            />
           )}
         </Tabs>
       </Grid>

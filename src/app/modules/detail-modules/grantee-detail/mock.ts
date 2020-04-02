@@ -52,7 +52,12 @@ export interface GranteeParams {
   mockData: HorizontalBarChartModel;
   barChartLegends: any;
   onBarChartLegendClick?: any;
-  projectTable: TableModuleModel;
+  ppVizData: any;
+  SDGVizData: any;
+  selectedSDG: string;
+  onBubbleSelect: Function;
+  geoMapData: any;
+  projectParams: any;
 }
 
 export const propsMock = {

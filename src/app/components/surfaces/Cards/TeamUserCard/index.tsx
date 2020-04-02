@@ -31,7 +31,18 @@ const BottomContainer = styled(Container)`
 
 const CardContainer = styled(Card)`
   && {
+    cursor: pointer;
+    border-radius: 2px;
     padding: 16px 16px 24px 24px;
+    border: 1px solid transparent;
+
+    &:hover {
+      border-color: ${ProjectPalette.secondary.light};
+
+      button {
+        color: ${ProjectPalette.secondary.light};
+      }
+    }
   }
 `;
 
@@ -64,8 +75,11 @@ const Caption = styled(Typography)`
 export function TeamUserCard(props: TeamUserCardModel) {
   const history = useHistory();
 
+  const editUser = () =>
+    history.push(`/super-admin/${props.urlParam}/edit/${props._id}`);
+
   return (
-    <CardContainer>
+    <CardContainer onClick={editUser}>
       <Header variant="body1">{props.title}</Header>
       <Description variant="subtitle1">{props.description}</Description>
       <BottomContainer>
@@ -74,11 +88,7 @@ export function TeamUserCard(props: TeamUserCardModel) {
             <Caption variant="caption">Created: {props.dateCreated}</Caption>
           </Grid>
           <Grid item>
-            <ButtonIcon
-              onClick={() =>
-                history.push(`/super-admin/${props.urlParam}/edit/${props._id}`)
-              }
-            >
+            <ButtonIcon onClick={editUser}>
               <Edit />
             </ButtonIcon>
             <ButtonIcon

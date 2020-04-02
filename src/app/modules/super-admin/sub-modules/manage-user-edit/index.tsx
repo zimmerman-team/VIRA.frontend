@@ -1,5 +1,5 @@
 // global
-import { Box } from '@material-ui/core';
+import { Box, Typography, useMediaQuery } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 // aboslute
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
@@ -16,6 +16,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 // direct
 import 'styled-components/macro';
+import { ProjectPalette } from 'app/theme';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {
@@ -174,6 +175,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
   }
 
   const loading = useStoreState(state => state.loadUser.loading);
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   // returned components
   return (
@@ -182,17 +184,28 @@ function ManageUserEditF(props: ManageUserEditModel) {
 
       {/* ---------------------------------------------------------------------*/}
       {/* breadcrumbs */}
-      <Grid item lg={12}>
-        <BreadCrumbs
-          currentLocation={props.breadcrumbs.currentLocation}
-          previousLocations={props.breadcrumbs.previousLocations}
-        />
-      </Grid>
+      {props.breadcrumbs && (
+        <Grid item lg={12}>
+          <BreadCrumbs
+            currentLocation={props.breadcrumbs.currentLocation}
+            previousLocations={props.breadcrumbs.previousLocations}
+          />
+        </Grid>
+      )}
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* title fragment */}
+      {props.title && (
+        <Grid item container lg={6} direction="column">
+          <Typography variant={'h6'}>{props.title}</Typography>
+        </Grid>
+      )}
 
       {/* ---------------------------------------------------------------------*/}
       {/* form */}
       <Grid item container xs={12} lg={12} direction="column">
-        <Box width="100%" height="30px" />
+        {!isMobileWidth && <Box width="100%" height="30px" />}
+
         <SingleMultiLineTextField
           value={firstName}
           setValue={setFirstName}
@@ -241,17 +254,26 @@ function ManageUserEditF(props: ManageUserEditModel) {
             )}
           </Grid>
         )}
-      </Grid>
 
-      {/* ---------------------------------------------------------------------*/}
-      {/* button */}
-      <Grid item container xs={12} lg={12} justify="flex-end">
-        <ContainedButton
-          onClick={onSubmit}
-          disabled={isSubmitDisabled()}
-          css={{ position: 'fixed', bottom: 32 }}
-          text={props.mode === 'add' ? 'Add' : 'Save'}
-        />
+        {/* ---------------------------------------------------------------------*/}
+        {/* button */}
+        <Grid
+          item
+          xs={12}
+          lg={12}
+          css={{
+            flexBasis: 'unset',
+            alignSelf: 'flex-end',
+            position: 'fixed',
+            bottom: '32px',
+          }}
+        >
+          <ContainedButton
+            onClick={onSubmit}
+            disabled={isSubmitDisabled()}
+            text={props.mode === 'add' ? 'Add' : 'Save'}
+          />
+        </Grid>
       </Grid>
     </React.Fragment>
   );

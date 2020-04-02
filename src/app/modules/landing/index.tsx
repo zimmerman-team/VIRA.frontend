@@ -4,41 +4,24 @@ import React from 'react';
 import { useTitle } from 'react-use';
 import get from 'lodash/get';
 import findIndex from 'lodash/findIndex';
-import find from 'lodash/find';
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 
 // absolute
-import {
-  Grid,
-  Typography,
-  Box,
-  Hidden,
-  useMediaQuery,
-} from '@material-ui/core';
+import { Grid, Box, Hidden } from '@material-ui/core';
 import { ListModule } from 'app/modules/list-module';
-import { GeoMap } from 'app/components/charts/GeoMap';
-import { NavItemParams } from 'app/modules/common/consts';
 import {
   statsMock,
   StatItemParams,
-  TabNavMockViz,
   TabNavMockList,
 } from 'app/modules/landing/statsMock';
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
-import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
-import { BubbleChart } from 'app/components/charts/Bubble';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
-import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
-import uniqBy from 'lodash/uniqBy';
-import { ProjectPalette } from 'app/theme';
 import { AppConfig } from 'app/data';
 import { getNavTabItems } from './utils/getNavTabItems';
-import { getNewReportsCount } from './utils/getNewReportsCount';
-import { useTranslation } from 'react-i18next';
+import { Viztabs } from '../common/components/Viztabs';
 
 export interface Joejoe {
   /** prop1 description */
@@ -54,15 +37,14 @@ function LandingLayout(props: any) {
   // set window title
   useTitle(`${AppConfig.appTitleLong} Dashboard`);
   /** prop1 description */
-  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [stats, setStats] = React.useState(statsMock);
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
-      label: 'Target',
+      label: 'charts.barchart.target',
       selected: true,
     },
     {
-      label: 'Budget',
+      label: 'charts.barchart.budget',
       selected: true,
     },
   ]);
@@ -124,116 +106,15 @@ function LandingLayout(props: any) {
         <Box width="100%" height="12px" />
       </Hidden>
 
-      <React.Fragment>
-        <Grid container item>
-          <Grid
-            item
-            xs={12}
-            sm={9}
-            css={`
-              order: ${isMobileWidth ? 1 : 0};
-              margin-top: ${isMobileWidth ? '28px' : 0};
-            `}
-          >
-            <Typography
-              variant="h4"
-              css={`
-                font-size: 20px;
-                font-weight: 600;
-                line-height: 1.5;
-              `}
-            >
-              {t(
-                get(
-                  find(
-                    TabNavMockViz.items,
-                    (item: NavItemParams) =>
-                      item.path.split('/')[2] ===
-                      get(props.match.params, 'viz', '')
-                  ),
-                  'label',
-                  'Priority Area'
-                )
-              )}
-            </Typography>
-          </Grid>
-
-          <Hidden smUp>
-            <Grid item xs={3} />
-          </Hidden>
-
-          <Grid item xs={9} sm={3}>
-            <TabNavigator
-              {...getNavTabItems(
-                TabNavMockViz,
-                get(props.match.params, 'list', '')
-              )}
-            />
-            <Hidden smUp>
-              <Box height="62px" width="1px" />
-            </Hidden>
-          </Grid>
-        </Grid>
-
-        <Grid item xs={12} lg={12}>
-          <Route path="/dashboard" exact>
-            <HorizontalBarChart
-              colors={[
-                ProjectPalette.primary.main,
-                ...uniqBy(
-                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-                    [],
-                  'value2Color'
-                ).map((item: any) => item.value2Color),
-              ]}
-              values={
-                ((ppVizData as unknown) as HorizontalBarChartValueModel[]) || []
-              }
-              maxValue={Math.max(
-                ...(
-                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-                  []
-                ).map((item: any) => item.value1 + item.value2)
-              )}
-              chartLegends={barChartLegends}
-              onChartLegendClick={onBarChartLegendClick}
-            />
-          </Route>
-          <Route path="/dashboard/priority-area">
-            <HorizontalBarChart
-              colors={[
-                ProjectPalette.primary.main,
-                ...uniqBy(
-                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-                    [],
-                  'value2Color'
-                ).map((item: any) => item.value2Color),
-              ]}
-              values={
-                ((ppVizData as unknown) as HorizontalBarChartValueModel[]) || []
-              }
-              maxValue={Math.max(
-                ...(
-                  ((ppVizData as unknown) as HorizontalBarChartValueModel[]) ||
-                  []
-                ).map((item: any) => item.value1 + item.value2)
-              )}
-              chartLegends={barChartLegends}
-              onChartLegendClick={onBarChartLegendClick}
-            />
-          </Route>
-          <Route path="/dashboard/sdgs">
-            <BubbleChart
-              data={{ ...bubbleMockData, children: SDGVizData }}
-              selectedBubble={selectedSDG}
-              setSelectedBubble={onBubbleSelect}
-            />
-          </Route>
-          <Route path="/dashboard/map">
-            <GeoMap data={geoMapData} />
-          </Route>
-        </Grid>
-      </React.Fragment>
+      <Viztabs
+        barChartData={ppVizData}
+        barChartLegends={barChartLegends}
+        onBarChartLegendClick={onBarChartLegendClick}
+        bubbleChartData={{ ...bubbleMockData, children: SDGVizData }}
+        selectedBubble={selectedSDG}
+        onBubbleSelect={onBubbleSelect}
+        geoMapData={geoMapData}
+      />
 
       <Hidden smDown>
         <Box width="100%" height="86px" />
@@ -241,6 +122,7 @@ function LandingLayout(props: any) {
       <Box width="100%" height="18px" />
 
       <ListModule
+        loadData
         tabNav={getNavTabItems(
           TabNavMockList,
           get(props.match.params, 'viz', '')

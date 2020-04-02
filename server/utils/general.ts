@@ -12,3 +12,7 @@ export function makePass(length: number): string {
   }
   return result;
 }
+
+export const isArray = function(a: any) {
+  return !!a && a.constructor === Array;
+};

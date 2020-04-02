@@ -177,8 +177,11 @@ IO.sockets.on('connection', (socket: any) => {
   socket.on('addProject', (data: any, fn: any) => {
     projectController.addProject({ query: data }, (res: any) => fn(res));
   });
-  socket.on('updateProject', (data: any, fn: any) => {
-    projectController.UpdateProject({ query: data }, (res: any) => fn(res));
+  socket.on('editProject', (data: any, fn: any) => {
+    projectController.editProject({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('deleteProject', (data: any, fn: any) => {
+    projectController.deleteProject({ query: data }, (res: any) => fn(res));
   });
   socket.on('getProjectBudgetData', (data: any, fn: any) => {
     projectController.getProjectBudgetData({ query: data }, (res: any) =>
@@ -186,9 +189,6 @@ IO.sockets.on('connection', (socket: any) => {
     );
   });
   /* Responsible person */
-  socket.on('delProject', (data: any, fn: any) => {
-    projectController.DelProject({ query: data }, (res: any) => fn(res));
-  });
   socket.on('allPerson', (data: any, fn: any) => {
     responsiblePersonController.allPerson({ query: data }, (res: any) =>
       fn(res)
@@ -332,6 +332,7 @@ server.listen(process.env.REACT_APP_BACKEND_PORT, () =>
 router.get('/redirectToHome', (req: any, res: any) => {
   res.redirect(`${process.env.REACT_APP_PROJECT_URL}/`);
 });
+
 app.use('/api', router);
 
 export {};

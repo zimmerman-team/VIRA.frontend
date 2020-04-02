@@ -8,13 +8,15 @@ import {
   Card,
   CardContent,
   Typography,
+  useMediaQuery,
+  Hidden,
 } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { useTranslation } from 'react-i18next';
 import { IntentTexArea } from './common/IntentTextArea';
 import { IndicatorVerificationPropsModel } from '../../model';
 import { AddMediaLayout } from './common/AddMedia';
 import { MediaBlock } from './common/MediaBlock';
-import { useTranslation } from 'react-i18next';
 
 const styles: any = {
   card: css`
@@ -30,12 +32,17 @@ const styles: any = {
   infoText: css`
     bottom: 0;
   `,
+  gridMobile: css`
+    padding-top: 0 !important;
+  `,
 };
 
 export const IndicatorVerificationLayout = (
   props: IndicatorVerificationPropsModel
 ) => {
   const { t, i18n } = useTranslation();
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -58,11 +65,12 @@ export const IndicatorVerificationLayout = (
         </Card>
       </Grid>
 
-      <Box height="84px" width="100%" />
-
+      <Hidden smDown>
+        <Box height="84px" width="100%" />
+      </Hidden>
       {/* ---------------------------------------------------------------------*/}
       {/* textarea 1 */}
-      <Grid item xs={12} lg={12}>
+      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
         <Card css={styles.card}>
           <CardContent css={styles.cardContent}>
             <IntentTexArea
@@ -85,7 +93,9 @@ export const IndicatorVerificationLayout = (
         </Card>
       </Grid>
 
-      <Box height="72px" width="100%" />
+      <Hidden smDown>
+        <Box height="72px" width="100%" />
+      </Hidden>
       {/* ---------------------------------------------------------------------*/}
       {/* add media button 1 */}
       <Grid item xs={12} lg={12}>
@@ -125,7 +135,9 @@ export const IndicatorVerificationLayout = (
         </div>
       </Modal>
 
-      <Box width="100%" height="40px" />
+      <Hidden smDown>
+        <Box width="100%" height="40px" />
+      </Hidden>
     </React.Fragment>
   );
 };
