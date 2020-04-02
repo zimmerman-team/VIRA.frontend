@@ -3,7 +3,6 @@ import React from 'react';
 
 import { ContactsCard } from 'app/components/surfaces/Cards/ContactsCard';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
-import { Description } from 'app/modules/common/components/DescriptionParams';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
@@ -44,9 +43,9 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
-      {/* project description */}
-      <Grid item xs={12} lg={6}>
-        <Description {...props.description} />
+      {/* contact card */}
+      <Grid item xs={12} md={6} lg={4}>
+        <ContactsCard {...props.contact} />
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}

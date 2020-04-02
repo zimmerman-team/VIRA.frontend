@@ -13,15 +13,12 @@ import {
 import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
 /* models */
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import { GranteeListMock } from 'app/modules/list-module/mock';
 import React from 'react';
-import { ReportListMock } from 'app/modules/list-module/mock';
 import get from 'lodash/get';
 import find from 'lodash/find';
-// import { useTranslation, Translation } from 'react-i18next';
+import { GranteeListMock, ReportListMock } from 'app/modules/list-module/mock';
 import { useTranslation, Translation } from 'react-i18next';
-// import i18n from '../i18n'
-import i18n from 'app/languages';
+// import i18n from 'app/languages';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];
@@ -56,7 +53,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
       },
     },
     {
-      name: i18n.t('Decision date'),
+      name: 'Decision date',
       // name: t('Decision date'),
       options: {
         filter: true,
@@ -239,7 +236,7 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
       },
     },
     {
-      name: i18n.t('Title of Reports'),
+      name: 'Title of Reports',
       // name: t('Title of Reports'),
       options: {
         filter: true,

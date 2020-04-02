@@ -32,7 +32,10 @@ export const ReportDetailLayout = (props: any) => {
       {/* button: generate report */}
       <Hidden xsDown>
         <Grid lg={12} container justify="flex-end">
-          <ContainedButton text="Edit Report" onClick={props.editReport} />
+          <ContainedButton
+            text={t('reports.detail.editReportBtn')}
+            onClick={props.editReport}
+          />
         </Grid>
       </Hidden>
 
@@ -48,11 +51,11 @@ export const ReportDetailLayout = (props: any) => {
           url_note={`${props.report.project.name}`}
           stats={[
             {
-              label: 'Target beneficiaries',
+              label: t('reports.detail.stats.targetBeneficiaries'),
               value: props.report.total_target_beneficiaries,
             },
             {
-              label: 'Budget',
+              label: t('reports.detail.stats.budget'),
               value: parseInt(props.report.budget || '', 10)
                 .toLocaleString(undefined, {
                   currency: 'EUR',
@@ -100,45 +103,45 @@ export const ReportDetailLayout = (props: any) => {
       {/* todo: optimise */}
       <Grid item lg={12}>
         <OutcomeCard
-          title={t('Key outcomes')}
+          title={t('reports.detail.cards.key_outcomes')}
           description={props.report.key_outcomes}
         />
       </Grid>
       <Grid item lg={12}>
         <OutcomeCard
-          title={t('Monitor and report on the outcomes')}
+          title={t('reports.detail.cards.monitor')}
           description={props.report.monitor_report_outcomes}
         />
       </Grid>
       {props.report.media.length > 0 && (
         <Grid item lg={12}>
           <OutcomeCard
-            title={t('Media')}
+            title={t('reports.detail.cards.media')}
             media={{ tileData: props.report.media }}
           />
         </Grid>
       )}
       <Grid item lg={12}>
         <OutcomeCard
-          title={t('Key implementation challenges')}
+          title={t('reports.detail.cards.key_implementation_challenges')}
           description={props.report.key_implementation_challenges}
         />
       </Grid>
       <Grid item lg={12}>
         <OutcomeCard
-          title={t('Other project outcomes and observations')}
+          title={t('reports.detail.cards.other_project')}
           description={props.report.other_project_outcomes}
         />
       </Grid>
       <Grid item lg={12}>
         <OutcomeCard
-          title={t('Future plans')}
+          title={t('reports.detail.cards.future_plans')}
           description={props.report.plans}
         />
       </Grid>
       <Grid item lg={12}>
         <OutcomeCard
-          title={t('Other comments')}
+          title={t('reports.detail.cards.other_comments')}
           description={props.report.other_comments}
         />
       </Grid>

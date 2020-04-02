@@ -40,7 +40,7 @@ const styles: any = {
 export const IndicatorVerificationLayout = (
   props: IndicatorVerificationPropsModel
 ) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   return (
@@ -54,12 +54,8 @@ export const IndicatorVerificationLayout = (
               componentID="indVer1"
               value={props.keyOutcomes}
               setValue={props.setKeyOutcomes}
-              tooltip={t(
-                'Please describe the key outcomes the project aims to achieve'
-              )}
-              description={t(
-                'Please describe the key outcomes the project aims to achieve'
-              )}
+              tooltip={t('reports.form.cards.key_outcomes')}
+              description={t('reports.form.cards.key_outcomes')}
             />
           </CardContent>
         </Card>
@@ -77,17 +73,11 @@ export const IndicatorVerificationLayout = (
               componentID="indVer2"
               value={props.monRepOutcomes}
               setValue={props.setMonRepOutcomes}
-              tooltip={t(
-                'Please tell us how you intend to monitor and report on the outcomes listed above'
-              )}
-              description={t(
-                'Please tell us how you intend to monitor and report on the outcomes listed above'
-              )}
+              tooltip={t('reports.form.cards.monitor')}
+              description={t('reports.form.cards.monitor')}
             />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {t(
-                'If you have baseline data (the data you track progress against) and a means of verification (how you intend to obtain the data and from which sources) please also provide that information.'
-              )}
+              {t('reports.form.cards.monitor_expl')}
             </Typography>
           </CardContent>
         </Card>
@@ -100,7 +90,7 @@ export const IndicatorVerificationLayout = (
       {/* add media button 1 */}
       <Grid item xs={12} lg={12}>
         <ContainedButton
-          text={t('Add media (Optional)')}
+          text={t('reports.form.cards.media')}
           icon={<GetAppIcon />}
           onClick={() => props.setOpenMediaModal(true)}
         />

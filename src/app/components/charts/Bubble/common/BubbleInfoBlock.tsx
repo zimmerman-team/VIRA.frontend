@@ -1,6 +1,7 @@
 import React from 'react';
 import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
+import { useTranslation } from 'react-i18next';
 import { Grid, Typography, Box } from '@material-ui/core';
 import {
   ProgressBar,
@@ -16,6 +17,7 @@ export type BubbleInfoBlockProps = {
 };
 
 export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
+  const { t } = useTranslation();
   return (
     <Grid
       container
@@ -38,7 +40,7 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
           color: ${ProjectPalette.common.white};
         `}
       >
-        {props.name}
+        {t(`charts.items.${props.name}`)}
       </Grid>
       <Grid item xs={12} lg={6}>
         <React.Fragment>
@@ -56,7 +58,7 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
               `}
               variant="subtitle1"
             >
-              Target ({props.targetPercentage.toFixed(2)}%)
+              {t('Target')} ({props.targetPercentage.toFixed(2)}%)
             </Typography>
             <Typography
               css={`
@@ -92,7 +94,7 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
               `}
               variant="subtitle1"
             >
-              Budget
+              {t('Budget')}
             </Typography>
             <Typography
               css={`

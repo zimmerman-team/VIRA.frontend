@@ -28,6 +28,8 @@ export interface SyncVariablesModel {
   user: UserModel | null;
   setUser: Action<SyncVariablesModel, UserModel>;
   clearUser: Action<SyncVariablesModel>;
+  lng: string;
+  setLng: Action<SyncVariablesModel, string>;
 }
 
 export interface ResponseData<T> {

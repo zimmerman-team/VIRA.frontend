@@ -82,7 +82,6 @@ export interface AddMediaButtonParams {
 }
 
 export const AddMediaButton = (props: AddMediaButtonParams) => {
-  const { t, i18n } = useTranslation();
   return (
     <div
       onClick={() => props.onClick()}
@@ -101,7 +100,7 @@ export const AddMediaButton = (props: AddMediaButtonParams) => {
         cursor: pointer;
       `}
     >
-      {t(props.text)}
+      {props.text}
     </div>
   );
 };
@@ -231,7 +230,7 @@ export const AddMediaCloseButton = (props: AddMediaCloseButtonParams) => (
 );
 
 export const AddMediaTitle = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Typography
       css={`
@@ -240,7 +239,7 @@ export const AddMediaTitle = () => {
         font-weight: 300;
       `}
     >
-      {t('Add Media')}
+      {t('reports.form.media_modal.title')}
     </Typography>
   );
 };

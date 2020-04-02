@@ -7,5 +7,9 @@
     "prisoner": "Prisoner rehabilitation /reintegration",
     "prostitution": "Prostitution",
     "refugees": "Refugees"
+  },
+  "barchart": {
+    "target": "Target",
+    "budget": "Budget"
   }
 }

@@ -6,6 +6,7 @@ import sortBy from 'lodash/sortBy';
 import filter from 'lodash/filter';
 import groupBy from 'lodash/groupBy';
 import consts from '../config/consts';
+import findIndex from 'lodash/findIndex';
 const Report = require('../models/report');
 import { isArray } from '../utils/general';
 import { ProjectPalette } from '../../src/app/theme';
@@ -140,10 +141,10 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
           }
         });
         policyPriorities.forEach((priority: any) => {
-          const foundPriority = find(result, {
-            name: priority.label,
+          const foundPriorityIndex = findIndex(result, {
+            name: priority.value,
           });
-          if (!foundPriority) {
+          if (foundPriorityIndex === -1) {
             result.push({
               name: priority.label,
               value1: 0,
@@ -153,6 +154,9 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
               value2Color: ProjectPalette.grey[500],
               tooltip: {},
             });
+          } else {
+            result[foundPriorityIndex].name = priority.label;
+            result[foundPriorityIndex].tooltip.title = priority.label;
           }
         });
       } else {
@@ -225,11 +229,13 @@ export function getSDGBubbleChart(req: any, res: any) {
     .exec((err: any, rawData: any) => {
       const data = filter(rawData, { isDraft: false });
       let result: any[] = [];
-      const groupedData = groupBy(data, 'policy_priority.name');
       Object.keys(ppToSdg).forEach(key => {
         const sdg = get(ppToSdg, `${[key]}`, null);
-        const pp = get(groupedData, `${[key]}`, null);
-        if (pp) {
+        const pp = filter(
+          data,
+          (item: any) => item.policy_priority.name === sdg.actualPPName
+        );
+        if (pp.length > 0) {
           const totTarget = sumBy(pp, 'total_target_beneficiaries');
           const totCommitted = sumBy(pp, 'total_target_beneficiaries_commited');
           const totBudget = sumBy(pp, 'budget');

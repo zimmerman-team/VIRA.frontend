@@ -11,6 +11,7 @@ import { CreateReportLayout } from 'app/modules/report/layout';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { AppConfig } from 'app/data';
 import { useQuery } from 'app/utils/useQuery';
+import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
 import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
 import { isNavBtnEnabled } from './utils/isNavBtnEnabled';
 import { validateIndVerFields } from './utils/validateIndVerFields';
@@ -20,7 +21,6 @@ import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
 import { uploadFiles } from './utils/uploadFiles';
 import { LocationModel } from './model';
-import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -74,6 +74,7 @@ function CreateReportFunc(props: any) {
     label: '',
     value: '',
   });
+
   const [budget, setBudget] = React.useState(0);
   const [insContribution, setInsContribution] = React.useState(0);
 
@@ -334,7 +335,7 @@ function CreateReportFunc(props: any) {
     validatePolicyPrioritiesFields(
       tarBenTotal,
       beneficiaryCounts,
-      policyPriority.label,
+      policyPriority.value,
       budget,
       get(projectBudgetData, 'data.remainBudget', 0),
       insContribution
@@ -363,7 +364,7 @@ function CreateReportFunc(props: any) {
             title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priority: policyPriority.label,
+            policy_priority: policyPriority.value,
             location: location
               ? {
                   long: (location as LocationModel).longitude,
@@ -401,7 +402,7 @@ function CreateReportFunc(props: any) {
             title: title === '' ? ' ' : title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priority: policyPriority.label,
+            policy_priority: policyPriority.value,
             location: location
               ? {
                   long: (location as LocationModel).longitude,

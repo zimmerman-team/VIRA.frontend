@@ -33,7 +33,7 @@ export const ProjectDetailLayout = (props: any) => {
       <Hidden xsDown>
         <Grid item xs={12} lg={6} container justify="flex-end">
           <ContainedButton
-            text={t('Generate Report')}
+            text={t('projects.detail.generateReportBtn')}
             onClick={props.projectDetail.generateReport}
           />
         </Grid>
@@ -43,6 +43,7 @@ export const ProjectDetailLayout = (props: any) => {
       {/* title fragment */}
       <Grid item xs={12} lg={12}>
         <TitleFragment
+          showMoreThanTitle
           title={props.projectDetail.project}
           id={`${t('project id:')} ${props.projectDetail.project_id}`}
           date={t('*earliest and latest activity start dates')}
@@ -50,7 +51,7 @@ export const ProjectDetailLayout = (props: any) => {
           url={props.projectDetail.website}
           stats={[
             {
-              label: t('Total project amount'),
+              label: t('projects.detail.stats.total_budget'),
               value: parseInt(props.projectDetail.total_amount || '', 10)
                 .toLocaleString(undefined, {
                   currency: 'EUR',
@@ -60,7 +61,7 @@ export const ProjectDetailLayout = (props: any) => {
                 .replace('.00', ''),
             },
             {
-              label: t('Project duration'),
+              label: t('projects.detail.stats.duration'),
               value: `${(props.projectDetail.start_date || '').replace(
                 /-/g,
                 '.'
@@ -87,17 +88,6 @@ export const ProjectDetailLayout = (props: any) => {
         onBubbleSelect={props.onBubbleSelect}
         geoMapData={props.geoMapData}
       />
-
-      {/* ---------------------------------------------------------------------*/}
-      {/* outcome cards */}
-      <Grid item container xs={12} md={12} lg={12}>
-        <Grid item xs={12} lg={6}>
-          <OutcomeCard {...ProjectOutcomeCardMock[0]} />
-        </Grid>
-        <Grid item xs={12} lg={6}>
-          <OutcomeCard {...ProjectOutcomeCardMock[1]} />
-        </Grid>
-      </Grid>
 
       {/* ---------------------------------------------------------------------*/}
       {/* reports */}

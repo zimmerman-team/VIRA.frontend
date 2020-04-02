@@ -6,7 +6,6 @@ import get from 'lodash/get';
 import findIndex from 'lodash/findIndex';
 import { withRouter } from 'react-router-dom';
 import 'styled-components/macro';
-import { useTranslation } from 'react-i18next';
 
 // absolute
 import { Grid, Box, Hidden } from '@material-ui/core';
@@ -32,8 +31,6 @@ export interface Joejoe {
  * Landing layout.
  */
 function LandingLayout(props: any) {
-  const { t, i18n } = useTranslation();
-
   // set window title
   useTitle(`${AppConfig.appTitleLong} Dashboard`);
   /** prop1 description */

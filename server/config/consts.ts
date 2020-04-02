@@ -6,38 +6,52 @@ export default {
     regular: 'Grantee user',
   },
   ppToSdg: {
-    'Poverty reduction with a focus on youth and children': {
-      name: 'No poverty',
+    poverty: {
+      actualPPName: 'Poverty reduction with a focus on youth and children',
+      actualName: 'No poverty',
+      name: 'sdgs.1',
       color: '#E5243D',
       number: 1,
     },
-    Refugees: {
-      name: 'Zero hunger',
+    refugees: {
+      actualPPName: 'Refugees',
+      actualName: 'Zero hunger',
+      name: 'sdgs.2',
       color: '#DDA73B',
       number: 2,
     },
-    'The Elderly': {
-      name: 'Reduced inequialities',
+    elderly: {
+      actualPPName: 'The Elderly',
+      actualName: 'Reduced inequialities',
+      name: 'sdgs.10',
       color: '#E01383',
       number: 10,
     },
-    'Prisoner rehabilitation / reintegration': {
-      name: 'Peace, Justice and strong institutions',
+    prisoner: {
+      actualPPName: 'Prisoner rehabilitation / reintegration',
+      actualName: 'Peace, Justice and strong institutions',
+      name: 'sdgs.16',
       color: '#136A9F',
       number: 16,
     },
-    'Drug use': {
-      name: 'Decent work and economic growth',
+    drug_use: {
+      actualPPName: 'Drug use',
+      actualName: 'Decent work and economic growth',
+      name: 'sdgs.8',
       color: '#A31C44',
       number: 8,
     },
-    Prostitution: {
-      name: 'Gender equality',
+    prostitution: {
+      actualPPName: 'Prostitution',
+      actualName: 'Gender equality',
+      name: 'sdgs.5',
       color: '#EF402E',
       number: 5,
     },
-    Homelessness: {
-      name: 'Good health and well-being',
+    homelessness: {
+      actualPPName: 'Homelessness',
+      actualName: 'Good health and well-being',
+      name: 'sdgs.3',
       color: '#4CA146',
       number: 3,
     },

@@ -2,38 +2,34 @@ import { IntentTextAreaParams } from 'app/modules/report/sub-modules/indicator-v
 
 export const ChallengeAreaMock: IntentTextAreaParams[] = [
   {
-    description: 'Key implementation challenges',
-    tooltip: 'Key implementation challenges',
+    description: 'reports.form.cards.key_implementation_challenges',
+    tooltip: 'reports.form.cards.key_implementation_challenges',
     componentID: 'outcome1',
-    explanation:
-      'Please indicate the key implementation challenges experience and how these were addressed',
+    explanation: 'reports.form.cards.key_implementation_challenges_expl',
     value: '',
     setValue: () => {},
   },
   {
-    description: 'Other project outcomes and observations',
-    tooltip: 'Other project outcomes and observations',
+    description: 'reports.form.cards.other_project',
+    tooltip: 'reports.form.cards.other_project',
     componentID: 'outcome2',
-    explanation:
-      'Did the project achieve any other unexpected (positive or negative) outcomes',
+    explanation: 'reports.form.cards.other_project_expl',
     value: '',
     setValue: () => {},
   },
   {
-    description: 'Future plans',
-    tooltip: 'Future plans',
+    description: 'reports.form.cards.future_plans',
+    tooltip: 'reports.form.cards.future_plans',
     componentID: 'outcome3',
-    explanation:
-      'Are you likely to apply for funding for future activities from the Insinger Foundation within the next 1-2 years?',
+    explanation: 'reports.form.cards.future_plans_expl',
     value: '',
     setValue: () => {},
   },
   {
-    description: 'Other comments',
-    tooltip: 'Other comments',
+    description: 'reports.form.cards.other_comments',
+    tooltip: 'reports.form.cards.other_comments',
     componentID: 'outcome4',
-    explanation:
-      'Please let us know if you want to share other observations or comments with the Insinger Foundation',
+    explanation: 'reports.form.cards.other_comments_expl',
     value: '',
     setValue: () => {},
   },

@@ -60,7 +60,7 @@ export const PreviewCard = (props: Props) => {
         )}
         <div css={styles.spacer} />
         <Typography variant="body2" color="secondary" css={styles.infoText}>
-          {t(props.explanation)}
+          {t(props.explanation || '')}
         </Typography>
       </CardContent>
     </Card>

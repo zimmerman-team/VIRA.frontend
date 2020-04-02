@@ -1,8 +1,20 @@
 {
   "detail": {
-    "title": ""
+    "title": "",
+    "generateReportBtn": "Genereer rapport",
+    "stats": {
+      "total_budget": "Totaal project budget",
+      "duration": "Duur project"
+    }
   },
   "overview": {
-    "title": ""
+    "title": "",
+    "table": {
+      "id": "ID",
+      "decision_date": "Beslissingsdatum",
+      "decision": "Besluit",
+      "project_title": "Titel project",
+      "organisation": "Organisatie"
+    }
   }
 }

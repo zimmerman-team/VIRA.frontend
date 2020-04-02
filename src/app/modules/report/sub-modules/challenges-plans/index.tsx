@@ -7,6 +7,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { ChallengesPlansPropsModel } from 'app/modules/report/model';
 import { IntentTexArea } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextArea';
 import { ChallengeAreaMock } from './mock';
@@ -32,6 +33,7 @@ const styles: any = {
 };
 
 export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
+  const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   return (
@@ -44,11 +46,13 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             <IntentTexArea
               {...ChallengeAreaMock[0]}
               explanation=""
+              description={t(ChallengeAreaMock[0].description)}
+              tooltip={t(ChallengeAreaMock[0].description)}
               value={props.keyImplChallenges}
               setValue={props.setKetImplChallenges}
             />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {ChallengeAreaMock[0].explanation}
+              {t(ChallengeAreaMock[0].explanation || '')}
             </Typography>
           </CardContent>
         </Card>
@@ -66,11 +70,13 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             <IntentTexArea
               {...ChallengeAreaMock[1]}
               explanation=""
+              description={t(ChallengeAreaMock[1].description)}
+              tooltip={t(ChallengeAreaMock[1].description)}
               value={props.otherProjOutObs}
               setValue={props.setOtherProjOutObs}
             />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {ChallengeAreaMock[1].explanation}
+              {t(ChallengeAreaMock[1].explanation || '')}
             </Typography>
           </CardContent>
         </Card>
@@ -88,11 +94,13 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             <IntentTexArea
               {...ChallengeAreaMock[2]}
               explanation=""
+              description={t(ChallengeAreaMock[2].description)}
+              tooltip={t(ChallengeAreaMock[2].description)}
               value={props.futurePlans}
               setValue={props.setFuturePlans}
             />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {ChallengeAreaMock[2].explanation}
+              {t(ChallengeAreaMock[2].explanation || '')}
             </Typography>
           </CardContent>
         </Card>
@@ -110,11 +118,13 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             <IntentTexArea
               {...ChallengeAreaMock[3]}
               explanation=""
+              description={t(ChallengeAreaMock[3].description)}
+              tooltip={t(ChallengeAreaMock[3].description)}
               value={props.otherComms}
               setValue={props.setOtherComms}
             />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {ChallengeAreaMock[3].explanation}
+              {t(ChallengeAreaMock[3].explanation || '')}
             </Typography>
           </CardContent>
         </Card>

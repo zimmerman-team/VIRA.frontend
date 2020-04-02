@@ -1,8 +1,8 @@
 // @ts-nocheck
 /* eslint-disable default-case */
 import React from 'react';
-import { Grid, Tabs, Tab } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import { Grid, Tabs, Tab } from '@material-ui/core';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import TableModule from 'app/components/datadisplay/Table';
 import {
@@ -36,12 +36,13 @@ type ListModuleParams = {
 
 export const ListModule = (props: ListModuleParams) => {
   const { id } = useParams();
+  const { t } = useTranslation();
   // set state
   const [baseTableForProject, setBaseTableForProject] = React.useState(
     getBaseTableForProject()
   );
   const [baseTableForGrantee, setBaseTableForGrantee] = React.useState(
-    getBaseTableForGrantee()
+    getBaseTableForGrantee(t)
   );
   const [baseTableForReport, setBaseTableForReport] = React.useState(
     getBaseTableForReport([])
@@ -108,7 +109,6 @@ export const ListModule = (props: ListModuleParams) => {
     }
   }, [id]);
 
-  const classes = useStyles();
   const [value, setValue] = React.useState(
     props.focus || parseInt(id, 10) ? props.focus || parseInt(id, 10) : 0
   );
@@ -116,9 +116,6 @@ export const ListModule = (props: ListModuleParams) => {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
-
-  const TabData = props.tabNav && props.tabNav.items;
-  const { t, i18n } = useTranslation();
 
   return (
     <React.Fragment>

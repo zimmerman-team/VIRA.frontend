@@ -15,8 +15,12 @@ import projects_nl from 'app/languages/nl/projects.json';
 import projects_en from 'app/languages/en/projects.json';
 import reports_nl from 'app/languages/nl/reports.json';
 import reports_en from 'app/languages/en/reports.json';
-import faq_nl from 'app/languages/nl/reports.json';
-import faq_en from 'app/languages/en/reports.json';
+import charts_nl from 'app/languages/nl/charts.json';
+import charts_en from 'app/languages/en/charts.json';
+import faq_nl from 'app/languages/nl/faq.json';
+import faq_en from 'app/languages/en/faq.json';
+import sdgs_en from 'app/languages/en/sdgs.json';
+import sdgs_nl from 'app/languages/nl/sdgs.json';
 
 i18n
   .use(LanguageDetector)
@@ -45,6 +49,8 @@ i18n
           reports: reports_nl,
           sidebar: sidebar_nl,
           faq: faq_nl,
+          charts: charts_nl,
+          sdgs: sdgs_nl,
           'Manage teams & users': 'Beheer teams & gebruikers',
           'Manage your account': 'Beheer jouw account',
           'Sign out': 'Uitloggen',
@@ -52,10 +58,8 @@ i18n
           Projects: 'Projecten',
           Grantees: 'Begunstigden',
           Grantee: 'Begunstigde',
-          Reports: 'Rapporten',
           'Priority Area': 'Prioriteitsgebied',
           label: 'label',
-          'Generate Report': 'Genereer rapport',
           'Insinger Foundation policy priorities':
             'Insinger Foundation policy priorities',
           'Key outcomes': 'Belangrijkste resultaten',
@@ -104,7 +108,6 @@ i18n
           'Project duration': 'Project duration',
           'project id:': 'project id:',
           // table 2
-          'Decision date': 'Decision date',
           Decision: 'Decision',
           'Project title': 'Project title',
           Organisation: 'Organisation',
@@ -124,8 +127,6 @@ i18n
           Password: 'wachtwoord',
           'Forgot Password': 'wachtwoord opvragen',
           Dashboard: 'Dashboard',
-          Projects: 'Projecten',
-          Grantees: 'Begunstigde',
           Reports: 'Rapportage',
           FAQ: ' FAQ',
           //  --------------------
@@ -162,7 +163,6 @@ i18n
           'Rows per page': 'Rijen per pagina',
           'Title of Reports': 'Rapportage titel',
           Date: 'Datum',
-          Reports: 'Rapportage',
           //  --------------------
           'Manage Team & Users': ' Gebruikersbeheer',
           'Manage your account': 'Uw account',
@@ -177,9 +177,6 @@ i18n
           'Add Team Member': 'voeg gebruiker toe',
           Save: 'Sla op',
           //  --------------------
-          Projects: 'Projecten',
-          Grantees: 'Begunstigde',
-          Reports: 'Rapportage',
           All: 'Alles',
           //  --------------------
           Manage: 'Beheer',
@@ -197,10 +194,7 @@ i18n
           'Key outcomes': 'Belangrijkste uitkomsten',
           'Indicator and verification': 'Indicator en verificatie',
           'project id': 'project nr.',
-          'Total project amount': 'Totaal project budget',
-          'Project duration': 'Duur project',
           //  --------------------
-          'Generate Report': 'Genereer rapport',
           Outcomes: 'Uitkoms.',
           'Indicator and verification': 'Indicator en verificatie',
           'Challenges and plans': 'Uitdagingen en plannen',
@@ -232,7 +226,7 @@ i18n
             'Vertel ons wat u van plan bent te volgen en te rapporteren over de hierboven vermelde resultaten',
           'If you have baseline data (the data you track progress against) and a means of verification (how you intend to obtain the data and from which sources) please also provide that information':
             'Als u basisgegevens hebt (de gegevens waartegen u de voortgang bijhoudt) en een verificatiemiddel (hoe u de gegevens wilt verkrijgen en uit welke bronnen), geeft u die informatie ook op',
-          'Add Media': ' Voeg bestand(en) toe (optioneel)',
+          'Add Media': 'Voeg bestand(en) toe (optioneel)',
           'Add Media': 'Voeg bestand(en) toe',
           Sound: 'Geluid',
           Video: 'Video',
@@ -268,6 +262,8 @@ i18n
           reports: reports_en,
           sidebar: sidebar_en,
           faq: faq_en,
+          charts: charts_en,
+          sdgs: sdgs_en,
           'Manage teams & users': 'Manage teams & users',
           'Manage your account': 'Manage your account',
           'Sign out': 'Sign out',
@@ -278,7 +274,6 @@ i18n
           Rerports: 'Reports',
           'Priority Area': 'Priority Area',
           label: 'label',
-          'Generate Report': 'Generate Report',
           'Insinger Foundation policy priorities':
             'Insinger Foundation policy priorities',
           'Key outcomes': 'Key outcomes',
@@ -347,9 +342,7 @@ i18n
           Password: 'wachtwoord',
           'Forgot Password': 'wachtwoord opvragen',
           Dashboard: 'Dashboard',
-          Projects: 'Projecten',
-          Grantees: 'Begunstigde',
-          Reports: 'Rapportage',
+          Reports: 'Reports',
           FAQ: ' FAQ',
           //  --------------------
           'Total Reports': 'Totaal rapporten',
@@ -364,14 +357,13 @@ i18n
           Refugees: 'Vluchtelingen',
           'The Elderly': 'Ouderen',
           //  --------------------
-          Target: 'Doel',
+          Target: 'Target',
           Budget: 'Budget',
           //  --------------------
           'Priority Area': 'Prioriteitsgebied',
           SDG: 'SDG',
           Map: 'Kaart',
           ID: 'identifier',
-          'Decision date': 'Beslissingsdatum',
           'Project title': 'Titel project',
           Organisation: 'Organisatie',
           //  --------------------
@@ -385,7 +377,6 @@ i18n
           'Rows per page': 'Rijen per pagina',
           'Title of Reports': 'Rapportage titel',
           Date: 'Datum',
-          Reports: 'Rapportage',
           //  --------------------
           'Manage Team & Users': ' Gebruikersbeheer',
           'Manage your account': 'Uw account',
@@ -400,9 +391,6 @@ i18n
           'Add Team Member': 'voeg gebruiker toe',
           Save: 'Sla op',
           //  --------------------
-          Projects: 'Projecten',
-          Grantees: 'Begunstigde',
-          Reports: 'Rapportage',
           All: 'Alles',
           //  --------------------
           Manage: 'Beheer',
@@ -420,10 +408,7 @@ i18n
           'Key outcomes': 'Belangrijkste uitkomsten',
           'Indicator and verification': 'Indicator en verificatie',
           'project id': 'project nr.',
-          'Total project amount': 'Totaal project budget',
-          'Project duration': 'Duur project',
           //  --------------------
-          'Generate Report': 'Genereer rapport',
           Outcomes: 'Uitkoms.',
           'Indicator and verification': 'Indicator en verificatie',
           'Challenges and plans': 'Uitdagingen en plannen',
