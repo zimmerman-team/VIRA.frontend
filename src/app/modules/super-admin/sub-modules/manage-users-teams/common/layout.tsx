@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 export const AdminManageOverviewLayout = (props: PageModuleModel) => {
   const history = useHistory();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -44,7 +44,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
 
       <Grid item xs={12} lg={12}>
         <ContainedButton
-          text={`${t('Add')} ${props.title.slice(0, props.title.length - 1)}`}
+          text={t(props.addBtnText)}
           icon={<Add />}
           onClick={() => {
             history.push(`${history.location.pathname}/add`);

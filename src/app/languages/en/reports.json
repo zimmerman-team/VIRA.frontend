@@ -17,7 +17,12 @@
     }
   },
   "overview": {
-    "title": ""
+    "title": "",
+    "table": {
+      "id": "ID",
+      "title": "Title of Reports",
+      "date": "Date"
+    }
   },
   "form": {
     "title": "Report",

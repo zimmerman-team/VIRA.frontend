@@ -11,23 +11,15 @@ import { NavItems } from 'app/modules/common/consts';
 import { PageWrapper } from 'app/modules/common/components/PageWrapper';
 import { PositionedSnackbar } from 'app/components/datadisplay/snackbar';
 import { InitialLoad } from 'app/utils/initialLoad';
-import { useStoreState, useStoreActions } from 'app/state/store/hooks';
+import { useStoreState } from 'app/state/store/hooks';
 import 'styled-components/macro';
 
 import { useTranslation } from 'react-i18next';
 
 export function App() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
-  const handleChangeLanguage = useStoreActions(
-    actions => actions.syncVariables.setLng
-  );
   const reduxLng = useStoreState(state => state.syncVariables.lng);
-
-  const changeLanguage = lng => {
-    i18n.changeLanguage(lng);
-    handleChangeLanguage(lng);
-  };
 
   React.useEffect(() => {
     if (i18n.language !== reduxLng && reduxLng) {
@@ -52,18 +44,6 @@ export function App() {
 
   return (
     <div className={classes.root}>
-      <div
-        css={`
-          position: fixed;
-          top: 0;
-          right: 0;
-          z-index: 20000;
-        `}
-      >
-        <button onClick={() => changeLanguage('nl')}>nl</button>
-        <button onClick={() => changeLanguage('en')}>en</button>
-      </div>
-
       {!isLoggedIn ? (
         <MainRoutes />
       ) : (

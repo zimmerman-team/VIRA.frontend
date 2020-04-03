@@ -6,8 +6,12 @@ import { AdminManageOverviewLayout } from 'app/modules/super-admin/sub-modules/m
 import { useTranslation } from 'react-i18next';
 
 export function AdminManageOverviewModule(props: PageModuleModel) {
-  const { t, i18n } = useTranslation();
-  useTitle(`${t('Manage')} ${props.urlParam?.split('-')[1]}`);
+  const { t } = useTranslation();
+  useTitle(
+    `${t('breadcrumbs.manage')} ${t(
+      `user_management.general.${props.urlParam?.split('-')[1]}`
+    )}`
+  );
 
   return <AdminManageOverviewLayout {...props} />;
 }

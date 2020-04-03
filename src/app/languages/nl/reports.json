@@ -17,7 +17,12 @@
     }
   },
   "overview": {
-    "title": ""
+    "title": "",
+    "table": {
+      "id": "ID",
+      "title": "Titel van Rapporten",
+      "date": "Datum"
+    }
   },
   "form": {
     "title": "Rapporteren",
@@ -65,7 +70,7 @@
       "draft": "Opslaan als concept",
       "submit": "Verzenden",
       "cancel": "Annuleren",
-      "save": "Sparen"
+      "save": "Sla op"
     }
   }
 }

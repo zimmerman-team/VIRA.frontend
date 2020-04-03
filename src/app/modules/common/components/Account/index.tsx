@@ -41,20 +41,20 @@ export const Account = (props: AccountProps) => {
       <Box height="32px" />
       <Button>
         <Link to="/super-admin/manage-teams" onClick={props.handleClick}>
-          {t('Manage teams & users')}
+          {t('user_management.general.manage_teams_users')}
         </Link>
       </Button>
       <Button>
         <Link to={`/manage-account/${userID}`} onClick={props.handleClick}>
-          {t('Manage your account')}
+          {t('user_management.general.manage_account')}
         </Link>
       </Button>
       <ButtonPrimary onClick={() => auth.signOut().then(() => clearUser())}>
-        {t('Sign out')}
+        {t('user_management.general.logout')}
       </ButtonPrimary>
       <Box height="14px" />
       <Link to="/privacy" onClick={props.handleClick}>
-        {t('Privacy Policy and Terms')}
+        {t('user_management.general.privacy_link')}
       </Link>
     </Container>
   );

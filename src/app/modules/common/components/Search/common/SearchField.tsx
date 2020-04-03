@@ -39,7 +39,7 @@ export const SearchField = (props: Props) => {
         autoFocus
         fullWidth
         value={props.value}
-        placeholder={t('Search')}
+        placeholder={t('search.placeholder')}
         onChange={e => props.setValue(e.target.value)}
       />
       <IconSearch

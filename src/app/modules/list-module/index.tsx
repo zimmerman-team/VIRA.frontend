@@ -63,6 +63,7 @@ export const ListModule = (props: ListModuleParams) => {
     state => state.allOrganisations.data
   );
   const allReportsData = useStoreState(state => state.allReports.data);
+  const reduxLng = useStoreState(state => state.syncVariables.lng);
 
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
@@ -108,6 +109,24 @@ export const ListModule = (props: ListModuleParams) => {
       setValue(parseInt(id, 10));
     }
   }, [id]);
+
+  React.useEffect(() => {
+    setBaseTableForProject({
+      ...baseTableForProject,
+      ...getBaseTableForProject(),
+      data: baseTableForProject.data,
+    });
+    setBaseTableForGrantee({
+      ...baseTableForGrantee,
+      ...getBaseTableForGrantee(),
+      data: baseTableForGrantee.data,
+    });
+    setBaseTableForReport({
+      ...baseTableForReport,
+      ...getBaseTableForReport(),
+      data: baseTableForReport.data,
+    });
+  }, [reduxLng]);
 
   const [value, setValue] = React.useState(
     props.focus || parseInt(id, 10) ? props.focus || parseInt(id, 10) : 0

@@ -21,13 +21,16 @@ export const SearchResultNavigation = (props: Props) => (
       background-color: ${ProjectPalette.primary.light};
     `}
   >
-    {navItems.map(navItem => (
-      <SearchResultNavItem
-        name={navItem}
-        active={props.activeTab === navItem}
-        onClick={() => props.onChange(navItem)}
-        count={get(props.results, `[${navItem}]`, []).length}
-      />
-    ))}
+    {navItems.map(navItem => {
+      const key = navItem.replace('search.', '');
+      return (
+        <SearchResultNavItem
+          name={navItem}
+          active={props.activeTab === key}
+          onClick={() => props.onChange(key)}
+          count={get(props.results, `[${key}]`, []).length}
+        />
+      );
+    })}
   </div>
 );

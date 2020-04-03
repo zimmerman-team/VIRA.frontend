@@ -20,6 +20,7 @@ export const NavigationButton = (props: NavItemParams) => {
       activeStyle={{ borderBottom: '4px solid #25baa4' }}
       css={`
         && {
+          margin-right: 15px;
           text-decoration: none;
           opacity: ${props.disabled ? 0.6 : 1};
           pointer-events: ${props.disabled ? 'none' : 'all'};

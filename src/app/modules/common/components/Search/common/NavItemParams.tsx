@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import 'styled-components/macro';
 import React from 'react';
 import { ProjectPalette } from 'app/theme';
@@ -12,7 +14,7 @@ interface NavItemParams {
 }
 
 export const SearchResultNavItem = (props: NavItemParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div
       onClick={props.onClick}
@@ -20,6 +22,7 @@ export const SearchResultNavItem = (props: NavItemParams) => {
         cursor: pointer;
         margin-right: 40px;
         padding-bottom: 8px;
+        border-bottom: 4px solid transparent;
         ${props.active &&
           `border-bottom: 4px solid ${ProjectPalette.secondary.main};`}
         &:hover {

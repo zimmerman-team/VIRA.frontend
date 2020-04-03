@@ -1,8 +1,9 @@
 // @ts-nocheck
 
 import i18n from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
 import landing_nl from 'app/languages/nl/landing.json';
 import landing_en from 'app/languages/en/landing.json';
 import home_nl from 'app/languages/nl/home.json';
@@ -21,6 +22,12 @@ import faq_nl from 'app/languages/nl/faq.json';
 import faq_en from 'app/languages/en/faq.json';
 import sdgs_en from 'app/languages/en/sdgs.json';
 import sdgs_nl from 'app/languages/nl/sdgs.json';
+import user_management_en from 'app/languages/en/user_management.json';
+import user_management_nl from 'app/languages/nl/user_management.json';
+import search_en from 'app/languages/en/search.json';
+import search_nl from 'app/languages/nl/search.json';
+import breadcrumbs_en from 'app/languages/en/breadcrumbs.json';
+import breadcrumbs_nl from 'app/languages/nl/breadcrumbs.json';
 
 i18n
   .use(LanguageDetector)
@@ -51,6 +58,9 @@ i18n
           faq: faq_nl,
           charts: charts_nl,
           sdgs: sdgs_nl,
+          user_management: user_management_nl,
+          search: search_nl,
+          breadcrumbs: breadcrumbs_nl,
           'Manage teams & users': 'Beheer teams & gebruikers',
           'Manage your account': 'Beheer jouw account',
           'Sign out': 'Uitloggen',
@@ -264,6 +274,9 @@ i18n
           faq: faq_en,
           charts: charts_en,
           sdgs: sdgs_en,
+          user_management: user_management_en,
+          search: search_en,
+          breadcrumbs: breadcrumbs_en,
           'Manage teams & users': 'Manage teams & users',
           'Manage your account': 'Manage your account',
           'Sign out': 'Sign out',
@@ -385,8 +398,8 @@ i18n
           //  --------------------
           Teams: 'Organisaties',
           'Add Team': 'Voeg organisatie toe',
-          'Created by': 'Toegevoegd door',
-          Created: 'Aanmaakdatum',
+          'Created by': 'Created by',
+          Created: 'Created',
           'Add Title': 'Naam organisatie',
           'Add Team Member': 'voeg gebruiker toe',
           Save: 'Sla op',
