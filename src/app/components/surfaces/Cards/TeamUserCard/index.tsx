@@ -88,11 +88,21 @@ export function TeamUserCard(props: TeamUserCardModel) {
             <Caption variant="caption">Created: {props.dateCreated}</Caption>
           </Grid>
           <Grid item>
-            <ButtonIcon onClick={editUser}>
+            <ButtonIcon
+              onClick={(e: any) => {
+                e.stopPropagation();
+                editUser();
+              }}
+            >
               <Edit />
             </ButtonIcon>
             <ButtonIcon
-              onClick={() => props.deleteUser && props.deleteUser(props._id)}
+              onClick={(e: any) => {
+                e.stopPropagation();
+                if (props.deleteUser) {
+                  props.deleteUser(props._id);
+                }
+              }}
             >
               <Delete />
             </ButtonIcon>

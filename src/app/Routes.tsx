@@ -13,7 +13,6 @@ import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
 import { PrivacyModule } from 'app/modules/privacy';
 import { CreateReport } from 'app/modules/report';
-import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 import { SdgModule } from 'app/modules/sdg';
 import SignInModule from 'app/modules/sign-in';
 import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
@@ -125,20 +124,6 @@ export function MainRoutes() {
 
       <Route exact path="/callback">
         <LoginCallbackModule auth={auth} />
-      </Route>
-
-      <Route exact path="/submitted">
-        {redirectUnAuth(SubmittedLayout, storeUser, {
-          message: 'Your report has been sent',
-          showGoToBtn: true,
-        })}
-      </Route>
-
-      <Route exact path="/draft-submitted">
-        {redirectUnAuth(SubmittedLayout, storeUser, {
-          message: 'Your report has been saved as a draft ',
-          showGoToBtn: false,
-        })}
       </Route>
 
       <Route path="/super-admin/manage-teams/edit/:id">

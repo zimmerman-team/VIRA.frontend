@@ -8,10 +8,12 @@ import { Route } from 'react-router-dom';
 import { ManageUsersTeamsLayoutModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { Typography, Hidden } from '@material-ui/core';
+import { Dialog } from 'app/components/surfaces/Dialog';
 
 export const ManageUsersTeamsLayout = (props: ManageUsersTeamsLayoutModel) => (
   <React.Fragment>
     {props.loading && <PageLoader />}
+    <Dialog {...props.dialogProps} />
     {/* ---------------------------------------------------------------------*/}
     {/* Breadcrumbs */}
     <Grid item xs={12} lg={10}>

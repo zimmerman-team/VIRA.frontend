@@ -3,6 +3,7 @@ import { PaginationModel } from 'app/components/misc/TablePagination';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 import { RouteComponentProps } from 'react-router-dom';
+import { DialogProps } from 'app/components/surfaces/Dialog/model';
 
 export type SortOptionsModel = {
   label: string;
@@ -27,4 +28,5 @@ export type ManageUsersTeamsLayoutModel = {
   pageModule: PageModuleModel;
   loading?: boolean;
   teamPageModule: PageModuleModel;
+  dialogProps: DialogProps;
 };
