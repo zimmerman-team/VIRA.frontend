@@ -222,7 +222,7 @@
   },
   "release": {
     "branches": [
-      "feature\/.*/"
+      "master"
     ]
   },
   "proxy": "http://localhost:4200"

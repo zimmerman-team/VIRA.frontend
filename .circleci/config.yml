@@ -157,5 +157,4 @@ workflows:
             - cypress/install
           filters:
             branches:
-              # only: master
-              only: /feature\/.*/
+              only: master
