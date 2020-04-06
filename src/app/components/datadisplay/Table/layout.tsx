@@ -37,6 +37,7 @@ export const TableLayout = (props: TableLayoutModel) => {
         title={props.title}
         options={props.options}
         columns={props.columns}
+        data-cy="mui-data-table"
         css={`
           && {
             box-shadow: none;

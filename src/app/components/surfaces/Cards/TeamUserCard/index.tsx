@@ -79,9 +79,13 @@ export function TeamUserCard(props: TeamUserCardModel) {
     history.push(`/super-admin/${props.urlParam}/edit/${props._id}`);
 
   return (
-    <CardContainer onClick={editUser}>
-      <Header variant="body1">{props.title}</Header>
-      <Description variant="subtitle1">{props.description}</Description>
+    <CardContainer data-cy="card-container" onClick={editUser}>
+      <Header data-cy="card-header" variant="body1">
+        {props.title}
+      </Header>
+      <Description data-cy="card-description" variant="subtitle1">
+        {props.description}
+      </Description>
       <BottomContainer>
         <Grid container justify="space-between" alignItems="flex-end">
           <Grid item>

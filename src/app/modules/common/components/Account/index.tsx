@@ -31,25 +31,42 @@ export const Account = (props: AccountProps) => {
 
   return (
     <Container>
-      <Avatar>{avatar.toUpperCase()}</Avatar>
+      <Avatar data-cy="usercard-avatar">{avatar.toUpperCase()}</Avatar>
       <Box height="17px" />
-      <Username variant="subtitle2">{storeUserName}</Username>
+      <Username data-cy="usercard-username" variant="subtitle2">
+        {storeUserName}
+      </Username>
       <Box height="32px" />
       <Button>
-        <Link to="/super-admin/manage-teams" onClick={props.handleClick}>
+        <Link
+          data-cy="usercard-manage-teams-button"
+          to="/super-admin/manage-teams"
+          onClick={props.handleClick}
+        >
           Manage teams & users
         </Link>
       </Button>
       <Button>
-        <Link to={`/manage-account/${userID}`} onClick={props.handleClick}>
+        <Link
+          data-cy="usercard-manage-account-button"
+          to={`/manage-account/${userID}`}
+          onClick={props.handleClick}
+        >
           Manage your account
         </Link>
       </Button>
-      <ButtonPrimary onClick={() => auth.signOut().then(() => clearUser())}>
+      <ButtonPrimary
+        data-cy="usercard-signout-button"
+        onClick={() => auth.signOut().then(() => clearUser())}
+      >
         Sign out
       </ButtonPrimary>
       <Box height="14px" />
-      <Link to="/privacy" onClick={props.handleClick}>
+      <Link
+        data-cy="usercard-privacy-button"
+        to="/privacy"
+        onClick={props.handleClick}
+      >
         Privacy Policy and Terms
       </Link>
     </Container>

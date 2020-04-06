@@ -37,7 +37,7 @@ function SidebarNavButtonF(props: SidebarNavButtonParams): JSX.Element {
     <NavLink
       to={props.path}
       exact
-      data-testid={props.text}
+      data-cy={props.text}
       css={`
         text-decoration: none;
       `}

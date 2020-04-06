@@ -32,7 +32,9 @@ const Form = styled.div`
 export const InputForm = (props: LayoutModel) => {
   return (
     <Form>
-      <Typography variant="h3">Sign in</Typography>
+      <Typography variant="h3" data-cy="sign-in-title">
+        Sign in
+      </Typography>
       <Box height="41px" />
       <FormSingleLineField
         fullWidth
@@ -40,7 +42,7 @@ export const InputForm = (props: LayoutModel) => {
         id="login-email"
         value={props.email}
         setValue={props.setEmail}
-        data-testid="login-email"
+        data-cy="login-email"
       />
       <PasswordTextField
         fullWidth
@@ -50,13 +52,13 @@ export const InputForm = (props: LayoutModel) => {
         showPass={props.showPass}
         setValue={props.setPassword}
         setShowPass={props.setShowPass}
-        data-testid="login-password"
+        data-cy="login-password"
       />
       <Link to="/recover-password">Forgot password</Link>
       <Grid item xs={3}>
         <ContainedButton
           text="Sign in"
-          data-testid="login-button"
+          data-cy="login-button"
           onClick={() => props.signInAction()}
           disabled={props.email === '' || props.password === ''}
         />

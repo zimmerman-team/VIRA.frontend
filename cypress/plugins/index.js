@@ -23,15 +23,15 @@ module.exports = (on, config) => {
 // const pickle = require('picklejs/cypress/plugin');
 
 // module.exports = pickle;
-const cucumber = require('cypress-cucumber-preprocessor').default;
-const {
-  addMatchImageSnapshotPlugin,
-} = require('cypress-image-snapshot/plugin');
+// const cucumber = require('cypress-cucumber-preprocessor').default;
+// const {
+//   addMatchImageSnapshotPlugin,
+// } = require('cypress-image-snapshot/plugin');
 
-const dill = require('dill');
+// const dill = require('dill');
 
-module.exports = (on, config) => {
-  addMatchImageSnapshotPlugin(on);
-  on('file:preprocessor', cucumber());
-  dill();
-};
+// module.exports = (on, config) => {
+//   addMatchImageSnapshotPlugin(on);
+//   on('file:preprocessor', cucumber());
+//   dill();
+// };

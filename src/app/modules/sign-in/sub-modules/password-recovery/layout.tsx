@@ -57,18 +57,20 @@ export const PasswordRecoveryLayout = (props: PasswordRecoveryLayoutModel) => {
               value={props.email}
               setValue={props.setEmail}
               placeholder="email@email.com"
-              data-testid="login-email"
+              data-cy="login-email"
             />
             <Grid item xs={3}>
               <ContainedButton
+                data-cy="recovery-button"
                 text="Send"
                 onClick={props.onSubmit}
-                data-testid="login-button"
                 disabled={!props.submitEnabled}
               />
             </Grid>
             <Box height="10px" />
-            <Typography variant="subtitle2">{props.message}</Typography>
+            <Typography variant="subtitle2" data-cy="feedback-message">
+              {props.message}
+            </Typography>
           </Form>
         </Container>
       </Grid>

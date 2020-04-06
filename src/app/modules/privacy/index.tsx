@@ -35,21 +35,32 @@ export const PrivacyModule = () => (
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item container xs={12} lg={12}>
-      <TitleFragment title="Insinger Stichting Privacy Verklaring" />
+      <TitleFragment
+        data-cy="privacy-page-title"
+        title="Insinger Stichting Privacy Verklaring"
+      />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* content */}
     <Grid item xs={12} lg={12}>
-      <Typography css={style.description}>{privacyDescriptionMock}</Typography>
+      <Typography data-cy="privacy-page-description" css={style.description}>
+        {privacyDescriptionMock}
+      </Typography>
       <Box height="32px" width="100%" />
     </Grid>
     {PrivacyModuleItemsMock.map((privacyItem, index) => (
       <Grid item xs={12} lg={12}>
-        <Typography css={style.paragraphTitle}>
+        <Typography
+          data-cy={`privacy-item-${index}-title`}
+          css={style.paragraphTitle}
+        >
           {`${index + 1}. ${privacyItem.title}`}
         </Typography>
-        <Typography css={style.paragraphBody}>
+        <Typography
+          data-cy={`privacy-item-${index}-description`}
+          css={style.paragraphBody}
+        >
           {privacyItem.description}
         </Typography>
         {privacyItem.listItems &&

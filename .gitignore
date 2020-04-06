@@ -75,3 +75,4 @@ media/
 cypress/videos/*
 public/media/*
 
+cypress.env.json
