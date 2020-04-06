@@ -136,6 +136,7 @@ function ManageUsersF(props: RouteComponentProps) {
       searchValue: search,
       deleteUser,
       urlParam: 'manage-users',
+      addBtnText: 'user_management.general.add_user_btn',
     },
     teamPageModule: {
       ...manageUsersTeamsLayoutMock.teamPageModule,
@@ -152,6 +153,7 @@ function ManageUsersF(props: RouteComponentProps) {
       searchValue: search,
       deleteUser,
       urlParam: 'manage-teams',
+      addBtnText: 'user_management.general.add_team_btn',
     },
   };
 

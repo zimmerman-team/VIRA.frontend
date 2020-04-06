@@ -26,7 +26,7 @@ export type HorizontalBarChartModel = {
 };
 
 // todo: add BarSvgProps when<Box height={'62px'} width={'1px'} /> axis/renderTick function declaration is included
-export const barModel: any = {
+export const getBarModel = t => ({
   data: [],
   minValue: 0,
   keys: ['value1', 'value2'],
@@ -60,7 +60,7 @@ export const barModel: any = {
             textAnchor="start"
             transform="translate(-256, -10)"
           >
-            {getTspanGroups(value, 30)}
+            {getTspanGroups(t(value), 30)}
           </text>
           <line
             x1="0"
@@ -109,15 +109,11 @@ export const barModel: any = {
     },
   },
   isInteractive: true,
-};
+});
 
 //https://github.com/plouc/nivo/issues/353
 //function is used for multiline text
-const getTspanGroups = (
-  value: string,
-  maxLineLength: number,
-  maxLines: number = 3
-) => {
+const getTspanGroups = (value: string, maxLineLength: number, maxLines = 3) => {
   const words = value.split(' ');
 
   type linesAcc = {

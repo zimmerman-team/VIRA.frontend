@@ -10,6 +10,7 @@ import {
   cookieDescriptionMock,
   CookieItemsMock,
 } from 'app/modules/privacy/mock';
+import { useTranslation } from 'react-i18next';
 
 /* todo: this module is a it convoluted, let's refactor asap */
 const style: any = {
@@ -30,44 +31,52 @@ const style: any = {
     color: #1b1b1b;
   `,
 };
-export const PrivacyModule = () => (
-  <React.Fragment>
-    {/* ---------------------------------------------------------------------*/}
-    {/* title fragment */}
-    <Grid item container xs={12} lg={12}>
-      <TitleFragment title="Insinger Stichting Privacy Verklaring" />
-    </Grid>
+export const PrivacyModule = () => {
+  const { t, i18n } = useTranslation();
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* content */}
-    <Grid item xs={12} lg={12}>
-      <Typography css={style.description}>{privacyDescriptionMock}</Typography>
-      <Box height="32px" width="100%" />
-    </Grid>
-    {PrivacyModuleItemsMock.map((privacyItem, index) => (
-      <Grid item xs={12} lg={12}>
-        <Typography css={style.paragraphTitle}>
-          {`${index + 1}. ${privacyItem.title}`}
-        </Typography>
-        <Typography css={style.paragraphBody}>
-          {privacyItem.description}
-        </Typography>
-        {privacyItem.listItems &&
-          privacyItem.listItems.map((lItem: any) => (
-            <>
-              <Typography css={style.paragraphBody}>
-                {lItem.description}
-              </Typography>
-              <ul>
-                {lItem.items.map((item: string) => (
-                  <li>
-                    <Typography css={style.paragraphBody}>{item}</Typography>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ))}
+  return (
+    <React.Fragment>
+      {/* ---------------------------------------------------------------------*/}
+      {/* title fragment */}
+      <Grid item container xs={12} lg={12}>
+        <TitleFragment title="Insinger Stichting Privacy Verklaring" />
       </Grid>
-    ))}
-  </React.Fragment>
-);
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* content */}
+      <Grid item xs={12} lg={12}>
+        <Typography css={style.description}>
+          {t(privacyDescriptionMock)}
+        </Typography>
+        <Box height="32px" width="100%" />
+      </Grid>
+      {PrivacyModuleItemsMock.map((privacyItem, index) => (
+        <Grid item xs={12} lg={12}>
+          <Typography css={style.paragraphTitle}>
+            {`${index + 1}. ${t(privacyItem.title)}`}
+          </Typography>
+          <Typography css={style.paragraphBody}>
+            {t(privacyItem.description)}
+          </Typography>
+          {privacyItem.listItems &&
+            privacyItem.listItems.map((lItem: any) => (
+              <>
+                <Typography css={style.paragraphBody}>
+                  {t(lItem.description)}
+                </Typography>
+                <ul>
+                  {lItem.items.map((item: string) => (
+                    <li>
+                      <Typography css={style.paragraphBody}>
+                        {t(item)}
+                      </Typography>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ))}
+        </Grid>
+      ))}
+    </React.Fragment>
+  );
+};

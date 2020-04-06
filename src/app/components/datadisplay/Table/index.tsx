@@ -16,6 +16,7 @@ const VerticalScrollHelper = styled.div`
 `;
 
 const TableModule = (props: TableModuleModel) => {
+  console.log(props.title);
   const [totalData, setTotalData] = React.useState({});
 
   React.useEffect(() => {

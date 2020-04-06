@@ -14,12 +14,14 @@ import find from 'lodash/find';
 import get from 'lodash/get';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 // direct
 import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {
+  const { t } = useTranslation();
   // redux state & actions
   const addUserData = useStoreState(state => state.addUser.data);
   const addUserAction = useStoreActions(actions => actions.addUser.fetch);
@@ -197,7 +199,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
       {/* title fragment */}
       {props.title && (
         <Grid item container lg={6} direction="column">
-          <Typography variant={'h6'}>{props.title}</Typography>
+          <Typography variant="h6">{t(props.title)}</Typography>
         </Grid>
       )}
 
@@ -210,7 +212,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           value={firstName}
           setValue={setFirstName}
           id="First Name"
-          label="First Name"
+          label={t('user_management.user.first_name')}
           bigLabel
         />
         <Box width="100%" height="32px" />
@@ -219,7 +221,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           value={lastName}
           setValue={setLastName}
           id="Last Name"
-          label="Last Name"
+          label={t('user_management.user.last_name')}
           bigLabel
         />
         <Box width="100%" height="32px" />
@@ -228,7 +230,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           value={email}
           setValue={setEmail}
           id="Email"
-          label="Email"
+          label={t('user_management.user.email')}
           bigLabel
         />
         <Box width="100%" height="32px" />
@@ -245,7 +247,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
             {props.mode === 'add' && (
               <Grid item xs={12} md={12} lg={6} xl={6}>
                 <Select
-                  title="Select team"
+                  title={t('user_management.user.select_team')}
                   selectedItem={group}
                   items={props.form.selectOptions}
                   onChange={(e: any) => setGroup(e.target.value)}
@@ -271,7 +273,11 @@ function ManageUserEditF(props: ManageUserEditModel) {
           <ContainedButton
             onClick={onSubmit}
             disabled={isSubmitDisabled()}
-            text={props.mode === 'add' ? 'Add' : 'Save'}
+            text={t(
+              `user_management.general.${
+                props.mode === 'add' ? 'add' : 'save'
+              }_btn`
+            )}
           />
         </Grid>
       </Grid>

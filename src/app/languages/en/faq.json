@@ -1,0 +1,21 @@
+{
+  "items": {
+    "faq1": {
+      "answer": "",
+      "question": "1: What does this tool do?"
+    },
+    "faq2": {
+      "answer": "",
+      "question": "2: Who uses this tool?"
+    },
+    "faq3": {
+      "answer": "If you have any questions about the use of this tool, please contact The Insinger Foundation at e-mail address: help@help.nl",
+      "question": "3: Who can I contact with questions?"
+    },
+    "faq4": {
+      "answer": "This tool currently only supports the reporting function. You cannot yet submit a project request via this tool.",
+      "question": "4: Does this tool also support the option for a new application?"
+    }
+  },
+  "title": "FAQ"
+}

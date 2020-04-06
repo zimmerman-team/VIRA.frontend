@@ -5,7 +5,7 @@ import { Search, Sort } from '@material-ui/icons';
 import { Popover } from 'app/components/misc/Popover';
 import { ProjectPalette } from 'app/theme';
 import React from 'react';
-// import 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 import { css } from 'styled-components/macro';
 import { SortOptionsModel } from '../../sub-modules/manage-users-teams/models';
 
@@ -24,6 +24,7 @@ export type HeaderParams = {
 };
 
 export const AdminManageOverviewToolbar = (props: HeaderParams) => {
+  const { t } = useTranslation();
   const [searchOpen, setSearchOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -88,7 +89,7 @@ export const AdminManageOverviewToolbar = (props: HeaderParams) => {
                   props.onSortChange && props.onSortChange(option.value)
                 }
               >
-                {option.label}
+                {t(option.label)}
               </ListItem>
             ))}
           </List>,
