@@ -60,4 +60,18 @@ typings/
 # next.js build output
 .next
 
-/build/
+build/
+
+._.DS_Store
+.DS_Store
+._.*
+
+
+
+.vscode/settings.json
+
+
+media/
+cypress/videos/*
+public/media/*
+

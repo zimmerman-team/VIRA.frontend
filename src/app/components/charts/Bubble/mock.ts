@@ -1,0 +1,121 @@
+export const bubbleMockData = {
+  name: '',
+  color: '',
+  children: [
+    {
+      name: 'No poverty',
+      color: '#E5243D',
+      loc: 10000,
+      number: 1,
+    },
+    {
+      name: 'Zero hunger',
+      color: '#DDA73B',
+      loc: 20000,
+      number: 2,
+    },
+    {
+      name: 'Good health and well-being',
+      color: '#4CA146',
+      loc: 30000,
+      number: 3,
+    },
+    {
+      name: 'Gender equality',
+      color: '#EF402E',
+      loc: 50000,
+      number: 5,
+    },
+    {
+      name: 'Decent work and economic growth',
+      color: '#A31C44',
+      loc: 80000,
+      number: 8,
+    },
+    {
+      name: 'Reduced inequialities',
+      color: '#E01383',
+      loc: 100000,
+      number: 10,
+    },
+    {
+      name: 'Peace, Justice and strong institutions',
+      color: '#136A9F',
+      loc: 160000,
+      number: 16,
+    },
+  ],
+};
+
+export const otherSdgs = [
+  {
+    name: 'Quality education',
+    color: '#C7212F',
+    opacity: 0.2,
+    number: 4,
+    loc: 0,
+  },
+  {
+    name: 'Clean water and sanitation',
+    color: '#28BFE6',
+    opacity: 0.2,
+    number: 6,
+    loc: 0,
+  },
+  {
+    name: 'Affordable and clean energy',
+    color: '#FBC412',
+    opacity: 0.2,
+    number: 7,
+    loc: 0,
+  },
+  {
+    name: 'Industry, Innovation and Infrastructure',
+    color: '#F26A2E',
+    opacity: 0.2,
+    number: 9,
+    loc: 0,
+  },
+  {
+    name: 'Sustainable cities and communities',
+    color: '#F89D2A',
+    opacity: 0.2,
+    loc: 0,
+    number: 11,
+  },
+  {
+    name: 'Responsible consumption and production',
+    color: '#F89D2A',
+    opacity: 0.2,
+    loc: 0,
+    number: 12,
+  },
+  {
+    name: 'Climate action',
+    color: '#407F46',
+    opacity: 0.2,
+    loc: 0,
+    number: 13,
+  },
+  {
+    name: 'Life below water',
+    color: '#1F96D4',
+    opacity: 0.2,
+    loc: 0,
+    number: 14,
+  },
+  {
+    name: 'Life on land',
+    color: '#59BA47',
+    opacity: 0.2,
+    loc: 0,
+    number: 15,
+  },
+  {
+    name: 'Partnerships for the goals',
+    color: '#14496B',
+    opacity: 0.2,
+    loc: 0,
+    number: 17,
+  },
+];

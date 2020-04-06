@@ -60,3 +60,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+:root {
+  font-size: 14px;
+}
+
+* {
+  /* outline: 1px solid rgba(0, 0, 0, 0.07); */
+}

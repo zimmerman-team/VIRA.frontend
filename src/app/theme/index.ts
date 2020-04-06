@@ -1,15 +1,21 @@
 // @ts-nocheck
 
+// import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
-import {
-  Palette,
-  PaletteOptions,
-} from '@material-ui/core/styles/createPalette';
+import { Palette } from '@material-ui/core/styles/createPalette';
 
 import {
   FontStyle,
   TypographyOptions,
 } from '@material-ui/core/styles/createTypography';
+
+interface Icon {
+  black: string;
+}
+
+interface ProjectPalette extends Palette {
+  icon: Icon;
+}
 
 export const TextStyle: FontStyle = {
   fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
@@ -19,34 +25,50 @@ export const TextStyle: FontStyle = {
   fontWeightMedium: 500,
   fontWeightBold: 700,
 };
+export const ProjectTextStyles = {
+  explanation: {
+    fontFamily: TextStyle.fontFamily,
+    fontSize: `${0.8571428571428571}rem`,
+    fontWeight: TextStyle.fontWeightLight,
+    letterSpacing: '0.42px',
+    color: '#185568',
+  },
+};
 
-export const ProjectPalette: Palette = {
+export const ProjectPalette: ProjectPalette = {
   tonalOffset: 0.2,
-  background: { paper: '#fff', default: '#fafafa' },
+  background: { paper: '#fff', default: '#fff' },
   contrastThreshold: 3,
   grey: {
     '50': '#fafafa',
     '100': '#f5f5f5',
-    '200': '#eeeeee',
+    '200': '#e8e8e8',
     '300': '#e0e0e0',
     '400': '#bdbdbd',
     '500': '#9e9e9e',
     '600': '#757575',
     '700': '#616161',
     '800': '#424242',
-    '900': '#212121',
-    A700: '#616161',
+    '900': '#a1a3a6',
+    A700: '#a1aebd',
     A100: '#d5d5d5',
-    A400: '#303030',
+    A400: '#20293c',
     A200: '#aaaaaa',
   },
   text: {
-    primary: 'rgba(0, 0, 0, 0.87)',
-    secondary: 'rgba(0, 0, 0, 0.54)',
+    primary: '#222222',
+    // secondary: '#fff',
+    secondary: '#6f7173',
     disabled: 'rgba(0, 0, 0, 0.38)',
     hint: 'rgba(0, 0, 0, 0.38)',
   },
   divider: 'rgba(0, 0, 0, 0.12)',
+  primary: {
+    main: '#242e42',
+    light: '#2f3b52',
+    dark: 'rgb(25, 32, 46)',
+    contrastText: '#fff',
+  },
   secondary: {
     main: '#25baa4',
     light: 'rgb(80,199,182)',
@@ -69,57 +91,57 @@ export const ProjectPalette: Palette = {
     disabled: 'rgba(0, 0, 0, 0.26)',
     active: 'rgba(0, 0, 0, 0.54)',
   },
-  primary: {
-    main: '#242e42',
-    light: 'rgb(79, 87, 103)',
-    dark: 'rgb(25, 32, 46)',
-    contrastText: '#fff',
-  },
 };
 
-export const Typography: TypographyOptions = {
+export const ProjectTypography: TypographyOptions = {
   h1: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${4}rem`,
     fontWeight: TextStyle.fontWeightMedium,
     letterSpacing: '-0.5px',
   },
   h2: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${3.5}rem`,
     fontWeight: TextStyle.fontWeightRegular,
-    lineHeight: '64px',
+    lineHeight: '1.14',
   },
   h3: {
-    fontFamily: 'Inter',
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${3}rem`,
     fontWeight: TextStyle.fontWeightMedium,
-    lineHeight: 'normal',
     letterSpacing: 'normal',
     fontStyle: 'normal',
   },
   h4: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${2.125}rem`,
     fontWeight: TextStyle.fontWeightBold,
     letterSpacing: '0.3px',
   },
   h6: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${1.25}rem`,
     fontWeight: TextStyle.fontWeightBold,
     lineHeight: '1.5',
     letterSpacing: 'normal',
   },
   h5: {
+    fontFamily: TextStyle.fontFamily,
     fontSize: `${1.25}rem`,
-    fontWeight: TextStyle.fontWeightLight,
+    fontWeight: TextStyle.fontWeightMedium,
     lineHeight: '1.5',
   },
   subtitle1: {
-    fontSize: `${1}rem`,
-    fontWeight: TextStyle.fontWeightMedium,
-    lineHeight: '1.5',
-    letterSpacing: '0.2px',
+    fontFamily: TextStyle.fontFamily,
+    fontSize: `${0.9}rem`,
+    fontWeight: TextStyle.fontWeightRegular,
+    lineHeight: '1.2',
+    letterSpacing: '0.25px',
   },
   subtitle2: {
-    fontSize: `${0.875}rem`,
+    fontFamily: TextStyle.fontFamily,
+    fontSize: `${1.1428571428571428}rem`,
     fontWeight: TextStyle.fontWeightMedium,
   },
   button: {
@@ -130,38 +152,99 @@ export const Typography: TypographyOptions = {
     fontWeight: 500,
   },
   caption: {
-    color: ProjectPalette.text.secondary,
+    color: ProjectPalette.primary.light,
     fontFamily: TextStyle.fontFamily,
-    lineHeight: `${1.375}em`,
-    fontSize: `${0.75}rem`,
-    fontWeight: 400,
+    lineHeight: `1.31`,
+    fontSize: `${0.6}rem`,
+    fontWeight: TextStyle.fontWeightBold,
   },
   body1: {
     color: ProjectPalette.text.primary,
     fontFamily: TextStyle.fontFamily,
-    lineHeight: `${1.46429}em`,
-    fontSize: `${0.875}rem`,
-    fontWeight: 400,
+    lineHeight: `1.5`,
+    fontSize: `${1}rem`,
+    letterSpacing: '0.5px',
+    fontWeight: 300,
   },
   body2: {
     color: ProjectPalette.text.primary,
     fontFamily: TextStyle.fontFamily,
-    lineHeight: `${1.71429}em`,
+    lineHeight: `1.71`,
     fontSize: `${0.875}rem`,
     fontWeight: 500,
   },
 };
 
-export default createMuiTheme({
+export const theme = createMuiTheme({
   overrides: {
     // Name of the component ⚛️
     MuiCssBaseline: {
       // Name of the rule
       '@global': {
         '*, *::before, *::after': {
-          transition: 'none !important',
-          animation: 'none !important',
+          /* todo: commented because it messes up the search progress bar */
+          // transition: 'none !important',
+          // animation: 'none !important',
         },
+      },
+    },
+    MuiTabs: {
+      root: { height: '30px!important', minHeight: 'initial!important' },
+      fixed: { height: '30px' },
+      indicator: {
+        height: '4px',
+      },
+    },
+    MuiButtonBase: {
+      root: {
+        width: 'initial',
+        minWidth: 'initial',
+        // focusRipple: false,
+        // disableRipple: true,
+        // padding: '0px!important',
+      },
+    },
+    MuiTab: {
+      root: {
+        width: 'initial',
+        minWidth: 'initial!important',
+        marginLeft: '50px!important',
+        // marginRight: '24px!important',
+        minHeight: 'initial!important',
+        padding: '0px 0px 6px 0px',
+      },
+      // selected: { display: 'none' },
+      wrapper: {
+        color: ProjectPalette.common.black,
+        fontWeight: 600,
+        fontSize: '14px',
+        // width: 'initial',
+        // minWidth: 'initial',
+      },
+    },
+    MuiTouchRipple: {
+      root: {
+        display: 'none',
+      },
+    },
+    MuiCardHeader: {
+      root: {
+        paddingBottom: 0,
+      },
+    },
+    MuiCard: {
+      root: {
+        boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
+      },
+    },
+    MUIDataTableHeadCell: {
+      root: {
+        fontWeight: 400,
+      },
+    },
+    MUIDataTableToolbar: {
+      root: {
+        paddingLeft: 27,
       },
     },
   },
@@ -221,7 +304,7 @@ export default createMuiTheme({
       complex: 375,
     },
   }, */
-  typography: Typography,
+  typography: ProjectTypography,
   zIndex: {
     modal: 1300,
     snackbar: 1400,
@@ -234,3 +317,6 @@ export default createMuiTheme({
   spacing: 8,
   palette: ProjectPalette,
 });
+
+// export default responsiveFontSizes(theme);
+export default theme;

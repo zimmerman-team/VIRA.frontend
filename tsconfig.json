@@ -14,7 +14,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "typeRoots": ["./typings", "node_modules/@types"]
   },
   "include": ["src"],
   "exclude": [
@@ -23,7 +24,6 @@
     "config",
     ".storybook",
     "node_modules",
-    "**/story.tsx",
     "**/*.spec.ts",
     "@nivo/bar",
     ".vscode",
