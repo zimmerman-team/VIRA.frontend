@@ -1,10 +1,10 @@
 {
-  "name": "zz-frontend-boilerplate",
+  "name": "insinger-frontend",
   "version": "0.1.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/zimmerman-zimmerman/zz-frontend-boilerplate.git"
+    "url": "https://github.com/zimmerman-zimmerman/insinger-frontend.git"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.5",
@@ -219,6 +219,11 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "release": {
+    "branches": [
+      "master"
+    ]
   },
   "proxy": "http://localhost:4200"
 }
