@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 /* project component */
 import { RadioGroupItem } from 'app/components/inputs/radiobuttons/RadioButtonGroup/common/RadioGroupItem';
 import { BigInputLabel } from 'app/components/inputs/textfields/SingleMultiLineTextField';
+import { useTranslation } from 'react-i18next';
 
 type ItemModel = {
   value: string;
@@ -36,10 +37,11 @@ const CustomFormControl = styled(props => <FormControl {...props} />)`
 `;
 
 export const RadioButtonsGroup = (props: RadioButtonsGroupModel) => {
+  const { t } = useTranslation();
   return (
     <>
       <CustomFormControl component="fieldset">
-        {props.title && <BigInputLabel>{props.title}</BigInputLabel>}
+        {props.title && <BigInputLabel>{t(props.title)}</BigInputLabel>}
         <RadioGroup value={props.value}>
           {props.items.map(item => (
             <RadioGroupItem

@@ -9,9 +9,14 @@ import {
   ResponseData,
 } from 'app/state/api/interfaces';
 import openSocket from 'socket.io-client';
+
 const socket = openSocket(process.env.REACT_APP_BACKEND_URL as string);
 
 export const syncVariables: SyncVariablesModel = {
+  lng: 'en',
+  setLng: action((state, payload: string) => {
+    state.lng = payload;
+  }),
   snackbar: '',
   setSnackbar: action((state, payload: string) => {
     state.snackbar = payload;

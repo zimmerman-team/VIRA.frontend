@@ -6,6 +6,7 @@ import { ProjectPalette } from 'app/theme';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import { StatItem } from 'app/modules/common/components/StatItem';
 import Grid from '@material-ui/core/Grid';
+import { useTranslation } from 'react-i18next';
 
 export interface TitleParams {
   title: string;
@@ -61,15 +62,16 @@ const style: any[] = [
 ];
 
 export const TitleFragment = (props: TitleParams) => {
+  const { t, i18n } = useTranslation();
   return (
     <React.Fragment>
       {/* ---------------------------- */}
       {/* title */}
-      <Typography css={style[0]}>{props.title}</Typography>
+      <Typography css={style[0]}>{t(props.title)}</Typography>
       <Box height="15px" />
       {props.showMoreThanTitle && (
         <Grid item container xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} lg={8}>
             {/* ---------------------------- */}
             {/* id */}
             {props.id && (
@@ -83,7 +85,7 @@ export const TitleFragment = (props: TitleParams) => {
             {/* note */}
             {props.note && (
               <React.Fragment>
-                <Typography css={style[2]}>{props.note}</Typography>
+                <Typography css={style[2]}>{t(props.note)}</Typography>
                 <Box height="10px" />
               </React.Fragment>
             )}
@@ -105,7 +107,7 @@ export const TitleFragment = (props: TitleParams) => {
               item
               container
               xs={12}
-              lg={6}
+              lg={4}
               alignItems="center"
               wrap="nowrap"
             >

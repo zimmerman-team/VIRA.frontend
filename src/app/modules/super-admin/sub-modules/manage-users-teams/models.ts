@@ -20,6 +20,7 @@ export type PageModuleModel = RouteComponentProps & {
   sortOptions?: SortOptionsModel[];
   onSortChange?: Function;
   deleteUser?: Function;
+  addBtnText: string;
 };
 
 export type ManageUsersTeamsLayoutModel = {

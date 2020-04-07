@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ChevronLeft } from '@material-ui/icons';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
-import React from 'react';
 import styled from 'styled-components';
 import { css } from 'styled-components/macro';
 import { useMediaQuery, Box, Grid } from '@material-ui/core';
@@ -51,13 +52,14 @@ const gridItem: any = css`
 `;
 
 export function BottomNav(props: BottomNavModel) {
+  const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   return (
     <Grid container item xs={12} lg={12} justify="space-between" wrap="nowrap">
       <Grid item xs={3}>
         <ContainedButton
-          text={isMobileWidth ? '' : 'Back'}
+          text={isMobileWidth ? '' : t('reports.form.buttons.back')}
           icon={isMobileWidth && <ChevronLeft />}
           onClick={props.back}
           disabled={props.backDisabled}
@@ -68,7 +70,7 @@ export function BottomNav(props: BottomNavModel) {
         {props.showDraftSubmitBtn && (
           <React.Fragment>
             <ContainedButton
-              text="Save as Draft"
+              text={t('reports.form.buttons.draft')}
               onClick={props.saveDraft}
               css={isMobileWidth && mobileButton}
             />
@@ -77,13 +79,13 @@ export function BottomNav(props: BottomNavModel) {
         )}
         {props.showSubmitBtn ? (
           <ContainedButton
-            text="Submit"
+            text={t('reports.form.buttons.submit')}
             onClick={props.submit}
             css={isMobileWidth && mobileButton}
           />
         ) : (
           <ContainedButton
-            text="Next"
+            text={t('reports.form.buttons.next')}
             onClick={props.next}
             disabled={props.nextDisabled}
             css={isMobileWidth && mobileButton}

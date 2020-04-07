@@ -132,7 +132,7 @@ export function MainRoutes() {
           mode: 'edit',
           breadcrumbs: {
             ...manageTeamEditAddMock.breadcrumbs,
-            currentLocation: 'Edit',
+            currentLocation: 'breadcrumbs.edit',
           },
         })}
       </Route>
@@ -146,7 +146,18 @@ export function MainRoutes() {
       </Route>
 
       <Route path="/super-admin/manage-users/edit/:id">
-        {redirectUnAuth(ManageUserEdit, storeUser, manageUserEditMock)}
+        {redirectUnAuth(ManageUserEdit, storeUser, {
+          ...manageUserEditMock,
+          breadcrumbs: {
+            currentLocation: 'breadcrumbs.edit',
+            previousLocations: [
+              {
+                label: 'breadcrumbs.manage',
+                url: '/super-admin/manage-users',
+              },
+            ],
+          },
+        })}
       </Route>
 
       <Route path="/super-admin/manage-users/add">
@@ -171,7 +182,7 @@ export function MainRoutes() {
 
       <Route path="/manage-account/:id">
         {redirectUnAuth(ManageUserEdit, storeUser, {
-          title: 'Manage Your Account',
+          title: 'user_management.general.manage_your_account',
           ...manageUserEditMock,
           breadcrumbs: null,
           editSelf: true,

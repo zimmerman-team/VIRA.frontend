@@ -1,15 +1,15 @@
 export const policyPriorities: { label: string; value: string }[] = [
-  { label: 'Refugees', value: 'Refugees' },
-  { label: 'Drug use', value: 'Drug use' },
-  { label: 'The Elderly', value: 'The Elderly' },
-  { label: 'Prostitution', value: 'Prostitution' },
+  { label: 'charts.items.refugees', value: 'Refugees' },
+  { label: 'charts.items.drug_use', value: 'Drug use' },
+  { label: 'charts.items.elderly', value: 'The Elderly' },
+  { label: 'charts.items.prostitution', value: 'Prostitution' },
   {
-    label: 'Poverty reduction with a focus on youth and children',
+    label: 'charts.items.poverty',
     value: 'Poverty reduction with a focus on youth and children',
   },
-  { label: 'Homelessness', value: 'Homelessness' },
+  { label: 'charts.items.homelessness', value: 'Homelessness' },
   {
-    label: 'Prisoner rehabilitation / reintegration',
+    label: 'charts.items.prisoner',
     value: 'Prisoner rehabilitation / reintegration',
   },
 ];
