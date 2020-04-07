@@ -12,6 +12,8 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { formatTeamCards } from './utils/formatTeamCards';
 
 function ManageUsersF(props: RouteComponentProps) {
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const [dialogAction, setDialogAction] = React.useState(() => {});
   const [users, setUsers] = React.useState([]);
   const [allUsers, setAllUsers] = React.useState([]);
   const [teams, setTeams] = React.useState([]);
@@ -113,7 +115,11 @@ function ManageUsersF(props: RouteComponentProps) {
       get(props.match.params, 'id', '') === 'manage-teams'
         ? 'deleteGroup'
         : 'deleteUser';
-    deleteUserAction({ socketName, values: { delId: id } });
+    const action = () => {
+      deleteUserAction({ socketName, values: { delId: id } });
+    };
+    setDialogAction(() => action);
+    setOpenDialog(true);
   }
 
   const loading = useStoreState(state => state.allUsers.loading);
@@ -154,6 +160,27 @@ function ManageUsersF(props: RouteComponentProps) {
       deleteUser,
       urlParam: 'manage-teams',
       addBtnText: 'user_management.general.add_team_btn',
+    },
+    dialogProps: {
+      open: openDialog,
+      title: 'Are you sure you want to delete the user?',
+      buttons: [
+        {
+          text: 'Cancel',
+          color: '#000000',
+          background: '#ffffff',
+          action: () => {},
+          closeOnClick: true,
+        },
+        {
+          text: 'Delete',
+          color: '#ffffff',
+          background: '#ed6060',
+          action: dialogAction,
+          closeOnClick: true,
+        },
+      ],
+      onClose: () => setOpenDialog(false),
     },
   };
 
