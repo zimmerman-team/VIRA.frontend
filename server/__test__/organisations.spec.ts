@@ -1,4 +1,4 @@
-// projects.spec.ts
+// organisations.spec.ts
 
 require('dotenv').config();
 import io from 'socket.io-client';
@@ -31,9 +31,9 @@ afterEach(done => {
   done();
 });
 
-describe('Testing projects API', () => {
-  test('tests fetching all projects from mongodb', done => {
-    socket.emit('allProject', {}, (res: any) => {
+describe('Testing organisations API', () => {
+  test('tests fetching all organisations from mongodb', done => {
+    socket.emit('allOrg', {}, (res: any) => {
       expect(res.length).toBeGreaterThan(0);
       done();
     });

@@ -87,9 +87,38 @@ jobs:
             fi
             source $BASH_ENV
 
+  test_api:
+    docker:
+      - image: circleci/node:12.14.1
+      - image: circleci/mongo:3.6.2-jessie
+    working_directory: ~/test
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Install packages
+          command: yarn install
+      - run:
+          name: Load environment variables
+          command: |
+            echo 'export REACT_APP_PROJECT_URL=http://localhost:3000' >> $BASH_ENV
+            echo 'export REACT_APP_BACKEND_URL=http://localhost:4200' >> $BASH_ENV
+            echo 'export REACT_APP_BACKEND_PORT=4200' >> $BASH_ENV
+            echo 'export REACT_APP_MONGO_DB_URL=mongodb://localhost:27017/insinger' >> $BASH_ENV
+            echo 'export REACT_APP_POSTMARK_CLIENT_ID=eb6520ea-eb38-4a11-b1f3-328cdee3ca57' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Run data script
+          command: yarn init-data
+      - run:
+          name: Run express-js app
+          command: yarn start-test-api
+
 workflows:
   build-and-test:
     jobs:
+      - test_api
       - load_envs
       - cypress/install:
           requires:

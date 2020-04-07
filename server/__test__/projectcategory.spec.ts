@@ -31,9 +31,9 @@ afterEach(done => {
   done();
 });
 
-describe('Testing projects API', () => {
-  test('tests fetching all projects from mongodb', done => {
-    socket.emit('allProject', {}, (res: any) => {
+describe('Testing project categories API', () => {
+  test('tests fetching all project categories from mongodb', done => {
+    socket.emit('allProjectCategory', {}, (res: any) => {
       expect(res.length).toBeGreaterThan(0);
       done();
     });
