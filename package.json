@@ -92,7 +92,7 @@
     "@types/socket.io-client": "^1.4.32",
     "@types/storybook__react": "^5.2.1",
     "@types/styled-components": "^5.0.1",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-styled-components": "^1.10.7",
     "codecrumbs": "^1.7.3",
