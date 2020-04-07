@@ -25,6 +25,7 @@ export const StatItem = (props: StatItemParams) => (
           text-decoration: none;
         }
       `}
+      data-cy={props.type}
     >
       <Typography
         css={`
