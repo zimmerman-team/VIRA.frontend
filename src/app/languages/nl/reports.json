@@ -1,0 +1,76 @@
+{
+  "detail": {
+    "title": "",
+    "editReportBtn": "Rapport bewerken",
+    "stats": {
+      "targetBeneficiaries": "Doel begunstigden",
+      "budget": "Budget"
+    },
+    "cards": {
+      "key_outcomes": "Belangrijkste uitkomsten",
+      "monitor": "Monitor en rapporteer over de resultaten",
+      "media": "Media",
+      "key_implementation_challenges": "Belangrijke implementatie-uitdagingen",
+      "other_project": "Andere projectresultaten en observaties",
+      "future_plans": "Plannen voor de toekomst",
+      "other_comments": "Overig commentaar"
+    }
+  },
+  "overview": {
+    "title": "",
+    "table": {
+      "id": "ID",
+      "title": "Titel van Rapporten",
+      "date": "Datum"
+    }
+  },
+  "form": {
+    "title": "Rapporteren",
+    "steps": {
+      "outcomes": "Resultaten",
+      "policy_priorities": "Beleidsprioriteiten",
+      "indicator_verification": "Indicator en verificatie",
+      "challenges_plans": "Uitdagingen en plannen",
+      "preview": "Voorvertoning"
+    },
+    "textfield": {
+      "title": "Geef een titel op voor uw rapport",
+      "location": "Voeg locatie toe",
+      "location_expl": "Op welke van de volgende geografische locaties wordt het project uitgevoerd",
+      "exact_location": "Selecteer de exacte locatie",
+      "insinger_f_policy_priorities": "Themas Insinger Stichting",
+      "budget": "Budget",
+      "remaining": "Resterende voor dit project",
+      "contribution": "Insinger Bijdrage",
+      "target_beneficiaries": "Doel begunstigden",
+      "total_commited": "Total committed number",
+      "of_which_ben": "Waarvan de begunstigden waarschijnlijk ongeveer zullen opnemen",
+      "sdg_mapping_expl": "Voor elke geselecteerde prioriteit verschijnen de relevante SDG's die kunnen worden geselecteerd op basis van onze mapping"
+    },
+    "cards": {
+      "key_outcomes": "Beschrijf de belangrijkste resultaten die het project wil bereiken",
+      "monitor": "Vertel ons wat u van plan bent te volgen en te rapporteren over de hierboven vermelde resultaten",
+      "monitor_expl": "Als u basisgegevens hebt (de gegevens waartegen u de voortgang bijhoudt) en een verificatiemiddel (hoe u de gegevens wilt verkrijgen en uit welke bronnen), geeft u die informatie ook op",
+      "media": "Voeg bestand(en) toe (optioneel)",
+      "key_implementation_challenges": "Belangrijke implementatie-uitdagingen",
+      "key_implementation_challenges_expl": "Geef de belangrijkste ervaringen met implementatie-uitdagingen aan en hoe deze zijn aangepakt",
+      "other_project": "Heeft het project andere onverwachte (positieve of negatieve) resultaten bereikt",
+      "other_project_expl": "Heeft het project andere onverwachte (positieve of negatieve) resultaten bereikt",
+      "future_plans": "Plannen voor de toekomst",
+      "future_plans_expl": "Verwacht u binnen de komende 1-2 jaar waarschijnlijk financiering voor toekomstige activiteiten van de Insinger Stichting?",
+      "other_comments": "Overig commentaar",
+      "other_comments_expl": "Laat het ons weten als u andere opmerkingen of opmerkingen wilt delen met de Insinger Foundation"
+    },
+    "media_modal": {
+      "title": "Voeg bestand(en) toe"
+    },
+    "buttons": {
+      "back": "Terug",
+      "next": "De volgende",
+      "draft": "Opslaan als concept",
+      "submit": "Verzenden",
+      "cancel": "Annuleren",
+      "save": "Sla op"
+    }
+  }
+}

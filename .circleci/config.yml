@@ -115,6 +115,14 @@ jobs:
           name: Run express-js app
           command: yarn start-test-api
 
+  release:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - checkout
+      - run: npx semantic-release
+
 workflows:
   build-and-test:
     jobs:
@@ -156,20 +164,26 @@ workflows:
             branches:
               only: develop
       - deploy-staging:
-         requires:
-           - cypress/install
-         filters:
-           branches:
-             only: master
-    #  - deploy-production:
-    #      requires:
-    #        - cypress/install
-    #      filters:
-    #        branches:
-    #          only: master
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: master
+      #  - deploy-production:
+      #      requires:
+      #        - cypress/install
+      #      filters:
+      #        branches:
+      #          only: master
       - deploy-storybook:
           requires:
             - cypress/install
           filters:
-           branches:
-             only: develop
+            branches:
+              only: develop
+      - release:
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: master

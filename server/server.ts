@@ -180,8 +180,11 @@ IO.sockets.on('connection', (socket: any) => {
   socket.on('addProject', (data: any, fn: any) => {
     projectController.addProject({ query: data }, (res: any) => fn(res));
   });
-  socket.on('updateProject', (data: any, fn: any) => {
-    projectController.UpdateProject({ query: data }, (res: any) => fn(res));
+  socket.on('editProject', (data: any, fn: any) => {
+    projectController.editProject({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('deleteProject', (data: any, fn: any) => {
+    projectController.deleteProject({ query: data }, (res: any) => fn(res));
   });
   socket.on('delProject', (data: any, fn: any) => {
     projectController.DelProject({ query: data }, (res: any) => fn(res));

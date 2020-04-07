@@ -7,7 +7,7 @@ import { colorScheme } from 'app/components/charts/BarCharts/common/colorUtil';
 import { useMediaQuery, Typography } from '@material-ui/core';
 import {
   HorizontalBarChartModel,
-  barModel,
+  getBarModel,
   BarChartLegendModel,
 } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import { ProjectPalette } from 'app/theme';
@@ -21,6 +21,7 @@ import { getMaxBudgetValue } from 'app/components/charts/BarCharts/utils/getMaxB
 import { LegendControl } from 'app/components/charts/BarCharts/common/LegendControl';
 import find from 'lodash/find';
 import filter from 'lodash/filter';
+import { useTranslation } from 'react-i18next';
 
 // TODO:
 //  - Find a way to implement the colouring.
@@ -162,6 +163,7 @@ const Legends = styled.div`
 
 // https://nivo.rocks/bar/
 export function HorizontalBarChart(props: HorizontalBarChartModel) {
+  const { t } = useTranslation();
   const [containerWidth, setContainerWidth] = React.useState(0);
   const containerRef: any = React.useRef();
   const [maxBudgetVal, setMaxBudgetVal] = React.useState(0);
@@ -188,11 +190,11 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
     true
   );
 
-  if (isMobileWidth) {
-    barModel.axisBottom.tickValues = 3;
-  }
-
   function renderBarchart() {
+    const barModel: any = getBarModel(t);
+    if (isMobileWidth) {
+      barModel.axisBottom.tickValues = 3;
+    }
     if (typeof props.values !== 'undefined' && props.values.length > 0) {
       // console.log(props.maxValue);
       return (
@@ -249,6 +251,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
     }
     return <NoDataMessage>No data found</NoDataMessage>;
   }
+
   return (
     <ChartContainer
       ref={containerRef}

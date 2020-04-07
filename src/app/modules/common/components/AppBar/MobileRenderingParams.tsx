@@ -4,6 +4,7 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -14,6 +15,7 @@ interface MobileRenderingParams {
   handleMobileMenuClose: () => void;
 }
 export function MobileRendering(props: MobileRenderingParams) {
+  const { t, i18n } = useTranslation();
   return (
     <Menu
       anchorEl={props.mobileMoreAnchorEl}
@@ -28,7 +30,7 @@ export function MobileRendering(props: MobileRenderingParams) {
         <IconButton aria-label="search" color="primary">
           <SearchIcon />
         </IconButton>
-        <p>Search</p>
+        <p>{t('Search')}</p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="primary">
@@ -36,7 +38,7 @@ export function MobileRendering(props: MobileRenderingParams) {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>{t('Notifications')}</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -47,7 +49,7 @@ export function MobileRendering(props: MobileRenderingParams) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>{t('Profile')}</p>
       </MenuItem>
     </Menu>
   );

@@ -12,105 +12,88 @@ import TableModule from 'app/components/datadisplay/Table';
 import { Grid, Hidden } from '@material-ui/core';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { Viztabs } from 'app/modules/common/components/Viztabs';
+import { useTranslation } from 'react-i18next';
 
-export const ProjectDetailLayout = (props: any) => (
-  <React.Fragment>
-    {/* ---------------------------------------------------------------------*/}
-    {/* breadcrumbs */}
-    <Grid item xs={12} lg={6}>
-      <BreadCrumbs
-        {...GranteeBreadCrumbsMock}
-        previousLocations={[{ label: 'Projects', url: '/list' }]}
-        currentLocation={props.projectDetail.project}
-      />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* button: generate report */}
-    <Hidden xsDown>
-      <Grid item xs={12} lg={6} container justify="flex-end">
-        <ContainedButton
-          text="Generate Report"
-          onClick={props.projectDetail.generateReport}
+export const ProjectDetailLayout = (props: any) => {
+  const { t } = useTranslation();
+  return (
+    <React.Fragment>
+      {/* ---------------------------------------------------------------------*/}
+      {/* breadcrumbs */}
+      <Grid item xs={12} lg={6}>
+        <BreadCrumbs
+          {...GranteeBreadCrumbsMock}
+          previousLocations={[{ label: 'Projects', url: '/list' }]}
+          currentLocation={props.projectDetail.project}
         />
       </Grid>
-    </Hidden>
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* title fragment */}
-    <Grid item xs={12} lg={12}>
-      <TitleFragment
-        title={props.projectDetail.project}
-        id={`project id: ${props.projectDetail.project_id}`}
-        date="*earliest and latest activity start dates"
-        url_note={props.projectDetail.organisation}
-        url={props.projectDetail.website}
-        stats={[
-          {
-            label: 'Total project amount',
-            value: parseInt(props.projectDetail.total_amount || '', 10)
-              .toLocaleString(undefined, {
-                currency: 'EUR',
-                currencyDisplay: 'symbol',
-                style: 'currency',
-              })
-              .replace('.00', ''),
-          },
-          {
-            label: 'Project duration',
-            value: `${(props.projectDetail.start_date || '').replace(
-              /-/g,
-              '.'
-            )} - ${(props.projectDetail.end_date || '').replace(/-/g, '.')}`,
-          },
-        ]}
-      />
-    </Grid>
+      {/* ---------------------------------------------------------------------*/}
+      {/* button: generate report */}
+      <Hidden xsDown>
+        <Grid item xs={12} lg={6} container justify="flex-end">
+          <ContainedButton
+            text={t('projects.detail.generateReportBtn')}
+            onClick={props.projectDetail.generateReport}
+          />
+        </Grid>
+      </Hidden>
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* mobile button: generate report */}
-    <Hidden smUp>
-      <Grid item xs={12}>
-        <ContainedButton
-          text="Generate Report"
-          onClick={props.projectDetail.generateReport}
+      {/* ---------------------------------------------------------------------*/}
+      {/* title fragment */}
+      <Grid item xs={12} lg={12}>
+        <TitleFragment
+          showMoreThanTitle
+          title={props.projectDetail.project}
+          id={`${t('project id:')} ${props.projectDetail.project_id}`}
+          date={t('*earliest and latest activity start dates')}
+          url_note={props.projectDetail.organisation}
+          url={props.projectDetail.website}
+          stats={[
+            {
+              label: t('projects.detail.stats.total_budget'),
+              value: parseInt(props.projectDetail.total_amount || '', 10)
+                .toLocaleString(undefined, {
+                  currency: 'EUR',
+                  currencyDisplay: 'symbol',
+                  style: 'currency',
+                })
+                .replace('.00', ''),
+            },
+            {
+              label: t('projects.detail.stats.duration'),
+              value: `${(props.projectDetail.start_date || '').replace(
+                /-/g,
+                '.'
+              )} - ${(props.projectDetail.end_date || '').replace(/-/g, '.')}`,
+            },
+          ]}
         />
       </Grid>
-    </Hidden>
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* project description */}
-    <Grid item xs={12} lg={6}>
-      <Description {...props} />
-    </Grid>
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* charts */}
-    <Viztabs
-      barChartData={props.ppVizData}
-      barChartLegends={props.barChartLegends}
-      onBarChartLegendClick={props.onBarChartLegendClick}
-      bubbleChartData={{ ...bubbleMockData, children: props.SDGVizData }}
-      selectedBubble={props.selectedSDG}
-      onBubbleSelect={props.onBubbleSelect}
-      geoMapData={props.geoMapData}
-    />
-
-    {/* ---------------------------------------------------------------------*/}
-    {/* outcome cards */}
-    <Grid item container xs={12} md={12} lg={12}>
+      {/* ---------------------------------------------------------------------*/}
+      {/* project description */}
       <Grid item xs={12} lg={6}>
-        <OutcomeCard {...ProjectOutcomeCardMock[0]} />
+        <Description {...props} />
       </Grid>
-      <Grid item xs={12} lg={6}>
-        <OutcomeCard {...ProjectOutcomeCardMock[1]} />
-      </Grid>
-    </Grid>
 
-    {/* ---------------------------------------------------------------------*/}
-    {/* reports */}
-    <Grid item xs={12} lg={12}>
-      <TableModule {...props.reportTable} />
-    </Grid>
-  </React.Fragment>
-);
+      {/* ---------------------------------------------------------------------*/}
+      {/* charts */}
+      <Viztabs
+        barChartData={props.ppVizData}
+        barChartLegends={props.barChartLegends}
+        onBarChartLegendClick={props.onBarChartLegendClick}
+        bubbleChartData={{ ...bubbleMockData, children: props.SDGVizData }}
+        selectedBubble={props.selectedSDG}
+        onBubbleSelect={props.onBubbleSelect}
+        geoMapData={props.geoMapData}
+      />
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* reports */}
+      <Grid item xs={12} lg={12}>
+        <TableModule {...props.reportTable} />
+      </Grid>
+    </React.Fragment>
+  );
+};

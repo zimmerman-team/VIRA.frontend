@@ -1,41 +1,50 @@
 /* eslint-disable no-underscore-dangle */
 import get from 'lodash/get';
+import find from 'lodash/find';
 import { ProjectPalette } from 'app/theme';
-import { getMediaTileData } from './getMediaTileData';
+import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
+import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
 
 const ppToSdg = {
-  'Poverty reduction with a focus on youth and children': {
-    name: 'No poverty',
+  poverty: {
+    // name: 'No poverty',
+    name: 'sdgs.1',
     color: '#E5243D',
     number: 1,
   },
-  Refugees: {
-    name: 'Zero hunger',
+  refugees: {
+    // name: 'Zero hunger',
+    name: 'sdgs.2',
     color: '#DDA73B',
     number: 2,
   },
-  'The Elderly': {
-    name: 'Reduced inequialities',
+  elderly: {
+    // name: 'Reduced inequialities',
+    name: 'sdgs.10',
     color: '#E01383',
     number: 10,
   },
-  'Prisoner rehabilitation / reintegration': {
-    name: 'Peace, Justice and strong institutions',
+  prisoner: {
+    // name: 'Peace, Justice and strong institutions',
+    name: 'sdgs.16',
     color: '#136A9F',
     number: 16,
   },
-  'Drug use': {
-    name: 'Decent work and economic growth',
+  drug_use: {
+    // name: 'Decent work and economic growth',
+    name: 'sdgs.8',
     color: '#A31C44',
     number: 8,
   },
-  Prostitution: {
-    name: 'Gender equality',
+  prostitution: {
+    // name: 'Gender equality',
+    name: 'sdgs.5',
     color: '#EF402E',
     number: 5,
   },
-  Homelessness: {
-    name: 'Good health and well-being',
+  homelessness: {
+    // name: 'Good health and well-being',
+    name: 'sdgs.3',
     color: '#4CA146',
     number: 3,
   },
@@ -78,6 +87,13 @@ export function formatReportDetail(data: any) {
       }
     });
   }
+  const ppNamePath = get(
+    find(policyPriorities, {
+      value: reportDetailRecord.policy_priority.name,
+    }),
+    'label',
+    reportDetailRecord.policy_priority.name
+  );
   return {
     id: reportDetailRecord._id,
     title: reportDetailRecord.title,
@@ -103,14 +119,14 @@ export function formatReportDetail(data: any) {
     reportID: reportDetailRecord.reportID,
     barChartData: [
       {
-        name: reportDetailRecord.policy_priority.name,
+        name: ppNamePath,
         value1: Math.min(targetVal, commitedVal),
         value2: diffVal < 0 ? diffVal * -1 : diffVal,
         value3: reportDetailRecord.budget,
         value1Color: ProjectPalette.primary.main,
         value2Color: diffVal > 0 ? ProjectPalette.grey[500] : '#05c985',
         tooltip: {
-          title: reportDetailRecord.policy_priority.name,
+          title: ppNamePath,
           items: [
             {
               label: `Target (${(

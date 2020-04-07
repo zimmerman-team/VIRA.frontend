@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 
 export type LegendListItemProps = {
   name: string;
@@ -13,6 +14,7 @@ export type LegendListItemProps = {
 };
 
 export function LegendListItem(props: LegendListItemProps) {
+  const { t } = useTranslation();
   return (
     <li
       css={`
@@ -43,7 +45,7 @@ export function LegendListItem(props: LegendListItemProps) {
           font-weight: ${props.active ? 'bold' : 'normal'};
         `}
       >
-        {props.name}
+        {t(props.name)}
       </div>
     </li>
   );

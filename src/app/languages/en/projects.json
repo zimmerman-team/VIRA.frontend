@@ -1,0 +1,20 @@
+{
+  "detail": {
+    "title": "",
+    "generateReportBtn": "Generate report",
+    "stats": {
+      "total_budget": "Total project budget",
+      "duration": "Project duration"
+    }
+  },
+  "overview": {
+    "title": "",
+    "table": {
+      "id": "ID",
+      "decision_date": "Decision date",
+      "decision": "Decision",
+      "project_title": "Project title",
+      "organisation": "Organisation"
+    }
+  }
+}

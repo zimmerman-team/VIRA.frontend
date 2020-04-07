@@ -11,6 +11,7 @@ import {
   SingleLineGridList,
   SingleLineGridListProps,
 } from 'app/components/layout/GridList/singleLineGridList';
+import { useTranslation } from 'react-i18next';
 
 export interface OutcomeCardParams {
   title: string;
@@ -42,6 +43,7 @@ const styles: any = {
 };
 
 export const OutcomeCard = (props: OutcomeCardParams) => {
+  const { t, i18n } = useTranslation();
   return (
     <Grid item lg={12}>
       <Card css={props.media ? styles.card : null}>
@@ -49,7 +51,7 @@ export const OutcomeCard = (props: OutcomeCardParams) => {
         <CardContent>
           {props.description && (
             <Typography css={styles.contentTypography}>
-              {props.description}
+              {t(props.description)}
             </Typography>
           )}
           {props.media && (

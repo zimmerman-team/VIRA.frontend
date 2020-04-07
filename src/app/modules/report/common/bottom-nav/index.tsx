@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Grid from '@material-ui/core/Grid';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import React from 'react';
-import styled from 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
+import { ChevronLeft } from '@material-ui/icons';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import styled from 'styled-components';
+import { css } from 'styled-components/macro';
+import { useMediaQuery, Box, Grid } from '@material-ui/core';
 
 type BottomNavModel = {
   next: Function;
@@ -27,34 +30,68 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-export const BottomNav = (props: BottomNavModel) => (
-  <Grid item container lg={12} justify="space-between">
-    <ContainedButton
-      text="Back"
-      onClick={props.back}
-      disabled={props.backDisabled}
-    />
-    <div>
-      {props.showDraftSubmitBtn && (
-        <React.Fragment>
-          <ContainedButton text="Save as Draft" onClick={props.saveDraft} />
-          <div
-            css={`
-              width: 24px;
-              display: inline-flex;
-            `}
-          />
-        </React.Fragment>
-      )}
-      {props.showSubmitBtn ? (
-        <ContainedButton text="Submit" onClick={props.submit} />
-      ) : (
+const mobileBackStyle: any = css`
+  max-width: 48px;
+  min-width: 48px;
+  max-height: 48px;
+  min-height: 48px;
+`;
+
+const mobileButton: any = css`
+  && {
+    max-height: 48px;
+    min-height: 48px;
+    max-width: 132px;
+  }
+`;
+
+const gridItem: any = css`
+  && {
+    display: flex;
+  }
+`;
+
+export function BottomNav(props: BottomNavModel) {
+  const { t } = useTranslation();
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
+  return (
+    <Grid container item xs={12} lg={12} justify="space-between" wrap="nowrap">
+      <Grid item xs={3}>
         <ContainedButton
-          text="Next"
-          onClick={props.next}
-          disabled={props.nextDisabled}
+          text={isMobileWidth ? '' : t('reports.form.buttons.back')}
+          icon={isMobileWidth && <ChevronLeft />}
+          onClick={props.back}
+          disabled={props.backDisabled}
+          css={isMobileWidth && mobileBackStyle}
         />
-      )}
-    </div>
-  </Grid>
-);
+      </Grid>
+      <Grid item xs={9} justify="flex-end" css={gridItem}>
+        {props.showDraftSubmitBtn && (
+          <React.Fragment>
+            <ContainedButton
+              text={t('reports.form.buttons.draft')}
+              onClick={props.saveDraft}
+              css={isMobileWidth && mobileButton}
+            />
+            <Box width={`${isMobileWidth ? '8px' : '24px'}`} />
+          </React.Fragment>
+        )}
+        {props.showSubmitBtn ? (
+          <ContainedButton
+            text={t('reports.form.buttons.submit')}
+            onClick={props.submit}
+            css={isMobileWidth && mobileButton}
+          />
+        ) : (
+          <ContainedButton
+            text={t('reports.form.buttons.next')}
+            onClick={props.next}
+            disabled={props.nextDisabled}
+            css={isMobileWidth && mobileButton}
+          />
+        )}
+      </Grid>
+    </Grid>
+  );
+}

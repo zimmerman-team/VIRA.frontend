@@ -3,6 +3,7 @@
 import React from 'react';
 import 'styled-components/macro';
 import { Checkbox } from 'app/components/inputs/checkboxes/Checkbox';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   label: string;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export function LegendControl(props: Props) {
+  const { t } = useTranslation();
   return (
     <div
       onClick={() => props.onClick && props.onClick(props.label)}
@@ -25,7 +27,7 @@ export function LegendControl(props: Props) {
         align-items: center;
       `}
     >
-      <Checkbox checked={props.selected} /> {props.label}
+      <Checkbox checked={props.selected} /> {t(`${props.label}`)}
     </div>
   );
 }

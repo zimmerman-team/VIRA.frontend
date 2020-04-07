@@ -13,6 +13,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 
 const Description = styled(Typography)`
   && {
@@ -74,6 +75,7 @@ const Caption = styled(Typography)`
 
 export function TeamUserCard(props: TeamUserCardModel) {
   const history = useHistory();
+  const { t } = useTranslation();
 
   const editUser = () =>
     history.push(`/super-admin/${props.urlParam}/edit/${props._id}`);
@@ -81,18 +83,36 @@ export function TeamUserCard(props: TeamUserCardModel) {
   return (
     <CardContainer onClick={editUser}>
       <Header variant="body1">{props.title}</Header>
-      <Description variant="subtitle1">{props.description}</Description>
+      <Description variant="subtitle1">
+        {props.description.indexOf('Created by') > -1
+          ? `${t(
+              'user_management.general.created_by'
+            )}${props.description.replace('Created by', '')}`
+          : props.description}
+      </Description>
       <BottomContainer>
         <Grid container justify="space-between" alignItems="flex-end">
           <Grid item>
-            <Caption variant="caption">Created: {props.dateCreated}</Caption>
+            <Caption variant="caption">
+              {t('user_management.general.created')}: {props.dateCreated}
+            </Caption>
           </Grid>
           <Grid item>
-            <ButtonIcon onClick={editUser}>
+            <ButtonIcon
+              onClick={(e: any) => {
+                e.stopPropagation();
+                editUser();
+              }}
+            >
               <Edit />
             </ButtonIcon>
             <ButtonIcon
-              onClick={() => props.deleteUser && props.deleteUser(props._id)}
+              onClick={(e: any) => {
+                e.stopPropagation();
+                if (props.deleteUser) {
+                  props.deleteUser(props._id);
+                }
+              }}
             >
               <Delete />
             </ButtonIcon>

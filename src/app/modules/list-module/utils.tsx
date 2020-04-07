@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-destructuring */
@@ -12,11 +13,11 @@ import {
 import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
 /* models */
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import { GranteeListMock } from 'app/modules/list-module/mock';
 import React from 'react';
-import { ReportListMock } from 'app/modules/list-module/mock';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import { GranteeListMock, ReportListMock } from 'app/modules/list-module/mock';
+import i18n from 'app/languages';
 
 export const formatTableDataForProject = (data: any): any[] => {
   let tempArray: any[] = [];
@@ -38,34 +39,38 @@ export const formatTableDataForProject = (data: any): any[] => {
 
 export const getBaseTableForProject = (): TableModuleModel => {
   const tableConfig = mockDataVar8;
+
   tableConfig.columns = [
     {
-      name: 'ID',
+      name: i18n.t('projects.overview.table.id'),
       options: {
         sortDirection: 'asc',
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `ID: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('projects.overview.table.id')}: ${value}`,
       },
     },
     {
-      name: 'Decision date',
+      name: i18n.t('projects.overview.table.decision_date'),
       options: {
         filter: true,
         filterType: 'checkbox',
-        customFilterListRender: value => `Decision date: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('projects.overview.table.decision_date')}: ${value}`,
       },
     },
     {
-      name: 'Decision',
+      name: i18n.t('projects.overview.table.decision'),
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `Decision: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('projects.overview.table.decision')}: ${value}`,
       },
     },
     {
-      name: 'Project title',
+      name: i18n.t('projects.overview.table.project_title'),
       options: {
         filter: true,
         filterType: 'dropdown',
@@ -77,15 +82,17 @@ export const getBaseTableForProject = (): TableModuleModel => {
             />
           );
         },
-        customFilterListRender: value => `ProjectTitle: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('projects.overview.table.project_title')}: ${value}`,
       },
     },
     {
-      name: 'Organisation',
+      name: i18n.t('projects.overview.table.organisation'),
       options: {
         filter: true,
         filterType: 'checkbox',
-        customFilterListRender: value => `Organisatie: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('projects.overview.table.organisation')}: ${value}`,
       },
     },
   ];
@@ -114,9 +121,10 @@ export const formatTableDataForGrantee = (data: any): any[] => {
 
 export const getBaseTableForGrantee = (): TableModuleModel => {
   const tableConfig = GranteeListMock;
+
   tableConfig.columns = [
     {
-      name: 'Grantee Name',
+      name: i18n.t('grantees.overview.table.name'),
       options: {
         sortDirection: 'asc',
         filter: true,
@@ -134,53 +142,59 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
             />
           );
         },
-        customFilterListRender: updateValue => `Grantee Name: ${updateValue}`,
+        customFilterListRender: updateValue =>
+          `${i18n.t('grantees.overview.table.name')}: ${updateValue}`,
       },
     },
     {
-      name: 'Grantee Type',
+      name: i18n.t('grantees.overview.table.type'),
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `Grantee Type: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('grantees.overview.table.type')}: ${value}`,
       },
     },
     {
-      name: 'Place',
+      name: i18n.t('grantees.overview.table.place'),
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `Place: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('grantees.overview.table.place')}: ${value}`,
       },
     },
     {
-      name: 'Country',
+      name: i18n.t('grantees.overview.table.country'),
       options: {
         filter: true,
         filterType: 'checkbox',
-        customFilterListRender: value => `Country: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('grantees.overview.table.country')}: ${value}`,
       },
     },
     {
-      name: 'Email',
+      name: i18n.t('grantees.overview.table.email'),
       options: {
         filter: true,
         filterType: 'checkbox',
         customBodyRender: (value, tableMeta, updateValue) => {
           return <ExternalLinkCellModule extLink link={value} value={value} />;
         },
-        customFilterListRender: value => `email: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('grantees.overview.table.email')}: ${value}`,
       },
     },
     {
-      name: 'Website',
+      name: i18n.t('grantees.overview.table.website'),
       options: {
         filter: true,
         filterType: 'checkbox',
         customBodyRender: (value, tableMeta, updateValue) => {
           return <ExternalLinkCellModule extLink link={value} value={value} />;
         },
-        customFilterListRender: value => `Website: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('grantees.overview.table.website')}: ${value}`,
       },
     },
   ];
@@ -207,22 +221,25 @@ export const formatTableDataForReport = (data: any): any[] => {
 
 export const getBaseTableForReport = (data: any): TableModuleModel => {
   const tableConfig = ReportListMock;
+
   tableConfig.columns = [
     {
-      name: 'ID',
+      name: i18n.t('reports.overview.table.id'),
       options: {
         sortDirection: 'asc',
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `ID: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('reports.overview.table.id')}: ${value}`,
       },
     },
     {
-      name: 'Title of Reports',
+      name: i18n.t('reports.overview.table.title'),
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `Title: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('reports.overview.table.title')}: ${value}`,
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowAllData = find(data, { reportID: tableMeta.rowData[0] });
           const id = get(rowAllData, '_id', '');
@@ -240,11 +257,12 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
       },
     },
     {
-      name: 'Date',
+      name: i18n.t('reports.overview.table.date'),
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `Date: ${value}`,
+        customFilterListRender: value =>
+          `${i18n.t('reports.overview.table.date')}: ${value}`,
       },
     },
   ];

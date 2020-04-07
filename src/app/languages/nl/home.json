@@ -1,0 +1,17 @@
+{
+  "chart_nav": {
+    "map": "Map",
+    "priority_area": "Prioriteitsgebied",
+    "sdg": "SDGs"
+  },
+  "dashboard": {
+    "grantees": "Grantees",
+    "projects": "Projecten",
+    "reports": "Totaal rapporten"
+  },
+  "overview_nav": {
+    "grantees": "Grantees",
+    "projects": "Projecten",
+    "reports": "Reports"
+  }
+}

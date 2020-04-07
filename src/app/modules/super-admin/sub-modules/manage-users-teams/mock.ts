@@ -11,20 +11,20 @@ import {
 import { UnregisterCallback, Href } from 'history';
 
 export const sortOptions: SortOptionsModel[] = [
-  { label: 'Title (asc)', value: 'title' },
-  { label: 'Title (desc)', value: '-title' },
-  { label: 'Created (asc)', value: 'dateCreated' },
-  { label: 'Created (desc)', value: '-dateCreated' },
+  { label: 'user_management.general.title_sort_asc', value: 'title' },
+  { label: 'user_management.general.title_sort_desc', value: '-title' },
+  { label: 'user_management.general.created_sort_asc', value: 'dateCreated' },
+  { label: 'user_management.general.created_sort_desc', value: '-dateCreated' },
 ];
 
 export const tabNavigatorMock: TabNavigatorParams = {
   items: [
     {
-      label: 'Teams',
+      label: 'user_management.general.teams',
       path: '/super-admin/manage-teams',
     },
     {
-      label: 'Users',
+      label: 'user_management.general.users',
       path: '/super-admin/manage-users',
     },
   ],
@@ -34,14 +34,14 @@ export const breadcrumbsMock: BreadcrumbModel = {
   currentLocation: '',
   previousLocations: [
     {
-      label: 'Manage',
+      label: 'breadcrumbs.manage',
       url: '/super-admin/manage-teams',
     },
   ],
 };
 
 export const pageModuleMockUsers: PageModuleModel = {
-  title: 'Users',
+  title: 'user_management.general.users',
   teamCards: [
     TeamUserCardMock,
     TeamUserCardMock,
@@ -106,7 +106,7 @@ export const pageModuleMockUsers: PageModuleModel = {
 };
 
 export const pageModuleMockTeams: PageModuleModel = {
-  title: 'Teams',
+  title: 'user_management.general.teams',
   teamCards: [
     TeamUserCardMock,
     TeamUserCardMock,

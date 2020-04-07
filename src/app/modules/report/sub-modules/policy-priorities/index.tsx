@@ -6,7 +6,11 @@ import {
   CardHeader,
   Card,
   CardContent,
+  useMediaQuery,
+  Hidden,
+  Box,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
 import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
 import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
@@ -40,9 +44,14 @@ const styles: any = {
     opacity: 0.2;
     pointer-events: none;
   `,
+  gridMobile: css`
+    padding-top: 0 !important;
+  `,
 };
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
+  const { t } = useTranslation();
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [isBlur, setIsBlur] = React.useState(false);
 
   React.useEffect(() => {
@@ -61,23 +70,20 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         <Card css={styles.card}>
           <CardHeader
             css={styles.cardHeader}
-            title="Insinger Foundation policy priorities"
+            title={t('reports.form.textfield.insinger_f_policy_priorities')}
           />
           <CardContent css={styles.cardContent}>
             <Autocomplete
-              values={policyPriorities}
+              values={policyPriorities.map((pp: any) => ({
+                ...pp,
+                label: t(pp.label),
+              }))}
               value={props.policyPriority}
               setValue={props.setPolicyPriority}
             />
-            <div
-              css={`
-                width: 100%;
-                height: 24px;
-              `}
-            />
+            <Box height="24px" width="100%" />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              For each priority selected, the relevant SDGs appear and can be
-              selected based on our mapping
+              {t('reports.form.textfield.sdg_mapping_expl')}
             </Typography>
           </CardContent>
         </Card>
@@ -85,9 +91,12 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* Budget */}
-      <Grid item xs={12} md={6} lg={4}>
+      <Grid item xs={12} md={6} lg={4} css={isMobileWidth && styles.gridMobile}>
         <Card css={styles.card}>
-          <CardHeader css={styles.cardHeader} title="Budget" />
+          <CardHeader
+            css={styles.cardHeader}
+            title={t('reports.form.textfield.budget')}
+          />
           <CardContent css={styles.cardContent}>
             <IntentTexFieldSingleLine
               fullWidth
@@ -97,24 +106,22 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               setValue={props.setBudget}
               description=""
             />
-            <div
-              css={`
-                width: 100%;
-                height: 24px;
-              `}
-            />
+            <Box height="24px" width="100%" />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              Remaning fot this project: {props.remainBudget}€
+              {t('reports.form.textfield.remaining')}: {props.remainBudget}€
             </Typography>
           </CardContent>
         </Card>
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
-      {/* Budget */}
-      <Grid item xs={12} md={6} lg={4}>
+      {/* Insinger contribution */}
+      <Grid item xs={12} md={6} lg={4} css={isMobileWidth && styles.gridMobile}>
         <Card css={styles.card}>
-          <CardHeader css={styles.cardHeader} title="Insinger Contribution" />
+          <CardHeader
+            css={styles.cardHeader}
+            title={t('reports.form.textfield.contribution')}
+          />
           <CardContent css={styles.cardContent}>
             <IntentTexFieldSingleLine
               fullWidth
@@ -124,32 +131,29 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               setValue={props.setInsContribution}
               description=""
             />
-            <div
-              css={`
-                width: 100%;
-                height: 24px;
-              `}
-            />
+
+            <Box height="24px" width="100%" />
+
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              Remaning fot this project: {props.remainBudget}€
+              {t('reports.form.textfield.remaining')}: {props.remainBudget}€
             </Typography>
           </CardContent>
         </Card>
       </Grid>
 
-      <div
-        css={`
-          width: 100%;
-          height: 80px;
-        `}
-      />
+      <Hidden smDown>
+        <Box height="80px" width="100%" />
+      </Hidden>
 
       {/* /!* ---------------------------------------------------------------------*!/ */}
       {/* /!* Target beneficiaries *!/ */}
       <Grid container item lg={12} css={isBlur ? styles.blurBlock : ``}>
         <Grid item sm={12} md={6} lg={4}>
           <Card css={styles.card}>
-            <CardHeader css={styles.cardHeader} title="Target Beneficiaries" />
+            <CardHeader
+              css={styles.cardHeader}
+              title={t('reports.form.textfield.target_beneficiaries')}
+            />
             <CardContent css={styles.cardContent}>
               <IntentTexFieldSingleLine
                 fullWidth
@@ -164,7 +168,10 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         </Grid>
         <Grid item sm={12} md={6} lg={4}>
           <Card css={styles.card}>
-            <CardHeader css={styles.cardHeader} title="Total commited number" />
+            <CardHeader
+              css={styles.cardHeader}
+              title={t('reports.form.textfield.total_commited')}
+            />
             <CardContent css={styles.cardContent}>
               <IntentTexFieldSingleLine
                 fullWidth
@@ -178,20 +185,24 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           </Card>
         </Grid>
 
-        <div
-          css={`
-            width: 100%;
-            height: 80px;
-          `}
-        />
+        <Hidden smDown>
+          <Box height="80px" width="100%" />
+        </Hidden>
 
         {/* /!* ---------------------------------------------------------------------*!/ */}
         {/* /!* Of which the beneficiaries will likely include approximately *!/ */}
-        <Grid item container sm={12} md={10} lg={8}>
+        <Grid
+          item
+          container
+          sm={12}
+          md={10}
+          lg={8}
+          css={isMobileWidth && styles.gridMobile}
+        >
           <Card css={styles.card}>
             <CardHeader
               css={styles.cardHeader}
-              title="Of which the beneficiaries will likely include approximately (Optional)"
+              title={t('reports.form.textfield.of_which_ben')}
             />
             <CardContent css={styles.cardContent}>
               <Grid item container lg={12} spacing={5}>
@@ -223,8 +234,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
                 color="secondary"
                 css={styles.infoText}
               >
-                For each priority selected, the relevant SDGs appear and can be
-                selected based on our mapping
+                {t('reports.form.textfield.sdg_mapping_expl')}
               </Typography>
             </CardContent>
           </Card>

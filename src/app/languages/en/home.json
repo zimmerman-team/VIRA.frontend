@@ -1,0 +1,17 @@
+{
+  "chart_nav": {
+    "map": "Map",
+    "priority_area": "Priority Area",
+    "sdg": "SDGs"
+  },
+  "dashboard": {
+    "grantees": "Grantees",
+    "projects": "Projects",
+    "reports": "Total Reports"
+  },
+  "overview_nav": {
+    "grantees": "Grantees",
+    "projects": "Projects",
+    "reports": "Reports"
+  }
+}
