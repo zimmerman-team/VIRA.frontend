@@ -126,34 +126,53 @@ export const ListModule = (props: ListModuleParams) => {
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
+          data-cy="list-tabs-container"
         >
           {!props.hideProjects && (
-            <Tab value={0} css={TabStyle} label="Projects" {...a11yProps(0)} />
+            <Tab
+              data-cy="projects-tab"
+              value={0}
+              css={TabStyle}
+              label="Projects"
+              {...a11yProps(0)}
+            />
           )}
 
           {!props.hideGrantees && (
-            <Tab value={1} css={TabStyle} label="Grantees" {...a11yProps(1)} />
+            <Tab
+              data-cy="grantees-tab"
+              value={1}
+              css={TabStyle}
+              label="Grantees"
+              {...a11yProps(1)}
+            />
           )}
 
           {!props.hideReports && (
-            <Tab value={2} css={TabStyle} label="Reports" {...a11yProps(2)} />
+            <Tab
+              data-cy="reports-tab"
+              value={2}
+              css={TabStyle}
+              label="Reports"
+              {...a11yProps(2)}
+            />
           )}
         </Tabs>
       </Grid>
 
       {/* tab content */}
       <Grid item lg={12}>
-        <TabPanel value={value} index={0}>
+        <TabPanel data-cy="projects-panel" value={value} index={0}>
           {/* projects table */}
           <TableModule {...baseTableForProject} />
         </TabPanel>
 
-        <TabPanel value={value} index={1}>
+        <TabPanel data-cy="grantees-panel" value={value} index={1}>
           {/* grantees table */}
           <TableModule {...baseTableForGrantee} />
         </TabPanel>
 
-        <TabPanel value={value} index={2}>
+        <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
           <TableModule {...baseTableForReport} cssVariant="reportsVariant" />
         </TabPanel>

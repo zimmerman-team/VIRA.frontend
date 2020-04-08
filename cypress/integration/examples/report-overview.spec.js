@@ -1,10 +1,10 @@
 /// <reference types="Cypress" />
-describe('project overview', () => {
-  it('test project overview', () => {
+describe('report overview', () => {
+  it('test report overview page', () => {
     // authenticate
     cy.auth();
     // goto page
-    cy.visit('/list/0');
+    cy.visit('/list/2');
 
     cy.listTabs();
   });

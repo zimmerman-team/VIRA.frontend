@@ -107,39 +107,39 @@ export const ReportDetailLayout = (props: any) => (
     {/* ---------------------------------------------------------------------*/}
     {/* cards */}
     {/* todo: optimise */}
-    <Grid item lg={12}>
+    <Grid data-cy="outcomes-card" item lg={12}>
       <OutcomeCard
         title="Key outcomes"
         description={props.report.key_outcomes}
       />
     </Grid>
-    <Grid item lg={12}>
+    <Grid data-cy="monitor-card" item lg={12}>
       <OutcomeCard
         title="Monitor and report on the outcomes"
         description={props.report.monitor_report_outcomes}
       />
     </Grid>
     {props.report.media.length > 0 && (
-      <Grid item lg={12}>
+      <Grid data-cy="media-card" item lg={12}>
         <OutcomeCard title="Media" media={{ tileData: props.report.media }} />
       </Grid>
     )}
-    <Grid item lg={12}>
+    <Grid data-cy="challenges-card" item lg={12}>
       <OutcomeCard
         title="Key implementation challenges"
         description={props.report.key_implementation_challenges}
       />
     </Grid>
-    <Grid item lg={12}>
+    <Grid data-cy="observations-card" item lg={12}>
       <OutcomeCard
         title="Other project outcomes and observations"
         description={props.report.other_project_outcomes}
       />
     </Grid>
-    <Grid item lg={12}>
+    <Grid data-cy="future-plans-card" item lg={12}>
       <OutcomeCard title="Future plans" description={props.report.plans} />
     </Grid>
-    <Grid item lg={12}>
+    <Grid data-cy="other-comments-card" item lg={12}>
       <OutcomeCard
         title="Other comments"
         description={props.report.other_comments}

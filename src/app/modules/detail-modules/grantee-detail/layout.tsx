@@ -35,23 +35,21 @@ export const GranteeDetailLayout = (props: GranteeParams) => (
       lg={12}
       xl={12}
       direction="column"
+      data-cy="grantee-detail-title"
     >
-      <TitleFragment data-cy="grantee-detail-title" {...props.title} />
+      <TitleFragment {...props.title} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* project description */}
-    <Grid item xs={12} lg={6}>
-      <Description
-        data-cy="grantee-detail-description"
-        {...props.description}
-      />
+    <Grid data-cy="grantee-detail-description" item xs={12} lg={6}>
+      <Description {...props.description} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* contact card */}
-    <Grid item xs={12} md={6} lg={6}>
-      <ContactsCard data-cy="grantee-detail-contact" {...props.contact} />
+    <Grid data-cy="grantee-detail-contact" item xs={12} md={6} lg={6}>
+      <ContactsCard {...props.contact} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}

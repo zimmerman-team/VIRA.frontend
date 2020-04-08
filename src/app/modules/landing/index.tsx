@@ -104,7 +104,6 @@ function LandingLayout(props: any) {
 
       {/* todo: description */}
       <Viztabs
-        data-cy="viz-tabs"
         barChartData={ppVizData}
         barChartLegends={barChartLegends}
         onBarChartLegendClick={onBarChartLegendClick}
@@ -122,7 +121,6 @@ function LandingLayout(props: any) {
       {/* todo: description */}
       <ListModule
         loadData
-        data-cy="list-module"
         tabNav={getNavTabItems(
           TabNavMockList,
           get(props.match.params, 'viz', '')

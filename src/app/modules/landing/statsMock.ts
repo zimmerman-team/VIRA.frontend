@@ -24,6 +24,7 @@ export interface StatItemParams {
   amount: number;
   type: string;
   path: string;
+  index?: number;
 }
 
 export const navItemMockViz: NavItemParams[] = [

@@ -25,7 +25,7 @@ export const StatItem = (props: StatItemParams) => (
           text-decoration: none;
         }
       `}
-      data-cy={props.type}
+      data-cy={`stat-item-${props.index}`}
     >
       <Typography
         css={`

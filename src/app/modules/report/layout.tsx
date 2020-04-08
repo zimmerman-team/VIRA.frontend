@@ -23,6 +23,7 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
       {/* title fragment */}
       <Grid item container lg={12} direction="column">
         <Typography
+          data-cy="report-title"
           css={`
             color: rgba(0, 0, 0, 0.85);
             font-size: 20px;
@@ -38,7 +39,13 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
 
       {/* ---------------------------------------------------------------------*/}
       {/* title fragment */}
-      <Grid item xs={12} lg={12} css={{ overflowX: 'scroll' }}>
+      <Grid
+        data-cy="report-stepper"
+        item
+        xs={12}
+        lg={12}
+        css={{ overflowX: 'scroll' }}
+      >
         <HorizontalStepper
           steps={props.tabs}
           onStepChange={props.changeRoute}

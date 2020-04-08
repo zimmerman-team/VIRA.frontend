@@ -1,21 +1,14 @@
 /// <reference types="Cypress" />
 describe('privacy page', () => {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000/privacy');
-    cy.clearCookies();
-    cy.reload(true);
-  });
-
-  afterEach(() => {
-    cy.clearCookies();
-  });
-
   it.only('test privacy page', () => {
-    cy.viewport(1440, 821);
-    cy.visit('http://localhost:3000/privacy');
-    cy.get('[data-cy="privacy-page-title"]').should('exist');
-    cy.get('[data-cy="privacy-page-description"]').should('exist');
-    cy.get('[data-cy="privacy-item-0-title"]').should('exist');
-    cy.get('[data-cy="privacy-item-0-description"]').should('exist');
+    // authenticate
+    cy.auth();
+    // goto page
+    cy.visit('/privacy');
+    // check elements
+    cy.findByTestId('privacy-page-title').should('exist');
+    cy.findByTestId('privacy-page-description').should('exist');
+    cy.findByTestId('privacy-item-0-title').should('exist');
+    cy.findByTestId('privacy-item-0-description').should('exist');
   });
 });

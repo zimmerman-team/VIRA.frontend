@@ -89,7 +89,7 @@ export function Viztabs(props: Props) {
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
-            data-cy="tabs-example"
+            data-cy="tabs-container"
           >
             <Tab
               data-cy="prio-tab"

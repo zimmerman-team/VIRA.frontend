@@ -24,35 +24,41 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 import 'cypress-audit/commands';
+import '@testing-library/cypress/add-commands';
+import { configure } from '@testing-library/cypress';
 
-Cypress.Commands.add('login', (overrides = {}) => {
-  Cypress.log({
-    name: 'loginViaAuth0',
-  });
-
-  const options = {
-    method: 'POST',
-    url: Cypress.env('auth_url'),
-    body: {
-      grant_type: 'password',
-      username: Cypress.env('auth_username'),
-      password: Cypress.env('auth_password'),
-      // audience: Cypress.env('auth_audience'),
-      scope: 'email',
-      client_id: Cypress.env('auth_client_id'),
-      client_secret: Cypress.env('auth_client_secret'),
-    },
-  };
-  cy.request(options);
-});
+configure({ testIdAttribute: 'data-cy' });
 
 Cypress.Commands.add('auth', (overrides = {}) => {
   cy.viewport(1440, 821);
   cy.visit('/login');
 
-  cy.get('[data-cy="login-email"]').type('user@zimmermanzimmerman.nl');
-  cy.get('[data-cy="login-password"]').type('Fg7PkcsMfaoLkhffEL^o');
-  cy.get('[data-cy="login-button"]').click();
+  cy.findByTestId('login-email').type('user@zimmermanzimmerman.nl');
+  cy.findByTestId('login-password').type('Fg7PkcsMfaoLkhffEL^o');
+  cy.findByTestId('login-button').click();
 
   cy.wait(5000);
+});
+
+Cypress.Commands.add('viztabs', (overrides = {}) => {
+  cy.findByTestId('viz-tabs-title').should('exist');
+  // check tabs
+  cy.findByTestId('prio-tab').should('exist');
+  cy.findByTestId('sdg-tab').should('exist');
+  cy.findByTestId('map-tab').should('exist');
+  // check panels
+  cy.findByTestId('prio-panel').should('exist');
+  cy.findByTestId('sdg-panel').should('exist');
+  cy.findByTestId('map-panel').should('exist');
+});
+
+Cypress.Commands.add('listTabs', (overrides = {}) => {
+  // check tabs
+  cy.findByTestId('projects-tab').should('exist');
+  cy.findByTestId('grantees-tab').should('exist');
+  cy.findByTestId('reports-tab').should('exist');
+  // check lists
+  cy.findByTestId('projects-panel').should('exist');
+  cy.findByTestId('grantees-panel').should('exist');
+  cy.findByTestId('reports-panel').should('exist');
 });

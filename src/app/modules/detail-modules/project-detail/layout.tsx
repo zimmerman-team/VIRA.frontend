@@ -40,6 +40,7 @@ export const ProjectDetailLayout = (props: any) => (
     {/* title fragment */}
     <Grid item xs={12} lg={12}>
       <TitleFragment
+        testAttr="project-title"
         title={props.projectDetail.project}
         id={`project id: ${props.projectDetail.project_id}`}
         date="*earliest and latest activity start dates"
@@ -72,6 +73,7 @@ export const ProjectDetailLayout = (props: any) => (
     <Hidden smUp>
       <Grid item xs={12}>
         <ContainedButton
+          testAttr="report-button"
           text="Generate Report"
           onClick={props.projectDetail.generateReport}
         />
@@ -99,17 +101,17 @@ export const ProjectDetailLayout = (props: any) => (
     {/* ---------------------------------------------------------------------*/}
     {/* outcome cards */}
     <Grid item container xs={12} md={12} lg={12}>
-      <Grid item xs={12} lg={6}>
+      <Grid data-cy="key-outcomes" item xs={12} lg={6}>
         <OutcomeCard {...ProjectOutcomeCardMock[0]} />
       </Grid>
-      <Grid item xs={12} lg={6}>
+      <Grid data-cy="indicator-verification" item xs={12} lg={6}>
         <OutcomeCard {...ProjectOutcomeCardMock[1]} />
       </Grid>
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* reports */}
-    <Grid item xs={12} lg={12}>
+    <Grid data-cy="report-table" item xs={12} lg={12}>
       <TableModule {...props.reportTable} />
     </Grid>
   </React.Fragment>
