@@ -4,7 +4,8 @@ describe('report overview', () => {
     // authenticate
     cy.auth();
     // goto page
-    cy.visit('/list/2');
+    // cy.visit('/list/2');
+    cy.findByTestId('sidebar-item-3').click();
 
     cy.listTabs();
   });

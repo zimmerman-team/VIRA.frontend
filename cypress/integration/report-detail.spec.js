@@ -4,7 +4,15 @@ describe('report detail page', () => {
     // authenticate
     cy.auth();
     // goto page
-    cy.visit('reports/5e4156aaf7c27f21f4a46986');
+
+    cy.findByTestId('sidebar-item-3').click();
+    // cy.get('[data-testid=MuiDataTableBodyCell-1-0]').click();
+    // cy.get(
+    //   ':nth-child(2) > .MUIDataTableHeadCell-toolButton-1234 > [title="Sort"] > .MUIDataTableHeadCell-data-1230'
+    // ).click();
+
+    cy.get('[data-testid=MuiDataTableBodyCell-1-0]').click();
+    // cy.get('[data-testid=MuiDataTableBodyCell-1-1]').click();
 
     cy.viztabs();
 

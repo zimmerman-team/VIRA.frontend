@@ -4,7 +4,8 @@ describe('faq page', () => {
     // authenticate
     cy.auth();
     // goto page
-    cy.visit('/faq');
+    // cy.visit('/faq');
+    cy.findByTestId('sidebar-item-4').click();
     // check elements
     cy.findByTestId('faq-title').should('exist');
     cy.findByTestId('question-0').should('exist');

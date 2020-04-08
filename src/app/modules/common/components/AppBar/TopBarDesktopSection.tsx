@@ -92,6 +92,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         </ClickAwayListener>
       ) : (
         <IconButton
+          data-cy="search-button"
           aria-label="search"
           color="primary"
           onClick={handleClickSearch}

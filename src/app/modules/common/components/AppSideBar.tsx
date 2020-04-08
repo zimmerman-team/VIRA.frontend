@@ -86,12 +86,13 @@ export function AppSideBar(props: AppSideBarParams) {
                   padding-left: ${isMobileWidth ? '45px' : 0};
                 `}
               >
-                <NavLink to="/">
+                <NavLink data-cy="sidebar-home-button" to="/">
                   <Logo />
                 </NavLink>
               </div>
               <Hidden smUp>
                 <IconButton
+                  data-cy="sidebar-menu-button"
                   onClick={props.handleDrawerClose}
                   css={`
                     position: relative;
@@ -108,6 +109,7 @@ export function AppSideBar(props: AppSideBarParams) {
             </>
           ) : (
             <IconButton
+              data-cy="sidebar-menu-button"
               onClick={props.handleDrawerOpen}
               css={`
                 && {

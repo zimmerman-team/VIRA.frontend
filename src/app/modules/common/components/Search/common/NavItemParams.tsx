@@ -8,10 +8,12 @@ interface NavItemParams {
   count: number;
   active: boolean;
   onClick: () => void;
+  index?: number;
 }
 
 export const SearchResultNavItem = (props: NavItemParams) => (
   <div
+    data-cy={`search-nav-item-${props.index}`}
     onClick={props.onClick}
     css={`
       cursor: pointer;

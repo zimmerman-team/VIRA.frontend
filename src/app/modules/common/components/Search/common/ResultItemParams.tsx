@@ -8,10 +8,12 @@ interface ResultItemParams {
   text: string;
   link: string;
   handleResultClick: any;
+  index?: number;
 }
 
 export const SearchResultItem = (props: ResultItemParams) => (
   <div
+    data-cy={`search-result-item-${props.index}`}
     onClick={props.handleResultClick}
     css={`
       margin: 8px 0;

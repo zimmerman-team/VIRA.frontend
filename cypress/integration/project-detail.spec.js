@@ -5,7 +5,10 @@ describe('project detail page', () => {
     cy.auth();
 
     // goto page
-    cy.visit('/projects/2017161');
+    // cy.visit('/projects/2017161');
+
+    cy.findByTestId('sidebar-item-1').click();
+    cy.get('[data-testid=MuiDataTableBodyCell-3-0]').click();
 
     cy.findByTestId('BreadCrumbs').should('exist');
     cy.findByTestId('project-title').should('exist');

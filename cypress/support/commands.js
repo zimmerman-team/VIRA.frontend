@@ -62,3 +62,25 @@ Cypress.Commands.add('listTabs', (overrides = {}) => {
   cy.findByTestId('grantees-panel').should('exist');
   cy.findByTestId('reports-panel').should('exist');
 });
+
+Cypress.Commands.add('listTabsNoGrantees', (overrides = {}) => {
+  // check tabs
+  cy.findByTestId('projects-tab').should('exist');
+  // cy.findByTestId('grantees-tab').should('exist');
+  cy.findByTestId('reports-tab').should('exist');
+  // check lists
+  cy.findByTestId('projects-panel').should('exist');
+  // cy.findByTestId('grantees-panel').should('exist');
+  cy.findByTestId('reports-panel').should('exist');
+});
+
+Cypress.Commands.add('listTabsNoReports', (overrides = {}) => {
+  // check tabs
+  cy.findByTestId('projects-tab').should('exist');
+  cy.findByTestId('grantees-tab').should('exist');
+  // cy.findByTestId('reports-tab').should('exist');
+  // check lists
+  cy.findByTestId('projects-panel').should('exist');
+  cy.findByTestId('grantees-panel').should('exist');
+  // cy.findByTestId('reports-panel').should('exist');
+});

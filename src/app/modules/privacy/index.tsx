@@ -34,19 +34,14 @@ export const PrivacyModule = () => (
   <React.Fragment>
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
-    <Grid item container xs={12} lg={12}>
-      <TitleFragment
-        data-cy="privacy-page-title"
-        title="Insinger Stichting Privacy Verklaring"
-      />
+    <Grid data-cy="privacy-page-title" item container xs={12} lg={12}>
+      <TitleFragment title="Insinger Stichting Privacy Verklaring" />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}
     {/* content */}
-    <Grid item xs={12} lg={12}>
-      <Typography data-cy="privacy-page-description" css={style.description}>
-        {privacyDescriptionMock}
-      </Typography>
+    <Grid data-cy="privacy-page-description" item xs={12} lg={12}>
+      <Typography css={style.description}>{privacyDescriptionMock}</Typography>
       <Box height="32px" width="100%" />
     </Grid>
     {PrivacyModuleItemsMock.map((privacyItem, index) => (
