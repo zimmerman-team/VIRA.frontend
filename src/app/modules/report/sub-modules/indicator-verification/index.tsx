@@ -51,6 +51,7 @@ export const IndicatorVerificationLayout = (
         <Card css={styles.card}>
           <CardContent css={styles.cardContent}>
             <IntentTexArea
+              testAttr="text-area-1"
               componentID="indVer1"
               value={props.keyOutcomes}
               setValue={props.setKeyOutcomes}
@@ -70,6 +71,7 @@ export const IndicatorVerificationLayout = (
         <Card css={styles.card}>
           <CardContent css={styles.cardContent}>
             <IntentTexArea
+              testAttr="text-area-2"
               componentID="indVer2"
               value={props.monRepOutcomes}
               setValue={props.setMonRepOutcomes}

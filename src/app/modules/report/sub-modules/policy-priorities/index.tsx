@@ -92,7 +92,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
       {/* ---------------------------------------------------------------------*/}
       {/* Budget */}
       <Grid
-        data-cy="budget"
+        data-cy="budget-container"
         item
         xs={12}
         md={6}
@@ -106,6 +106,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent css={styles.cardContent}>
             <IntentTexFieldSingleLine
+              testAttr="budget-field"
               fullWidth
               type="number"
               min={0}
@@ -138,6 +139,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent css={styles.cardContent}>
             <IntentTexFieldSingleLine
+              testAttr="insinger-contribution-field"
               fullWidth
               type="number"
               min={0}
@@ -170,6 +172,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
             />
             <CardContent css={styles.cardContent}>
               <IntentTexFieldSingleLine
+                testAttr="target-beneficiaries-field"
                 fullWidth
                 type="number"
                 min={0}
@@ -188,6 +191,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
             />
             <CardContent css={styles.cardContent}>
               <IntentTexFieldSingleLine
+                testAttr="total-committed-field"
                 fullWidth
                 type="number"
                 min={0}
@@ -223,6 +227,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
                 {props.beneficiaryCounts.map((item: any, index: number) => (
                   <Grid item xs={12} md={6} lg={4} key={item.name}>
                     <IntentTexFieldSingleLine
+                      testAttr={`which-when-item-${index}`}
                       type="number"
                       min={0}
                       value={item.value}
