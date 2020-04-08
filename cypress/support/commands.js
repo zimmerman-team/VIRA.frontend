@@ -33,8 +33,8 @@ Cypress.Commands.add('auth', (overrides = {}) => {
   cy.viewport(1440, 821);
   cy.visit('/login');
 
-  cy.findByTestId('login-email').type('user@zimmermanzimmerman.nl');
-  cy.findByTestId('login-password').type('Fg7PkcsMfaoLkhffEL^o');
+  cy.findByTestId('login-email').type(Cypress.env('auth_username'));
+  cy.findByTestId('login-password').type(Cypress.env('auth_password'));
   cy.findByTestId('login-button').click();
 
   cy.wait(5000);
