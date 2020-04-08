@@ -1,0 +1,76 @@
+{
+  "detail": {
+    "title": "",
+    "editReportBtn": "Edit report",
+    "stats": {
+      "targetBeneficiaries": "Target beneficiaries",
+      "budget": "Budget"
+    },
+    "cards": {
+      "key_outcomes": "Key outcomes",
+      "monitor": "Monitor and report on the outcomes",
+      "media": "Media",
+      "key_implementation_challenges": "Key implementation challenges",
+      "other_project": "Other project outcomes and observations",
+      "future_plans": "Future plans",
+      "other_comments": "Other comments"
+    }
+  },
+  "overview": {
+    "title": "",
+    "table": {
+      "id": "ID",
+      "title": "Title of Reports",
+      "date": "Date"
+    }
+  },
+  "form": {
+    "title": "Report",
+    "steps": {
+      "outcomes": "Outcomes",
+      "policy_priorities": "Policy priorities",
+      "indicator_verification": "Indicator and verification",
+      "challenges_plans": "Challenges and plans",
+      "preview": "Preview"
+    },
+    "textfield": {
+      "title": "Please provide a title for your report",
+      "location": "Add location",
+      "location_expl": "In which of the following geographical locations will the project be implemented",
+      "exact_location": "Select exact location",
+      "insinger_f_policy_priorities": "Insinger Foundation policy priorities",
+      "budget": "Budget",
+      "remaining": "Remaning for this project",
+      "contribution": "Insinger Contribution",
+      "target_beneficiaries": "Target beneficiaries",
+      "total_commited": "Totaal toegewijd aantal",
+      "of_which_ben": "Of which the beneficiaries will likely include approximately (Optional)",
+      "sdg_mapping_expl": "For each priority selected, the relevant SDGs appear and can beselected based on our mapping"
+    },
+    "cards": {
+      "key_outcomes": "Please describe the key outcomes the project aims to achieve",
+      "monitor": "Please tell us how you intend to monitor and report on the outcomes listed above",
+      "monitor_expl": "If you have baseline data (the data you track progress against) and a means of verification (how you intend to obtain the data and from which sources) please also provide that information.",
+      "media": "Add media (Optional)",
+      "key_implementation_challenges": "Key implementation challenges",
+      "key_implementation_challenges_expl": "Please indicate the key implementation challenges experience and how these were addressed",
+      "other_project": "Did the project achieve any other unexpected (positive or negative) outcomes",
+      "other_project_expl": "Did the project achieve any other unexpected (positive or negative) outcomes",
+      "future_plans": "Future plans",
+      "future_plans_expl": "Are you likely to apply for funding for future activities from the Insinger Foundation within the next 1-2 years?",
+      "other_comments": "Other comments",
+      "other_comments_expl": "Please let us know if you want to share other observations or comments with the Insinger Foundation"
+    },
+    "media_modal": {
+      "title": "Add media"
+    },
+    "buttons": {
+      "back": "Back",
+      "next": "Next",
+      "draft": "Save as draft",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  }
+}

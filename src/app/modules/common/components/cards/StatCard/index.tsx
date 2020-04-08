@@ -5,7 +5,7 @@ import { StatItem } from 'app/modules/landing/common/stats/StatItem';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import { Card, CardContent, Grid } from '@material-ui/core';
 import { StatItemParams } from 'app/modules/landing/statsMock';
-
+import { useTranslation } from 'react-i18next';
 export interface StatsCard {
   stats: StatItemParams[];
 }
@@ -13,9 +13,12 @@ export interface StatsCard {
 export const StatCard = (props: StatsCard) => {
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
+  const { t, i18n } = useTranslation();
+
   function renderCard(content: any) {
     return (
       <Card>
+        {/* <CardContent>{t(content)}</CardContent> */}
         <CardContent>{content}</CardContent>
       </Card>
     );

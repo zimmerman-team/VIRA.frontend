@@ -11,6 +11,7 @@ import { LayoutModel } from 'app/modules/sign-in/models';
 import { PasswordTextField } from 'app/components/inputs/textfields/PasswordTextField';
 import { FormSingleLineField } from 'app/components/inputs/textfields/FormSingleLineField';
 import { Grid, Typography, Box } from '@material-ui/core/';
+import { useTranslation } from 'react-i18next';
 
 const Link = styled(RouteLink)`
   color: #d7d8d9;
@@ -30,15 +31,17 @@ const Form = styled.div`
 `;
 
 export const InputForm = (props: LayoutModel) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <Form>
-      <Typography variant="h3" data-cy="sign-in-title">
-        Sign in
+      <Typography data-cy="sign-in-title" variant="h3">
+        {t('landing.sign_in.title')}
       </Typography>
       <Box height="41px" />
       <FormSingleLineField
         fullWidth
-        label="Email"
+        label={t('landing.sign_in.email')}
         id="login-email"
         value={props.email}
         setValue={props.setEmail}
@@ -46,7 +49,7 @@ export const InputForm = (props: LayoutModel) => {
       />
       <PasswordTextField
         fullWidth
-        label="Password"
+        label={t('landing.sign_in.password')}
         id="login-password"
         value={props.password}
         showPass={props.showPass}
@@ -54,10 +57,10 @@ export const InputForm = (props: LayoutModel) => {
         setShowPass={props.setShowPass}
         data-cy="login-password"
       />
-      <Link to="/recover-password">Forgot password</Link>
+      <Link to="/recover-password">{t('landing.sign_in.forgot_password')}</Link>
       <Grid item xs={3}>
         <ContainedButton
-          text="Sign in"
+          text={t('landing.sign_in.button')}
           data-cy="login-button"
           onClick={() => props.signInAction()}
           disabled={props.email === '' || props.password === ''}

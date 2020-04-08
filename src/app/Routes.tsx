@@ -13,7 +13,6 @@ import { ListModule } from 'app/modules/list-module';
 import { PriorityAreaModule } from 'app/modules/priority-area';
 import { PrivacyModule } from 'app/modules/privacy';
 import { CreateReport } from 'app/modules/report';
-import { SubmittedLayout } from 'app/modules/report/sub-modules/submitted';
 import { SdgModule } from 'app/modules/sdg';
 import SignInModule from 'app/modules/sign-in';
 import { PasswordRecovery } from 'app/modules/sign-in/sub-modules/password-recovery';
@@ -127,27 +126,13 @@ export function MainRoutes() {
         <LoginCallbackModule auth={auth} />
       </Route>
 
-      <Route exact path="/submitted">
-        {redirectUnAuth(SubmittedLayout, storeUser, {
-          message: 'Your report has been sent',
-          showGoToBtn: true,
-        })}
-      </Route>
-
-      <Route exact path="/draft-submitted">
-        {redirectUnAuth(SubmittedLayout, storeUser, {
-          message: 'Your report has been saved as a draft ',
-          showGoToBtn: false,
-        })}
-      </Route>
-
       <Route path="/super-admin/manage-teams/edit/:id">
         {redirectUnAuth(ManageTeamEditAdd, storeUser, {
           ...manageTeamEditAddMock,
           mode: 'edit',
           breadcrumbs: {
             ...manageTeamEditAddMock.breadcrumbs,
-            currentLocation: 'Edit',
+            currentLocation: 'breadcrumbs.edit',
           },
         })}
       </Route>
@@ -161,7 +146,18 @@ export function MainRoutes() {
       </Route>
 
       <Route path="/super-admin/manage-users/edit/:id">
-        {redirectUnAuth(ManageUserEdit, storeUser, manageUserEditMock)}
+        {redirectUnAuth(ManageUserEdit, storeUser, {
+          ...manageUserEditMock,
+          breadcrumbs: {
+            currentLocation: 'breadcrumbs.edit',
+            previousLocations: [
+              {
+                label: 'breadcrumbs.manage',
+                url: '/super-admin/manage-users',
+              },
+            ],
+          },
+        })}
       </Route>
 
       <Route path="/super-admin/manage-users/add">
@@ -186,7 +182,7 @@ export function MainRoutes() {
 
       <Route path="/manage-account/:id">
         {redirectUnAuth(ManageUserEdit, storeUser, {
-          title: 'Manage Your Account',
+          title: 'user_management.general.manage_your_account',
           ...manageUserEditMock,
           breadcrumbs: null,
           editSelf: true,

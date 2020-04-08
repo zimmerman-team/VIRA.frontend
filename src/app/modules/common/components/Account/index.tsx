@@ -12,6 +12,8 @@ import {
   Username,
 } from 'app/modules/common/components/Account/styles';
 
+import { useTranslation } from 'react-i18next';
+
 type AccountProps = {
   handleClick: any;
 };
@@ -29,6 +31,8 @@ export const Account = (props: AccountProps) => {
     .map(i => i.slice(0, 1))
     .join('');
 
+  const { t, i18n } = useTranslation();
+
   return (
     <Container>
       <Avatar data-cy="usercard-avatar">{avatar.toUpperCase()}</Avatar>
@@ -43,7 +47,7 @@ export const Account = (props: AccountProps) => {
           to="/super-admin/manage-teams"
           onClick={props.handleClick}
         >
-          Manage teams & users
+          {t('user_management.general.manage_teams_users')}
         </Link>
       </Button>
       <Button>
@@ -52,14 +56,14 @@ export const Account = (props: AccountProps) => {
           to={`/manage-account/${userID}`}
           onClick={props.handleClick}
         >
-          Manage your account
+          {t('user_management.general.manage_account')}
         </Link>
       </Button>
       <ButtonPrimary
         data-cy="usercard-signout-button"
         onClick={() => auth.signOut().then(() => clearUser())}
       >
-        Sign out
+        {t('user_management.general.logout')}
       </ButtonPrimary>
       <Box height="14px" />
       <Link
@@ -67,7 +71,7 @@ export const Account = (props: AccountProps) => {
         to="/privacy"
         onClick={props.handleClick}
       >
-        Privacy Policy and Terms
+        {t('user_management.general.privacy_link')}
       </Link>
     </Container>
   );

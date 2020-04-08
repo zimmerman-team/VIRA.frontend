@@ -37,11 +37,11 @@ function LandingLayout(props: any) {
   const [stats, setStats] = React.useState(statsMock);
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
-      label: 'Target',
+      label: 'charts.barchart.target',
       selected: true,
     },
     {
-      label: 'Budget',
+      label: 'charts.barchart.budget',
       selected: true,
     },
   ]);

@@ -1,0 +1,16 @@
+{
+  "detail": {
+    "title": ""
+  },
+  "overview": {
+    "title": "",
+    "table": {
+      "name": "Grantee Name",
+      "type": "Grantee Type",
+      "place": "Place",
+      "country": "Country",
+      "email": "Email",
+      "website": "Website"
+    }
+  }
+}

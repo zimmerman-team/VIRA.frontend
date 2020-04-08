@@ -5,15 +5,17 @@ import 'styled-components/macro';
 export interface FieldDescriptionParams {
   text: string;
 }
-export const FieldDescription = (props: FieldDescriptionParams) => (
-  <Typography
-    variant="subtitle2"
-    color="textPrimary"
-    css={`
-      line-height: 1.3 !important;
-      font-size: 17.5px !important;
-    `}
-  >
-    {props.text}
-  </Typography>
-);
+export const FieldDescription = (props: FieldDescriptionParams) => {
+  return (
+    <Typography
+      variant="subtitle2"
+      color="textPrimary"
+      css={`
+        line-height: 1.3 !important;
+        font-size: 17.5px !important;
+      `}
+    >
+      {props.text}
+    </Typography>
+  );
+};

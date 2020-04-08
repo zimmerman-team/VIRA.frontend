@@ -4,6 +4,7 @@ import 'styled-components/macro';
 import MUIDataTable from 'mui-datatables';
 import { TableLayoutModel } from 'app/components/datadisplay/Table/model';
 import { changeTableRowColor } from 'app/components/datadisplay/Table/helpers';
+import { useTranslation } from 'react-i18next';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { standard } from 'app/components/datadisplay/Table/style/standard';
 import { variant9 } from 'app/components/datadisplay/Table/style/variant9';
@@ -24,17 +25,17 @@ function setTableVariant(cssVariant: string) {
 }
 
 export const TableLayout = (props: TableLayoutModel) => {
+  const { t } = useTranslation();
   React.useEffect(() => {
     if (props.changeTableRowColor) {
       changeTableRowColor(props.changeTableRowColor);
     }
   }, [props.changeTableRowColor]);
-
   return (
     <MuiThemeProvider theme={setTableVariant(props.cssVariant)}>
       <MUIDataTable
         data={props.data}
-        title={props.title}
+        title={t(props.title)}
         options={props.options}
         columns={props.columns}
         data-cy="mui-data-table"

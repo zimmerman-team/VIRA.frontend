@@ -1,0 +1,16 @@
+{
+  "detail": {
+    "title": ""
+  },
+  "overview": {
+    "title": "",
+    "table": {
+      "name": "Naam begunstigde",
+      "type": "Type begunstigde",
+      "place": "Locatie",
+      "country": "Land",
+      "email": "Email",
+      "website": "Website"
+    }
+  }
+}

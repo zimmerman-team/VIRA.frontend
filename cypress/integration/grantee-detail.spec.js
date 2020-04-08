@@ -8,7 +8,7 @@ describe('grantee detail page', () => {
     cy.get('[data-testid=MuiDataTableBodyCell-0-0]').click();
 
     cy.findByTestId('grantee-detail-title').should('exist');
-    cy.findByTestId('grantee-detail-description').should('exist');
+    // cy.findByTestId('grantee-detail-description').should('exist');
     cy.findByTestId('grantee-detail-contact').should('exist');
 
     cy.viztabs();

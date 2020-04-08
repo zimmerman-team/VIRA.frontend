@@ -9,22 +9,13 @@ import {
   CardContent,
   useMediaQuery,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { IntentTexField } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
 import { OutcomesPropsModel } from 'app/modules/report/model';
 import { GeoMap } from 'app/components/charts/GeoMap';
 import { countries } from 'app/assets/data/countries';
 import { Autocomplete } from './common/Autocomplete';
-
-const locMock = {
-  longitude: 4.895168,
-  latitude: 52.370216,
-};
-
-const locMock2 = {
-  longitude: 4.895168,
-  latitude: 40.370216,
-};
 
 const styles: any = {
   card: css`
@@ -44,6 +35,7 @@ const styles: any = {
 };
 
 export const OutcomesLayout = (props: OutcomesPropsModel) => {
+  const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   return (
@@ -54,10 +46,11 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         <Card css={styles.card}>
           <CardHeader
             css={styles.cardHeader}
-            title="Please provide a title for your report"
+            title={t('reports.form.textfield.title')}
           />
           <CardContent css={styles.cardContent}>
             <IntentTexField
+              testAttr="outcome-title"
               value={props.title}
               componentID="outcome1"
               setValue={props.setTitle}
@@ -81,7 +74,10 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
             overflow: visible;
           `}
         >
-          <CardHeader css={styles.cardHeader} title="Add location" />
+          <CardHeader
+            css={styles.cardHeader}
+            title={t('reports.form.textfield.location')}
+          />
           <CardContent css={styles.cardContent}>
             <Autocomplete
               values={countries}
@@ -90,8 +86,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
             />
             <Box width="100%" height="8px" />
             <Typography variant="body2" color="secondary">
-              In which of the following geographical locations will the project
-              be implemented
+              {t('reports.form.textfield.location_expl')}
             </Typography>
           </CardContent>
         </Card>
@@ -108,7 +103,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         data-cy="exact-location"
       >
         <Card>
-          <CardHeader title="Select Exact Location" />
+          <CardHeader title={t('reports.form.textfield.exact_location')} />
           <CardContent>
             <GeoMap
               noData

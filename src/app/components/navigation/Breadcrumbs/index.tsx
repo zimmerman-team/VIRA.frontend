@@ -4,6 +4,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { css } from 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 
 import { ProjectPalette } from 'app/theme';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
@@ -44,6 +45,7 @@ const BreadCrumbStyle = css`
 
 // todo: user NavLink component instead of Typography
 export function BreadCrumbs(props: BreadcrumbModel) {
+  const { t } = useTranslation();
   return (
     <Breadcrumbs
       css={BreadCrumbStyle}
@@ -57,12 +59,12 @@ export function BreadCrumbs(props: BreadcrumbModel) {
           to={previousLocation.url}
           key={previousLocation.label}
         >
-          {previousLocation.label}
+          {t(previousLocation.label)}
         </NavLink>
       ))}
 
       <Typography css={CurrentLinkStyle} variant="subtitle2">
-        {props.currentLocation}
+        {t(props.currentLocation)}
       </Typography>
     </Breadcrumbs>
   );

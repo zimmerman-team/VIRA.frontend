@@ -20,8 +20,8 @@ describe('project detail page', () => {
     cy.viztabs();
 
     // outcomes
-    cy.findByTestId('key-outcomes').should('exist');
-    cy.findByTestId('indicator-verification').should('exist');
+    // cy.findByTestId('key-outcomes').should('exist');
+    // cy.findByTestId('indicator-verification').should('exist');
 
     // reports table
     cy.findByTestId('reports-table').should('exist');

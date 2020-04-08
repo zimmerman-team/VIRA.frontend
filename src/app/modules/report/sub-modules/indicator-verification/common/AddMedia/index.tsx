@@ -1,6 +1,7 @@
 import 'styled-components/macro';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { useTranslation } from 'react-i18next';
 
 import {
   AddMediaParams,
@@ -14,6 +15,7 @@ import {
 } from './AddMediaParams';
 
 export const AddMediaLayout = (props: AddMediaParams) => {
+  const { t, i18n } = useTranslation();
   const [selectedTab, setSelectedTab]: [
     'picture' | 'video' | 'document',
     Function
@@ -102,8 +104,14 @@ export const AddMediaLayout = (props: AddMediaParams) => {
         </Grid>
         <Grid item container lg={12} justify="flex-end">
           <Grid item container xs={8} md={6} lg={4} justify="space-around">
-            <AddMediaButton text="Cancel" onClick={props.onClose} />
-            <AddMediaButton text="Save" onClick={props.onSaveMedia} />
+            <AddMediaButton
+              text={t('reports.form.buttons.cancel')}
+              onClick={props.onClose}
+            />
+            <AddMediaButton
+              text={t('reports.form.buttons.save')}
+              onClick={props.onSaveMedia}
+            />
           </Grid>
         </Grid>
       </Grid>

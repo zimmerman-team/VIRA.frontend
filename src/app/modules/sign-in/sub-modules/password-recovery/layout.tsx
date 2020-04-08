@@ -7,6 +7,7 @@ import { Container, Typography, Box } from '@material-ui/core';
 import styled from 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
 import { GroupImage } from 'app/assets/images/group';
+import { useTranslation } from 'react-i18next';
 
 const Form = styled.form`
   display: flex;
@@ -14,6 +15,8 @@ const Form = styled.form`
 `;
 
 export const PasswordRecoveryLayout = (props: PasswordRecoveryLayoutModel) => {
+  const { t, i18n } = useTranslation();
+
   return (
     <Grid
       container
@@ -46,13 +49,15 @@ export const PasswordRecoveryLayout = (props: PasswordRecoveryLayoutModel) => {
       >
         <Container maxWidth="sm">
           <Form>
-            <Typography variant="h3">Recover password</Typography>
+            <Typography variant="h3">
+              {t('landing.recover_password.title')}
+            </Typography>
             <Box height="41px" />
             <FormSingleLineField
               css={`
                 width: 392px;
               `}
-              label="Your email"
+              label={t('landing.recover_password.email')}
               id="recovery-email"
               value={props.email}
               setValue={props.setEmail}
@@ -61,14 +66,14 @@ export const PasswordRecoveryLayout = (props: PasswordRecoveryLayoutModel) => {
             />
             <Grid item xs={3}>
               <ContainedButton
-                data-cy="recovery-button"
-                text="Send"
+                text={t('landing.recover_password.button')}
                 onClick={props.onSubmit}
+                data-cy="recovery-button"
                 disabled={!props.submitEnabled}
               />
             </Grid>
             <Box height="10px" />
-            <Typography variant="subtitle2" data-cy="feedback-message">
+            <Typography data-cy="feedback-message" variant="subtitle2">
               {props.message}
             </Typography>
           </Form>

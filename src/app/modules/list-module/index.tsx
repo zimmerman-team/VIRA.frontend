@@ -1,5 +1,7 @@
 // @ts-nocheck
 /* eslint-disable default-case */
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Grid, Tabs, Tab } from '@material-ui/core';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import TableModule from 'app/components/datadisplay/Table';
@@ -15,7 +17,6 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { useParams } from 'react-router-dom';
 /* utils */
 import get from 'lodash/get';
-import React from 'react';
 import 'styled-components/macro';
 import {
   useStyles,
@@ -35,12 +36,13 @@ type ListModuleParams = {
 
 export const ListModule = (props: ListModuleParams) => {
   const { id } = useParams();
+  const { t } = useTranslation();
   // set state
   const [baseTableForProject, setBaseTableForProject] = React.useState(
     getBaseTableForProject()
   );
   const [baseTableForGrantee, setBaseTableForGrantee] = React.useState(
-    getBaseTableForGrantee()
+    getBaseTableForGrantee(t)
   );
   const [baseTableForReport, setBaseTableForReport] = React.useState(
     getBaseTableForReport([])
@@ -61,6 +63,7 @@ export const ListModule = (props: ListModuleParams) => {
     state => state.allOrganisations.data
   );
   const allReportsData = useStoreState(state => state.allReports.data);
+  const reduxLng = useStoreState(state => state.syncVariables.lng);
 
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
@@ -107,7 +110,24 @@ export const ListModule = (props: ListModuleParams) => {
     }
   }, [id]);
 
-  const classes = useStyles();
+  React.useEffect(() => {
+    setBaseTableForProject({
+      ...baseTableForProject,
+      ...getBaseTableForProject(),
+      data: baseTableForProject.data,
+    });
+    setBaseTableForGrantee({
+      ...baseTableForGrantee,
+      ...getBaseTableForGrantee(),
+      data: baseTableForGrantee.data,
+    });
+    setBaseTableForReport({
+      ...baseTableForReport,
+      ...getBaseTableForReport(),
+      data: baseTableForReport.data,
+    });
+  }, [reduxLng]);
+
   const [value, setValue] = React.useState(
     props.focus || parseInt(id, 10) ? props.focus || parseInt(id, 10) : 0
   );
@@ -115,8 +135,6 @@ export const ListModule = (props: ListModuleParams) => {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
-
-  const TabData = props.tabNav && props.tabNav.items;
 
   return (
     <React.Fragment>
@@ -133,7 +151,7 @@ export const ListModule = (props: ListModuleParams) => {
               data-cy="projects-tab"
               value={0}
               css={TabStyle}
-              label="Projects"
+              label={t('Projects')}
               {...a11yProps(0)}
             />
           )}
@@ -143,7 +161,7 @@ export const ListModule = (props: ListModuleParams) => {
               data-cy="grantees-tab"
               value={1}
               css={TabStyle}
-              label="Grantees"
+              label={t('Grantees')}
               {...a11yProps(1)}
             />
           )}
@@ -153,7 +171,7 @@ export const ListModule = (props: ListModuleParams) => {
               data-cy="reports-tab"
               value={2}
               css={TabStyle}
-              label="Reports"
+              label={t('Reports')}
               {...a11yProps(2)}
             />
           )}

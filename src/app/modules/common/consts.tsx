@@ -14,28 +14,28 @@ export interface NavItemParams {
 
 export const NavItems: NavItemParams[] = [
   {
-    label: 'Dashboard',
+    label: 'sidebar.items.dashboard',
     path: '/',
     icon: <IconDashBoard />,
   },
   {
-    label: 'Projects',
+    label: 'sidebar.items.projects',
     path: '/list/0',
     icon: <IconProjects />,
   },
   {
-    label: 'Grantees',
+    label: 'sidebar.items.grantees',
     path: '/list/1',
     icon: <IconGrantees />,
   },
   {
-    label: 'Reports',
+    label: 'sidebar.items.reports',
     path: '/list/2',
     icon: <IconReports />,
   },
   {
+    label: 'sidebar.items.faq',
     path: '/faq',
-    label: 'FAQ',
     icon: <IconFAQ />,
   },
 ];

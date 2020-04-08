@@ -6,10 +6,7 @@ import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 /* project-comps */
-import {
-  formatMoney,
-  getInfoTHead,
-} from 'app/components/datadisplay/Table/helpers';
+import { formatMoney } from 'app/components/datadisplay/Table/helpers';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { Checkbox } from 'app/components/inputs/checkboxes/Checkbox';
 import get from 'lodash/get';

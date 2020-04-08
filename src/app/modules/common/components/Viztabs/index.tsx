@@ -8,10 +8,10 @@ import {
   Tabs,
   Tab,
   Typography,
-  Box,
   Hidden,
   useMediaQuery,
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { GeoMap } from 'app/components/charts/GeoMap';
 import { BubbleChart } from 'app/components/charts/Bubble';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
@@ -36,17 +36,18 @@ type Props = {
 function getTitle(index: number): string {
   switch (index) {
     case 0:
-      return 'Priority Area';
+      return 'home.chart_nav.priority_area';
     case 1:
-      return 'SDGs';
+      return 'home.chart_nav.sdg';
     case 2:
-      return 'Map';
+      return 'home.chart_nav.map';
     default:
-      return 'Priority Area';
+      return 'home.chart_nav.priority_area';
   }
 }
 
 export function Viztabs(props: Props) {
+  const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [value, setValue] = React.useState(props.focus ? props.focus : 0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -76,7 +77,7 @@ export function Viztabs(props: Props) {
               line-height: 1.5;
             `}
           >
-            {getTitle(value)}
+            {t(getTitle(value))}
           </Typography>
         </Grid>
 
@@ -94,19 +95,19 @@ export function Viztabs(props: Props) {
             <Tab
               data-cy="prio-tab"
               css={TabStyle}
-              label="Priority Area"
+              label={t('home.chart_nav.priority_area')}
               {...a11yProps(0)}
             />
             <Tab
               data-cy="sdg-tab"
               css={TabStyle}
-              label="SDGs"
+              label={t('home.chart_nav.sdg')}
               {...a11yProps(1)}
             />
             <Tab
               data-cy="map-tab"
               css={TabStyle}
-              label="Map"
+              label={t('home.chart_nav.map')}
               {...a11yProps(2)}
             />
           </Tabs>

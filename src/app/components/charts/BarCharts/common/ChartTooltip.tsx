@@ -1,6 +1,7 @@
 import React, { ReactText } from 'react';
 import { ProjectPalette } from 'app/theme';
 import styled from 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 import { Typography, Box } from '@material-ui/core';
 
 const ContentContainer = styled.div`
@@ -72,34 +73,40 @@ type ChartTooltipModel = {
 };
 
 export const ChartTooltip = (props: ChartTooltipModel) => {
+  const { t } = useTranslation();
   return (
     <ContentContainer>
-      <Title variant="subtitle2">{props.title}</Title>
+      <Title variant="subtitle2">{t(props.title as string)}</Title>
       <Divider />
-      {props.items.map((item: ChartTooltipItemModel, index: number) => (
-        <React.Fragment key={item.label}>
-          <Item
-            css={`
-              margin-bottom: ${item.percentage ? '8px' : 0};
-            `}
-          >
-            <Label variant="subtitle1">{item.label}</Label>
-            <Value variant="subtitle1">{item.value}</Value>
-          </Item>
-          {item.percentage && (
-            <ProgressBarContainer>
-              <ProgressBar
-                css={`
-                  width: ${item.percentage > 100 ? 100 : item.percentage}%;
-                `}
-              />
-            </ProgressBarContainer>
-          )}
-          {index !== props.items.length - 1 && (
-            <Box height="17px" width="100%" />
-          )}
-        </React.Fragment>
-      ))}
+      {props.items.map((item: ChartTooltipItemModel, index: number) => {
+        const label = (item.label as string).split(' ');
+        return (
+          <React.Fragment key={item.label}>
+            <Item
+              css={`
+                margin-bottom: ${item.percentage ? '8px' : 0};
+              `}
+            >
+              <Label variant="subtitle1">
+                {label[0] ? t(label[0]) : item.label} {label[1] || ''}
+              </Label>
+              <Value variant="subtitle1">{item.value}</Value>
+            </Item>
+            {item.percentage && (
+              <ProgressBarContainer>
+                <ProgressBar
+                  css={`
+                    width: ${item.percentage > 100 ? 100 : item.percentage}%;
+                  `}
+                />
+              </ProgressBarContainer>
+            )}
+            {index !== props.items.length - 1 && (
+              <Box height="17px" width="100%" />
+            )}
+          </React.Fragment>
+        );
+      })}
     </ContentContainer>
   );
 };

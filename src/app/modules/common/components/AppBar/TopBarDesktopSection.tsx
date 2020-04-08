@@ -8,8 +8,9 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Search } from 'app/modules/common/components/Search/index';
 import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
 import { ProjectPalette } from 'app/theme';
-import { useStoreState } from 'app/state/store/hooks';
+import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 import get from 'lodash/get';
+import { useTranslation } from 'react-i18next';
 
 interface TopBarDesktopSectionParams {
   classes: Record<
@@ -29,6 +30,7 @@ interface TopBarDesktopSectionParams {
 }
 
 export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
+  const { i18n } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -71,6 +73,14 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
       handleClickSearch();
     }
   });
+
+  const handleChangeLanguage = useStoreActions(
+    actions => actions.syncVariables.setLng
+  );
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    handleChangeLanguage(lng);
+  };
 
   const avatar = useStoreState(state =>
     get(state.syncVariables.user, 'name', '')
@@ -169,6 +179,53 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           {avatar}
         </div>
       </IconButton>
+      <div
+        css={`
+          display: flex;
+          padding: 12px 0 12px 12px;
+          button {
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            outline: none;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 50%;
+            &:active {
+              border-style: solid;
+            }
+          }
+        `}
+      >
+        <button
+          css={`
+            color: ${i18n.language === 'nl'
+              ? 'white'
+              : ProjectPalette.primary.main};
+            background: ${i18n.language === 'nl'
+              ? ProjectPalette.primary.main
+              : 'transparent'};
+          `}
+          type="button"
+          onClick={() => changeLanguage('nl')}
+        >
+          NL
+        </button>
+        <button
+          css={`
+            color: ${i18n.language === 'en'
+              ? 'white'
+              : ProjectPalette.primary.main};
+            background: ${i18n.language === 'en'
+              ? ProjectPalette.primary.main
+              : 'transparent'};
+          `}
+          type="button"
+          onClick={() => changeLanguage('en')}
+        >
+          EN
+        </button>
+      </div>
     </div>
   );
 }
