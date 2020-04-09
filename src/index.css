@@ -65,19 +65,19 @@ body {
   font-size: 14px;
 }
 
-* {
+/* * {
   outline: 1px solid rgba(0, 0, 0, 0.07);
-}
+} */
 
 /* *[] */
 /* a[href*='example'] {
   font-size: 2em;
 } */
-*[data-cy] {
-  outline: 1px solid green !important;
+/* *[data-cy] { */
+/*  outline: 1px solid green !important;
   outline-offset: -5px;
-  /* position: relative; */
-}
+  position: relative;
+} */
 
 /* *[data-cy] ::before {
   position: absolute;
