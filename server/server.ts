@@ -56,6 +56,9 @@ require('dotenv').config();
 
 IO.sockets.on('connection', (socket: any) => {
   // console.log('Client connected...');
+  socket.on('testConnection', (data: any, fn: any) => {
+    fn('success');
+  });
   /* User */
   socket.on('getUser', (data: any, fn: any) => {
     getUser({ query: data }, (res: any) => fn(res));
@@ -182,6 +185,9 @@ IO.sockets.on('connection', (socket: any) => {
   });
   socket.on('deleteProject', (data: any, fn: any) => {
     projectController.deleteProject({ query: data }, (res: any) => fn(res));
+  });
+  socket.on('delProject', (data: any, fn: any) => {
+    projectController.DelProject({ query: data }, (res: any) => fn(res));
   });
   socket.on('getProjectBudgetData', (data: any, fn: any) => {
     projectController.getProjectBudgetData({ query: data }, (res: any) =>

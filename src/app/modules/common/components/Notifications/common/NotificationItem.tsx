@@ -4,6 +4,7 @@ import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 import { ProjectPalette } from 'app/theme';
 import { IconWarning } from 'app/modules/common/components/Notifications/common/icons/IconWarning';
+import { useTranslation } from 'react-i18next';
 
 export interface NotificationItemParams {
   notificationLabel: string;
@@ -41,6 +42,7 @@ function setNotificationType(param: string) {
 }
 
 export const NotificationItem = (props: NotificationItemParams) => {
+  const { t, i18n } = useTranslation();
   return (
     <div
       css={`
@@ -85,7 +87,7 @@ export const NotificationItem = (props: NotificationItemParams) => {
             }
           `}
         >
-          {props.notificationLabel}
+          {t(props.notificationLabel)}
         </Typography>
         <Typography variant="caption">{props.notificationDate}</Typography>
       </div>

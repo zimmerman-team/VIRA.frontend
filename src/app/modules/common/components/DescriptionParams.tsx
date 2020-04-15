@@ -2,11 +2,13 @@ import 'styled-components/macro';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { ProjectPalette } from 'app/theme';
+import { useTranslation } from 'react-i18next';
 
 export interface DescriptionParams {
   project_description: string;
 }
 export const Description = (props: DescriptionParams) => {
+  const { t, i18n } = useTranslation();
   return (
     <Typography
       css={`
@@ -18,7 +20,7 @@ export const Description = (props: DescriptionParams) => {
         }
       `}
     >
-      {props.project_description}
+      {t(props.project_description)}
     </Typography>
   );
 };

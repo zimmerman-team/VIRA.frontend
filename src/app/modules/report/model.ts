@@ -1,5 +1,6 @@
 import { NavItemParams } from 'app/modules/common/consts';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
+import { DialogProps } from 'app/components/surfaces/Dialog/model';
 
 export type BeneficiaryCountsModel = {
   name: string;
@@ -104,4 +105,5 @@ export type CreateReportLayoutModel = {
   submit: Function;
   loading: boolean;
   saveDraft: Function;
+  dialogProps: DialogProps;
 };

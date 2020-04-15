@@ -1,18 +1,22 @@
 import React from 'react';
 import 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 import { Grid, Typography, Box, Hidden } from '@material-ui/core';
 import { ReportModuleRoutes } from 'app/modules/report/routes';
 import { BottomNav } from 'app/modules/report/common/bottom-nav';
 import { CreateReportLayoutModel } from 'app/modules/report/model';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { HorizontalStepper } from 'app/components/navigation/HorizontalStepper';
-import { PageLoader } from '../common/page-loader';
+import { PageLoader } from 'app/modules/common/page-loader';
+import { Dialog } from 'app/components/surfaces/Dialog';
 
 export function CreateReportLayout(props: CreateReportLayoutModel) {
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       {/* <Grid item container xs={12} lg={12} spacing={4}> */}
       {props.loading && <PageLoader />}
+      <Dialog {...props.dialogProps} />
       {/* ---------------------------------------------------------------------*/}
       {/* breadcrumbs */}
       <Grid item lg={12}>
@@ -32,7 +36,7 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
             border-bottom: 1px solid #e8e8e8;
           `}
         >
-          Report
+          {t('reports.form.title')}
         </Typography>
       </Grid>
 

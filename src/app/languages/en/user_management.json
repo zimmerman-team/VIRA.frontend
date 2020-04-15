@@ -1,0 +1,33 @@
+{
+    "team": {
+        "edit_title": "Edit title",
+        "add_title": "Add title",
+        "table_title": "Add Team Member"
+    },
+    "user": {
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "email": "Email",
+        "user_role": "User Role",
+        "select_team": "Select team"
+    },
+    "general": {
+        "manage_your_account": "Manage your account",
+        "manage_teams_users": "Manage teams & users",
+        "manage_account": "Manage your account",
+        "logout": "Sign out",
+        "privacy_link": "Privacy Policy and Terms",
+        "teams": "Teams",
+        "users": "Users",
+        "add_user_btn": "Add User",
+        "add_team_btn": "Add Team",
+        "title_sort_asc": "Title (asc)",
+        "title_sort_desc": "Title (desc)",
+        "created_sort_asc": "Created (asc)",
+        "created_sort_desc": "Created (asc)",
+        "created": "Created",
+        "created_by": "Created by",
+        "save_btn": "Save",
+        "add_btn": "Add"
+    }
+}

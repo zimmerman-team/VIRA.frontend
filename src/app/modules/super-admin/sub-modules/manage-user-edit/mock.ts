@@ -3,10 +3,10 @@ import { UnregisterCallback, Href } from 'history';
 
 export const manageUserEditMock: ManageUserEditModel = {
   breadcrumbs: {
-    currentLocation: 'Edit',
+    currentLocation: 'breadcrumbs.edit',
     previousLocations: [
       {
-        label: 'Manage',
+        label: 'breadcrumbs.add',
         url: '/super-admin/manage-users',
       },
     ],
@@ -16,7 +16,7 @@ export const manageUserEditMock: ManageUserEditModel = {
     firstName: '',
     lastName: '',
     radioButtonGroup: {
-      title: 'User Role',
+      title: 'user_management.user.user_role',
       items: [
         {
           value: 'Administrator',

@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
       margin: theme.spacing(1),
-      minWidth: 120,
+      minWidth: 150,
     },
   })
 );
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export function Select(props: any) {
   const classes = useStyles();
   const inputLabel = React.useRef<HTMLLabelElement>(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
+  const [labelWidth, setLabelWidth] = React.useState(150);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current!.offsetWidth);
   }, []);
