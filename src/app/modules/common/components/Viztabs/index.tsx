@@ -122,7 +122,6 @@ export function Viztabs(props: Props) {
                   [],
                 'value2Color'
               ).map((item: any) => item.value2Color),
-              ProjectPalette.chart.darkSkyBlue,
               ...uniqBy(
                 ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
                   [],
