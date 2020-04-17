@@ -1,5 +1,5 @@
 orbs:
-  cypress: cypress-io/cypress@1.19.1
+  cypress: cypress-io/cypress@1
 version: 2.1
 # todo: move all ip's to env vars
 # todo: make zz orb
@@ -172,18 +172,18 @@ workflows:
           executor: cypress/base-12-6-0
           yarn: true
           build: yarn build
-#       - cypress/run:
-#          executor: cypress/browsers-chrome76
-#          browser: chrome
-#          requires:
-#            - cypress/install
-#          start: yarn start
-#          wait-on: 'http://localhost:3000'
-#          yarn: true
-#          record: false
-#          parallel: true
-#          parallelism: 4
-#          group: '4 machines'
+      - cypress/run:
+          executor: cypress/browsers-chrome76
+          browser: chrome
+          requires:
+            - cypress/install
+          start: yarn start-fullstack
+          wait-on: 'http://localhost:3000'
+          yarn: true
+          record: true
+          parallel: true
+          parallelism: 4
+          group: 'all tests'
 #       post-steps:
       # - store_test_results:
       # path: cypress/results
