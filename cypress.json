@@ -2,7 +2,7 @@
   "projectId": "whmos3",
   "stepDefinitions": "**/*.steps",
   "stepDefinitionTemp": "cypress/steps-compiled.json",
-  "baseUrl": "http://localhost:3000",
+  "baseUrl": "https://app.ins.test.nyuki.io",
   "experimentalGetCookiesSameSite": true,
   "chromeWebSecurity": false
 }
