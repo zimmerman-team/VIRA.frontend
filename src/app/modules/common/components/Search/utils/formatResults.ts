@@ -11,7 +11,7 @@ export function formatResults(data: any) {
   data.projects.forEach((project: any) => {
     results.projects.push({
       title: project.project_name,
-      link: `/projects/${project.project_number}/detail`,
+      link: `/projects/${project.project_number}`,
     } as never);
   });
   data.organisations.forEach((organisation: any) => {
@@ -23,7 +23,7 @@ export function formatResults(data: any) {
   data.reports.forEach((report: any) => {
     results.reports.push({
       title: report.title,
-      link: `/reports/${report._id}/detail`,
+      link: `/reports/${report._id}`,
     } as never);
   });
 
