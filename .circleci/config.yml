@@ -14,6 +14,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      - run: yarn install
+      - run: yarn build
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit

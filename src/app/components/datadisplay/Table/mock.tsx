@@ -227,7 +227,7 @@ export const mockDataVar2: TableModuleModel = {
       // building body
       data.forEach(row => {
         row.data.forEach((cell: any, index: number) => {
-          console.log('mock - cell', typeof cell);
+          // console.log('mock - cell', typeof cell);
           const cellVal = index === 0 ? cell.name : cell;
           csvData = csvData.concat('"'.concat(cellVal).concat('"')).concat(',');
         });

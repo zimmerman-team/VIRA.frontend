@@ -265,7 +265,7 @@ function CreateReportFunc(props: any) {
   }, [props.match.params.projectID, allProjectsData]);
 
   React.useEffect(() => {
-    console.log(addReportData);
+    // console.log(addReportData);
     if (get(addReportData, 'status', '') === 'success') {
       const isDraft = get(addReportData, 'data.isDraft', false);
       setDialogProps({
