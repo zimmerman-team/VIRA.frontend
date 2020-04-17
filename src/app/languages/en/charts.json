@@ -10,6 +10,7 @@
   },
   "barchart": {
     "target": "Target",
-    "budget": "Budget"
+    "budget": "Budget",
+    "commitment": "Insinger Commitment"
   }
 }

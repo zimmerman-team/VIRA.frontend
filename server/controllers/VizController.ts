@@ -89,7 +89,7 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
 
   Report.find(query)
     .select(
-      'policy_priority total_target_beneficiaries total_target_beneficiaries_commited budget isDraft'
+      'policy_priority total_target_beneficiaries total_target_beneficiaries_commited budget isDraft insContribution'
     )
     .populate('policy_priority')
     .exec((err: any, rawData: any) => {
@@ -109,13 +109,20 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
             );
             const totDiff = totTarget - totCommitted;
             const totBudget = sumBy(groupedData[key], 'budget');
+            const totInsingerCommitment = sumBy(
+              groupedData[key],
+              'insContribution'
+            );
+
             result.push({
               name: key,
               value1: Math.min(totTarget, totCommitted),
               value2: totDiff < 0 ? totDiff * -1 : totDiff,
               value3: totBudget,
+              value4: totInsingerCommitment,
               value1Color: ProjectPalette.primary.main,
               value2Color: totDiff > 0 ? ProjectPalette.grey[500] : '#05c985',
+              value4Color: ProjectPalette.chart.darkSkyBlue,
               tooltip: {
                 title: key,
                 items: [
@@ -135,6 +142,16 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
                       style: 'currency',
                     }),
                   },
+                  {
+                    label: 'Insinger Commitment',
+                    value: totInsingerCommitment
+                      ? totInsingerCommitment.toLocaleString(undefined, {
+                          currency: 'EUR',
+                          currencyDisplay: 'symbol',
+                          style: 'currency',
+                        })
+                      : '0',
+                  },
                 ],
               },
             });
@@ -150,8 +167,10 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
               value1: 0,
               value2: 0,
               value3: 0,
+              value4: 0,
               value1Color: ProjectPalette.primary.main,
               value2Color: ProjectPalette.grey[500],
+              value4Color: ProjectPalette.chart.darkSkyBlue,
               tooltip: {},
             });
           } else {

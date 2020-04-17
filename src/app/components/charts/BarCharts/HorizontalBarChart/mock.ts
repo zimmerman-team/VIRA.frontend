@@ -6,10 +6,12 @@ export const mockData: HorizontalBarChartModel = {
     {
       name: 'Poverty reduction with a focus on youth and children',
       value1: 400,
-      value2: 1000 - 400,
+      value2: 1000 - 400 - 100,
       value3: 90000,
+      value4: 100,
       value1Color: ProjectPalette.primary.main,
       value2Color: ProjectPalette.grey[500],
+      value4Color: ProjectPalette.chart.darkSkyBlue,
       tooltip: {
         title: 'Poverty reduction with a focus on youth and children',
         items: [
@@ -21,6 +23,10 @@ export const mockData: HorizontalBarChartModel = {
           {
             label: 'Budget',
             value: 900000,
+          },
+          {
+            label: 'Commitment',
+            value: 100,
           },
         ],
       },

@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { GeoMap } from 'app/components/charts/GeoMap';
 import { BubbleChart } from 'app/components/charts/Bubble';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
+import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import {
   TabStyle,
@@ -126,6 +127,11 @@ export function Viztabs(props: Props) {
                   [],
                 'value2Color'
               ).map((item: any) => item.value2Color),
+              ...uniqBy(
+                ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
+                  [],
+                'value4Color'
+              ).map((item: any) => item.value4Color),
             ]}
             values={
               ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||

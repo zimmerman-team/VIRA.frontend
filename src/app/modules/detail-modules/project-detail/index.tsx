@@ -30,11 +30,15 @@ const ProjectDetailModuleF = (props: any) => {
   );
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
-      label: 'Target',
+      label: 'charts.barchart.target',
       selected: true,
     },
     {
-      label: 'Budget',
+      label: 'charts.barchart.budget',
+      selected: true,
+    },
+    {
+      label: 'charts.barchart.commitment',
       selected: true,
     },
   ]);
