@@ -189,7 +189,7 @@ workflows:
       # path: cypress/results
       - deploy-dev:
           requires:
-            - load_envs
+            - cypress/install
           filters:
             branches:
               only: /feature\/.*/
