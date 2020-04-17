@@ -36,6 +36,7 @@ export const SearchField = (props: Props) => {
       `}
     >
       <StyledInput
+        data-cy="search-field"
         autoFocus
         fullWidth
         value={props.value}

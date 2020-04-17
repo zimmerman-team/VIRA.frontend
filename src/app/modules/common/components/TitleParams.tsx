@@ -17,6 +17,7 @@ export interface TitleParams {
   url_note?: string;
   url?: string;
   description?: string;
+  testAttr?: string;
   stats?: { label: string; value: string }[];
 }
 
@@ -67,7 +68,9 @@ export const TitleFragment = (props: TitleParams) => {
     <React.Fragment>
       {/* ---------------------------- */}
       {/* title */}
-      <Typography css={style[0]}>{t(props.title)}</Typography>
+      <Typography data-cy={props.testAttr} css={style[0]}>
+        {t(props.title)}
+      </Typography>
       <Box height="15px" />
       {props.showMoreThanTitle && (
         <Grid item container xs={12} sm={12} md={12} lg={12} xl={12}>

@@ -102,6 +102,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         </ClickAwayListener>
       ) : (
         <IconButton
+          data-cy="search-button"
           aria-label="search"
           color="primary"
           onClick={handleClickSearch}
@@ -148,7 +149,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
             setOpenAccount(false);
           }}
         >
-          <div>
+          <div data-cy="usercard-container">
             <Account handleClick={() => setOpenAccount(false)} />
           </div>
         </ClickAwayListener>
@@ -159,6 +160,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         aria-controls={props.menuId}
         aria-haspopup="true"
         color="primary"
+        data-cy="usercard-button"
         onClick={handleClickAccount('bottom-end')}
       >
         <div

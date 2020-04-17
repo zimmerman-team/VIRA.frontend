@@ -3,188 +3,187 @@ version: 2
 jobs:
   test_api:
     docker:
-    - image: circleci/node:12.14.1
-    - image: circleci/mongo:3.6.2-jessie
+      - image: circleci/node:12.14.1
+      - image: circleci/mongo:3.6.2-jessie
     working_directory: ~/test
     steps:
-    - checkout
-    - attach_workspace:
-        at: ~/
-    - run:
-        name: Install packages
-        command: yarn install
-    - run:
-        name: Load environment variables
-        command: |
-          echo 'export REACT_APP_PROJECT_URL=http://localhost:3000' >> $BASH_ENV
-          echo 'export REACT_APP_BACKEND_URL=http://localhost:4200' >> $BASH_ENV
-          echo 'export REACT_APP_BACKEND_PORT=4200' >> $BASH_ENV
-          echo 'export REACT_APP_MONGO_DB_URL=mongodb://localhost:27017/insinger' >> $BASH_ENV
-          echo 'export REACT_APP_POSTMARK_CLIENT_ID=eb6520ea-eb38-4a11-b1f3-328cdee3ca57' >> $BASH_ENV
-          source $BASH_ENV
-    - run:
-        name: Run data script
-        command: yarn init-data
-    - run:
-        name: Run express-js app
-        command: yarn start-test-api
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Install packages
+          command: yarn install
+      - run:
+          name: Load environment variables
+          command: |
+            echo 'export REACT_APP_PROJECT_URL=http://localhost:3000' >> $BASH_ENV
+            echo 'export REACT_APP_BACKEND_URL=http://localhost:4200' >> $BASH_ENV
+            echo 'export REACT_APP_BACKEND_PORT=4200' >> $BASH_ENV
+            echo 'export REACT_APP_MONGO_DB_URL=mongodb://localhost:27017/insinger' >> $BASH_ENV
+            echo 'export REACT_APP_POSTMARK_CLIENT_ID=eb6520ea-eb38-4a11-b1f3-328cdee3ca57' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Run data script
+          command: yarn init-data
+      - run:
+          name: Run express-js app
+          command: yarn start-test-api
   load_envs:
     docker:
-    - image: circleci/node:12.14.1-stretch-browsers
+      - image: circleci/node:12.14.1-stretch-browsers
     working_directory: ~/project
     steps:
-    - attach_workspace:
-        at: ~/
-    - run:
-        name: Load environment variables based on branch
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
-            echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
-          elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-            echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
-            echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
-          else
-            echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
-            echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
-          fi
-          source $BASH_ENV
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Load environment variables based on branch
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
+            else
+              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
+              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
+            fi
+            source $BASH_ENV
   cypress/install:
     docker:
-    - image: cypress/base:12.6.0
+      - image: cypress/base:12.6.0
     steps:
-    - checkout
-    - restore_cache:
-        keys:
-        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-    - run:
-        name: Yarn install
-        command: yarn install --frozen-lockfile
-        working_directory: ''
-    - run:
-        name: Verify Cypress
-        command: npx cypress verify
-        working_directory: ''
-    - save_cache:
-        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-        paths:
-        - ~/.cache
-    - run:
-        name: Build
-        command: yarn build
-    - persist_to_workspace:
-        root: ~/
-        paths:
-        - project
-        - .cache/Cypress
+      - checkout
+      - restore_cache:
+          keys:
+            - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Yarn install
+          command: yarn install --frozen-lockfile
+          working_directory: ''
+      - run:
+          name: Verify Cypress
+          command: npx cypress verify
+          working_directory: ''
+      - save_cache:
+          key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.cache
+      - run:
+          name: Build
+          command: yarn build
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+            - .cache/Cypress
   deploy-dev:
     docker:
-    - image: circleci/node:12.14.1-stretch-browsers
+      - image: circleci/node:12.14.1-stretch-browsers
     working_directory: ~/project
     steps:
-    - attach_workspace:
-        at: ~/
-    - run:
-        command: eval ssh-agent -s
-    - run:
-        command: sudo apt install rsync
-    - run:
-        command: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-    - run:
-        command: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-dev/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
-    - run:
-        command: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
+      - attach_workspace:
+          at: ~/
+      - run:
+          command: eval ssh-agent -s
+      - run:
+          command: sudo apt install rsync
+      - run:
+          command: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run:
+          command: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-dev/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
+      - run:
+          command: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
   deploy-test:
     docker:
-    - image: circleci/node:12.14.1-stretch-browsers
+      - image: circleci/node:12.14.1-stretch-browsers
     working_directory: ~/project
     steps:
-    - attach_workspace:
-        at: ~/
-    - run:
-        command: eval ssh-agent -s
-    - run:
-        command: sudo apt install rsync
-    - run:
-        command: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-    - run:
-        command: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-test/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
-    - run:
-        command: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
+      - attach_workspace:
+          at: ~/
+      - run:
+          command: eval ssh-agent -s
+      - run:
+          command: sudo apt install rsync
+      - run:
+          command: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run:
+          command: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-test/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
+      - run:
+          command: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
   deploy-staging:
     docker:
-    - image: circleci/node:12.14.1-stretch-browsers
+      - image: circleci/node:12.14.1-stretch-browsers
     working_directory: ~/project
     steps:
-    - attach_workspace:
-        at: ~/
-    - run:
-        command: eval ssh-agent -s
-    - run:
-        command: sudo apt install rsync
-    - run:
-        command: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-    - run:
-        command: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-staging/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
-    - run:
-        command: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
+      - attach_workspace:
+          at: ~/
+      - run:
+          command: eval ssh-agent -s
+      - run:
+          command: sudo apt install rsync
+      - run:
+          command: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run:
+          command: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-staging/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
+      - run:
+          command: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
   deploy-storybook:
     docker:
-    - image: circleci/node:12.14.1-stretch-browsers
+      - image: circleci/node:12.14.1-stretch-browsers
     working_directory: ~/project
     steps:
-    - attach_workspace:
-        at: ~/
-    - run:
-        command: yarn build-storybook
-    - run:
-        command: eval ssh-agent -s
-    - run:
-        command: sudo apt install rsync
-    - run:
-        command: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-    - run:
-        command: rsync -O -ave ssh ~/project/storybook-static zz@206.189.241.202:~/insinger-storybook
+      - attach_workspace:
+          at: ~/
+      - run:
+          command: yarn build-storybook
+      - run:
+          command: eval ssh-agent -s
+      - run:
+          command: sudo apt install rsync
+      - run:
+          command: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
+      - run:
+          command: rsync -O -ave ssh ~/project/storybook-static zz@206.189.241.202:~/insinger-storybook
 workflows:
   build-and-test:
     jobs:
-    - test_api
-    - load_envs
-    - cypress/install:
-        requires:
-        - load_envs
-    - deploy-dev:
-        filters:
-          branches:
-            only: /feature\/.*/
-        requires:
-        - cypress/install
-    - deploy-test:
-        filters:
-          branches:
-            only: develop
-        requires:
-        - cypress/install
-    - deploy-staging:
-        filters:
-          branches:
-            only: master
-        requires:
-        - cypress/install
-    - deploy-storybook:
-        filters:
-          branches:
-            only: develop
-        requires:
-        - cypress/install
+      - test_api
+      - load_envs
+      - cypress/install:
+          requires:
+            - load_envs
+      - deploy-dev:
+          filters:
+            branches:
+              only: /feature\/.*/
+          requires:
+            - cypress/install
+      - deploy-test:
+          filters:
+            branches:
+              only: develop
+          requires:
+            - cypress/install
+      - deploy-staging:
+          filters:
+            branches:
+              only: master
+          requires:
+            - cypress/install
+      - deploy-storybook:
+          filters:
+            branches:
+              only: develop
+          requires:
+            - cypress/install
   version: 2
-
 # Original config.yml file:
 # orbs:
 #   cypress: cypress-io/cypress@1.13.0
@@ -207,7 +206,7 @@ workflows:
 #       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
 #       - run: ssh \"$SSH_USER\"@\"$SSH_HOST_STAGING\" \"cd ~/insinger-dev/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;\"
 #       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
-# 
+#
 #   deploy-test:
 #     docker:
 #       - image: circleci/node:12.14.1-stretch-browsers
@@ -220,7 +219,7 @@ workflows:
 #       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
 #       - run: ssh \"$SSH_USER\"@\"$SSH_HOST_STAGING\" \"cd ~/insinger-test/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;\"
 #       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
-# 
+#
 #   deploy-storybook:
 #     docker:
 #       - image: circleci/node:12.14.1-stretch-browsers
@@ -233,7 +232,7 @@ workflows:
 #       - run: sudo apt install rsync
 #       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
 #       - run: rsync -O -ave ssh ~/project/storybook-static zz@206.189.241.202:~/insinger-storybook
-# 
+#
 #   deploy-staging:
 #     docker:
 #       - image: circleci/node:12.14.1-stretch-browsers
@@ -246,7 +245,7 @@ workflows:
 #       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
 #       - run: ssh \"$SSH_USER\"@\"$SSH_HOST_STAGING\" \"cd ~/insinger-staging/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;\"
 #       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
-# 
+#
 #   load_envs:
 #     docker:
 #       - image: circleci/node:12.14.1-stretch-browsers
@@ -274,7 +273,7 @@ workflows:
 #               echo 'export REACT_APP_MONGO_DB_URL=\"$REACT_APP_MONGO_DB_URL_DEV\"' >> $BASH_ENV
 #             fi
 #             source $BASH_ENV
-# 
+#
 #   test_api:
 #     docker:
 #       - image: circleci/node:12.14.1
@@ -302,7 +301,7 @@ workflows:
 #       - run:
 #           name: Run express-js app
 #           command: yarn start-test-api
-# 
+#
 # workflows:
 #   build-and-test:
 #     jobs:
@@ -330,7 +329,7 @@ workflows:
 #       # - store_test_results:
 #       # path: cypress/results
 #       # - deploy-test:
-# 
+#
 #       - deploy-dev:
 #           requires:
 #             - cypress/install

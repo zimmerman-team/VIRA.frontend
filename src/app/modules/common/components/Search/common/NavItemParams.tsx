@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import 'styled-components/macro';
 import React from 'react';
 import { ProjectPalette } from 'app/theme';
@@ -11,12 +9,14 @@ interface NavItemParams {
   count: number;
   active: boolean;
   onClick: () => void;
+  index?: number;
 }
 
 export const SearchResultNavItem = (props: NavItemParams) => {
   const { t } = useTranslation();
   return (
     <div
+      data-cy={`search-nav-item-${props.index}`}
       onClick={props.onClick}
       css={`
         cursor: pointer;

@@ -101,45 +101,45 @@ export const ReportDetailLayout = (props: any) => {
       {/* ---------------------------------------------------------------------*/}
       {/* cards */}
       {/* todo: optimise */}
-      <Grid item lg={12}>
+      <Grid data-cy="outcomes-card" item lg={12}>
         <OutcomeCard
           title={t('reports.detail.cards.key_outcomes')}
           description={props.report.key_outcomes}
         />
       </Grid>
-      <Grid item lg={12}>
+      <Grid data-cy="monitor-card" item lg={12}>
         <OutcomeCard
           title={t('reports.detail.cards.monitor')}
           description={props.report.monitor_report_outcomes}
         />
       </Grid>
       {props.report.media.length > 0 && (
-        <Grid item lg={12}>
+        <Grid data-cy="media-card" item lg={12}>
           <OutcomeCard
             title={t('reports.detail.cards.media')}
             media={{ tileData: props.report.media }}
           />
         </Grid>
       )}
-      <Grid item lg={12}>
+      <Grid data-cy="challenges-card" item lg={12}>
         <OutcomeCard
           title={t('reports.detail.cards.key_implementation_challenges')}
           description={props.report.key_implementation_challenges}
         />
       </Grid>
-      <Grid item lg={12}>
+      <Grid data-cy="observations-card" item lg={12}>
         <OutcomeCard
           title={t('reports.detail.cards.other_project')}
           description={props.report.other_project_outcomes}
         />
       </Grid>
-      <Grid item lg={12}>
+      <Grid data-cy="future-plans-card" item lg={12}>
         <OutcomeCard
           title={t('reports.detail.cards.future_plans')}
           description={props.report.plans}
         />
       </Grid>
-      <Grid item lg={12}>
+      <Grid data-cy="other-comments-card" item lg={12}>
         <OutcomeCard
           title={t('reports.detail.cards.other_comments')}
           description={props.report.other_comments}

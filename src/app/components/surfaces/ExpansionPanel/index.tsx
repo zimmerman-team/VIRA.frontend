@@ -20,7 +20,7 @@ const StyledExpandMoreIcon = styled(ExpandMoreIcon)`
 export const ExpansionPanel = (props: ExpansionPanelModel) => {
   return (
     <Box width="100%">
-      {props.faqItems.map(question => (
+      {props.faqItems.map((question, index) => (
         <MuiExpansionPanel
           square
           css={`
@@ -35,6 +35,8 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
               background-color: rgba(0, 0, 0, 0);
             }
           `}
+          key={`question-${index}`}
+          data-cy={`question-${index}`}
         >
           <ExpansionPanelSummary
             css={`
@@ -67,6 +69,7 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
                 font-size: 16px !important;
                 font-weight: 500 !important;
               `}
+              data-cy={`question-${index}-title`}
             >
               {question.title}
             </Typography>
@@ -79,7 +82,9 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
               }
             `}
           >
-            <Typography variant="body1">{question.expl}</Typography>
+            <Typography variant="body1" data-cy={`question-${index}-expl`}>
+              {question.expl}
+            </Typography>
           </ExpansionPanelDetails>
         </MuiExpansionPanel>
       ))}

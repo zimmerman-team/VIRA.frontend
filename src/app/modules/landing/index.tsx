@@ -94,15 +94,15 @@ function LandingLayout(props: any) {
     <React.Fragment>
       {/* -------------------------------------------------------------- */}
       {/* stat items */}
-
       <Grid item xs={12}>
-        <StatCard stats={stats} />
+        <StatCard data-cy="stat-card" stats={stats} />
       </Grid>
 
       <Hidden smDown>
         <Box width="100%" height="12px" />
       </Hidden>
 
+      {/* todo: description */}
       <Viztabs
         barChartData={ppVizData}
         barChartLegends={barChartLegends}
@@ -118,6 +118,7 @@ function LandingLayout(props: any) {
       </Hidden>
       <Box width="100%" height="18px" />
 
+      {/* todo: description */}
       <ListModule
         loadData
         tabNav={getNavTabItems(

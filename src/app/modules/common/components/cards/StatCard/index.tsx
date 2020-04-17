@@ -26,9 +26,14 @@ export const StatCard = (props: StatsCard) => {
 
   const StatContent = () => (
     <Grid container direction="row" alignItems="center" wrap="nowrap">
-      {props.stats.map(stat => (
+      {props.stats.map((stat, index) => (
         <React.Fragment key={stat.type}>
-          <StatItem amount={stat.amount} type={stat.type} path={stat.path} />
+          <StatItem
+            index={index}
+            amount={stat.amount}
+            type={stat.type}
+            path={stat.path}
+          />
           <StatItemDivider />
         </React.Fragment>
       ))}

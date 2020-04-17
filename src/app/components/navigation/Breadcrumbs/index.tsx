@@ -50,7 +50,7 @@ export function BreadCrumbs(props: BreadcrumbModel) {
     <Breadcrumbs
       css={BreadCrumbStyle}
       aria-label="breadcrumb"
-      data-testid="BreadCrumbs"
+      data-cy="BreadCrumbs"
     >
       {props.previousLocations.map(previousLocation => (
         <NavLink

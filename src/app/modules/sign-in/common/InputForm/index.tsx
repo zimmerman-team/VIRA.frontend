@@ -35,7 +35,9 @@ export const InputForm = (props: LayoutModel) => {
 
   return (
     <Form>
-      <Typography variant="h3">{t('landing.sign_in.title')}</Typography>
+      <Typography data-cy="sign-in-title" variant="h3">
+        {t('landing.sign_in.title')}
+      </Typography>
       <Box height="41px" />
       <FormSingleLineField
         fullWidth
@@ -43,7 +45,7 @@ export const InputForm = (props: LayoutModel) => {
         id="login-email"
         value={props.email}
         setValue={props.setEmail}
-        data-testid="login-email"
+        data-cy="login-email"
       />
       <PasswordTextField
         fullWidth
@@ -53,13 +55,13 @@ export const InputForm = (props: LayoutModel) => {
         showPass={props.showPass}
         setValue={props.setPassword}
         setShowPass={props.setShowPass}
-        data-testid="login-password"
+        data-cy="login-password"
       />
       <Link to="/recover-password">{t('landing.sign_in.forgot_password')}</Link>
       <Grid item xs={3}>
         <ContainedButton
           text={t('landing.sign_in.button')}
-          data-testid="login-button"
+          data-cy="login-button"
           onClick={() => props.signInAction()}
           disabled={props.email === '' || props.password === ''}
         />

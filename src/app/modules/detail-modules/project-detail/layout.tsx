@@ -44,6 +44,7 @@ export const ProjectDetailLayout = (props: any) => {
       <Grid item xs={12} lg={12}>
         <TitleFragment
           showMoreThanTitle
+          testAttr="project-title"
           title={props.projectDetail.project}
           id={`${t('project id:')} ${props.projectDetail.project_id}`}
           date={t('*earliest and latest activity start dates')}
@@ -91,7 +92,7 @@ export const ProjectDetailLayout = (props: any) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* reports */}
-      <Grid item xs={12} lg={12}>
+      <Grid data-cy="reports-table" item xs={12} lg={12}>
         <TableModule {...props.reportTable} />
       </Grid>
     </React.Fragment>

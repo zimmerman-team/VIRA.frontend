@@ -20,6 +20,7 @@ export const StatItem = (props: StatItemParams) => {
         align-items: center;
         flex-direction: column;
       `}
+      data-cy={`stat-item-${props.index}`}
     >
       <Link
         to={props.path}

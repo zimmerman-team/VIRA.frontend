@@ -1,0 +1,20 @@
+{
+  "presets": ["react-app"],
+  "plugins": [
+    // [
+    //   "@welldone-software/babel-plugin-react-add-test-id",
+    //   {
+    //     "attrName": "data-cy",
+    //     "mode": "light",
+    //     "ignoreElements": ["svg", "img", "path", "br", "hr", "g"],
+    //     "additionalIgnoreElements": ["React.Fragment"]
+    //   }
+    // ],
+    [
+      "babel-plugin-styled-components",
+      {
+        "ssr": false
+      }
+    ]
+  ]
+}

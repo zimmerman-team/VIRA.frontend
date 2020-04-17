@@ -65,6 +65,28 @@ body {
   font-size: 14px;
 }
 
-* {
-  /* outline: 1px solid rgba(0, 0, 0, 0.07); */
-}
+/* * {
+  outline: 1px solid rgba(0, 0, 0, 0.07);
+} */
+
+/* *[] */
+/* a[href*='example'] {
+  font-size: 2em;
+} */
+/* *[data-cy] { */
+/*  outline: 1px solid green !important;
+  outline-offset: -5px;
+  position: relative;
+} */
+
+/* *[data-cy] ::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  color: blue;
+  background-color: red;
+  font-size: 12px;
+  width: 200px;
+  content: attr(data-cy);
+} */

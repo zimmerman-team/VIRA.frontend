@@ -38,19 +38,21 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
         lg={12}
         xl={12}
         direction="column"
+        data-cy="grantee-detail-title"
       >
         <TitleFragment {...props.title} />
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
       {/* contact card */}
-      <Grid item xs={12} md={6} lg={4}>
+      <Grid data-cy="grantee-detail-contact" item xs={12} md={6} lg={4}>
         <ContactsCard {...props.contact} />
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
       <Viztabs
+        data-cy="grantee-detail-viztabs"
         barChartData={props.ppVizData}
         barChartLegends={props.barChartLegends}
         onBarChartLegendClick={props.onBarChartLegendClick}
@@ -64,7 +66,11 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
       {/* projects */}
 
       <Box width="100%" height="50px" />
-      <ListModule hideGrantees tabNav={getNavTabItems(TabNavMockList, 'viz')} />
+      <ListModule
+        data-cy="grantee-detail-projects"
+        hideGrantees
+        tabNav={getNavTabItems(TabNavMockList, 'viz')}
+      />
     </React.Fragment>
   );
 };

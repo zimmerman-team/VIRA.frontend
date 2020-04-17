@@ -69,6 +69,7 @@ export function Viztabs(props: Props) {
           `}
         >
           <Typography
+            data-cy="viz-tabs-title"
             variant="h4"
             css={`
               font-size: 20px;
@@ -89,18 +90,22 @@ export function Viztabs(props: Props) {
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
+            data-cy="tabs-container"
           >
             <Tab
+              data-cy="prio-tab"
               css={TabStyle}
               label={t('home.chart_nav.priority_area')}
               {...a11yProps(0)}
             />
             <Tab
+              data-cy="sdg-tab"
               css={TabStyle}
               label={t('home.chart_nav.sdg')}
               {...a11yProps(1)}
             />
             <Tab
+              data-cy="map-tab"
               css={TabStyle}
               label={t('home.chart_nav.map')}
               {...a11yProps(2)}
@@ -111,7 +116,7 @@ export function Viztabs(props: Props) {
 
       {/* tab content */}
       <Grid item lg={12}>
-        <TabPanel value={value} index={0}>
+        <TabPanel value={value} index={0} data-cy="prio-panel">
           {/* Priority Area horizontal bar chart */}
           <HorizontalBarChart
             colors={[
@@ -137,7 +142,7 @@ export function Viztabs(props: Props) {
           />
         </TabPanel>
 
-        <TabPanel value={value} index={1}>
+        <TabPanel value={value} index={1} data-cy="sdg-panel">
           {/* SDG bubble chart */}
           <BubbleChart
             data={props.bubbleChartData}
@@ -146,7 +151,7 @@ export function Viztabs(props: Props) {
           />
         </TabPanel>
 
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={2} data-cy="map-panel">
           {/* Geomap */}
           <GeoMap data={props.geoMapData} />
         </TabPanel>
