@@ -106,4 +106,7 @@ export type CreateReportLayoutModel = {
   loading: boolean;
   saveDraft: Function;
   dialogProps: DialogProps;
+  delDialogProps: DialogProps;
+  showDeleteBtn: boolean;
+  deleteReport: Function;
 };

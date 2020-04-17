@@ -120,13 +120,56 @@ function CreateReportFunc(props: any) {
     onClose: () => setDialogProps(prevState => ({ ...prevState, open: false })),
   });
 
+  const deleteReport = () => {
+    const rid = query.get('rid');
+    deleteReportAction({
+      socketName: 'delReport',
+      values: {
+        _id: rid,
+      },
+    });
+  };
+
+  const [delDialogProps, setDelDialogProps] = React.useState({
+    title: 'Are you sure you want to delete the report?',
+    open: false,
+    buttons: [
+      {
+        text: 'Cancel',
+        color: '#000000',
+        background: '#ffffff',
+        action: () => {},
+        closeOnClick: true,
+      },
+      {
+        text: 'Delete',
+        color: '#ffffff',
+        background: '#ed6060',
+        action: deleteReport,
+        closeOnClick: true,
+      },
+    ],
+    onClose: () =>
+      setDelDialogProps(prevState => ({ ...prevState, open: false })),
+  });
+
+  const openDelDialog = () => {
+    setDelDialogProps(d => ({ ...d, open: true }));
+  };
+
   // redux actions
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
   );
   const addReportAction = useStoreActions(actions => actions.addReport.fetch);
+  const deleteReportAction = useStoreActions(
+    actions => actions.deleteReport.fetch
+  );
   const addReportClearAction = useStoreActions(
     actions => actions.addReport.clear
+  );
+  const deleteReportClearAction = useStoreActions(
+    actions => actions.deleteReport.clear
   );
   const snackbarAction = useStoreActions(
     actions => actions.syncVariables.setSnackbar
@@ -146,12 +189,19 @@ function CreateReportFunc(props: any) {
   );
   const addReportData = useStoreState(state => state.addReport.data);
   const addReportLoading = useStoreState(state => state.addReport.loading);
+  const deleteReportData = useStoreState(state => state.deleteReport.data);
+  const deleteReportLoading = useStoreState(
+    state => state.deleteReport.loading
+  );
   const projectBudgetData = useStoreState(
     state => state.projectBudgetData.data
   );
   const reportDetailData = useStoreState(state => state.reportDetail.data);
 
-  useWindowUnloadEffect(addReportClearAction, true);
+  useWindowUnloadEffect(() => {
+    addReportClearAction();
+    deleteReportClearAction();
+  }, true);
 
   React.useEffect(() => {
     setInitialTabIndex(
@@ -300,6 +350,12 @@ function CreateReportFunc(props: any) {
       });
     }
   }, [addReportData]);
+
+  React.useEffect(() => {
+    if (get(deleteReportData, 'status', '') === 'success') {
+      props.history.replace('/list/2');
+    }
+  }, [deleteReportData]);
 
   React.useEffect(() => {
     if (location && get(location, 'country.label', '') !== '') {
@@ -489,7 +545,7 @@ function CreateReportFunc(props: any) {
 
   return (
     <CreateReportLayout
-      loading={addReportLoading}
+      loading={addReportLoading || deleteReportLoading}
       submit={onSubmit}
       saveDraft={onDraftSubmit}
       tabs={getTabs(
@@ -505,7 +561,7 @@ function CreateReportFunc(props: any) {
           { label: 'Projects', url: '/list/projects' },
           {
             label: get(project, 'project_name', 'Project'),
-            url: `/projects/${props.match.params.projectID}/detail`,
+            url: `/projects/${props.match.params.projectID}`,
           },
         ],
       }}
@@ -584,6 +640,9 @@ function CreateReportFunc(props: any) {
       showDraftSubmitBtn={draftSubmitEnabled}
       showSubmitBtn={props.location.pathname.split('/')[3] === 'preview'}
       dialogProps={dialogProps}
+      delDialogProps={delDialogProps}
+      showDeleteBtn={query.get('rid') !== undefined}
+      deleteReport={openDelDialog}
     />
   );
 }

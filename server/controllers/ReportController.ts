@@ -423,16 +423,18 @@ export function updateReport(req: any, res: any) {
 export function deleteReport(req: any, res: any) {
   Report.deleteOne(
     {
-      _id: req.params._id,
+      _id: req.query._id,
     },
     (err: any, report: any) => {
       if (err) {
         res.json(err);
       } else {
-        res.json({
-          status: 'report successfully deleted',
-          message: report,
-        });
+        res(
+          JSON.stringify({
+            status: 'success',
+            message: 'Report successfully deleted',
+          })
+        );
       }
     }
   );

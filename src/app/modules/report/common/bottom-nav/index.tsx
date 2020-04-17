@@ -14,6 +14,8 @@ type BottomNavModel = {
   saveDraft: Function;
   nextDisabled: boolean;
   backDisabled: boolean;
+  showDeleteBtn: boolean;
+  deleteReport: Function;
   showSubmitBtn: boolean;
   showDraftSubmitBtn: boolean;
 };
@@ -67,6 +69,27 @@ export function BottomNav(props: BottomNavModel) {
         />
       </Grid>
       <Grid item xs={9} justify="flex-end" css={gridItem}>
+        {props.showDeleteBtn && (
+          <React.Fragment>
+            <ContainedButton
+              text={t('reports.form.buttons.delete')}
+              onClick={props.deleteReport}
+              css={`
+                && {
+                  background: #ef5350;
+                  &:hover {
+                    background: #e57373 !important;
+                  }
+                  ${isMobileWidth &&
+                    `max-height: 48px;
+                  min-height: 48px;
+                  max-width: 132px;`}
+                }
+              `}
+            />
+            <Box width={`${isMobileWidth ? '8px' : '24px'}`} />
+          </React.Fragment>
+        )}
         {props.showDraftSubmitBtn && (
           <React.Fragment>
             <ContainedButton

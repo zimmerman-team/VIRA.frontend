@@ -70,7 +70,8 @@
       "draft": "Save as draft",
       "submit": "Submit",
       "cancel": "Cancel",
-      "save": "Save"
+      "save": "Save",
+      "delete": "Delete"
     }
   }
 }
