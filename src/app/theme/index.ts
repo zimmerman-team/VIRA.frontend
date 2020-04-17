@@ -13,8 +13,13 @@ interface Icon {
   black: string;
 }
 
+interface Chart {
+  darkSkyBlue: string;
+}
+
 interface ProjectPalette extends Palette {
   icon: Icon;
+  chart: Chart;
 }
 
 export const TextStyle: FontStyle = {
@@ -90,6 +95,9 @@ export const ProjectPalette: ProjectPalette = {
     disabledBackground: 'rgba(0, 0, 0, 0.12)',
     disabled: 'rgba(0, 0, 0, 0.26)',
     active: 'rgba(0, 0, 0, 0.54)',
+  },
+  chart: {
+    darkSkyBlue: '#5ca2d5',
   },
 };
 
