@@ -169,12 +169,10 @@ workflows:
     jobs:
       - test_api
       - cypress/install:
-          requires:
-            - load_envs
           executor: cypress/base-12-6-0
           yarn: true
           build: yarn build
-      - cypress/run:
+      # - cypress/run:
       # executor: cypress/browsers-chrome76
       # browser: chrome
       # requires:
@@ -189,8 +187,6 @@ workflows:
       # post-steps:
       # - store_test_results:
       # path: cypress/results
-      # - deploy-test:
-
       - deploy-dev:
           requires:
             - load_envs
@@ -209,21 +205,15 @@ workflows:
           filters:
             branches:
               only: master
-      #  - deploy-production:
-      #      requires:
-      #        - cypress/install
-      #      filters:
-      #        branches:
-      #          only: master
-      # - deploy-storybook:
-      #     requires:
-      #       - cypress/install
-      #     filters:
-      #       branches:
-      #         only: develop
-      # - release:
-      #     requires:
-      #       - cypress/install
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy-storybook:
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: develop
+      - release:
+          requires:
+            - cypress/install
+          filters:
+            branches:
+              only: master
