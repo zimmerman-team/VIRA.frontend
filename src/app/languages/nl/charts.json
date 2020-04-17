@@ -10,7 +10,6 @@
   },
   "barchart": {
     "target": "Doel",
-    "budget": "Budget",
-    "commitment": "Bijdrage Insinger"
+    "budget": "Budget"
   }
 }
