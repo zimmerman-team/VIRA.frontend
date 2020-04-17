@@ -123,6 +123,7 @@ export function formatReportDetail(data: any) {
         value1: Math.min(targetVal, commitedVal),
         value2: diffVal < 0 ? diffVal * -1 : diffVal,
         value3: reportDetailRecord.budget,
+        value4: reportDetailRecord.insContribution,
         value1Color: ProjectPalette.primary.main,
         value2Color: diffVal > 0 ? ProjectPalette.grey[500] : '#05c985',
         tooltip: {
@@ -148,6 +149,16 @@ export function formatReportDetail(data: any) {
                 currencyDisplay: 'symbol',
                 style: 'currency',
               }),
+            },
+            {
+              label: 'Insinger Contribution',
+              value: reportDetailRecord.insContribution
+                ? reportDetailRecord.insContribution.toLocaleString(undefined, {
+                    currency: 'EUR',
+                    currencyDisplay: 'symbol',
+                    style: 'currency',
+                  })
+                : '0',
             },
           ],
         },
