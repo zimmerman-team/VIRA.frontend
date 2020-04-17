@@ -70,7 +70,8 @@
       "draft": "Opslaan als concept",
       "submit": "Verzenden",
       "cancel": "Annuleren",
-      "save": "Sla op"
+      "save": "Sla op",
+      "delete": "Verwijderen"
     }
   }
 }

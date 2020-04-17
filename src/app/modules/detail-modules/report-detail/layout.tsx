@@ -47,7 +47,7 @@ export const ReportDetailLayout = (props: any) => {
           note={props.report.date}
           title={props.report.title}
           id={`Report ID: ${props.report.reportID}`}
-          url={`/projects/${props.report.project.id}/detail`}
+          url={`/projects/${props.report.project.id}`}
           url_note={`${props.report.project.name}`}
           stats={[
             {

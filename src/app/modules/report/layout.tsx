@@ -17,6 +17,7 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
       {/* <Grid item container xs={12} lg={12} spacing={4}> */}
       {props.loading && <PageLoader />}
       <Dialog {...props.dialogProps} />
+      <Dialog {...props.delDialogProps} />
       {/* ---------------------------------------------------------------------*/}
       {/* breadcrumbs */}
       <Grid item lg={12}>
@@ -80,6 +81,8 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
         nextDisabled={props.nextBtnDisabled}
         backDisabled={props.backBtnDisabled}
         showDraftSubmitBtn={props.showDraftSubmitBtn}
+        showDeleteBtn={props.showDeleteBtn}
+        deleteReport={props.deleteReport}
       />
       {/* </Grid> */}
     </React.Fragment>
