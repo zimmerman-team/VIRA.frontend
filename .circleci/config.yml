@@ -128,14 +128,14 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test_api
+      # - test_api
       - load_envs
-      - cypress/install:
-          requires:
-            - load_envs
-          executor: cypress/base-12-6-0
-          yarn: true
-          build: yarn build
+      # - cypress/install:
+      #     requires:
+      #       - load_envs
+      #     executor: cypress/base-12-6-0
+      #     yarn: true
+      #     build: yarn build
       # - cypress/run:
       # executor: cypress/browsers-chrome76
       # browser: chrome
@@ -155,37 +155,37 @@ workflows:
 
       - deploy-dev:
           requires:
-            - cypress/install
+            - load_envs
           filters:
             branches:
               only: /feature\/.*/
-      - deploy-test:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: develop
-      - deploy-staging:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: master
+      # - deploy-test:
+      #     requires:
+      #       - cypress/install
+      #     filters:
+      #       branches:
+      #         only: develop
+      # - deploy-staging:
+      #     requires:
+      #       - cypress/install
+      #     filters:
+      #       branches:
+      #         only: master
       #  - deploy-production:
       #      requires:
       #        - cypress/install
       #      filters:
       #        branches:
       #          only: master
-      - deploy-storybook:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: develop
-      - release:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: master
+      # - deploy-storybook:
+      #     requires:
+      #       - cypress/install
+      #     filters:
+      #       branches:
+      #         only: develop
+      # - release:
+      #     requires:
+      #       - cypress/install
+      #     filters:
+      #       branches:
+      #         only: master
