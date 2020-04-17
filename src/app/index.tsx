@@ -22,7 +22,6 @@ export function App() {
   const reduxLng = useStoreState(state => state.syncVariables.lng);
 
   React.useEffect(() => {
-    console.log(process.env);
     if (i18n.language !== reduxLng && reduxLng) {
       i18n.changeLanguage(reduxLng);
     }
