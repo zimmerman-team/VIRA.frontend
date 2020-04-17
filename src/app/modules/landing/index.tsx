@@ -44,7 +44,12 @@ function LandingLayout(props: any) {
       label: 'charts.barchart.budget',
       selected: true,
     },
+    {
+      label: 'charts.barchart.commitment',
+      selected: true,
+    },
   ]);
+
   const [selectedSDG, setSelectedSDG] = React.useState('');
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
   const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
