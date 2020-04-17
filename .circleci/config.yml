@@ -1,5 +1,5 @@
 orbs:
-  cypress: cypress-io/cypress@1.13.0
+  cypress: cypress-io/cypress@1.19.1
 version: 2.1
 # todo: move all ip's to env vars
 # todo: make zz orb

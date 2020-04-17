@@ -73,6 +73,7 @@ build/
 
 media/
 cypress/videos/*
+cypress/screenshots/*
 public/media/*
 
 cypress.env.json
