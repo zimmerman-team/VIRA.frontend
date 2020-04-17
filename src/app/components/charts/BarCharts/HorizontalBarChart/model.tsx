@@ -31,7 +31,7 @@ export type HorizontalBarChartModel = {
 export const getBarModel = t => ({
   data: [],
   minValue: 0,
-  keys: ['value1', 'value2', 'value4'],
+  keys: ['value1', 'value2'],
   indexBy: 'name',
   margin: { top: 10, right: 30, bottom: 50, left: 256 },
   padding: 0,

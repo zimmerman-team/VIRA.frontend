@@ -143,7 +143,7 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
                     }),
                   },
                   {
-                    label: 'Insinger Commitment',
+                    label: 'Insinger Contribution',
                     value: totInsingerCommitment
                       ? totInsingerCommitment.toLocaleString(undefined, {
                           currency: 'EUR',

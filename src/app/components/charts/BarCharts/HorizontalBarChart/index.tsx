@@ -72,13 +72,21 @@ const BarComponent = (props: {
     containerWidth,
     tooltip,
     showBar,
-    showLine,
+    showBudgetLine,
+    showContribLine,
     ...fprops
   } = props;
   const width = getBarInnerLineWidth(
     allData,
     fprops.data,
-    containerWidth - 286 // subtracted value should align with margin left + right in model.tsx
+    containerWidth - 286, // subtracted value should align with margin left + right in model.tsx
+    'value3'
+  );
+  const contribLineWidth = getBarInnerLineWidth(
+    allData,
+    fprops.data,
+    containerWidth - 286, // subtracted value should align with margin left + right in model.tsx
+    'value4'
   );
   return (
     <g
@@ -95,13 +103,14 @@ const BarComponent = (props: {
       {showBar && (
         <rect {...fprops} y={fprops.y - 2} fill={props.color} height="25px" />
       )}
-      {showLine && (
-        <>
+      {showBudgetLine && (
+        <React.Fragment>
+          {/* budget line */}
           <line
             x1="0"
             x2={width}
-            y1={props.y + 11}
-            y2={props.y + 11}
+            y1={props.y + 4}
+            y2={props.y + 4}
             style={{
               strokeWidth: 2,
               stroke: ProjectPalette.secondary.main,
@@ -110,11 +119,33 @@ const BarComponent = (props: {
           <line
             x1={width}
             x2={width}
-            y1={props.y + 3}
-            y2={props.y + 19}
+            y1={props.y}
+            y2={props.y + 8}
             style={{ strokeWidth: 2, stroke: ProjectPalette.secondary.main }}
           />
-        </>
+        </React.Fragment>
+      )}
+      {showContribLine && (
+        <React.Fragment>
+          {/* contribution line */}
+          <line
+            x1="0"
+            x2={contribLineWidth}
+            y1={props.y + 15}
+            y2={props.y + 15}
+            style={{
+              strokeWidth: 2,
+              stroke: ProjectPalette.chart.darkSkyBlue,
+            }}
+          />
+          <line
+            x1={contribLineWidth}
+            x2={contribLineWidth}
+            y1={props.y + 11}
+            y2={props.y + 19}
+            style={{ strokeWidth: 2, stroke: ProjectPalette.chart.darkSkyBlue }}
+          />
+        </React.Fragment>
       )}
     </g>
   );
@@ -180,12 +211,17 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
   }, [props.values]);
 
   const showBar = get(
-    find(props.chartLegends, { label: 'Target' }),
+    find(props.chartLegends, { label: 'charts.barchart.target' }),
     'selected',
     true
   );
-  const showLine = get(
-    find(props.chartLegends, { label: 'Budget' }),
+  const showBudgetLine = get(
+    find(props.chartLegends, { label: 'charts.barchart.budget' }),
+    'selected',
+    true
+  );
+  const showContribLine = get(
+    find(props.chartLegends, { label: 'charts.barchart.commitment' }),
     'selected',
     true
   );
@@ -199,7 +235,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
       // console.log(props.maxValue);
       return (
         <>
-          {showLine && (
+          {(showBudgetLine || showContribLine) && (
             <TopAxis>
               <TopAxisValue>0€</TopAxisValue>
               <TopAxisValue>{maxBudgetVal}€</TopAxisValue>
@@ -212,9 +248,10 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
               <BarComponent
                 {...bProps}
                 showBar={showBar}
-                showLine={showLine}
                 allData={props.values}
                 containerWidth={containerWidth}
+                showBudgetLine={showBudgetLine}
+                showContribLine={showContribLine}
               />
             )}
             colors={colorScheme(props.colors)}
