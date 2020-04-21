@@ -115,7 +115,7 @@ export const TitleFragment = (props: TitleParams) => {
               wrap="nowrap"
             >
               {(props.stats || []).map((stat: any, index: number) => (
-                <React.Fragment>
+                <React.Fragment key={stat.label}>
                   <StatItem label={stat.label} value={stat.value} />
                   {index < (props.stats || []).length - 1 && (
                     <StatItemDivider />
