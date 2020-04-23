@@ -26,6 +26,7 @@ export interface ProjectModel {
   country: string;
   telephone: string;
   organisation_email: string;
+  organisation_link: string;
   website: string;
   family_name: string;
   initial: string;
@@ -82,6 +83,7 @@ export const projectMock: ProjectModel = {
   country: 'Nederland',
   telephone: '',
   organisation_email: 'penningmeester@ngkdeontmoeting.nl',
+  organisation_link: '',
   website: 'https://www.ngkdeontmoeting.nl',
   family_name: 'Reijersen',
   initial: 'Albert',

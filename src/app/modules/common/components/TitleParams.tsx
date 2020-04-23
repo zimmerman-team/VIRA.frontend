@@ -7,6 +7,7 @@ import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivide
 import { StatItem } from 'app/modules/common/components/StatItem';
 import Grid from '@material-ui/core/Grid';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 export interface TitleParams {
   title: string;
@@ -63,7 +64,7 @@ const style: any[] = [
 ];
 
 export const TitleFragment = (props: TitleParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       {/* ---------------------------- */}
@@ -97,9 +98,7 @@ export const TitleFragment = (props: TitleParams) => {
             {/* url */}
             {props.url && (
               <Typography css={style[3]}>
-                <a href={props.url} target="_blank" rel="noopener noreferrer">
-                  {props.url_note}
-                </a>
+                <Link to={props.url}>{props.url_note}</Link>
               </Typography>
             )}
           </Grid>
@@ -111,7 +110,7 @@ export const TitleFragment = (props: TitleParams) => {
               container
               xs={12}
               lg={4}
-              alignItems="center"
+              justify="flex-end"
               wrap="nowrap"
             >
               {(props.stats || []).map((stat: any, index: number) => (

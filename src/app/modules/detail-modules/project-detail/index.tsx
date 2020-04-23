@@ -103,6 +103,7 @@ const ProjectDetailModuleF = (props: any) => {
           released_amount: projectDetailRecord[0].released_amount,
           paid_amount: projectDetailRecord[0].paid_amount,
           organisation: projectDetailRecord[0].organisation.organisation_name,
+          organisation_link: `/grantee/${projectDetailRecord[0].organisation._id}/detail`,
           org_type: '',
           street: 'Postbus',
           house_number: '193',
