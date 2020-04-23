@@ -26,11 +26,13 @@ export function generalSearchSocketAPI(req: any, res: any) {
           projects = projectsResults;
         }
         Organisation.find({
-          organisation_name: { $regex: q, $options: '-i' },
-          street: { $regex: q, $options: '-i' },
-          postcode: { $regex: q, $options: '-i' },
-          place: { $regex: q, $options: '-i' },
-          country: { $regex: q, $options: '-i' },
+          $or: [
+            { organisation_name: { $regex: q, $options: '-i' } },
+            { street: { $regex: q, $options: '-i' } },
+            { postcode: { $regex: q, $options: '-i' } },
+            { place: { $regex: q, $options: '-i' } },
+            { country: { $regex: q, $options: '-i' } },
+          ],
         }).exec((err: any, orgsResults: any) => {
           if (!err) {
             orgs = orgsResults;

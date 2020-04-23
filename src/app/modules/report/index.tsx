@@ -641,7 +641,7 @@ function CreateReportFunc(props: any) {
       showSubmitBtn={props.location.pathname.split('/')[3] === 'preview'}
       dialogProps={dialogProps}
       delDialogProps={delDialogProps}
-      showDeleteBtn={query.get('rid') !== undefined}
+      showDeleteBtn={query.get('rid') !== null}
       deleteReport={openDelDialog}
     />
   );

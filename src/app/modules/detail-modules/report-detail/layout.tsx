@@ -1,8 +1,10 @@
 // @ts-nocheck
 // global
 import React from 'react';
+import get from 'lodash/get';
 import { useTranslation } from 'react-i18next';
 import { Grid, Hidden } from '@material-ui/core';
+import { useStoreState } from 'app/state/store/hooks';
 
 // absolute
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
@@ -17,6 +19,11 @@ import { Viztabs } from 'app/modules/common/components/Viztabs';
 
 export const ReportDetailLayout = (props: any) => {
   const { t } = useTranslation();
+  const showEditBtn = useStoreState(
+    state =>
+      get(state.userDetails.data, 'role', '') === 'Administrator' ||
+      get(state.userDetails.data, 'role', '') === 'Manager'
+  );
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -30,14 +37,16 @@ export const ReportDetailLayout = (props: any) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* button: generate report */}
-      <Hidden xsDown>
-        <Grid lg={12} container justify="flex-end">
-          <ContainedButton
-            text={t('reports.detail.editReportBtn')}
-            onClick={props.editReport}
-          />
-        </Grid>
-      </Hidden>
+      {showEditBtn && (
+        <Hidden xsDown>
+          <Grid lg={12} container justify="flex-end">
+            <ContainedButton
+              text={t('reports.detail.editReportBtn')}
+              onClick={props.editReport}
+            />
+          </Grid>
+        </Hidden>
+      )}
 
       {/* ---------------------------------------------------------------------*/}
       {/* title fragment */}
@@ -77,11 +86,13 @@ export const ReportDetailLayout = (props: any) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* button: generate report */}
-      <Hidden smUp>
-        <Grid container xs={12}>
-          <ContainedButton text="Edit Report" onClick={props.editReport} />
-        </Grid>
-      </Hidden>
+      {showEditBtn && (
+        <Hidden smUp>
+          <Grid container xs={12}>
+            <ContainedButton text="Edit Report" onClick={props.editReport} />
+          </Grid>
+        </Hidden>
+      )}
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
