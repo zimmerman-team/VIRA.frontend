@@ -234,7 +234,10 @@ function CreateReportFunc(props: any) {
     setProjectData();
     projectBudgetDataAction({
       socketName: 'getProjectBudgetData',
-      values: { projectID: props.match.params.projectID },
+      values: {
+        projectID: props.match.params.projectID,
+        exludeReportID: query.get('rid'),
+      },
     });
     return () => reportDetailClearAction();
   }, []);
