@@ -242,7 +242,7 @@ export function getSDGBubbleChart(req: any, res: any) {
   // } else {
   Report.find(query)
     .select(
-      'policy_priority total_target_beneficiaries total_target_beneficiaries_commited budget isDraft'
+      'policy_priority total_target_beneficiaries total_target_beneficiaries_commited budget insContribution isDraft'
     )
     .populate('policy_priority')
     .exec((err: any, rawData: any) => {
@@ -258,12 +258,14 @@ export function getSDGBubbleChart(req: any, res: any) {
           const totTarget = sumBy(pp, 'total_target_beneficiaries');
           const totCommitted = sumBy(pp, 'total_target_beneficiaries_commited');
           const totBudget = sumBy(pp, 'budget');
+          const totInsingerCommitment = sumBy(pp, 'insContribution');
           result.push({
             ppName: key,
             name: sdg.name,
             color: sdg.color,
             number: sdg.number,
             targetValue: totTarget,
+            insContribution: totInsingerCommitment,
             targetPercentage: (totCommitted / totTarget) * 100,
             loc: totBudget,
           });

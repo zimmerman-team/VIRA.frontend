@@ -169,6 +169,19 @@ export function BubbleChart(props: Props) {
                             })
                             .replace('.00', ''),
                         },
+                        {
+                          label: 'charts.barchart.commitment',
+                          value: tProps.data.insContribution
+                            ? tProps.data.insContribution.toLocaleString(
+                                undefined,
+                                {
+                                  currency: 'EUR',
+                                  currencyDisplay: 'symbol',
+                                  style: 'currency',
+                                }
+                              )
+                            : '0',
+                        },
                       ]}
                     />
                   );
@@ -194,6 +207,7 @@ export function BubbleChart(props: Props) {
                 budgetValue={selectedBubbleObj.loc}
                 targetPercentage={selectedBubbleObj.targetPercentage}
                 budgetPercentage={0}
+                insContribution={selectedBubbleObj.insContribution}
               />
             )}
           </Grid>
