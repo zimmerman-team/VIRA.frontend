@@ -58,19 +58,16 @@ export function formatReportDetail(data: any) {
   const commitedVal: number =
     reportDetailRecord.total_target_beneficiaries_commited;
   const diffVal: number = targetVal - commitedVal;
-  const sdg = get(
-    ppToSdg,
-    `${[reportDetailRecord.policy_priority.name]}`,
-    null
-  );
+  const sdg = get(ppToSdg, `${[reportDetailRecord.bubblePPKey]}`, null);
   const bubbleChartData = [];
   if (sdg) {
     bubbleChartData.push({
       name: sdg.name,
       color: sdg.color,
       loc: reportDetailRecord.budget,
-      ppName: reportDetailRecord.policy_priority.name,
+      ppName: reportDetailRecord.bubblePPKey,
       number: sdg.number,
+      insContribution: reportDetailRecord.insContribution,
       targetValue: reportDetailRecord.total_target_beneficiaries,
       targetPercentage:
         (reportDetailRecord.total_target_beneficiaries_commited /

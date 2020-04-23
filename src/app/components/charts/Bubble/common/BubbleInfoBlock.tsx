@@ -14,6 +14,7 @@ export type BubbleInfoBlockProps = {
   budgetValue: number;
   targetPercentage: number;
   budgetPercentage: number;
+  insContribution: number;
 };
 
 export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
@@ -24,7 +25,6 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
       spacing={3}
       css={`
         width: 100%;
-        height: 90px;
         display: flex;
         align-items: center;
         background-color: ${ProjectPalette.primary.main};
@@ -118,6 +118,39 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
               `}
             />
           </ProgressBarContainer> */}
+        </React.Fragment>
+        <Box width="100%" height="18px" />
+        <React.Fragment>
+          <div
+            css={`
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            `}
+          >
+            <Typography
+              css={`
+                color: ${ProjectPalette.common.white};
+              `}
+              variant="subtitle1"
+            >
+              {t('charts.barchart.commitment')}
+            </Typography>
+            <Typography
+              css={`
+                color: ${ProjectPalette.common.white};
+              `}
+              variant="subtitle1"
+            >
+              {props.insContribution
+                .toLocaleString(undefined, {
+                  currency: 'EUR',
+                  currencyDisplay: 'symbol',
+                  style: 'currency',
+                })
+                .replace('.00', '')}
+            </Typography>
+          </div>
         </React.Fragment>
       </Grid>
     </Grid>
