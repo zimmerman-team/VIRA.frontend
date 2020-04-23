@@ -35,6 +35,7 @@
     },
     "textfield": {
       "title": "Geef een titel op voor uw rapport",
+      "preview_title": "Titel",
       "location": "Voeg locatie toe",
       "location_expl": "Op welke van de volgende geografische locaties wordt het project uitgevoerd",
       "exact_location": "Selecteer de exacte locatie",
