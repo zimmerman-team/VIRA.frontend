@@ -47,6 +47,11 @@ export const ManageAccount = (props: ManageAccountModel) => {
         <Box width="100%" height="32px" />
 
         <SingleMultiLineTextField id={'Email'} label={t('Email')} bigLabel />
+        <SingleMultiLineTextField
+          id={'Password'}
+          label={t('Password')}
+          bigLabel
+        />
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}

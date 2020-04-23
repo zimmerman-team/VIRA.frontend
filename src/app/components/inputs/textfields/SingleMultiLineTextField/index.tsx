@@ -41,6 +41,7 @@ export const Input = withStyles((theme: Theme) =>
     inputLabel: {
       root: {},
     },
+    //  TODO: change backgroundcolor when type=password
   })
 )(InputBase);
 

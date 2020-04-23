@@ -52,6 +52,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
   const [role, setRole] = React.useState(
     props.form.radioButtonGroup.items[0].value
   );
+  const [password, setPassword] = React.useState('secretpassword');
   const [group, setGroup] = React.useState('');
 
   function onSubmit() {
@@ -64,6 +65,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           surname: lastName,
           groupId: group,
           roleId: role,
+          password: password,
           groupName: find(props.form.selectOptions, { value: group }),
           roleName: find(props.form.radioButtonGroup.items, { value: role }),
         },
@@ -143,6 +145,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         setLastName('');
         setEmail('');
         setGroup('');
+        setPassword('');
       }
     }
   }, [addUserData]);
@@ -153,13 +156,18 @@ function ManageUserEditF(props: ManageUserEditModel) {
       setLastName(get(loadUserData, 'lastName', ''));
       setEmail(get(loadUserData, 'email', ''));
       setRole(get(loadUserData, 'role', ''));
+      setPassword(get(loadUserData, 'password'));
     }
   }, [loadUserData]);
 
   function isSubmitDisabled() {
     if (props.mode === 'add') {
       return (
-        firstName === '' || lastName === '' || email === '' || group === ''
+        firstName === '' ||
+        lastName === '' ||
+        email === '' ||
+        group === '' ||
+        password === ''
       );
     }
     if (props.mode === 'edit') {
@@ -170,7 +178,8 @@ function ManageUserEditF(props: ManageUserEditModel) {
         (firstName === get(loadUserData, 'firstName', '') &&
           lastName === get(loadUserData, 'lastName', '') &&
           email === get(loadUserData, 'email', '') &&
-          role === get(loadUserData, 'role', ''))
+          role === get(loadUserData, 'role', '') &&
+          password === get(loadUserData, 'password', ''))
       );
     }
     return true;
@@ -234,6 +243,20 @@ function ManageUserEditF(props: ManageUserEditModel) {
           bigLabel
         />
         <Box width="100%" height="32px" />
+        {props.isManageAccount && (
+          <>
+            <SingleMultiLineTextField
+              autoFocus={true}
+              value={password}
+              setValue={setPassword}
+              type={'password'}
+              id="Password"
+              label={t('user_management.user.password')}
+              bigLabel
+            />
+            <Box width="100%" height="32px" />
+          </>
+        )}
 
         {!props.editSelf && (
           <Grid container>

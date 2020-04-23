@@ -242,6 +242,7 @@ export function MainRoutes() {
         {redirectUnAuth(ManageUserEdit, storeUser, {
           title: 'user_management.general.manage_your_account',
           ...manageUserEditMock,
+          isManageAccount: true,
           breadcrumbs: null,
           editSelf: true,
         })}
