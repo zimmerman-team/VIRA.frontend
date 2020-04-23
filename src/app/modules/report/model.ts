@@ -66,6 +66,7 @@ export type IndicatorVerificationPropsModel = {
   setMonRepOutcomes: Function;
   media: MediaModel;
   setMedia: Function;
+  mediaAdded: any;
   onSaveMedia: Function;
   openMediaModal: boolean;
   setOpenMediaModal: Function;

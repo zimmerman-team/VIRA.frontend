@@ -157,7 +157,7 @@ export const AddMediaBigButton = (props: {
       return 'video/*';
     }
     if (props.text === 'document') {
-      return 'application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf';
+      return 'application/msword,	application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, text/plain, application/pdf';
     }
     return '';
   };

@@ -99,7 +99,11 @@ export const IndicatorVerificationLayout = (
       </Grid>
 
       <Grid item xs={12} lg={12}>
-        <MediaBlock items={props.media} removeItem={props.removeMedia} />
+        <MediaBlock
+          items={props.media}
+          addedMedia={props.mediaAdded}
+          removeItem={props.removeMedia}
+        />
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}

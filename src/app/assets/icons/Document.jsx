@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Document = () => (
-  <svg width="72px" height="82px" viewBox="0 0 72 82">
+  <svg width="82px" height="82px" viewBox="0 0 82 82">
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g transform="translate(-399.000000, -1006.000000)">
         <image
