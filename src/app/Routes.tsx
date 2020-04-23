@@ -25,7 +25,7 @@ import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/
 import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
 import React, { Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { TabNavMock } from 'app/modules/list-module/mock';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
 import { AppConfig } from 'app/data';
@@ -66,12 +66,26 @@ function redirectAuth(user: UserModel | null) {
 }
 
 export function MainRoutes() {
+  const history = useHistory();
   const storeUser = useStoreState(state => state.syncVariables.user);
   const userRoles = useStoreState(state => state.getUserRoles.data);
   const userGroups = useStoreState(state => state.getUserGroups.data);
   const userRole = useStoreState(state =>
     get(state.userDetails.data, 'role', '')
   );
+
+  React.useEffect(() => {
+    return history.listen(() => {
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }, 5);
+    });
+  }, [history]);
+
   return (
     // <Suspense fallback={<PageLoader />}>
     <Switch>
