@@ -226,7 +226,7 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
     {
       name: i18n.t('reports.overview.table.id'),
       options: {
-        sortDirection: 'asc',
+        sortDirection: 'desc',
         filter: true,
         filterType: 'dropdown',
         customFilterListRender: value =>
