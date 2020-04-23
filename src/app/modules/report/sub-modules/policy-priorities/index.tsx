@@ -149,10 +149,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
             />
 
             <Box height="24px" width="100%" />
-
-            <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {t('reports.form.textfield.remaining')}: {props.remainBudget}€
-            </Typography>
           </CardContent>
         </Card>
       </Grid>
