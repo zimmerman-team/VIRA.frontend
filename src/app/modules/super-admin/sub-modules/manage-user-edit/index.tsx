@@ -246,9 +246,9 @@ function ManageUserEditF(props: ManageUserEditModel) {
         {props.isManageAccount && (
           <>
             <SingleMultiLineTextField
-              autoFocus={true}
               value={password}
               setValue={setPassword}
+              autoComplete="new-password"
               type={'password'}
               id="Password"
               label={t('user_management.user.password')}

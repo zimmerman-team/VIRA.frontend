@@ -22,6 +22,7 @@ export interface MultilineTextfieldParams extends InputBaseProps {
   type?: string;
   min?: number;
   testAttr?: string;
+  autoComplete?: string;
 }
 
 export const Input = withStyles((theme: Theme) =>
