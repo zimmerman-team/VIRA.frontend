@@ -76,7 +76,7 @@ export const Account = (props: AccountProps) => {
       </Button>
       <ButtonPrimary
         data-cy="usercard-signout-button"
-        onClick={() => auth.signOut().then(() => clearUser())}
+        onClick={() => auth.signOut(clearUser)}
       >
         {t('user_management.general.logout')}
       </ButtonPrimary>

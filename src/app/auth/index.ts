@@ -68,11 +68,12 @@ class Auth extends AuthProps {
     );
   };
 
-  signOut = () => {
+  signOut = (action: any) => {
     return new Promise((resolve, reject) => {
       localStorage.removeItem('auth_access_token');
       localStorage.removeItem('auth_id_token');
       localStorage.removeItem('auth_expires_at');
+      action();
       this.auth0.logout({
         returnTo: process.env.REACT_APP_PROJECT_URL,
         clientID: process.env.REACT_APP_CLIENT_ID,
