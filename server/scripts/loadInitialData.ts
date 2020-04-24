@@ -121,6 +121,7 @@ async function checkAndAddOrgs(data: any) {
                 postcode: org.postcode,
                 place: org.place,
                 country: org.country,
+                telephone: org.telephone,
                 email: org.organisation_email,
                 website: org.website,
               }).save((err: any, doc: any) => {

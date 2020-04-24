@@ -13,6 +13,7 @@ const OrgSchema = new Schema({
   postcode: { type: String, required: false },
   place: { type: String, required: false },
   country: { type: String, required: false },
+  telephone: { type: String, required: false },
   email: { type: String, required: false },
   website: { type: String, required: false },
 });
