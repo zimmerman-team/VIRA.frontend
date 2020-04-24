@@ -92,6 +92,7 @@ export const ButtonPrimary = styled.div`
 `;
 
 export const Username = styled(Typography)`
+  overflow-wrap: anywhere;
   text-align: center;
   line-height: 1.33;
   letter-spacing: 0.42px;

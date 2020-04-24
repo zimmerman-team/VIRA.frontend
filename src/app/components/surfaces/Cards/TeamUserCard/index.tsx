@@ -21,6 +21,7 @@ const Description = styled(Typography)`
     margin-bottom: 40px;
     line-height: 1.71;
     letter-spacing: 0.25px;
+    overflow-wrap: break-word;
   }
 `;
 
