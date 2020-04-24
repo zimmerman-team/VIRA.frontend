@@ -149,6 +149,7 @@ export const AddMediaBigButton = (props: {
   text: string;
   onChange: Function;
 }) => {
+  const [active, setActive] = React.useState(false);
   const getAcceptString = () => {
     if (props.text === 'picture') {
       return 'image/*';
@@ -162,34 +163,69 @@ export const AddMediaBigButton = (props: {
     return '';
   };
 
+  const onDragEnter = () => {
+    setActive(true);
+  };
+
+  const onDragLeave = () => {
+    setActive(false);
+  };
+
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setActive(true);
+  };
+
+  const onDrop = (e: React.DragEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setActive(false);
+    props.onChange(e, props.text);
+  };
+
   return (
     <>
-      <label
-        htmlFor="file-input"
+      <div
+        onDragOver={onDragOver}
+        onDragEnter={onDragEnter}
+        onDragLeave={onDragLeave}
+        onDrop={onDrop}
         css={`
+          width: 300px;
           display: flex;
+          height: 250px;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 1.5;
+          align-self: center;
+          align-items: center;
+          border-radius: 10px;
+          flex-direction: column;
+          letter-spacing: 0.5px;
           justify-content: center;
+          background-color: #20293c;
+          opacity: ${active ? 0.5 : 1};
+          color: ${ProjectPalette.common.white};
         `}
       >
-        <div
+        Drag and Drop {props.text}
+        <span>or</span>
+        <label
+          htmlFor="file-input"
           css={`
-            cursor: pointer;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #20293c;
-            width: 300px;
-            height: 250px;
             font-size: 16px;
-            font-weight: 300;
-            line-height: 1.5;
-            letter-spacing: 0.5px;
-            color: ${ProjectPalette.common.white};
+            cursor: pointer;
+            margin-bottom: 10px;
+            color: ${ProjectPalette.secondary.main};
+
+            &:hover {
+              text-decoration: underline;
+            }
           `}
         >
-          Add {props.text}
-        </div>
-      </label>
+          browse {props.text}
+        </label>
+      </div>
       <input
         id="file-input"
         css={`

@@ -389,13 +389,14 @@ function CreateReportFunc(props: any) {
   };
 
   const onAddMedia = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement> & { dataTransfer?: DataTransfer },
     type: 'picture' | 'video' | 'document'
   ) => {
     if (media[type]) {
       const newFiles: any = media[type];
-      for (let i = 0; i < get(e, 'target.files.length', 0); i++) {
-        newFiles.push(get(e, 'target.files', [])[i]);
+      const filesPath = e.dataTransfer ? 'dataTransfer' : 'target';
+      for (let i = 0; i < get(e, `${filesPath}.files.length`, 0); i++) {
+        newFiles.push(get(e, `${filesPath}.files`, [])[i]);
       }
       setMedia({ ...media, [type]: newFiles });
     }
