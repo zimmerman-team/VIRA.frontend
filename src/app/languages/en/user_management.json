@@ -5,16 +5,17 @@
     "table_title": "Add Team Member"
   },
   "user": {
-    "first_name": "First Name",
-    "last_name": "Last Name",
-    "email": "Email",
+    "first_name": "Edit First Name",
+    "last_name": "Edit Last Name",
+    "email": "Change Email",
+    "password": "Change Password",
     "user_role": "User Role",
     "select_team": "Select team"
   },
   "general": {
-    "manage_your_account": "Manage your account",
-    "manage_teams_users": "Manage teams & users",
-    "manage_account": "Manage your account",
+    "manage_your_account": "Manage Your Account",
+    "manage_teams_users": "Manage Teams & Users",
+    "manage_account": "Manage Your Account",
     "logout": "Sign out",
     "privacy_link": "Privacy Policy and Terms",
     "teams": "Teams",
