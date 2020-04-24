@@ -37,13 +37,17 @@ export function GranteeDetailModule(props: any) {
   const granteeTitleMock: TitleParams = GranteeTitleMock;
   const breadcrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
   const descriptionMock: DescriptionParams = GranteeDescriptionMock;
-  const contactMock: ContactsCardModel = mockDataContactsCard;
   const baseTableForProject: TableModuleModel = getBaseTableForProject();
 
   const [granteeTitle, setGranteeTitle] = useState(granteeTitleMock);
   const [breadCrumb, setBreadCrumb] = useState(breadcrumbsMock);
   const [description, setDescription] = useState(descriptionMock);
-  const [contact, setContact] = useState(contactMock);
+  const [contact, setContact] = useState({
+    title: '',
+    email: '',
+    phonenumber: '',
+    address: '',
+  });
   const [projectTableData, setProjectTableData] = useState([[]]);
 
   const granteeDetailAction = useStoreActions(
@@ -114,12 +118,13 @@ export function GranteeDetailModule(props: any) {
       });
       setContact({
         title: 'Contacts',
-        email: get(granteeDetailData, 'data').email,
-        phonenumber: '0000',
-        ufo: '0000',
-        address: `${get(granteeDetailData, 'data').place}, ${
-          get(granteeDetailData, 'data').postcode
-        }, ${get(granteeDetailData, 'data').country}`,
+        email: get(granteeDetailData, 'data.email', ''),
+        phonenumber: get(granteeDetailData, 'data.telephone', ''),
+        address: `${get(granteeDetailData, 'data.place', '')}, ${get(
+          granteeDetailData,
+          'data.postcode',
+          ''
+        )}, ${get(granteeDetailData, 'data.country', '')}`,
       });
     }
   }, [granteeDetailData]);
