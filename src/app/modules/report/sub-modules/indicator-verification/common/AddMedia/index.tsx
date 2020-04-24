@@ -1,6 +1,7 @@
 import 'styled-components/macro';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { useBeforeUnload } from 'react-use';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -15,7 +16,13 @@ import {
 } from './AddMediaParams';
 
 export const AddMediaLayout = (props: AddMediaParams) => {
-  const { t, i18n } = useTranslation();
+  useBeforeUnload(
+    props.items.document.length > 0 ||
+      props.items.picture.length > 0 ||
+      props.items.video.length > 0,
+    'Media files are not saved. If you click Reload they will be lost.'
+  );
+  const { t } = useTranslation();
   const [selectedTab, setSelectedTab]: [
     'picture' | 'video' | 'document',
     Function

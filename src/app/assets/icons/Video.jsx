@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Video = () => (
-  <svg width="70px" height="76px" viewBox="0 0 70 76">
+  <svg width="82px" height="82px" viewBox="0 0 82 82">
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g
         id="Desktop-/-Project-/-Report-/-Indicator-and-verification-/-Media-Added"
