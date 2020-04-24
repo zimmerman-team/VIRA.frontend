@@ -1,5 +1,6 @@
 const Project = require('../models/project');
 import sumBy from 'lodash/sumBy';
+import filter from 'lodash/filter';
 const Report = require('../models/report');
 const ProjectCat = require('../models/project_categroy');
 const Organisation = require('../models/Org');
@@ -229,7 +230,7 @@ export function deleteProject(req: any, res: any) {
 
 // get project budget data
 export function getProjectBudgetData(req: any, res: any) {
-  const { projectID } = req.query;
+  const { projectID, exludeReportID } = req.query;
 
   Project.findOne({ project_number: projectID.toString() }).exec(
     (err: any, project: any) => {
@@ -243,7 +244,10 @@ export function getProjectBudgetData(req: any, res: any) {
           .populate('policy_priority')
           .exec((err: any, reports: any) => {
             if (reports) {
-              const totUsedBudget = sumBy(reports, 'budget');
+              const fReports = exludeReportID
+                ? filter(reports, { _id: exludeReportID })
+                : reports;
+              const totUsedBudget = sumBy(fReports, 'budget');
               res(
                 JSON.stringify({
                   status: 'success',
