@@ -197,15 +197,18 @@ export const AddMediaBigButton = (props: {
           font-size: 16px;
           font-weight: 300;
           line-height: 1.5;
+          border-width: 2px;
           align-self: center;
           align-items: center;
           border-radius: 10px;
-          flex-direction: column;
+          border-style: dashed;
           letter-spacing: 0.5px;
+          flex-direction: column;
           justify-content: center;
           background-color: #20293c;
           opacity: ${active ? 0.5 : 1};
           color: ${ProjectPalette.common.white};
+          border-color: ${ProjectPalette.secondary.main};
         `}
       >
         Drag and Drop {props.text}
