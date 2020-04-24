@@ -6,6 +6,7 @@ import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import styled from 'styled-components';
 import { css } from 'styled-components/macro';
 import { useMediaQuery, Box, Grid } from '@material-ui/core';
+import { useQuery } from 'app/utils/useQuery';
 
 type BottomNavModel = {
   next: Function;
@@ -54,6 +55,7 @@ const gridItem: any = css`
 `;
 
 export function BottomNav(props: BottomNavModel) {
+  const query = useQuery();
   const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
@@ -102,7 +104,9 @@ export function BottomNav(props: BottomNavModel) {
         )}
         {props.showSubmitBtn ? (
           <ContainedButton
-            text={t('reports.form.buttons.submit')}
+            text={t(
+              `reports.form.buttons.${query.get('rid') ? 'save' : 'submit'}`
+            )}
             onClick={props.submit}
             css={isMobileWidth && mobileButton}
           />

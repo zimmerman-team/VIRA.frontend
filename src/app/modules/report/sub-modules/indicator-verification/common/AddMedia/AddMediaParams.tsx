@@ -145,23 +145,24 @@ export const AddMediaInputFieldLabel = (props: { text: string }) => (
   </Grid>
 );
 
+export const getAcceptString = (type: string) => {
+  if (type === 'picture') {
+    return 'image/*';
+  }
+  if (type === 'video') {
+    return 'video/*';
+  }
+  if (type === 'document') {
+    return 'application/msword,	application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, text/plain, application/pdf';
+  }
+  return '';
+};
+
 export const AddMediaBigButton = (props: {
   text: string;
   onChange: Function;
 }) => {
   const [active, setActive] = React.useState(false);
-  const getAcceptString = () => {
-    if (props.text === 'picture') {
-      return 'image/*';
-    }
-    if (props.text === 'video') {
-      return 'video/*';
-    }
-    if (props.text === 'document') {
-      return 'application/msword,	application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, text/plain, application/pdf';
-    }
-    return '';
-  };
 
   const onDragEnter = () => {
     setActive(true);
@@ -234,7 +235,7 @@ export const AddMediaBigButton = (props: {
         multiple
         type="file"
         name="file"
-        accept={getAcceptString()}
+        accept={getAcceptString(props.text)}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           props.onChange(e, props.text)
         }

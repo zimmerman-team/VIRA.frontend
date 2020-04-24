@@ -71,6 +71,7 @@ export type IndicatorVerificationPropsModel = {
   openMediaModal: boolean;
   setOpenMediaModal: Function;
   removeMedia: Function;
+  onDialogCancel: Function;
 };
 
 export type ChallengesPlansPropsModel = {

@@ -108,10 +108,7 @@ export const IndicatorVerificationLayout = (
 
       {/* ---------------------------------------------------------------------*/}
       {/* add media modal 1 */}
-      <Modal
-        open={props.openMediaModal}
-        onClose={() => props.setOpenMediaModal(false)}
-      >
+      <Modal open={props.openMediaModal} onClose={() => props.onDialogCancel()}>
         <div
           css={`
             width: 100%;
@@ -126,7 +123,7 @@ export const IndicatorVerificationLayout = (
             items={props.media}
             onChange={props.setMedia}
             onSaveMedia={props.onSaveMedia}
-            onClose={() => props.setOpenMediaModal(false)}
+            onClose={() => props.onDialogCancel()}
           />
         </div>
       </Modal>

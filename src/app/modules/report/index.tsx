@@ -13,7 +13,6 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { AppConfig } from 'app/data';
 import { useQuery } from 'app/utils/useQuery';
 import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
-import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
 import { DialogBtnType } from 'app/components/surfaces/Dialog/model';
 import CheckIcon from '@material-ui/icons/Check';
 import { usePersistedState } from 'app/utils/usePersistedState';
@@ -25,6 +24,7 @@ import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
 import { uploadFiles } from './utils/uploadFiles';
 import { LocationModel } from './model';
+import { getFileTypeAccept } from './utils/getFileTypeAccept';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -313,21 +313,6 @@ function CreateReportFunc(props: any) {
         value: get(reportDetailData, 'report.policy_priority.name', ''),
       });
       if (get(reportDetailData, 'report.media', []).length > 0) {
-        const media = getMediaTileData(
-          get(reportDetailData, 'report.media', [])
-        );
-        const initMedia = {
-          document: [],
-          video: [],
-          picture: [],
-        };
-        media.forEach((m: any) => {
-          get(initMedia, `[${m.type}]`, []).push({
-            name: m.name,
-            size: Math.random(),
-          });
-        });
-        setMedia(initMedia);
         setMediaAdded(
           get(reportDetailData, 'report.media', []).map((m: any) => ({
             path: m,
@@ -364,7 +349,9 @@ function CreateReportFunc(props: any) {
         open: true,
         title: isDraft
           ? 'Your report has been saved as a draft'
-          : dialogProps.title,
+          : query.get('rid')
+          ? 'Your report has been saved'
+          : 'Your report has been sent',
         buttons: isDraft
           ? [
               {
@@ -433,30 +420,24 @@ function CreateReportFunc(props: any) {
     e: React.ChangeEvent<HTMLInputElement> & { dataTransfer?: DataTransfer },
     type: 'picture' | 'video' | 'document'
   ) => {
+    const accept = getFileTypeAccept(type);
     if (media[type]) {
       const newFiles: any = media[type];
       const filesPath = e.dataTransfer ? 'dataTransfer' : 'target';
       for (let i = 0; i < get(e, `${filesPath}.files.length`, 0); i++) {
-        newFiles.push(get(e, `${filesPath}.files`, [])[i]);
+        const file = get(e, `${filesPath}.files`, [])[i];
+        if (accept.indexOf(get(file.type.split('/'), '[0]', '')) !== -1) {
+          newFiles.push(file);
+        }
       }
       setMedia({ ...media, [type]: newFiles });
     }
   };
 
-  const removeMedia = (
-    name: string
-    // type: 'picture' | 'video' | 'document'
-  ) => {
-    // setMedia({
-    //   ...media,
-    //   [type]: filter(media[type], (m: any) => m.name !== name),
-    // });
+  const removeMedia = (name: string) => {
     setMediaAdded((prevData: never[]) => {
       return filter(prevData, (d: any) => {
         return d.path !== name;
-        // const splits = d.path.split('/');
-        // const itemname = splits[splits.length - 1].split('-')[1];
-        // return itemname !== name;
       }) as never[];
     });
   };
@@ -483,6 +464,15 @@ function CreateReportFunc(props: any) {
     if (files.length > 0) {
       uploadFiles(files, onSaveMediaCB, onSaveMediaError);
     }
+  };
+
+  const onDialogCancel = () => {
+    setOpenMediaModal(false);
+    setMedia({
+      document: [],
+      video: [],
+      picture: [],
+    });
   };
 
   const draftSubmitEnabled = title.length > 0 || country.label.length > 0;
@@ -652,6 +642,7 @@ function CreateReportFunc(props: any) {
         openMediaModal,
         setOpenMediaModal,
         removeMedia,
+        onDialogCancel,
       }}
       challengesPlansProps={{
         keyImplChallenges,

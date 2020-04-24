@@ -86,7 +86,21 @@ export const AddMediaLayout = (props: AddMediaParams) => {
             />
           </Grid>
           <Grid item container lg={12} justify="center">
-            <Grid item lg={5} justify="center" alignItems="center">
+            <Grid
+              item
+              lg={5}
+              justify="center"
+              alignItems="center"
+              css={
+                filesToShow.length === 0
+                  ? `
+                && {
+                  flex-basis: auto;
+                }
+              `
+                  : ''
+              }
+            >
               <AddMediaBigButton text={selectedTab} onChange={props.onChange} />
             </Grid>
             {filesToShow.length > 0 && (
