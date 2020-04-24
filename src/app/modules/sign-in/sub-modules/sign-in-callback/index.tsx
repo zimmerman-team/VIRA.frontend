@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import useTitle from 'react-use/lib/useTitle';
 /* project */
+import { PageLoader } from 'app/modules/common/page-loader';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
 function LoginCallback(props: any) {
@@ -42,12 +43,14 @@ function LoginCallback(props: any) {
       .catch((err: any) => setError(err.description));
   }, []);
   useEffect(() => {
-    props.history.replace('/');
+    if (storeUser) {
+      props.history.replace('/');
+    }
   }, [storeUser]);
 
   return (
     <div style={{ width: '100%', textAlign: 'center' }}>
-      {error.length > 0 ? error : 'Loading profile...'}
+      {error.length > 0 ? error : <PageLoader message="Loading profile..." />}
     </div>
   );
 }
