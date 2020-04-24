@@ -16,6 +16,7 @@ import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
 import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
 import { DialogBtnType } from 'app/components/surfaces/Dialog/model';
 import CheckIcon from '@material-ui/icons/Check';
+import { usePersistedState } from 'app/utils/usePersistedState';
 import { isNavBtnEnabled } from './utils/isNavBtnEnabled';
 import { validateIndVerFields } from './utils/validateIndVerFields';
 import { getTabs } from './utils/getTabs';
@@ -38,65 +39,102 @@ function CreateReportFunc(props: any) {
   );
 
   // Outcomes state
-  const [title, setTitle] = React.useState('');
-  const [country, setCountry] = React.useState({
+  const [title, setTitle] = usePersistedState('report_title', '');
+  const [country, setCountry] = usePersistedState('report_country', {
     label: '',
     value: '',
   });
+  // @ts-ignore
   const [location, setLocation]: [
     LocationModel | null,
     Function
-  ] = React.useState(null);
+  ] = usePersistedState('report_location', null);
 
   // Policy Priorities
-  const [tarBenTotal, setTarBenTotal] = React.useState(0);
-  const [tarBenTotal2, setTarBenTotal2] = React.useState(0);
-  const [beneficiaryCounts, setBeneficiaryCounts] = React.useState([
+  const [tarBenTotal, setTarBenTotal] = usePersistedState(
+    'report_tarBenTotal',
+    0
+  );
+  const [tarBenTotal2, setTarBenTotal2] = usePersistedState(
+    'report_tarBenTotal2',
+    0
+  );
+  const [beneficiaryCounts, setBeneficiaryCounts] = usePersistedState(
+    'report_beneficiaryCounts',
+    [
+      {
+        name: 'Children/Young people',
+        value: 0,
+      },
+      {
+        name: 'Elderly',
+        value: 0,
+      },
+      {
+        name: 'Women',
+        value: 0,
+      },
+      {
+        name: 'Refugees',
+        value: 0,
+      },
+      {
+        name: 'Low income individuals',
+        value: 0,
+      },
+    ]
+  );
+  const [policyPriority, setPolicyPriority] = usePersistedState(
+    'report_policyPriority',
     {
-      name: 'Children/Young people',
-      value: 0,
-    },
-    {
-      name: 'Elderly',
-      value: 0,
-    },
-    {
-      name: 'Women',
-      value: 0,
-    },
-    {
-      name: 'Refugees',
-      value: 0,
-    },
-    {
-      name: 'Low income individuals',
-      value: 0,
-    },
-  ]);
-  const [policyPriority, setPolicyPriority] = React.useState({
-    label: '',
-    value: '',
-  });
+      label: '',
+      value: '',
+    }
+  );
 
-  const [budget, setBudget] = React.useState(0);
-  const [insContribution, setInsContribution] = React.useState(0);
+  const [budget, setBudget] = usePersistedState('report_budget', 0);
+  const [insContribution, setInsContribution] = usePersistedState(
+    'report_insContribution',
+    0
+  );
 
   // Indicator and verification state
-  const [keyOutcomes, setKeyOutcomes] = React.useState('');
-  const [monRepOutcomes, setMonRepOutcomes] = React.useState('');
+  const [keyOutcomes, setKeyOutcomes] = usePersistedState(
+    'report_keyOutcomes',
+    ''
+  );
+  const [monRepOutcomes, setMonRepOutcomes] = usePersistedState(
+    'report_monRepOutcomes',
+    ''
+  );
   const [media, setMedia] = React.useState({
     document: [],
     video: [],
     picture: [],
   });
-  const [mediaAdded, setMediaAdded] = React.useState([]);
+  const [mediaAdded, setMediaAdded] = usePersistedState(
+    'report_mediaAdded',
+    []
+  );
   const [openMediaModal, setOpenMediaModal] = React.useState(false);
 
   // Challenges and plans
-  const [keyImplChallenges, setKetImplChallenges] = React.useState('');
-  const [otherProjOutObs, setOtherProjOutObs] = React.useState('');
-  const [futurePlans, setFuturePlans] = React.useState('');
-  const [otherComms, setOtherComms] = React.useState('');
+  const [keyImplChallenges, setKetImplChallenges] = usePersistedState(
+    'report_keyImplChallenges',
+    ''
+  );
+  const [otherProjOutObs, setOtherProjOutObs] = usePersistedState(
+    'report_otherProjOutObs',
+    ''
+  );
+  const [futurePlans, setFuturePlans] = usePersistedState(
+    'report_futurePlans',
+    ''
+  );
+  const [otherComms, setOtherComms] = usePersistedState(
+    'report_otherComms',
+    ''
+  );
 
   const [dialogProps, setDialogProps] = React.useState({
     title: 'Your report has been sent',
@@ -234,7 +272,10 @@ function CreateReportFunc(props: any) {
     setProjectData();
     projectBudgetDataAction({
       socketName: 'getProjectBudgetData',
-      values: { projectID: props.match.params.projectID },
+      values: {
+        projectID: props.match.params.projectID,
+        exludeReportID: query.get('rid'),
+      },
     });
     return () => reportDetailClearAction();
   }, []);
@@ -403,18 +444,19 @@ function CreateReportFunc(props: any) {
   };
 
   const removeMedia = (
-    name: string,
-    type: 'picture' | 'video' | 'document'
+    name: string
+    // type: 'picture' | 'video' | 'document'
   ) => {
-    setMedia({
-      ...media,
-      [type]: filter(media[type], (m: any) => m.name !== name),
-    });
+    // setMedia({
+    //   ...media,
+    //   [type]: filter(media[type], (m: any) => m.name !== name),
+    // });
     setMediaAdded((prevData: never[]) => {
       return filter(prevData, (d: any) => {
-        const splits = d.path.split('/');
-        const itemname = splits[splits.length - 1].split('-')[1];
-        return itemname !== name;
+        return d.path !== name;
+        // const splits = d.path.split('/');
+        // const itemname = splits[splits.length - 1].split('-')[1];
+        // return itemname !== name;
       }) as never[];
     });
   };
@@ -422,6 +464,11 @@ function CreateReportFunc(props: any) {
   const onSaveMediaCB = (data: any) => {
     setMediaAdded((prevData: never[]) => {
       return [...prevData, ...data] as never[];
+    });
+    setMedia({
+      document: [],
+      video: [],
+      picture: [],
     });
     setOpenMediaModal(false);
     snackbarAction('Files upload completed');
@@ -600,6 +647,7 @@ function CreateReportFunc(props: any) {
         setMonRepOutcomes,
         media,
         setMedia: onAddMedia,
+        mediaAdded,
         onSaveMedia,
         openMediaModal,
         setOpenMediaModal,

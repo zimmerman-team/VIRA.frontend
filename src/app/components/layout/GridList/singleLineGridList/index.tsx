@@ -61,7 +61,7 @@ export const SingleLineGridList = (props: SingleLineGridListProps) => {
           onClick={() => window.open(tile.url, '_blank')}
         >
           <div css={styles.item}>
-            {getMediaIcon(tile.type)}
+            {getMediaIcon(tile.name)}
             <div css={styles.itemLabel}>{tile.name}</div>
           </div>
         </GridListTile>

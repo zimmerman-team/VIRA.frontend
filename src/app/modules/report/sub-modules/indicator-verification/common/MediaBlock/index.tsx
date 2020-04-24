@@ -9,6 +9,7 @@ import { getMediaIcon } from './utils';
 type MediaBlockProps = {
   items: MediaModel;
   removeItem: Function;
+  addedMedia: any;
 };
 
 const styles: any = {
@@ -34,30 +35,30 @@ const styles: any = {
 export const MediaBlock = (props: MediaBlockProps) => {
   return (
     <div css={styles.container}>
-      {['picture', 'video', 'document'].map((type: any) => {
-        return get(props.items, type, []).map((item: any) => {
-          return (
-            <div css={styles.itemContainer}>
-              <Badge
-                key={`${item.name}-${item.size}`}
-                badgeContent={
-                  <CloseIcon
-                    fontSize="small"
-                    css={`
-                      cursor: pointer;
-                    `}
-                    onClick={() => props.removeItem(item.name, type)}
-                  />
-                }
-              >
-                <div css={styles.item}>
-                  {getMediaIcon(type)}
-                  <div css={styles.itemLabel}>{item.name}</div>
-                </div>
-              </Badge>
-            </div>
-          );
-        });
+      {props.addedMedia.map((item: any) => {
+        const nameSplits = item.path.split('-');
+        const name = nameSplits[nameSplits.length - 1];
+        return (
+          <div css={styles.itemContainer}>
+            <Badge
+              key={`${item.path}-${Math.random()}`}
+              badgeContent={
+                <CloseIcon
+                  fontSize="small"
+                  css={`
+                    cursor: pointer;
+                  `}
+                  onClick={() => props.removeItem(item.path)}
+                />
+              }
+            >
+              <div css={styles.item}>
+                {getMediaIcon(name)}
+                <div css={styles.itemLabel}>{name}</div>
+              </div>
+            </Badge>
+          </div>
+        );
       })}
     </div>
   );

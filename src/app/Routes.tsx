@@ -31,6 +31,7 @@ import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/mana
 import { AppConfig } from 'app/data';
 import get from 'lodash/get';
 import findIndex from 'lodash/findIndex';
+import { useClearPersistedState } from './utils/useClearPersistedState';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -66,6 +67,7 @@ function redirectAuth(user: UserModel | null) {
 }
 
 export function MainRoutes() {
+  useClearPersistedState();
   const history = useHistory();
   const storeUser = useStoreState(state => state.syncVariables.user);
   const userRoles = useStoreState(state => state.getUserRoles.data);
