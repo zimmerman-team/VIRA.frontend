@@ -56,8 +56,12 @@ export const ProjectDetailLayout = (props: any) => {
           id={`${t('project id:')} ${props.projectDetail.project_id}`}
           date={t('*earliest and latest activity start dates')}
           url_note={props.projectDetail.organisation}
-          url={props.projectDetail.website}
+          url={props.projectDetail.organisation_link}
           stats={[
+            // {
+            //   label: '',
+            //   value: '',
+            // },
             {
               label: t('projects.detail.stats.total_budget'),
               value: parseInt(props.projectDetail.total_amount || '', 10)
@@ -67,13 +71,6 @@ export const ProjectDetailLayout = (props: any) => {
                   style: 'currency',
                 })
                 .replace('.00', ''),
-            },
-            {
-              label: t('projects.detail.stats.duration'),
-              value: `${(props.projectDetail.start_date || '').replace(
-                /-/g,
-                '.'
-              )} - ${(props.projectDetail.end_date || '').replace(/-/g, '.')}`,
             },
           ]}
         />
