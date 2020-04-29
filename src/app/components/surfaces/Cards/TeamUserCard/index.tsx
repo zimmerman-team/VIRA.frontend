@@ -22,6 +22,13 @@ const Description = styled(Typography)`
     line-height: 1.71;
     letter-spacing: 0.25px;
     overflow-wrap: break-word;
+
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    //line-height: 1.71;
+    //letter-spacing: 0.25px;
   }
 `;
 
@@ -52,6 +59,13 @@ const Header = styled(Typography)`
   && {
     font-weight: 500;
     letter-spacing: 0.25px;
+
+    font-size: 16px;
+    //font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    //letter-spacing: 0.25px;
     color: ${ProjectPalette.common.black};
   }
 `;
@@ -70,6 +84,14 @@ const Caption = styled(Typography)`
   && {
     font-size: 12px;
     letter-spacing: 0.42px;
+
+    //font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    //letter-spacing: 0.42px;
+
     color: ${ProjectPalette.text.secondary};
   }
 `;

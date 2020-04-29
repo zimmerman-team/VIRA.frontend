@@ -15,10 +15,18 @@ const mobFontSize = '12px;';
 const PreviousLinkStyle = css`
   font-family: Inter;
   font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
-  color: rgba(1, 1, 10, 0.6);
+  //font-weight: 500;
+  //line-height: 1;
+  //color: rgba(1, 1, 10, 0.6);
   text-decoration: none;
+
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.45);
 
   @media (max-width: 768px) {
     font-size: ${mobFontSize};

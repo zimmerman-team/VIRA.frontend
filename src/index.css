@@ -65,9 +65,9 @@ body {
   font-size: 14px;
 }
 
-/* * {
-  outline: 1px solid rgba(0, 0, 0, 0.07);
-} */
+* {
+  /*outline: 1px solid rgba(0, 0, 0, 0.07);*/
+}
 
 /* *[] */
 /* a[href*='example'] {
