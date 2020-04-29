@@ -34,7 +34,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
               font-size: 20px;
               font-weight: 600;
               line-height: 1.5;
-              margin-left: 24px;
+              margin-left: 16px;
             }
           `}
         >
