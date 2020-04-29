@@ -35,15 +35,28 @@ const Description = styled(Typography)`
 const BottomContainer = styled(Container)`
   && {
     padding: 0;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    width: calc(100% - 24px);
   }
 `;
 
 const CardContainer = styled(Card)`
   && {
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
     border-radius: 2px;
-    padding: 16px 16px 24px 24px;
+    //padding-top: 16px;
+    //padding-right: 24px;
+    //padding-left: 24px;
+    //padding-bottom: 24px;
+    //padding: 16px 16px 24px 24px;
+    height: 214px;
+    padding: 16px;
     border: 1px solid transparent;
+    position: relative;
 
     &:hover {
       border-color: ${ProjectPalette.secondary.light};
