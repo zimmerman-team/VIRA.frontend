@@ -15,6 +15,7 @@ interface Props {
 const BaseContainedButtonStyle = css`
   padding: 12px 15px !important;
   box-shadow: none !important;
+  border-radius: 2px !important;
 
   @media (max-width: 768px) {
     width: 100%;

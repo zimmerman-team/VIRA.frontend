@@ -407,7 +407,7 @@ i18n
           All: 'Alles',
           //  --------------------
           Manage: 'Beheer',
-          Add: 'Voeg toe',
+
           //  --------------------
           'First Name': 'Voornaam',
           'Last Name': 'achternaam',
