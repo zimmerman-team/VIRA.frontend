@@ -1,7 +1,7 @@
 {
   "team": {
-    "edit_title": "Edit title",
-    "add_title": "Edit Team’s Name",
+    "edit_title": "Edit team name",
+    "add_title": "Name your team",
     "table_title": "Add Team Member"
   },
   "user": {
