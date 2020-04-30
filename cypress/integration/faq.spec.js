@@ -8,10 +8,10 @@ describe('faq page', () => {
     cy.findByTestId('sidebar-item-4').click();
     // check elements
     cy.findByTestId('faq-title').should('exist');
-    cy.findByTestId('question-0').should('exist');
-    cy.findByTestId('question-1').should('exist');
-    cy.findByTestId('question-2"').should('exist');
-    cy.findByTestId('question-3').should('exist');
+    cy.findByTestId('question-0-title').should('exist');
+    cy.findByTestId('question-1-title').should('exist');
+    cy.findByTestId('question-2-title').should('exist');
+    cy.findByTestId('question-3-title').should('exist');
     cy.findByTestId('question-0-expl').should('exist');
     cy.findByTestId('question-1-expl').should('exist');
     cy.findByTestId('question-2-expl').should('exist');
