@@ -41,8 +41,8 @@ const customViewports = {
   mobileGeneral: {
     name: 'Mobile General',
     styles: {
-      width: '360px',
-      height: '640px',
+      width: '414px',
+      height: '736px',
     },
   },
 
