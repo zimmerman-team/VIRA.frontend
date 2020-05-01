@@ -38,21 +38,13 @@ export const InputForm = (props: LayoutModel) => {
 
   return (
     <React.Fragment>
-      {/*<Grid
-        item
-        md={7}
-        lg={7}
-        css={`
-          height: 50vh;
-        `}
-      />*/}
-      <Grid item xs={12} sm={7} md={7} lg={7}>
+      <Grid item xs={12} lg={12}>
         <Typography data-cy="sign-in-title" variant="h3" css={``}>
           {t('landing.sign_in.title')}
         </Typography>
       </Grid>
 
-      <Grid item xs={12} sm={7} md={7} lg={7}>
+      <Grid item xs={12} lg={12}>
         <FormSingleLineField
           fullWidth
           label={t('landing.sign_in.email')}
@@ -63,7 +55,7 @@ export const InputForm = (props: LayoutModel) => {
         />
       </Grid>
 
-      <Grid item xs={12} sm={7} md={7} lg={7}>
+      <Grid item xs={12} lg={12}>
         <PasswordTextField
           fullWidth
           label={t('landing.sign_in.password')}
@@ -83,9 +75,7 @@ export const InputForm = (props: LayoutModel) => {
         container
         item
         xs={12}
-        sm={7}
-        md={7}
-        lg={7}
+        lg={12}
         css={`
           justify-content: flex-start;
           @media (max-width: 768px) {

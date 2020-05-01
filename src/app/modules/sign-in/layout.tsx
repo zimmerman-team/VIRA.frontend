@@ -45,7 +45,7 @@ export const SignInLayout = (props: LayoutModel) => {
             `}
           />
 
-          {/*<div
+          <div
             css={`
               left: -50vw;
               top: 0;
@@ -54,7 +54,7 @@ export const SignInLayout = (props: LayoutModel) => {
               height: 100%;
               background-color: #242e42;
             `}
-          />*/}
+          />
 
           {/*<GroupImage />*/}
         </Grid>
@@ -81,13 +81,23 @@ export const SignInLayout = (props: LayoutModel) => {
         lg={6}
         md={6}
         container
-        // direction="column"
-        alignContent="center"
-        spacing={2}
+        css={`
+          justify-content: center;
+          align-items: center;
+        `}
       >
-        {/*<Grid >*/}
-        <InputForm {...props} />
-        {/*</Grid>*/}
+        <Grid
+          item
+          xs={12}
+          md={10}
+          lg={8}
+          container
+          spacing={2}
+          alignItems="flex-start"
+          alignContent="flex-start"
+        >
+          <InputForm {...props} />
+        </Grid>
       </Grid>
     </Grid>
   );
