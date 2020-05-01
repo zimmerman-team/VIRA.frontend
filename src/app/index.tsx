@@ -4,7 +4,7 @@
 import React from 'react';
 import { MainRoutes } from 'app/Routes';
 import { useStyles } from 'app/modules/common/useStyles';
-import { useTheme } from '@material-ui/core';
+import { Container, useTheme } from '@material-ui/core';
 import PrimarySearchAppBar from 'app/modules/common/components/AppBar';
 import { AppSideBar } from 'app/modules/common/components/AppSideBar';
 import { NavItems } from 'app/modules/common/consts';
@@ -44,9 +44,7 @@ export function App() {
 
   return (
     <div className={classes.root}>
-      {!isLoggedIn ? (
-        <MainRoutes />
-      ) : (
+      {isLoggedIn ? (
         <>
           <PrimarySearchAppBar
             classes={classes}
@@ -68,6 +66,10 @@ export function App() {
             <MainRoutes />
           </PageWrapper>
         </>
+      ) : (
+        <Container maxWidth="lg">
+          <MainRoutes />
+        </Container>
       )}
       <PositionedSnackbar />
     </div>

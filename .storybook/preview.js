@@ -4,6 +4,8 @@ import { StoryWrapper } from '../src/app/utils/StoryWrapper';
 import Providers from '../src/app/Providers';
 import { withConsole } from '@storybook/addon-console';
 
+import { withFigma } from '@dreipol/storybook-figma-addon';
+
 import { DocsPage } from 'storybook-addon-deps/blocks';
 
 addParameters({
@@ -60,6 +62,13 @@ addDecorator(storyFn => (
     <StoryWrapper>{storyFn()}</StoryWrapper>
   </Providers>
 ));
+
+addDecorator(
+  withFigma({
+    apiToken: '43680-c276eb2d-a664-465a-a71b-f0a7f2deac46',
+    projectID: 'PUtQiy64uvXmuSNvwUbxMf',
+  })
+);
 
 addParameters({
   viewport: {
