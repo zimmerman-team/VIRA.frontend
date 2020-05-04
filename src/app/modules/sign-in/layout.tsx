@@ -5,6 +5,8 @@ import { Container, Grid, Hidden } from '@material-ui/core';
 import { GroupImage } from 'app/assets/images/group';
 import { InputForm } from 'app/modules/sign-in/common/InputForm';
 import { LayoutModel } from 'app/modules/sign-in/models';
+import { SignInDeco } from './common/SignInDeco';
+import { SignInDecoDesktop } from 'app/modules/sign-in/common/SignInDecoDesktop';
 
 // TODO: so a lot of code is repeated in recovery in sign in
 // TODO: Also the sign in flow should be outside of the generel wrapper component
@@ -39,11 +41,11 @@ export const SignInLayout = (props: LayoutModel) => {
           <div
             css={`
               z-index: 10;
-              width: 200px;
-              height: 200px;
-              background-color: red;
+              position: absolute;
             `}
-          />
+          >
+            <SignInDecoDesktop />
+          </div>
 
           <div
             css={`
@@ -55,23 +57,20 @@ export const SignInLayout = (props: LayoutModel) => {
               background-color: #242e42;
             `}
           />
-
-          {/*<GroupImage />*/}
         </Grid>
       </Hidden>
 
-      {/*<Hidden smUp>
-        <Grid container item xs={12} sm={6} lg={6} md={6}>
-          <div
-            css={`
-              z-index: 10;
-              width: 100px;
-              height: 100px;
-              background-color: red;
-            `}
-          />
-        </Grid>
-      </Hidden>*/}
+      <Hidden mdUp>
+        <div
+          css={`
+            z-index: 10;
+            top: 10px;
+            position: absolute;
+          `}
+        >
+          <SignInDeco />
+        </div>
+      </Hidden>
 
       {/* Right side */}
       <Grid
