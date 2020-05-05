@@ -66,7 +66,13 @@ function renderLabel(props) {
     return <BigInputLabel variant="subtitle1">{props.label}</BigInputLabel>;
   }
   return (
-    <InputLabel shrink htmlFor={props.id}>
+    <InputLabel
+      shrink
+      htmlFor={props.id}
+      css={`
+        font-size: 14px;
+      `}
+    >
       {props.label}
     </InputLabel>
   );

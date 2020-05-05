@@ -3,7 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link as RouteLink } from 'react-router-dom';
-import 'styled-components/macro';
+import { css } from 'styled-components/macro';
 
 /* components */
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
@@ -24,48 +24,74 @@ const Link = styled(RouteLink)`
   }
 `;
 
-const Form = styled.div`
+const FormStyle = css`
   width: 300px;
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const InputForm = (props: LayoutModel) => {
   const { t, i18n } = useTranslation();
 
   return (
-    <Form>
-      <Typography data-cy="sign-in-title" variant="h3">
-        {t('landing.sign_in.title')}
-      </Typography>
-      <Box height="41px" />
-      <FormSingleLineField
-        fullWidth
-        label={t('landing.sign_in.email')}
-        id="login-email"
-        value={props.email}
-        setValue={props.setEmail}
-        data-cy="login-email"
-      />
-      <PasswordTextField
-        fullWidth
-        label={t('landing.sign_in.password')}
-        id="login-password"
-        value={props.password}
-        showPass={props.showPass}
-        setValue={props.setPassword}
-        setShowPass={props.setShowPass}
-        data-cy="login-password"
-      />
-      <Link to="/recover-password">{t('landing.sign_in.forgot_password')}</Link>
-      <Grid item xs={3}>
-        <ContainedButton
-          text={t('landing.sign_in.button')}
-          data-cy="login-button"
-          onClick={() => props.signInAction()}
-          disabled={props.email === '' || props.password === ''}
+    <React.Fragment>
+      <Grid item xs={12} lg={12}>
+        <Typography data-cy="sign-in-title" variant="h3" css={``}>
+          {t('landing.sign_in.title')}
+        </Typography>
+      </Grid>
+
+      <Grid item xs={12} lg={12}>
+        <FormSingleLineField
+          fullWidth
+          label={t('landing.sign_in.email')}
+          id="login-email"
+          value={props.email}
+          setValue={props.setEmail}
+          data-cy="login-email"
         />
       </Grid>
-    </Form>
+
+      <Grid item xs={12} lg={12}>
+        <PasswordTextField
+          fullWidth
+          label={t('landing.sign_in.password')}
+          id="login-password"
+          value={props.password}
+          showPass={props.showPass}
+          setValue={props.setPassword}
+          setShowPass={props.setShowPass}
+          data-cy="login-password"
+        />
+        <Link to="/recover-password">
+          {t('landing.sign_in.forgot_password')}
+        </Link>
+      </Grid>
+
+      <Grid
+        container
+        item
+        xs={12}
+        lg={12}
+        css={`
+          justify-content: flex-start;
+          @media (max-width: 768px) {
+            justify-content: center;
+          }
+        `}
+      >
+        <Grid item xs={6}>
+          <ContainedButton
+            text={t('landing.sign_in.button')}
+            data-cy="login-button"
+            onClick={() => props.signInAction()}
+            disabled={props.email === '' || props.password === ''}
+          />
+        </Grid>
+      </Grid>
+    </React.Fragment>
   );
 };
