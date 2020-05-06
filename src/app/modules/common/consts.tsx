@@ -15,7 +15,7 @@ export interface NavItemParams {
 export const NavItems: NavItemParams[] = [
   {
     label: 'sidebar.items.dashboard',
-    path: '/',
+    path: '/dashboard',
     icon: <IconDashBoard />,
   },
   {

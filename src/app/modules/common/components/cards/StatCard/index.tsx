@@ -18,7 +18,6 @@ export const StatCard = (props: StatsCard) => {
   function renderCard(content: any) {
     return (
       <Card>
-        {/* <CardContent>{t(content)}</CardContent> */}
         <CardContent>{content}</CardContent>
       </Card>
     );
@@ -26,6 +25,7 @@ export const StatCard = (props: StatsCard) => {
 
   const StatContent = () => (
     <Grid container direction="row" alignItems="center" wrap="nowrap">
+      {/* map through data and generate state items */}
       {props.stats.map((stat, index) => (
         <React.Fragment key={stat.type}>
           <StatItem
