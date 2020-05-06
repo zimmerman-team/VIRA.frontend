@@ -13,7 +13,6 @@ export const variant9 = createMuiTheme({
       titleText: {
         fontFamily: TextStyle.fontFamily,
         fontSize: '20px',
-        textAlign: 'left',
         fontWeight: '600',
         lineHeight: '1.5',
         letterSpacing: 'normal',

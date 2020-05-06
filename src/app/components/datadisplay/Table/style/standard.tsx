@@ -19,6 +19,12 @@ export const standard = createMuiTheme({
         letterSpacing: 'normal',
         color: ProjectPalette.common.black,
       },
+      titleRoot: {
+        textAlignLast: 'left',
+      },
+      actions: {
+        textAlignLast: 'right',
+      },
     },
     MUIDataTable: {
       liveAnnounce: { display: 'none' },
