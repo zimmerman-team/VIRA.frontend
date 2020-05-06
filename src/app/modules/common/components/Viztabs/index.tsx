@@ -86,12 +86,18 @@ export function Viztabs(props: Props) {
           <Grid item xs={3} />
         </Hidden>
 
-        <Grid container item xs={9} sm={5} lg={6} justify="flex-end">
+        <Grid item xs={12} justify="flex-end">
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
             data-cy="tabs-container"
+            css={`
+              width: 100%;
+              [class*='MuiTabs-flexContainer'] {
+                justify-content: flex-end;
+              }
+            `}
           >
             <Tab
               data-cy="prio-tab"
