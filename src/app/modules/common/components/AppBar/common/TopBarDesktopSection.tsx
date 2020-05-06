@@ -1,11 +1,11 @@
 import React from 'react';
-import 'styled-components/macro';
+import { css } from 'styled-components/macro';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import { useEventListener } from 'app/utils/useEventListener';
 import { Account } from 'app/modules/common/components/Account';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Search } from 'app/modules/common/components/Search/index';
+import { Search } from 'app/modules/common/components/Search';
 import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
 import { ProjectPalette } from 'app/theme';
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
@@ -28,6 +28,35 @@ interface TopBarDesktopSectionParams {
   >;
   menuId: string;
 }
+
+const UserCardButtonStyle = css`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  font-size: 12px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: ${ProjectPalette.common.white};
+  background: ${ProjectPalette.secondary.main};
+`;
+
+const LanguageButtonStyle = css`
+  display: flex;
+  padding: 12px 0 12px 12px;
+  button {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    outline: none;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 50%;
+    &:active {
+      border-style: solid;
+    }
+  }
+`;
 
 export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
   const { i18n } = useTranslation();
@@ -89,8 +118,24 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
     .map(i => i.slice(0, 1))
     .join('');
 
+  const DutchLangBtnStyle = css`
+    color: ${i18n.language === 'nl' ? 'white' : ProjectPalette.primary.main};
+    background: ${i18n.language === 'nl'
+      ? ProjectPalette.primary.main
+      : 'transparent'};
+  `;
+
+  const EnglisLangBtnStyle = css`
+    color: ${i18n.language === 'en' ? 'white' : ProjectPalette.primary.main};
+    background: ${i18n.language === 'en'
+      ? ProjectPalette.primary.main
+      : 'transparent'};
+  `;
+
   return (
     <div className={props.classes.sectionDesktop}>
+      {/* ---------------------------- */}
+      {/* search */}
       {openSearch ? (
         <ClickAwayListener
           mouseEvent="onMouseDown"
@@ -110,33 +155,9 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           <SearchIcon />
         </IconButton>
       )}
-      {/* notifications disabled for now */}
-      {/* <Popper
-        open={open}
-        anchorEl={anchorEl}
-        placement={placement}
-        disablePortal
-      >
-        <ClickAwayListener
-          mouseEvent="onMouseDown"
-          onClickAway={() => {
-            setOpen(false);
-          }}
-        >
-          <div>
-            <NotificationContainer notificationItems={notifMock} />
-          </div>
-        </ClickAwayListener>
-      </Popper> */}
-      {/* <IconButton
-        aria-label="show new notifications"
-        color="primary"
-        onClick={handleClick('bottom-end')}
-      >
-        <Badge badgeContent={17} color="secondary">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton> */}
+
+      {/* ---------------------------- */}
+      {/* usercard popper */}
       <Popper
         open={openAccount}
         anchorEl={anchorElAccount}
@@ -154,6 +175,8 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           </div>
         </ClickAwayListener>
       </Popper>
+      {/* ---------------------------- */}
+      {/* user account button */}
       <IconButton
         edge="end"
         aria-label="account of current user"
@@ -163,63 +186,20 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         data-cy="usercard-button"
         onClick={handleClickAccount('bottom-end')}
       >
-        <div
-          css={`
-            width: 24px;
-            height: 24px;
-            display: flex;
-            font-size: 12px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            color: ${ProjectPalette.common.white};
-            background: ${ProjectPalette.secondary.main};
-          `}
-        >
-          {avatar}
-        </div>
+        <div css={UserCardButtonStyle}>{avatar}</div>
       </IconButton>
-      <div
-        css={`
-          display: flex;
-          padding: 12px 0 12px 12px;
-          button {
-            padding: 0;
-            width: 24px;
-            height: 24px;
-            outline: none;
-            cursor: pointer;
-            font-size: 12px;
-            border-radius: 50%;
-            &:active {
-              border-style: solid;
-            }
-          }
-        `}
-      >
+      {/* ---------------------------- */}
+      {/* NL and EN btn container */}
+      <div css={LanguageButtonStyle}>
         <button
-          css={`
-            color: ${i18n.language === 'nl'
-              ? 'white'
-              : ProjectPalette.primary.main};
-            background: ${i18n.language === 'nl'
-              ? ProjectPalette.primary.main
-              : 'transparent'};
-          `}
+          css={DutchLangBtnStyle}
           type="button"
           onClick={() => changeLanguage('nl')}
         >
           NL
         </button>
         <button
-          css={`
-            color: ${i18n.language === 'en'
-              ? 'white'
-              : ProjectPalette.primary.main};
-            background: ${i18n.language === 'en'
-              ? ProjectPalette.primary.main
-              : 'transparent'};
-          `}
+          css={EnglisLangBtnStyle}
           type="button"
           onClick={() => changeLanguage('en')}
         >
