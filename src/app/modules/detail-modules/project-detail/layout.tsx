@@ -96,8 +96,8 @@ export const ProjectDetailLayout = (props: any) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* reports */}
-      <Grid data-cy="reports-table" item xs={12} lg={12}>
-        <TableModule {...props.reportTable} />
+      <Grid item data-cy="reports-table" xs={12} lg={12}>
+        <TableModule {...props.reportTable} cssVariant="reportsVariant" />
       </Grid>
     </React.Fragment>
   );
