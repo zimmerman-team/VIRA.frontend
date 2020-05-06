@@ -137,6 +137,7 @@
     "storybook-vrhythm": "^0.0.4",
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.2",
+    "typescript-plugin-styled-components": "^1.4.4",
     "wait-on": "^4.0.1"
   },
   "scripts": {
@@ -188,7 +189,21 @@
       "react-hooks/exhaustive-deps": 0,
       "@typescript-eslint/no-explicit-any": 0,
       "@typescript-eslint/ban-ts-ignore ": 0,
-      "@typescript-eslint/no-unused-vars": 0
+      "@typescript-eslint/no-unused-vars": 0,
+      "no-restricted-imports": [
+        "error",
+        {
+          "paths": [
+            {
+              "name": "styled-components",
+              "message": "Please import from styled-components/macro."
+            }
+          ],
+          "patterns": [
+            "!styled-components/macro"
+          ]
+        }
+      ]
     },
     "overrides": [
       {

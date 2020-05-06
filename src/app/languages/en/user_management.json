@@ -1,7 +1,7 @@
 {
   "team": {
-    "edit_title": "Edit title",
-    "add_title": "Add title",
+    "edit_title": "Edit team name",
+    "add_title": "Name your team",
     "table_title": "Add Team Member"
   },
   "user": {
@@ -18,7 +18,8 @@
     "manage_account": "Manage Your Account",
     "logout": "Sign out",
     "privacy_link": "Privacy Policy and Terms",
-    "teams": "Teams",
+    "teams": "Manage Teams",
+    "teams_button": "Teams",
     "users": "Users",
     "add_user_btn": "Add User",
     "add_team_btn": "Add Team",

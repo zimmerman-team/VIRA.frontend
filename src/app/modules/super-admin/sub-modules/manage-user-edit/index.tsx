@@ -212,7 +212,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
       {/* ---------------------------------------------------------------------*/}
       {/* form */}
       <Grid item container xs={12} lg={12} direction="column">
-        {!isMobileWidth && <Box width="100%" height="30px" />}
+        {/*{!isMobileWidth && <Box width="100%" height="30px" />}*/}
 
         <SingleMultiLineTextField
           value={firstName}

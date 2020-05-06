@@ -22,7 +22,7 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => {
         <BreadCrumbs {...props.breadcrumbs} />
       </Grid>
 
-      <Box width="100%" height="30px" />
+      {/*<Box width="100%" height="30px" />*/}
 
       {/* ---------------------------------------------------------------------*/}
       {/* form */}

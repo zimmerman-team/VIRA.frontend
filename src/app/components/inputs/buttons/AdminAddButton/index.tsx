@@ -13,9 +13,27 @@ interface Props {
 }
 
 const BaseContainedButtonStyle = css`
-  padding: 12px 15px !important;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  //padding-top: 12px !important;
+  padding-right: 15px !important;
+  padding-left: 24px !important;
+  //padding-bottom: 12px !important;
   box-shadow: none !important;
-  border-radius: 2px !important;
+
+  width: 200px;
+  height: 50px;
+  border-radius: 2px;
+  background-color: #25baa4;
+
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.15px;
+  color: #ffffff;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -26,7 +44,9 @@ const BaseContainedButtonStyle = css`
   }
 
   svg {
-    margin-right: 5px;
+    width: 1.1em !important;
+    height: 1.1em !important;
+    margin-right: 24px;
   }
 
   & [class*='MuiButton-label'] {
@@ -35,7 +55,7 @@ const BaseContainedButtonStyle = css`
   }
 `;
 
-export const ContainedButton = (props: Props) => {
+export const AdminAddButton = (props: Props) => {
   const { text, disabled, ...other } = props;
 
   return (
@@ -48,10 +68,10 @@ export const ContainedButton = (props: Props) => {
       disableRipple
       {...other}
     >
-      <>
-        {props.icon && props.icon}
-        {text}
-      </>
+      {/*<React.Fragment>*/}
+      {props.icon && props.icon}
+      <div>{text}</div>
+      {/*</React.Fragment>*/}
     </Button>
   );
 };
