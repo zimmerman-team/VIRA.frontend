@@ -8,9 +8,12 @@ describe('project detail page', () => {
     // cy.visit('/projects/2017161');
 
     cy.findByTestId('sidebar-item-1').click();
-    cy.get('[data-testid=MuiDataTableBodyCell-3-0]').click();
 
-    cy.findByTestId('BreadCrumbs').should('exist');
+    cy.wait(5000);
+    cy.get('[data-testid=MuiDataTableBodyCell-3-0]')
+      .children()
+      .click();
+
     cy.findByTestId('project-title').should('exist');
 
     // report button

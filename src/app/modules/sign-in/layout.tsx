@@ -1,7 +1,7 @@
 import React from 'react';
 import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
-import { Container, Grid, Hidden } from '@material-ui/core';
+import { Container, Grid, Hidden, useMediaQuery } from '@material-ui/core';
 import { GroupImage } from 'app/assets/images/group';
 import { InputForm } from 'app/modules/sign-in/common/InputForm';
 import { LayoutModel } from 'app/modules/sign-in/models';
@@ -11,31 +11,17 @@ import { SignInDecoDesktop } from 'app/modules/sign-in/common/SignInDecoDesktop'
 // TODO: so a lot of code is repeated in recovery in sign in
 // TODO: Also the sign in flow should be outside of the generel wrapper component
 export const SignInLayout = (props: LayoutModel) => {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <Grid
       container
       css={`
+        padding: ${isMobileWidth && '0 36px'};
         overflow: hidden;
         height: 100vh;
       `}
     >
-      {/* Left side */}
-      {/*<Hidden smDown>
-        <Grid
-          item
-          lg={6}
-          md={6}
-          css={`
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: ${ProjectPalette.primary.main};
-          `}
-        >
-          <GroupImage />
-        </Grid>
-      </Hidden>*/}
       <Hidden smDown>
         <Grid container justify="flex-end" item sm={6} lg={6} md={6}>
           <div
@@ -65,6 +51,7 @@ export const SignInLayout = (props: LayoutModel) => {
           css={`
             z-index: 10;
             top: 10px;
+            left: 0;
             position: absolute;
           `}
         >

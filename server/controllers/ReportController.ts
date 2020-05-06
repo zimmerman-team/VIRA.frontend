@@ -9,6 +9,7 @@ import filter from 'lodash/filter';
 import findIndex from 'lodash/findIndex';
 import consts from '../config/consts';
 import { isArray } from '../utils/general';
+import { sdgMapModel, sdgmap } from '../utils/sdgmap';
 
 const ppToSdg = consts.ppToSdg;
 
@@ -53,12 +54,6 @@ export function getReport(req: any, res: any) {
         res(JSON.stringify({ status: 'error', message: err.message }));
       }
       if (report) {
-        const ppKeys = Object.keys(ppToSdg).map((key: string) => key);
-        const ppIndex = findIndex(
-          // @ts-ignore
-          Object.keys(ppToSdg).map((key: string) => ppToSdg[key]),
-          { actualPPName: report.policy_priority.name }
-        );
         const mapData = {
           mapMarkers: report.location
             ? [
@@ -78,14 +73,15 @@ export function getReport(req: any, res: any) {
             ),
           },
         };
+        const sdgVizData: sdgMapModel[] = sdgmap([report]);
         const reportData = {
           ...report._doc,
-          bubblePPKey: ppKeys[ppIndex],
         };
         res(
           JSON.stringify({
             report: reportData,
             mapData: mapData,
+            sdgVizData: sdgVizData,
           })
         );
       }

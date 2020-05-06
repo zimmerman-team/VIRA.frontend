@@ -220,7 +220,7 @@ export const formatTableDataForReport = (data: any): any[] => {
 };
 
 export const getBaseTableForReport = (data: any): TableModuleModel => {
-  const tableConfig = ReportListMock;
+  const tableConfig = { ...ReportListMock, data: [] };
 
   tableConfig.columns = [
     {

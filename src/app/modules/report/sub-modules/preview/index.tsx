@@ -1,6 +1,6 @@
 import React from 'react';
 import 'styled-components/macro';
-import { Grid } from '@material-ui/core';
+import { Grid, useMediaQuery } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import {
   OutcomesPropsModel,
@@ -9,7 +9,7 @@ import {
   ChallengesPlansPropsModel,
   BeneficiaryCountsModel,
 } from 'app/modules/report/model';
-import { PreviewCard } from './common/PreviewCard';
+import { PreviewCard, PreviewCardTextField } from './common/PreviewCard';
 
 type Props = {
   step2Enabled: boolean;
@@ -24,11 +24,13 @@ type Props = {
 
 export const PreviewLayout = (props: Props) => {
   const { t } = useTranslation();
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
-    <Grid container spacing={4}>
+    <>
       <Grid item xs={12} lg={6}>
         <PreviewCard
-          title="reports.form.textfield.title"
+          title="reports.form.textfield.preview_title"
           content={props.outcomesProps.title}
         />
       </Grid>
@@ -71,50 +73,102 @@ export const PreviewLayout = (props: Props) => {
         />
       </Grid>
       <Grid item xs={12} lg={12}>
-        <PreviewCard
-          title="reports.form.cards.key_outcomes"
-          tooltip="reports.form.cards.key_outcomes"
-          content={props.indicatorVerificationProps.keyOutcomes}
-        />
+        {isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.key_outcomes"
+            tooltip="reports.form.cards.key_outcomes"
+            content={props.indicatorVerificationProps.keyOutcomes}
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.key_outcomes"
+            tooltip="reports.form.cards.key_outcomes"
+            content={props.indicatorVerificationProps.keyOutcomes}
+          />
+        )}
       </Grid>
       <Grid item xs={12} lg={12}>
-        <PreviewCard
-          title="reports.form.cards.monitor"
-          tooltip="reports.form.cards.monitor_expl"
-          content={props.indicatorVerificationProps.monRepOutcomes}
-        />
+        {isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.monitor"
+            tooltip="reports.form.cards.monitor_expl"
+            content={props.indicatorVerificationProps.monRepOutcomes}
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.monitor"
+            tooltip="reports.form.cards.monitor_expl"
+            content={props.indicatorVerificationProps.monRepOutcomes}
+          />
+        )}
       </Grid>
       <Grid item xs={12} lg={12}>
-        <PreviewCard
-          title="reports.form.cards.key_implementation_challenges"
-          tooltip="reports.form.cards.key_implementation_challenges"
-          content={props.challengesPlansProps.keyImplChallenges}
-          explanation="reports.form.cards.key_implementation_challenges_expl"
-        />
+        {isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.key_implementation_challenges"
+            tooltip="reports.form.cards.key_implementation_challenges"
+            content={props.challengesPlansProps.keyImplChallenges}
+            explanation="reports.form.cards.key_implementation_challenges_expl"
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.key_implementation_challenges"
+            tooltip="reports.form.cards.key_implementation_challenges"
+            content={props.challengesPlansProps.keyImplChallenges}
+            explanation="reports.form.cards.key_implementation_challenges_expl"
+          />
+        )}
       </Grid>
       <Grid item xs={12} lg={12}>
-        <PreviewCard
-          title="reports.form.cards.other_project"
-          tooltip="reports.form.cards.other_project"
-          content={props.challengesPlansProps.otherProjOutObs}
-          explanation="reports.form.cards.other_project_expl"
-        />
+        {isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.other_project"
+            tooltip="reports.form.cards.other_project"
+            content={props.challengesPlansProps.otherProjOutObs}
+            explanation="reports.form.cards.other_project_expl"
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.other_project"
+            tooltip="reports.form.cards.other_project"
+            content={props.challengesPlansProps.otherProjOutObs}
+            explanation="reports.form.cards.other_project_expl"
+          />
+        )}
       </Grid>
       <Grid item xs={12} lg={12}>
-        <PreviewCard
-          title="reports.form.cards.future_plans"
-          tooltip="reports.form.cards.future_plans"
-          content={props.challengesPlansProps.futurePlans}
-          explanation="reports.form.cards.future_plans_expl"
-        />
+        {isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.future_plans"
+            tooltip="reports.form.cards.future_plans"
+            content={props.challengesPlansProps.futurePlans}
+            explanation="reports.form.cards.future_plans_expl"
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.future_plans"
+            tooltip="reports.form.cards.future_plans"
+            content={props.challengesPlansProps.futurePlans}
+            explanation="reports.form.cards.future_plans_expl"
+          />
+        )}
       </Grid>
       <Grid item xs={12} lg={12}>
-        <PreviewCard
-          title="reports.form.cards.other_comments"
-          tooltip="reports.form.cards.other_comments"
-          content={props.challengesPlansProps.otherComms}
-          explanation="reports.form.cards.other_comments_expl"
-        />
+        {isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.other_comments"
+            tooltip="reports.form.cards.other_comments"
+            content={props.challengesPlansProps.otherComms}
+            explanation="reports.form.cards.other_comments_expl"
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.other_comments"
+            tooltip="reports.form.cards.other_comments"
+            content={props.challengesPlansProps.otherComms}
+            explanation="reports.form.cards.other_comments_expl"
+          />
+        )}
       </Grid>
       <div
         css={`
@@ -122,6 +176,6 @@ export const PreviewLayout = (props: Props) => {
           height: 54px;
         `}
       />
-    </Grid>
+    </>
   );
 };

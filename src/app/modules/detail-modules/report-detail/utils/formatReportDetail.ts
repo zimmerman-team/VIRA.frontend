@@ -58,32 +58,6 @@ export function formatReportDetail(data: any) {
   const commitedVal: number =
     reportDetailRecord.total_target_beneficiaries_commited;
   const diffVal: number = targetVal - commitedVal;
-  const sdg = get(ppToSdg, `${[reportDetailRecord.bubblePPKey]}`, null);
-  const bubbleChartData = [];
-  if (sdg) {
-    bubbleChartData.push({
-      name: sdg.name,
-      color: sdg.color,
-      loc: reportDetailRecord.budget,
-      ppName: reportDetailRecord.bubblePPKey,
-      number: sdg.number,
-      insContribution: reportDetailRecord.insContribution,
-      targetValue: reportDetailRecord.total_target_beneficiaries,
-      targetPercentage:
-        (reportDetailRecord.total_target_beneficiaries_commited /
-          reportDetailRecord.total_target_beneficiaries) *
-        100,
-    });
-    Object.keys(ppToSdg).forEach((ppKey: string) => {
-      if (get(ppToSdg, `[${ppKey}].name`, '') !== sdg.name) {
-        bubbleChartData.push({
-          ...get(ppToSdg, `[${ppKey}]`, {}),
-          ppName: ppKey,
-          opacity: 0.2,
-        });
-      }
-    });
-  }
   const ppNamePath = get(
     find(policyPriorities, {
       value: reportDetailRecord.policy_priority.name,
@@ -162,7 +136,7 @@ export function formatReportDetail(data: any) {
       },
     ],
     budget: reportDetailRecord.budget,
-    bubbleChartData,
+    bubbleChartData: data.sdgVizData,
     mapData: data.mapData,
   };
 }

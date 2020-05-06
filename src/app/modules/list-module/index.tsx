@@ -14,7 +14,7 @@ import {
   getBaseTableForReport,
 } from 'app/modules/list-module/utils';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 /* utils */
 import get from 'lodash/get';
 import 'styled-components/macro';
@@ -25,6 +25,7 @@ import {
   TabPanel,
 } from './common/TabPanelProps';
 import { css } from 'styled-components/macro';
+import { PageLoader } from '../common/page-loader';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
@@ -38,6 +39,7 @@ type ListModuleParams = {
 export const ListModule = (props: ListModuleParams) => {
   const { id } = useParams();
   const { t } = useTranslation();
+  const history = useHistory();
   // set state
   const [baseTableForProject, setBaseTableForProject] = React.useState(
     getBaseTableForProject()
@@ -65,6 +67,12 @@ export const ListModule = (props: ListModuleParams) => {
   );
   const allReportsData = useStoreState(state => state.allReports.data);
   const reduxLng = useStoreState(state => state.syncVariables.lng);
+  const loading = useStoreState(
+    state =>
+      state.allProjects.loading ||
+      state.allOrganisations.loading ||
+      state.allReports.loading
+  );
 
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
@@ -135,10 +143,14 @@ export const ListModule = (props: ListModuleParams) => {
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    history.push(`/list/${newValue}`);
   };
 
   return (
     <React.Fragment>
+      {/* loader */}
+      {loading && <PageLoader />}
+
       {/* tab navigation */}
       <Grid item xs={12} justify="flex-end">
         <Tabs

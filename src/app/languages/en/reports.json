@@ -35,6 +35,7 @@
     },
     "textfield": {
       "title": "Please provide a title for your report",
+      "preview_title": "Title",
       "location": "Add location",
       "location_expl": "In which of the following geographical locations will the project be implemented",
       "exact_location": "Select exact location",

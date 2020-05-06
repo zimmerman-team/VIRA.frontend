@@ -40,7 +40,7 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
           color: ${ProjectPalette.common.white};
         `}
       >
-        {t(`charts.items.${props.name}`)}
+        {t(props.name)}
       </Grid>
       <Grid item xs={12} lg={6}>
         <React.Fragment>

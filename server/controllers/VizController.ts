@@ -1,19 +1,15 @@
-import get from 'lodash/get';
 import find from 'lodash/find';
-import minBy from 'lodash/minBy';
 import sumBy from 'lodash/sumBy';
 import sortBy from 'lodash/sortBy';
 import filter from 'lodash/filter';
 import groupBy from 'lodash/groupBy';
-import consts from '../config/consts';
 import findIndex from 'lodash/findIndex';
 const Report = require('../models/report');
 import { isArray } from '../utils/general';
 import { ProjectPalette } from '../../src/app/theme';
 import { countryFeaturesData } from '../config/countryFeatures';
 import { policyPriorities } from '../../src/app/modules/report/sub-modules/policy-priorities/mock';
-
-const ppToSdg = consts.ppToSdg;
+import { sdgMapModel, sdgmap } from '../utils/sdgmap';
 
 export function getPolicyPriorityBarChartAPI(req: any, res: any) {
   Report.find({})
@@ -131,7 +127,7 @@ export function getPolicyPriorityBarChart(req: any, res: any) {
                       (totCommitted / totTarget) *
                       100
                     ).toFixed(2)}%)`,
-                    value: totCommitted,
+                    value: totTarget,
                     percentage: ((totCommitted / totTarget) * 100).toFixed(2),
                   },
                   {
@@ -247,43 +243,7 @@ export function getSDGBubbleChart(req: any, res: any) {
     .populate('policy_priority')
     .exec((err: any, rawData: any) => {
       const data = filter(rawData, { isDraft: false });
-      let result: any[] = [];
-      Object.keys(ppToSdg).forEach(key => {
-        const sdg = get(ppToSdg, `${[key]}`, null);
-        const pp = filter(
-          data,
-          (item: any) => item.policy_priority.name === sdg.actualPPName
-        );
-        if (pp.length > 0) {
-          const totTarget = sumBy(pp, 'total_target_beneficiaries');
-          const totCommitted = sumBy(pp, 'total_target_beneficiaries_commited');
-          const totBudget = sumBy(pp, 'budget');
-          const totInsingerCommitment = sumBy(pp, 'insContribution');
-          result.push({
-            ppName: key,
-            name: sdg.name,
-            color: sdg.color,
-            number: sdg.number,
-            targetValue: totTarget,
-            insContribution: totInsingerCommitment,
-            targetPercentage: (totCommitted / totTarget) * 100,
-            loc: totBudget,
-          });
-        } else {
-          result.push({
-            ppName: key,
-            name: sdg.name,
-            color: sdg.color,
-            number: sdg.number,
-            opacity: 0.2,
-          });
-        }
-      });
-      const minValue = get(minBy(result, 'loc'), 'loc', 0);
-      result = result.map((r: any) => ({
-        ...r,
-        loc: !r.loc ? minValue : r.loc,
-      }));
+      const result: sdgMapModel[] = sdgmap(data);
       res(JSON.stringify(sortBy(result, 'number')));
     });
   // }

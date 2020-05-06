@@ -12,6 +12,7 @@ import { PasswordTextField } from 'app/components/inputs/textfields/PasswordText
 import { FormSingleLineField } from 'app/components/inputs/textfields/FormSingleLineField';
 import { Grid, Typography, Box } from '@material-ui/core/';
 import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from '@material-ui/core';
 
 const Link = styled(RouteLink)`
   color: #d7d8d9;
@@ -34,6 +35,7 @@ const FormStyle = css`
 `;
 
 export const InputForm = (props: LayoutModel) => {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const { t, i18n } = useTranslation();
 
   return (
@@ -42,10 +44,14 @@ export const InputForm = (props: LayoutModel) => {
         <Typography data-cy="sign-in-title" variant="h3" css={``}>
           {t('landing.sign_in.title')}
         </Typography>
+        <Box width="100%" height="16px" />
       </Grid>
 
       <Grid item xs={12} lg={12}>
         <FormSingleLineField
+          css={`
+            margin-bottom: 20px !important;
+          `}
           fullWidth
           label={t('landing.sign_in.email')}
           id="login-email"
@@ -84,8 +90,12 @@ export const InputForm = (props: LayoutModel) => {
         `}
       >
         <Grid item xs={6}>
+          {isMobileWidth && <Box height="50px" width="100%" />}
           <ContainedButton
             text={t('landing.sign_in.button')}
+            css={`
+              max-width: ${isMobileWidth ? '132px' : 'unset'};
+            `}
             data-cy="login-button"
             onClick={() => props.signInAction()}
             disabled={props.email === '' || props.password === ''}
