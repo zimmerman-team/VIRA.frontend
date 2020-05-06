@@ -1,11 +1,13 @@
 /// <reference types="Cypress" />
-describe('project detail page', () => {
-  it('test project detail page', () => {
+describe('generate report page', () => {
+  it('test generate report page', () => {
     // authenticate
     cy.auth();
 
     cy.findByTestId('sidebar-item-1').click();
-    cy.get('[data-testid=MuiDataTableBodyCell-3-0]').click();
+    cy.get('[data-testid=MuiDataTableBodyCell-3-0]')
+      .children()
+      .click();
 
     cy.findByTestId('project-title').should('exist');
 
@@ -33,9 +35,10 @@ describe('project detail page', () => {
     cy.get('.react-geocoder > .MuiInputBase-root > .MuiInputBase-input').type(
       'Afghanistan {enter}'
     );
+    cy.get('.react-geocoder-results > :nth-child(1)').click();
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton4-sc-7nwiqa-5').click();
+    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
 
     cy.get('#autocomplete-countries').click();
     cy.get('#autocomplete-countries').type('Refugees');
@@ -45,13 +48,13 @@ describe('project detail page', () => {
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(3000);
+      .type(1);
 
     cy.findByTestId('insinger-contribution-field')
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(1000);
+      .type(1);
 
     cy.findByTestId('target-beneficiaries-field')
       .should('exist')
@@ -78,7 +81,7 @@ describe('project detail page', () => {
       .type(25);
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton4-sc-7nwiqa-5').click();
+    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -93,7 +96,7 @@ describe('project detail page', () => {
       .type('Lorem ipsum dolor simet text area 2');
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton4-sc-7nwiqa-5').click();
+    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -120,6 +123,6 @@ describe('project detail page', () => {
       .type('Lorem ipsum dolor simet text area 4');
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton4-sc-7nwiqa-5').click();
+    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
   });
 });

@@ -5,7 +5,9 @@ describe('grantee detail page', () => {
     cy.auth();
 
     cy.findByTestId('sidebar-item-2').click();
-    cy.get('[data-testid=MuiDataTableBodyCell-0-0]').click();
+    cy.get('[data-testid=MuiDataTableBodyCell-0-0]')
+      .children()
+      .click();
 
     cy.findByTestId('grantee-detail-title').should('exist');
     // cy.findByTestId('grantee-detail-description').should('exist');
