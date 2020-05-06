@@ -216,7 +216,7 @@ export const theme = createMuiTheme({
       root: {
         width: 'initial',
         minWidth: 'initial!important',
-        marginLeft: '50px!important',
+        // marginLeft: '50px!important',
         // marginRight: '24px!important',
         minHeight: 'initial!important',
         padding: '0px 0px 6px 0px',

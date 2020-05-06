@@ -24,6 +24,7 @@ import {
   a11yProps,
   TabPanel,
 } from './common/TabPanelProps';
+import { css } from 'styled-components/macro';
 import { PageLoader } from '../common/page-loader';
 
 type ListModuleParams = {
@@ -151,12 +152,18 @@ export const ListModule = (props: ListModuleParams) => {
       {loading && <PageLoader />}
 
       {/* tab navigation */}
-      <Grid container item lg={12} justify="flex-end">
+      <Grid item xs={12} justify="flex-end">
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
           data-cy="list-tabs-container"
+          css={`
+            width: 100%;
+            [class*='MuiTabs-flexContainer'] {
+              justify-content: flex-end;
+            }
+          `}
         >
           {!props.hideProjects && (
             <Tab
@@ -191,7 +198,7 @@ export const ListModule = (props: ListModuleParams) => {
       </Grid>
 
       {/* tab content */}
-      <Grid item lg={12}>
+      <Grid item xs={12}>
         <TabPanel data-cy="projects-panel" value={value} index={0}>
           {/* projects table */}
           <TableModule {...baseTableForProject} />
@@ -204,7 +211,7 @@ export const ListModule = (props: ListModuleParams) => {
 
         <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
-          <TableModule {...baseTableForReport} cssVariant="reportsVariant" />
+          <TableModule {...baseTableForReport} />
         </TabPanel>
       </Grid>
     </React.Fragment>
