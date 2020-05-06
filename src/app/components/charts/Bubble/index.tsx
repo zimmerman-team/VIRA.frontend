@@ -95,6 +95,7 @@ export function BubbleChart(props: Props) {
                 colorBy={v => v.color}
                 nodeComponent={({ node, style, handlers }) => {
                   if (style.r <= 0) return null;
+                  const hasData = !node.data.opacity || node.data.opacity === 1;
                   return (
                     <div
                       id={(node.data && node.data.id
@@ -114,15 +115,11 @@ export function BubbleChart(props: Props) {
                         borderRadius: '50%',
                         opacity: node.data.opacity || 1,
                         color: ProjectPalette.common.white,
-                        cursor:
-                          node.data.opacity === undefined
-                            ? 'pointer'
-                            : 'initial',
+                        cursor: hasData ? 'pointer' : 'initial',
                       }}
                       {...handlers}
                       onClick={_e =>
-                        node.data.opacity === undefined &&
-                        props.setSelectedBubble(node.id)
+                        hasData && props.setSelectedBubble(node.id)
                       }
                     >
                       <svg
@@ -202,7 +199,7 @@ export function BubbleChart(props: Props) {
             </ChartContainer>
             {selectedBubbleObj && (
               <BubbleInfoBlock
-                name={selectedBubbleObj.ppName}
+                name={selectedBubbleObj.name}
                 targetValue={selectedBubbleObj.targetValue}
                 budgetValue={selectedBubbleObj.loc}
                 targetPercentage={selectedBubbleObj.targetPercentage}

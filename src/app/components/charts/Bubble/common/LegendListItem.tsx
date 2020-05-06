@@ -15,6 +15,7 @@ export type LegendListItemProps = {
 
 export function LegendListItem(props: LegendListItemProps) {
   const { t } = useTranslation();
+  const hasData = !props.opacity || props.opacity === 1;
   return (
     <li
       css={`
@@ -24,11 +25,9 @@ export function LegendListItem(props: LegendListItemProps) {
         align-items: center;
         margin-bottom: 16px;
         opacity: ${props.opacity || 1};
-        cursor: ${!props.opacity ? 'pointer' : 'default'};
+        cursor: ${hasData ? 'pointer' : 'default'};
       `}
-      onClick={() =>
-        props.onClick && !props.opacity && props.onClick(props.name)
-      }
+      onClick={() => props.onClick && hasData && props.onClick(props.name)}
     >
       <div
         css={`
