@@ -17,6 +17,7 @@ export const TabStyle = css`
   background-color: white;
   text-transform: capitalize;
   max-width: 140px;
+  margin-left: 14px;
 `;
 
 export function TabPanel(props: TabPanelProps) {
@@ -28,9 +29,16 @@ export function TabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      css={`
+        overflow-x: scroll;
+      `}
       {...other}
     >
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && (
+        <Box style={{ padding: 0 }} p={3}>
+          {children}
+        </Box>
+      )}
     </Typography>
   );
 }

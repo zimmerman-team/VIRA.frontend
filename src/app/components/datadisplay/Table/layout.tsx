@@ -6,10 +6,14 @@ import { TableLayoutModel } from 'app/components/datadisplay/Table/model';
 import { changeTableRowColor } from 'app/components/datadisplay/Table/helpers';
 import { useTranslation } from 'react-i18next';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { standard } from 'app/components/datadisplay/Table/style/standard';
+import {
+  mobileStyle,
+  standard,
+} from 'app/components/datadisplay/Table/style/standard';
 import { variant9 } from 'app/components/datadisplay/Table/style/variant9';
 import { variant10 } from 'app/components/datadisplay/Table/style/variant10';
 import { reportsVariant } from 'app/components/datadisplay/Table/style/reportsVariant';
+import { useMediaQuery } from '@material-ui/core';
 
 function setTableVariant(cssVariant: string) {
   switch (cssVariant) {
@@ -26,11 +30,13 @@ function setTableVariant(cssVariant: string) {
 
 export const TableLayout = (props: TableLayoutModel) => {
   const { t } = useTranslation();
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   React.useEffect(() => {
     if (props.changeTableRowColor) {
       changeTableRowColor(props.changeTableRowColor);
     }
   }, [props.changeTableRowColor]);
+
   return (
     <MuiThemeProvider theme={setTableVariant(props.cssVariant)}>
       <MUIDataTable
@@ -40,6 +46,7 @@ export const TableLayout = (props: TableLayoutModel) => {
         columns={props.columns}
         data-cy="mui-data-table"
         css={`
+          ${isMobileWidth && mobileStyle}
           && {
             box-shadow: none;
             border-color: white;

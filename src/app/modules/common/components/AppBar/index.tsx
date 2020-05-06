@@ -74,6 +74,8 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
         })}
         css={`
           box-shadow: none !important;
+          width: 100vw;
+          left: 0 !important;
         `}
       >
         <Toolbar
