@@ -41,6 +41,9 @@ const styles: any = {
   `,
   infoText: css`
     bottom: 0;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
   `,
   spacer: css`
     width: 100%;

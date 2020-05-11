@@ -1,5 +1,5 @@
 import React from 'react';
-import 'styled-components/macro';
+import { css } from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography, Box, Hidden } from '@material-ui/core';
 import { ReportModuleRoutes } from 'app/modules/report/routes';
@@ -10,11 +10,19 @@ import { HorizontalStepper } from 'app/components/navigation/HorizontalStepper';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { Dialog } from 'app/components/surfaces/Dialog';
 
+const ReportTitleStyle = css`
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e8e8e8;
+`;
+
 export function CreateReportLayout(props: CreateReportLayoutModel) {
   const { t } = useTranslation();
   return (
     <React.Fragment>
-      {/* <Grid item container xs={12} lg={12} spacing={4}> */}
       {props.loading && <PageLoader />}
       <Dialog {...props.dialogProps} />
       <Dialog {...props.delDialogProps} />
@@ -27,17 +35,7 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
       {/* ---------------------------------------------------------------------*/}
       {/* title fragment */}
       <Grid item container lg={12} direction="column">
-        <Typography
-          data-cy="report-title"
-          css={`
-            color: rgba(0, 0, 0, 0.85);
-            font-size: 20px;
-            font-weight: 500;
-            line-height: 28px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e8e8e8;
-          `}
-        >
+        <Typography data-cy="report-title" css={ReportTitleStyle}>
           {t('reports.form.title')}
         </Typography>
       </Grid>
@@ -49,7 +47,9 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
         item
         xs={12}
         lg={12}
-        css={{ overflowX: 'scroll' }}
+        css={`
+          overflow-x: scroll;
+        `}
       >
         <HorizontalStepper
           steps={props.tabs}
@@ -58,7 +58,7 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
         />
       </Grid>
       <Hidden smDown>
-        <Box width="100%" height="40px" />
+        <Box width="100%" height="20px" />
       </Hidden>
 
       <ReportModuleRoutes
@@ -84,7 +84,6 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
         showDeleteBtn={props.showDeleteBtn}
         deleteReport={props.deleteReport}
       />
-      {/* </Grid> */}
     </React.Fragment>
   );
 }
