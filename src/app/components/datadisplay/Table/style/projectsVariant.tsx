@@ -2,7 +2,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ProjectPalette, TextStyle } from 'app/theme';
 
-export const variant9 = createMuiTheme({
+export const projectsVariant = createMuiTheme({
   overrides: {
     MuiSvgIcon: {
       root: {
@@ -78,7 +78,7 @@ export const variant9 = createMuiTheme({
         border: 'solid 1px rgba(198, 198, 198, 0.2)',
       },
     },
-    /* MuiTableHead: {
+    /*MuiTableHead: {
       root: {
         '& * > th': {
           height: '0',

@@ -33,6 +33,7 @@
     "jss": "^10.0.4",
     "jss-preset-default": "^10.0.4",
     "lodash": "^4.17.15",
+    "material-table": "^1.57.2",
     "mongoose": "^5.9.2",
     "mongoose-auto-increment": "^5.0.1",
     "mui-datatables": "^2.14.0",

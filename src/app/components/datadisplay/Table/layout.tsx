@@ -14,6 +14,7 @@ import { variant9 } from 'app/components/datadisplay/Table/style/variant9';
 import { variant10 } from 'app/components/datadisplay/Table/style/variant10';
 import { reportsVariant } from 'app/components/datadisplay/Table/style/reportsVariant';
 import { useMediaQuery } from '@material-ui/core';
+import { projectsVariant } from 'app/components/datadisplay/Table/style/projectsVariant';
 
 function setTableVariant(cssVariant: string) {
   switch (cssVariant) {
@@ -23,6 +24,8 @@ function setTableVariant(cssVariant: string) {
       return variant10;
     case 'reportsVariant':
       return reportsVariant;
+    case 'projectsVariant':
+      return projectsVariant;
     default:
       return standard;
   }
