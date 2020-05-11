@@ -26,14 +26,13 @@ const style: any[] = [
   // title style
   css`
     font-size: 34px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.25px;
     line-height: normal;
 
     @media (max-width: 768px) {
-      font-size: 25px;
+      font-size: 20px;
       line-height: 1.3;
-      font-weight: 600;
     }
   `,
   // id style
