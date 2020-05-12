@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { css } from 'styled-components/macro';
 import { IconDashBoard } from 'app/modules/common/icons/IconDashBoard';
