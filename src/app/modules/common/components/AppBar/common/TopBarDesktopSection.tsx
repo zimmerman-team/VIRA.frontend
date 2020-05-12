@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import { css } from 'styled-components/macro';
 import SearchIcon from '@material-ui/icons/Search';

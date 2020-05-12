@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { css } from 'styled-components/macro';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
