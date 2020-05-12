@@ -29,6 +29,7 @@
     "config",
     ".storybook",
     "node_modules",
+    "node_modules/@emotion",
     "**/*.spec.ts",
     "@nivo/bar",
     ".vscode",

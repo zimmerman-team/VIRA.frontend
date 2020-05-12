@@ -146,9 +146,9 @@
     "codecrumbs": "codecrumbs -e src/index.tsx -d src -p 1234 ",
     "start-back": "nodemon --watch 'server/' --ignore 'server/__test__' --exec ts-node --project 'nodetsconfig.json' server/server.ts",
     "start-fullstack": "yarn start & yarn start-back",
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test-api": "jest --detectOpenHandles --runTestsByPath ./server/__test__/*.spec.ts",
     "start-back-test": "ts-node --project 'nodetsconfig.json' server/server",
@@ -165,6 +165,19 @@
     "styledComponents": {
       "pure": true
     }
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      [
+        "babel-plugin-styled-components",
+        {
+          "ssr": false
+        }
+      ]
+    ]
   },
   "eslintConfig": {
     "settings": {
