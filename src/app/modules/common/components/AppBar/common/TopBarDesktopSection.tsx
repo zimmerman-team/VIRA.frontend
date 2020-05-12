@@ -212,7 +212,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
         />
 
         <div css={DutchLangBtnStyle} onClick={() => changeLanguage('nl')}>
-          NL
+          NLs
         </div>
       </div>
     </div>
