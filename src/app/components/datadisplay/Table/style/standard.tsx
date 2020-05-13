@@ -85,4 +85,4 @@ export const mobileStyle: any =
   '[aria-label*="Search"]{ display: none; } ' + //No search functionality on mobile
   '[aria-label*="Next Page"]{ padding: 0 !important;}' + //Amending the bottom toolbar
   '[aria-label*="Previous Page"]{ padding: 0 !important; } ' +
-  '[class *= "MuiTableCell-footer"]{padding-left: 0 !important; float: left;}';
+  '[class *= "MuiTableCell-footer"]{padding-left: 0 !important; float: left; padding-top: 10px; position: absolute;}';
