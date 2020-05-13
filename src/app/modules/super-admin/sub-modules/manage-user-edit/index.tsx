@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 // aboslute
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { RadioButtonsGroup } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
-import { Select } from 'app/components/inputs/select';
+import { TeamSelect } from 'app/components/inputs/select';
 import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { PageLoader } from 'app/modules/common/page-loader';
@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 // direct
 import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
+import { TeamSelectNew } from 'app/components/inputs/select-team-new';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {
@@ -266,12 +267,19 @@ function ManageUserEditF(props: ManageUserEditModel) {
             </Grid>
             {props.mode === 'add' && (
               <Grid item xs={12} md={12} lg={6} xl={6}>
-                <Select
+                <TeamSelect
                   title={t('user_management.user.select_team')}
                   selectedItem={group}
                   items={props.form.selectOptions}
                   onChange={(e: any) => setGroup(e.target.value)}
                 />
+
+                {/*<TeamSelectNew
+                  title={t('user_management.user.select_team')}
+                  selectedItem={group}
+                  items={props.form.selectOptions}
+                  onChange={(e: any) => setGroup(e.target.value)}
+                />*/}
               </Grid>
             )}
           </Grid>

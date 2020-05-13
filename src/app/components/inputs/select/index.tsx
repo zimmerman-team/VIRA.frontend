@@ -3,10 +3,11 @@
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import MuiSelect from '@material-ui/core/Select';
+import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { SelectItemModel } from 'app/components/inputs/select/model';
 import React from 'react';
+import { css } from 'styled-components/macro';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export function Select(props: any) {
+export function TeamSelect(props: any) {
   const classes = useStyles();
   const inputLabel = React.useRef<HTMLLabelElement>(null);
   const [labelWidth, setLabelWidth] = React.useState(150);
@@ -27,10 +28,16 @@ export function Select(props: any) {
 
   return (
     <FormControl variant="outlined" className={classes.formControl}>
-      <InputLabel ref={inputLabel} id="select-outlined-label">
+      <InputLabel
+        ref={inputLabel}
+        id="select-outlined-label"
+        css={`
+          outline: 1px solid red;
+        `}
+      >
         {props.title}
       </InputLabel>
-      <MuiSelect
+      <Select
         id="select-outlined"
         labelWidth={labelWidth}
         onChange={props.onChange}
@@ -45,7 +52,7 @@ export function Select(props: any) {
             {item.label}
           </MenuItem>
         ))}
-      </MuiSelect>
+      </Select>
     </FormControl>
   );
 }
