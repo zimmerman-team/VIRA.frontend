@@ -171,6 +171,7 @@
       "react-app"
     ],
     "plugins": [
+      "macros",
       [
         "babel-plugin-styled-components",
         {
