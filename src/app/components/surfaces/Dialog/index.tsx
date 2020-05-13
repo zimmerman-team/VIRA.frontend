@@ -33,10 +33,23 @@ export const Dialog = (props: DialogProps) => {
       onClose={handleClose}
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description"
+      css={`
+        && {
+          .MuiBackdrop-root {
+            background-color: transparent !important;
+          }
+          @media (min-width: 768px) {
+            .MuiDialog-paper {
+              padding: 24px 48px;
+            }
+          }
+        }
+      `}
     >
       <DialogTitle
         css={`
           font-size: 20px;
+          text-align: center;
         `}
         id="dialog-title"
       >
