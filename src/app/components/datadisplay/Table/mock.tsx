@@ -1055,6 +1055,7 @@ export const projectsTableConfig: TableModuleModel = {
     responsive: 'scrollFullHeight',
     filterType: 'checkbox',
     selectableRows: 'none',
+    fixedHeaderOptions: { xAxis: false, yAxis: false },
   },
   columnsCell: ['', '', '', 'LinkCellModule', '', ''],
 };

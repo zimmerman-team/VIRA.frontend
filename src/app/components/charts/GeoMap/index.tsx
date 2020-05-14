@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-undef */
 /* eslint-disable no-shadow */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // @ts-nocheck
@@ -14,10 +16,12 @@ import ReactMapGL, {
   PointerEvent,
   InteractiveMap,
 } from 'react-map-gl';
+import { useMediaQuery } from '@material-ui/core';
 import { MapPin } from 'app/components/charts/GeoMap/common/MapPin';
-import mapStyle from 'app/components/charts/GeoMap/common/style/style.json';
+// import mapStyle from 'app/components/charts/GeoMap/common/style/style.json';
 import mapStyle2 from 'app/components/charts/GeoMap/common/style/style2.json';
 import geoJSON from 'app/components/charts/GeoMap/common/style/geojson.json';
+import { getRandomKey } from 'app/utils/getRandomKey';
 import { LocationModel } from 'app/modules/report/model';
 import { countries } from 'app/assets/data/countries';
 import { Input } from 'app/components/inputs/textfields/PasswordTextField';
@@ -26,7 +30,6 @@ import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 import Cluster from './common/MapCluster';
 import { ClusterElement } from './common/MapCluster/ClusterElement';
 import { MapControls } from './common/MapControls';
-import { getRandomKey } from 'app/utils/getRandomKey';
 
 type Props = {
   data?: any;
@@ -42,15 +45,24 @@ export function GeoMap(props: Props) {
   const [maxPinValue, setMaxPinValue] = React.useState(
     Math.max(...get(props.data, 'mapMarkers', []).map((m: any) => m.value))
   );
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const containerRef: React.RefObject<HTMLDivElement> = React.createRef();
   const [viewport, setViewport] = React.useState({
-    width: props.width || 400,
-    height: props.height || 557,
+    width: props.width || 0,
+    height: props.height || (isMobileWidth ? 200 : 557),
     latitude: 13,
     longitude: 25,
-    zoom: 1,
-    minZoom: 1,
+    zoom: props.noData ? 1 : isMobileWidth ? 0 : 1,
+    minZoom: 0,
   });
+
+  React.useEffect(() => {
+    setViewport(prev => ({
+      ...prev,
+      zoom: props.noData ? 1 : isMobileWidth ? 0 : 1,
+      height: props.height || (isMobileWidth ? 200 : 557),
+    }));
+  }, [isMobileWidth]);
 
   React.useEffect(() => {
     setViewport(prev => ({
@@ -201,7 +213,7 @@ export function GeoMap(props: Props) {
         ref={mapRef}
         {...viewport}
         onViewportChange={setViewport}
-        mapStyle={props.noData ? mapStyle2 : mapStyle}
+        mapStyle={props.noData ? mapStyle2 : 'mapbox://styles/mapbox/light-v10'}
         onClick={props.noData ? onMapClick : undefined}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       >

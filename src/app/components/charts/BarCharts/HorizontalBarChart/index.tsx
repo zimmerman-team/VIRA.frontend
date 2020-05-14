@@ -1,7 +1,6 @@
-import 'styled-components/macro';
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import get from 'lodash/get';
 import { colorScheme } from 'app/components/charts/BarCharts/common/colorUtil';
 import { useMediaQuery, Typography } from '@material-ui/core';
@@ -22,6 +21,7 @@ import { LegendControl } from 'app/components/charts/BarCharts/common/LegendCont
 import find from 'lodash/find';
 import filter from 'lodash/filter';
 import { useTranslation } from 'react-i18next';
+import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll';
 
 // TODO:
 //  - Find a way to implement the colouring.
@@ -243,8 +243,8 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
           )}
           <div
             css={`
-              height: ${props.values.length > 1 ? '380px' : '130px'};
               width: 100%;
+              height: ${props.values.length > 1 ? 350 : 100}px;
             `}
           >
             <BarChart
@@ -279,7 +279,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
               axisBottom={showBar ? barModel.axisBottom : null}
             />
           </div>
-          {props.chartLegends && (
+          {!isMobileWidth && props.chartLegends && (
             <Legends>
               {props.chartLegends.map(legend => (
                 <LegendControl
@@ -296,5 +296,40 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
     return <NoDataMessage>No data found</NoDataMessage>;
   }
 
-  return <ChartContainer ref={containerRef}>{renderBarchart()}</ChartContainer>;
+  return (
+    <React.Fragment>
+      <MobileVerticalScroll>
+        <ChartContainer
+          ref={containerRef}
+          css={`
+            height: ${props.values.length > 1 ? '390px' : '150px'};
+            @media (max-width: 600px) {
+              width: 200vw;
+            }
+          `}
+        >
+          {renderBarchart()}
+        </ChartContainer>
+      </MobileVerticalScroll>
+      {isMobileWidth && props.chartLegends && (
+        <React.Fragment>
+          <div
+            css={`
+              width: 100%;
+              height: 16px;
+            `}
+          />
+          <Legends>
+            {props.chartLegends.map(legend => (
+              <LegendControl
+                {...legend}
+                key={legend.label}
+                onClick={props.onChartLegendClick}
+              />
+            ))}
+          </Legends>
+        </React.Fragment>
+      )}
+    </React.Fragment>
+  );
 }

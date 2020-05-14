@@ -136,7 +136,7 @@ export const ProjectTypography: TypographyOptions = {
   },
   h5: {
     fontFamily: TextStyle.fontFamily,
-    fontSize: `${1.25}rem`,
+    fontSize: `${1.145}rem`,
     fontWeight: TextStyle.fontWeightMedium,
     lineHeight: '1.5',
   },

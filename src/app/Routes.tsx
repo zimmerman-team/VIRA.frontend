@@ -112,6 +112,7 @@ export function MainRoutes() {
         {redirectUnAuth(ListModule, storeUser, {
           tabNav: TabNavMock,
           loadData: true,
+          listPage: true,
         })}
       </Route>
 
