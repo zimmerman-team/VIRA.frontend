@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { css } from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
