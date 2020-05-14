@@ -122,7 +122,7 @@ export function Viztabs(props: Props) {
       </Grid>
 
       {/* tab content */}
-      <Grid item lg={12}>
+      <Grid item xs={12}>
         <TabPanel value={value} index={0} data-cy="prio-panel">
           {/* Priority Area horizontal bar chart */}
           <HorizontalBarChart

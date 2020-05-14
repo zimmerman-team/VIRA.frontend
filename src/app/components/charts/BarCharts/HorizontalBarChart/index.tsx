@@ -241,37 +241,44 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
               <TopAxisValue>{maxBudgetVal}€</TopAxisValue>
             </TopAxis>
           )}
-          <BarChart
-            {...barModel}
-            data={props.values}
-            barComponent={(bProps: any) => (
-              <BarComponent
-                {...bProps}
-                showBar={showBar}
-                allData={props.values}
-                containerWidth={containerWidth}
-                showBudgetLine={showBudgetLine}
-                showContribLine={showContribLine}
-              />
-            )}
-            colors={colorScheme(props.colors)}
-            tooltip={(tProps: any) => (
-              <ChartTooltip
-                {...tProps}
-                maxValue={props.maxValue}
-                items={filter(tProps.items, (item: ChartTooltipItemModel) => {
-                  const foundLegend = find(
-                    props.chartLegends,
-                    (c: BarChartLegendModel) =>
-                      (item.label as string).indexOf(c.label) > -1
-                  );
-                  return foundLegend ? foundLegend.selected : true;
-                })}
-              />
-            )}
-            maxValue={props.maxValue || 'auto'}
-            axisBottom={showBar ? barModel.axisBottom : null}
-          />
+          <div
+            css={`
+              height: ${props.values.length > 1 ? '380px' : '130px'};
+              width: 100%;
+            `}
+          >
+            <BarChart
+              {...barModel}
+              data={props.values}
+              barComponent={(bProps: any) => (
+                <BarComponent
+                  {...bProps}
+                  showBar={showBar}
+                  allData={props.values}
+                  containerWidth={containerWidth}
+                  showBudgetLine={showBudgetLine}
+                  showContribLine={showContribLine}
+                />
+              )}
+              colors={colorScheme(props.colors)}
+              tooltip={(tProps: any) => (
+                <ChartTooltip
+                  {...tProps}
+                  maxValue={props.maxValue}
+                  items={filter(tProps.items, (item: ChartTooltipItemModel) => {
+                    const foundLegend = find(
+                      props.chartLegends,
+                      (c: BarChartLegendModel) =>
+                        (item.label as string).indexOf(c.label) > -1
+                    );
+                    return foundLegend ? foundLegend.selected : true;
+                  })}
+                />
+              )}
+              maxValue={props.maxValue || 'auto'}
+              axisBottom={showBar ? barModel.axisBottom : null}
+            />
+          </div>
           {props.chartLegends && (
             <Legends>
               {props.chartLegends.map(legend => (
@@ -289,14 +296,5 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
     return <NoDataMessage>No data found</NoDataMessage>;
   }
 
-  return (
-    <ChartContainer
-      ref={containerRef}
-      css={`
-        height: ${props.values.length > 1 ? '380px' : '130px'};
-      `}
-    >
-      {renderBarchart()}
-    </ChartContainer>
-  );
+  return <ChartContainer ref={containerRef}>{renderBarchart()}</ChartContainer>;
 }
