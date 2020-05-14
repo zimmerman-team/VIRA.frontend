@@ -147,9 +147,9 @@ function CreateReportFunc(props: any) {
         `}
       >
         <CheckIcon
-          htmlColor="#30c2b0"
+          htmlColor="#05C985"
           css={`
-            font-size: 6rem;
+            font-size: 5rem;
           `}
         />
       </div>

@@ -29,13 +29,13 @@ export function TabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      css={`
-        overflow-x: scroll;
-      `}
+      // css={`
+      //   overflow-x: scroll;
+      // `}
       {...other}
     >
       {value === index && (
-        <Box style={{ padding: 0 }} p={3}>
+        <Box style={{ padding: 0, width: '100%' }} p={3}>
           {children}
         </Box>
       )}

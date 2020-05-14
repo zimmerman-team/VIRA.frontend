@@ -146,9 +146,9 @@
     "codecrumbs": "codecrumbs -e src/index.tsx -d src -p 1234 ",
     "start-back": "nodemon --watch 'server/' --ignore 'server/__test__' --exec ts-node --project 'nodetsconfig.json' server/server.ts",
     "start-fullstack": "yarn start & yarn start-back",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "test-api": "jest --detectOpenHandles --runTestsByPath ./server/__test__/*.spec.ts",
     "start-back-test": "ts-node --project 'nodetsconfig.json' server/server",
@@ -160,24 +160,6 @@
     "chromatice:build": "npx chromatic --project-token=j2ltypvksbm",
     "cypress:open": "cypress open",
     "cypress:record": "cypress run --record --key 30a16df3-0b07-4a7e-bd9c-d6a60c8c8354"
-  },
-  "babelMacros": {
-    "styledComponents": {
-      "pure": true
-    }
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "plugins": [
-      [
-        "babel-plugin-styled-components",
-        {
-          "ssr": false
-        }
-      ]
-    ]
   },
   "eslintConfig": {
     "settings": {
