@@ -10,6 +10,9 @@ export const reportsVariant = createMuiTheme({
       },
     },
     MUIDataTableToolbar: {
+      root: {
+        paddingLeft: 0,
+      },
       titleText: {
         fontFamily: TextStyle.fontFamily,
         fontSize: '20px',
@@ -33,6 +36,7 @@ export const reportsVariant = createMuiTheme({
         letterSpacing: '0.42px',
         lineHeight: '1.33',
         padding: '17px 24px',
+
         color: 'rgba(1, 1, 10, 0.6)',
         '&:nth-child(1)': {
           width: '140px',

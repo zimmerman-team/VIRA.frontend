@@ -13,8 +13,8 @@ import {
   mockDataVar5,
   mockDataVar6,
   mockDataVar7,
-  mockDataVar8,
-  mockDataVar9,
+  projectsTableConfig,
+  addTeamMemberTableConfig,
 } from './mock';
 import {
   getBaseTableForProject,

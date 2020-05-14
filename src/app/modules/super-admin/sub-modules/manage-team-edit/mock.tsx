@@ -4,7 +4,7 @@ import {
   ManageTeamEditLayoutModel,
   ManageEditAddTeamModel,
 } from 'app/modules/super-admin/sub-modules/manage-team-edit/models';
-import { mockDataVar9 } from 'app/components/datadisplay/Table/mock';
+import { addTeamMemberTableConfig } from 'app/components/datadisplay/Table/mock';
 import { UnregisterCallback, Href } from 'history';
 
 export const breadcrumbsMock: BreadcrumbModel = {
@@ -20,7 +20,7 @@ export const breadcrumbsMock: BreadcrumbModel = {
 
 export const manageTeamEditLayoutMock: ManageTeamEditLayoutModel = {
   breadcrumbs: breadcrumbsMock,
-  table: mockDataVar9,
+  table: addTeamMemberTableConfig,
   title: '',
   setTitle: () => {},
   loading: false,
@@ -32,7 +32,7 @@ export const manageTeamEditLayoutMock: ManageTeamEditLayoutModel = {
 export const manageTeamEditAddMock: ManageEditAddTeamModel = {
   breadcrumbs: breadcrumbsMock,
   mode: 'add',
-  table: mockDataVar9,
+  table: addTeamMemberTableConfig,
   match: {
     isExact: true,
     params: {},

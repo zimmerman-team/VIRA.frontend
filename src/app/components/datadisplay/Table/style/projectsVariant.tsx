@@ -2,7 +2,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ProjectPalette, TextStyle } from 'app/theme';
 
-export const standard = createMuiTheme({
+export const projectsVariant = createMuiTheme({
   overrides: {
     MuiSvgIcon: {
       root: {
@@ -16,20 +16,10 @@ export const standard = createMuiTheme({
       titleText: {
         fontFamily: TextStyle.fontFamily,
         fontSize: '20px',
-        textAlign: 'left',
         fontWeight: '600',
         lineHeight: '1.5',
         letterSpacing: 'normal',
         color: ProjectPalette.common.black,
-        '@media (max-width: 1200px)': {
-          fontSize: '20px !important',
-        },
-      },
-      titleRoot: {
-        textAlignLast: 'left',
-      },
-      actions: {
-        textAlignLast: 'right',
       },
     },
     MUIDataTable: {
@@ -45,7 +35,6 @@ export const standard = createMuiTheme({
         letterSpacing: '0.42px',
         lineHeight: '1.33',
         padding: '17px 24px',
-
         color: 'rgba(1, 1, 10, 0.6)',
       },
       sortAction: {
@@ -60,6 +49,15 @@ export const standard = createMuiTheme({
         fontWeight: 'normal',
         '& a': {
           fontWeight: '600',
+        },
+        '&:nth-child(1)': {
+          width: '50px',
+        },
+        '&:nth-child(2)': {
+          width: '140px',
+        },
+        '&:nth-child(3)': {
+          width: '50px',
         },
       },
     },
@@ -80,13 +78,13 @@ export const standard = createMuiTheme({
         border: 'solid 1px rgba(198, 198, 198, 0.2)',
       },
     },
+    /*MuiTableHead: {
+      root: {
+        '& * > th': {
+          height: '0',
+          padding: '0',
+        },
+      },
+    },*/
   },
 });
-
-export const mobileStyle: any =
-  '' +
-  '* { white-space: nowrap} ' + //On mobile there should be no text wrap so everything is on 1 line
-  '[aria-label*="Search"]{ display: none; } ' + //No search functionality on mobile
-  '[aria-label*="Next Page"]{ padding: 0 !important;}' + //Amending the bottom toolbar
-  '[aria-label*="Previous Page"]{ padding: 0 !important; } ' +
-  '[class *= "MuiTableCell-footer"]{padding-left: 0 !important; float: left; padding-top: 10px; position: absolute;}';

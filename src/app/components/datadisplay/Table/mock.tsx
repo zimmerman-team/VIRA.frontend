@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { table9Data } from 'app/assets/data/insingerData';
+import { adminTableData } from 'app/assets/data/insingerData';
 import { ButtonCellModule } from 'app/components/datadisplay/Table/common/ButtonCell';
 import IconCellModule from 'app/components/datadisplay/Table/common/IconCell';
 import InfoCellModule from 'app/components/datadisplay/Table/common/InfoCell';
@@ -971,7 +971,7 @@ export const mockDataVar7: TableModuleModel = {
   columnsCell: [''],
 };
 
-export const mockDataVar8: TableModuleModel = {
+export const projectsTableConfig: TableModuleModel = {
   title: 'Projects',
   data: [[]], // table9Data,
   columns: [
@@ -1060,9 +1060,9 @@ export const mockDataVar8: TableModuleModel = {
   columnsCell: ['', '', '', 'LinkCellModule', '', ''],
 };
 
-export const mockDataVar9: TableModuleModel = {
+export const addTeamMemberTableConfig: TableModuleModel = {
   title: 'Add Team Member',
-  data: table9Data,
+  data: adminTableData,
   columns: [
     {
       name: '',
@@ -1135,7 +1135,7 @@ export const mockDataVar9: TableModuleModel = {
 
 export const mockDataVar10: TableModuleModel = {
   title: 'Manage Users',
-  data: table9Data,
+  data: adminTableData,
   columns: [
     {
       name: 'ID',

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
-import { mockDataVar8 as mockDatatable } from 'app/components/datadisplay/Table/mock';
+import { projectsTableConfig as mockDatatable } from 'app/components/datadisplay/Table/mock';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { NavItemParams } from 'app/modules/common/consts';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
