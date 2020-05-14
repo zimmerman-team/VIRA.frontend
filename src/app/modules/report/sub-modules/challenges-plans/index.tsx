@@ -18,14 +18,11 @@ const styles: any = {
     height: 100%;
     overflow: visible;
   `,
-  cardHeader: css`
-    padding: 12px !important;
-  `,
-  cardContent: css`
-    padding: 12px !important;
-  `,
   infoText: css`
     bottom: 0;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
   `,
   gridMobile: css`
     padding-top: 0 !important;
@@ -42,7 +39,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
       {/* textareas */}
       <Grid item container lg={12} alignItems="center">
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
               testAttr="text-area-1"
               {...ChallengeAreaMock[0]}
@@ -67,7 +64,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         css={isMobileWidth && styles.gridMobile}
       >
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
               testAttr="text-area-2"
               {...ChallengeAreaMock[1]}
@@ -92,7 +89,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         css={isMobileWidth && styles.gridMobile}
       >
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
               testAttr="text-area-3"
               {...ChallengeAreaMock[2]}
@@ -117,7 +114,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         css={isMobileWidth && styles.gridMobile}
       >
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
               testAttr="text-area-4"
               {...ChallengeAreaMock[3]}

@@ -23,17 +23,11 @@ const styles: any = {
     height: 100%;
     overflow: visible;
   `,
-  cardHeader: css`
-    padding: 12px !important;
-  `,
-  cardContent: css`
-    padding: 12px !important;
-  `,
   infoText: css`
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
     bottom: 0;
-  `,
-  gridMobile: css`
-    padding-top: 0 !important;
   `,
 };
 
@@ -49,7 +43,7 @@ export const IndicatorVerificationLayout = (
       {/* textarea 1 */}
       <Grid item xs={12} lg={12}>
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
               testAttr="text-area-1"
               componentID="indVer1"
@@ -69,7 +63,7 @@ export const IndicatorVerificationLayout = (
       {/* textarea 1 */}
       <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
               testAttr="text-area-2"
               componentID="indVer2"
