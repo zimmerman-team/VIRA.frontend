@@ -253,8 +253,6 @@ export const theme = createMuiTheme({
     MUIDataTableToolbar: {
       root: {
         paddingLeft: 27,
-        // outline: '3px solid red',
-        // paddingLeft: '0!important',
       },
     },
   },

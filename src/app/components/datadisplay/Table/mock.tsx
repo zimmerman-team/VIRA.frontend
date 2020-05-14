@@ -1057,7 +1057,6 @@ export const projectsTableConfig: TableModuleModel = {
     selectableRows: 'none',
   },
   columnsCell: ['', '', '', 'LinkCellModule', '', ''],
-  cssVariant: 'variant9',
 };
 
 export const addTeamMemberTableConfig: TableModuleModel = {

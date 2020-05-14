@@ -44,7 +44,6 @@ export const CustomStyleDataTable = {
         font-size: 12px;
         color: rgba(1, 1, 10, 0.6);
         border-bottom: none;
-        outline: 2px solid red;
       }
 
       [class*='MuiTableCell-root'] {
@@ -157,7 +156,6 @@ export const CustomStyleDataTable = {
       }
     }
   `,
-
   variant10: css`
     && {
       box-shadow: none;
