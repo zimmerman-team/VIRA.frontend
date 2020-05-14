@@ -13,15 +13,10 @@ import { NavLink } from 'react-router-dom';
 const mobFontSize = '12px;';
 
 const PreviousLinkStyle = css`
-  font-family: Inter;
   font-size: 14px;
   text-decoration: none;
-
-  font-size: 14px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.57;
+  line-height: 1;
   letter-spacing: normal;
   color: rgba(0, 0, 0, 0.45);
 
@@ -31,14 +26,16 @@ const PreviousLinkStyle = css`
 `;
 
 const CurrentLinkStyle = css`
-  font-family: Inter;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: normal;
   line-height: 1;
   color: ${ProjectPalette.secondary.main};
 
+  display: flex;
+  align-items: center;
   @media (max-width: 768px) {
-    font-size: ${mobFontSize};
+    font-size: ${mobFontSize}!important;
+    height: 15px;
   }
 `;
 
@@ -48,7 +45,7 @@ const BreadCrumbStyle = css`
   }
 `;
 
-// todo: user NavLink component instead of Typography
+// todo: use NavLink component instead of Typography
 export function BreadCrumbs(props: BreadcrumbModel) {
   const { t } = useTranslation();
   return (
@@ -68,9 +65,17 @@ export function BreadCrumbs(props: BreadcrumbModel) {
         </NavLink>
       ))}
 
-      <Typography css={CurrentLinkStyle} variant="subtitle2">
-        {t(props.currentLocation)}
-      </Typography>
+      {props.currentLocation && (
+        <div
+          css={`
+            display: flex;
+            align-items: center;
+            height: 21px;
+          `}
+        >
+          <div css={CurrentLinkStyle}>{t(props.currentLocation)}</div>
+        </div>
+      )}
     </Breadcrumbs>
   );
 }
