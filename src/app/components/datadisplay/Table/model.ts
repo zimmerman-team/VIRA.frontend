@@ -28,7 +28,12 @@ export interface TableModuleModel {
   expandableData?: any[][][] | undefined;
   totalRowColsDef?: TotalRowColModel[];
   changeTableRowColor?: number;
-  cssVariant?: 'standard' | 'variant9' | 'variant10' | 'reportsVariant';
+  cssVariant?:
+    | 'standard'
+    | 'variant9'
+    | 'variant10'
+    | 'reportsVariant'
+    | 'projectsVariant';
   // infoItems?: TableInfoItemModel[];
 }
 

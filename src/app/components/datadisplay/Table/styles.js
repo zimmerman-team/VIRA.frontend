@@ -85,6 +85,7 @@ export const CustomStyleDataTable = {
           font-weight: 600;
           line-height: 1.5;
           letter-spacing: normal;
+
           color: ${ProjectPalette.common.black};
         }
 
@@ -124,7 +125,7 @@ export const CustomStyleDataTable = {
       [class*='MuiTableHead-root'] {
         * > th {
           height: 0;
-          padding: 0;
+          padding: 24px;
         }
       }
 
@@ -155,7 +156,6 @@ export const CustomStyleDataTable = {
       }
     }
   `,
-
   variant10: css`
     && {
       box-shadow: none;

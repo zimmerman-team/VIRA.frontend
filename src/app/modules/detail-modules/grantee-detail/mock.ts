@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { mockDataVar8 as mockDatatable } from 'app/components/datadisplay/Table/mock';
+import { projectsTableConfig as mockDatatable } from 'app/components/datadisplay/Table/mock';
 import { mockData as mockDataBreadcrumbs } from 'app/components/navigation/Breadcrumbs/mock';
 import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';
 import { TitleParams } from 'app/modules/common/components/TitleParams';

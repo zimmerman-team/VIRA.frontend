@@ -341,7 +341,7 @@ export const insingerData = [
   ],
 ];
 
-export const table9Data = [
+export const adminTableData = [
   ['', 'User Name', 'Administrator', ''],
   ['', 'User Name', 'Grantee', ''],
   ['', 'User Name', 'Granteee', ''],

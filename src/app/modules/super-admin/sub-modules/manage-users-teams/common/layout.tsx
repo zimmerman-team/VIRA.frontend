@@ -35,6 +35,11 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
               font-weight: 600;
               line-height: 1.5;
               margin-left: 16px;
+
+              /* todo: have a talk about this with the designers */
+              @media (max-width: 768px) {
+                margin-left: 0;
+              }
             }
           `}
         >
@@ -56,7 +61,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
       {/* ---------------------------------------------------------------------*/}
       {/* button: add team / user */}
 
-      <Grid item xs={12} lg={12}>
+      <Grid item xs={7} lg={12}>
         <AdminAddButton
           text={t(props.addBtnText)}
           icon={<Add />}

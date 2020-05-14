@@ -120,17 +120,23 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
     .join('');
 
   const DutchLangBtnStyle = css`
-    color: ${i18n.language === 'nl' ? 'white' : ProjectPalette.primary.main};
-    background: ${i18n.language === 'nl'
-      ? ProjectPalette.primary.main
-      : 'transparent'};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    color: ${i18n.language === 'nl' ? '#25BAA4' : '#70889E'};
+    cursor: pointer;
+    user-select: none;
   `;
 
   const EnglisLangBtnStyle = css`
-    color: ${i18n.language === 'en' ? 'white' : ProjectPalette.primary.main};
-    background: ${i18n.language === 'en'
-      ? ProjectPalette.primary.main
-      : 'transparent'};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    color: ${i18n.language === 'en' ? '#25BAA4' : '#70889E'};
+    cursor: pointer;
+    user-select: none;
   `;
 
   return (
@@ -192,20 +198,22 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
       {/* ---------------------------- */}
       {/* NL and EN btn container */}
       <div css={LanguageButtonStyle}>
-        <button
-          css={DutchLangBtnStyle}
-          type="button"
-          onClick={() => changeLanguage('nl')}
-        >
-          NL
-        </button>
-        <button
-          css={EnglisLangBtnStyle}
-          type="button"
-          onClick={() => changeLanguage('en')}
-        >
+        <div css={EnglisLangBtnStyle} onClick={() => changeLanguage('en')}>
           EN
-        </button>
+        </div>
+        <div
+          css={`
+            width: 1px;
+            background-color: #70889e;
+            margin: 5px;
+            margin-left: 1px;
+            margin-right: 1px;
+          `}
+        />
+
+        <div css={DutchLangBtnStyle} onClick={() => changeLanguage('nl')}>
+          NL
+        </div>
       </div>
     </div>
   );

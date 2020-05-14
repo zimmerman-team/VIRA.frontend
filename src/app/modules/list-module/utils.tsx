@@ -10,7 +10,7 @@ import {
   ExternalLinkCellModule,
 } from 'app/components/datadisplay/Table/common/LinkCell';
 /* mock */
-import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
+import { projectsTableConfig } from 'app/components/datadisplay/Table/mock';
 /* models */
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import React from 'react';
@@ -38,7 +38,7 @@ export const formatTableDataForProject = (data: any): any[] => {
 };
 
 export const getBaseTableForProject = (): TableModuleModel => {
-  const tableConfig = mockDataVar8;
+  const tableConfig = projectsTableConfig;
 
   tableConfig.columns = [
     {
