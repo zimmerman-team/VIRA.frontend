@@ -36,11 +36,20 @@ export const Dialog = (props: DialogProps) => {
       css={`
         && {
           .MuiBackdrop-root {
-            background-color: transparent !important;
+            background: rgba(162, 162, 162, 0.1);
           }
-          @media (min-width: 768px) {
-            .MuiDialog-paper {
-              padding: 24px 48px;
+          .MuiDialog-paper {
+            margin: 0;
+            box-shadow: none;
+            @media (min-width: 768px) {
+              padding: 52px 96px;
+            }
+            @media (max-width: 767px) {
+              width: 364px;
+              padding: 42px 56px;
+            }
+            @media (max-width: 380px) {
+              width: calc(100% - 16px);
             }
           }
         }
@@ -48,6 +57,7 @@ export const Dialog = (props: DialogProps) => {
     >
       <DialogTitle
         css={`
+          padding: 0;
           font-size: 20px;
           text-align: center;
         `}
@@ -55,12 +65,6 @@ export const Dialog = (props: DialogProps) => {
       >
         {props.title}
       </DialogTitle>
-      <div
-        css={`
-          width: 100%;
-          height: 15px;
-        `}
-      />
       {props.content && <DialogContent>{props.content}</DialogContent>}
       {props.buttons && (
         <DialogActions
@@ -78,8 +82,9 @@ export const Dialog = (props: DialogProps) => {
             return (
               <Button
                 css={`
-                  font-size: 16px;
+                  font-size: 14px;
                   min-width: 140px;
+                  padding: 12px 16px;
                   color: ${button.color};
                   text-transform: capitalize;
                   background: ${button.background};
