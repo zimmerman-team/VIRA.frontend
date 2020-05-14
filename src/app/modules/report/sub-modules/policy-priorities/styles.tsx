@@ -9,11 +9,6 @@ export const styles: any = {
       width: 90px;
     }
   `,
-  test: css`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  `,
   infoText: css`
     bottom: 0;
     font-size: 12px;
