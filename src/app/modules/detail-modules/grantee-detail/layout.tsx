@@ -66,7 +66,7 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
-      {/*{checkIfPPData(props.ppVizData) && !props.loading && (
+      {checkIfPPData(props.ppVizData) && !props.loading && (
         <Viztabs
           data-cy="grantee-detail-viztabs"
           barChartData={props.ppVizData}
@@ -77,17 +77,17 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
           onBubbleSelect={props.onBubbleSelect}
           geoMapData={props.geoMapData}
         />
-      )}*/}
+      )}
 
       {/* ---------------------------------------------------------------------*/}
       {/* projects */}
 
       <Box width="100%" height="50px" />
-      {/*<ListModule
+      <ListModule
         data-cy="grantee-detail-projects"
         hideGrantees
         tabNav={getNavTabItems(TabNavMockList, 'viz')}
-      />*/}
+      />
     </React.Fragment>
   );
 };
