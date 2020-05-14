@@ -161,11 +161,6 @@
     "cypress:open": "cypress open",
     "cypress:record": "cypress run --record --key 30a16df3-0b07-4a7e-bd9c-d6a60c8c8354"
   },
-  "babelMacros": {
-    "styledComponents": {
-      "pure": true
-    }
-  },
   "eslintConfig": {
     "settings": {
       "import/resolver": {

@@ -15,6 +15,7 @@ export type BubbleInfoBlockProps = {
   targetPercentage: number;
   budgetPercentage: number;
   insContribution: number;
+  isMobileWidth: boolean;
 };
 
 export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
@@ -22,12 +23,15 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
   return (
     <Grid
       container
-      spacing={3}
+      spacing={props.isMobileWidth ? 2 : 3}
       css={`
         width: 100%;
         display: flex;
         align-items: center;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
         background-color: ${ProjectPalette.primary.main};
+        ${props.isMobileWidth && 'padding: 12px 18px 18px 18px;'}
       `}
     >
       <Grid

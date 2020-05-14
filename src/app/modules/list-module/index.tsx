@@ -1,6 +1,7 @@
 // @ts-nocheck
 /* eslint-disable default-case */
 import React from 'react';
+import 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { Grid, Tabs, Tab } from '@material-ui/core';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
@@ -17,14 +18,12 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { useParams, useHistory } from 'react-router-dom';
 /* utils */
 import get from 'lodash/get';
-import 'styled-components/macro';
 import {
   useStyles,
   TabStyle,
   a11yProps,
   TabPanel,
 } from './common/TabPanelProps';
-import { css } from 'styled-components/macro';
 import { PageLoader } from '../common/page-loader';
 
 type ListModuleParams = {
@@ -34,6 +33,7 @@ type ListModuleParams = {
   hideReports?: boolean;
   focus?: number;
   loadData?: boolean;
+  listPage?: boolean;
 };
 
 export const ListModule = (props: ListModuleParams) => {
@@ -143,7 +143,9 @@ export const ListModule = (props: ListModuleParams) => {
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
-    history.push(`/list/${newValue}`);
+    if (props.listPage) {
+      history.push(`/list/${newValue}`);
+    }
   };
 
   return (
