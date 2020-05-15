@@ -1,5 +1,6 @@
 orbs:
   cypress: cypress-io/cypress@1
+  happo: happo/happo@2.0.1
 version: 2.1
 # todo: move all ip's to env vars
 # todo: make zz orb
@@ -218,3 +219,4 @@ workflows:
           filters:
             branches:
               only: master
+      - happo/run
