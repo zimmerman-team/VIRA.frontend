@@ -21,5 +21,7 @@ describe('report detail page', () => {
     cy.findByTestId('observations-card').should('exist');
     cy.findByTestId('future-plans-card').should('exist');
     cy.findByTestId('other-comments-card').should('exist');
+
+    cy.get('body').happoScreenshot();
   });
 });

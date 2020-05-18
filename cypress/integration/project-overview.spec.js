@@ -7,5 +7,7 @@ describe('project overview', () => {
     // cy.visit('/list/0');
     cy.findByTestId('sidebar-item-1').click();
     cy.listTabs();
+
+    cy.get('body').happoScreenshot();
   });
 });

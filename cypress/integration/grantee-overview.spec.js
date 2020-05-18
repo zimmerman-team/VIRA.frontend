@@ -9,5 +9,7 @@ describe('grantee overview page', () => {
 
     cy.findByTestId('sidebar-item-2').click();
     cy.listTabs();
+
+    cy.get('body').happoScreenshot();
   });
 });
