@@ -17,6 +17,7 @@ export interface OutcomeCardParams {
   title: string;
   description?: string;
   media?: SingleLineGridListProps;
+  testID?: string;
 }
 const styles: any = {
   cardHeader: css`
@@ -45,7 +46,7 @@ const styles: any = {
 export const OutcomeCard = (props: OutcomeCardParams) => {
   const { t, i18n } = useTranslation();
   return (
-    <Grid item lg={12}>
+    <React.Fragment>
       <Card css={props.media ? styles.card : null}>
         <CardHeader title={props.title} css={styles.cardHeader} />
         <CardContent>
@@ -60,6 +61,6 @@ export const OutcomeCard = (props: OutcomeCardParams) => {
         </CardContent>
       </Card>
       <Box height="24px" width="100%" />
-    </Grid>
+    </React.Fragment>
   );
 };
