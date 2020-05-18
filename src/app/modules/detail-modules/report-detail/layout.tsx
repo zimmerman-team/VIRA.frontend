@@ -136,7 +136,7 @@ export const ReportDetailLayout = (props: any) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
-      {/* <Viztabs
+      <Viztabs
         barChartData={props.report.barChartData}
         barChartLegends={props.barChartLegends}
         onBarChartLegendClick={props.onBarChartLegendClick}
@@ -147,7 +147,7 @@ export const ReportDetailLayout = (props: any) => {
         selectedBubble={props.selectedSDG}
         onBubbleSelect={props.onBubbleSelect}
         geoMapData={props.report.mapData}
-      />*/}
+      />
 
       {/* ---------------------------------------------------------------------*/}
       {/* cards */}
