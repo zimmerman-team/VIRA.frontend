@@ -10,7 +10,7 @@ import { ExpansionPanelModel } from 'app/components/surfaces/ExpansionPanel/mode
 import Box from '@material-ui/core/Box';
 import { ProjectPalette } from 'app/theme';
 
-const ExpansionPanelStyle = css`
+const ExpansionPanelStyle = `
   //margin: 8px !important;
   margin-bottom: 8px !important;
 
@@ -25,7 +25,7 @@ const ExpansionPanelStyle = css`
   }
 `;
 
-const ExpansionPanelSummaryStyle = css`
+const ExpansionPanelSummaryStyle = `
   && {
     height: 80px;
     padding: 0 32px 0 32px;
@@ -42,17 +42,17 @@ const ExpansionPanelSummaryStyle = css`
   }
 `;
 
-const SubtitleStyle = css`
+const SubtitleStyle = `
   color: ${ProjectPalette.common.black} !important;
   font-size: 16px !important;
   font-weight: 500 !important;
 `;
 
-const ExpandMoreIconStyle = css`
+const ExpandMoreIconStyle = `
   color: #a1aebd;
 `;
 
-const ExpansionPanelDetailsStyle = css`
+const ExpansionPanelDetailsStyle = `
   && {
     padding: 33px 29.7px 33px 29.7px;
   }
