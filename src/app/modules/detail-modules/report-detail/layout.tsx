@@ -24,6 +24,46 @@ export const ReportDetailLayout = (props: any) => {
       get(state.userDetails.data, 'role', '') === 'Administrator' ||
       get(state.userDetails.data, 'role', '') === 'Manager'
   );
+
+  const cardData = [
+    {
+      testID: 'outcomes-card',
+      title: 'reports.detail.cards.key_outcomes',
+      description: props.report.key_outcomes,
+    },
+    {
+      testID: 'monitor-card',
+      title: 'reports.detail.cards.monitor',
+      description: props.report.monitor_report_outcomes,
+    },
+    {
+      testID: 'media-card',
+      title: 'reports.detail.cards.media',
+      media: props.report.media,
+    },
+
+    {
+      testID: 'challenges-card',
+      title: 'reports.detail.cards.key_implementation_challenges',
+      description: props.report.key_implementation_challenges,
+    },
+    {
+      testID: 'observations-card',
+      title: 'reports.detail.cards.other_project',
+      description: props.report.other_project_outcomes,
+    },
+    {
+      testID: 'future-plans-card',
+      title: 'reports.detail.cards.future_plans',
+      description: props.report.plans,
+    },
+    {
+      testID: 'other-comments-card',
+      title: 'reports.detail.cards.other_comments',
+      description: props.report.other_comments,
+    },
+  ];
+
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -88,7 +128,7 @@ export const ReportDetailLayout = (props: any) => {
       {/* button: generate report */}
       {showEditBtn && (
         <Hidden smUp>
-          <Grid container xs={12}>
+          <Grid container item xs={12}>
             <ContainedButton text="Edit Report" onClick={props.editReport} />
           </Grid>
         </Hidden>
@@ -96,7 +136,7 @@ export const ReportDetailLayout = (props: any) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
-      <Viztabs
+      {/* <Viztabs
         barChartData={props.report.barChartData}
         barChartLegends={props.barChartLegends}
         onBarChartLegendClick={props.onBarChartLegendClick}
@@ -107,55 +147,27 @@ export const ReportDetailLayout = (props: any) => {
         selectedBubble={props.selectedSDG}
         onBubbleSelect={props.onBubbleSelect}
         geoMapData={props.report.mapData}
-      />
+      />*/}
 
       {/* ---------------------------------------------------------------------*/}
       {/* cards */}
-      {/* todo: optimise */}
-      <Grid data-cy="outcomes-card" item lg={12}>
-        <OutcomeCard
-          title={t('reports.detail.cards.key_outcomes')}
-          description={props.report.key_outcomes}
-        />
-      </Grid>
-      <Grid data-cy="monitor-card" item lg={12}>
-        <OutcomeCard
-          title={t('reports.detail.cards.monitor')}
-          description={props.report.monitor_report_outcomes}
-        />
-      </Grid>
-      {props.report.media.length > 0 && (
-        <Grid data-cy="media-card" item lg={12}>
-          <OutcomeCard
-            title={t('reports.detail.cards.media')}
-            media={{ tileData: props.report.media }}
-          />
-        </Grid>
+
+      {cardData.map(card =>
+        card.media ? (
+          card.media.length > 0 && (
+            <Grid data-cy={card.testID} item xs={12} lg={12}>
+              <OutcomeCard
+                title={t(card.title)}
+                media={{ tileData: props.report.media }}
+              />
+            </Grid>
+          )
+        ) : (
+          <Grid data-cy={card.testID} item xs={12} lg={12}>
+            <OutcomeCard title={t(card.title)} description={card.description} />
+          </Grid>
+        )
       )}
-      <Grid data-cy="challenges-card" item lg={12}>
-        <OutcomeCard
-          title={t('reports.detail.cards.key_implementation_challenges')}
-          description={props.report.key_implementation_challenges}
-        />
-      </Grid>
-      <Grid data-cy="observations-card" item lg={12}>
-        <OutcomeCard
-          title={t('reports.detail.cards.other_project')}
-          description={props.report.other_project_outcomes}
-        />
-      </Grid>
-      <Grid data-cy="future-plans-card" item lg={12}>
-        <OutcomeCard
-          title={t('reports.detail.cards.future_plans')}
-          description={props.report.plans}
-        />
-      </Grid>
-      <Grid data-cy="other-comments-card" item lg={12}>
-        <OutcomeCard
-          title={t('reports.detail.cards.other_comments')}
-          description={props.report.other_comments}
-        />
-      </Grid>
     </React.Fragment>
   );
 };
