@@ -15,8 +15,7 @@ executors:
 jobs:
   deploy-dev:
     docker:
-#      - image: circleci/node:12.16.1-buster
-      - image: cimg/node:12.16
+      - image: circleci/node:12.16.1-buster
 #      - image: cimg/base:2020.01
     resource_class: medium
     working_directory: ~/project
