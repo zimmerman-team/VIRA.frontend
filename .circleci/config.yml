@@ -10,12 +10,12 @@ version: 2.1
 executors:
   with-chrome:
     docker:
-      - image: circleci/node:12.14.1-stretch-browsers
+      - image: 'cypress/browsers:node12.16.1-chrome80-ff73'
     resource_class: xlarge
 jobs:
   deploy-dev:
     docker:
-      - image: circleci/node:12.14.1-stretch-browsers
+      - image: circleci/node:12.16.1-buster
     working_directory: ~/project
     steps:
       - checkout
@@ -56,7 +56,7 @@ workflows:
     jobs:
 
       - cypress/install:
-#          executor: cypress/base-12-6-0
+#          executor: cypress/base-12-6-1
           executor: with-chrome
           yarn: true
           build: yarn build
