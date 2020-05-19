@@ -1,15 +1,13 @@
 module.exports = {
   stories: [
     '../src/**/story.tsx',
-    '../src/**/story.mdx',
+    // '../src/**/story.mdx',
     // '../src/**/story.mdx',
   ],
 
   presets: [
     '@storybook/preset-create-react-app',
-
     'storybook-addon-deps/preset-explorer',
-
     // '@storybook/preset-typescript',
   ],
   addons: [
@@ -17,6 +15,5 @@ module.exports = {
     '@storybook/addon-links/register',
     '@storybook/addon-viewport/register',
     '@storybook/addon-docs',
-    '@dreipol/storybook-figma-addon/register',
   ],
 };

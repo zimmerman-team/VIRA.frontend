@@ -75,6 +75,6 @@ workflows:
             - deploy-dev
           record: true
           parallel: true
-          parallelism: 4
+          parallelism: 6
           group: 'all tests'
 
