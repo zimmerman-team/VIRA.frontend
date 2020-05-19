@@ -167,33 +167,17 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test_api
+#      - test_api
       - cypress/install:
           executor: cypress/base-12-6-0
           yarn: true
           build: yarn build
-      - cypress/run:
-          executor: cypress/browsers-chrome76
-          browser: chrome
-          requires:
-            - cypress/install
-#          start: yarn start
-#          wait-on: 'http://localhost:3000'
-          yarn: true
-          record: true
-          parallel: true
-          parallelism: 4
-          group: 'all tests'
-          store_artifacts: true
-#       post-steps:
-      # - store_test_results:
-      # path: cypress/results
       - deploy-dev:
           requires:
             - cypress/install
           filters:
             branches:
-              only: /feature\/.*/
+              only: /feat\/.*/
       - deploy-test:
           requires:
             - cypress/install
@@ -206,12 +190,24 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy-storybook:
+      - cypress/run:
+          executor: cypress/browsers-chrome76
+          yarn: true
+          browser: chrome
           requires:
             - cypress/install
-          filters:
-            branches:
-              only: develop
+            - deploy-dev
+          record: true
+          parallel: true
+          parallelism: 4
+          group: 'all tests'
+
+#      - deploy-storybook:
+#          requires:
+#            - cypress/install
+#          filters:
+#            branches:
+#              only: develop
       - release:
           requires:
             - cypress/install
