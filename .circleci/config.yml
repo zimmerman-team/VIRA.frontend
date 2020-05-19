@@ -4,6 +4,7 @@ jobs:
   cypress/install:
     docker:
       - image: cypress/base:12.6.0
+    resource_class: xlarge
     environment:
       - CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
     steps:
