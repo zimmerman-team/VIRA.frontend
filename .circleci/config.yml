@@ -170,6 +170,7 @@ workflows:
 #      - test_api
       - cypress/install:
           executor: cypress/base-12-6-0
+          resource_class: large
           yarn: true
           build: yarn build
       - deploy-dev:
@@ -192,6 +193,7 @@ workflows:
               only: master
       - cypress/run:
           executor: cypress/browsers-chrome76
+          resource_class: large
           yarn: true
           browser: chrome
           requires:
