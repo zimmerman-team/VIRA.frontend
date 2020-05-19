@@ -61,9 +61,9 @@ workflows:
           executor: with-chrome
           yarn: true
           build: yarn build
-#      - deploy-dev:
-#          requires:
-#            - cypress/install
+      - deploy-dev:
+          requires:
+            - cypress/install
       - cypress/run:
           executor: with-chrome
           yarn: true
