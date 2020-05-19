@@ -72,7 +72,7 @@ workflows:
           browser: chrome
           requires:
             - cypress/install
-#            - deploy-dev
+            - deploy-dev
           record: true
           parallel: true
           parallelism: 4
