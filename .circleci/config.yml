@@ -11,7 +11,7 @@ executors:
   with-chrome:
     docker:
       - image: 'cypress/included:4.5.0'
-    resource_class: large
+    resource_class: xlarge
 jobs:
   deploy-dev:
     docker:
@@ -75,6 +75,6 @@ workflows:
             - deploy-dev
           record: true
           parallel: true
-          parallelism: 6
+          parallelism: 11
           group: 'all tests'
 
