@@ -11,13 +11,13 @@ executors:
   with-chrome:
     docker:
       - image: 'cypress/browsers:node12.16.1-chrome80-ff73'
-    resource_class: xlarge
+    resource_class: medium
 jobs:
   deploy-dev:
     docker:
       - image: circleci/node:12.16.1-buster
 #      - image: cimg/base:2020.01
-    resource_class: xlarge
+    resource_class: medium
     working_directory: ~/project
     steps:
       - checkout
