@@ -36,13 +36,13 @@ module.exports = (on, config) => {
 //   dill();
 // };
 
-const dotenv = require('dotenv-extended');
-const getenv = require('getenv');
+const dotenv = require('./node_modules/dotenv-extended');
+const getenv = require('./node_modules/getenv');
 
 dotenv.config({ path: '.env' });
 dotenv.load();
 
-const happoTask = require('happo-cypress/task');
+const happoTask = require('./node_modules/happo-cypress/task');
 
 const overrideEnvVars = config => {
   const baseUrl = getenv.string('REACT_APP_CYPRESS_baseUrl', '');

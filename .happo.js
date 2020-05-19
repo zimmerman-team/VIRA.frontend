@@ -1,4 +1,5 @@
 const { RemoteBrowserTarget } = require('happo.io');
+const happoPluginStorybook = require('happo-plugin-storybook');
 
 module.exports = {
   apiKey: process.env.HAPPO_API_KEY,
@@ -8,9 +9,9 @@ module.exports = {
     'chrome-desktop': new RemoteBrowserTarget('chrome', {
       viewport: '1440x1024',
     }),
-
-    'ios-safari': new RemoteBrowserTarget('ios-safari', {
-      viewport: '414x736',
-    }),
   },
+  // plugins: [
+  //   // see https://github.com/happo/happo-plugin-storybook for a list of options you can pass to the plugin
+  //   happoPluginStorybook(),
+  // ],
 };

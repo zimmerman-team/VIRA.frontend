@@ -124,6 +124,6 @@ describe('generate report page', () => {
 
     // next
     cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
-    cy.get('body').happoScreenshot();
+    // cy.get('body').happoScreenshot();
   });
 });

@@ -9,6 +9,6 @@ describe('report overview', () => {
 
     cy.listTabs();
 
-    cy.get('body').happoScreenshot();
+    // cy.get('body').happoScreenshot();
   });
 });

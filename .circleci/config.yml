@@ -168,10 +168,11 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test_api
+      # - test_api
       - cypress/install:
           executor: cypress/base-12-6-0
           yarn: true
+          run: happo-ci-circleci
           build: yarn build
       - cypress/run:
           executor: cypress/browsers-chrome76

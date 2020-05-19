@@ -38,7 +38,7 @@ Cypress.Commands.add('auth', (overrides = {}) => {
   cy.findByTestId('login-password').type(Cypress.env('password'));
   cy.findByTestId('login-button').click();
 
-  cy.wait(10000);
+  cy.wait(5000);
 });
 
 Cypress.Commands.add('viztabs', (overrides = {}) => {

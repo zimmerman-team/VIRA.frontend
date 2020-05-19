@@ -8,6 +8,6 @@ describe('project overview', () => {
     cy.findByTestId('sidebar-item-1').click();
     cy.listTabs();
 
-    cy.get('body').happoScreenshot();
+    // cy.get('body').happoScreenshot();
   });
 });

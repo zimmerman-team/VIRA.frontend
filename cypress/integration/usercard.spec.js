@@ -17,6 +17,6 @@ describe('user card', () => {
     cy.findByTestId('usercard-signout-button').should('exist');
     cy.findByTestId('usercard-privacy-button').should('exist');
 
-    cy.get('body').happoScreenshot();
+    // cy.get('body').happoScreenshot();
   });
 });

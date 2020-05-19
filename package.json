@@ -121,6 +121,7 @@
     "fork-ts-checker-webpack-plugin": "^4.0.5",
     "getenv": "^1.0.0",
     "happo-cypress": "^0.2.0",
+    "happo-plugin-storybook": "^2.5.3",
     "happo.io": "^5.4.0",
     "husky": "^4.2.3",
     "jest": "24.9.0",

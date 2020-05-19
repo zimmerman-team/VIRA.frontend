@@ -13,6 +13,6 @@ describe('privacy page', () => {
     cy.findByTestId('privacy-item-0-title').should('exist');
     cy.findByTestId('privacy-item-0-description').should('exist');
 
-    cy.get('body').happoScreenshot();
+    // cy.get('body').happoScreenshot();
   });
 });
