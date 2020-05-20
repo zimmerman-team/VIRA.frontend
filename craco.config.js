@@ -20,8 +20,7 @@ module.exports = {
       //   context: path.resolve(__dirname, 'src'),
       //   files: ['**/*.tsx', '**/*.ts'],
       // }),
-
-      new WebpackPluginRamdisk(),
+      // new WebpackPluginRamdisk(),
     ],
   },
 
