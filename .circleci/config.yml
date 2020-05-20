@@ -17,15 +17,11 @@ executors:
       REACT_APP_BACKEND_URL: $REACT_APP_BACKEND_URL_DEV
       REACT_APP_BACKEND_PORT: $REACT_APP_BACKEND_PORT_DEV
       REACT_APP_MONGO_DB_URL: $REACT_APP_MONGO_DB_URL_DEV
-    steps:
-      - run:
-          name: "What branch am I on now?"
-          command: echo $CIRCLE_BRANCH
+
 jobs:
   deploy-dev:
     docker:
       - image: circleci/node:12.13.0-buster
-
     resource_class: large
     working_directory: ~/project
     steps:
