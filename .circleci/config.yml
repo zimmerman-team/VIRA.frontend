@@ -56,7 +56,6 @@ workflows:
   build-and-test:
     jobs:
       - cypress/install:
-
           executor: dev-executor
           yarn: true
           build: yarn build
@@ -66,24 +65,23 @@ workflows:
                 - master
                 - develop
 
-      - cypress/install:
-
-          executor: test-executor
-          yarn: true
-          build: yarn build
-          filters:
-            branches:
-              only:
-                - develop
-
-      - cypress/install:
-          executor: staging-executor
-          yarn: true
-          build: yarn build
-          filters:
-            branches:
-              only:
-                - master
+#      - cypress/install:
+#          executor: test-executor
+#          yarn: true
+#          build: yarn build
+#          filters:
+#            branches:
+#              only:
+#                - develop
+#
+#      - cypress/install:
+#          executor: staging-executor
+#          yarn: true
+#          build: yarn build
+#          filters:
+#            branches:
+#              only:
+#                - master
       - deploy-dev:
           requires:
             - cypress/install
