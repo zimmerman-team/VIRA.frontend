@@ -7,16 +7,18 @@ version: 2.1
 #   - ssh_target
 #   - ssh_path
 
+
+environment:
+  REACT_APP_BACKEND_PORT: 4201
+  REACT_APP_PROJECT_URL: 'https://app.ins.dev.nyuki.io'
+  REACT_APP_BACKEND_URL: 'https://app.ins.dev.nyuki.io'
+  REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger-dev'
+
 executors:
   with-chrome:
     docker:
       - image: 'cypress/included:4.5.0'
     resource_class: xlarge
-    environment:
-      REACT_APP_BACKEND_PORT: 4201
-      REACT_APP_PROJECT_URL: 'https://app.ins.dev.nyuki.io'
-      REACT_APP_BACKEND_URL: 'https://app.ins.dev.nyuki.io'
-      REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger-dev'
 
 jobs:
   deploy-dev:
