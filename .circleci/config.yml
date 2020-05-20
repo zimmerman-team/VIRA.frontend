@@ -1,14 +1,14 @@
 orbs:
   cypress: cypress-io/cypress@1
 version: 2.1
-# todo: move all ip's to env vars
-# todo: make zz orb
-#   - circleci_path
-#   - ssh_target
-#   - ssh_path
 
 executors:
-  with-chrome:
+  test-run-executor:
+    docker:
+      - image: 'cypress/included:4.5.0'
+    resource_class: xlarge
+
+  dev-executor:
     docker:
       - image: 'cypress/included:4.5.0'
     resource_class: xlarge
@@ -17,6 +17,26 @@ executors:
       REACT_APP_PROJECT_URL: 'https://app.ins.dev.nyuki.io'
       REACT_APP_BACKEND_URL: 'https://app.ins.dev.nyuki.io'
       REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger-dev'
+
+  test-executor:
+    docker:
+      - image: 'cypress/included:4.5.0'
+    resource_class: xlarge
+    environment:
+      REACT_APP_BACKEND_PORT: 4202
+      REACT_APP_PROJECT_URL: 'https://app.ins.test.nyuki.io'
+      REACT_APP_BACKEND_URL: 'https://app.ins.test.nyuki.io'
+      REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger-test'
+
+  staging-executor:
+    docker:
+      - image: 'cypress/included:4.5.0'
+    resource_class: xlarge
+    environment:
+      REACT_APP_BACKEND_PORT: 4200
+      REACT_APP_PROJECT_URL: 'https://app.ins.staging.nyuki.io'
+      REACT_APP_BACKEND_URL: 'https://app.ins.staging.nyuki.io'
+      REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger'
 
 jobs:
   deploy-dev:
@@ -27,47 +47,51 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-#      - run:
-#          name: Load environment variables based on branch
-#          command: |
-#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-#              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
-#              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
-#              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
-#              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
-#            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-#              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
-#              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
-#              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
-#              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
-#            else
-#              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
-#              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
-#              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
-#              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
-#            fi
-#            source $BASH_ENV
-#      - run: yarn build
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
 
-
-
 workflows:
   build-and-test:
     jobs:
-      - env-dev
       - cypress/install:
-          executor: with-chrome
+          name: Build feature branch
+          executor: dev-executor
           yarn: true
           build: yarn build
+          filters:
+            branches:
+              ignore:
+                - master
+                - develop
+                -
+      - cypress/install:
+          name: Build develop branch
+          executor: test-executor
+          yarn: true
+          build: yarn build
+          filters:
+            branches:
+              only:
+                - develop
+
+      - cypress/install:
+          name: Build master branch
+          executor: staging-executor
+          yarn: true
+          build: yarn build
+          filters:
+            branches:
+              only:
+                - master
       - deploy-dev:
+          name: Deploy build
           requires:
             - cypress/install
       - cypress/run:
-          executor: with-chrome
+          name: Run cypress tests on deployed build
+          executor: test-run-executor
           yarn: true
           browser: chrome
           requires:
