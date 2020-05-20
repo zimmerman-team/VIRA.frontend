@@ -17,6 +17,10 @@ executors:
       REACT_APP_BACKEND_URL: $REACT_APP_BACKEND_URL_DEV
       REACT_APP_BACKEND_PORT: $REACT_APP_BACKEND_PORT_DEV
       REACT_APP_MONGO_DB_URL: $REACT_APP_MONGO_DB_URL_DEV
+    steps:
+      - run:
+          name: "What branch am I on now?"
+          command: echo $CIRCLE_BRANCH
 jobs:
   deploy-dev:
     docker:
@@ -62,25 +66,13 @@ workflows:
   build-and-test:
     jobs:
       - cypress/install:
-          steps:
-            - run:
-                name: "What branch am I on now?"
-                command: echo $CIRCLE_BRANCH
           executor: with-chrome
           yarn: true
           build: yarn build
       - deploy-dev:
-          steps:
-            - run:
-                name: "What branch am I on now?"
-                command: echo $CIRCLE_BRANCH
           requires:
             - cypress/install
       - cypress/run:
-          steps:
-            - run:
-                name: "What branch am I on now?"
-                command: echo $CIRCLE_BRANCH
           executor: with-chrome
           yarn: true
           browser: chrome
