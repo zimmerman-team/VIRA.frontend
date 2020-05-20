@@ -6,7 +6,7 @@ executors:
   cypress-executor:
     docker:
       - image: 'cypress/included:4.6.0'
-    resource_class: xlarge
+    resource_class: large
 
 jobs:
   deploy:
@@ -72,6 +72,6 @@ workflows:
             - deploy
           record: true
           parallel: true
-          parallelism: 11
+          parallelism: 6
           group: 'all tests'
 
