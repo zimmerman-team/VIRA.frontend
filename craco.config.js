@@ -1,21 +1,34 @@
+const reactHotReloadPlugin = require('craco-plugin-react-hot-reload');
 const BabelRcPlugin = require('@jackwilsdon/craco-use-babelrc');
+const { WebpackPluginRamdisk } = require('webpack-plugin-ramdisk');
 
-// const TestID = require('babel-plugin-react-add-test-id/lib');
-// const TestID = require('@welldone-software/babel-plugin-add-test-id');
-// require.resolve('babel-plugin-named-asset-import')
+const { ESLINT_MODES } = require('@craco/craco');
+
 module.exports = {
-  // plugins: [{ plugin: BabelRcPlugin }],
   eslint: {
     enable: false,
+    // mode: ESLINT_MODES.file,
   },
-  plugins: [{ plugin: BabelRcPlugin }],
-  // presets: ['react-app'],
-  // babel: {
-  // plugins: [
-  // [
-  // require.resolve('@welldone-software/babel-plugin-add-test-id'),
-  // { attrName: 'data-test-id-example' },
-  // ],
-  // ],
-  // },
+
+  webpack: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
+    plugins: [
+      // new StyleLintPlugin({
+      //   configBasedir: __dirname,
+      //   context: path.resolve(__dirname, 'src'),
+      //   files: ['**/*.tsx', '**/*.ts'],
+      // }),
+
+      new WebpackPluginRamdisk(),
+    ],
+  },
+
+  plugins: [
+    {
+      // plugin: reactHotReloadPlugin,
+      plugin: BabelRcPlugin,
+    },
+  ],
 };
