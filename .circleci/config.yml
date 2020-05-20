@@ -12,7 +12,7 @@ jobs:
   deploy:
     docker:
 #      - image: circleci/node:12.13.0-buster
-      - image: eeacms/rsync
+      - image: instrumentisto/rsync-ssh
     resource_class: large
     working_directory: ~/project
     steps:
