@@ -27,7 +27,7 @@ module.exports = {
 
   plugins: [
     {
-      // plugin: reactHotReloadPlugin,
+      plugin: reactHotReloadPlugin,
       plugin: BabelRcPlugin,
     },
   ],
