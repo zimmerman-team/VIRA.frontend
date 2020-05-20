@@ -77,7 +77,6 @@ workflows:
                 - develop
 
       - cypress/install:
-
           executor: staging-executor
           yarn: true
           build: yarn build
@@ -86,12 +85,9 @@ workflows:
               only:
                 - master
       - deploy-dev:
-          name: Deploy build
           requires:
             - cypress/install
       - cypress/run:
-
-       
           executor: test-run-executor
           yarn: true
           browser: chrome
