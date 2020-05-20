@@ -12,7 +12,7 @@ module.exports = {
 
   webpack: {
     alias: {
-      'react-dom': '@hot-loader/react-dom',
+      // 'react-dom': '@hot-loader/react-dom',
     },
     plugins: [
       // new StyleLintPlugin({
@@ -27,7 +27,7 @@ module.exports = {
 
   plugins: [
     {
-      plugin: reactHotReloadPlugin,
+      // plugin: reactHotReloadPlugin,
       plugin: BabelRcPlugin,
     },
   ],

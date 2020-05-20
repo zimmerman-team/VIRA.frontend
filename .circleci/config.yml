@@ -67,8 +67,6 @@ workflows:
       - cypress/run:
           executor: with-chrome
           yarn: true
-#          start: yarn serve -s build
-#          wait-on: 'http://localhost:300'
           browser: chrome
           requires:
             - cypress/install
