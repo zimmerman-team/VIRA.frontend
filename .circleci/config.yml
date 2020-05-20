@@ -9,7 +9,7 @@ executors:
     resource_class: xlarge
 
 jobs:
-  deploy-dev:
+  deploy:
     docker:
       - image: circleci/node:12.13.0-buster
     resource_class: large
@@ -21,6 +21,15 @@ jobs:
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
+          name: Transfer build to digital ocean instance
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              sync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              sync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
+            else
+              sync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
+            fi
 
 workflows:
   build-and-test:
@@ -51,7 +60,7 @@ workflows:
           yarn: true
           build: yarn build
 
-      - deploy-dev:
+      - deploy:
           requires:
             - cypress/install
       - cypress/run:
@@ -59,8 +68,7 @@ workflows:
           yarn: true
           browser: chrome
           requires:
-            - cypress/install
-            - deploy-dev
+            - deploy
           record: true
           parallel: true
           parallelism: 11
