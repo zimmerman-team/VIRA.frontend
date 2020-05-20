@@ -65,7 +65,7 @@ workflows:
               ignore:
                 - master
                 - develop
-                -
+                
       - cypress/install:
           name: Build develop branch
           executor: test-executor
