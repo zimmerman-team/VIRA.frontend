@@ -5,7 +5,7 @@ version: 2.1
 executors:
   cypress-executor:
     docker:
-      - image: 'cypress/included:4.5.0'
+      - image: 'cypress/included:4.6.0'
     resource_class: xlarge
 
 jobs:
@@ -58,6 +58,7 @@ workflows:
                                fi
                                source $BASH_ENV
           yarn: true
+          install-command: yarn install --frozen-lockfile
           build: yarn build
 
       - deploy:
