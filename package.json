@@ -155,7 +155,7 @@
     "start-test-api": "start-server-and-test start-back-test http://localhost:4200/api test-api",
     "storybook": "start-storybook -p 9009 -s public --ci process.env.DEV_ENVIRONMENT=isolated",
     "build-storybook": "build-storybook -s public",
-    "init-data": "ts-node --project 'nodetsconfig.json' server/scripts/loadInitialData.ts",
+    "import-data": "ts-node --project 'nodetsconfig.json' server/scripts/loadInitialData.ts",
     "chroma": "chromatic",
     "chroma:build": "npx chromatic --project-token=j2ltypvksbm",
     "cypress:open": "cypress open",
