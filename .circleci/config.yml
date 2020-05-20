@@ -57,8 +57,7 @@ workflows:
     jobs:
       - cypress/install:
           executor: dev-executor
-          pre-steps:
-            command: |
+          command: |
                        if [ "${CIRCLE_BRANCH}" == "master" ]; then
                          echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
                          echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
