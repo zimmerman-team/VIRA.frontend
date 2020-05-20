@@ -3,7 +3,7 @@ orbs:
 version: 2.1
 
 executors:
-  test-run-executor:
+  cypress-executor:
     docker:
       - image: 'cypress/included:4.5.0'
     resource_class: xlarge
@@ -56,7 +56,7 @@ workflows:
   build-and-test:
     jobs:
       - cypress/install:
-          executor: dev-executor
+          executor: cypress-executor
           pre-steps:
             - run:
                 name: Set env variables
@@ -103,7 +103,7 @@ workflows:
           requires:
             - cypress/install
       - cypress/run:
-          executor: test-run-executor
+          executor: cypress-executor
           yarn: true
           browser: chrome
           requires:
