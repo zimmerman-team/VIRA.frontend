@@ -20,17 +20,17 @@ jobs:
       - run: eval ssh-agent -s
       - run: sudo apt install rsync
       - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-      - run: sync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
-#      - run:
-#          name: Transfer build to digital ocean instance
-#          command: |
-#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-#              sync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
-#            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-#              sync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
-#            else
-#              sync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
-#            fi
+#      - run: sync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
+      - run:
+          name: Transfer build to digital ocean instance
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
+            else
+              rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
+            fi
 
 workflows:
   build-and-test:
@@ -59,7 +59,6 @@ workflows:
                                fi
                                source $BASH_ENV
           yarn: true
-          install-command: yarn install --frozen-lockfile
           build: yarn build
 
       - deploy:
