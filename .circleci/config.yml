@@ -8,36 +8,6 @@ executors:
       - image: 'cypress/included:4.5.0'
     resource_class: xlarge
 
-  dev-executor:
-    docker:
-      - image: 'cypress/included:4.5.0'
-    resource_class: xlarge
-    environment:
-      REACT_APP_BACKEND_PORT: 4201
-      REACT_APP_PROJECT_URL: 'https://app.ins.dev.nyuki.io'
-      REACT_APP_BACKEND_URL: 'https://app.ins.dev.nyuki.io'
-      REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger-dev'
-
-  test-executor:
-    docker:
-      - image: 'cypress/included:4.5.0'
-    resource_class: xlarge
-    environment:
-      REACT_APP_BACKEND_PORT: 4202
-      REACT_APP_PROJECT_URL: 'https://app.ins.test.nyuki.io'
-      REACT_APP_BACKEND_URL: 'https://app.ins.test.nyuki.io'
-      REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger-test'
-
-  staging-executor:
-    docker:
-      - image: 'cypress/included:4.5.0'
-    resource_class: xlarge
-    environment:
-      REACT_APP_BACKEND_PORT: 4200
-      REACT_APP_PROJECT_URL: 'https://app.ins.staging.nyuki.io'
-      REACT_APP_BACKEND_URL: 'https://app.ins.staging.nyuki.io'
-      REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger'
-
 jobs:
   deploy-dev:
     docker:
@@ -81,24 +51,6 @@ workflows:
           yarn: true
           build: yarn build
 
-
-#      - cypress/install:
-#          executor: test-executor
-#          yarn: true
-#          build: yarn build
-#          filters:
-#            branches:
-#              only:
-#                - develop
-#
-#      - cypress/install:
-#          executor: staging-executor
-#          yarn: true
-#          build: yarn build
-#          filters:
-#            branches:
-#              only:
-#                - master
       - deploy-dev:
           requires:
             - cypress/install
