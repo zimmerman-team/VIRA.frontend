@@ -12,15 +12,13 @@ executors:
     docker:
       - image: 'cypress/included:4.5.0'
     resource_class: xlarge
-
-
-jobs:
-  set-env-dev:
     environment:
       REACT_APP_BACKEND_PORT: 4201
       REACT_APP_PROJECT_URL: 'https://app.ins.dev.nyuki.io'
       REACT_APP_BACKEND_URL: 'https://app.ins.dev.nyuki.io'
       REACT_APP_MONGO_DB_URL: 'mongodb://localhost:27017/insinger-dev'
+
+jobs:
   deploy-dev:
     docker:
       - image: circleci/node:12.13.0-buster
@@ -60,7 +58,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - set-env-dev
+      - env-dev
       - cypress/install:
           executor: with-chrome
           yarn: true
