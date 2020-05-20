@@ -62,13 +62,25 @@ workflows:
   build-and-test:
     jobs:
       - cypress/install:
+          steps:
+            - run:
+                name: "What branch am I on now?"
+                command: echo $CIRCLE_BRANCH
           executor: with-chrome
           yarn: true
           build: yarn build
       - deploy-dev:
+          steps:
+            - run:
+                name: "What branch am I on now?"
+                command: echo $CIRCLE_BRANCH
           requires:
             - cypress/install
       - cypress/run:
+          steps:
+            - run:
+                name: "What branch am I on now?"
+                command: echo $CIRCLE_BRANCH
           executor: with-chrome
           yarn: true
           browser: chrome
