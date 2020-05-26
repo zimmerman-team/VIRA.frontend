@@ -101,7 +101,9 @@
     "stylelint-processor-styled-components": "^1.10.0",
     "typescript": "^3.8.2",
     "typescript-plugin-styled-components": "^1.4.4",
-    "webpack-plugin-ramdisk": "^0.1.4"
+    "webpack-plugin-ramdisk": "^0.1.4",
+    "happo-cypress": "^0.2.0",
+    "happo.io": "^5.4.0"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
@@ -120,7 +122,9 @@
     "build-storybook": "build-storybook -s public",
     "init-data": "ts-node --project 'nodetsconfig.json' server/scripts/loadInitialData.ts",
     "cypress:open": "cypress open",
-    "cypress:record": "cypress run --record --key 30a16df3-0b07-4a7e-bd9c-d6a60c8c8354"
+    "cypress:record": "cypress run --record --key 30a16df3-0b07-4a7e-bd9c-d6a60c8c8354",
+    "happo:run": "happo run [sha]",
+    "happo-ci-circleci": "BASE_BRANCH=\"origin/develop\" happo-ci-circleci"
   },
   "eslintConfig": {
     "settings": {
