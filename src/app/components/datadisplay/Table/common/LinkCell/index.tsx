@@ -1,10 +1,10 @@
+/* eslint-disable spaced-comment */
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import { Link } from 'react-router-dom';
 import { LinkCellModuleModel } from 'app/components/datadisplay/Table/model';
 import { TextStyle, ProjectPalette } from 'app/theme';
-import css from 'styled-components/macro';
 
 const CustomLink = styled(props => <Link {...props} />)`
   font-family: ${TextStyle.fontFamily};

@@ -7,9 +7,7 @@ module.exports = {
 
   presets: [
     '@storybook/preset-create-react-app',
-
-    // 'storybook-addon-deps/preset-explorer',
-
+    'storybook-addon-deps/preset-explorer',
     // '@storybook/preset-typescript',
   ],
   addons: [
@@ -17,6 +15,5 @@ module.exports = {
     '@storybook/addon-links/register',
     '@storybook/addon-viewport/register',
     '@storybook/addon-docs',
-    'happo-plugin-storybook/register',
   ],
 };

@@ -43,7 +43,12 @@ export interface TableLayoutModel {
   columns: MUIDataTableColumnDef[];
   options: MUIDataTableOptions;
   changeTableRowColor?: number;
-  cssVariant?: 'standard' | 'variant9' | 'variant10' | 'reportsVariant';
+  cssVariant?:
+    | 'standard'
+    | 'variant9'
+    | 'variant10'
+    | 'reportsVariant'
+    | 'projectsVariant';
 }
 
 export interface InfoCellModuleModel {

@@ -14,6 +14,7 @@ describe('grantee detail page', () => {
     cy.findByTestId('grantee-detail-contact').should('exist');
 
     cy.viztabs();
+
     cy.listTabsNoGrantees();
 
     // cy.get('body').happoScreenshot();

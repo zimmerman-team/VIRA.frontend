@@ -1,223 +1,76 @@
 orbs:
   cypress: cypress-io/cypress@1
-  happo: happo/happo@2.0.1
 version: 2.1
-# todo: move all ip's to env vars
-# todo: make zz orb
-#   - circleci_path
-#   - ssh_target
-#   - ssh_path
+
+# have a look at https://circleci.com/orbs/registry/orb/germade/rsync
+executors:
+  cypress-executor:
+    docker:
+      - image: 'cypress/included:4.6.0'
+    resource_class: large
+
 jobs:
-  deploy-dev:
+  deploy:
     docker:
-      - image: circleci/node:12.14.1-stretch-browsers
+      - image: instrumentisto/rsync-ssh
+    resource_class: large
     working_directory: ~/project
     steps:
-      - checkout
       - attach_workspace:
           at: ~/
-      - run: yarn install
+      - run: eval ssh-agent -s
+      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
       - run:
-          name: Load environment variables based on branch
+          name: Transfer build to digital ocean instance
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
+              rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
+              rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
             else
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
+              rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
             fi
-            source $BASH_ENV
-      - run: yarn build
-      - run: eval ssh-agent -s
-      - run: sudo apt install rsync
-      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-dev/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
-      - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
-
-  deploy-test:
-    docker:
-      - image: circleci/node:12.14.1-stretch-browsers
-    working_directory: ~/project
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/
-      - run: yarn install
-      - run:
-          name: Load environment variables based on branch
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
-            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
-            else
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
-            fi
-            source $BASH_ENV
-      - run: yarn build
-      - run: eval ssh-agent -s
-      - run: sudo apt install rsync
-      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-test/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
-      - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
-
-  deploy-storybook:
-    docker:
-      - image: circleci/node:12.14.1-stretch-browsers
-    working_directory: ~/project
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: yarn build-storybook
-      - run: eval ssh-agent -s
-      - run: sudo apt install rsync
-      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-      - run: rsync -O -ave ssh ~/project/storybook-static zz@206.189.241.202:~/insinger-storybook
-
-  deploy-staging:
-    docker:
-      - image: circleci/node:12.14.1-stretch-browsers
-    working_directory: ~/project
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/
-      - run: yarn install
-      - run:
-          name: Load environment variables based on branch
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
-            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
-            else
-              echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
-              echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
-            fi
-            source $BASH_ENV
-      - run: yarn build
-      - run: eval ssh-agent -s
-      - run: sudo apt install rsync
-      - run: ssh -o StrictHostKeyChecking=no zz@206.189.241.202 exit
-      - run: ssh "$SSH_USER"@"$SSH_HOST_STAGING" "cd ~/insinger-staging/; git checkout .; git pull; git checkout ${CIRCLE_BRANCH}; yarn install;"
-      - run: rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
-
-  test_api:
-    docker:
-      - image: circleci/node:12.14.1
-      - image: circleci/mongo:3.6.2-jessie
-    working_directory: ~/test
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: Install packages
-          command: yarn install
-      - run:
-          name: Load environment variables
-          command: |
-            echo 'export REACT_APP_PROJECT_URL=http://localhost:3000' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_URL=http://localhost:4200' >> $BASH_ENV
-            echo 'export REACT_APP_BACKEND_PORT=4200' >> $BASH_ENV
-            echo 'export REACT_APP_MONGO_DB_URL=mongodb://localhost:27017/insinger' >> $BASH_ENV
-            echo 'export REACT_APP_POSTMARK_CLIENT_ID=eb6520ea-eb38-4a11-b1f3-328cdee3ca57' >> $BASH_ENV
-            source $BASH_ENV
-      - run:
-          name: Run data script
-          command: yarn init-data
-      - run:
-          name: Run express-js app
-          command: yarn start-test-api
-
-  release:
-    docker:
-      - image: circleci/node:12.14.1-stretch-browsers
-    working_directory: ~/project
-    steps:
-      - checkout
-      - run: npx semantic-release
 
 workflows:
   build-and-test:
     jobs:
-      # - test_api
       - cypress/install:
-          executor: cypress/base-12-6-0
+          executor: cypress-executor
+          pre-steps:
+            - run:
+                name: Set env variables
+                command: |
+                               if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                                 echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
+                                 echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
+                                 echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
+                                 echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
+                               elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+                                 echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+                                 echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
+                                 echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
+                                 echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
+                               else
+                                 echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+                                 echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
+                                 echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
+                                 echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
+                               fi
+                               source $BASH_ENV
           yarn: true
-          run: happo-ci-circleci
           build: yarn build
+
+      - deploy:
+          requires:
+            - cypress/install
       - cypress/run:
-          executor: cypress/browsers-chrome76
+          executor: cypress-executor
+          yarn: true
           browser: chrome
           requires:
-            - cypress/install
-#          start: yarn start
-#          wait-on: 'http://localhost:3000'
-          yarn: true
+            - deploy
           record: true
           parallel: true
-          parallelism: 4
+          parallelism: 6
           group: 'all tests'
-          store_artifacts: true
-#       post-steps:
-      # - store_test_results:
-      # path: cypress/results
-      - deploy-dev:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: /feature\/.*/
-      - deploy-test:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: develop
-      - deploy-staging:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: master
-      # - deploy-storybook:
-          # requires:
-            # - cypress/install
-          # filters:
-            # branches:
-              # only: develop
-      - release:
-          requires:
-            - cypress/install
-          filters:
-            branches:
-              only: master
 

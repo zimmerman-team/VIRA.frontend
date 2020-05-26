@@ -1,8 +1,10 @@
+/* eslint-disable spaced-comment */
+/// <reference types="styled-components/cssprop" />
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from 'app';
 import 'app/languages';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars,import/no-unresolved
 import * as _ from 'styled-components/cssprop';
 import Providers from 'app/Providers';
 import * as serviceWorker from './serviceWorker';
