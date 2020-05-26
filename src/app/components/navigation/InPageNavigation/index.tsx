@@ -1,6 +1,9 @@
+// @ts-nocheck
+/* eslint-disable spaced-comment */
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
 import { InPageNavigationModel } from 'app/components/navigation/InPageNavigation/model';
 import { Grid } from '@material-ui/core';
