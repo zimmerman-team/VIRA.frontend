@@ -30,5 +30,10 @@ describe('project detail page', () => {
     cy.findByTestId('reports-table').should('exist');
 
     // cy.get('body').happoScreenshot();
+
+    cy.get('body').happoScreenshot({
+      component: 'Project detail',
+      variant: 'base',
+    });
   });
 });

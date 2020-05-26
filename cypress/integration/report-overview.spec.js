@@ -9,6 +9,10 @@ describe('report overview', () => {
 
     cy.listTabs();
 
+    cy.get('body').happoScreenshot({
+      component: 'Report overview',
+      variant: 'base',
+    });
     // cy.get('body').happoScreenshot();
   });
 });

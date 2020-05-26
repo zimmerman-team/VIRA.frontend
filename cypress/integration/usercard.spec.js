@@ -18,5 +18,9 @@ describe('user card', () => {
     cy.findByTestId('usercard-privacy-button').should('exist');
 
     // cy.get('body').happoScreenshot();
+    cy.get('body').happoScreenshot({
+      component: 'Usercard',
+      variant: 'base',
+    });
   });
 });

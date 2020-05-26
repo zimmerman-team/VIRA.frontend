@@ -8256,10 +8256,10 @@ handle-thing@^2.0.0:
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
   integrity sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==
 
-happo-cypress@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/happo-cypress/-/happo-cypress-0.2.0.tgz#21cf978b47ba4b1e6af7134e68b551c8fe4b166d"
-  integrity sha512-5DjMwLZc8iG6PB2Xff+TAjjf6Qzd67Zpcfd0xZEtdJd/NXGpakMBHsUG9hX4uwrcJBkZgaJHPSdz8TVUN7XLoA==
+happo-cypress@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/happo-cypress/-/happo-cypress-1.0.0.tgz#b48517120b927ef87d03e0df5c2cfcb9d8713bdf"
+  integrity sha512-PO50kvSLVevwaCw8mmWTbe3LsXYZPIRFPiV/r9h3sgjsLHCVjguAPaAm+3n9yJBimV4x1J9udoLrsDaY+eBhPw==
   dependencies:
     archiver "^3.1.1"
     node-fetch "^2.6.0"

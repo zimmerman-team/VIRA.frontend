@@ -9,5 +9,10 @@ describe('project overview', () => {
     cy.listTabs();
 
     // cy.get('body').happoScreenshot();
+
+    cy.get('body').happoScreenshot({
+      component: 'Project overview',
+      variant: 'base',
+    });
   });
 });

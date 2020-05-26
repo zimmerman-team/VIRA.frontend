@@ -18,5 +18,10 @@ describe('reports', () => {
     // cy.findByTestId('').should('exist');
     // cy.findByTestId('').should('exist');
     // cy.get('body').happoScreenshot();
+
+    cy.get('body').happoScreenshot({
+      component: 'Create report: outcomes',
+      variant: 'base',
+    });
   });
 });

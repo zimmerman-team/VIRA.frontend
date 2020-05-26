@@ -14,5 +14,10 @@ describe('search', () => {
     cy.findByTestId('search-nav-item-3').click();
 
     // cy.get('body').happoScreenshot();
+
+    cy.get('body').happoScreenshot({
+      component: 'Search',
+      variant: 'base',
+    });
   });
 });

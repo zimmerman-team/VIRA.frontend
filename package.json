@@ -88,6 +88,8 @@
     "eslint-plugin-prettier": "^3.1.2",
     "fork-ts-checker-webpack-plugin": "^4.0.5",
     "getenv": "^1.0.0",
+    "happo-cypress": "^1.0.0",
+    "happo.io": "^5.4.0",
     "husky": "^4.2.3",
     "jest": "24.9.0",
     "paths.macro": "^2.0.2",
@@ -101,9 +103,7 @@
     "stylelint-processor-styled-components": "^1.10.0",
     "typescript": "^3.8.2",
     "typescript-plugin-styled-components": "^1.4.4",
-    "webpack-plugin-ramdisk": "^0.1.4",
-    "happo-cypress": "^0.2.0",
-    "happo.io": "^5.4.0"
+    "webpack-plugin-ramdisk": "^0.1.4"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
