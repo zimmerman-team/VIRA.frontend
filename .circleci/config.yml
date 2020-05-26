@@ -2,6 +2,7 @@ orbs:
   cypress: cypress-io/cypress@1
 version: 2.1
 
+# have a look at https://circleci.com/orbs/registry/orb/germade/rsync
 executors:
   cypress-executor:
     docker:
