@@ -12,5 +12,12 @@ describe('search', () => {
     cy.findByTestId('search-nav-item-1').click();
     cy.findByTestId('search-nav-item-2').click();
     cy.findByTestId('search-nav-item-3').click();
+
+    // cy.get('body').happoScreenshot();
+
+    cy.get('body').happoScreenshot({
+      component: 'Search',
+      variant: 'base',
+    });
   });
 });

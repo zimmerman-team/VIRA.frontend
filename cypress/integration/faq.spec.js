@@ -16,5 +16,12 @@ describe('faq page', () => {
     cy.findByTestId('question-1-expl').should('exist');
     cy.findByTestId('question-2-expl').should('exist');
     cy.findByTestId('question-3-expl').should('exist');
+
+    // cy.get('body').happoScreenshot();
+
+    cy.get('body').happoScreenshot({
+      component: 'FAQ page',
+      variant: 'base',
+    });
   });
 });

@@ -8,5 +8,11 @@ describe('report overview', () => {
     cy.findByTestId('sidebar-item-3').click();
 
     cy.listTabs();
+
+    cy.get('body').happoScreenshot({
+      component: 'Report overview',
+      variant: 'base',
+    });
+    // cy.get('body').happoScreenshot();
   });
 });

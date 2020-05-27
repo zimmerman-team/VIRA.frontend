@@ -88,6 +88,8 @@
     "eslint-plugin-prettier": "^3.1.2",
     "fork-ts-checker-webpack-plugin": "^4.0.5",
     "getenv": "^1.0.0",
+    "happo-cypress": "^1.0.0",
+    "happo.io": "^5.4.0",
     "husky": "^4.2.3",
     "jest": "24.9.0",
     "paths.macro": "^2.0.2",
@@ -120,7 +122,9 @@
     "build-storybook": "build-storybook -s public",
     "init-data": "ts-node --project 'nodetsconfig.json' server/scripts/loadInitialData.ts",
     "cypress:open": "cypress open",
-    "cypress:record": "cypress run --record --key 30a16df3-0b07-4a7e-bd9c-d6a60c8c8354"
+    "cypress:record": "cypress run --record --key 30a16df3-0b07-4a7e-bd9c-d6a60c8c8354",
+    "happo:run": "happo run [sha]",
+    "happo-ci-circleci": "BASE_BRANCH=\"origin/develop\" happo-ci-circleci"
   },
   "eslintConfig": {
     "settings": {

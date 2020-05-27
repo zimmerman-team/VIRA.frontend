@@ -16,5 +16,7 @@ describe('grantee detail page', () => {
     cy.viztabs();
 
     cy.listTabsNoGrantees();
+
+    // cy.get('body').happoScreenshot();
   });
 });

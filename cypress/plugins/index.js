@@ -42,6 +42,8 @@ const getenv = require('getenv');
 dotenv.config({ path: '.env' });
 dotenv.load();
 
+const happoTask = require('happo-cypress/task');
+
 const overrideEnvVars = config => {
   const baseUrl = getenv.string('REACT_APP_CYPRESS_baseUrl', '');
   const username = getenv.string('REACT_APP_CYPRESS_USER', '');
@@ -53,5 +55,6 @@ const overrideEnvVars = config => {
 };
 
 module.exports = (on, config) => {
+  on('task', happoTask);
   return overrideEnvVars(config);
 };
