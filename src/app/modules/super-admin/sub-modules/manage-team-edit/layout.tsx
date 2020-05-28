@@ -3,7 +3,6 @@ import { Grid, Box } from '@material-ui/core';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { ManageTeamEditLayoutModel } from 'app/modules/super-admin/sub-modules/manage-team-edit/models';
 import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import 'styled-components/macro';
 import TableModule from 'app/components/datadisplay/Table';
 import { PageLoader } from 'app/modules/common/page-loader';
@@ -23,7 +22,7 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => {
         <BreadCrumbs {...props.breadcrumbs} />
       </Grid>
 
-      {/*<Box width="100%" height="30px" />*/}
+      <Box width="100%" height="10px" />
 
       {/* ---------------------------------------------------------------------*/}
       {/* form */}
@@ -54,6 +53,7 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => {
         {/* todo: currently it's overflowing. thereby messing up the layout; we need to fix this */}
         <TableModule
           {...props.table}
+          cssVariant="teamEditVariant"
           title="user_management.team.table_title"
         />
       </Grid>
