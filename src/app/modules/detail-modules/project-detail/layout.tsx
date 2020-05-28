@@ -58,13 +58,22 @@ export const ProjectDetailLayout = (props: any) => {
           url_note={props.projectDetail.organisation}
           url={props.projectDetail.organisation_link}
           stats={[
-            // {
-            //   label: '',
-            //   value: '',
-            // },
             {
               label: t('projects.detail.stats.total_budget'),
               value: parseInt(props.projectDetail.total_amount || '', 10)
+                .toLocaleString(undefined, {
+                  currency: 'EUR',
+                  currencyDisplay: 'symbol',
+                  style: 'currency',
+                })
+                .replace('.00', ''),
+            },
+            {
+              label: t('projects.detail.stats.insinger_contribution'),
+              value: parseInt(
+                props.projectDetail.total_insinger_contribution || '',
+                10
+              )
                 .toLocaleString(undefined, {
                   currency: 'EUR',
                   currencyDisplay: 'symbol',

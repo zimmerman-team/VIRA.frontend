@@ -4,6 +4,7 @@
     "generateReportBtn": "Genereer rapport",
     "stats": {
       "total_budget": "Totaal project budget",
+      "insinger_contribution": "Insinger contributie",
       "duration": "Duur project"
     }
   },
