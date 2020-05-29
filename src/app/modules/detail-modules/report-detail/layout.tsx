@@ -98,6 +98,8 @@ export const ReportDetailLayout = (props: any) => {
           id={`Report ID: ${props.report.reportID}`}
           url={`/projects/${props.report.project.id}`}
           url_note={`${props.report.project.name}`}
+          editReport={props.editReport}
+          showEditBtn={showEditBtn}
           stats={[
             {
               label: t('reports.detail.stats.targetBeneficiaries'),
@@ -116,23 +118,14 @@ export const ReportDetailLayout = (props: any) => {
           ]}
         />
       </Grid>
-
-      <div
-        css={`
-          width: 100%;
-          height: 32px;
-        `}
-      />
-
-      {/* ---------------------------------------------------------------------*/}
-      {/* button: generate report */}
-      {showEditBtn && (
-        <Hidden smUp>
-          <Grid container item xs={12}>
-            <ContainedButton text="Edit Report" onClick={props.editReport} />
-          </Grid>
-        </Hidden>
-      )}
+      <Hidden smDown>
+        <div
+          css={`
+            width: 100%;
+            height: 32px;
+          `}
+        />
+      </Hidden>
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}

@@ -8,6 +8,8 @@ import { StatItem } from 'app/modules/common/components/StatItem';
 import Grid from '@material-ui/core/Grid';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { Hidden } from '@material-ui/core';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 
 export interface TitleParams {
   title: string;
@@ -20,6 +22,8 @@ export interface TitleParams {
   description?: string;
   testAttr?: string;
   stats?: { label: string; value: string }[];
+  editReport?: void;
+  showEditBtn?: boolean;
 }
 
 const style: any[] = [
@@ -107,6 +111,21 @@ export const TitleFragment = (props: TitleParams) => {
               height: 24px;
             `}
           />
+
+          {/* ---------------------------------------------------------------------*/}
+          {/* button: generate report */}
+          {props.showEditBtn && (
+            <Hidden smUp>
+              <Grid container item xs={12}>
+                <ContainedButton
+                  text="Edit Report"
+                  onClick={props.editReport}
+                />
+              </Grid>
+              <Box width="100%" height="25px" />
+            </Hidden>
+          )}
+
           {/* ---------------------------------------------------------------------*/}
           {/* stat fragment */}
           {props.stats && (
