@@ -117,8 +117,8 @@ Cypress.Commands.add('updateTeam', () => {
   cy.waitPageLoader();
   cy.findByTestId('add-team-input-title').type(' Updated');
   cy.findByTestId('contained-button').click();
-  cy.visit('/super-admin/manage-teams');
   cy.waitPageLoader();
+  cy.visit('/super-admin/manage-teams');
   cy.findAllByTestId('manage-users-teams-card-container')
     .first()
     .findByTestId('card-header')
