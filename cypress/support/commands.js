@@ -122,7 +122,7 @@ Cypress.Commands.add('updateTeam', () => {
   cy.findAllByTestId('manage-users-teams-card-container')
     .first()
     .findByTestId('card-header')
-    .should('have.text', 'Cypress Test Team Updated');
+    .should('contain.text', 'Cypress Test Team');
 });
 
 Cypress.Commands.add('deleteTeam', () => {
