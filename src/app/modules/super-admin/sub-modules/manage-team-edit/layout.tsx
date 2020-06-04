@@ -30,6 +30,7 @@ export const ManageTeamEditLayout = (props: ManageTeamEditLayoutModel) => {
       <Grid item container xs={12} lg={12} direction="column">
         <SingleMultiLineTextField
           bigLabel
+          data-cy="add-team-input-title"
           id="Edit Title"
           value={props.title}
           label={t(

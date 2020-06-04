@@ -28,6 +28,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
         `}
       >
         <Typography
+          data-cy="manage-users-teams-title"
           variant="h6"
           css={`
             && {
@@ -51,6 +52,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
       {/* Tool bar */}
       <Grid item xs={12} lg={6}>
         <AdminManageOverviewToolbar
+          data-cy="manage-users-teams-toolbar"
           sortOptions={props.sortOptions}
           onSortChange={props.onSortChange}
           searchValue={props.searchValue}
@@ -63,6 +65,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
 
       <Grid item xs={7} lg={12}>
         <AdminAddButton
+          data-cy="manage-users-teams-add-button"
           text={t(props.addBtnText)}
           icon={<Add />}
           onClick={() => {
@@ -74,7 +77,13 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
       {/* ---------------------------------------------------------------------*/}
       {/* Cards */}
       {props.teamCards.map((card, index) => (
-        <Grid item xs={12} lg={4} key={card._id}>
+        <Grid
+          data-cy="manage-users-teams-card-container"
+          item
+          xs={12}
+          lg={4}
+          key={card._id}
+        >
           <TeamUserCard
             {...card}
             urlParam={props.urlParam}
