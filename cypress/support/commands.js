@@ -85,3 +85,57 @@ Cypress.Commands.add('listTabsNoReports', (overrides = {}) => {
   cy.findByTestId('grantees-panel').should('exist');
   // cy.findByTestId('reports-panel').should('exist');
 });
+
+Cypress.Commands.add('waitPageLoader', (timeout = 50000) => {
+  cy.get('[data-cy=general-loader]', { timeout }).should('not.be.visible');
+  cy.wait(2000);
+});
+
+Cypress.Commands.add('createNewTeam', (user = false) => {
+  cy.findByTestId('manage-users-teams-add-button').click();
+  cy.findByTestId('add-team-input-title').type('Cypress Test Team');
+  cy.get('#MUIDataTableBodyRow-0')
+    .find("[type='checkbox']")
+    .click();
+  cy.findByTestId('contained-button').click();
+});
+
+Cypress.Commands.add('readTeam', (user = false) => {
+  cy.visit('/super-admin/manage-teams');
+  cy.waitPageLoader();
+  cy.findAllByTestId('manage-users-teams-card-container')
+    .first()
+    .findByTestId('card-header')
+    .should('have.text', 'Cypress Test Team');
+});
+
+Cypress.Commands.add('updateTeam', (user = false) => {
+  cy.findAllByTestId('manage-users-teams-card-container')
+    .first()
+    .click();
+  cy.waitPageLoader();
+  cy.findByTestId('add-team-input-title').type(' Updated');
+  cy.findByTestId('contained-button').click();
+  cy.visit('/super-admin/manage-teams');
+  cy.waitPageLoader();
+  cy.findAllByTestId('manage-users-teams-card-container')
+    .first()
+    .findByTestId('card-header')
+    .should('have.text', 'Cypress Test Team Updated');
+});
+
+Cypress.Commands.add('deleteTeam', (user = false) => {
+  cy.findAllByTestId('manage-users-teams-card-container')
+    .first()
+    .findByTestId('card-delete-button')
+    .click();
+
+  cy.findAllByTestId('dialog-action-button')
+    .eq(1)
+    .click();
+
+  cy.findAllByTestId('manage-users-teams-card-container')
+    .first()
+    .findByTestId('card-header')
+    .should('not.have.text', 'Cypress Test Team Updated');
+});
