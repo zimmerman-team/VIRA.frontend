@@ -105,8 +105,12 @@ export function TeamSelect(props: any) {
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        {props.items.map((item: SelectItemModel) => (
-          <MenuItem key={item.value} value={item.value}>
+        {props.items.map((item: SelectItemModel, index: number) => (
+          <MenuItem
+            data-cy={`select-item-${index}`}
+            key={item.value}
+            value={item.value}
+          >
             {item.label}
           </MenuItem>
         ))}

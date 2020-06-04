@@ -216,6 +216,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         {/*{!isMobileWidth && <Box width="100%" height="30px" />}*/}
 
         <SingleMultiLineTextField
+          data-cy="manage-user-input-first-name"
           value={firstName}
           setValue={setFirstName}
           id="First Name"
@@ -225,6 +226,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         <Box width="100%" height="32px" />
 
         <SingleMultiLineTextField
+          data-cy="manage-user-input-last-name"
           value={lastName}
           setValue={setLastName}
           id="Last Name"
@@ -234,6 +236,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         <Box width="100%" height="32px" />
 
         <SingleMultiLineTextField
+          data-cy="manage-user-input-email"
           value={email}
           setValue={setEmail}
           id="Email"
@@ -268,6 +271,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
             {props.mode === 'add' && (
               <Grid item xs={12} md={12} lg={6} xl={6}>
                 <TeamSelect
+                  data-cy="manage-user-select-team"
                   title={t('user_management.user.select_team')}
                   selectedItem={group}
                   items={props.form.selectOptions}
@@ -299,6 +303,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           }}
         >
           <ContainedButton
+            data-cy="manage-user-save-button"
             onClick={onSubmit}
             disabled={isSubmitDisabled()}
             text={t(
