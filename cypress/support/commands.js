@@ -85,3 +85,8 @@ Cypress.Commands.add('listTabsNoReports', (overrides = {}) => {
   cy.findByTestId('grantees-panel').should('exist');
   // cy.findByTestId('reports-panel').should('exist');
 });
+
+Cypress.Commands.add('waitPageLoader', (timeout = 50000) => {
+  cy.get('[data-cy=general-loader]', { timeout }).should('not.be.visible');
+  cy.wait(2000);
+});

@@ -33,6 +33,7 @@ export const ManageAccount = (props: ManageAccountModel) => {
       {/* form */}
       <Grid item container xs={12} lg={12} direction={'column'}>
         <SingleMultiLineTextField
+          data-cy="manage-account-first-name"
           id={'First Name'}
           label={t('First Name')}
           bigLabel
@@ -58,6 +59,7 @@ export const ManageAccount = (props: ManageAccountModel) => {
       {/* button */}
       <Grid item container xs={12} lg={12} justify={'flex-end'}>
         <ContainedButton
+          data-cy="manage-account-save-button"
           text={t('Save')}
           onClick={() => console.log(props)}
           css={{ position: 'absolute', bottom: 32 }}

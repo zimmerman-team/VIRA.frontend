@@ -216,6 +216,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         {/*{!isMobileWidth && <Box width="100%" height="30px" />}*/}
 
         <SingleMultiLineTextField
+          data-cy="manage-user-input-first-name"
           value={firstName}
           setValue={setFirstName}
           id="First Name"
@@ -299,6 +300,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           }}
         >
           <ContainedButton
+            data-cy="manage-user-save-button"
             onClick={onSubmit}
             disabled={isSubmitDisabled()}
             text={t(
