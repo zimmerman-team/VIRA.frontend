@@ -150,6 +150,7 @@ Cypress.Commands.add('createNewUser', () => {
   cy.get('#select-outlined').click();
   cy.findByTestId('select-item-1').click();
   cy.findByTestId('manage-user-save-button').click();
+  cy.waitPageLoader();
 });
 
 Cypress.Commands.add('readUser', () => {
