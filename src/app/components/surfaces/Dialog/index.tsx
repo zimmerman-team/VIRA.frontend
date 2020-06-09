@@ -81,6 +81,7 @@ export const Dialog = (props: DialogProps) => {
             };
             return (
               <Button
+                data-cy="dialog-button"
                 css={`
                   font-size: 14px;
                   min-width: 140px;

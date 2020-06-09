@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-describe('generate report page', () => {
-  it('test generate report page', () => {
+describe('save draft', () => {
+  it('test save draft', () => {
     // authenticate
     cy.auth();
 
@@ -125,9 +125,27 @@ describe('generate report page', () => {
     // next
     cy.findByTestId('next-button').click();
 
-    cy.get('body').happoScreenshot({
-      component: 'Create report',
-      variant: 'base',
-    });
+    // save as draft
+    cy.findByTestId('draft-button').click();
+
+    // continue
+    cy.wait(1000);
+    cy.findByTestId('dialog-button').click();
+
+    // go to reports
+    cy.findByTestId('sidebar-item-3').click();
+
+    // check if top title contains '[Draft]'
+    cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
+      .should('exist')
+      .contains('[Draft]')
+      .click();
+
+    // save draft
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('submit-button').click();
   });
 });
