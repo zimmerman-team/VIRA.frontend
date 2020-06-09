@@ -84,6 +84,7 @@ export interface AddMediaButtonParams {
 export const AddMediaButton = (props: AddMediaButtonParams) => {
   return (
     <div
+      data-cy="add-media-button"
       onClick={() => props.onClick()}
       css={`
         font-size: 14px;
@@ -109,6 +110,7 @@ export const AddMediaInputField = (props: { text: string }) => (
   <Grid
     item
     lg={12}
+    data-cy="add-media-input"
     css={`
       display: flex;
       border: solid 1px #30c2b0;
@@ -133,6 +135,7 @@ export const AddMediaInputFieldLabel = (props: { text: string }) => (
   <Grid
     item
     lg={12}
+    data-cy="add-media-input-label"
     css={`
       font-size: 17px;
       font-weight: 300;
@@ -215,6 +218,7 @@ export const AddMediaBigButton = (props: {
         <span>or</span>
         <label
           htmlFor="file-input"
+          data-cy="file-input-label"
           css={`
             display: flex;
             font-size: 16px;
@@ -232,6 +236,7 @@ export const AddMediaBigButton = (props: {
       </div>
       <input
         id="file-input"
+        data-cy="file-input"
         css={`
           display: none;
         `}
@@ -253,6 +258,7 @@ export interface AddMediaCloseButtonParams {
 
 export const AddMediaCloseButton = (props: AddMediaCloseButtonParams) => (
   <div
+    data-cy="media-close-button"
     onClick={() => props.onClick()}
     css={`
       width: 20px;
@@ -273,6 +279,7 @@ export const AddMediaTitle = () => {
   const { t } = useTranslation();
   return (
     <Typography
+      data-cy="add-media-title"
       css={`
         color: white;
         font-size: 20px;
