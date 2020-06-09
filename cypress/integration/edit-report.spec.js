@@ -30,23 +30,24 @@ describe('edit report page', () => {
     const currentDate = new Date();
     const newTitle = currentDate.getTime();
 
-    cy.get('[data-cy=outcome-title]')
+    cy.findByTestId('outcome-title')
       .children()
       .clear()
       .type(newTitle);
 
-    // todo: change finByText to stable indicator for 'next' click (test wont work if language is changed currently)
+    // next
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
 
-    cy.findByText('Next').click();
-    cy.findByText('Next').click();
-    cy.findByText('Next').click();
-    cy.findByText('Next').click();
+    // save
+    cy.findByTestId('submit-button').click();
 
-    cy.findByText('Save').click();
+    // go to report
+    cy.findByTestId('dialog-button').click();
 
-    cy.findByText('Go to Report').click();
-
-    // Check if title has been updated
+    // check if title has been updated
     cy.contains(newTitle).should('exist');
   });
 });

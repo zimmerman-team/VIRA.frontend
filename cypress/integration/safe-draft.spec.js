@@ -38,7 +38,7 @@ describe('save draft', () => {
     cy.get('.react-geocoder-results > :nth-child(1)').click();
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
+    cy.findByTestId('next-button').click();
 
     cy.get('#autocomplete-countries').click();
     cy.get('#autocomplete-countries').type('Refugees');
@@ -81,7 +81,7 @@ describe('save draft', () => {
       .type(25);
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
+    cy.findByTestId('next-button').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -96,7 +96,7 @@ describe('save draft', () => {
       .type('Lorem ipsum dolor simet text area 2');
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
+    cy.findByTestId('next-button').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -123,21 +123,29 @@ describe('save draft', () => {
       .type('Lorem ipsum dolor simet text area 4');
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
+    cy.findByTestId('next-button').click();
 
     // save as draft
-    cy.get('.bottom-nav___StyledContainedButton3-sc-7nwiqa-4').click();
+    cy.findByTestId('draft-button').click();
 
     // continue
-    cy.get('.Dialog___StyledButton-sc-9reru9-3').click();
+    cy.wait(1000);
+    cy.findByTestId('dialog-button').click();
 
     // go to reports
     cy.findByTestId('sidebar-item-3').click();
 
     // check if top title contains '[Draft]'
-
     cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
       .should('exist')
-      .contains('[Draft]');
+      .contains('[Draft]')
+      .click();
+
+    // save draft
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('next-button').click();
+    cy.findByTestId('submit-button').click();
   });
 });
