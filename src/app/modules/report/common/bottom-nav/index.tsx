@@ -63,6 +63,7 @@ export function BottomNav(props: BottomNavModel) {
     <Grid container item xs={12} lg={12} justify="space-between" wrap="nowrap">
       <Grid item xs={3}>
         <ContainedButton
+          testAttr="back-button"
           text={isMobileWidth ? '' : t('reports.form.buttons.back')}
           icon={isMobileWidth && <ChevronLeft />}
           onClick={props.back}
@@ -74,6 +75,7 @@ export function BottomNav(props: BottomNavModel) {
         {props.showDeleteBtn && (
           <React.Fragment>
             <ContainedButton
+              testAttr="delete-button"
               text={t('reports.form.buttons.delete')}
               onClick={props.deleteReport}
               css={`
