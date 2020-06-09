@@ -95,6 +95,7 @@ export function BottomNav(props: BottomNavModel) {
         {props.showDraftSubmitBtn && (
           <React.Fragment>
             <ContainedButton
+              testAttr="draft-button"
               text={t('reports.form.buttons.draft')}
               onClick={props.saveDraft}
               css={isMobileWidth && mobileButton}
@@ -104,6 +105,7 @@ export function BottomNav(props: BottomNavModel) {
         )}
         {props.showSubmitBtn ? (
           <ContainedButton
+            testAttr="submit-button"
             text={t(
               `reports.form.buttons.${query.get('rid') ? 'save' : 'submit'}`
             )}
@@ -112,6 +114,7 @@ export function BottomNav(props: BottomNavModel) {
           />
         ) : (
           <ContainedButton
+            testAttr="next-button"
             text={t('reports.form.buttons.next')}
             onClick={props.next}
             disabled={props.nextDisabled}

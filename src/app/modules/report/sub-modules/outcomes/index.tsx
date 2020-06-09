@@ -122,6 +122,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
                 </div>
                 <Box width="100%" height="14px" />
                 <ContainedButton
+                  testAttr="remove-button"
                   text="Remove"
                   onClick={() => props.setLocation(null)}
                 />
