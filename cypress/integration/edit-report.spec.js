@@ -1,35 +1,36 @@
 /// <reference types="Cypress" />
-/// <reference types="Cypress" />
+
 describe('edit report page', () => {
   it('test edit report page', () => {
     // authenticate
     cy.auth();
 
+    // reports
     cy.findByTestId('sidebar-item-3').click();
-    cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
-      .children()
-      .click();
 
     // save previous title
     const prevTitle = '';
+    cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
+      .invoke('text')
+      .then(text1 => {
+        prevTitle = text1;
+      });
 
-    cy.wait(2000).then(() => {
-      cy.get('[data-cy=report-title]')
-        .invoke('text')
-        .then(text1 => {
-          prevTitle = text1;
-        });
-    });
-
-    cy.findByTestId('report-title').should('exist');
-
-    // click edit button
-    cy.findByTestId('contained-button').click();
+    // click top report
+    cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
+      .children()
+      .click()
+      // click edit button if report is not a draft
+      .then(() => {
+        !prevTitle.includes('[Draft]') &&
+          cy.findByTestId('contained-button').click();
+      });
 
     // use exact time as new title
     const currentDate = new Date();
     const newTitle = currentDate.getTime();
 
+    // type new title
     cy.findByTestId('outcome-title')
       .children()
       .clear()
