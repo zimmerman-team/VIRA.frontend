@@ -117,7 +117,7 @@ Cypress.Commands.add('updateTeam', () => {
   cy.waitPageLoader();
   cy.findByTestId('add-team-input-title').type(' Updated');
   cy.findByTestId('contained-button').click();
-  cy.waitPageLoader();
+  cy.visit('/super-admin/manage-teams');
   cy.visit('/super-admin/manage-teams');
   cy.findAllByTestId('manage-users-teams-card-container')
     .first()
@@ -169,9 +169,8 @@ Cypress.Commands.add('updateUser', () => {
   cy.waitPageLoader();
   cy.findByTestId('manage-user-input-last-name').type(' Updated');
   cy.findByTestId('manage-user-save-button').click();
-  cy.waitPageLoader();
   cy.visit('/super-admin/manage-users');
-  cy.waitPageLoader();
+  cy.visit('/super-admin/manage-users');
   cy.findAllByTestId('manage-users-teams-card-container')
     .first()
     .findByTestId('card-header')
@@ -183,10 +182,11 @@ Cypress.Commands.add('deleteUser', () => {
     .first()
     .findByTestId('card-delete-button')
     .click();
+
   cy.findAllByTestId('dialog-action-button')
     .eq(1)
     .click();
-  cy.waitPageLoader();
+
   cy.findAllByTestId('manage-users-teams-card-container')
     .first()
     .findByTestId('card-header')
