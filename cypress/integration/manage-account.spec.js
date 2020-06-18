@@ -13,6 +13,7 @@ describe('user card', () => {
       .first()
       .clear()
       .type('Test');
+    cy.wait(1000);
     cy.findByTestId('manage-user-save-button').click();
     cy.waitPageLoader();
 
@@ -24,6 +25,7 @@ describe('user card', () => {
       .first()
       .clear()
       .type('Zimmerman');
+    cy.wait(1000);
     cy.findByTestId('manage-user-save-button').click();
     cy.waitPageLoader();
 
