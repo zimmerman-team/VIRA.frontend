@@ -13,11 +13,12 @@ describe('user card', () => {
       .first()
       .clear()
       .type('Test');
-    cy.wait(1000);
+    cy.wait(4000);
     cy.findByTestId('manage-user-save-button').click();
     cy.waitPageLoader();
 
     cy.findByTestId('usercard-button').click();
+    cy.wait(4000);
     cy.findByTestId('usercard-manage-account-button').click();
     cy.waitPageLoader();
     cy.findByTestId('manage-user-input-first-name')
@@ -25,7 +26,7 @@ describe('user card', () => {
       .first()
       .clear()
       .type('Zimmerman');
-    cy.wait(1000);
+    cy.wait(4000);
     cy.findByTestId('manage-user-save-button').click();
     cy.waitPageLoader();
 
