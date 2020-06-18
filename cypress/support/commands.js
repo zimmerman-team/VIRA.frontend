@@ -170,7 +170,7 @@ Cypress.Commands.add('updateUser', () => {
   cy.findByTestId('manage-user-input-last-name').type(' Updated');
   cy.findByTestId('manage-user-save-button').click();
   cy.visit('/super-admin/manage-users');
-  cy.visit('/super-admin/manage-users');
+  // TODO: inconsistent bug, loader sometimes keeps spinning
   cy.findAllByTestId('manage-users-teams-card-container')
     .first()
     .findByTestId('card-header')
@@ -186,7 +186,8 @@ Cypress.Commands.add('deleteUser', () => {
   cy.findAllByTestId('dialog-action-button')
     .eq(1)
     .click();
-
+  cy.waitPageLoader();
+  // TODO: same here
   cy.findAllByTestId('manage-users-teams-card-container')
     .first()
     .findByTestId('card-header')

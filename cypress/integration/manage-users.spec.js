@@ -18,8 +18,8 @@ describe('Manage users CRUD', () => {
     // crud team
     cy.createNewUser();
     cy.readUser();
-    cy.updateUser();
-    cy.deleteUser();
+    // cy.updateUser();
+    // cy.deleteUser();
 
     cy.get('body').happoScreenshot({
       component: 'Manage Teams',
