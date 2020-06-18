@@ -95,39 +95,15 @@ describe('generate report page', () => {
       .type('{backspace}')
       .type('Lorem ipsum dolor simet text area 2');
 
-    // next
-    cy.findByTestId('next-button').click();
-
-    cy.findByTestId('text-area-1')
+    cy.get('[testattr=media-button]')
       .should('exist')
-      .click()
-      .type('{backspace}')
-      .type('Lorem ipsum dolor simet text area 1');
+      .click();
 
-    cy.findByTestId('text-area-2')
+    cy.findByTestId('file-input-label').should('exist');
+    cy.findByTestId('media-save-button').should('exist');
+
+    cy.findByTestId('media-cancel-button')
       .should('exist')
-      .click()
-      .type('{backspace}')
-      .type('Lorem ipsum dolor simet text area 2');
-
-    cy.findByTestId('text-area-3')
-      .should('exist')
-      .click()
-      .type('{backspace}')
-      .type('Lorem ipsum dolor simet text area 3');
-
-    cy.findByTestId('text-area-4')
-      .should('exist')
-      .click()
-      .type('{backspace}')
-      .type('Lorem ipsum dolor simet text area 4');
-
-    // next
-    cy.findByTestId('next-button').click();
-
-    cy.get('body').happoScreenshot({
-      component: 'Create report',
-      variant: 'base',
-    });
+      .click();
   });
 });

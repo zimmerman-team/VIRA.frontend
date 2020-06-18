@@ -33,7 +33,8 @@ export interface TableModuleModel {
     | 'variant9'
     | 'variant10'
     | 'reportsVariant'
-    | 'projectsVariant';
+    | 'projectsVariant'
+    | 'teamEditVariant';
   // infoItems?: TableInfoItemModel[];
 }
 
@@ -48,7 +49,8 @@ export interface TableLayoutModel {
     | 'variant9'
     | 'variant10'
     | 'reportsVariant'
-    | 'projectsVariant';
+    | 'projectsVariant'
+    | 'teamEditVariant';
 }
 
 export interface InfoCellModuleModel {

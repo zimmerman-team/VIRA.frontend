@@ -38,7 +38,7 @@ Cypress.Commands.add('auth', (overrides = {}) => {
   cy.findByTestId('login-password').type(Cypress.env('password'));
   cy.findByTestId('login-button').click();
 
-  cy.wait(5000);
+  cy.wait(10000);
 });
 
 Cypress.Commands.add('waitPageLoader', (timeout = 50000) => {
@@ -131,7 +131,7 @@ Cypress.Commands.add('deleteTeam', () => {
     .findByTestId('card-delete-button')
     .click();
 
-  cy.findAllByTestId('dialog-action-button')
+  cy.findAllByTestId('dialog-button')
     .eq(1)
     .click();
 
@@ -183,7 +183,7 @@ Cypress.Commands.add('deleteUser', () => {
     .findByTestId('card-delete-button')
     .click();
 
-  cy.findAllByTestId('dialog-action-button')
+  cy.findAllByTestId('dialog-button')
     .eq(1)
     .click();
   cy.waitPageLoader();

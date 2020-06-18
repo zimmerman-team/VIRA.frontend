@@ -11,6 +11,7 @@ export interface ProjectModel {
   start_date: string;
   end_date: string;
   total_amount: string;
+  total_insinger_contribution: number;
   decision_date: string;
   decision: string;
   allocated_amount: string;

@@ -63,6 +63,7 @@ export function BottomNav(props: BottomNavModel) {
     <Grid container item xs={12} lg={12} justify="space-between" wrap="nowrap">
       <Grid item xs={3}>
         <ContainedButton
+          testAttr="back-button"
           text={isMobileWidth ? '' : t('reports.form.buttons.back')}
           icon={isMobileWidth && <ChevronLeft />}
           onClick={props.back}
@@ -74,6 +75,7 @@ export function BottomNav(props: BottomNavModel) {
         {props.showDeleteBtn && (
           <React.Fragment>
             <ContainedButton
+              testAttr="delete-button"
               text={t('reports.form.buttons.delete')}
               onClick={props.deleteReport}
               css={`
@@ -95,6 +97,7 @@ export function BottomNav(props: BottomNavModel) {
         {props.showDraftSubmitBtn && (
           <React.Fragment>
             <ContainedButton
+              testAttr="draft-button"
               text={t('reports.form.buttons.draft')}
               onClick={props.saveDraft}
               css={isMobileWidth && mobileButton}
@@ -104,6 +107,7 @@ export function BottomNav(props: BottomNavModel) {
         )}
         {props.showSubmitBtn ? (
           <ContainedButton
+            testAttr="submit-button"
             text={t(
               `reports.form.buttons.${query.get('rid') ? 'save' : 'submit'}`
             )}
@@ -112,6 +116,7 @@ export function BottomNav(props: BottomNavModel) {
           />
         ) : (
           <ContainedButton
+            testAttr="next-button"
             text={t('reports.form.buttons.next')}
             onClick={props.next}
             disabled={props.nextDisabled}

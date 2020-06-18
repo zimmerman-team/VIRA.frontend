@@ -16,11 +16,6 @@ const BaseContainedButtonStyle = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  //justify-self: flex-end;
-  //padding-top: 12px !important;
-  //padding-right: 15px !important;
-  //padding-left: 24px !important;
-  //padding-bottom: 12px !important;
   box-shadow: none !important;
 
   width: 100%;
@@ -69,10 +64,7 @@ export const AdminSaveButton = (props: Props) => {
       disableRipple
       {...other}
     >
-      {/*<React.Fragment>*/}
-      {/*{props.icon && props.icon}*/}
       <div>{text}</div>
-      {/*</React.Fragment>*/}
     </Button>
   );
 };
