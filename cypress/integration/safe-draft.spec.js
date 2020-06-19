@@ -129,7 +129,7 @@ describe('save draft', () => {
     cy.findByTestId('draft-button').click();
 
     // continue
-    cy.wait(1000);
+    cy.wait(5000);
     cy.findByTestId('dialog-button').click();
 
     // go to reports
