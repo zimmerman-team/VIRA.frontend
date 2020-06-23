@@ -1,6 +1,6 @@
 orbs:
   cypress: cypress-io/cypress@1
-  sonarcloud: sonarsource/sonarcloud@1.0.1
+#  sonarcloud: sonarsource/sonarcloud@1.0.1
 version: 2.1
 
 # have a look at https://circleci.com/orbs/registry/orb/germade/rsync
@@ -61,8 +61,8 @@ workflows:
                                source $BASH_ENV
           yarn: true
           build: yarn build
-          post-steps:
-            - sonarcloud/scan
+#          post-steps:
+#            - sonarcloud/scan
 
       - deploy:
           requires:
