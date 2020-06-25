@@ -14,8 +14,6 @@ import { useTranslation } from 'react-i18next';
 /* data */
 import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
 
-import get from 'lodash/get';
-
 /* ui */
 import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
 import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
