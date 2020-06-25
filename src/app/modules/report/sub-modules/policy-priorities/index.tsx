@@ -7,16 +7,29 @@ import {
   CardContent,
   Box,
 } from '@material-ui/core';
+
+/* multilabg */
 import { useTranslation } from 'react-i18next';
+
+/* data */
 import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
-import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
+
+/* ui */
+import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
 import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
-import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
+
+/* mock */
+import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
+
+/* state */
+import { useStoreState } from 'easy-peasy';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   const { t } = useTranslation();
   const [isBlur, setIsBlur] = React.useState(false);
+
+  const projectDetail = useStoreState(state => state.projectDetail);
 
   React.useEffect(() => {
     setIsBlur(
@@ -63,7 +76,11 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               fullWidth
               type="number"
               min={0}
-              value={props.budget}
+              value={
+                props.budget
+                  ? props.budget
+                  : projectDetail.data.data[0].total_amount
+              }
               setValue={props.setBudget}
               description=""
             />
