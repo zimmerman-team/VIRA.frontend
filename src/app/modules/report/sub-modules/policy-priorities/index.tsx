@@ -20,7 +20,12 @@ import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Aut
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 
 /* mock */
-import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
+import {
+  funderList,
+  FunderProps,
+  policyPriorities,
+  PolicyPriorityProps,
+} from 'app/modules/report/sub-modules/policy-priorities/mock';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   const { t } = useTranslation();
@@ -45,10 +50,12 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent>
             <Autocomplete
-              values={policyPriorities.map((pp: any) => ({
-                ...pp,
-                label: t(pp.label),
-              }))}
+              values={policyPriorities.map(
+                (policyPriority: PolicyPriorityProps) => ({
+                  ...policyPriority,
+                  label: t(policyPriority.label),
+                })
+              )}
               value={props.policyPriority}
               setValue={props.setPolicyPriority}
             />
@@ -200,6 +207,27 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
             <Typography variant="body2" color="secondary" css={styles.infoText}>
               {t('reports.form.textfield.sdg_mapping_expl')}
             </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* Other funders */}
+
+      {}
+      <Grid data-cy="other-funders" item xs={12} md={12} lg={4}>
+        <Card css={styles.cardSecondary}>
+          <CardHeader title={t('reports.form.textfield.other_funders')} />
+          <CardContent>
+            <Autocomplete
+              values={funderList.map((funder: FunderProps) => ({
+                ...funder,
+                label: t(funder.label),
+              }))}
+              value={props.policyPriority}
+              setValue={props.setPolicyPriority}
+            />
+            {/*<Box height="14px" width="100%" />*/}
           </CardContent>
         </Card>
       </Grid>

@@ -3,8 +3,8 @@
   <component name="ProjectTreeColorHighlighter">
     <files>
       <node color="3" path="$PROJECT_DIR$/src/app/modules/detail-modules/report-detail" />
-      <node color="5" path="$PROJECT_DIR$/src/app/modules/report" />
       <node color="4" path="$PROJECT_DIR$/src/app/modules/report/data.ts" />
+      <node color="6" path="$PROJECT_DIR$/src/app/modules/report/sub-modules/policy-priorities" />
     </files>
     <colors>
       <color name="Color 1" value="#de2c2c" enabled="true" />
