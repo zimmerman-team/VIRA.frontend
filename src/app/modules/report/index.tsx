@@ -1,30 +1,46 @@
 /* eslint-disable no-plusplus */
 import React from 'react';
-import get from 'lodash/get';
-import find from 'lodash/find';
 import 'styled-components/macro';
-import filter from 'lodash/filter';
+import { withRouter } from 'react-router-dom';
+import CheckIcon from '@material-ui/icons/Check';
+
+/* utils thirdparty */
 import { useTitle } from 'react-use';
 import findIndex from 'lodash/findIndex';
-import { withRouter } from 'react-router-dom';
+import get from 'lodash/get';
+import find from 'lodash/find';
+import filter from 'lodash/filter';
+
+/* general */
 import { tabs } from 'app/modules/report/mock';
 import { CreateReportLayout } from 'app/modules/report/layout';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
-import { AppConfig } from 'app/data';
-import { useQuery } from 'app/utils/useQuery';
-import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
+
+/* model */
+import { LocationModel } from './model';
 import { DialogBtnType } from 'app/components/surfaces/Dialog/model';
-import CheckIcon from '@material-ui/icons/Check';
-import { usePersistedState } from 'app/utils/usePersistedState';
+
+/* utils: misc */
 import { isNavBtnEnabled } from './utils/isNavBtnEnabled';
-import { validateIndVerFields } from './utils/validateIndVerFields';
+import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
 import { getTabs } from './utils/getTabs';
+
+/* utils related to validating field data */
 import { validateOutcomeFields } from './utils/validateOutcomeFields';
 import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
+import { validateIndVerFields } from './utils/validateIndVerFields';
+
+/* utils related to data */
 import { uploadFiles } from './utils/uploadFiles';
-import { LocationModel } from './model';
 import { getFileTypeAccept } from './utils/getFileTypeAccept';
+
+/* state/data */
+import { useQuery } from 'app/utils/useQuery';
+import { usePersistedState } from 'app/utils/usePersistedState';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+
+/* global variables */
+import { AppConfig } from 'app/data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -225,6 +241,9 @@ function CreateReportFunc(props: any) {
   const allProjectsData = useStoreState(state =>
     get(state.allProjects.data, 'data', [])
   );
+
+  // console.log("allProjectsData", allProjectsData);
+
   const addReportData = useStoreState(state => state.addReport.data);
   const addReportLoading = useStoreState(state => state.addReport.loading);
   const deleteReportData = useStoreState(state => state.deleteReport.data);
@@ -235,6 +254,8 @@ function CreateReportFunc(props: any) {
     state => state.projectBudgetData.data
   );
   const reportDetailData = useStoreState(state => state.reportDetail.data);
+
+  // console.log("reportDetailData", reportDetailData);
 
   useWindowUnloadEffect(() => {
     addReportClearAction();

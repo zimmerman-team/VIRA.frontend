@@ -7,12 +7,22 @@ import {
   CardContent,
   Box,
 } from '@material-ui/core';
+
+/* multilabg */
 import { useTranslation } from 'react-i18next';
+
+/* data */
 import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
-import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
+
+import get from 'lodash/get';
+
+/* ui */
+import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
 import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
-import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
+
+/* mock */
+import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   const { t } = useTranslation();
@@ -63,7 +73,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               fullWidth
               type="number"
               min={0}
-              value={props.budget}
+              value={props.budget ? props.budget : props.remainBudget}
               setValue={props.setBudget}
               description=""
             />
