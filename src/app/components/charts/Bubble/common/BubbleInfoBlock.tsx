@@ -106,13 +106,14 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
               `}
               variant="subtitle1"
             >
-              {props.budgetValue
-                .toLocaleString(undefined, {
-                  currency: 'EUR',
-                  currencyDisplay: 'symbol',
-                  style: 'currency',
-                })
-                .replace('.00', '')}
+              {props.budgetValue &&
+                props.budgetValue
+                  .toLocaleString(undefined, {
+                    currency: 'EUR',
+                    currencyDisplay: 'symbol',
+                    style: 'currency',
+                  })
+                  .replace('.00', '')}
             </Typography>
           </div>
           {/* <ProgressBarContainer>
@@ -146,13 +147,14 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
               `}
               variant="subtitle1"
             >
-              {props.insContribution
-                .toLocaleString(undefined, {
-                  currency: 'EUR',
-                  currencyDisplay: 'symbol',
-                  style: 'currency',
-                })
-                .replace('.00', '')}
+              {props.insContribution &&
+                props.insContribution
+                  .toLocaleString(undefined, {
+                    currency: 'EUR',
+                    currencyDisplay: 'symbol',
+                    style: 'currency',
+                  })
+                  .replace('.00', '')}
             </Typography>
           </div>
         </React.Fragment>

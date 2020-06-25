@@ -22,11 +22,6 @@ import { AppConfig } from 'app/data';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { Viztabs } from '../common/components/Viztabs';
 
-export interface Joejoe {
-  /** prop1 description */
-  prop1: string;
-}
-
 /**
  * Landing layout.
  */
@@ -62,7 +57,6 @@ function LandingLayout(props: any) {
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
 
   React.useEffect(() => {
-    getPPVizData({ socketName: 'getPolicyPriorityBarChart', values: {} });
     getSDGVizData({
       socketName: 'getSDGBubbleChart',
       values: {},
@@ -125,6 +119,7 @@ function LandingLayout(props: any) {
 
       {/* todo: description */}
       <ListModule
+        selectedSDG={selectedSDG}
         loadData
         tabNav={getNavTabItems(
           TabNavMockList,

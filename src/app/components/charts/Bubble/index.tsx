@@ -170,13 +170,15 @@ export function BubbleChart(props: Props) {
                         },
                         {
                           label: 'Budget',
-                          value: tProps.data.loc
-                            .toLocaleString(undefined, {
-                              currency: 'EUR',
-                              currencyDisplay: 'symbol',
-                              style: 'currency',
-                            })
-                            .replace('.00', ''),
+                          value:
+                            tProps.data.loc &&
+                            tProps.data.loc
+                              .toLocaleString(undefined, {
+                                currency: 'EUR',
+                                currencyDisplay: 'symbol',
+                                style: 'currency',
+                              })
+                              .replace('.00', ''),
                         },
                         {
                           label: 'charts.barchart.commitment',

@@ -18,13 +18,9 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { useParams, useHistory } from 'react-router-dom';
 /* utils */
 import get from 'lodash/get';
-import {
-  useStyles,
-  TabStyle,
-  a11yProps,
-  TabPanel,
-} from './common/TabPanelProps';
+import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
+import { getReportsBySDG } from 'app/modules/list-module/common/TableDataBySDG';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
@@ -34,6 +30,7 @@ type ListModuleParams = {
   focus?: number;
   loadData?: boolean;
   listPage?: boolean;
+  selectedSDG?: string;
 };
 
 export const ListModule = (props: ListModuleParams) => {
@@ -66,6 +63,16 @@ export const ListModule = (props: ListModuleParams) => {
     state => state.allOrganisations.data
   );
   const allReportsData = useStoreState(state => state.allReports.data);
+
+  let sdgReportsData;
+  let sdgProjectData;
+  let sdgOrgranisationData;
+
+  if (props.selectedSDG !== '') {
+    sdgReportsData = getReportsBySDG(props.selectedSDG, allReportsData);
+    // sdgProjectData = getProjectsBySDG(props.selectedSDG, allProjectsData);
+    // sdgOrgranisationData = getProjectsBySDG(props.selectedSDG, allProjectsData);
+  }
   const reduxLng = useStoreState(state => state.syncVariables.lng);
   const loading = useStoreState(
     state =>
@@ -90,13 +97,25 @@ export const ListModule = (props: ListModuleParams) => {
   }, []);
 
   // Format the projects on componentDidUpdate when allProjectsData change
-  React.useEffect(() => {
-    setBaseTableForProject({
-      ...baseTableForProject,
-      data: formatTableDataForProject(get(allProjectsData, 'data', [])),
-    });
-  }, [allProjectsData]);
+  if (props.selectedSDG === '') {
+    React.useEffect(() => {
+      setBaseTableForProject({
+        ...baseTableForProject,
+        data: formatTableDataForProject(get(allProjectsData, 'data', [])),
+      });
+    }, [allProjectsData]);
+  } else {
+    React.useEffect(() => {
+      setBaseTableForProject({
+        ...baseTableForProject,
+        data: formatTableDataForProject(
+          get(filterBySDG(allProjectsData), 'data', [])
+        ),
+      });
+    }, [props.selectedSDG]);
+  }
 
+  console.log('all projects', allProjectsData);
   // Format the projects on componentDidUpdate when allOrganisationsData change
   React.useEffect(() => {
     setBaseTableForGrantee({
@@ -105,13 +124,24 @@ export const ListModule = (props: ListModuleParams) => {
     });
   }, [allOrganisationsData]);
 
+  console.log('org data', allOrganisationsData);
   // Format the reports on componentDidUpdate when allReportsData change
-  React.useEffect(() => {
-    setBaseTableForReport({
-      ...getBaseTableForReport(get(allReportsData, 'data', [])),
-      data: formatTableDataForReport(get(allReportsData, 'data', [])),
-    });
-  }, [allReportsData]);
+  if (props.selectedSDG === '') {
+    React.useEffect(() => {
+      setBaseTableForReport({
+        ...getBaseTableForReport(get(allReportsData, 'data', [])),
+        data: formatTableDataForReport(get(allReportsData, 'data', [])),
+      });
+    }, [allReportsData]);
+  } else {
+    React.useEffect(() => {
+      setBaseTableForReport({
+        ...getBaseTableForReport(get(sdgReportsData, 'data', [])),
+        data: formatTableDataForReport(get(sdgReportsData, 'data', [])),
+      });
+    }, [props.selectedSDG]);
+  }
+  console.log('allReportsData', allReportsData);
 
   React.useEffect(() => {
     if (parseInt(id, 10) < 3) {
