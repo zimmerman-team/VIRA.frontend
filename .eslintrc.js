@@ -16,7 +16,9 @@ module.exports = {
     'eslint-config-react-app',
     'react-app',
     'airbnb-typescript-prettier',
+    'plugin:sonarjs/recommended',
   ],
+  plugins: ['sonarjs'],
   rules: {
     'react/no-array-index-key': 0,
     'react/jsx-fragments': ['off', 'element'],
