@@ -14,15 +14,18 @@ import { useTranslation } from 'react-i18next';
 /* data */
 import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
 
-import get from 'lodash/get';
-
 /* ui */
 import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
 import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 
 /* mock */
-import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
+import {
+  funderList,
+  FunderProps,
+  policyPriorities,
+  PolicyPriorityProps,
+} from 'app/modules/report/sub-modules/policy-priorities/mock';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   const { t } = useTranslation();
@@ -47,10 +50,12 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent>
             <Autocomplete
-              values={policyPriorities.map((pp: any) => ({
-                ...pp,
-                label: t(pp.label),
-              }))}
+              values={policyPriorities.map(
+                (policyPriority: PolicyPriorityProps) => ({
+                  ...policyPriority,
+                  label: t(policyPriority.label),
+                })
+              )}
               value={props.policyPriority}
               setValue={props.setPolicyPriority}
             />
@@ -73,7 +78,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               fullWidth
               type="number"
               min={0}
-              value={props.budget ? props.budget : props.remainBudget}
+              value={props.budget}
               setValue={props.setBudget}
               description=""
             />
@@ -155,6 +160,32 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               description=""
               setValue={props.setTarBenTotal2}
             />
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* Other funders */}
+      <Grid
+        data-cy="other-funders"
+        item
+        xs={12}
+        md={12}
+        lg={4}
+        css={isBlur ? styles.blurBlock : ``}
+      >
+        <Card css={styles.cardSecondary}>
+          <CardHeader title={t('reports.form.textfield.other_funders')} />
+          <CardContent>
+            <Autocomplete
+              values={funderList.map((funder: FunderProps) => ({
+                ...funder,
+                label: t(funder.label),
+              }))}
+              value={props.funder}
+              setValue={props.setFunder}
+            />
+            {/*<Box height="14px" width="100%" />*/}
           </CardContent>
         </Card>
       </Grid>
