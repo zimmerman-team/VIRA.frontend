@@ -7,7 +7,7 @@ version: 2.1
 executors:
   cypress-executor:
     docker:
-      - image: 'cypress/included:4.6.0'
+      - image: 'cypress/included:4.8.0'
     resource_class: large
 
 jobs:
@@ -61,8 +61,7 @@ workflows:
                                source $BASH_ENV
           yarn: true
           build: yarn build
-#          post-steps:
-#            - sonarcloud/scan
+
 
       - deploy:
           requires:

@@ -22,11 +22,6 @@ import { AppConfig } from 'app/data';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { Viztabs } from '../common/components/Viztabs';
 
-export interface Joejoe {
-  /** prop1 description */
-  prop1: string;
-}
-
 /**
  * Landing layout.
  */
