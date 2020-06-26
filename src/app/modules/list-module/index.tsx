@@ -154,7 +154,7 @@ export const ListModule = (props: ListModuleParams) => {
       {loading && <PageLoader />}
 
       {/* tab navigation */}
-      <Grid item xs={12} justify="flex-end">
+      <Grid item xs={12} container justify="flex-end">
         <Tabs
           value={value}
           onChange={handleChange}
