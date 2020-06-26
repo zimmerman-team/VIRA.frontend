@@ -13,8 +13,8 @@ export const DataDaterangePicker = () => {
   const [selectedDate, setSelectedDate] = React.useState(
     new Date('2014-08-18T21:11:54')
   );
-  // eslint-disable-next-line
-  const handleDateChange = date => {
+
+  const handleDateChange = (date: any) => {
     setSelectedDate(date);
   };
 
