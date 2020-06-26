@@ -6,7 +6,8 @@ export function validatePolicyPrioritiesFields(
   policyPriority: string,
   budget: number,
   remainBudget: number,
-  insContribution: number
+  insContribution: number,
+  funder: string
 ) {
   if (policyPriority === '') {
     return false;
@@ -21,6 +22,9 @@ export function validatePolicyPrioritiesFields(
     return false;
   }
   if (budget > remainBudget) {
+    return false;
+  }
+  if (funder === '') {
     return false;
   }
   return true;

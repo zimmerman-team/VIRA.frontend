@@ -78,7 +78,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               fullWidth
               type="number"
               min={0}
-              value={props.budget ? props.budget : props.remainBudget}
+              value={props.budget}
               setValue={props.setBudget}
               description=""
             />
@@ -164,6 +164,32 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         </Card>
       </Grid>
 
+      {/* ---------------------------------------------------------------------*/}
+      {/* Other funders */}
+      <Grid
+        data-cy="other-funders"
+        item
+        xs={12}
+        md={12}
+        lg={4}
+        css={isBlur ? styles.blurBlock : ``}
+      >
+        <Card css={styles.cardSecondary}>
+          <CardHeader title={t('reports.form.textfield.other_funders')} />
+          <CardContent>
+            <Autocomplete
+              values={funderList.map((funder: FunderProps) => ({
+                ...funder,
+                label: t(funder.label),
+              }))}
+              value={props.funder}
+              setValue={props.setFunder}
+            />
+            {/*<Box height="14px" width="100%" />*/}
+          </CardContent>
+        </Card>
+      </Grid>
+
       {/* /!* ---------------------------------------------------------------------*!/ */}
       {/* /!* Of which the beneficiaries will likely include approximately *!/ */}
       <Grid
@@ -207,27 +233,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
             <Typography variant="body2" color="secondary" css={styles.infoText}>
               {t('reports.form.textfield.sdg_mapping_expl')}
             </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-
-      {/* ---------------------------------------------------------------------*/}
-      {/* Other funders */}
-
-      {}
-      <Grid data-cy="other-funders" item xs={12} md={12} lg={4}>
-        <Card css={styles.cardSecondary}>
-          <CardHeader title={t('reports.form.textfield.other_funders')} />
-          <CardContent>
-            <Autocomplete
-              values={funderList.map((funder: FunderProps) => ({
-                ...funder,
-                label: t(funder.label),
-              }))}
-              value={props.policyPriority}
-              setValue={props.setPolicyPriority}
-            />
-            {/*<Box height="14px" width="100%" />*/}
           </CardContent>
         </Card>
       </Grid>

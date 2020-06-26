@@ -23,7 +23,8 @@ export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
         data.policyPriority,
         data.budget,
         data.remainBudget,
-        data.insContribution
+        data.insContribution,
+        data.funder
       );
     case 2:
       return validateIndVerFields(data.keyOutcomes, data.monRepOutcomes);

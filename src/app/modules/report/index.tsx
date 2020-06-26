@@ -108,11 +108,18 @@ function CreateReportFunc(props: any) {
     }
   );
 
-  const [budget, setBudget] = usePersistedState('report_budget', 0);
+  const [budget, setBudget] = usePersistedState(
+    'report_budget',
+    useStoreState(state => get(state.projectBudgetData, 'data.remainBudget', 0))
+  );
   const [insContribution, setInsContribution] = usePersistedState(
     'report_insContribution',
     0
   );
+  const [funder, setFunder] = usePersistedState('report_funder', {
+    label: '',
+    value: '',
+  });
 
   // Indicator and verification state
   const [keyOutcomes, setKeyOutcomes] = usePersistedState(
@@ -412,6 +419,10 @@ function CreateReportFunc(props: any) {
     }
   }, [location]);
 
+  React.useEffect(() => {
+    setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+  }, [projectBudgetData]);
+
   const onStepChange = (tabIndex: number) => {
     const rid = query.get('rid');
     props.history.push(`${tabs[tabIndex].path}${rid ? `?rid=${rid}` : ''}`);
@@ -508,7 +519,8 @@ function CreateReportFunc(props: any) {
       policyPriority.value,
       budget,
       get(projectBudgetData, 'data.remainBudget', 0),
-      insContribution
+      insContribution,
+      funder.value
     );
 
   const step4Enabled =
@@ -555,6 +567,7 @@ function CreateReportFunc(props: any) {
             plans: futurePlans,
             other_comments: otherComms,
             isDraft: false,
+            funder: funder.label,
           },
         },
       });
@@ -596,6 +609,7 @@ function CreateReportFunc(props: any) {
             plans: futurePlans === '' ? ' ' : futurePlans,
             other_comments: otherComms === '' ? ' ' : otherComms,
             isDraft: true,
+            funder: funder.label,
           },
         },
       });
@@ -650,6 +664,8 @@ function CreateReportFunc(props: any) {
         remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
         insContribution,
         setInsContribution,
+        funder,
+        setFunder,
       }}
       indicatorVerificationProps={{
         keyOutcomes,
@@ -691,6 +707,7 @@ function CreateReportFunc(props: any) {
           policyPriority,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
           insContribution,
+          funder: funder.value,
         })
       }
       backBtnDisabled={!isNavBtnEnabled('back', initialTabIndex, {})}

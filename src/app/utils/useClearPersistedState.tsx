@@ -29,6 +29,7 @@ const keys = [
   'report_otherProjOutObs',
   'report_futurePlans',
   'report_otherComms',
+  'report_funder',
 ];
 
 export function useClearPersistedState() {
