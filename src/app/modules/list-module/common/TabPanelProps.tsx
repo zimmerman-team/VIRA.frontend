@@ -39,7 +39,6 @@ export function TabPanel(props: TabPanelProps) {
       {value === index && (
         <Box style={{ padding: 0, width: '100%' }} p={3}>
           {children}
-          <DataDaterangePicker />
         </Box>
       )}
     </Typography>

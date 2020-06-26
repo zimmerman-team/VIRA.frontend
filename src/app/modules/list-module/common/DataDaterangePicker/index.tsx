@@ -7,6 +7,8 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+// import {css} from 'styled-components/macro'
+
 export const DataDaterangePicker = () => {
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date('2014-08-18T21:11:54')
@@ -17,17 +19,35 @@ export const DataDaterangePicker = () => {
   };
 
   return (
-    <React.Fragment>
-      <h5>Filter by date:</h5>
+    <div
+      css={`
+        display: flex;
+        flex-direction: column;
+      `}
+    >
+      {/*<span>Filter by date:</span>*/}
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify="space-around">
+        <div
+          css={`
+            display: flex;
+            //width: 50%;
+            justify-content: space-between;
+            align-items: center;
+          `}
+        >
           <KeyboardDatePicker
             disableToolbar
             variant="inline"
             format="dd/MM/yyyy"
             margin="normal"
             id="date-picker-inline"
-            label="From:"
+            // label="From:"
+            css={`
+              && {
+                margin-top: 8px !important;
+                margin-right: 20px;
+              }
+            `}
             value={selectedDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
@@ -36,8 +56,13 @@ export const DataDaterangePicker = () => {
           />
           <KeyboardDatePicker
             margin="normal"
+            css={`
+              && {
+                margin-top: 8px !important;
+              }
+            `}
             id="date-picker-dialog"
-            label="To:"
+            // label="To:"
             format="dd/MM/yyyy"
             value={selectedDate}
             onChange={handleDateChange}
@@ -45,9 +70,9 @@ export const DataDaterangePicker = () => {
               'aria-label': 'change date',
             }}
           />
-        </Grid>
+        </div>
       </MuiPickersUtilsProvider>
-    </React.Fragment>
+    </div>
   );
 };
 

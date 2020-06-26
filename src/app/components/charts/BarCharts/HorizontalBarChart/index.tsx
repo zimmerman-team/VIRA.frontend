@@ -3,7 +3,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components/macro';
 import get from 'lodash/get';
 import { colorScheme } from 'app/components/charts/BarCharts/common/colorUtil';
-import { useMediaQuery, Typography } from '@material-ui/core';
+import { useMediaQuery, Typography, Box } from '@material-ui/core';
 import {
   HorizontalBarChartModel,
   getBarModel,
@@ -22,6 +22,7 @@ import find from 'lodash/find';
 import filter from 'lodash/filter';
 import { useTranslation } from 'react-i18next';
 import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll';
+import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterangePicker';
 
 // TODO:
 //  - Find a way to implement the colouring.
@@ -189,7 +190,10 @@ const TopAxisValue = styled.div`
 
 const Legends = styled.div`
   display: flex;
-  align-self: flex-end;
+  width: 100%;
+  justify-content: space-between;
+  //align-self: flex-end;
+  align-items: center;
 `;
 
 // https://nivo.rocks/bar/
@@ -278,15 +282,23 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
               axisBottom={showBar ? barModel.axisBottom : null}
             />
           </div>
+
           {!isMobileWidth && props.chartLegends && (
             <Legends>
-              {props.chartLegends.map(legend => (
-                <LegendControl
-                  {...legend}
-                  key={legend.label}
-                  onClick={props.onChartLegendClick}
-                />
-              ))}
+              <DataDaterangePicker />
+              <div
+                css={`
+                  display: flex;
+                `}
+              >
+                {props.chartLegends.map(legend => (
+                  <LegendControl
+                    {...legend}
+                    key={legend.label}
+                    onClick={props.onChartLegendClick}
+                  />
+                ))}
+              </div>
             </Legends>
           )}
         </>
