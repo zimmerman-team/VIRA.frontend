@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export const useWindowUnloadEffect = (handler: any, callOnCleanup: any) => {
   const cb = useRef();

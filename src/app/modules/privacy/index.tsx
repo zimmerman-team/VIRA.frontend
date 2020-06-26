@@ -7,8 +7,6 @@ import { Box } from '@material-ui/core';
 import {
   privacyDescriptionMock,
   PrivacyModuleItemsMock,
-  cookieDescriptionMock,
-  CookieItemsMock,
 } from 'app/modules/privacy/mock';
 import { useTranslation } from 'react-i18next';
 

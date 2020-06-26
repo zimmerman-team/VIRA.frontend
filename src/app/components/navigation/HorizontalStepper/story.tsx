@@ -1,6 +1,6 @@
 import React from 'react';
 import Providers from 'app/Providers';
-import { Button, Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import { mock } from 'app/components/navigation/HorizontalStepper/mock';
 import { HorizontalStepper as Component } from 'app/components/navigation/HorizontalStepper';
 

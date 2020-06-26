@@ -46,8 +46,6 @@ interface AppSideBarParams {
 export function AppSideBar(props: AppSideBarParams) {
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
-  const { t, i18n } = useTranslation();
-
   const HeaderStyle = css`
     && {
       display: flex;
