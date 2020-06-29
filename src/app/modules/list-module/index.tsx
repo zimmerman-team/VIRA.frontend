@@ -74,20 +74,30 @@ export const ListModule = (props: ListModuleParams) => {
       state.allReports.loading
   );
 
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
+
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
     if (props.loadData) {
       allProjectsAction({
         socketName: 'allProject',
-        values: '',
+        values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
       });
       allOrganisationsAction({
         socketName: 'allOrg',
-        values: '',
+        values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
       });
-      allReportsAction({ socketName: 'allReport', values: '' });
+      allReportsAction({
+        socketName: 'allReport',
+        values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      });
     }
-  }, []);
+  }, [signedInUserRole, signedInUserEmail]);
 
   // Format the projects on componentDidUpdate when allProjectsData change
   React.useEffect(() => {

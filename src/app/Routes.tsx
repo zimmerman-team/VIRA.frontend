@@ -125,10 +125,7 @@ export function MainRoutes() {
       </Route>
 
       <Route path="/report/:projectID">
-        {redirectUnAuth(CreateReport, storeUser, {}, userRole, [
-          'Administrator',
-          'Manager',
-        ])}
+        {redirectUnAuth(CreateReport, storeUser)}
       </Route>
 
       <Route exact path="/grantees/detail">

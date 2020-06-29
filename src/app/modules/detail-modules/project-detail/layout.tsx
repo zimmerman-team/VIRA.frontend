@@ -18,8 +18,11 @@ export const ProjectDetailLayout = (props: any) => {
   const { t } = useTranslation();
   const showGenerateBtn = useStoreState(
     state =>
+      get(state.userDetails.data, 'role', '') === 'Super admin' ||
       get(state.userDetails.data, 'role', '') === 'Administrator' ||
-      get(state.userDetails.data, 'role', '') === 'Manager'
+      get(state.userDetails.data, 'role', '') === 'Manager' ||
+      get(state.userDetails.data, 'email', '_') ===
+        props.projectDetail.responsible_person_email
   );
   return (
     <React.Fragment>

@@ -14,6 +14,7 @@ export function InitialLoad() {
   const loadAuth0DBConnectionData = useStoreState(
     state => state.loadAuth0DBConnection.data
   );
+  const storeUser = useStoreState(state => state.userDetails.data);
 
   React.useEffect(() => {
     getUserRolesAction({
@@ -22,7 +23,7 @@ export function InitialLoad() {
     });
     getUserGroupsAction({
       socketName: 'getUserGroups',
-      values: {},
+      values: { user: storeUser },
     });
     if (!loadAuth0DBConnectionData) {
       loadAuth0DBConnectionAction({
@@ -30,5 +31,5 @@ export function InitialLoad() {
         values: {},
       });
     }
-  }, []);
+  }, [storeUser]);
 }
