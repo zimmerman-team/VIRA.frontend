@@ -146,7 +146,7 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
               `}
               variant="subtitle1"
             >
-              {props.insContribution
+              {(props.insContribution || 0)
                 .toLocaleString(undefined, {
                   currency: 'EUR',
                   currencyDisplay: 'symbol',
