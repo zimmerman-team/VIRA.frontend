@@ -3,19 +3,8 @@
 import React from 'react';
 import Providers from 'app/Providers';
 import { Container, Grid } from '@material-ui/core';
-import LandingLayout from 'app/modules/landing/index';
 import Table from './index';
-import {
-  mockDataVar1,
-  mockDataVar2,
-  mockDataVar3,
-  mockDataVar4,
-  mockDataVar5,
-  mockDataVar6,
-  mockDataVar7,
-  projectsTableConfig,
-  addTeamMemberTableConfig,
-} from './mock';
+
 import {
   getBaseTableForProject,
   getBaseTableForGrantee,
