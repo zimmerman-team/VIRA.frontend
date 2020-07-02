@@ -42,6 +42,12 @@ function redirectUnAuth<ReactModule>(
   allowedRoles?: string[]
 ) {
   if (!user) {
+    if (
+      window.location.pathname !== '/callback' &&
+      window.location.pathname !== '/login'
+    ) {
+      sessionStorage.setItem('redirectTo', window.location.pathname);
+    }
     return <Redirect to="/login" />;
   }
   if (role) {
