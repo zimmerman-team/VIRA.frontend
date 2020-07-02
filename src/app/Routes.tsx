@@ -57,7 +57,7 @@ function redirectUnAuth<ReactModule>(
         return <Redirect to="/" />;
       }
     }
-    if (!allowedRoles && role !== 'Administrator') {
+    if (!allowedRoles && role !== 'Administrator' && role !== 'Super admin') {
       return <Redirect to="/" />;
     }
   }
