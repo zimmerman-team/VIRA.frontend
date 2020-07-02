@@ -30,6 +30,7 @@ import { TabNavMock } from 'app/modules/list-module/mock';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
 import { AppConfig } from 'app/data';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
 import findIndex from 'lodash/findIndex';
 import { useClearPersistedState } from './utils/useClearPersistedState';
 
@@ -234,8 +235,9 @@ export function MainRoutes() {
               ...manageUserEditMock.form,
               radioButtonGroup: {
                 title: 'User Role',
-                items:
-                  userRoles || manageUserEditMock.form.radioButtonGroup.items,
+                items: userRoles
+                  ? filter(userRoles, (ur: any) => ur.name !== 'Super admin')
+                  : manageUserEditMock.form.radioButtonGroup.items,
               },
               selectOptions: userGroups,
             },
