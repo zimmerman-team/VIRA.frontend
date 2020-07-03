@@ -23,17 +23,11 @@ const styles: any = {
     height: 100%;
     overflow: visible;
   `,
-  cardHeader: css`
-    padding: 12px !important;
-  `,
-  cardContent: css`
-    padding: 12px !important;
-  `,
   infoText: css`
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
     bottom: 0;
-  `,
-  gridMobile: css`
-    padding-top: 0 !important;
   `,
 };
 
@@ -49,8 +43,9 @@ export const IndicatorVerificationLayout = (
       {/* textarea 1 */}
       <Grid item xs={12} lg={12}>
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
+              testAttr="text-area-1"
               componentID="indVer1"
               value={props.keyOutcomes}
               setValue={props.setKeyOutcomes}
@@ -68,8 +63,9 @@ export const IndicatorVerificationLayout = (
       {/* textarea 1 */}
       <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
+              testAttr="text-area-2"
               componentID="indVer2"
               value={props.monRepOutcomes}
               setValue={props.setMonRepOutcomes}
@@ -90,6 +86,7 @@ export const IndicatorVerificationLayout = (
       {/* add media button 1 */}
       <Grid item xs={12} lg={12}>
         <ContainedButton
+          testAttr="media-button"
           text={t('reports.form.cards.media')}
           icon={<GetAppIcon />}
           onClick={() => props.setOpenMediaModal(true)}
@@ -97,15 +94,16 @@ export const IndicatorVerificationLayout = (
       </Grid>
 
       <Grid item xs={12} lg={12}>
-        <MediaBlock items={props.media} removeItem={props.removeMedia} />
+        <MediaBlock
+          items={props.media}
+          addedMedia={props.mediaAdded}
+          removeItem={props.removeMedia}
+        />
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
       {/* add media modal 1 */}
-      <Modal
-        open={props.openMediaModal}
-        onClose={() => props.setOpenMediaModal(false)}
-      >
+      <Modal open={props.openMediaModal} onClose={() => props.onDialogCancel()}>
         <div
           css={`
             width: 100%;
@@ -120,7 +118,7 @@ export const IndicatorVerificationLayout = (
             items={props.media}
             onChange={props.setMedia}
             onSaveMedia={props.onSaveMedia}
-            onClose={() => props.setOpenMediaModal(false)}
+            onClose={() => props.onDialogCancel()}
           />
         </div>
       </Modal>

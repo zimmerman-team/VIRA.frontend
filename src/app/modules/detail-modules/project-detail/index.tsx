@@ -30,11 +30,15 @@ const ProjectDetailModuleF = (props: any) => {
   );
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
-      label: 'Target',
+      label: 'charts.barchart.target',
       selected: true,
     },
     {
-      label: 'Budget',
+      label: 'charts.barchart.budget',
+      selected: true,
+    },
+    {
+      label: 'charts.barchart.commitment',
       selected: true,
     },
   ]);
@@ -93,30 +97,21 @@ const ProjectDetailModuleF = (props: any) => {
           start_date: projectDetailRecord[0].start_date,
           end_date: projectDetailRecord[0].end_date,
           total_amount: projectDetailRecord[0].total_amount,
+          total_insinger_contribution: projectDetailRecord[0].allocated_amount,
           decision_date: projectDetailRecord[0].decision_date,
           decision: projectDetailRecord[0].decision,
           allocated_amount: projectDetailRecord[0].allocated_amount,
           released_amount: projectDetailRecord[0].released_amount,
           paid_amount: projectDetailRecord[0].paid_amount,
           organisation: projectDetailRecord[0].organisation.organisation_name,
-          org_type: '',
-          street: 'Postbus',
-          house_number: '193',
-          additional_house_number: '',
-          postcode: '3780 BD',
-          place: 'Voorthuizen',
-          country: 'Nederland',
-          telephone: '',
-          organisation_email: 'penningmeester@ngkdeontmoeting.nl',
-          website: 'https://www.ngkdeontmoeting.nl',
-          family_name: 'Reijersen',
-          initial: 'Albert',
-          insertion: '',
-          title: '',
-          email: 'penningmeester@ngkdeontmoeting.nl',
-          login_email: 'penningmeester@ngkdeontmoeting.nl',
-          sex: 'male',
-          role: 'voorzitter kerkenraad',
+          organisation_link: `/grantee/${projectDetailRecord[0].organisation._id}/detail`,
+          place: '',
+          country: '',
+          responsible_person_email: get(
+            projectDetailRecord[0],
+            'person.email',
+            ''
+          ),
           generateReport: () => {
             generateReport();
           },

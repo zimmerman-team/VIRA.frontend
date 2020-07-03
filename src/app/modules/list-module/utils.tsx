@@ -10,7 +10,7 @@ import {
   ExternalLinkCellModule,
 } from 'app/components/datadisplay/Table/common/LinkCell';
 /* mock */
-import { mockDataVar8 } from 'app/components/datadisplay/Table/mock';
+import { projectsTableConfig } from 'app/components/datadisplay/Table/mock';
 /* models */
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import React from 'react';
@@ -38,7 +38,7 @@ export const formatTableDataForProject = (data: any): any[] => {
 };
 
 export const getBaseTableForProject = (): TableModuleModel => {
-  const tableConfig = mockDataVar8;
+  const tableConfig = projectsTableConfig;
 
   tableConfig.columns = [
     {
@@ -220,13 +220,13 @@ export const formatTableDataForReport = (data: any): any[] => {
 };
 
 export const getBaseTableForReport = (data: any): TableModuleModel => {
-  const tableConfig = ReportListMock;
+  const tableConfig = { ...ReportListMock, data: [] };
 
   tableConfig.columns = [
     {
       name: i18n.t('reports.overview.table.id'),
       options: {
-        sortDirection: 'asc',
+        sortDirection: 'desc',
         filter: true,
         filterType: 'dropdown',
         customFilterListRender: value =>
@@ -244,8 +244,12 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
           const rowAllData = find(data, { reportID: tableMeta.rowData[0] });
           const id = get(rowAllData, '_id', '');
           const isDraft = get(rowAllData, 'isDraft', false);
+          const projectNumber = get(rowAllData, 'project.project_number', '');
+          if (projectNumber === '') {
+            return `${value}${isDraft ? ' [Draft]' : ''}`;
+          }
           const link = isDraft
-            ? `/report/${rowAllData.project.project_number}/outcomes?rid=${id}`
+            ? `/report/${projectNumber}/outcomes?rid=${id}`
             : `/reports/${id}`;
           return (
             <LinkCellModule

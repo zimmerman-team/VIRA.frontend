@@ -13,8 +13,10 @@ export type HorizontalBarChartValueModel = {
   value1: number | null;
   value2?: number | null;
   value3?: number | null;
+  value4?: number | null; //Insinger Contribution
   value1Color: string;
   value2Color?: string;
+  value4Color?: string;
   tooltip?: ChartTooltipItemModel;
 };
 export type HorizontalBarChartModel = {

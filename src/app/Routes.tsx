@@ -25,20 +25,41 @@ import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/
 import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
 import React, { Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { TabNavMock } from 'app/modules/list-module/mock';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
 import { AppConfig } from 'app/data';
+import get from 'lodash/get';
+import filter from 'lodash/filter';
+import findIndex from 'lodash/findIndex';
+import { useClearPersistedState } from './utils/useClearPersistedState';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
   Component: any,
   user: UserModel | null,
   componentProps?: any,
-  role?: string
+  role?: string,
+  allowedRoles?: string[]
 ) {
   if (!user) {
+    if (
+      window.location.pathname !== '/callback' &&
+      window.location.pathname !== '/login'
+    ) {
+      sessionStorage.setItem('redirectTo', window.location.pathname);
+    }
     return <Redirect to="/login" />;
+  }
+  if (role) {
+    if (allowedRoles) {
+      if (findIndex(allowedRoles, r => r === role) === -1) {
+        return <Redirect to="/" />;
+      }
+    }
+    if (!allowedRoles && role !== 'Administrator' && role !== 'Super admin') {
+      return <Redirect to="/" />;
+    }
   }
 
   return <Component {...componentProps} />;
@@ -53,9 +74,27 @@ function redirectAuth(user: UserModel | null) {
 }
 
 export function MainRoutes() {
+  useClearPersistedState();
+  const history = useHistory();
   const storeUser = useStoreState(state => state.syncVariables.user);
   const userRoles = useStoreState(state => state.getUserRoles.data);
   const userGroups = useStoreState(state => state.getUserGroups.data);
+  const userRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', '')
+  );
+
+  React.useEffect(() => {
+    return history.listen(() => {
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }, 5);
+    });
+  }, [history]);
+
   return (
     // <Suspense fallback={<PageLoader />}>
     <Switch>
@@ -80,6 +119,7 @@ export function MainRoutes() {
         {redirectUnAuth(ListModule, storeUser, {
           tabNav: TabNavMock,
           loadData: true,
+          listPage: true,
         })}
       </Route>
 
@@ -127,63 +167,90 @@ export function MainRoutes() {
       </Route>
 
       <Route path="/super-admin/manage-teams/edit/:id">
-        {redirectUnAuth(ManageTeamEditAdd, storeUser, {
-          ...manageTeamEditAddMock,
-          mode: 'edit',
-          breadcrumbs: {
-            ...manageTeamEditAddMock.breadcrumbs,
-            currentLocation: 'breadcrumbs.edit',
+        {redirectUnAuth(
+          ManageTeamEditAdd,
+          storeUser,
+          {
+            ...manageTeamEditAddMock,
+            mode: 'edit',
+            breadcrumbs: {
+              ...manageTeamEditAddMock.breadcrumbs,
+              currentLocation: 'breadcrumbs.edit',
+            },
           },
-        })}
+          userRole
+        )}
       </Route>
 
       <Route path="/super-admin/manage-teams/add">
-        {redirectUnAuth(ManageTeamEditAdd, storeUser, manageTeamEditAddMock)}
+        {redirectUnAuth(
+          ManageTeamEditAdd,
+          storeUser,
+          manageTeamEditAddMock,
+          userRole
+        )}
       </Route>
 
       <Route exact path="/super-admin/:id">
-        {redirectUnAuth(ManageUsers, storeUser, manageUsersTeamsLayoutMock)}
+        {redirectUnAuth(
+          ManageUsers,
+          storeUser,
+          manageUsersTeamsLayoutMock,
+          userRole
+        )}
       </Route>
 
       <Route path="/super-admin/manage-users/edit/:id">
-        {redirectUnAuth(ManageUserEdit, storeUser, {
-          ...manageUserEditMock,
-          breadcrumbs: {
-            currentLocation: 'breadcrumbs.edit',
-            previousLocations: [
-              {
-                label: 'breadcrumbs.manage',
-                url: '/super-admin/manage-users',
-              },
-            ],
+        {redirectUnAuth(
+          ManageUserEdit,
+          storeUser,
+          {
+            ...manageUserEditMock,
+            breadcrumbs: {
+              currentLocation: 'breadcrumbs.edit',
+              previousLocations: [
+                {
+                  label: 'breadcrumbs.manage',
+                  url: '/super-admin/manage-users',
+                },
+              ],
+            },
           },
-        })}
+          userRole
+        )}
       </Route>
 
       <Route path="/super-admin/manage-users/add">
-        {redirectUnAuth(ManageUserEdit, storeUser, {
-          ...manageUserEditMock,
-          breadcrumbs: {
-            ...manageUserEditMock.breadcrumbs,
-            currentLocation: 'Add',
-          },
-          mode: 'add',
-          form: {
-            ...manageUserEditMock.form,
-            radioButtonGroup: {
-              title: 'User Role',
-              items:
-                userRoles || manageUserEditMock.form.radioButtonGroup.items,
+        {redirectUnAuth(
+          ManageUserEdit,
+          storeUser,
+          {
+            ...manageUserEditMock,
+            breadcrumbs: {
+              ...manageUserEditMock.breadcrumbs,
+              currentLocation: 'Add',
             },
-            selectOptions: userGroups,
+            mode: 'add',
+            form: {
+              ...manageUserEditMock.form,
+              radioButtonGroup: {
+                title: 'User Role',
+                items: userRoles
+                  ? filter(userRoles, (ur: any) => ur.name !== 'Super admin')
+                  : manageUserEditMock.form.radioButtonGroup.items,
+              },
+              selectOptions: userGroups,
+            },
           },
-        })}
+          userRole
+        )}
       </Route>
 
       <Route path="/manage-account/:id">
         {redirectUnAuth(ManageUserEdit, storeUser, {
           title: 'user_management.general.manage_your_account',
           ...manageUserEditMock,
+          isManageAccount: true,
           breadcrumbs: null,
           editSelf: true,
         })}

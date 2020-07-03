@@ -42,7 +42,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
       {/* title */}
-      <Grid item xs={12} md={12} lg={6}>
+      <Grid data-cy="outcomes-title" item xs={12} md={12} lg={6}>
         <Card css={styles.card}>
           <CardHeader
             css={styles.cardHeader}
@@ -50,6 +50,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
           />
           <CardContent css={styles.cardContent}>
             <IntentTexField
+              testAttr="outcome-title"
               value={props.title}
               componentID="outcome1"
               setValue={props.setTitle}
@@ -66,6 +67,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         md={12}
         lg={6}
         css={isMobileWidth && styles.gridMobile}
+        data-cy="add-location"
       >
         <Card
           css={`
@@ -98,6 +100,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         md={12}
         lg={6}
         css={isMobileWidth && styles.gridMobile}
+        data-cy="exact-location"
       >
         <Card>
           <CardHeader title={t('reports.form.textfield.exact_location')} />
@@ -119,6 +122,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
                 </div>
                 <Box width="100%" height="14px" />
                 <ContainedButton
+                  testAttr="remove-button"
                   text="Remove"
                   onClick={() => props.setLocation(null)}
                 />

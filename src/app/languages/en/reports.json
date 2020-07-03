@@ -35,15 +35,17 @@
     },
     "textfield": {
       "title": "Please provide a title for your report",
+      "preview_title": "Title",
       "location": "Add location",
       "location_expl": "In which of the following geographical locations will the project be implemented",
       "exact_location": "Select exact location",
       "insinger_f_policy_priorities": "Insinger Foundation policy priorities",
+      "other_funders": "Other funders",
       "budget": "Budget",
       "remaining": "Remaning for this project",
       "contribution": "Insinger Contribution",
       "target_beneficiaries": "Target beneficiaries",
-      "total_commited": "Totaal toegewijd aantal",
+      "total_commited": "Total committed number",
       "of_which_ben": "Of which the beneficiaries will likely include approximately (Optional)",
       "sdg_mapping_expl": "For each priority selected, the relevant SDGs appear and can beselected based on our mapping"
     },
@@ -70,7 +72,8 @@
       "draft": "Save as draft",
       "submit": "Submit",
       "cancel": "Cancel",
-      "save": "Save"
+      "save": "Save",
+      "delete": "Delete"
     }
   }
 }

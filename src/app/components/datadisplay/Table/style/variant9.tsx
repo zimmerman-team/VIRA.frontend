@@ -10,10 +10,12 @@ export const variant9 = createMuiTheme({
       },
     },
     MUIDataTableToolbar: {
+      root: {
+        paddingLeft: 0,
+      },
       titleText: {
         fontFamily: TextStyle.fontFamily,
         fontSize: '20px',
-        textAlign: 'left',
         fontWeight: '600',
         lineHeight: '1.5',
         letterSpacing: 'normal',
@@ -76,13 +78,13 @@ export const variant9 = createMuiTheme({
         border: 'solid 1px rgba(198, 198, 198, 0.2)',
       },
     },
-    MuiTableHead: {
+    /* MuiTableHead: {
       root: {
         '& * > th': {
           height: '0',
           padding: '0',
         },
       },
-    },
+    },*/
   },
 });

@@ -4,7 +4,6 @@ import { createStore } from 'easy-peasy';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
-import * as LogRocket from 'logrocket';
 
 /* interfaces */
 import {
@@ -39,6 +38,7 @@ import getPPVizData from 'app/state/api/actionsReducers/getPPVizData';
 import projectBudgetData from 'app/state/api/actionsReducers/projectBudgetData';
 import getSDGVizData from 'app/state/api/actionsReducers/getSDGVizData';
 import getGeoMapData from 'app/state/api/actionsReducers/getGeoMapData';
+import deleteReport from 'app/state/api/actionsReducers/deleteReport';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
@@ -50,7 +50,7 @@ const encryptor = createEncryptor({
 const persistConfig = {
   storage,
   key: 'storage',
-  blacklist: ['snackbar', 'addUser', 'generalSearch'],
+  blacklist: ['snackbar', 'addUser', 'generalSearch', 'deleteReport'],
   transforms: [encryptor],
 };
 
@@ -81,6 +81,7 @@ export interface ApplicationStoreModel {
   projectBudgetData: SocketAPIResonseInterface;
   getSDGVizData: SocketAPIResonseInterface;
   getGeoMapData: SocketAPIResonseInterface;
+  deleteReport: SocketAPIResonseInterface;
 }
 
 const applicationStore: ApplicationStoreModel = {
@@ -110,6 +111,7 @@ const applicationStore: ApplicationStoreModel = {
   projectBudgetData,
   getSDGVizData,
   getGeoMapData,
+  deleteReport,
 };
 
 export const appStore = createStore(applicationStore, {
@@ -117,7 +119,7 @@ export const appStore = createStore(applicationStore, {
     // TODO: check why persistor throws error with encryptor
     return persistReducer(persistConfig, reducer);
   },
-  middleware: [LogRocket.reduxMiddleware()],
+  middleware: [],
 });
 
 export const persistor = persistStore(appStore);

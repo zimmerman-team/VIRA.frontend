@@ -58,35 +58,6 @@ export function formatReportDetail(data: any) {
   const commitedVal: number =
     reportDetailRecord.total_target_beneficiaries_commited;
   const diffVal: number = targetVal - commitedVal;
-  const sdg = get(
-    ppToSdg,
-    `${[reportDetailRecord.policy_priority.name]}`,
-    null
-  );
-  const bubbleChartData = [];
-  if (sdg) {
-    bubbleChartData.push({
-      name: sdg.name,
-      color: sdg.color,
-      loc: reportDetailRecord.budget,
-      ppName: reportDetailRecord.policy_priority.name,
-      number: sdg.number,
-      targetValue: reportDetailRecord.total_target_beneficiaries,
-      targetPercentage:
-        (reportDetailRecord.total_target_beneficiaries_commited /
-          reportDetailRecord.total_target_beneficiaries) *
-        100,
-    });
-    Object.keys(ppToSdg).forEach((ppKey: string) => {
-      if (get(ppToSdg, `[${ppKey}].name`, '') !== sdg.name) {
-        bubbleChartData.push({
-          ...get(ppToSdg, `[${ppKey}]`, {}),
-          ppName: ppKey,
-          opacity: 0.2,
-        });
-      }
-    });
-  }
   const ppNamePath = get(
     find(policyPriorities, {
       value: reportDetailRecord.policy_priority.name,
@@ -106,6 +77,9 @@ export function formatReportDetail(data: any) {
     project: {
       name: reportDetailRecord.project.project_name,
       id: reportDetailRecord.project.project_number,
+      person: {
+        email: get(reportDetailRecord, 'project.person.email', ''),
+      },
     },
     key_outcomes: reportDetailRecord.key_outcomes,
     monitor_report_outcomes: reportDetailRecord.monitor_report_outcomes,
@@ -123,6 +97,7 @@ export function formatReportDetail(data: any) {
         value1: Math.min(targetVal, commitedVal),
         value2: diffVal < 0 ? diffVal * -1 : diffVal,
         value3: reportDetailRecord.budget,
+        value4: reportDetailRecord.insContribution,
         value1Color: ProjectPalette.primary.main,
         value2Color: diffVal > 0 ? ProjectPalette.grey[500] : '#05c985',
         tooltip: {
@@ -149,12 +124,22 @@ export function formatReportDetail(data: any) {
                 style: 'currency',
               }),
             },
+            {
+              label: 'Insinger Contribution',
+              value: reportDetailRecord.insContribution
+                ? reportDetailRecord.insContribution.toLocaleString(undefined, {
+                    currency: 'EUR',
+                    currencyDisplay: 'symbol',
+                    style: 'currency',
+                  })
+                : '0',
+            },
           ],
         },
       },
     ],
     budget: reportDetailRecord.budget,
-    bubbleChartData,
+    bubbleChartData: data.sdgVizData,
     mapData: data.mapData,
   };
 }

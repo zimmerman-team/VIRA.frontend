@@ -1,5 +1,8 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.enable": true,
-  "remote.SSH.useLocalServer": false
+  "remote.SSH.useLocalServer": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true
 }

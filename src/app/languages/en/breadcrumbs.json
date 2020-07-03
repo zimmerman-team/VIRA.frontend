@@ -1,5 +1,7 @@
 {
-    "manage": "Manage",
-    "add": "Add",
-    "edit": "Edit"
+  "manage": "Manage",
+  "manage_teams": "Manage Teams",
+  "manage_users": "Manage Users",
+  "add": "Add",
+  "edit": "Edit"
 }

@@ -39,23 +39,15 @@ export const bubbleMockData = {
       number: 10,
     },
     {
-      name: 'Peace, Justice and strong institutions',
-      color: '#136A9F',
+      name: 'Sustainable cities and communities',
+      color: '#F89D2A',
       loc: 160000,
-      number: 16,
+      number: 11,
     },
   ],
 };
 
 export const otherSdgs = [
-  {
-    // name: 'Quality education',
-    name: 'sdgs.4',
-    color: '#C7212F',
-    opacity: 0.2,
-    number: 4,
-    loc: 0,
-  },
   {
     // name: 'Clean water and sanitation',
     name: 'sdgs.6',
@@ -79,14 +71,6 @@ export const otherSdgs = [
     opacity: 0.2,
     number: 9,
     loc: 0,
-  },
-  {
-    // name: 'Sustainable cities and communities',
-    name: 'sdgs.11',
-    color: '#F89D2A',
-    opacity: 0.2,
-    loc: 0,
-    number: 11,
   },
   {
     // name: 'Responsible consumption and production',
@@ -119,6 +103,14 @@ export const otherSdgs = [
     opacity: 0.2,
     loc: 0,
     number: 15,
+  },
+  {
+    // name: 'Peace, Justice and strong institutions',
+    name: 'sdgs.16',
+    color: '#136A9F',
+    opacity: 0.2,
+    loc: 0,
+    number: 16,
   },
   {
     // name: 'Partnerships for the goals',

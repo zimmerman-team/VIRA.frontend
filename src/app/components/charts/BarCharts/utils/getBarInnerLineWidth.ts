@@ -1,5 +1,18 @@
-export function getBarInnerLineWidth(allData: any, barData: any, width: any) {
-  const value = barData.data.value3;
-  const maxValue = Math.max(...allData.map((a: any) => a.value3));
-  return (value / maxValue) * width;
+/* eslint-disable no-restricted-globals */
+
+export function getBarInnerLineWidth(
+  allData: any,
+  barData: any,
+  width: any,
+  dataField: string
+) {
+  const value = barData.data[dataField];
+  const lineValues = allData
+    .map((item: any) => item.value3 || 0)
+    .concat(allData.map((item: any) => item.value4 || 0));
+  const maxValue = Math.max(...lineValues);
+  const res = !isNaN((value / maxValue) * width)
+    ? (value / maxValue) * width
+    : 0;
+  return res;
 }

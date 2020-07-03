@@ -1,6 +1,7 @@
 import 'styled-components/macro';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { useBeforeUnload } from 'react-use';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -15,7 +16,13 @@ import {
 } from './AddMediaParams';
 
 export const AddMediaLayout = (props: AddMediaParams) => {
-  const { t, i18n } = useTranslation();
+  useBeforeUnload(
+    props.items.document.length > 0 ||
+      props.items.picture.length > 0 ||
+      props.items.video.length > 0,
+    'Media files are not saved. If you click Reload they will be lost.'
+  );
+  const { t } = useTranslation();
   const [selectedTab, setSelectedTab]: [
     'picture' | 'video' | 'document',
     Function
@@ -79,7 +86,21 @@ export const AddMediaLayout = (props: AddMediaParams) => {
             />
           </Grid>
           <Grid item container lg={12} justify="center">
-            <Grid item lg={5} justify="center" alignItems="center">
+            <Grid
+              item
+              lg={5}
+              justify="center"
+              alignItems="center"
+              css={
+                filesToShow.length === 0
+                  ? `
+                && {
+                  flex-basis: auto;
+                }
+              `
+                  : ''
+              }
+            >
               <AddMediaBigButton text={selectedTab} onChange={props.onChange} />
             </Grid>
             {filesToShow.length > 0 && (
@@ -105,10 +126,12 @@ export const AddMediaLayout = (props: AddMediaParams) => {
         <Grid item container lg={12} justify="flex-end">
           <Grid item container xs={8} md={6} lg={4} justify="space-around">
             <AddMediaButton
+              testAttr="media-cancel-button"
               text={t('reports.form.buttons.cancel')}
               onClick={props.onClose}
             />
             <AddMediaButton
+              testAttr="media-save-button"
               text={t('reports.form.buttons.save')}
               onClick={props.onSaveMedia}
             />

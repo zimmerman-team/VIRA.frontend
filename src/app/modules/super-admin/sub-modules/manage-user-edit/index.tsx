@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 // aboslute
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { RadioButtonsGroup } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
-import { Select } from 'app/components/inputs/select';
+import { TeamSelect } from 'app/components/inputs/select';
 import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
 import { BreadCrumbs } from 'app/components/navigation/Breadcrumbs';
 import { PageLoader } from 'app/modules/common/page-loader';
@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 // direct
 import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
+import { TeamSelectNew } from 'app/components/inputs/select-team-new';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {
@@ -52,6 +53,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
   const [role, setRole] = React.useState(
     props.form.radioButtonGroup.items[0].value
   );
+  // const [password, setPassword] = React.useState('secretpassword');
   const [group, setGroup] = React.useState('');
 
   function onSubmit() {
@@ -64,6 +66,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           surname: lastName,
           groupId: group,
           roleId: role,
+          // password: password,
           groupName: find(props.form.selectOptions, { value: group }),
           roleName: find(props.form.radioButtonGroup.items, { value: role }),
         },
@@ -143,6 +146,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
         setLastName('');
         setEmail('');
         setGroup('');
+        // setPassword('');
       }
     }
   }, [addUserData]);
@@ -153,6 +157,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
       setLastName(get(loadUserData, 'lastName', ''));
       setEmail(get(loadUserData, 'email', ''));
       setRole(get(loadUserData, 'role', ''));
+      // setPassword(get(loadUserData, 'password'));
     }
   }, [loadUserData]);
 
@@ -160,6 +165,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
     if (props.mode === 'add') {
       return (
         firstName === '' || lastName === '' || email === '' || group === ''
+        // password === ''
       );
     }
     if (props.mode === 'edit') {
@@ -171,6 +177,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           lastName === get(loadUserData, 'lastName', '') &&
           email === get(loadUserData, 'email', '') &&
           role === get(loadUserData, 'role', ''))
+        // password === get(loadUserData, 'password', ''))
       );
     }
     return true;
@@ -206,7 +213,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
       {/* ---------------------------------------------------------------------*/}
       {/* form */}
       <Grid item container xs={12} lg={12} direction="column">
-        {!isMobileWidth && <Box width="100%" height="30px" />}
+        {/*{!isMobileWidth && <Box width="100%" height="30px" />}*/}
 
         <SingleMultiLineTextField
           value={firstName}
@@ -234,6 +241,20 @@ function ManageUserEditF(props: ManageUserEditModel) {
           bigLabel
         />
         <Box width="100%" height="32px" />
+        {/* {props.isManageAccount && (
+          <>
+            <SingleMultiLineTextField
+              value={password}
+              setValue={setPassword}
+              autoComplete="new-password"
+              type={'password'}
+              id="Password"
+              label={t('user_management.user.password')}
+              bigLabel
+            />
+            <Box width="100%" height="32px" />
+          </>
+        )} */}
 
         {!props.editSelf && (
           <Grid container>
@@ -246,12 +267,19 @@ function ManageUserEditF(props: ManageUserEditModel) {
             </Grid>
             {props.mode === 'add' && (
               <Grid item xs={12} md={12} lg={6} xl={6}>
-                <Select
+                <TeamSelect
                   title={t('user_management.user.select_team')}
                   selectedItem={group}
                   items={props.form.selectOptions}
                   onChange={(e: any) => setGroup(e.target.value)}
                 />
+
+                {/*<TeamSelectNew
+                  title={t('user_management.user.select_team')}
+                  selectedItem={group}
+                  items={props.form.selectOptions}
+                  onChange={(e: any) => setGroup(e.target.value)}
+                />*/}
               </Grid>
             )}
           </Grid>

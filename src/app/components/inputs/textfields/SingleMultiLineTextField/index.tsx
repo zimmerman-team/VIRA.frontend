@@ -21,6 +21,8 @@ export interface MultilineTextfieldParams extends InputBaseProps {
   placeholder?: string;
   type?: string;
   min?: number;
+  testAttr?: string;
+  autoComplete?: string;
 }
 
 export const Input = withStyles((theme: Theme) =>
@@ -40,6 +42,7 @@ export const Input = withStyles((theme: Theme) =>
     inputLabel: {
       root: {},
     },
+    //  TODO: change backgroundcolor when type=password
   })
 )(InputBase);
 
@@ -63,7 +66,13 @@ function renderLabel(props) {
     return <BigInputLabel variant="subtitle1">{props.label}</BigInputLabel>;
   }
   return (
-    <InputLabel shrink htmlFor={props.id}>
+    <InputLabel
+      shrink
+      htmlFor={props.id}
+      css={`
+        font-size: 14px;
+      `}
+    >
       {props.label}
     </InputLabel>
   );
@@ -76,6 +85,7 @@ export const SingleMultiLineTextField = (props: MultilineTextfieldParams) => {
     <FormControl fullWidth={props.fullWidth}>
       {renderLabel(props)}
       <Input
+        data-cy={props.testAttr}
         {...inputProps}
         inputProps={{ min }}
         placeholder={props.placeholder}

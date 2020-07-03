@@ -8,10 +8,10 @@ import {
   IconButton,
   AppBar,
 } from '@material-ui/core';
-import { MobileRendering } from 'app/modules/common/components/AppBar/MobileRenderingParams';
-import { TopBarDesktopSection } from 'app/modules/common/components/AppBar/TopBarDesktopSection';
-import { TopBarMobileSection } from 'app/modules/common/components/AppBar/TopBarMobileSection';
-import { useStyles } from 'app/modules/common/components/AppBar/useStyles';
+import { MobileRendering } from 'app/modules/common/components/AppBar/common/MobileRenderingParams';
+import { TopBarDesktopSection } from 'app/modules/common/components/AppBar/common/TopBarDesktopSection';
+import { TopBarMobileSection } from 'app/modules/common/components/AppBar/common/TopBarMobileSection';
+import { useStyles } from 'app/modules/common/components/AppBar/common/useStyles';
 import { IconMenuToggle } from 'app/modules/common/icons/IconMenuToggle';
 import { ProjectPalette } from 'app/theme';
 import clsx from 'clsx';
@@ -74,6 +74,8 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
         })}
         css={`
           box-shadow: none !important;
+          width: 100vw;
+          left: 0 !important;
         `}
       >
         <Toolbar

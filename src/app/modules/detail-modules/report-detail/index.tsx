@@ -28,6 +28,9 @@ export const ReportDetailModuleF = (props: any) => {
     project: {
       name: '',
       id: '',
+      person: {
+        email: '',
+      },
     },
     key_outcomes: '',
     monitor_report_outcomes: '',
@@ -45,11 +48,15 @@ export const ReportDetailModuleF = (props: any) => {
   });
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
-      label: 'Target',
+      label: 'charts.barchart.target',
       selected: true,
     },
     {
-      label: 'Budget',
+      label: 'charts.barchart.budget',
+      selected: true,
+    },
+    {
+      label: 'charts.barchart.commitment',
       selected: true,
     },
   ]);

@@ -7,6 +7,9 @@ import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivide
 import { StatItem } from 'app/modules/common/components/StatItem';
 import Grid from '@material-ui/core/Grid';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { Hidden } from '@material-ui/core';
+import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 
 export interface TitleParams {
   title: string;
@@ -17,21 +20,23 @@ export interface TitleParams {
   url_note?: string;
   url?: string;
   description?: string;
+  testAttr?: string;
   stats?: { label: string; value: string }[];
+  editReport?: void;
+  showEditBtn?: boolean;
 }
 
 const style: any[] = [
   // title style
   css`
     font-size: 34px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.25px;
     line-height: normal;
 
     @media (max-width: 768px) {
-      font-size: 25px;
+      font-size: 20px;
       line-height: 1.3;
-      font-weight: 600;
     }
   `,
   // id style
@@ -62,12 +67,14 @@ const style: any[] = [
 ];
 
 export const TitleFragment = (props: TitleParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       {/* ---------------------------- */}
       {/* title */}
-      <Typography css={style[0]}>{t(props.title)}</Typography>
+      <Typography data-cy={props.testAttr} css={style[0]}>
+        {t(props.title)}
+      </Typography>
       <Box height="15px" />
       {props.showMoreThanTitle && (
         <Grid item container xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -94,12 +101,31 @@ export const TitleFragment = (props: TitleParams) => {
             {/* url */}
             {props.url && (
               <Typography css={style[3]}>
-                <a href={props.url} target="_blank" rel="noopener noreferrer">
-                  {props.url_note}
-                </a>
+                <Link to={props.url}>{props.url_note}</Link>
               </Typography>
             )}
           </Grid>
+          <div
+            css={`
+              width: 100%;
+              height: 24px;
+            `}
+          />
+
+          {/* ---------------------------------------------------------------------*/}
+          {/* button: generate report */}
+          {props.showEditBtn && (
+            <Hidden smUp>
+              <Grid container item xs={12}>
+                <ContainedButton
+                  text="Edit Report"
+                  onClick={props.editReport}
+                />
+              </Grid>
+              <Box width="100%" height="25px" />
+            </Hidden>
+          )}
+
           {/* ---------------------------------------------------------------------*/}
           {/* stat fragment */}
           {props.stats && (
@@ -108,11 +134,11 @@ export const TitleFragment = (props: TitleParams) => {
               container
               xs={12}
               lg={4}
-              alignItems="center"
+              justify="flex-end"
               wrap="nowrap"
             >
               {(props.stats || []).map((stat: any, index: number) => (
-                <React.Fragment>
+                <React.Fragment key={stat.label}>
                   <StatItem label={stat.label} value={stat.value} />
                   {index < (props.stats || []).length - 1 && (
                     <StatItemDivider />

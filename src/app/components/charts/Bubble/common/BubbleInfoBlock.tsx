@@ -14,6 +14,8 @@ export type BubbleInfoBlockProps = {
   budgetValue: number;
   targetPercentage: number;
   budgetPercentage: number;
+  insContribution: number;
+  isMobileWidth: boolean;
 };
 
 export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
@@ -21,13 +23,15 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
   return (
     <Grid
       container
-      spacing={3}
+      spacing={props.isMobileWidth ? 2 : 3}
       css={`
         width: 100%;
-        height: 90px;
         display: flex;
         align-items: center;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
         background-color: ${ProjectPalette.primary.main};
+        ${props.isMobileWidth && 'padding: 12px 18px 18px 18px;'}
       `}
     >
       <Grid
@@ -40,7 +44,7 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
           color: ${ProjectPalette.common.white};
         `}
       >
-        {t(`charts.items.${props.name}`)}
+        {t(props.name)}
       </Grid>
       <Grid item xs={12} lg={6}>
         <React.Fragment>
@@ -102,13 +106,14 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
               `}
               variant="subtitle1"
             >
-              {props.budgetValue
-                .toLocaleString(undefined, {
-                  currency: 'EUR',
-                  currencyDisplay: 'symbol',
-                  style: 'currency',
-                })
-                .replace('.00', '')}
+              {props.budgetValue &&
+                props.budgetValue
+                  .toLocaleString(undefined, {
+                    currency: 'EUR',
+                    currencyDisplay: 'symbol',
+                    style: 'currency',
+                  })
+                  .replace('.00', '')}
             </Typography>
           </div>
           {/* <ProgressBarContainer>
@@ -118,6 +123,39 @@ export function BubbleInfoBlock(props: BubbleInfoBlockProps) {
               `}
             />
           </ProgressBarContainer> */}
+        </React.Fragment>
+        <Box width="100%" height="18px" />
+        <React.Fragment>
+          <div
+            css={`
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            `}
+          >
+            <Typography
+              css={`
+                color: ${ProjectPalette.common.white};
+              `}
+              variant="subtitle1"
+            >
+              {t('charts.barchart.commitment')}
+            </Typography>
+            <Typography
+              css={`
+                color: ${ProjectPalette.common.white};
+              `}
+              variant="subtitle1"
+            >
+              {(props.insContribution || 0)
+                .toLocaleString(undefined, {
+                  currency: 'EUR',
+                  currencyDisplay: 'symbol',
+                  style: 'currency',
+                })
+                .replace('.00', '')}
+            </Typography>
+          </div>
         </React.Fragment>
       </Grid>
     </Grid>

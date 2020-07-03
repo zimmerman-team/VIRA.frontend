@@ -79,11 +79,13 @@ export const AddMediaNavContainer = (props: {
 export interface AddMediaButtonParams {
   text: string;
   onClick: Function;
+  testAttr: string;
 }
 
 export const AddMediaButton = (props: AddMediaButtonParams) => {
   return (
     <div
+      data-cy={props.testAttr}
       onClick={() => props.onClick()}
       css={`
         font-size: 14px;
@@ -109,6 +111,7 @@ export const AddMediaInputField = (props: { text: string }) => (
   <Grid
     item
     lg={12}
+    data-cy="add-media-input"
     css={`
       display: flex;
       border: solid 1px #30c2b0;
@@ -133,6 +136,7 @@ export const AddMediaInputFieldLabel = (props: { text: string }) => (
   <Grid
     item
     lg={12}
+    data-cy="add-media-input-label"
     css={`
       font-size: 17px;
       font-weight: 300;
@@ -145,60 +149,102 @@ export const AddMediaInputFieldLabel = (props: { text: string }) => (
   </Grid>
 );
 
+export const getAcceptString = (type: string) => {
+  if (type === 'picture') {
+    return 'image/*';
+  }
+  if (type === 'video') {
+    return 'video/*';
+  }
+  if (type === 'document') {
+    return 'application/msword,	application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, text/plain, application/pdf';
+  }
+  return '';
+};
+
 export const AddMediaBigButton = (props: {
   text: string;
   onChange: Function;
 }) => {
-  const getAcceptString = () => {
-    if (props.text === 'picture') {
-      return 'image/*';
-    }
-    if (props.text === 'video') {
-      return 'video/*';
-    }
-    if (props.text === 'document') {
-      return 'application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf';
-    }
-    return '';
+  const [active, setActive] = React.useState(false);
+
+  const onDragEnter = () => {
+    setActive(true);
+  };
+
+  const onDragLeave = () => {
+    setActive(false);
+  };
+
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setActive(true);
+  };
+
+  const onDrop = (e: React.DragEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setActive(false);
+    props.onChange(e, props.text);
   };
 
   return (
     <>
-      <label
-        htmlFor="file-input"
+      <div
+        onDragOver={onDragOver}
+        onDragEnter={onDragEnter}
+        onDragLeave={onDragLeave}
+        onDrop={onDrop}
         css={`
+          width: 300px;
           display: flex;
+          height: 250px;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 1.5;
+          border-width: 2px;
+          align-self: center;
+          align-items: center;
+          border-radius: 10px;
+          border-style: dashed;
+          letter-spacing: 0.5px;
+          flex-direction: column;
           justify-content: center;
+          background-color: #20293c;
+          opacity: ${active ? 0.5 : 1};
+          color: ${ProjectPalette.common.white};
+          border-color: ${ProjectPalette.secondary.main};
         `}
       >
-        <div
+        Drag and Drop {props.text}
+        <span>or</span>
+        <label
+          htmlFor="file-input"
+          data-cy="file-input-label"
           css={`
-            cursor: pointer;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #20293c;
-            width: 300px;
-            height: 250px;
             font-size: 16px;
-            font-weight: 300;
-            line-height: 1.5;
-            letter-spacing: 0.5px;
-            color: ${ProjectPalette.common.white};
+            cursor: pointer;
+            margin-bottom: 10px;
+            color: ${ProjectPalette.secondary.main};
+
+            &:hover {
+              text-decoration: underline;
+            }
           `}
         >
-          Add {props.text}
-        </div>
-      </label>
+          browse {props.text}
+        </label>
+      </div>
       <input
         id="file-input"
+        data-cy="file-input"
         css={`
           display: none;
         `}
         multiple
         type="file"
         name="file"
-        accept={getAcceptString()}
+        accept={getAcceptString(props.text)}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           props.onChange(e, props.text)
         }
@@ -213,6 +259,7 @@ export interface AddMediaCloseButtonParams {
 
 export const AddMediaCloseButton = (props: AddMediaCloseButtonParams) => (
   <div
+    data-cy="media-close-button"
     onClick={() => props.onClick()}
     css={`
       width: 20px;
@@ -233,6 +280,7 @@ export const AddMediaTitle = () => {
   const { t } = useTranslation();
   return (
     <Typography
+      data-cy="add-media-title"
       css={`
         color: white;
         font-size: 20px;

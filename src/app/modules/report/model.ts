@@ -23,6 +23,11 @@ export type LocationModel = {
   place?: string | null;
 };
 
+export type LabelValueModel = {
+  label: string;
+  value: string;
+};
+
 export type OutcomesPropsModel = {
   title: string;
   setTitle: Function;
@@ -50,13 +55,15 @@ export type PolicyPrioritiesPropsModel = {
   setTarBenTotal2: Function;
   beneficiaryCounts: BeneficiaryCountsModel[];
   setBeneficiaryCounts: Function;
-  policyPriority: { label: string; value: string };
+  policyPriority: LabelValueModel;
   setPolicyPriority: Function;
   budget: number;
   setBudget: Function;
   remainBudget: number;
   insContribution: number;
   setInsContribution: Function;
+  funder: LabelValueModel;
+  setFunder: Function;
 };
 
 export type IndicatorVerificationPropsModel = {
@@ -66,10 +73,12 @@ export type IndicatorVerificationPropsModel = {
   setMonRepOutcomes: Function;
   media: MediaModel;
   setMedia: Function;
+  mediaAdded: any;
   onSaveMedia: Function;
   openMediaModal: boolean;
   setOpenMediaModal: Function;
   removeMedia: Function;
+  onDialogCancel: Function;
 };
 
 export type ChallengesPlansPropsModel = {
@@ -106,4 +115,7 @@ export type CreateReportLayoutModel = {
   loading: boolean;
   saveDraft: Function;
   dialogProps: DialogProps;
+  delDialogProps: DialogProps;
+  showDeleteBtn: boolean;
+  deleteReport: Function;
 };

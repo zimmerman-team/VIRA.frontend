@@ -6,6 +6,7 @@ import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import styled from 'styled-components';
 import { css } from 'styled-components/macro';
 import { useMediaQuery, Box, Grid } from '@material-ui/core';
+import { useQuery } from 'app/utils/useQuery';
 
 type BottomNavModel = {
   next: Function;
@@ -14,6 +15,8 @@ type BottomNavModel = {
   saveDraft: Function;
   nextDisabled: boolean;
   backDisabled: boolean;
+  showDeleteBtn: boolean;
+  deleteReport: Function;
   showSubmitBtn: boolean;
   showDraftSubmitBtn: boolean;
 };
@@ -52,6 +55,7 @@ const gridItem: any = css`
 `;
 
 export function BottomNav(props: BottomNavModel) {
+  const query = useQuery();
   const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
@@ -59,6 +63,7 @@ export function BottomNav(props: BottomNavModel) {
     <Grid container item xs={12} lg={12} justify="space-between" wrap="nowrap">
       <Grid item xs={3}>
         <ContainedButton
+          testAttr="back-button"
           text={isMobileWidth ? '' : t('reports.form.buttons.back')}
           icon={isMobileWidth && <ChevronLeft />}
           onClick={props.back}
@@ -67,9 +72,32 @@ export function BottomNav(props: BottomNavModel) {
         />
       </Grid>
       <Grid item xs={9} justify="flex-end" css={gridItem}>
+        {props.showDeleteBtn && (
+          <React.Fragment>
+            <ContainedButton
+              testAttr="delete-button"
+              text={t('reports.form.buttons.delete')}
+              onClick={props.deleteReport}
+              css={`
+                && {
+                  background: #ef5350;
+                  &:hover {
+                    background: #e57373 !important;
+                  }
+                  ${isMobileWidth &&
+                    `max-height: 48px;
+                  min-height: 48px;
+                  max-width: 132px;`}
+                }
+              `}
+            />
+            <Box width={`${isMobileWidth ? '8px' : '24px'}`} />
+          </React.Fragment>
+        )}
         {props.showDraftSubmitBtn && (
           <React.Fragment>
             <ContainedButton
+              testAttr="draft-button"
               text={t('reports.form.buttons.draft')}
               onClick={props.saveDraft}
               css={isMobileWidth && mobileButton}
@@ -79,12 +107,16 @@ export function BottomNav(props: BottomNavModel) {
         )}
         {props.showSubmitBtn ? (
           <ContainedButton
-            text={t('reports.form.buttons.submit')}
+            testAttr="submit-button"
+            text={t(
+              `reports.form.buttons.${query.get('rid') ? 'save' : 'submit'}`
+            )}
             onClick={props.submit}
             css={isMobileWidth && mobileButton}
           />
         ) : (
           <ContainedButton
+            testAttr="next-button"
             text={t('reports.form.buttons.next')}
             onClick={props.next}
             disabled={props.nextDisabled}

@@ -1,5 +1,7 @@
 {
-    "manage": "Beheer",
-    "add": "Toevoegen",
-    "edit": "Bewerk"
+  "manage": "Beheer",
+  "manage_teams": "Beheer Teams",
+  "manage_users": "Beheer Gebruikers",
+  "add": "Toevoegen",
+  "edit": "Bewerk"
 }

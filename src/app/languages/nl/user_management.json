@@ -1,33 +1,35 @@
 {
-    "team": {
-        "edit_title": "Titel bewerken",
-        "add_title": "Titel toevoegen",
-        "table_title": "Voeg gebruiker toe"
-    },
-    "user": {
-        "first_name": "Voornaam",
-        "last_name": "Achternaam",
-        "email": "Email",
-        "user_role": "Gebruikersrol",
-        "select_team": "Selecteer team"
-    },
-    "general": {
-        "manage_your_account": "Beheer je account",
-        "manage_teams_users": "Beheer teams & gebruikers",
-        "manage_account": "Uw account",
-        "logout": "Log uit",
-        "privacy_link": "Privacy en voorwaarden",
-        "teams": "Organisaties",
-        "users": "Gebruikers",
-        "add_user_btn": "Voeg toe Gebruiker",
-        "add_team_btn": "Voeg toe Organisatie",
-        "title_sort_asc": "Titel (opl)",
-        "title_sort_desc": "Titel (afl)",
-        "created_sort_asc": "Aanmaakdatum (opl)",
-        "created_sort_desc": "Aanmaakdatum (afl)",
-        "created": "Aanmaakdatum",
-        "created_by": "Toegevoegd door",
-        "save_btn": "Sla op",
-        "add_btn": "Voeg toe"
-    }
+  "team": {
+    "edit_title": "Titel bewerken",
+    "add_title": "Titel toevoegen",
+    "table_title": "Voeg gebruiker toe"
+  },
+  "user": {
+    "first_name": "Voornaam",
+    "last_name": "Achternaam",
+    "email": "Email",
+    "password": "Wachtwoord wijzigen",
+    "user_role": "Gebruikersrol",
+    "select_team": "Selecteer team"
+  },
+  "general": {
+    "manage_your_account": "Beheer je account",
+    "manage_teams_users": "Beheer teams & gebruikers",
+    "manage_account": "Uw account",
+    "logout": "Log uit",
+    "privacy_link": "Privacy en voorwaarden",
+    "teams": "Organisaties",
+    "teams_button": "Organisaties",
+    "users": "Gebruikers",
+    "add_user_btn": "Voeg toe Gebruiker",
+    "add_team_btn": "Voeg toe Organisatie",
+    "title_sort_asc": "Titel (opl)",
+    "title_sort_desc": "Titel (afl)",
+    "created_sort_asc": "Aanmaakdatum (opl)",
+    "created_sort_desc": "Aanmaakdatum (afl)",
+    "created": "Aanmaakdatum",
+    "created_by": "Toegevoegd door",
+    "save_btn": "Sla op",
+    "add_btn": "Voeg toe"
+  }
 }

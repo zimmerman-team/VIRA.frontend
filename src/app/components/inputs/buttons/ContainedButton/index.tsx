@@ -4,16 +4,18 @@ import { css } from 'styled-components/macro';
 import Button from '@material-ui/core/Button';
 import { ProjectPalette } from 'app/theme';
 
-type Props = {
+interface Props {
   text: string;
   icon?: React.ReactNode;
   disabled?: boolean;
   onClick?: any;
-};
+  testAttr?: string;
+}
 
 const BaseContainedButtonStyle = css`
   padding: 12px 15px !important;
   box-shadow: none !important;
+  border-radius: 2px !important;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -38,6 +40,7 @@ export const ContainedButton = (props: Props) => {
 
   return (
     <Button
+      data-cy={props.testAttr ? props.testAttr : 'contained-button'}
       css={BaseContainedButtonStyle}
       variant="contained"
       color="secondary"

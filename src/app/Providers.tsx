@@ -1,13 +1,11 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable spaced-comment */
 // @ts-nocheck
 // cc:application base#;application providers
 import React, { ReactNode } from 'react';
 
 import theme from 'app/theme';
-import {
-  ThemeProvider,
-  StylesProvider,
-  createGenerateClassName,
-} from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import { StoreProvider } from 'easy-peasy';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ClientContextProvider } from 'react-fetching-library';
@@ -31,10 +29,10 @@ type ProviderProps = {
   children?: ReactNode;
 };
 
-const generateClassName = createGenerateClassName({
-  dangerouslyUseGlobalCSS: true,
-  productionPrefix: 'production',
-});
+// const generateClassName = createGenerateClassName({
+//   dangerouslyUseGlobalCSS: true,
+//   productionPrefix: 'production',
+// });
 
 function Providers(props: ProviderProps) {
   return (
@@ -49,9 +47,9 @@ function Providers(props: ProviderProps) {
         <PersistGate loading={null} persistor={persistor}>
           <ClientContextProvider client={Client}>
             {/* react router */}
-            <StylesProvider generateClassName={generateClassName}>
-              <Router>{props.children}</Router>
-            </StylesProvider>
+            {/*<StylesProvider generateClassName={generateClassName}>*/}
+            <Router>{props.children}</Router>
+            {/*</StylesProvider>*/}
           </ClientContextProvider>
         </PersistGate>
       </StoreProvider>

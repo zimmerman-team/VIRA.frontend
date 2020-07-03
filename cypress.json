@@ -1,5 +1,8 @@
 {
   "projectId": "whmos3",
   "stepDefinitions": "**/*.steps",
-  "stepDefinitionTemp": "cypress/steps-compiled.json"
+  "stepDefinitionTemp": "cypress/steps-compiled.json",
+  "baseUrl": "http://app.ins.dev.nyuki.io",
+  "experimentalGetCookiesSameSite": true,
+  "chromeWebSecurity": false
 }

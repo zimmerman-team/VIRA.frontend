@@ -6,8 +6,10 @@ import { TeamUserCard } from 'app/components/surfaces/Cards/TeamUserCard';
 import { Pagination } from 'app/components/misc/TablePagination';
 import { PageModuleModel } from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 import { Add } from '@material-ui/icons';
-import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+
 import { useTranslation } from 'react-i18next';
+import 'styled-components/macro';
+import { AdminAddButton } from 'app/components/inputs/buttons/AdminAddButton';
 
 export const AdminManageOverviewLayout = (props: PageModuleModel) => {
   const history = useHistory();
@@ -25,7 +27,24 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
           align-items: center;
         `}
       >
-        <Typography variant="h6">{t(props.title)}</Typography>
+        <Typography
+          variant="h6"
+          css={`
+            && {
+              font-size: 20px;
+              font-weight: 600;
+              line-height: 1.5;
+              margin-left: 16px;
+
+              /* todo: have a talk about this with the designers */
+              @media (max-width: 768px) {
+                margin-left: 0;
+              }
+            }
+          `}
+        >
+          {t(props.title)}
+        </Typography>
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
@@ -42,8 +61,8 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
       {/* ---------------------------------------------------------------------*/}
       {/* button: add team / user */}
 
-      <Grid item xs={12} lg={12}>
-        <ContainedButton
+      <Grid item xs={7} lg={12}>
+        <AdminAddButton
           text={t(props.addBtnText)}
           icon={<Add />}
           onClick={() => {

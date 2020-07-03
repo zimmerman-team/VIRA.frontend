@@ -1,4 +1,5 @@
-import 'styled-components/macro';
+// @ts-nocheck
+import { css, CSSProp } from 'styled-components/macro';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Theme } from '@material-ui/core/styles';
@@ -17,7 +18,6 @@ import { ProjectPalette } from 'app/theme';
 import { IconMenuOpen } from 'app/modules/common/icons/IconMenuOpen';
 import { NavItemParams } from 'app/modules/common/consts';
 import { Logo } from 'app/assets/icons/Logo';
-import { useTranslation } from 'react-i18next';
 
 interface AppSideBarParams {
   classes: Record<
@@ -45,10 +45,52 @@ interface AppSideBarParams {
 export function AppSideBar(props: AppSideBarParams) {
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
-  const { t, i18n } = useTranslation();
+  const HeaderStyle = css`
+    && {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: ${ProjectPalette.primary.main};
+    }
+  `;
+
+  const NavLinkStyle = css`
+    font-weight: 500;
+    padding-top: 24px;
+    padding-bottom: 36px;
+    display: ${props.open ? 'flex' : 'none'};
+    padding-left: ${isMobileWidth ? '45px' : 0};
+  `;
+
+  const IconButtonOpenStyle = css`
+    position: relative;
+    left: 32px;
+  `;
+
+  const IconButtonClosedStyle = css`
+    && {
+      background-color: ${ProjectPalette.primary.main};
+      border-radius: 0;
+      padding: 0;
+      width: 54px;
+      height: 36px;
+      /* do we want the side bar items to be aligned at all times? */
+      //margin-bottom: 84px;
+    }
+  `;
+
+  const SidebarListStyle = css`
+    overflow-x: hidden;
+    padding-left: ${props.open ? '42px' : 0};
+    background-color: ${ProjectPalette.primary.main};
+  `;
+
+  const DrawerStyle = css`
+    display: ${isMobileWidth && !props.open ? 'none' : ''};
+  `;
 
   return (
-    <>
+    <React.Fragment>
       <Drawer
         variant={isMobileWidth ? 'temporary' : 'permanent'}
         transitionDuration={isMobileWidth ? 0 : undefined}
@@ -63,43 +105,23 @@ export function AppSideBar(props: AppSideBarParams) {
             [props.classes.drawerClose]: !props.open,
           }),
         }}
-        css={`
-          display: ${isMobileWidth && !props.open ? 'none' : ''};
-        `}
+        css={DrawerStyle}
       >
-        <div
-          className={props.classes.drawerHeader}
-          css={`
-            && {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background-color: ${ProjectPalette.primary.main};
-            }
-          `}
-        >
+        <div className={props.classes.drawerHeader} css={HeaderStyle}>
           {props.open ? (
-            <>
-              <div
-                css={`
-                  font-weight: 500;
-                  padding-top: 24px;
-                  padding-bottom: 36px;
-                  display: ${props.open ? 'flex' : 'none'};
-                  padding-left: ${isMobileWidth ? '45px' : 0};
-                `}
-              >
-                <NavLink to="/">
+            /* --------------------------------------- */
+            /* if sidebar is open show the following: */
+            <React.Fragment>
+              <div css={NavLinkStyle}>
+                <NavLink data-cy="sidebar-home-button" to="/">
                   <Logo />
                 </NavLink>
               </div>
               <Hidden smUp>
                 <IconButton
+                  data-cy="sidebar-menu-button"
                   onClick={props.handleDrawerClose}
-                  css={`
-                    position: relative;
-                    left: 32px;
-                  `}
+                  css={IconButtonOpenStyle}
                 >
                   <Close
                     css={`
@@ -108,31 +130,24 @@ export function AppSideBar(props: AppSideBarParams) {
                   />
                 </IconButton>
               </Hidden>
-            </>
+            </React.Fragment>
           ) : (
+            /* --------------------------------------- */
+            /* if sidebar is closed show the following: */
             <IconButton
+              data-cy="sidebar-menu-button"
               onClick={props.handleDrawerOpen}
-              css={`
-                && {
-                  background-color: ${ProjectPalette.primary.main};
-                  border-radius: 0;
-                  padding: 0;
-                  width: 54px;
-                  height: 36px;
-                }
-              `}
+              css={IconButtonClosedStyle}
             >
               <IconMenuOpen />
             </IconButton>
           )}
         </div>
-        <List
-          css={`
-            overflow-x: hidden;
-            padding-left: ${props.open ? '42px' : 0};
-            background-color: ${ProjectPalette.primary.main};
-          `}
-        >
+
+        {/* --------------------------------------- */}
+        {/* nav item list */}
+        <List css={SidebarListStyle}>
+          {/* generate sidebar nav items */}
           {props.navItems.map((navItem, index) => (
             <SidebarNavButton
               text={navItem.label}
@@ -145,6 +160,9 @@ export function AppSideBar(props: AppSideBarParams) {
           ))}
         </List>
       </Drawer>
+
+      {/* --------------------------------------- */}
+      {/* some kind of backdrop that is only supposed to appear on mobile */}
       <Hidden smUp>
         <Backdrop
           open={props.open}
@@ -157,6 +175,6 @@ export function AppSideBar(props: AppSideBarParams) {
           `}
         />
       </Hidden>
-    </>
+    </React.Fragment>
   );
 }

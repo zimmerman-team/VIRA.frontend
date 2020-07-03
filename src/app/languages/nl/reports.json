@@ -35,15 +35,17 @@
     },
     "textfield": {
       "title": "Geef een titel op voor uw rapport",
+      "preview_title": "Titel",
       "location": "Voeg locatie toe",
       "location_expl": "Op welke van de volgende geografische locaties wordt het project uitgevoerd",
       "exact_location": "Selecteer de exacte locatie",
       "insinger_f_policy_priorities": "Themas Insinger Stichting",
+      "other_funders": "Andere financiers",
       "budget": "Budget",
       "remaining": "Resterende voor dit project",
       "contribution": "Insinger Bijdrage",
       "target_beneficiaries": "Doel begunstigden",
-      "total_commited": "Total committed number",
+      "total_commited": "Totaal toegewijd aantal",
       "of_which_ben": "Waarvan de begunstigden waarschijnlijk ongeveer zullen opnemen",
       "sdg_mapping_expl": "Voor elke geselecteerde prioriteit verschijnen de relevante SDG's die kunnen worden geselecteerd op basis van onze mapping"
     },
@@ -70,7 +72,8 @@
       "draft": "Opslaan als concept",
       "submit": "Verzenden",
       "cancel": "Annuleren",
-      "save": "Sla op"
+      "save": "Sla op",
+      "delete": "Verwijderen"
     }
   }
 }

@@ -16,6 +16,7 @@ type Props = {
 
 export const SearchResult = (props: Props) => (
   <div
+    data-cy="search-result"
     css={`
       top: 46px;
       display: flex;
@@ -51,8 +52,10 @@ export const SearchResult = (props: Props) => (
       `}
     >
       {get(props.results, `[${props.resultType}]`, []).map(
-        (resultItem: any) => (
+        (resultItem: any, index: number) => (
           <SearchResultItem
+            index={index}
+            key={`search-result-item-${index}`}
             text={resultItem.title}
             link={resultItem.link}
             handleResultClick={props.handleResultClick}

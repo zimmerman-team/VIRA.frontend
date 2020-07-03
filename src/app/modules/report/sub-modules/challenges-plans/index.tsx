@@ -18,14 +18,11 @@ const styles: any = {
     height: 100%;
     overflow: visible;
   `,
-  cardHeader: css`
-    padding: 12px !important;
-  `,
-  cardContent: css`
-    padding: 12px !important;
-  `,
   infoText: css`
     bottom: 0;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
   `,
   gridMobile: css`
     padding-top: 0 !important;
@@ -42,8 +39,9 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
       {/* textareas */}
       <Grid item container lg={12} alignItems="center">
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
+              testAttr="text-area-1"
               {...ChallengeAreaMock[0]}
               explanation=""
               description={t(ChallengeAreaMock[0].description)}
@@ -66,8 +64,9 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         css={isMobileWidth && styles.gridMobile}
       >
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
+              testAttr="text-area-2"
               {...ChallengeAreaMock[1]}
               explanation=""
               description={t(ChallengeAreaMock[1].description)}
@@ -90,8 +89,9 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         css={isMobileWidth && styles.gridMobile}
       >
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
+              testAttr="text-area-3"
               {...ChallengeAreaMock[2]}
               explanation=""
               description={t(ChallengeAreaMock[2].description)}
@@ -114,8 +114,9 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         css={isMobileWidth && styles.gridMobile}
       >
         <Card css={styles.card}>
-          <CardContent css={styles.cardContent}>
+          <CardContent>
             <IntentTexArea
+              testAttr="text-area-4"
               {...ChallengeAreaMock[3]}
               explanation=""
               description={t(ChallengeAreaMock[3].description)}

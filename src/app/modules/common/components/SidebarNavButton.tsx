@@ -1,5 +1,6 @@
+// @ts-nocheck
 import React from 'react';
-import 'styled-components/macro';
+import { css } from 'styled-components/macro';
 import { IconDashBoard } from 'app/modules/common/icons/IconDashBoard';
 import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
@@ -35,51 +36,57 @@ function SidebarNavButtonF(props: SidebarNavButtonParams): JSX.Element {
     setIsActive(isNavLinkActive(props));
   }, [props.location.pathname]);
 
+  const ListeItemStyle = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    /* if open; wide / if closed; narrow */
+    width: ${props.open ? 'initial' : '54px'};
+
+    &:hover {
+      background-color: initial;
+      opacity: 0.5;
+    }
+  `;
+
+  const ListItemIconStyle = css`
+    && {
+      min-width: initial;
+      margin-left: ${props.open ? '0' : '0'};
+      margin-right: ${props.open ? '13px' : '0'};
+    }
+  `;
+
+  const ListItemTextStyle = css`
+    display: ${props.open ? 'flex' : 'none'};
+    span {
+      color: white;
+      font-weight: ${isActive ? 'bold' : 300};
+    }
+  `;
+
+  const NavLinkStyle = css`
+    text-decoration: none;
+  `;
+
   return (
-    <NavLink
-      to={props.path}
-      exact
-      data-testid={props.text}
-      css={`
-        text-decoration: none;
-      `}
-    >
+    <NavLink to={props.path} exact css={NavLinkStyle}>
       <ListItem
         button
+        data-cy={`sidebar-item-${props.index}`}
         key={props.text}
-        css={`
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 44px;
-          width: ${props.open ? '255px' : '54px'};
-        `}
+        css={ListeItemStyle}
       >
-        <ListItemIcon
-          css={`
-            && {
-              min-width: initial;
-              margin-left: ${props.open ? '0' : '0'};
-              margin-right: ${props.open ? '13px' : '0'};
-            }
-          `}
-        >
+        <ListItemIcon css={ListItemIconStyle}>
           {props.icon || <IconDashBoard />}
         </ListItemIcon>
 
-        <ListItemText
-          css={`
-            display: ${props.open ? 'flex' : 'none'};
-            span {
-              color: white;
-              font-weight: ${isActive ? 'bold' : 300};
-            }
-          `}
-          primary={t(props.text)}
-        />
+        <ListItemText css={ListItemTextStyle} primary={t(props.text)} />
       </ListItem>
     </NavLink>
   );
 }
 
+/* todo: do we need to use the withRouter? */
 export const SidebarNavButton = withRouter(SidebarNavButtonF);

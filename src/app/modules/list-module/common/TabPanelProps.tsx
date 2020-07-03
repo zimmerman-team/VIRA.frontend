@@ -2,6 +2,8 @@ import { Box, Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { css } from 'styled-components/macro';
+// todo: change to absolute path
+import { DataDaterangePicker } from './DataDaterangePicker';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -17,6 +19,7 @@ export const TabStyle = css`
   background-color: white;
   text-transform: capitalize;
   max-width: 140px;
+  margin-left: 14px;
 `;
 
 export function TabPanel(props: TabPanelProps) {
@@ -28,9 +31,16 @@ export function TabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      // css={`
+      //   overflow-x: scroll;
+      // `}
       {...other}
     >
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && (
+        <Box style={{ padding: 0, width: '100%' }} p={3}>
+          {children}
+        </Box>
+      )}
     </Typography>
   );
 }

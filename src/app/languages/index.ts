@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 // @ts-nocheck
 
 import i18n from 'i18next';
@@ -35,7 +36,7 @@ i18n
   .init({
     lng: 'nl',
     fallbackLng: 'en',
-    debug: true,
+    debug: false,
 
     // have a common namespace used around the full app
     ns: ['translations'],
@@ -167,7 +168,7 @@ i18n
           'Grantee Name': 'Type begunstigde',
           Place: 'locatie',
           Country: 'land',
-          Email: 'e-mail',
+
           Website: 'Website',
           //  --------------------
           'Rows per page': 'Rijen per pagina',
@@ -407,7 +408,7 @@ i18n
           All: 'Alles',
           //  --------------------
           Manage: 'Beheer',
-          Add: 'Voeg toe',
+
           //  --------------------
           'First Name': 'Voornaam',
           'Last Name': 'achternaam',

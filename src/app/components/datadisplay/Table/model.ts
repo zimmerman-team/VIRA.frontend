@@ -28,7 +28,13 @@ export interface TableModuleModel {
   expandableData?: any[][][] | undefined;
   totalRowColsDef?: TotalRowColModel[];
   changeTableRowColor?: number;
-  cssVariant?: 'standard' | 'variant9' | 'variant10' | 'reportsVariant';
+  cssVariant?:
+    | 'standard'
+    | 'variant9'
+    | 'variant10'
+    | 'reportsVariant'
+    | 'projectsVariant'
+    | 'teamEditVariant';
   // infoItems?: TableInfoItemModel[];
 }
 
@@ -38,7 +44,13 @@ export interface TableLayoutModel {
   columns: MUIDataTableColumnDef[];
   options: MUIDataTableOptions;
   changeTableRowColor?: number;
-  cssVariant?: 'standard' | 'variant9' | 'variant10' | 'reportsVariant';
+  cssVariant?:
+    | 'standard'
+    | 'variant9'
+    | 'variant10'
+    | 'reportsVariant'
+    | 'projectsVariant'
+    | 'teamEditVariant';
 }
 
 export interface InfoCellModuleModel {

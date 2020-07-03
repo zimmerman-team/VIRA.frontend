@@ -9,14 +9,8 @@ import {
   addConfig,
   calculateTotalRow,
 } from 'app/components/datadisplay/Table/helpers';
-import styled from 'styled-components';
-
-const VerticalScrollHelper = styled.div`
-  overflow-x: scroll;
-`;
 
 const TableModule = (props: TableModuleModel) => {
-  console.log(props.title);
   const [totalData, setTotalData] = React.useState({});
 
   React.useEffect(() => {
@@ -42,11 +36,7 @@ const TableModule = (props: TableModuleModel) => {
     setTotalData
   );
 
-  return (
-    <VerticalScrollHelper>
-      <TableLayout {...props} options={options} />
-    </VerticalScrollHelper>
-  );
+  return <TableLayout {...props} options={options} />;
 };
 
 export default TableModule;

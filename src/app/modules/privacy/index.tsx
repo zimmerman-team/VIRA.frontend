@@ -7,8 +7,6 @@ import { Box } from '@material-ui/core';
 import {
   privacyDescriptionMock,
   PrivacyModuleItemsMock,
-  cookieDescriptionMock,
-  CookieItemsMock,
 } from 'app/modules/privacy/mock';
 import { useTranslation } from 'react-i18next';
 
@@ -38,13 +36,13 @@ export const PrivacyModule = () => {
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
       {/* title fragment */}
-      <Grid item container xs={12} lg={12}>
+      <Grid data-cy="privacy-page-title" item container xs={12} lg={12}>
         <TitleFragment title="Insinger Stichting Privacy Verklaring" />
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
       {/* content */}
-      <Grid item xs={12} lg={12}>
+      <Grid data-cy="privacy-page-description" item xs={12} lg={12}>
         <Typography css={style.description}>
           {t(privacyDescriptionMock)}
         </Typography>
@@ -52,10 +50,16 @@ export const PrivacyModule = () => {
       </Grid>
       {PrivacyModuleItemsMock.map((privacyItem, index) => (
         <Grid item xs={12} lg={12}>
-          <Typography css={style.paragraphTitle}>
+          <Typography
+            data-cy={`privacy-item-${index}-title`}
+            css={style.paragraphTitle}
+          >
             {`${index + 1}. ${t(privacyItem.title)}`}
           </Typography>
-          <Typography css={style.paragraphBody}>
+          <Typography
+            data-cy={`privacy-item-${index}-description`}
+            css={style.paragraphBody}
+          >
             {t(privacyItem.description)}
           </Typography>
           {privacyItem.listItems &&

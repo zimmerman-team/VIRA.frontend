@@ -1,5 +1,6 @@
 import React from 'react';
 import get from 'lodash/get';
+import { useQuery } from 'app/utils/useQuery';
 import { PreviewLayout } from 'app/modules/report/sub-modules/preview';
 import { OutcomesLayout } from 'app/modules/report/sub-modules/outcomes';
 import {
@@ -30,6 +31,7 @@ interface Props extends RouteComponentProps {
 }
 
 const ReportModuleRoutesF = (props: Props) => {
+  const query = useQuery();
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -45,7 +47,9 @@ const ReportModuleRoutesF = (props: Props) => {
           <PolicyPrioritiesLayout {...props.policyPrioritiesProps} />
         ) : (
           <Redirect
-            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes`}
+            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes${
+              query.get('rid') ? `?rid=${query.get('rid')}` : ''
+            }`}
           />
         )}
       </Route>
@@ -57,7 +61,9 @@ const ReportModuleRoutesF = (props: Props) => {
           <IndicatorVerificationLayout {...props.indicatorVerificationProps} />
         ) : (
           <Redirect
-            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes`}
+            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes${
+              query.get('rid') ? `?rid=${query.get('rid')}` : ''
+            }`}
           />
         )}
       </Route>
@@ -69,7 +75,9 @@ const ReportModuleRoutesF = (props: Props) => {
           <ChallengesPlansLayout {...props.challengesPlansProps} />
         ) : (
           <Redirect
-            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes`}
+            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes${
+              query.get('rid') ? `?rid=${query.get('rid')}` : ''
+            }`}
           />
         )}
       </Route>
@@ -81,7 +89,9 @@ const ReportModuleRoutesF = (props: Props) => {
           <PreviewLayout {...props} />
         ) : (
           <Redirect
-            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes`}
+            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes${
+              query.get('rid') ? `?rid=${query.get('rid')}` : ''
+            }`}
           />
         )}
       </Route>

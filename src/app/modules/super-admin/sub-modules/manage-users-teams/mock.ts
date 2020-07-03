@@ -20,7 +20,7 @@ export const sortOptions: SortOptionsModel[] = [
 export const tabNavigatorMock: TabNavigatorParams = {
   items: [
     {
-      label: 'user_management.general.teams',
+      label: 'user_management.general.teams_button',
       path: '/super-admin/manage-teams',
     },
     {
@@ -34,7 +34,7 @@ export const breadcrumbsMock: BreadcrumbModel = {
   currentLocation: '',
   previousLocations: [
     {
-      label: 'breadcrumbs.manage',
+      label: 'breadcrumbs.manage_teams',
       url: '/super-admin/manage-teams',
     },
   ],

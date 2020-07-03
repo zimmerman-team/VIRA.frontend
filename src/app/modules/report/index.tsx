@@ -1,29 +1,46 @@
 /* eslint-disable no-plusplus */
 import React from 'react';
-import get from 'lodash/get';
-import find from 'lodash/find';
 import 'styled-components/macro';
-import filter from 'lodash/filter';
+import { withRouter } from 'react-router-dom';
+import CheckIcon from '@material-ui/icons/Check';
+
+/* utils thirdparty */
 import { useTitle } from 'react-use';
 import findIndex from 'lodash/findIndex';
-import { withRouter } from 'react-router-dom';
+import get from 'lodash/get';
+import find from 'lodash/find';
+import filter from 'lodash/filter';
+
+/* general */
 import { tabs } from 'app/modules/report/mock';
 import { CreateReportLayout } from 'app/modules/report/layout';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
-import { AppConfig } from 'app/data';
-import { useQuery } from 'app/utils/useQuery';
-import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
-import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
+
+/* model */
+import { LocationModel } from './model';
 import { DialogBtnType } from 'app/components/surfaces/Dialog/model';
-import CheckIcon from '@material-ui/icons/Check';
+
+/* utils: misc */
 import { isNavBtnEnabled } from './utils/isNavBtnEnabled';
-import { validateIndVerFields } from './utils/validateIndVerFields';
+import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
 import { getTabs } from './utils/getTabs';
+
+/* utils related to validating field data */
 import { validateOutcomeFields } from './utils/validateOutcomeFields';
 import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
+import { validateIndVerFields } from './utils/validateIndVerFields';
+
+/* utils related to data */
 import { uploadFiles } from './utils/uploadFiles';
-import { LocationModel } from './model';
+import { getFileTypeAccept } from './utils/getFileTypeAccept';
+
+/* state/data */
+import { useQuery } from 'app/utils/useQuery';
+import { usePersistedState } from 'app/utils/usePersistedState';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+
+/* global variables */
+import { AppConfig } from 'app/data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -38,65 +55,109 @@ function CreateReportFunc(props: any) {
   );
 
   // Outcomes state
-  const [title, setTitle] = React.useState('');
-  const [country, setCountry] = React.useState({
+  const [title, setTitle] = usePersistedState('report_title', '');
+  const [country, setCountry] = usePersistedState('report_country', {
     label: '',
     value: '',
   });
+  // @ts-ignore
   const [location, setLocation]: [
     LocationModel | null,
     Function
-  ] = React.useState(null);
+  ] = usePersistedState('report_location', null);
 
   // Policy Priorities
-  const [tarBenTotal, setTarBenTotal] = React.useState(0);
-  const [tarBenTotal2, setTarBenTotal2] = React.useState(0);
-  const [beneficiaryCounts, setBeneficiaryCounts] = React.useState([
+  const [tarBenTotal, setTarBenTotal] = usePersistedState(
+    'report_tarBenTotal',
+    0
+  );
+  const [tarBenTotal2, setTarBenTotal2] = usePersistedState(
+    'report_tarBenTotal2',
+    0
+  );
+  const [beneficiaryCounts, setBeneficiaryCounts] = usePersistedState(
+    'report_beneficiaryCounts',
+    [
+      {
+        name: 'Children/Young people',
+        value: 0,
+      },
+      {
+        name: 'Elderly',
+        value: 0,
+      },
+      {
+        name: 'Women',
+        value: 0,
+      },
+      {
+        name: 'Refugees',
+        value: 0,
+      },
+      {
+        name: 'Low income individuals',
+        value: 0,
+      },
+    ]
+  );
+  const [policyPriority, setPolicyPriority] = usePersistedState(
+    'report_policyPriority',
     {
-      name: 'Children/Young people',
-      value: 0,
-    },
-    {
-      name: 'Elderly',
-      value: 0,
-    },
-    {
-      name: 'Women',
-      value: 0,
-    },
-    {
-      name: 'Refugees',
-      value: 0,
-    },
-    {
-      name: 'Low income individuals',
-      value: 0,
-    },
-  ]);
-  const [policyPriority, setPolicyPriority] = React.useState({
+      label: '',
+      value: '',
+    }
+  );
+
+  const [budget, setBudget] = usePersistedState(
+    'report_budget',
+    useStoreState(state => get(state.projectBudgetData, 'data.remainBudget', 0))
+  );
+  const [insContribution, setInsContribution] = usePersistedState(
+    'report_insContribution',
+    0
+  );
+  const [funder, setFunder] = usePersistedState('report_funder', {
     label: '',
     value: '',
   });
 
-  const [budget, setBudget] = React.useState(0);
-  const [insContribution, setInsContribution] = React.useState(0);
-
   // Indicator and verification state
-  const [keyOutcomes, setKeyOutcomes] = React.useState('');
-  const [monRepOutcomes, setMonRepOutcomes] = React.useState('');
+  const [keyOutcomes, setKeyOutcomes] = usePersistedState(
+    'report_keyOutcomes',
+    ''
+  );
+  const [monRepOutcomes, setMonRepOutcomes] = usePersistedState(
+    'report_monRepOutcomes',
+    ''
+  );
   const [media, setMedia] = React.useState({
     document: [],
     video: [],
     picture: [],
   });
-  const [mediaAdded, setMediaAdded] = React.useState([]);
+  const [mediaAdded, setMediaAdded] = usePersistedState(
+    'report_mediaAdded',
+    []
+  );
   const [openMediaModal, setOpenMediaModal] = React.useState(false);
 
   // Challenges and plans
-  const [keyImplChallenges, setKetImplChallenges] = React.useState('');
-  const [otherProjOutObs, setOtherProjOutObs] = React.useState('');
-  const [futurePlans, setFuturePlans] = React.useState('');
-  const [otherComms, setOtherComms] = React.useState('');
+  const [keyImplChallenges, setKetImplChallenges] = usePersistedState(
+    'report_keyImplChallenges',
+    ''
+  );
+  const [otherProjOutObs, setOtherProjOutObs] = usePersistedState(
+    'report_otherProjOutObs',
+    ''
+  );
+  const [futurePlans, setFuturePlans] = usePersistedState(
+    'report_futurePlans',
+    ''
+  );
+  const [otherComms, setOtherComms] = usePersistedState(
+    'report_otherComms',
+    ''
+  );
 
   const [dialogProps, setDialogProps] = React.useState({
     title: 'Your report has been sent',
@@ -109,9 +170,9 @@ function CreateReportFunc(props: any) {
         `}
       >
         <CheckIcon
-          htmlColor="#30c2b0"
+          htmlColor="#05C985"
           css={`
-            font-size: 6rem;
+            font-size: 5rem;
           `}
         />
       </div>
@@ -120,13 +181,56 @@ function CreateReportFunc(props: any) {
     onClose: () => setDialogProps(prevState => ({ ...prevState, open: false })),
   });
 
+  const deleteReport = () => {
+    const rid = query.get('rid');
+    deleteReportAction({
+      socketName: 'delReport',
+      values: {
+        _id: rid,
+      },
+    });
+  };
+
+  const [delDialogProps, setDelDialogProps] = React.useState({
+    title: 'Are you sure you want to delete the report?',
+    open: false,
+    buttons: [
+      {
+        text: 'Cancel',
+        color: '#000000',
+        background: '#ffffff',
+        action: () => {},
+        closeOnClick: true,
+      },
+      {
+        text: 'Delete',
+        color: '#ffffff',
+        background: '#ed6060',
+        action: deleteReport,
+        closeOnClick: true,
+      },
+    ],
+    onClose: () =>
+      setDelDialogProps(prevState => ({ ...prevState, open: false })),
+  });
+
+  const openDelDialog = () => {
+    setDelDialogProps(d => ({ ...d, open: true }));
+  };
+
   // redux actions
   const allProjectsAction = useStoreActions(
     actions => actions.allProjects.fetch
   );
   const addReportAction = useStoreActions(actions => actions.addReport.fetch);
+  const deleteReportAction = useStoreActions(
+    actions => actions.deleteReport.fetch
+  );
   const addReportClearAction = useStoreActions(
     actions => actions.addReport.clear
+  );
+  const deleteReportClearAction = useStoreActions(
+    actions => actions.deleteReport.clear
   );
   const snackbarAction = useStoreActions(
     actions => actions.syncVariables.setSnackbar
@@ -144,14 +248,33 @@ function CreateReportFunc(props: any) {
   const allProjectsData = useStoreState(state =>
     get(state.allProjects.data, 'data', [])
   );
+
+  // console.log("allProjectsData", allProjectsData);
+
   const addReportData = useStoreState(state => state.addReport.data);
   const addReportLoading = useStoreState(state => state.addReport.loading);
+  const deleteReportData = useStoreState(state => state.deleteReport.data);
+  const deleteReportLoading = useStoreState(
+    state => state.deleteReport.loading
+  );
   const projectBudgetData = useStoreState(
     state => state.projectBudgetData.data
   );
   const reportDetailData = useStoreState(state => state.reportDetail.data);
 
-  useWindowUnloadEffect(addReportClearAction, true);
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
+
+  // console.log("reportDetailData", reportDetailData);
+
+  useWindowUnloadEffect(() => {
+    addReportClearAction();
+    deleteReportClearAction();
+  }, true);
 
   React.useEffect(() => {
     setInitialTabIndex(
@@ -184,7 +307,10 @@ function CreateReportFunc(props: any) {
     setProjectData();
     projectBudgetDataAction({
       socketName: 'getProjectBudgetData',
-      values: { projectID: props.match.params.projectID },
+      values: {
+        projectID: props.match.params.projectID,
+        exludeReportID: query.get('rid'),
+      },
     });
     return () => reportDetailClearAction();
   }, []);
@@ -222,21 +348,6 @@ function CreateReportFunc(props: any) {
         value: get(reportDetailData, 'report.policy_priority.name', ''),
       });
       if (get(reportDetailData, 'report.media', []).length > 0) {
-        const media = getMediaTileData(
-          get(reportDetailData, 'report.media', [])
-        );
-        const initMedia = {
-          document: [],
-          video: [],
-          picture: [],
-        };
-        media.forEach((m: any) => {
-          get(initMedia, `[${m.type}]`, []).push({
-            name: m.name,
-            size: Math.random(),
-          });
-        });
-        setMedia(initMedia);
         setMediaAdded(
           get(reportDetailData, 'report.media', []).map((m: any) => ({
             path: m,
@@ -265,7 +376,7 @@ function CreateReportFunc(props: any) {
   }, [props.match.params.projectID, allProjectsData]);
 
   React.useEffect(() => {
-    console.log(addReportData);
+    // console.log(addReportData);
     if (get(addReportData, 'status', '') === 'success') {
       const isDraft = get(addReportData, 'data.isDraft', false);
       setDialogProps({
@@ -273,7 +384,9 @@ function CreateReportFunc(props: any) {
         open: true,
         title: isDraft
           ? 'Your report has been saved as a draft'
-          : dialogProps.title,
+          : query.get('rid')
+          ? 'Your report has been saved'
+          : 'Your report has been sent',
         buttons: isDraft
           ? [
               {
@@ -302,10 +415,26 @@ function CreateReportFunc(props: any) {
   }, [addReportData]);
 
   React.useEffect(() => {
+    if (get(deleteReportData, 'status', '') === 'success') {
+      props.history.replace('/list/2');
+    }
+  }, [deleteReportData]);
+
+  React.useEffect(() => {
     if (location && get(location, 'country.label', '') !== '') {
       setCountry(get(location, 'country') as { label: string; value: string });
     }
   }, [location]);
+
+  React.useEffect(() => {
+    if (
+      get(projectBudgetData, 'data', null) &&
+      get(projectBudgetData, 'data.person_email', '-') !== signedInUserEmail
+    ) {
+      props.history.replace('/');
+    }
+    setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+  }, [projectBudgetData]);
 
   const onStepChange = (tabIndex: number) => {
     const rid = query.get('rid');
@@ -333,31 +462,27 @@ function CreateReportFunc(props: any) {
   };
 
   const onAddMedia = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement> & { dataTransfer?: DataTransfer },
     type: 'picture' | 'video' | 'document'
   ) => {
+    const accept = getFileTypeAccept(type);
     if (media[type]) {
       const newFiles: any = media[type];
-      for (let i = 0; i < get(e, 'target.files.length', 0); i++) {
-        newFiles.push(get(e, 'target.files', [])[i]);
+      const filesPath = e.dataTransfer ? 'dataTransfer' : 'target';
+      for (let i = 0; i < get(e, `${filesPath}.files.length`, 0); i++) {
+        const file = get(e, `${filesPath}.files`, [])[i];
+        if (accept.indexOf(get(file.type.split('/'), '[0]', '')) !== -1) {
+          newFiles.push(file);
+        }
       }
       setMedia({ ...media, [type]: newFiles });
     }
   };
 
-  const removeMedia = (
-    name: string,
-    type: 'picture' | 'video' | 'document'
-  ) => {
-    setMedia({
-      ...media,
-      [type]: filter(media[type], (m: any) => m.name !== name),
-    });
+  const removeMedia = (name: string) => {
     setMediaAdded((prevData: never[]) => {
       return filter(prevData, (d: any) => {
-        const splits = d.path.split('/');
-        const itemname = splits[splits.length - 1].split('-')[1];
-        return itemname !== name;
+        return d.path !== name;
       }) as never[];
     });
   };
@@ -365,6 +490,11 @@ function CreateReportFunc(props: any) {
   const onSaveMediaCB = (data: any) => {
     setMediaAdded((prevData: never[]) => {
       return [...prevData, ...data] as never[];
+    });
+    setMedia({
+      document: [],
+      video: [],
+      picture: [],
     });
     setOpenMediaModal(false);
     snackbarAction('Files upload completed');
@@ -381,6 +511,15 @@ function CreateReportFunc(props: any) {
     }
   };
 
+  const onDialogCancel = () => {
+    setOpenMediaModal(false);
+    setMedia({
+      document: [],
+      video: [],
+      picture: [],
+    });
+  };
+
   const draftSubmitEnabled = title.length > 0 || country.label.length > 0;
 
   const step2Enabled = validateOutcomeFields(title, country.label);
@@ -393,7 +532,8 @@ function CreateReportFunc(props: any) {
       policyPriority.value,
       budget,
       get(projectBudgetData, 'data.remainBudget', 0),
-      insContribution
+      insContribution,
+      funder.value
     );
 
   const step4Enabled =
@@ -440,6 +580,7 @@ function CreateReportFunc(props: any) {
             plans: futurePlans,
             other_comments: otherComms,
             isDraft: false,
+            funder: funder.label,
           },
         },
       });
@@ -481,6 +622,7 @@ function CreateReportFunc(props: any) {
             plans: futurePlans === '' ? ' ' : futurePlans,
             other_comments: otherComms === '' ? ' ' : otherComms,
             isDraft: true,
+            funder: funder.label,
           },
         },
       });
@@ -489,7 +631,7 @@ function CreateReportFunc(props: any) {
 
   return (
     <CreateReportLayout
-      loading={addReportLoading}
+      loading={addReportLoading || deleteReportLoading}
       submit={onSubmit}
       saveDraft={onDraftSubmit}
       tabs={getTabs(
@@ -505,7 +647,7 @@ function CreateReportFunc(props: any) {
           { label: 'Projects', url: '/list/projects' },
           {
             label: get(project, 'project_name', 'Project'),
-            url: `/projects/${props.match.params.projectID}/detail`,
+            url: `/projects/${props.match.params.projectID}`,
           },
         ],
       }}
@@ -535,6 +677,8 @@ function CreateReportFunc(props: any) {
         remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
         insContribution,
         setInsContribution,
+        funder,
+        setFunder,
       }}
       indicatorVerificationProps={{
         keyOutcomes,
@@ -543,10 +687,12 @@ function CreateReportFunc(props: any) {
         setMonRepOutcomes,
         media,
         setMedia: onAddMedia,
+        mediaAdded,
         onSaveMedia,
         openMediaModal,
         setOpenMediaModal,
         removeMedia,
+        onDialogCancel,
       }}
       challengesPlansProps={{
         keyImplChallenges,
@@ -574,6 +720,7 @@ function CreateReportFunc(props: any) {
           policyPriority,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
           insContribution,
+          funder: funder.value,
         })
       }
       backBtnDisabled={!isNavBtnEnabled('back', initialTabIndex, {})}
@@ -584,6 +731,9 @@ function CreateReportFunc(props: any) {
       showDraftSubmitBtn={draftSubmitEnabled}
       showSubmitBtn={props.location.pathname.split('/')[3] === 'preview'}
       dialogProps={dialogProps}
+      delDialogProps={delDialogProps}
+      showDeleteBtn={query.get('rid') !== null}
+      deleteReport={openDelDialog}
     />
   );
 }

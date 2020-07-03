@@ -13,6 +13,7 @@ type Props = {
 
 export const SearchResultNavigation = (props: Props) => (
   <div
+    data-cy="SearchResultNavigation"
     css={`
       display: flex;
       padding: 15px 24px;
@@ -21,10 +22,13 @@ export const SearchResultNavigation = (props: Props) => (
       background-color: ${ProjectPalette.primary.light};
     `}
   >
-    {navItems.map(navItem => {
+    {navItems.map((navItem, index) => {
       const key = navItem.replace('search.', '');
       return (
         <SearchResultNavItem
+          key={`search-nav-item-${index}`}
+          // data-cy={navItem}
+          index={index}
           name={navItem}
           active={props.activeTab === key}
           onClick={() => props.onChange(key)}

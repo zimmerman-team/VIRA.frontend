@@ -23,15 +23,38 @@ module.exports = (on, config) => {
 // const pickle = require('picklejs/cypress/plugin');
 
 // module.exports = pickle;
-const cucumber = require('cypress-cucumber-preprocessor').default;
-const {
-  addMatchImageSnapshotPlugin,
-} = require('cypress-image-snapshot/plugin');
+// const cucumber = require('cypress-cucumber-preprocessor').default;
+// const {
+//   addMatchImageSnapshotPlugin,
+// } = require('cypress-image-snapshot/plugin');
 
-const dill = require('dill');
+// const dill = require('dill');
+
+// module.exports = (on, config) => {
+//   addMatchImageSnapshotPlugin(on);
+//   on('file:preprocessor', cucumber());
+//   dill();
+// };
+
+const dotenv = require('dotenv-extended');
+const getenv = require('getenv');
+
+dotenv.config({ path: '.env' });
+dotenv.load();
+
+const happoTask = require('happo-cypress/task');
+
+const overrideEnvVars = config => {
+  const baseUrl = getenv.string('REACT_APP_CYPRESS_baseUrl', '');
+  const username = getenv.string('REACT_APP_CYPRESS_USER', '');
+  const password = getenv.string('REACT_APP_CYPRESS_PASS', '');
+  if (baseUrl !== '') config.baseUrl = baseUrl;
+  if (username !== '') config.env.username = username;
+  if (password !== '') config.env.password = password;
+  return config;
+};
 
 module.exports = (on, config) => {
-  addMatchImageSnapshotPlugin(on);
-  on('file:preprocessor', cucumber());
-  dill();
+  on('task', happoTask);
+  return overrideEnvVars(config);
 };

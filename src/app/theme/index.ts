@@ -13,8 +13,13 @@ interface Icon {
   black: string;
 }
 
+interface Chart {
+  darkSkyBlue: string;
+}
+
 interface ProjectPalette extends Palette {
   icon: Icon;
+  chart: Chart;
 }
 
 export const TextStyle: FontStyle = {
@@ -91,6 +96,9 @@ export const ProjectPalette: ProjectPalette = {
     disabled: 'rgba(0, 0, 0, 0.26)',
     active: 'rgba(0, 0, 0, 0.54)',
   },
+  chart: {
+    darkSkyBlue: '#5ca2d5',
+  },
 };
 
 export const ProjectTypography: TypographyOptions = {
@@ -128,7 +136,7 @@ export const ProjectTypography: TypographyOptions = {
   },
   h5: {
     fontFamily: TextStyle.fontFamily,
-    fontSize: `${1.25}rem`,
+    fontSize: `${1.145}rem`,
     fontWeight: TextStyle.fontWeightMedium,
     lineHeight: '1.5',
   },
@@ -208,7 +216,7 @@ export const theme = createMuiTheme({
       root: {
         width: 'initial',
         minWidth: 'initial!important',
-        marginLeft: '50px!important',
+        // marginLeft: '50px!important',
         // marginRight: '24px!important',
         minHeight: 'initial!important',
         padding: '0px 0px 6px 0px',

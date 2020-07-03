@@ -14,7 +14,8 @@ export function PageWrapper(props: PageWrapperParams) {
   return (
     <Container
       css={`
-        padding: 0 16px;
+        padding: ${isMobileWidth ? 0 : '0 16px'};
+        width: calc(100% - 32px);
       `}
       maxWidth="lg"
     >

@@ -8,7 +8,7 @@ import minBy from 'lodash/minBy';
 import { ProjectPalette } from 'app/theme';
 import styled from 'styled-components/macro';
 import { ResponsiveBubbleHtml } from '@nivo/circle-packing';
-import { Grid, Card as MuiCard } from '@material-ui/core';
+import { Grid, Card as MuiCard, useMediaQuery } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
 import { LegendList } from './common/LegendList';
 import { BubbleInfoBlock } from './common/BubbleInfoBlock';
@@ -41,10 +41,14 @@ const Content = styled(props => <CardContent {...props} />)`
   flex-direction: column;
   && {
     padding: 24px 0px 8px 24px !important;
+    @media (max-width: 600px) {
+      padding: 0 !important;
+    }
   }
 `;
 
 export function BubbleChart(props: Props) {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [minValue, setMinValue] = React.useState(0);
   const [selectedBubbleObj, setSelectedBubbleObj] = React.useState(null);
   const contRef = React.useRef();
@@ -68,20 +72,27 @@ export function BubbleChart(props: Props) {
   return (
     <Card>
       <Content>
-        <Grid container spacing={3}>
-          <Grid item xs={12} lg={3}>
-            <LegendList
-              activeBubble={props.selectedBubble}
-              setActiveBubble={props.setSelectedBubble}
-              items={[...props.data.children, ...otherSdgs]}
-            />
-          </Grid>
-          <Grid item xs={12} lg={9}>
-            <ChartContainer ref={contRef}>
+        <Grid container spacing={isMobileWidth ? 0 : 3}>
+          {!isMobileWidth && (
+            <Grid item xs={0} sm={0} lg={3}>
+              <LegendList
+                activeBubble={props.selectedBubble}
+                setActiveBubble={props.setSelectedBubble}
+                items={[...props.data.children, ...otherSdgs]}
+              />
+            </Grid>
+          )}
+          <Grid item xs={12} sm={12} lg={9}>
+            <ChartContainer
+              ref={contRef}
+              css={`
+                height: ${isMobileWidth ? '375px' : '475px'};
+              `}
+            >
               <ResponsiveBubbleHtml
                 leavesOnly
                 value="loc"
-                padding={60}
+                padding={isMobileWidth ? 50 : 60}
                 identity="name"
                 root={{
                   ...props.data,
@@ -95,6 +106,7 @@ export function BubbleChart(props: Props) {
                 colorBy={v => v.color}
                 nodeComponent={({ node, style, handlers }) => {
                   if (style.r <= 0) return null;
+                  const hasData = !node.data.opacity || node.data.opacity === 1;
                   return (
                     <div
                       id={(node.data && node.data.id
@@ -109,20 +121,21 @@ export function BubbleChart(props: Props) {
                         background: node.color,
                         top: style.y - style.r,
                         left: style.x - style.r,
-                        width: style.r * 2.3,
-                        height: style.r * 2.3,
+                        width: style.r * (isMobileWidth ? 3 : 2.3),
+                        height: style.r * (isMobileWidth ? 3 : 2.3),
                         borderRadius: '50%',
                         opacity: node.data.opacity || 1,
                         color: ProjectPalette.common.white,
-                        cursor:
-                          node.data.opacity === undefined
-                            ? 'pointer'
-                            : 'initial',
+                        cursor: hasData ? 'pointer' : 'initial',
+                        border:
+                          selectedBubbleObj &&
+                          selectedBubbleObj.number === node.data.number
+                            ? `3px solid ${ProjectPalette.secondary.main}`
+                            : '',
                       }}
                       {...handlers}
                       onClick={_e =>
-                        node.data.opacity === undefined &&
-                        props.setSelectedBubble(node.id)
+                        hasData && props.setSelectedBubble(node.id)
                       }
                     >
                       <svg
@@ -134,6 +147,7 @@ export function BubbleChart(props: Props) {
                         <text
                           x="50%"
                           y="50%"
+                          fontWeight={700}
                           textAnchor="middle"
                           dominantBaseline="middle"
                           fill={ProjectPalette.common.white}
@@ -145,7 +159,7 @@ export function BubbleChart(props: Props) {
                   );
                 }}
                 tooltip={tProps => {
-                  if (tProps.data.opacity === 0.2) {
+                  if (tProps.data.opacity === 0.2 || isMobileWidth) {
                     return null;
                   }
                   return (
@@ -161,13 +175,28 @@ export function BubbleChart(props: Props) {
                         },
                         {
                           label: 'Budget',
-                          value: tProps.data.loc
-                            .toLocaleString(undefined, {
-                              currency: 'EUR',
-                              currencyDisplay: 'symbol',
-                              style: 'currency',
-                            })
-                            .replace('.00', ''),
+                          value:
+                            tProps.data.loc &&
+                            tProps.data.loc
+                              .toLocaleString(undefined, {
+                                currency: 'EUR',
+                                currencyDisplay: 'symbol',
+                                style: 'currency',
+                              })
+                              .replace('.00', ''),
+                        },
+                        {
+                          label: 'charts.barchart.commitment',
+                          value: tProps.data.insContribution
+                            ? tProps.data.insContribution.toLocaleString(
+                                undefined,
+                                {
+                                  currency: 'EUR',
+                                  currencyDisplay: 'symbol',
+                                  style: 'currency',
+                                }
+                              )
+                            : '0',
                         },
                       ]}
                     />
@@ -189,11 +218,13 @@ export function BubbleChart(props: Props) {
             </ChartContainer>
             {selectedBubbleObj && (
               <BubbleInfoBlock
-                name={selectedBubbleObj.ppName}
+                name={selectedBubbleObj.name}
+                isMobileWidth={isMobileWidth}
                 targetValue={selectedBubbleObj.targetValue}
                 budgetValue={selectedBubbleObj.loc}
                 targetPercentage={selectedBubbleObj.targetPercentage}
                 budgetPercentage={0}
+                insContribution={selectedBubbleObj.insContribution}
               />
             )}
           </Grid>

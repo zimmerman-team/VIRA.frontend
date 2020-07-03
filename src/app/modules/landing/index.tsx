@@ -22,11 +22,6 @@ import { AppConfig } from 'app/data';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { Viztabs } from '../common/components/Viztabs';
 
-export interface Joejoe {
-  /** prop1 description */
-  prop1: string;
-}
-
 /**
  * Landing layout.
  */
@@ -44,6 +39,10 @@ function LandingLayout(props: any) {
       label: 'charts.barchart.budget',
       selected: true,
     },
+    {
+      label: 'charts.barchart.commitment',
+      selected: true,
+    },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
@@ -55,15 +54,36 @@ function LandingLayout(props: any) {
   const allReportsData = useStoreState(state => state.allReports.data);
   const allGranteesData = useStoreState(state => state.allOrganisations.data);
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+    setSelectedSDG('');
+  };
+
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
 
   React.useEffect(() => {
-    getPPVizData({ socketName: 'getPolicyPriorityBarChart', values: {} });
+    getPPVizData({
+      socketName: 'getPolicyPriorityBarChart',
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
     getSDGVizData({
       socketName: 'getSDGBubbleChart',
-      values: {},
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
     });
-    getGeoMapData({ socketName: 'getGeoMapData', values: {} });
-  }, []);
+    getGeoMapData({
+      socketName: 'getGeoMapData',
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+    });
+  }, [signedInUserRole, signedInUserEmail]);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];
@@ -94,16 +114,18 @@ function LandingLayout(props: any) {
     <React.Fragment>
       {/* -------------------------------------------------------------- */}
       {/* stat items */}
-
       <Grid item xs={12}>
-        <StatCard stats={stats} />
+        <StatCard data-cy="stat-card" stats={stats} />
       </Grid>
 
       <Hidden smDown>
         <Box width="100%" height="12px" />
       </Hidden>
 
+      {/* todo: description */}
       <Viztabs
+        value={value}
+        onTabClick={handleChange}
         barChartData={ppVizData}
         barChartLegends={barChartLegends}
         onBarChartLegendClick={onBarChartLegendClick}
@@ -118,7 +140,9 @@ function LandingLayout(props: any) {
       </Hidden>
       <Box width="100%" height="18px" />
 
+      {/* todo: description */}
       <ListModule
+        selectedSDG={selectedSDG}
         loadData
         tabNav={getNavTabItems(
           TabNavMockList,

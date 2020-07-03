@@ -1,6 +1,6 @@
 import React from 'react';
 import 'styled-components/macro';
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden, useMediaQuery } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import {
   OutcomesPropsModel,
@@ -9,9 +9,9 @@ import {
   ChallengesPlansPropsModel,
   BeneficiaryCountsModel,
 } from 'app/modules/report/model';
-import { PreviewCard } from './common/PreviewCard';
+import { PreviewCard, PreviewCardTextField } from './common/PreviewCard';
 
-type Props = {
+interface PreviewParams {
   step2Enabled: boolean;
   step3Enabled: boolean;
   step4Enabled: boolean;
@@ -20,18 +20,34 @@ type Props = {
   policyPrioritiesProps: PolicyPrioritiesPropsModel;
   indicatorVerificationProps: IndicatorVerificationPropsModel;
   challengesPlansProps: ChallengesPlansPropsModel;
-};
+}
 
-export const PreviewLayout = (props: Props) => {
+export const PreviewLayout = (props: PreviewParams) => {
   const { t } = useTranslation();
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
-    <Grid container spacing={4}>
+    <React.Fragment>
+      {/* --------------------------------- */}
+      {/* title */}
       <Grid item xs={12} lg={6}>
         <PreviewCard
-          title="reports.form.textfield.title"
+          title="reports.form.textfield.preview_title"
           content={props.outcomesProps.title}
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
+      {/* --------------------------------- */}
+      {/* location */}
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.location"
@@ -39,6 +55,18 @@ export const PreviewLayout = (props: Props) => {
           explanation={t('reports.form.textfield.location_expl')}
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
+      {/* --------------------------------- */}
+      {/* insinger policy priorities */}
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.insinger_f_policy_priorities"
@@ -47,6 +75,18 @@ export const PreviewLayout = (props: Props) => {
           explanation="reports.form.textfield.sdg_mapping_expl"
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
+      {/* --------------------------------- */}
+      {/* budget */}
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.budget"
@@ -54,6 +94,18 @@ export const PreviewLayout = (props: Props) => {
           content={props.policyPrioritiesProps.budget}
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
+      {/* --------------------------------- */}
+      {/* target beneficiaries */}
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.target_beneficiaries"
@@ -61,6 +113,18 @@ export const PreviewLayout = (props: Props) => {
           content={props.policyPrioritiesProps.tarBenTotal}
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
+      {/* --------------------------------- */}
+      {/* Of which the beneficiaries will likely include approximately (Optional) */}
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.of_which_ben"
@@ -70,21 +134,97 @@ export const PreviewLayout = (props: Props) => {
           )}
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
+      {/* --------------------------------- */}
+      {/* budget */}
       <Grid item xs={12} lg={12}>
+        {/*{isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.key_outcomes"
+            tooltip="reports.form.cards.key_outcomes"
+            content={props.indicatorVerificationProps.keyOutcomes}
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.key_outcomes"
+            tooltip="reports.form.cards.key_outcomes"
+            content={props.indicatorVerificationProps.keyOutcomes}
+          />
+        )}*/}
+
         <PreviewCard
           title="reports.form.cards.key_outcomes"
           tooltip="reports.form.cards.key_outcomes"
           content={props.indicatorVerificationProps.keyOutcomes}
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
       <Grid item xs={12} lg={12}>
+        {/*{isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.monitor"
+            tooltip="reports.form.cards.monitor_expl"
+            content={props.indicatorVerificationProps.monRepOutcomes}
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.monitor"
+            tooltip="reports.form.cards.monitor_expl"
+            content={props.indicatorVerificationProps.monRepOutcomes}
+          />
+        )}*/}
+
         <PreviewCard
           title="reports.form.cards.monitor"
           tooltip="reports.form.cards.monitor_expl"
           content={props.indicatorVerificationProps.monRepOutcomes}
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
       <Grid item xs={12} lg={12}>
+        {/*{isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.key_implementation_challenges"
+            tooltip="reports.form.cards.key_implementation_challenges"
+            content={props.challengesPlansProps.keyImplChallenges}
+            explanation="reports.form.cards.key_implementation_challenges_expl"
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.key_implementation_challenges"
+            tooltip="reports.form.cards.key_implementation_challenges"
+            content={props.challengesPlansProps.keyImplChallenges}
+            explanation="reports.form.cards.key_implementation_challenges_expl"
+          />
+        )}*/}
+
         <PreviewCard
           title="reports.form.cards.key_implementation_challenges"
           tooltip="reports.form.cards.key_implementation_challenges"
@@ -92,7 +232,33 @@ export const PreviewLayout = (props: Props) => {
           explanation="reports.form.cards.key_implementation_challenges_expl"
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
       <Grid item xs={12} lg={12}>
+        {/*{isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.other_project"
+            tooltip="reports.form.cards.other_project"
+            content={props.challengesPlansProps.otherProjOutObs}
+            explanation="reports.form.cards.other_project_expl"
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.other_project"
+            tooltip="reports.form.cards.other_project"
+            content={props.challengesPlansProps.otherProjOutObs}
+            explanation="reports.form.cards.other_project_expl"
+          />
+        )}*/}
+
         <PreviewCard
           title="reports.form.cards.other_project"
           tooltip="reports.form.cards.other_project"
@@ -100,7 +266,33 @@ export const PreviewLayout = (props: Props) => {
           explanation="reports.form.cards.other_project_expl"
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
       <Grid item xs={12} lg={12}>
+        {/*{isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.future_plans"
+            tooltip="reports.form.cards.future_plans"
+            content={props.challengesPlansProps.futurePlans}
+            explanation="reports.form.cards.future_plans_expl"
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.future_plans"
+            tooltip="reports.form.cards.future_plans"
+            content={props.challengesPlansProps.futurePlans}
+            explanation="reports.form.cards.future_plans_expl"
+          />
+        )}*/}
+
         <PreviewCard
           title="reports.form.cards.future_plans"
           tooltip="reports.form.cards.future_plans"
@@ -108,7 +300,33 @@ export const PreviewLayout = (props: Props) => {
           explanation="reports.form.cards.future_plans_expl"
         />
       </Grid>
+
+      <Hidden smUp>
+        <div
+          css={`
+            width: 100%;
+            height: 25px;
+          `}
+        />
+      </Hidden>
+
       <Grid item xs={12} lg={12}>
+        {/* {isMobileWidth ? (
+          <PreviewCardTextField
+            title="reports.form.cards.other_comments"
+            tooltip="reports.form.cards.other_comments"
+            content={props.challengesPlansProps.otherComms}
+            explanation="reports.form.cards.other_comments_expl"
+          />
+        ) : (
+          <PreviewCard
+            title="reports.form.cards.other_comments"
+            tooltip="reports.form.cards.other_comments"
+            content={props.challengesPlansProps.otherComms}
+            explanation="reports.form.cards.other_comments_expl"
+          />
+        )}*/}
+
         <PreviewCard
           title="reports.form.cards.other_comments"
           tooltip="reports.form.cards.other_comments"
@@ -122,6 +340,6 @@ export const PreviewLayout = (props: Props) => {
           height: 54px;
         `}
       />
-    </Grid>
+    </React.Fragment>
   );
 };
