@@ -69,7 +69,6 @@ export const ReportListMock: TableModuleModel = {
     selectableRows: 'none',
     fixedHeaderOptions: { xAxis: false, yAxis: false },
   },
-  // columnsCell: ['', '', '', 'LinkCellModule', 'MultiValuesCellModule', ''],
   columnsCell: ['', '', '', 'LinkCellModule', 'MultiValuesCellModule', ''],
   totalCell: false,
 };

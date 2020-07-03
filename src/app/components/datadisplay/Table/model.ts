@@ -34,6 +34,7 @@ export interface TableModuleModel {
     | 'reportsVariant'
     | 'projectsVariant'
     | 'teamEditVariant';
+  openDatePicker?: any;
 }
 
 export interface TableLayoutModel {

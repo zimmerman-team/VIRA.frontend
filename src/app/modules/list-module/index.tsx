@@ -209,7 +209,7 @@ export const ListModule = (props: ListModuleParams) => {
           {/* reports table */}
           <TableModule {...baseTableForReport} />
           {/*<ReportsOverviewTable data={baseTableForReport.data} />*/}
-          <ReportsOverviewTable {...baseTableForReport} />
+          {/*<ReportsOverviewTable />*/}
         </TabPanel>
       </Grid>
     </React.Fragment>

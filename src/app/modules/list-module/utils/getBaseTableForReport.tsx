@@ -1,21 +1,46 @@
+// @ts-nocheck
+import React, { useState } from 'react';
+import { DateRangePicker } from '@matharumanpreet00/react-daterange-picker';
+import MUIDataTable, {
+  MUIDataTableColumn,
+  MUIDataTableOptions,
+} from 'mui-datatables';
+
+import { ColumnID } from 'app/modules/list-module/common/report-table/columns/ColumnID';
+import { ColumnTitle } from 'app/modules/list-module/common/report-table/columns/ColumnTitle';
+import { ColumnDate } from 'app/modules/list-module/common/report-table/columns/ColumnDate';
+import { data } from './data';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { reportsVariant } from 'app/components/datadisplay/Table/style/reportsVariant';
+
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import React from 'react';
+
 import get from 'lodash/get';
 import find from 'lodash/find';
 import i18n from 'app/languages';
 import { ReportListMock } from 'app/mock/lists/ReportListMock';
 
+const options: MUIDataTableOptions = {
+  filter: true,
+  filterType: 'multiselect',
+  responsive: 'standard',
+  download: false,
+  print: false,
+  selectableRows: false,
+  viewColumns: false,
+};
+
 export const getBaseTableForReport = (data: any): TableModuleModel => {
   const tableConfig = { ...ReportListMock, data: [] };
 
+  tableConfig.options = options;
   tableConfig.columns = [
     {
       name: i18n.t('reports.overview.table.id'),
       options: {
         sortDirection: 'desc',
-        filter: true,
-        filterType: 'dropdown',
+        filter: false,
         customFilterListRender: value =>
           `${i18n.t('reports.overview.table.id')}: ${value}`,
       },
@@ -23,8 +48,7 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
     {
       name: i18n.t('reports.overview.table.title'),
       options: {
-        filter: true,
-        filterType: 'dropdown',
+        filter: false,
         customFilterListRender: value =>
           `${i18n.t('reports.overview.table.title')}: ${value}`,
         customBodyRender: (value, tableMeta, updateValue) => {
@@ -46,8 +70,7 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
     {
       name: i18n.t('reports.overview.table.date'),
       options: {
-        filter: true,
-        filterType: 'dropdown',
+        filter: false,
         customFilterListRender: value =>
           `${i18n.t('reports.overview.table.date')}: ${value}`,
       },
@@ -57,7 +80,35 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
       name: 'Unix timestamp',
       options: {
         filter: true,
-        filterType: 'dropdown',
+        filterType: 'custom',
+        display: false,
+        filterOptions: {
+          names: [],
+          logic(date, filters) {
+            if (filters[0] && filters[1]) {
+              return date < filters[0] || date > filters[1];
+            } else if (filters[0]) {
+              return date < filters[0];
+            } else if (filters[1]) {
+              return date > filters[1];
+            }
+            return false;
+          },
+          display: (filterList, onChange, index, column) => {
+            function updateAll(dateRange) {
+              filterList[index][0] = Date.parse(dateRange.startDate) / 1000;
+              filterList[index][1] = Date.parse(dateRange.endDate) / 1000;
+              onChange(filterList[index], index, column);
+            }
+
+            return (
+              <DateRangePicker
+                open={true}
+                onChange={range => updateAll(range)}
+              />
+            );
+          },
+        },
       },
     },
   ];
