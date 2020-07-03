@@ -75,20 +75,6 @@ const ProjectDetailModuleF = (props: any) => {
     props.history.push(`/report/${project_number}/outcomes`);
   }
 
-  function calculateTotalContribution() {
-    let totalContribution: number = 0;
-
-    if (Array.isArray(ppVizData)) {
-      ppVizData.map((item: any) => {
-        if (!isNaN(item.value4)) {
-          totalContribution += item.value4;
-        }
-      });
-    }
-
-    return totalContribution;
-  }
-
   React.useEffect(() => {
     projectDetailAction({
       socketName: 'allProject',
@@ -109,7 +95,7 @@ const ProjectDetailModuleF = (props: any) => {
           start_date: projectDetailRecord[0].start_date,
           end_date: projectDetailRecord[0].end_date,
           total_amount: projectDetailRecord[0].total_amount,
-          total_insinger_contribution: calculateTotalContribution(),
+          total_insinger_contribution: projectDetailRecord[0].allocated_amount,
           decision_date: projectDetailRecord[0].decision_date,
           decision: projectDetailRecord[0].decision,
           allocated_amount: projectDetailRecord[0].allocated_amount,

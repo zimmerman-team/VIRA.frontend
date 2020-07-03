@@ -3,7 +3,6 @@
 import React from 'react';
 import Providers from 'app/Providers';
 import { Container, Grid } from '@material-ui/core';
-import LandingLayout from 'app/modules/landing/index';
 import Table from './index';
 import {
   mockDataVar1,

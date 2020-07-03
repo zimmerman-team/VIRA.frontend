@@ -79,7 +79,7 @@ export const ReportDetailLayout = (props: any) => {
       {/* button: generate report */}
       {showEditBtn && (
         <Hidden xsDown>
-          <Grid lg={12} container justify="flex-end">
+          <Grid item lg={12} container justify="flex-end">
             <ContainedButton
               text={t('reports.detail.editReportBtn')}
               onClick={props.editReport}
@@ -149,7 +149,7 @@ export const ReportDetailLayout = (props: any) => {
       {cardData.map(card =>
         card.media ? (
           card.media.length > 0 && (
-            <Grid data-cy={card.testID} item xs={12} lg={12}>
+            <Grid key={card.title} data-cy={card.testID} item xs={12} lg={12}>
               <OutcomeCard
                 title={t(card.title)}
                 media={{ tileData: props.report.media }}
@@ -157,7 +157,7 @@ export const ReportDetailLayout = (props: any) => {
             </Grid>
           )
         ) : (
-          <Grid data-cy={card.testID} item xs={12} lg={12}>
+          <Grid key={card.title} data-cy={card.testID} item xs={12} lg={12}>
             <OutcomeCard title={t(card.title)} description={card.description} />
           </Grid>
         )

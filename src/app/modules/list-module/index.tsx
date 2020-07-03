@@ -19,6 +19,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
+import { getReportsBySDG } from 'app/modules/list-module/common/TableDataBySDG';
 import { ReportsOverviewTable } from 'app/modules/list-module/common/report-table';
 
 type ListModuleParams = {
@@ -29,6 +30,7 @@ type ListModuleParams = {
   focus?: number;
   loadData?: boolean;
   listPage?: boolean;
+  selectedSDG?: string;
 };
 
 export const ListModule = (props: ListModuleParams) => {
@@ -61,6 +63,16 @@ export const ListModule = (props: ListModuleParams) => {
     state => state.allOrganisations.data
   );
   const allReportsData = useStoreState(state => state.allReports.data);
+
+  let sdgReportsData;
+  let sdgProjectData;
+  let sdgOrgranisationData;
+
+  if (props.selectedSDG !== '') {
+    sdgReportsData = getReportsBySDG(props.selectedSDG, allReportsData);
+    // sdgProjectData = getProjectsBySDG(props.selectedSDG, allProjectsData);
+    // sdgOrgranisationData = getProjectsBySDG(props.selectedSDG, allProjectsData);
+  }
   const reduxLng = useStoreState(state => state.syncVariables.lng);
   const loading = useStoreState(
     state =>
@@ -70,7 +82,7 @@ export const ListModule = (props: ListModuleParams) => {
   );
 
   // Load the projects and orgs on componentDidMount
-  /*  React.useEffect(() => {
+  React.useEffect(() => {
     if (props.loadData) {
       allProjectsAction({
         socketName: 'allProject',
@@ -82,29 +94,26 @@ export const ListModule = (props: ListModuleParams) => {
       });
       allReportsAction({ socketName: 'allReport', values: '' });
     }
-  }, []);*/
-
-  useEffectOnce(() => {
-    if (props.loadData) {
-      allProjectsAction({
-        socketName: 'allProject',
-        values: '',
-      });
-      allOrganisationsAction({
-        socketName: 'allOrg',
-        values: '',
-      });
-      allReportsAction({ socketName: 'allReport', values: '' });
-    }
-  });
+  }, []);
 
   // Format the projects on componentDidUpdate when allProjectsData change
-  React.useEffect(() => {
-    setBaseTableForProject({
-      ...baseTableForProject,
-      data: formatTableDataForProject(get(allProjectsData, 'data', [])),
-    });
-  }, [allProjectsData]);
+  if (props.selectedSDG === '') {
+    React.useEffect(() => {
+      setBaseTableForProject({
+        ...baseTableForProject,
+        data: formatTableDataForProject(get(allProjectsData, 'data', [])),
+      });
+    }, [allProjectsData]);
+  } else {
+    React.useEffect(() => {
+      setBaseTableForProject({
+        ...baseTableForProject,
+        data: formatTableDataForProject(
+          get(filterBySDG(allProjectsData), 'data', [])
+        ),
+      });
+    }, [props.selectedSDG]);
+  }
 
   // Format the projects on componentDidUpdate when allOrganisationsData change
   React.useEffect(() => {
@@ -115,12 +124,22 @@ export const ListModule = (props: ListModuleParams) => {
   }, [allOrganisationsData]);
 
   // Format the reports on componentDidUpdate when allReportsData change
-  React.useEffect(() => {
-    setBaseTableForReport({
-      ...getBaseTableForReport(get(allReportsData, 'data', [])),
-      data: formatTableDataForReport(get(allReportsData, 'data', [])),
-    });
-  }, [allReportsData]);
+  if (props.selectedSDG === '') {
+    React.useEffect(() => {
+      setBaseTableForReport({
+        ...getBaseTableForReport(get(allReportsData, 'data', [])),
+        data: formatTableDataForReport(get(allReportsData, 'data', [])),
+      });
+    }, [allReportsData]);
+  } else {
+    React.useEffect(() => {
+      setBaseTableForReport({
+        ...getBaseTableForReport(get(sdgReportsData, 'data', [])),
+        data: formatTableDataForReport(get(sdgReportsData, 'data', [])),
+      });
+    }, [props.selectedSDG]);
+  }
+  console.log('allReportsData', allReportsData);
 
   React.useEffect(() => {
     if (parseInt(id, 10) < 3) {
@@ -214,11 +233,12 @@ export const ListModule = (props: ListModuleParams) => {
           {/* projects table */}
           <TableModule {...baseTableForProject} />
         </TabPanel>
+
         <TabPanel data-cy="grantees-panel" value={value} index={1}>
           {/* grantees table */}
           <TableModule {...baseTableForGrantee} />
         </TabPanel>
-        {console.log(baseTableForReport.data)}
+
         <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
           {/*<TableModule {...baseTableForReport} />*/}
