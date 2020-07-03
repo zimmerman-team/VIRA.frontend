@@ -1,25 +1,24 @@
 // @ts-nocheck
-/* eslint-disable default-case */
+
 import React from 'react';
-import { useEffectOnce } from 'react-use';
+
 import 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { Grid, Tabs, Tab } from '@material-ui/core';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import TableModule from 'app/components/datadisplay/Table';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { useParams, useHistory } from 'react-router-dom';
+/* utils */
 import { getBaseTableForReport } from 'app/modules/list-module/utils/getBaseTableForReport';
 import { getBaseTableForGrantee } from 'app/modules/list-module/utils/getBaseTableForGrantee';
 import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
 import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTableDataForReport';
 import { formatTableDataForGrantee } from 'app/modules/list-module/utils/formatTableDataForGrantee';
 import { formatTableDataForProject } from 'app/modules/list-module/utils/formatTableDataForProject';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
-import { useParams, useHistory } from 'react-router-dom';
-/* utils */
 import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
-import { getReportsBySDG } from 'app/modules/list-module/common/TableDataBySDG';
 import { ReportsOverviewTable } from 'app/modules/list-module/common/report-table';
 
 type ListModuleParams = {
@@ -30,7 +29,6 @@ type ListModuleParams = {
   focus?: number;
   loadData?: boolean;
   listPage?: boolean;
-  selectedSDG?: string;
 };
 
 export const ListModule = (props: ListModuleParams) => {
@@ -63,16 +61,6 @@ export const ListModule = (props: ListModuleParams) => {
     state => state.allOrganisations.data
   );
   const allReportsData = useStoreState(state => state.allReports.data);
-
-  let sdgReportsData;
-  let sdgProjectData;
-  let sdgOrgranisationData;
-
-  if (props.selectedSDG !== '') {
-    sdgReportsData = getReportsBySDG(props.selectedSDG, allReportsData);
-    // sdgProjectData = getProjectsBySDG(props.selectedSDG, allProjectsData);
-    // sdgOrgranisationData = getProjectsBySDG(props.selectedSDG, allProjectsData);
-  }
   const reduxLng = useStoreState(state => state.syncVariables.lng);
   const loading = useStoreState(
     state =>
@@ -97,23 +85,12 @@ export const ListModule = (props: ListModuleParams) => {
   }, []);
 
   // Format the projects on componentDidUpdate when allProjectsData change
-  if (props.selectedSDG === '') {
-    React.useEffect(() => {
-      setBaseTableForProject({
-        ...baseTableForProject,
-        data: formatTableDataForProject(get(allProjectsData, 'data', [])),
-      });
-    }, [allProjectsData]);
-  } else {
-    React.useEffect(() => {
-      setBaseTableForProject({
-        ...baseTableForProject,
-        data: formatTableDataForProject(
-          get(filterBySDG(allProjectsData), 'data', [])
-        ),
-      });
-    }, [props.selectedSDG]);
-  }
+  React.useEffect(() => {
+    setBaseTableForProject({
+      ...baseTableForProject,
+      data: formatTableDataForProject(get(allProjectsData, 'data', [])),
+    });
+  }, [allProjectsData]);
 
   // Format the projects on componentDidUpdate when allOrganisationsData change
   React.useEffect(() => {
@@ -124,22 +101,12 @@ export const ListModule = (props: ListModuleParams) => {
   }, [allOrganisationsData]);
 
   // Format the reports on componentDidUpdate when allReportsData change
-  if (props.selectedSDG === '') {
-    React.useEffect(() => {
-      setBaseTableForReport({
-        ...getBaseTableForReport(get(allReportsData, 'data', [])),
-        data: formatTableDataForReport(get(allReportsData, 'data', [])),
-      });
-    }, [allReportsData]);
-  } else {
-    React.useEffect(() => {
-      setBaseTableForReport({
-        ...getBaseTableForReport(get(sdgReportsData, 'data', [])),
-        data: formatTableDataForReport(get(sdgReportsData, 'data', [])),
-      });
-    }, [props.selectedSDG]);
-  }
-  console.log('allReportsData', allReportsData);
+  React.useEffect(() => {
+    setBaseTableForReport({
+      ...getBaseTableForReport(get(allReportsData, 'data', [])),
+      data: formatTableDataForReport(get(allReportsData, 'data', [])),
+    });
+  }, [allReportsData]);
 
   React.useEffect(() => {
     if (parseInt(id, 10) < 3) {
@@ -233,16 +200,16 @@ export const ListModule = (props: ListModuleParams) => {
           {/* projects table */}
           <TableModule {...baseTableForProject} />
         </TabPanel>
-
         <TabPanel data-cy="grantees-panel" value={value} index={1}>
           {/* grantees table */}
           <TableModule {...baseTableForGrantee} />
         </TabPanel>
-
+        {/*{console.log(baseTableForReport.data)}*/}
         <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
-          {/*<TableModule {...baseTableForReport} />*/}
-          <ReportsOverviewTable data={baseTableForReport.data} />
+          <TableModule {...baseTableForReport} />
+          {/*<ReportsOverviewTable data={baseTableForReport.data} />*/}
+          <ReportsOverviewTable {...baseTableForReport} />
         </TabPanel>
       </Grid>
     </React.Fragment>

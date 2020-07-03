@@ -1,3 +1,4 @@
+// @ts-nocheck
 import allReports from 'app/state/api/actionsReducers/allReports';
 
 export const policyPriorities = [
