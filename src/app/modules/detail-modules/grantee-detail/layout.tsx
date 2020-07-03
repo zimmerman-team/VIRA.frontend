@@ -19,6 +19,11 @@ import { ContactsCardMobile } from 'app/components/surfaces/Cards/ContactsCardMo
 
 export const GranteeDetailLayout = (props: GranteeParams) => {
   const { t } = useTranslation();
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
   return (
     <React.Fragment>
       {props.loading && <PageLoader />}
@@ -68,6 +73,8 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
       {/* charts */}
       {checkIfPPData(props.ppVizData) && !props.loading && (
         <Viztabs
+          value={value}
+          onTabClick={handleChange}
           data-cy="grantee-detail-viztabs"
           barChartData={props.ppVizData}
           barChartLegends={props.barChartLegends}

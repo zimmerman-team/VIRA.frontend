@@ -68,11 +68,12 @@ export const ListModule = (props: ListModuleParams) => {
   );
   const allReportsData = useStoreState(state => state.allReports.data);
 
+  // get datasets by selected SDG
   let sdgReportsData;
   let sdgProjectData;
   let sdgOrgranisationData;
 
-  if (props.selectedSDG !== '') {
+  if (props.selectedSDG !== '' && props.selectedSDG !== undefined) {
     sdgReportsData = getReportsBySDG(props.selectedSDG, allReportsData);
     sdgProjectData = getProjectsBySDG(allProjectsData, sdgReportsData);
     sdgOrgranisationData = getGranteesBySDG(
@@ -105,7 +106,7 @@ export const ListModule = (props: ListModuleParams) => {
   }, []);
 
   // Format the projects on componentDidUpdate when allProjectsData change
-  if (props.selectedSDG === '') {
+  if (props.selectedSDG === '' || props.selectedSDG === undefined) {
     React.useEffect(() => {
       setBaseTableForProject({
         ...baseTableForProject,
@@ -121,9 +122,8 @@ export const ListModule = (props: ListModuleParams) => {
     }, [props.selectedSDG]);
   }
 
-  console.log('all projects', allProjectsData);
   // Format the projects on componentDidUpdate when allOrganisationsData change
-  if (props.selectedSDG === '') {
+  if (props.selectedSDG === '' || props.selectedSDG === undefined) {
     React.useEffect(() => {
       setBaseTableForGrantee({
         ...baseTableForGrantee,
@@ -139,9 +139,8 @@ export const ListModule = (props: ListModuleParams) => {
     }, [props.selectedSDG]);
   }
 
-  console.log('org data', allOrganisationsData);
   // Format the reports on componentDidUpdate when allReportsData change
-  if (props.selectedSDG === '') {
+  if (props.selectedSDG === '' || props.selectedSDG === undefined) {
     React.useEffect(() => {
       setBaseTableForReport({
         ...getBaseTableForReport(get(allReportsData, 'data', [])),
@@ -156,7 +155,6 @@ export const ListModule = (props: ListModuleParams) => {
       });
     }, [props.selectedSDG]);
   }
-  console.log('allReportsData', allReportsData);
 
   React.useEffect(() => {
     if (parseInt(id, 10) < 3) {
