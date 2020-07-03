@@ -1,3 +1,4 @@
+//TODO: Find a way to keep the insinger-backend const en front-end in sync.
 export const policyPriorities = [
   {
     key: 'poverty',
@@ -36,6 +37,7 @@ export const policyPriorities = [
   },
 ];
 
+// In order for us to reduce the number of any types used, we should make a Model folder containing the business objects (report, user etc)
 export function getReportsBySDG(selectedSDG: string, allReportsData: any) {
   let data = allReportsData;
   const regExp: RegExpMatchArray | null = selectedSDG.match(/\d/g);
