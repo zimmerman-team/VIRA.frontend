@@ -54,7 +54,8 @@ export const Account = (props: AccountProps) => {
         {storeUserName}
       </Username>
       <Box height="32px" />
-      {get(userDetails, 'role', '') === 'Administrator' && (
+      {(get(userDetails, 'role', '') === 'Administrator' ||
+        get(userDetails, 'role', '') === 'Super admin') && (
         <Button>
           <Link
             data-cy="usercard-manage-teams-button"

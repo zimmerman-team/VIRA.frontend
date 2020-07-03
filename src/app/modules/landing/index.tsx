@@ -55,15 +55,30 @@ function LandingLayout(props: any) {
   const allReportsData = useStoreState(state => state.allReports.data);
   const allGranteesData = useStoreState(state => state.allOrganisations.data);
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
 
   React.useEffect(() => {
-    getPPVizData({ socketName: 'getPolicyPriorityBarChart', values: {} });
+    getPPVizData({
+      socketName: 'getPolicyPriorityBarChart',
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
     getSDGVizData({
       socketName: 'getSDGBubbleChart',
-      values: {},
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
     });
-    getGeoMapData({ socketName: 'getGeoMapData', values: {} });
-  }, []);
+    getGeoMapData({
+      socketName: 'getGeoMapData',
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+    });
+  }, [signedInUserRole, signedInUserEmail]);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];

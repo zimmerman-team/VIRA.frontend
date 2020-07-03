@@ -18,6 +18,7 @@ function LoginCallback(props: any) {
   const userDetailsAction = useStoreActions(
     actions => actions.userDetails.fetch
   );
+
   useEffect(() => {
     props.auth
       .handleAuthentication()
@@ -42,9 +43,11 @@ function LoginCallback(props: any) {
       })
       .catch((err: any) => setError(err.description));
   }, []);
+
   useEffect(() => {
     if (storeUser) {
-      props.history.replace('/');
+      const redirectTo = sessionStorage.getItem('redirectTo') || '/';
+      props.history.replace(redirectTo);
     }
   }, [storeUser]);
 
