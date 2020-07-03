@@ -14,6 +14,7 @@ import { LegendList } from './common/LegendList';
 import { BubbleInfoBlock } from './common/BubbleInfoBlock';
 import { otherSdgs } from './mock';
 import { ChartTooltip } from '../BarCharts/common/ChartTooltip';
+import { hexToRgb } from 'app/utils/hexToRgb';
 
 type Props = {
   data: object;
@@ -74,7 +75,7 @@ export function BubbleChart(props: Props) {
       <Content>
         <Grid container spacing={isMobileWidth ? 0 : 3}>
           {!isMobileWidth && (
-            <Grid item xs={0} sm={0} lg={3}>
+            <Grid item xs={false} sm={false} lg={3}>
               <LegendList
                 activeBubble={props.selectedBubble}
                 setActiveBubble={props.setSelectedBubble}
@@ -107,6 +108,7 @@ export function BubbleChart(props: Props) {
                 nodeComponent={({ node, style, handlers }) => {
                   if (style.r <= 0) return null;
                   const hasData = !node.data.opacity || node.data.opacity === 1;
+                  const rgbColor = hexToRgb(node.color);
                   return (
                     <div
                       id={(node.data && node.data.id
@@ -118,22 +120,26 @@ export function BubbleChart(props: Props) {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        background: node.color,
+                        background: `rgba(${rgbColor?.r}, ${rgbColor?.g}, ${
+                          rgbColor?.b
+                        }, ${node.data.opacity || 1})`,
                         top: style.y - style.r,
                         left: style.x - style.r,
                         width: style.r * (isMobileWidth ? 3 : 2.3),
                         height: style.r * (isMobileWidth ? 3 : 2.3),
                         borderRadius: '50%',
-                        opacity: node.data.opacity || 1,
+                        // opacity: node.data.opacity || 1,
                         color: ProjectPalette.common.white,
                         cursor: hasData ? 'pointer' : 'initial',
+                        fontWeight: 700,
                       }}
                       {...handlers}
                       onClick={_e =>
                         hasData && props.setSelectedBubble(node.id)
                       }
                     >
-                      <svg
+                      SDG {node.data.number}
+                      {/* <svg
                         css={`
                           width: 70%;
                         `}
@@ -149,7 +155,7 @@ export function BubbleChart(props: Props) {
                         >
                           SDG {node.data.number}
                         </text>
-                      </svg>
+                      </svg> */}
                     </div>
                   );
                 }}

@@ -128,6 +128,7 @@ export function MainRoutes() {
         {redirectUnAuth(CreateReport, storeUser, {}, userRole, [
           'Administrator',
           'Manager',
+          'Super admin',
         ])}
       </Route>
 

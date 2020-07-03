@@ -349,6 +349,10 @@ function CreateReportFunc(props: any) {
       }
       setBudget(get(reportDetailData, 'report.budget', 0));
       setInsContribution(get(reportDetailData, 'report.insContribution', 0));
+      setFunder({
+        label: get(reportDetailData, 'report.funder.name', ''),
+        value: get(reportDetailData, 'report.funder.name', ''),
+      });
       setKeyOutcomes(get(reportDetailData, 'report.key_outcomes', ''));
       setMonRepOutcomes(
         get(reportDetailData, 'report.monitor_report_outcomes', '')
