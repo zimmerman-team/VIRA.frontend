@@ -20,7 +20,11 @@ import { useParams, useHistory } from 'react-router-dom';
 import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
-import { getReportsBySDG } from 'app/modules/list-module/common/TableDataBySDG';
+import {
+  getGranteesBySDG,
+  getProjectsBySDG,
+  getReportsBySDG,
+} from 'app/modules/list-module/common/TableDataBySDG';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
@@ -70,9 +74,13 @@ export const ListModule = (props: ListModuleParams) => {
 
   if (props.selectedSDG !== '') {
     sdgReportsData = getReportsBySDG(props.selectedSDG, allReportsData);
-    // sdgProjectData = getProjectsBySDG(props.selectedSDG, allProjectsData);
-    // sdgOrgranisationData = getProjectsBySDG(props.selectedSDG, allProjectsData);
+    sdgProjectData = getProjectsBySDG(allProjectsData, sdgReportsData);
+    sdgOrgranisationData = getGranteesBySDG(
+      allOrganisationsData,
+      sdgProjectData
+    );
   }
+
   const reduxLng = useStoreState(state => state.syncVariables.lng);
   const loading = useStoreState(
     state =>
@@ -108,21 +116,28 @@ export const ListModule = (props: ListModuleParams) => {
     React.useEffect(() => {
       setBaseTableForProject({
         ...baseTableForProject,
-        data: formatTableDataForProject(
-          get(filterBySDG(allProjectsData), 'data', [])
-        ),
+        data: formatTableDataForProject(get(sdgProjectData, 'data', [])),
       });
     }, [props.selectedSDG]);
   }
 
   console.log('all projects', allProjectsData);
   // Format the projects on componentDidUpdate when allOrganisationsData change
-  React.useEffect(() => {
-    setBaseTableForGrantee({
-      ...baseTableForGrantee,
-      data: formatTableDataForGrantee(get(allOrganisationsData, 'data', [])),
-    });
-  }, [allOrganisationsData]);
+  if (props.selectedSDG === '') {
+    React.useEffect(() => {
+      setBaseTableForGrantee({
+        ...baseTableForGrantee,
+        data: formatTableDataForGrantee(get(allOrganisationsData, 'data', [])),
+      });
+    }, [allOrganisationsData]);
+  } else {
+    React.useEffect(() => {
+      setBaseTableForGrantee({
+        ...baseTableForGrantee,
+        data: formatTableDataForGrantee(get(sdgOrgranisationData, 'data', [])),
+      });
+    }, [props.selectedSDG]);
+  }
 
   console.log('org data', allOrganisationsData);
   // Format the reports on componentDidUpdate when allReportsData change

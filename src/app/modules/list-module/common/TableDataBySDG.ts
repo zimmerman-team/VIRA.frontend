@@ -1,5 +1,3 @@
-import allReports from 'app/state/api/actionsReducers/allReports';
-
 export const policyPriorities = [
   {
     key: 'poverty',
@@ -39,29 +37,72 @@ export const policyPriorities = [
 ];
 
 export function getReportsBySDG(selectedSDG: string, allReportsData: any) {
-  const regExp: string = selectedSDG.match(/\d/g);
-  const sdgNumber = parseInt(regExp.join(''));
-  const reportsBySDG: any = [];
+  let data = allReportsData;
+  const regExp: RegExpMatchArray | null = selectedSDG.match(/\d/g);
 
-  //Check if a reports policy priority matches the given sdg
-  allReportsData.data.map(report => {
-    let obj = policyPriorities.find(pp => {
-      return pp.name == report.policy_priority.name;
+  if (regExp) {
+    const sdgNumber = parseInt(regExp.join(''));
+    const reportsBySDG: any = [];
+
+    //Check if a reports policy priority matches the given sdg
+    allReportsData.data.map((report: any) => {
+      let obj = policyPriorities.find(pp => {
+        return pp.name == report.policy_priority.name;
+      });
+
+      if (obj != undefined && obj.sdgs.includes(sdgNumber)) {
+        reportsBySDG.push(report);
+      }
     });
 
-    if (obj != undefined && obj.sdgs.includes(sdgNumber)) {
-      reportsBySDG.push(report);
-    }
-  });
-
-  const data = {
-    status: 'success',
-    data: reportsBySDG,
-  };
+    data = {
+      status: 'success',
+      data: reportsBySDG,
+    };
+  }
 
   return data;
 }
 
-export function getProjectsBySDG(allProjectsData: any, reportsBySDG: any) {
-  allProjectsData.filter();
+export function getProjectsBySDG(allProjectsData: any, reportsData: any) {
+  const projectsBySDG: any = [];
+
+  for (let i = 0; i < reportsData.data.length; i++) {
+    for (let j = 0; j < allProjectsData.data.length; j++) {
+      if (
+        allProjectsData.data[j].project_number ===
+        reportsData.data[i].project.project_number
+      ) {
+        if (!projectsBySDG.includes(allProjectsData.data[j])) {
+          projectsBySDG.push(allProjectsData.data[j]);
+        }
+      }
+    }
+  }
+
+  return {
+    status: 'success',
+    data: projectsBySDG,
+  };
+}
+
+export function getGranteesBySDG(allGranteesData: any, projectsData: any) {
+  const granteesBySDG: any = [];
+
+  for (let i = 0; i < projectsData.data.length; i++) {
+    for (let j = 0; j < allGranteesData.data.length; j++) {
+      if (
+        allGranteesData.data[j]._id === projectsData.data[i].organisation._id
+      ) {
+        if (!granteesBySDG.includes(allGranteesData.data[j])) {
+          granteesBySDG.push(allGranteesData.data[j]);
+        }
+      }
+    }
+  }
+
+  return {
+    status: 'success',
+    data: granteesBySDG,
+  };
 }
