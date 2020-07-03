@@ -71,6 +71,7 @@ export const projectMock: ProjectModel = {
   total_amount: '245410',
   decision_date: '30-9-2019',
   decision: 'Toekenning',
+  total_insinger_contribution: 0,
   allocated_amount: '15000',
   released_amount: '',
   paid_amount: '',

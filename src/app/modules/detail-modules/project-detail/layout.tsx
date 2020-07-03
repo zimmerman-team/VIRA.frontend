@@ -60,7 +60,7 @@ export const ProjectDetailLayout = (props: any) => {
           stats={[
             {
               label: t('projects.detail.stats.total_budget'),
-              value: parseInt(props.projectDetail.total_amount || '', 10)
+              value: parseInt(props.projectDetail.total_amount || 0, 10)
                 .toLocaleString(undefined, {
                   currency: 'EUR',
                   currencyDisplay: 'symbol',
@@ -71,7 +71,7 @@ export const ProjectDetailLayout = (props: any) => {
             {
               label: t('projects.detail.stats.insinger_contribution'),
               value: parseInt(
-                props.projectDetail.total_insinger_contribution || '',
+                props.projectDetail.total_insinger_contribution || 0,
                 10
               )
                 .toLocaleString(undefined, {

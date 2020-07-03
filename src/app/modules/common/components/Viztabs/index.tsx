@@ -86,7 +86,7 @@ export function Viztabs(props: Props) {
           <Grid item xs={3} />
         </Hidden>
 
-        <Grid item xs={12} justify="flex-end">
+        <Grid item xs={12} container justify="flex-end">
           <Tabs
             value={value}
             onChange={handleChange}

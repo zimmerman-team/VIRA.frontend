@@ -4,6 +4,10 @@ export const styles: any = {
     height: 100%;
     overflow: visible;
   `,
+  cardSecondary: css`
+    //height: 100%;
+    overflow: visible;
+  `,
   input: css`
     [class*='-input'] {
       width: 90px;

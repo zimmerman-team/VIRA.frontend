@@ -68,6 +68,13 @@ describe('generate report page', () => {
       .type('{backspace}')
       .type(1000);
 
+    // open funders list and click top option
+    cy.findByTestId('other-funders')
+      .should('exist')
+      .click()
+      .type('funder one');
+    cy.get('#autocomplete-countries-option-0').click();
+
     cy.findByTestId('which-when-item-0')
       .should('exist')
       .click()

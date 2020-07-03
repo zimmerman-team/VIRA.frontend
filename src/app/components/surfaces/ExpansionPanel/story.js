@@ -1,7 +1,7 @@
 import React from 'react';
 import Providers from 'app/Providers';
 import { Grid } from '@material-ui/core';
-import mockData from './mock';
+import mockData from './mockData';
 import { ExpansionPanel } from './';
 
 export default {
