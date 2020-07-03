@@ -1,30 +1,25 @@
 // @ts-nocheck
 /* eslint-disable default-case */
 import React from 'react';
+import { useEffectOnce } from 'react-use';
 import 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { Grid, Tabs, Tab } from '@material-ui/core';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import TableModule from 'app/components/datadisplay/Table';
-import {
-  formatTableDataForGrantee,
-  formatTableDataForProject,
-  formatTableDataForReport,
-  getBaseTableForGrantee,
-  getBaseTableForProject,
-  getBaseTableForReport,
-} from 'app/modules/list-module/utils';
+import { getBaseTableForReport } from 'app/modules/list-module/utils/getBaseTableForReport';
+import { getBaseTableForGrantee } from 'app/modules/list-module/utils/getBaseTableForGrantee';
+import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
+import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTableDataForReport';
+import { formatTableDataForGrantee } from 'app/modules/list-module/utils/formatTableDataForGrantee';
+import { formatTableDataForProject } from 'app/modules/list-module/utils/formatTableDataForProject';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { useParams, useHistory } from 'react-router-dom';
 /* utils */
 import get from 'lodash/get';
-import {
-  useStyles,
-  TabStyle,
-  a11yProps,
-  TabPanel,
-} from './common/TabPanelProps';
+import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
+import { ReportsOverviewTable } from 'app/modules/list-module/common/report-table';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
@@ -75,7 +70,7 @@ export const ListModule = (props: ListModuleParams) => {
   );
 
   // Load the projects and orgs on componentDidMount
-  React.useEffect(() => {
+  /*  React.useEffect(() => {
     if (props.loadData) {
       allProjectsAction({
         socketName: 'allProject',
@@ -87,7 +82,21 @@ export const ListModule = (props: ListModuleParams) => {
       });
       allReportsAction({ socketName: 'allReport', values: '' });
     }
-  }, []);
+  }, []);*/
+
+  useEffectOnce(() => {
+    if (props.loadData) {
+      allProjectsAction({
+        socketName: 'allProject',
+        values: '',
+      });
+      allOrganisationsAction({
+        socketName: 'allOrg',
+        values: '',
+      });
+      allReportsAction({ socketName: 'allReport', values: '' });
+    }
+  });
 
   // Format the projects on componentDidUpdate when allProjectsData change
   React.useEffect(() => {
@@ -154,7 +163,7 @@ export const ListModule = (props: ListModuleParams) => {
       {loading && <PageLoader />}
 
       {/* tab navigation */}
-      <Grid item xs={12} justify="flex-end">
+      <Grid item xs={12} container justify="flex-end">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -205,15 +214,15 @@ export const ListModule = (props: ListModuleParams) => {
           {/* projects table */}
           <TableModule {...baseTableForProject} />
         </TabPanel>
-
         <TabPanel data-cy="grantees-panel" value={value} index={1}>
           {/* grantees table */}
           <TableModule {...baseTableForGrantee} />
         </TabPanel>
-
+        {console.log(baseTableForReport.data)}
         <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
-          <TableModule {...baseTableForReport} />
+          {/*<TableModule {...baseTableForReport} />*/}
+          <ReportsOverviewTable data={baseTableForReport.data} />
         </TabPanel>
       </Grid>
     </React.Fragment>
