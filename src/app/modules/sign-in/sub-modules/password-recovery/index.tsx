@@ -22,9 +22,7 @@ export function PasswordRecovery() {
   );
 
   React.useEffect(() => {
-    setSubmitEnabled(
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-    );
+    setSubmitEnabled(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email));
   }, [email]);
 
   React.useEffect(() => {

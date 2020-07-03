@@ -244,8 +244,12 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
           const rowAllData = find(data, { reportID: tableMeta.rowData[0] });
           const id = get(rowAllData, '_id', '');
           const isDraft = get(rowAllData, 'isDraft', false);
+          const projectNumber = get(rowAllData, 'project.project_number', '');
+          if (projectNumber === '') {
+            return `${value}${isDraft ? ' [Draft]' : ''}`;
+          }
           const link = isDraft
-            ? `/report/${rowAllData.project.project_number}/outcomes?rid=${id}`
+            ? `/report/${projectNumber}/outcomes?rid=${id}`
             : `/reports/${id}`;
           return (
             <LinkCellModule

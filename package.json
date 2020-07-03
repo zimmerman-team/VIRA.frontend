@@ -137,6 +137,5 @@
     "branches": [
       "master"
     ]
-  },
-  "proxy": "http://localhost:4200"
+  }
 }

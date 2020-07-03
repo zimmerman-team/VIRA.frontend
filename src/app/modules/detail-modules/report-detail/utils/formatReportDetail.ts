@@ -77,6 +77,9 @@ export function formatReportDetail(data: any) {
     project: {
       name: reportDetailRecord.project.project_name,
       id: reportDetailRecord.project.project_number,
+      person: {
+        email: get(reportDetailRecord, 'project.person.email', ''),
+      },
     },
     key_outcomes: reportDetailRecord.key_outcomes,
     monitor_report_outcomes: reportDetailRecord.monitor_report_outcomes,
