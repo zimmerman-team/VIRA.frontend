@@ -28,6 +28,11 @@ export const ReportDetailLayout = (props: any) => {
         props.report.project.person.email
   );
 
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
   const cardData = [
     {
       testID: 'outcomes-card',
@@ -134,6 +139,8 @@ export const ReportDetailLayout = (props: any) => {
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
       <Viztabs
+        value={value}
+        onTabClick={handleChange}
         barChartData={props.report.barChartData}
         barChartLegends={props.barChartLegends}
         onBarChartLegendClick={props.onBarChartLegendClick}

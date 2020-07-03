@@ -44,7 +44,6 @@ function LandingLayout(props: any) {
       selected: true,
     },
   ]);
-
   const [selectedSDG, setSelectedSDG] = React.useState('');
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
   const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
@@ -55,6 +54,12 @@ function LandingLayout(props: any) {
   const allReportsData = useStoreState(state => state.allReports.data);
   const allGranteesData = useStoreState(state => state.allOrganisations.data);
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+    setSelectedSDG('');
+  };
+
   const signedInUserRole = useStoreState(state =>
     get(state.userDetails.data, 'role', 'Grantee user')
   );
@@ -119,6 +124,8 @@ function LandingLayout(props: any) {
 
       {/* todo: description */}
       <Viztabs
+        value={value}
+        onTabClick={handleChange}
         barChartData={ppVizData}
         barChartLegends={barChartLegends}
         onBarChartLegendClick={onBarChartLegendClick}
@@ -135,6 +142,7 @@ function LandingLayout(props: any) {
 
       {/* todo: description */}
       <ListModule
+        selectedSDG={selectedSDG}
         loadData
         tabNav={getNavTabItems(
           TabNavMockList,
