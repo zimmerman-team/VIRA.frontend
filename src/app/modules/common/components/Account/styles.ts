@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { ProjectPalette } from 'app/theme';
 import { Link as RouteLink } from 'react-router-dom';
-import React from 'react';
 import { Typography } from '@material-ui/core';
-import { white } from 'material-ui/styles/colors';
 
 export const Container = styled.div`
   width: 272px;

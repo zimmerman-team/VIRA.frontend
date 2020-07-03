@@ -24,14 +24,14 @@ import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-te
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { TabNavMock } from 'app/modules/list-module/mock';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
 import { AppConfig } from 'app/data';
 import get from 'lodash/get';
 import findIndex from 'lodash/findIndex';
 import { useClearPersistedState } from './utils/useClearPersistedState';
+import { TabNavMock } from 'app/mock/tabnav';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(

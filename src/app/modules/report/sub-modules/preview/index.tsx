@@ -9,7 +9,7 @@ import {
   ChallengesPlansPropsModel,
   BeneficiaryCountsModel,
 } from 'app/modules/report/model';
-import { PreviewCard, PreviewCardTextField } from './common/PreviewCard';
+import { PreviewCard } from './common/PreviewCard';
 
 interface PreviewParams {
   step2Enabled: boolean;

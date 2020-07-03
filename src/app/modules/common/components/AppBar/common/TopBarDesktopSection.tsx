@@ -98,6 +98,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
     setOpenSearch(prev => !prev);
   };
 
+  /* todo: refactor, deprecated symbol */
   useEventListener('keydown', (e: KeyboardEvent) => {
     if (e.keyCode === 83 && e.ctrlKey) {
       handleClickSearch();

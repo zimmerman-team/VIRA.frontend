@@ -16,10 +16,8 @@ import {
   projectsTableConfig,
   addTeamMemberTableConfig,
 } from './mock';
-import {
-  getBaseTableForProject,
-  getBaseTableForGrantee,
-} from 'app/modules/list-module/utils';
+import { getBaseTableForGrantee } from 'app/modules/list-module/utils/getBaseTableForGrantee';
+import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
 export default { title: 'Components ' };
 
 const projectTableConfig = getBaseTableForProject();

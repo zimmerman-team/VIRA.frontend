@@ -1,5 +1,4 @@
 import { IntentTextFieldParams } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
-import { OutcomesPropsModel } from 'app/modules/report/model';
 
 export const TextFielMock: IntentTextFieldParams[] = [
   {

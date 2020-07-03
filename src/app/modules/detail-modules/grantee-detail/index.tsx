@@ -18,12 +18,8 @@ import {
 import get from 'lodash/get';
 
 import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
-import { ContactsCardModel } from 'app/components/surfaces/Cards/ContactsCard/model';
-import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';
-import {
-  getBaseTableForProject,
-  formatTableDataForProject,
-} from 'app/modules/list-module/utils';
+import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
+import { formatTableDataForProject } from 'app/modules/list-module/utils/formatTableDataForProject';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import findIndex from 'lodash/findIndex';
 import { AppConfig } from 'app/data';

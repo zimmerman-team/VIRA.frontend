@@ -1,7 +1,6 @@
 // @ts-nocheck
 // todo: solve ts error
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { css } from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';

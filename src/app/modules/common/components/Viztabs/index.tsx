@@ -15,7 +15,6 @@ import { useTranslation } from 'react-i18next';
 import { GeoMap } from 'app/components/charts/GeoMap';
 import { BubbleChart } from 'app/components/charts/Bubble';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import {
   TabStyle,
