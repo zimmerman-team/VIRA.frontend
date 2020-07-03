@@ -60,13 +60,30 @@ function LandingLayout(props: any) {
     setSelectedSDG('');
   };
 
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
+
   React.useEffect(() => {
+    getPPVizData({
+      socketName: 'getPolicyPriorityBarChart',
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
     getSDGVizData({
       socketName: 'getSDGBubbleChart',
-      values: {},
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
     });
-    getGeoMapData({ socketName: 'getGeoMapData', values: {} });
-  }, []);
+    getGeoMapData({
+      socketName: 'getGeoMapData',
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+    });
+  }, [signedInUserRole, signedInUserEmail]);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];
