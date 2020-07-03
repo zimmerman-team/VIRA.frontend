@@ -48,11 +48,11 @@ export function getReportsBySDG(selectedSDG: string, allReportsData: any) {
 
     //Check if a reports policy priority matches the given sdg
     allReportsData.data.map((report: any) => {
-      let obj = policyPriorities.find(pp => {
-        return pp.name == report.policy_priority.name;
+      let found = policyPriorities.find(policyPriority => {
+        return policyPriority.name == report.policy_priority.name;
       });
 
-      if (obj != undefined && obj.sdgs.includes(sdgNumber)) {
+      if (found != undefined && found.sdgs.includes(sdgNumber)) {
         reportsBySDG.push(report);
       }
     });
