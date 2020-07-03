@@ -127,6 +127,11 @@ export function BubbleChart(props: Props) {
                         opacity: node.data.opacity || 1,
                         color: ProjectPalette.common.white,
                         cursor: hasData ? 'pointer' : 'initial',
+                        border:
+                          selectedBubbleObj &&
+                          selectedBubbleObj.number === node.data.number
+                            ? `3px solid ${ProjectPalette.secondary.main}`
+                            : '',
                       }}
                       {...handlers}
                       onClick={_e =>
