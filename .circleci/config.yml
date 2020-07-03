@@ -1,12 +1,13 @@
 orbs:
   cypress: cypress-io/cypress@1
+#  sonarcloud: sonarsource/sonarcloud@1.0.1
 version: 2.1
 
 # have a look at https://circleci.com/orbs/registry/orb/germade/rsync
 executors:
   cypress-executor:
     docker:
-      - image: 'cypress/included:4.6.0'
+      - image: 'cypress/included:4.8.0'
     resource_class: large
 
 jobs:
@@ -24,6 +25,7 @@ jobs:
           name: Transfer build to digital ocean instance
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+
               rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
               rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
@@ -59,6 +61,7 @@ workflows:
                                source $BASH_ENV
           yarn: true
           build: yarn build
+
 
       - deploy:
           requires:
