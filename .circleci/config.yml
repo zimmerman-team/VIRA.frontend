@@ -32,6 +32,13 @@ jobs:
             else
               rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
             fi
+  release:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - checkout
+      - run: npx semantic-release
 
 workflows:
   build-and-test:
@@ -55,7 +62,6 @@ workflows:
                   source $BASH_ENV
           yarn: true
           build: yarn build
-
       - deploy:
           requires:
             - cypress/install
@@ -70,3 +76,9 @@ workflows:
           parallel: true
           parallelism: 6
           group: "all tests"
+      - release:
+          requires:
+            - deploy
+          filters:
+            branches:
+              only: master
