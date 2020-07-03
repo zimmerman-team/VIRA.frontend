@@ -23,7 +23,6 @@ function ManageUsersF(props: RouteComponentProps) {
   const [page, setPage] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(10);
   // redux state & actions
-  const storeUser = useStoreState(state => state.syncVariables.user);
   const allUsersAction = useStoreActions(actions => actions.allUsers.fetch);
   const allUsersData = useStoreState(state => state.allUsers.data);
   const deleteUserAction = useStoreActions(actions => actions.deleteUser.fetch);
@@ -34,6 +33,7 @@ function ManageUsersF(props: RouteComponentProps) {
   const userGroupsAction = useStoreActions(
     actions => actions.getUserGroups.fetch
   );
+  const storeUser = useStoreState(state => state.userDetails.data);
 
   React.useEffect(() => {
     allUsersAction({
@@ -89,7 +89,10 @@ function ManageUsersF(props: RouteComponentProps) {
         socketName: 'getUserGroups',
         values: { user: storeUser },
       });
-      userGroupsAction({ socketName: 'getUserGroups', values: {} });
+      userGroupsAction({
+        socketName: 'getUserGroups',
+        values: { user: storeUser },
+      });
     } else {
       allUsersAction({
         socketName: 'getAllUsers',

@@ -16,10 +16,17 @@ import get from 'lodash/get';
 
 export const ProjectDetailLayout = (props: any) => {
   const { t } = useTranslation();
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
   const showGenerateBtn = useStoreState(
     state =>
+      get(state.userDetails.data, 'role', '') === 'Super admin' ||
       get(state.userDetails.data, 'role', '') === 'Administrator' ||
-      get(state.userDetails.data, 'role', '') === 'Manager'
+      get(state.userDetails.data, 'role', '') === 'Manager' ||
+      get(state.userDetails.data, 'email', '_') ===
+        props.projectDetail.responsible_person_email
   );
   return (
     <React.Fragment>
@@ -94,6 +101,8 @@ export const ProjectDetailLayout = (props: any) => {
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
       <Viztabs
+        value={value}
+        onTabClick={handleChange}
         barChartData={props.ppVizData}
         barChartLegends={props.barChartLegends}
         onBarChartLegendClick={props.onBarChartLegendClick}

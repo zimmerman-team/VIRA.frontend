@@ -1,8 +1,8 @@
-import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
-import { projectsTableConfig } from 'app/components/datadisplay/Table/mock';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
-import React from 'react';
+import { projectsTableConfig } from 'app/components/datadisplay/Table/mock';
 import i18n from 'app/languages';
+import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
+import React from 'react';
 
 export const getBaseTableForProject = (): TableModuleModel => {
   const tableConfig = projectsTableConfig;

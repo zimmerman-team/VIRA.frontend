@@ -28,6 +28,9 @@ export const ReportDetailModuleF = (props: any) => {
     project: {
       name: '',
       id: '',
+      person: {
+        email: '',
+      },
     },
     key_outcomes: '',
     monitor_report_outcomes: '',

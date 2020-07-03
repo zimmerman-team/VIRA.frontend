@@ -29,6 +29,7 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
 import { AppConfig } from 'app/data';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
 import findIndex from 'lodash/findIndex';
 import { useClearPersistedState } from './utils/useClearPersistedState';
 import { TabNavMock } from 'app/mock/tabnav';
@@ -42,6 +43,12 @@ function redirectUnAuth<ReactModule>(
   allowedRoles?: string[]
 ) {
   if (!user) {
+    if (
+      window.location.pathname !== '/callback' &&
+      window.location.pathname !== '/login'
+    ) {
+      sessionStorage.setItem('redirectTo', window.location.pathname);
+    }
     return <Redirect to="/login" />;
   }
   if (role) {
@@ -50,7 +57,7 @@ function redirectUnAuth<ReactModule>(
         return <Redirect to="/" />;
       }
     }
-    if (!allowedRoles && role !== 'Administrator') {
+    if (!allowedRoles && role !== 'Administrator' && role !== 'Super admin') {
       return <Redirect to="/" />;
     }
   }
@@ -125,10 +132,7 @@ export function MainRoutes() {
       </Route>
 
       <Route path="/report/:projectID">
-        {redirectUnAuth(CreateReport, storeUser, {}, userRole, [
-          'Administrator',
-          'Manager',
-        ])}
+        {redirectUnAuth(CreateReport, storeUser)}
       </Route>
 
       <Route exact path="/grantees/detail">
@@ -231,8 +235,9 @@ export function MainRoutes() {
               ...manageUserEditMock.form,
               radioButtonGroup: {
                 title: 'User Role',
-                items:
-                  userRoles || manageUserEditMock.form.radioButtonGroup.items,
+                items: userRoles
+                  ? filter(userRoles, (ur: any) => ur.name !== 'Super admin')
+                  : manageUserEditMock.form.radioButtonGroup.items,
               },
               selectOptions: userGroups,
             },

@@ -1,8 +1,6 @@
 export const formatTableDataForReport = (data: any): any[] => {
   let tempArray: any[] = [];
-
   const bigTempArray: any[][] = [];
-
   data.forEach((row: any) => {
     const splits = row.date.split('/');
     tempArray.push(
@@ -15,6 +13,5 @@ export const formatTableDataForReport = (data: any): any[] => {
     tempArray = [];
   });
 
-  // console.log('bigi', bigTempArray);
   return bigTempArray;
 };

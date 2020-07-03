@@ -32,6 +32,12 @@ export const Search = (props: SearchProps) => {
     actions => actions.generalSearch.clear
   );
   const generalSearchData = useStoreState(state => state.generalSearch.data);
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
 
   useDebounce(
     () => {
@@ -40,6 +46,8 @@ export const Search = (props: SearchProps) => {
           socketName: 'search',
           values: {
             q: value,
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
           },
         });
         setLoading(false);

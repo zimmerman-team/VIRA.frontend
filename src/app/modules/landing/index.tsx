@@ -44,7 +44,6 @@ function LandingLayout(props: any) {
       selected: true,
     },
   ]);
-
   const [selectedSDG, setSelectedSDG] = React.useState('');
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
   const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
@@ -55,14 +54,36 @@ function LandingLayout(props: any) {
   const allReportsData = useStoreState(state => state.allReports.data);
   const allGranteesData = useStoreState(state => state.allOrganisations.data);
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+    setSelectedSDG('');
+  };
+
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
 
   React.useEffect(() => {
+    getPPVizData({
+      socketName: 'getPolicyPriorityBarChart',
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
     getSDGVizData({
       socketName: 'getSDGBubbleChart',
-      values: {},
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
     });
-    getGeoMapData({ socketName: 'getGeoMapData', values: {} });
-  }, []);
+    getGeoMapData({
+      socketName: 'getGeoMapData',
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+    });
+  }, [signedInUserRole, signedInUserEmail]);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];
@@ -103,6 +124,8 @@ function LandingLayout(props: any) {
 
       {/* todo: description */}
       <Viztabs
+        value={value}
+        onTabClick={handleChange}
         barChartData={ppVizData}
         barChartLegends={barChartLegends}
         onBarChartLegendClick={onBarChartLegendClick}
