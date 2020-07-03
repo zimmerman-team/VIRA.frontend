@@ -285,7 +285,8 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
 
           {!isMobileWidth && props.chartLegends && (
             <Legends>
-              <DataDaterangePicker />
+              {/* <DataDaterangePicker /> */}
+              <div />
               <div
                 css={`
                   display: flex;
