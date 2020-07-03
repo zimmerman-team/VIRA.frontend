@@ -262,6 +262,13 @@ function CreateReportFunc(props: any) {
   );
   const reportDetailData = useStoreState(state => state.reportDetail.data);
 
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
+
   // console.log("reportDetailData", reportDetailData);
 
   useWindowUnloadEffect(() => {
@@ -424,6 +431,12 @@ function CreateReportFunc(props: any) {
   }, [location]);
 
   React.useEffect(() => {
+    if (
+      get(projectBudgetData, 'data', null) &&
+      get(projectBudgetData, 'data.person_email', '-') !== signedInUserEmail
+    ) {
+      props.history.replace('/');
+    }
     setBudget(get(projectBudgetData, 'data.remainBudget', 0));
   }, [projectBudgetData]);
 

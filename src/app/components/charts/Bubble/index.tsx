@@ -132,6 +132,11 @@ export function BubbleChart(props: Props) {
                         color: ProjectPalette.common.white,
                         cursor: hasData ? 'pointer' : 'initial',
                         fontWeight: 700,
+                        border:
+                          selectedBubbleObj &&
+                          selectedBubbleObj.number === node.data.number
+                            ? `3px solid ${ProjectPalette.secondary.main}`
+                            : '',
                       }}
                       {...handlers}
                       onClick={_e =>
@@ -139,23 +144,6 @@ export function BubbleChart(props: Props) {
                       }
                     >
                       SDG {node.data.number}
-                      {/* <svg
-                        css={`
-                          width: 70%;
-                        `}
-                        viewBox="0 0 56 18"
-                      >
-                        <text
-                          x="50%"
-                          y="50%"
-                          fontWeight={700}
-                          textAnchor="middle"
-                          dominantBaseline="middle"
-                          fill={ProjectPalette.common.white}
-                        >
-                          SDG {node.data.number}
-                        </text>
-                      </svg> */}
                     </div>
                   );
                 }}
@@ -176,13 +164,15 @@ export function BubbleChart(props: Props) {
                         },
                         {
                           label: 'Budget',
-                          value: tProps.data.loc
-                            .toLocaleString(undefined, {
-                              currency: 'EUR',
-                              currencyDisplay: 'symbol',
-                              style: 'currency',
-                            })
-                            .replace('.00', ''),
+                          value:
+                            tProps.data.loc &&
+                            tProps.data.loc
+                              .toLocaleString(undefined, {
+                                currency: 'EUR',
+                                currencyDisplay: 'symbol',
+                                style: 'currency',
+                              })
+                              .replace('.00', ''),
                         },
                         {
                           label: 'charts.barchart.commitment',

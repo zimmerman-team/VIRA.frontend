@@ -22,6 +22,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
   const allUsersData = useStoreState(state => state.allUsers.data);
   const allUsersAction = useStoreActions(actions => actions.allUsers.fetch);
   const storeUser = useStoreState(state => state.syncVariables.user);
+  const storeUser2 = useStoreState(state => state.userDetails.data);
   const addTeamData = useStoreState(state => state.addTeam.data);
   const addTeamAction = useStoreActions(actions => actions.addTeam.fetch);
   const addTeamClearAction = useStoreActions(actions => actions.addTeam.clear);
@@ -45,7 +46,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
   React.useEffect(() => {
     allUsersAction({
       socketName: 'getAllUsers',
-      values: { user: storeUser },
+      values: { user: storeUser2 },
     });
     if (props.mode === 'edit') {
       if (allTeamsData) {
@@ -59,7 +60,7 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
       } else {
         allTeamsAction({
           socketName: 'getUserGroups',
-          values: { user: storeUser },
+          values: { user: storeUser2 },
         });
       }
     }
@@ -83,9 +84,12 @@ function ManageTeamEditAddF(props: ManageEditAddTeamModel) {
       } else {
         allTeamsAction({
           socketName: 'getUserGroups',
-          values: { user: storeUser },
+          values: { user: storeUser2 },
         });
-        userGroupsAction({ socketName: 'getUserGroups', values: {} });
+        userGroupsAction({
+          socketName: 'getUserGroups',
+          values: { user: storeUser2 },
+        });
       }
       setTimeout(() => {
         snackbarAction('');
