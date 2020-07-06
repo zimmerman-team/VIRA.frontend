@@ -53,7 +53,7 @@ function SidebarNavButtonF(props: SidebarNavButtonParams): JSX.Element {
   const ListItemIconStyle = css`
     && {
       min-width: initial;
-      margin-left: ${props.open ? '0' : '0'};
+      margin-left: 0;
       margin-right: ${props.open ? '13px' : '0'};
     }
   `;

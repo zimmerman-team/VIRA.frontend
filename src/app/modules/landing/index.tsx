@@ -95,6 +95,7 @@ function LandingLayout(props: any) {
     setStats(updatedStats);
   }, [allProjectsData, allReportsData]);
 
+  /* todo: contains duplicate code */
   function onBarChartLegendClick(legend: string) {
     const prevBarChartLegends = [...barChartLegends];
     const legendIndex = findIndex(prevBarChartLegends, { label: legend });

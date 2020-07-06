@@ -12,7 +12,6 @@ export const NavigationButton = (props: NavItemParams) => {
   const { t, i18n } = useTranslation();
 
   const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <NavLink

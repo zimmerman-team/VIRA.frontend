@@ -3,7 +3,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components/macro';
 import get from 'lodash/get';
 import { colorScheme } from 'app/components/charts/BarCharts/common/colorUtil';
-import { useMediaQuery, Typography, Box } from '@material-ui/core';
+import { useMediaQuery, Typography } from '@material-ui/core';
 import {
   HorizontalBarChartModel,
   getBarModel,
@@ -22,7 +22,6 @@ import find from 'lodash/find';
 import filter from 'lodash/filter';
 import { useTranslation } from 'react-i18next';
 import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll';
-import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterangePicker';
 
 // TODO:
 //  - Find a way to implement the colouring.

@@ -19,8 +19,10 @@ import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll
 
 function setTableVariant(cssVariant: string) {
   switch (cssVariant) {
+    /* todo: rename variant9 to something more descriptive */
     case 'variant9':
       return variant9;
+    /* todo: rename variant10 to something more descriptive */
     case 'variant10':
       return variant10;
     case 'reportsVariant':

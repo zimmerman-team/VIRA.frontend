@@ -561,6 +561,7 @@ function CreateReportFunc(props: any) {
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
             policy_priority: policyPriority.value,
+            /* todo: stefanos, please look into refactoring this piece */
             location: location
               ? {
                   long: (location as LocationModel).longitude,
@@ -569,6 +570,7 @@ function CreateReportFunc(props: any) {
               : null,
             media: mediaAdded.map((m: any) => m.path),
             country: country.label,
+            /* todo: stefanos, please look into refactoring this piece */
             place_name: location ? (location as LocationModel).place : null,
             total_target_beneficiaries: tarBenTotal,
             total_target_beneficiaries_commited: tarBenTotal2,
@@ -600,6 +602,7 @@ function CreateReportFunc(props: any) {
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
             policy_priority: policyPriority.value,
+            /* todo: stefanos, please look into refactoring this piece */
             location: location
               ? {
                   long: (location as LocationModel).longitude,
@@ -608,6 +611,7 @@ function CreateReportFunc(props: any) {
               : null,
             media: mediaAdded.map((m: any) => m.path),
             country: country.label === '' ? ' ' : country.label,
+            /* todo: stefanos, please look into refactoring this piece */
             place_name: location ? (location as LocationModel).place : null,
             total_target_beneficiaries: tarBenTotal,
             total_target_beneficiaries_commited: tarBenTotal2,

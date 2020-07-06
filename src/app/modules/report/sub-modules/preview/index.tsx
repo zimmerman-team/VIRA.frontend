@@ -9,7 +9,7 @@ import {
   ChallengesPlansPropsModel,
   BeneficiaryCountsModel,
 } from 'app/modules/report/model';
-import { PreviewCard, PreviewCardTextField } from './common/PreviewCard';
+import { PreviewCard } from './common/PreviewCard';
 
 interface PreviewParams {
   step2Enabled: boolean;
@@ -24,7 +24,6 @@ interface PreviewParams {
 
 export const PreviewLayout = (props: PreviewParams) => {
   const { t } = useTranslation();
-  const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   return (
     <React.Fragment>

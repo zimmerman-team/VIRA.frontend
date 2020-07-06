@@ -18,12 +18,8 @@ import {
 import get from 'lodash/get';
 
 import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
-import { ContactsCardModel } from 'app/components/surfaces/Cards/ContactsCard/model';
-import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';
-import {
-  getBaseTableForProject,
-  formatTableDataForProject,
-} from 'app/modules/list-module/utils';
+import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
+import { formatTableDataForProject } from 'app/modules/list-module/utils/formatTableDataForProject';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import findIndex from 'lodash/findIndex';
 import { AppConfig } from 'app/data';
@@ -62,7 +58,7 @@ export function GranteeDetailModule(props: any) {
   const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
   const granteeDetailData = useStoreState(state => state.orgDetail.data);
   const ProjectsData = useStoreState(state => state.allProjects.data);
-  const ReportsData = useStoreState(state => state.allReports.data);
+
   const loading = useStoreState(
     state =>
       state.orgDetail.loading ||
@@ -195,6 +191,7 @@ export function GranteeDetailModule(props: any) {
   }
 
   return (
+    /* todo: look into why we're not passing mockData */
     <GranteeDetailLayout
       match={props.match}
       loading={loading}

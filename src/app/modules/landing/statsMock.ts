@@ -1,8 +1,6 @@
 // @ts-nocheck
 import { NavItemParams } from 'app/modules/common/consts';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
-import { useTranslation } from 'react-i18next';
-import i18next from 'i18next';
 
 export const statsMock: StatItemParams[] = [
   {

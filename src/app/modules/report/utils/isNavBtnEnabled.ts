@@ -5,6 +5,7 @@ import { validatePolicyPrioritiesFields } from 'app/modules/report/utils/validat
 
 export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
   if (btnType === 'back') {
+    /* todo: can this be simplified? */
     if (tabIndex === 0) {
       return false;
     }

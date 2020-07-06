@@ -5,6 +5,7 @@ import { ProjectPalette } from 'app/theme';
 import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
 import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
 
+/* todo: stefanos, can this one be removed? */
 const ppToSdg = {
   poverty: {
     // name: 'No poverty',

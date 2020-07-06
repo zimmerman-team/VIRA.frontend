@@ -1,5 +1,4 @@
 import { MUIDataTableOptions, MUIDataTableColumnDef } from 'mui-datatables';
-// import { TableInfoItemModel } from 'app/components/datadisplay/TableWTotal/common/TableInfo/model';
 
 export interface TotalRowColModel {
   percValue?: number | string;
@@ -24,8 +23,8 @@ export interface TableModuleModel {
   columns: MUIDataTableColumnDef[];
   options: MUIDataTableOptions;
   columnsCell?: string[];
-  totalCell?: boolean | undefined;
-  expandableData?: any[][][] | undefined;
+  totalCell?: boolean;
+  expandableData?: any[][][];
   totalRowColsDef?: TotalRowColModel[];
   changeTableRowColor?: number;
   cssVariant?:
@@ -35,7 +34,7 @@ export interface TableModuleModel {
     | 'reportsVariant'
     | 'projectsVariant'
     | 'teamEditVariant';
-  // infoItems?: TableInfoItemModel[];
+  openDatePicker?: any;
 }
 
 export interface TableLayoutModel {

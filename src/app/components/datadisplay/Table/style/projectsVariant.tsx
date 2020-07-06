@@ -2,6 +2,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ProjectPalette, TextStyle } from 'app/theme';
 
+/* todo: resolve duplicate code, is the same as variant9.tsx */
 export const projectsVariant = createMuiTheme({
   overrides: {
     MuiSvgIcon: {

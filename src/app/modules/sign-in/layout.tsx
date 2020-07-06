@@ -1,8 +1,6 @@
 import React from 'react';
 import 'styled-components/macro';
-import { ProjectPalette } from 'app/theme';
-import { Container, Grid, Hidden, useMediaQuery } from '@material-ui/core';
-import { GroupImage } from 'app/assets/images/group';
+import { Grid, Hidden, useMediaQuery } from '@material-ui/core';
 import { InputForm } from 'app/modules/sign-in/common/InputForm';
 import { LayoutModel } from 'app/modules/sign-in/models';
 import { SignInDeco } from './common/SignInDeco';

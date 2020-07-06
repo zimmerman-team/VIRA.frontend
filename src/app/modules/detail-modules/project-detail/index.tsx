@@ -11,10 +11,8 @@ import {
 } from 'app/modules/detail-modules/project-detail/model';
 
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
-import {
-  formatTableDataForReport,
-  getBaseTableForReport,
-} from 'app/modules/list-module/utils';
+import { getBaseTableForReport } from 'app/modules/list-module/utils/getBaseTableForReport';
+import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTableDataForReport';
 
 import { AppConfig } from 'app/data';
 
@@ -161,6 +159,7 @@ const ProjectDetailModuleF = (props: any) => {
     }
   }, [projectDetailData]);
 
+  /* todo: resolve duplicate code */
   function onBarChartLegendClick(legend: string) {
     const prevBarChartLegends = [...barChartLegends];
     const legendIndex = findIndex(prevBarChartLegends, { label: legend });
