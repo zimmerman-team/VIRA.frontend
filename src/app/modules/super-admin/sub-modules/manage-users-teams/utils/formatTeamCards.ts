@@ -28,6 +28,7 @@ export function formatTeamCards(
     newData = allData;
   }
 
+  /* todo: duplicate code in formatUserCards.ts */
   // do search
   if (search !== '') {
     newData = filter(

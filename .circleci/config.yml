@@ -1,12 +1,13 @@
 orbs:
   cypress: cypress-io/cypress@1
+#  sonarcloud: sonarsource/sonarcloud@1.0.1
 version: 2.1
 
 # have a look at https://circleci.com/orbs/registry/orb/germade/rsync
 executors:
   cypress-executor:
     docker:
-      - image: 'cypress/included:4.6.0'
+      - image: "cypress/included:4.8.0"
     resource_class: large
 
 jobs:
@@ -24,12 +25,20 @@ jobs:
           name: Transfer build to digital ocean instance
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+
               rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-staging
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
               rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-test
             else
               rsync -O -ave ssh ~/project/build zz@206.189.241.202:~/insinger-dev
             fi
+  release:
+    docker:
+      - image: circleci/node:12.14.1-stretch-browsers
+    working_directory: ~/project
+    steps:
+      - checkout
+      - run: npx semantic-release
 
 workflows:
   build-and-test:
@@ -40,26 +49,19 @@ workflows:
             - run:
                 name: Set env variables
                 command: |
-                               if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                                 echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
-                                 echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
-                                 echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_STAGING"' >> $BASH_ENV
-                                 echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_STAGING"' >> $BASH_ENV
-                               elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-                                 echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
-                                 echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
-                                 echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_TEST"' >> $BASH_ENV
-                                 echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_TEST"' >> $BASH_ENV
-                               else
-                                 echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
-                                 echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
-                                 echo 'export REACT_APP_BACKEND_PORT="$REACT_APP_BACKEND_PORT_DEV"' >> $BASH_ENV
-                                 echo 'export REACT_APP_MONGO_DB_URL="$REACT_APP_MONGO_DB_URL_DEV"' >> $BASH_ENV
-                               fi
-                               source $BASH_ENV
+                  if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                    echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
+                    echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
+                  elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+                    echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+                    echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
+                  else
+                    echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+                    echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
+                  fi
+                  source $BASH_ENV
           yarn: true
           build: yarn build
-
       - deploy:
           requires:
             - cypress/install
@@ -73,5 +75,10 @@ workflows:
           record: true
           parallel: true
           parallelism: 6
-          group: 'all tests'
-
+          group: "all tests"
+      - release:
+          requires:
+            - deploy
+          filters:
+            branches:
+              only: master

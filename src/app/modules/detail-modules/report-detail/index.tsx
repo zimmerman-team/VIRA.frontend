@@ -28,6 +28,9 @@ export const ReportDetailModuleF = (props: any) => {
     project: {
       name: '',
       id: '',
+      person: {
+        email: '',
+      },
     },
     key_outcomes: '',
     monitor_report_outcomes: '',
@@ -85,6 +88,7 @@ export const ReportDetailModuleF = (props: any) => {
     }
   }, [reportDetailData]);
 
+  /* todo: resolve duplicate code */
   function onBarChartLegendClick(legend: string) {
     const prevBarChartLegends = [...barChartLegends];
     const legendIndex = findIndex(prevBarChartLegends, { label: legend });

@@ -21,9 +21,17 @@ export const ReportDetailLayout = (props: any) => {
   const { t } = useTranslation();
   const showEditBtn = useStoreState(
     state =>
+      get(state.userDetails.data, 'role', '') === 'Super admin' ||
       get(state.userDetails.data, 'role', '') === 'Administrator' ||
-      get(state.userDetails.data, 'role', '') === 'Manager'
+      get(state.userDetails.data, 'role', '') === 'Manager' ||
+      get(state.userDetails.data, 'email', '_') ===
+        props.report.project.person.email
   );
+
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
 
   const cardData = [
     {
@@ -79,7 +87,7 @@ export const ReportDetailLayout = (props: any) => {
       {/* button: generate report */}
       {showEditBtn && (
         <Hidden xsDown>
-          <Grid lg={12} container justify="flex-end">
+          <Grid item lg={12} container justify="flex-end">
             <ContainedButton
               text={t('reports.detail.editReportBtn')}
               onClick={props.editReport}
@@ -98,6 +106,9 @@ export const ReportDetailLayout = (props: any) => {
           id={`Report ID: ${props.report.reportID}`}
           url={`/projects/${props.report.project.id}`}
           url_note={`${props.report.project.name}`}
+          editReport={props.editReport}
+          showEditBtn={showEditBtn}
+          testAttr="report-title"
           stats={[
             {
               label: t('reports.detail.stats.targetBeneficiaries'),
@@ -116,27 +127,20 @@ export const ReportDetailLayout = (props: any) => {
           ]}
         />
       </Grid>
-
-      <div
-        css={`
-          width: 100%;
-          height: 32px;
-        `}
-      />
-
-      {/* ---------------------------------------------------------------------*/}
-      {/* button: generate report */}
-      {showEditBtn && (
-        <Hidden smUp>
-          <Grid container item xs={12}>
-            <ContainedButton text="Edit Report" onClick={props.editReport} />
-          </Grid>
-        </Hidden>
-      )}
+      <Hidden smDown>
+        <div
+          css={`
+            width: 100%;
+            height: 32px;
+          `}
+        />
+      </Hidden>
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
       <Viztabs
+        value={value}
+        onTabClick={handleChange}
         barChartData={props.report.barChartData}
         barChartLegends={props.barChartLegends}
         onBarChartLegendClick={props.onBarChartLegendClick}
@@ -155,7 +159,7 @@ export const ReportDetailLayout = (props: any) => {
       {cardData.map(card =>
         card.media ? (
           card.media.length > 0 && (
-            <Grid data-cy={card.testID} item xs={12} lg={12}>
+            <Grid key={card.title} data-cy={card.testID} item xs={12} lg={12}>
               <OutcomeCard
                 title={t(card.title)}
                 media={{ tileData: props.report.media }}
@@ -163,7 +167,7 @@ export const ReportDetailLayout = (props: any) => {
             </Grid>
           )
         ) : (
-          <Grid data-cy={card.testID} item xs={12} lg={12}>
+          <Grid key={card.title} data-cy={card.testID} item xs={12} lg={12}>
             <OutcomeCard title={t(card.title)} description={card.description} />
           </Grid>
         )

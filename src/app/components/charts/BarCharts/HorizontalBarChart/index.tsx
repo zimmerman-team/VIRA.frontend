@@ -189,7 +189,10 @@ const TopAxisValue = styled.div`
 
 const Legends = styled.div`
   display: flex;
-  align-self: flex-end;
+  width: 100%;
+  justify-content: space-between;
+  //align-self: flex-end;
+  align-items: center;
 `;
 
 // https://nivo.rocks/bar/
@@ -232,7 +235,6 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
       barModel.axisBottom.tickValues = 3;
     }
     if (typeof props.values !== 'undefined' && props.values.length > 0) {
-      // console.log(props.maxValue);
       return (
         <>
           {(showBudgetLine || showContribLine) && (
@@ -279,15 +281,24 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
               axisBottom={showBar ? barModel.axisBottom : null}
             />
           </div>
+
           {!isMobileWidth && props.chartLegends && (
             <Legends>
-              {props.chartLegends.map(legend => (
-                <LegendControl
-                  {...legend}
-                  key={legend.label}
-                  onClick={props.onChartLegendClick}
-                />
-              ))}
+              {/* <DataDaterangePicker /> */}
+              <div />
+              <div
+                css={`
+                  display: flex;
+                `}
+              >
+                {props.chartLegends.map(legend => (
+                  <LegendControl
+                    {...legend}
+                    key={legend.label}
+                    onClick={props.onChartLegendClick}
+                  />
+                ))}
+              </div>
             </Legends>
           )}
         </>

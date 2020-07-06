@@ -13,17 +13,22 @@ import {
 import { variant9 } from 'app/components/datadisplay/Table/style/variant9';
 import { variant10 } from 'app/components/datadisplay/Table/style/variant10';
 import { reportsVariant } from 'app/components/datadisplay/Table/style/reportsVariant';
+import { teamEditVariant } from 'app/components/datadisplay/Table/style/teamEditVariant';
 import { useMediaQuery } from '@material-ui/core';
 import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll';
 
 function setTableVariant(cssVariant: string) {
   switch (cssVariant) {
+    /* todo: rename variant9 to something more descriptive */
     case 'variant9':
       return variant9;
+    /* todo: rename variant10 to something more descriptive */
     case 'variant10':
       return variant10;
     case 'reportsVariant':
       return reportsVariant;
+    case 'teamEditVariant':
+      return teamEditVariant;
     default:
       return standard;
   }
@@ -32,6 +37,7 @@ function setTableVariant(cssVariant: string) {
 export const TableLayout = (props: TableLayoutModel) => {
   const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   React.useEffect(() => {
     if (props.changeTableRowColor) {
       changeTableRowColor(props.changeTableRowColor);

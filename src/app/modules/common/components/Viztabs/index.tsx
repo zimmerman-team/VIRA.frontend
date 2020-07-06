@@ -15,7 +15,6 @@ import { useTranslation } from 'react-i18next';
 import { GeoMap } from 'app/components/charts/GeoMap';
 import { BubbleChart } from 'app/components/charts/Bubble';
 import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { mockData } from 'app/components/charts/BarCharts/HorizontalBarChart/mock';
 import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import {
   TabStyle,
@@ -24,6 +23,8 @@ import {
 } from 'app/modules/list-module/common/TabPanelProps';
 
 type Props = {
+  value: number;
+  onTabClick: any;
   focus?: number;
   barChartData: any;
   barChartLegends: any;
@@ -50,10 +51,6 @@ function getTitle(index: number): string {
 export function Viztabs(props: Props) {
   const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
-  const [value, setValue] = React.useState(props.focus ? props.focus : 0);
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
 
   return (
     <React.Fragment>
@@ -78,7 +75,7 @@ export function Viztabs(props: Props) {
               line-height: 1.5;
             `}
           >
-            {t(getTitle(value))}
+            {t(getTitle(props.value))}
           </Typography>
         </Grid>
 
@@ -86,10 +83,10 @@ export function Viztabs(props: Props) {
           <Grid item xs={3} />
         </Hidden>
 
-        <Grid item xs={12} justify="flex-end">
+        <Grid item xs={12} container justify="flex-end">
           <Tabs
-            value={value}
-            onChange={handleChange}
+            value={props.value}
+            onChange={props.onTabClick}
             aria-label="simple tabs example"
             data-cy="tabs-container"
             css={`
@@ -129,7 +126,7 @@ export function Viztabs(props: Props) {
           width: 100%;
         `}
       >
-        <TabPanel value={value} index={0} data-cy="prio-panel">
+        <TabPanel value={props.value} index={0} data-cy="prio-panel">
           {/* Priority Area horizontal bar chart */}
           <HorizontalBarChart
             colors={[
@@ -160,7 +157,7 @@ export function Viztabs(props: Props) {
           />
         </TabPanel>
 
-        <TabPanel value={value} index={1} data-cy="sdg-panel">
+        <TabPanel value={props.value} index={1} data-cy="sdg-panel">
           {/* SDG bubble chart */}
           <BubbleChart
             data={props.bubbleChartData}
@@ -169,7 +166,7 @@ export function Viztabs(props: Props) {
           />
         </TabPanel>
 
-        <TabPanel value={value} index={2} data-cy="map-panel">
+        <TabPanel value={props.value} index={2} data-cy="map-panel">
           {/* Geomap */}
           <GeoMap data={props.geoMapData} />
         </TabPanel>

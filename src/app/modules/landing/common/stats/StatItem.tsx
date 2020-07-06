@@ -61,7 +61,12 @@ export const StatItem = (props: StatItemParams) => {
     >
       <Link to={props.path} css={LinkStyle}>
         <Typography css={AmountStyle}>{props.amount}</Typography>
-        <Typography css={StatItemTypeStyle}>{t(props.type)}</Typography>
+        <Typography
+          css={StatItemTypeStyle}
+          data-cy={`stat-item-text-${props.index}`}
+        >
+          {t(props.type)}
+        </Typography>
       </Link>
     </Grid>
   );

@@ -23,6 +23,11 @@ export type LocationModel = {
   place?: string | null;
 };
 
+export type LabelValueModel = {
+  label: string;
+  value: string;
+};
+
 export type OutcomesPropsModel = {
   title: string;
   setTitle: Function;
@@ -50,13 +55,15 @@ export type PolicyPrioritiesPropsModel = {
   setTarBenTotal2: Function;
   beneficiaryCounts: BeneficiaryCountsModel[];
   setBeneficiaryCounts: Function;
-  policyPriority: { label: string; value: string };
+  policyPriority: LabelValueModel;
   setPolicyPriority: Function;
   budget: number;
   setBudget: Function;
   remainBudget: number;
   insContribution: number;
   setInsContribution: Function;
+  funder: LabelValueModel;
+  setFunder: Function;
 };
 
 export type IndicatorVerificationPropsModel = {

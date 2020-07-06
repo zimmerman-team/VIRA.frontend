@@ -1,30 +1,46 @@
 /* eslint-disable no-plusplus */
 import React from 'react';
-import get from 'lodash/get';
-import find from 'lodash/find';
 import 'styled-components/macro';
-import filter from 'lodash/filter';
+import { withRouter } from 'react-router-dom';
+import CheckIcon from '@material-ui/icons/Check';
+
+/* utils thirdparty */
 import { useTitle } from 'react-use';
 import findIndex from 'lodash/findIndex';
-import { withRouter } from 'react-router-dom';
+import get from 'lodash/get';
+import find from 'lodash/find';
+import filter from 'lodash/filter';
+
+/* general */
 import { tabs } from 'app/modules/report/mock';
 import { CreateReportLayout } from 'app/modules/report/layout';
-import { useStoreActions, useStoreState } from 'app/state/store/hooks';
-import { AppConfig } from 'app/data';
-import { useQuery } from 'app/utils/useQuery';
-import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
+
+/* model */
+import { LocationModel } from './model';
 import { DialogBtnType } from 'app/components/surfaces/Dialog/model';
-import CheckIcon from '@material-ui/icons/Check';
-import { usePersistedState } from 'app/utils/usePersistedState';
+
+/* utils: misc */
 import { isNavBtnEnabled } from './utils/isNavBtnEnabled';
-import { validateIndVerFields } from './utils/validateIndVerFields';
+import { useWindowUnloadEffect } from 'app/utils/useWindowUnloadEffect';
 import { getTabs } from './utils/getTabs';
+
+/* utils related to validating field data */
 import { validateOutcomeFields } from './utils/validateOutcomeFields';
 import { validateChallengesPlans } from './utils/validateChallengesPlans';
 import { validatePolicyPrioritiesFields } from './utils/validatePolicyPriorities';
+import { validateIndVerFields } from './utils/validateIndVerFields';
+
+/* utils related to data */
 import { uploadFiles } from './utils/uploadFiles';
-import { LocationModel } from './model';
 import { getFileTypeAccept } from './utils/getFileTypeAccept';
+
+/* state/data */
+import { useQuery } from 'app/utils/useQuery';
+import { usePersistedState } from 'app/utils/usePersistedState';
+import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+
+/* global variables */
+import { AppConfig } from 'app/data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
@@ -92,11 +108,18 @@ function CreateReportFunc(props: any) {
     }
   );
 
-  const [budget, setBudget] = usePersistedState('report_budget', 0);
+  const [budget, setBudget] = usePersistedState(
+    'report_budget',
+    useStoreState(state => get(state.projectBudgetData, 'data.remainBudget', 0))
+  );
   const [insContribution, setInsContribution] = usePersistedState(
     'report_insContribution',
     0
   );
+  const [funder, setFunder] = usePersistedState('report_funder', {
+    label: '',
+    value: '',
+  });
 
   // Indicator and verification state
   const [keyOutcomes, setKeyOutcomes] = usePersistedState(
@@ -225,6 +248,9 @@ function CreateReportFunc(props: any) {
   const allProjectsData = useStoreState(state =>
     get(state.allProjects.data, 'data', [])
   );
+
+  // console.log("allProjectsData", allProjectsData);
+
   const addReportData = useStoreState(state => state.addReport.data);
   const addReportLoading = useStoreState(state => state.addReport.loading);
   const deleteReportData = useStoreState(state => state.deleteReport.data);
@@ -235,6 +261,15 @@ function CreateReportFunc(props: any) {
     state => state.projectBudgetData.data
   );
   const reportDetailData = useStoreState(state => state.reportDetail.data);
+
+  const signedInUserRole = useStoreState(state =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState(state =>
+    get(state.userDetails.data, 'email', '')
+  );
+
+  // console.log("reportDetailData", reportDetailData);
 
   useWindowUnloadEffect(() => {
     addReportClearAction();
@@ -391,6 +426,17 @@ function CreateReportFunc(props: any) {
     }
   }, [location]);
 
+  React.useEffect(() => {
+    if (
+      get(projectBudgetData, 'data', null) &&
+      get(projectBudgetData, 'data.person_email', '-') !== signedInUserEmail &&
+      signedInUserRole === 'Grantee user'
+    ) {
+      props.history.replace('/');
+    }
+    setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+  }, [projectBudgetData]);
+
   const onStepChange = (tabIndex: number) => {
     const rid = query.get('rid');
     props.history.push(`${tabs[tabIndex].path}${rid ? `?rid=${rid}` : ''}`);
@@ -487,7 +533,8 @@ function CreateReportFunc(props: any) {
       policyPriority.value,
       budget,
       get(projectBudgetData, 'data.remainBudget', 0),
-      insContribution
+      insContribution,
+      funder.value
     );
 
   const step4Enabled =
@@ -514,6 +561,7 @@ function CreateReportFunc(props: any) {
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
             policy_priority: policyPriority.value,
+            /* todo: stefanos, please look into refactoring this piece */
             location: location
               ? {
                   long: (location as LocationModel).longitude,
@@ -522,6 +570,7 @@ function CreateReportFunc(props: any) {
               : null,
             media: mediaAdded.map((m: any) => m.path),
             country: country.label,
+            /* todo: stefanos, please look into refactoring this piece */
             place_name: location ? (location as LocationModel).place : null,
             total_target_beneficiaries: tarBenTotal,
             total_target_beneficiaries_commited: tarBenTotal2,
@@ -534,6 +583,7 @@ function CreateReportFunc(props: any) {
             plans: futurePlans,
             other_comments: otherComms,
             isDraft: false,
+            funder: funder.label,
           },
         },
       });
@@ -552,6 +602,7 @@ function CreateReportFunc(props: any) {
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
             policy_priority: policyPriority.value,
+            /* todo: stefanos, please look into refactoring this piece */
             location: location
               ? {
                   long: (location as LocationModel).longitude,
@@ -560,6 +611,7 @@ function CreateReportFunc(props: any) {
               : null,
             media: mediaAdded.map((m: any) => m.path),
             country: country.label === '' ? ' ' : country.label,
+            /* todo: stefanos, please look into refactoring this piece */
             place_name: location ? (location as LocationModel).place : null,
             total_target_beneficiaries: tarBenTotal,
             total_target_beneficiaries_commited: tarBenTotal2,
@@ -575,6 +627,7 @@ function CreateReportFunc(props: any) {
             plans: futurePlans === '' ? ' ' : futurePlans,
             other_comments: otherComms === '' ? ' ' : otherComms,
             isDraft: true,
+            funder: funder.label,
           },
         },
       });
@@ -629,6 +682,8 @@ function CreateReportFunc(props: any) {
         remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
         insContribution,
         setInsContribution,
+        funder,
+        setFunder,
       }}
       indicatorVerificationProps={{
         keyOutcomes,
@@ -670,6 +725,7 @@ function CreateReportFunc(props: any) {
           policyPriority,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
           insContribution,
+          funder: funder.value,
         })
       }
       backBtnDisabled={!isNavBtnEnabled('back', initialTabIndex, {})}

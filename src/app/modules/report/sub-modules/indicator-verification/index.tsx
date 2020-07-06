@@ -86,6 +86,7 @@ export const IndicatorVerificationLayout = (
       {/* add media button 1 */}
       <Grid item xs={12} lg={12}>
         <ContainedButton
+          testAttr="media-button"
           text={t('reports.form.cards.media')}
           icon={<GetAppIcon />}
           onClick={() => props.setOpenMediaModal(true)}

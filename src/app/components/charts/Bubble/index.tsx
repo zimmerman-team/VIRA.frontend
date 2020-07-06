@@ -127,6 +127,11 @@ export function BubbleChart(props: Props) {
                         opacity: node.data.opacity || 1,
                         color: ProjectPalette.common.white,
                         cursor: hasData ? 'pointer' : 'initial',
+                        border:
+                          selectedBubbleObj &&
+                          selectedBubbleObj.number === node.data.number
+                            ? `3px solid ${ProjectPalette.secondary.main}`
+                            : '',
                       }}
                       {...handlers}
                       onClick={_e =>
@@ -170,13 +175,15 @@ export function BubbleChart(props: Props) {
                         },
                         {
                           label: 'Budget',
-                          value: tProps.data.loc
-                            .toLocaleString(undefined, {
-                              currency: 'EUR',
-                              currencyDisplay: 'symbol',
-                              style: 'currency',
-                            })
-                            .replace('.00', ''),
+                          value:
+                            tProps.data.loc &&
+                            tProps.data.loc
+                              .toLocaleString(undefined, {
+                                currency: 'EUR',
+                                currencyDisplay: 'symbol',
+                                style: 'currency',
+                              })
+                              .replace('.00', ''),
                         },
                         {
                           label: 'charts.barchart.commitment',

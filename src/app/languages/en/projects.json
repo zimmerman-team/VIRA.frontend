@@ -4,6 +4,7 @@
     "generateReportBtn": "Generate report",
     "stats": {
       "total_budget": "Total project budget",
+      "insinger_contribution": "Insinger contribution",
       "duration": "Project duration"
     }
   },

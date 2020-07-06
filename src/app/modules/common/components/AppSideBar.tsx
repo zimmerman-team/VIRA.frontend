@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { css, CSSProp } from 'styled-components/macro';
+import { css } from 'styled-components/macro';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Theme } from '@material-ui/core/styles';
@@ -18,7 +18,6 @@ import { ProjectPalette } from 'app/theme';
 import { IconMenuOpen } from 'app/modules/common/icons/IconMenuOpen';
 import { NavItemParams } from 'app/modules/common/consts';
 import { Logo } from 'app/assets/icons/Logo';
-import { useTranslation } from 'react-i18next';
 
 interface AppSideBarParams {
   classes: Record<
@@ -45,8 +44,6 @@ interface AppSideBarParams {
 
 export function AppSideBar(props: AppSideBarParams) {
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
-
-  const { t, i18n } = useTranslation();
 
   const HeaderStyle = css`
     && {

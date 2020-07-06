@@ -98,6 +98,7 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
     setOpenSearch(prev => !prev);
   };
 
+  /* todo: refactor, deprecated symbol */
   useEventListener('keydown', (e: KeyboardEvent) => {
     if (e.keyCode === 83 && e.ctrlKey) {
       handleClickSearch();
@@ -198,7 +199,11 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
       {/* ---------------------------- */}
       {/* NL and EN btn container */}
       <div css={LanguageButtonStyle}>
-        <div css={EnglisLangBtnStyle} onClick={() => changeLanguage('en')}>
+        <div
+          data-cy="language-en"
+          css={EnglisLangBtnStyle}
+          onClick={() => changeLanguage('en')}
+        >
           EN
         </div>
         <div
@@ -211,7 +216,11 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
           `}
         />
 
-        <div css={DutchLangBtnStyle} onClick={() => changeLanguage('nl')}>
+        <div
+          data-cy="language-nl"
+          css={DutchLangBtnStyle}
+          onClick={() => changeLanguage('nl')}
+        >
           NL
         </div>
       </div>

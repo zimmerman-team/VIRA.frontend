@@ -17,8 +17,6 @@ import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // direct
 import 'styled-components/macro';
-import { ProjectPalette } from 'app/theme';
-import { TeamSelectNew } from 'app/components/inputs/select-team-new';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {

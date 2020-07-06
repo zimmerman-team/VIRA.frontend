@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { css } from 'styled-components/macro';
+import 'styled-components/macro';
 import { ContactsCardModel } from 'app/components/surfaces/Cards/ContactsCard/model';
 import { Typography, Grid } from '@material-ui/core';
 import { Email, Public, Phone } from '@material-ui/icons';

@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { TitleParams } from 'app/modules/common/components/TitleParams';
-import { StatParams } from 'app/modules/common/components/StatItem';
-import { OutcomeCardParams } from 'app/modules/common/components/OutcomeCard';
-import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
-import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+// import { TitleParams } from 'app/modules/common/components/TitleParams';
+// import { StatParams } from 'app/modules/common/components/StatItem';
+// import { OutcomeCardParams } from 'app/modules/common/components/OutcomeCard';
+// import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
+// import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 
-import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
+// import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 
+/*
 export const ProjectTitleMock: TitleParams = {
   title: 'Project Title',
   id: 'GB-CHC-274467',
@@ -26,8 +27,9 @@ export const ProjectStatMock: StatParams[] = [
     value: '01.2019-02.2021',
   },
 ];
+*/
 
-export const ProjectOutcomeCardMock: OutcomeCardParams[] = [
+/*export const ProjectOutcomeCardMock: OutcomeCardParams[] = [
   {
     title: 'Key outcomes',
     description:
@@ -38,13 +40,16 @@ export const ProjectOutcomeCardMock: OutcomeCardParams[] = [
     description:
       'Number of prisoners obtaining a Tertiary and Vocational Education certificate, labor market connection after one year after the release from prison',
   },
-];
+];*/
 
+/*
 export const DescriptionMock: DescriptionParams = {
   project_description:
     'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',
 };
+*/
 
+/*
 export const ProjectReportsMock: TableModuleModel = {
   title: 'Reports',
   data: [
@@ -114,3 +119,4 @@ export const ProjectReportsMock: TableModuleModel = {
   },
   columnsCell: ['', '', '', 'LinkCellModule', '', ''],
 };
+*/

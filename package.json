@@ -8,25 +8,36 @@
   },
   "dependencies": {
     "@craco/craco": "^5.6.4",
+    "@date-io/date-fns": "1.x",
     "@hot-loader/react-dom": "^16.13.0",
     "@jackwilsdon/craco-use-babelrc": "^1.0.0",
     "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.44",
+    "@material-ui/pickers": "^3.2.10",
     "@nivo/bar": "^0.59.2",
     "@nivo/circle-packing": "^0.61.0",
     "@turf/helpers": "^6.1.4",
+    "@types/material-ui": "^0.21.7",
+    "@types/mui-datatables": "^2.13.4",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
     "@types/react-map-gl": "^5.2.0",
+    "@types/react-router-dom": "^5.1.3",
+    "@types/styled-components": "^5.0.1",
     "auth0-js": "^9.11.3",
     "axios": "^0.19.2",
     "clsx": "^1.0.4",
     "craco-plugin-react-hot-reload": "^0.1.0",
+    "date-fns": "1.30.1",
     "easy-peasy": "^3.3.0",
     "history": "^4.10.1",
     "i18next": "^19.3.3",
     "i18next-browser-languagedetector": "^4.0.2",
     "lodash": "^4.17.15",
+    "material-ui": "^0.20.2",
     "mui-datatables": "^2.14.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-fetching-library": "^1.7.0",
@@ -46,15 +57,6 @@
     "which-country": "^1.0.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.3.14",
-    "@storybook/addon-docs": "^5.3.14",
-    "@storybook/addon-links": "^5.3.14",
-    "@storybook/addon-viewport": "^5.3.14",
-    "@storybook/addons": "^5.3.12",
-    "@storybook/csf": "^0.0.1",
-    "@storybook/preset-create-react-app": "^2.0.0",
-    "@storybook/preset-typescript": "^2.1.0",
-    "@storybook/react": "^5.3.14",
     "@testing-library/cypress": "^6.0.0",
     "@testing-library/dom": "^7.2.1",
     "@testing-library/react": "^10.0.2",
@@ -62,19 +64,12 @@
     "@types/i18next-xhr-backend": "^1.4.2",
     "@types/jest": "24.0.22",
     "@types/lodash": "^4.14.149",
-    "@types/material-ui": "^0.21.7",
-    "@types/mui-datatables": "^2.13.4",
     "@types/node": "^12.12.11",
-    "@types/react": "^16.9.23",
-    "@types/react-dom": "^16.9.5",
-    "@types/react-map-gl": "^5.2.0",
-    "@types/react-router-dom": "^5.1.3",
     "@types/redux-logger": "^3.0.7",
     "@types/redux-persist": "^4.3.1",
     "@types/redux-persist-transform-encrypt": "^2.0.1",
     "@types/socket.io": "^2.1.4",
     "@types/socket.io-client": "^1.4.32",
-    "@types/styled-components": "^5.0.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-react-data-testid": "^0.1.1",
@@ -86,6 +81,7 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-sonarjs": "^0.5.0",
     "fork-ts-checker-webpack-plugin": "^4.0.5",
     "getenv": "^1.0.0",
     "happo-cypress": "^1.0.0",
@@ -108,84 +104,14 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "depcheck": "depcheck",
-    "codecrumbs": "codecrumbs -e src/index.tsx -d src -p 1234 ",
-    "start-back": "nodemon --watch 'server/' --ignore 'server/__test__' --exec ts-node --project 'nodetsconfig.json' server/server.ts",
-    "start-fullstack": "yarn start & yarn start-back",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "test-api": "jest --detectOpenHandles --runTestsByPath ./server/__test__/*.spec.ts",
-    "start-back-test": "ts-node --project 'nodetsconfig.json' server/server",
-    "start-test-api": "start-server-and-test start-back-test http://localhost:4200/api test-api",
-    "storybook": "start-storybook -p 9009 -s public --ci process.env.DEV_ENVIRONMENT=isolated",
-    "build-storybook": "build-storybook -s public",
-    "init-data": "ts-node --project 'nodetsconfig.json' server/scripts/loadInitialData.ts",
     "cypress:open": "cypress open",
     "cypress:record": "cypress run --record --key 30a16df3-0b07-4a7e-bd9c-d6a60c8c8354",
     "happo:run": "happo run [sha]",
     "happo-ci-circleci": "BASE_BRANCH=\"origin/develop\" happo-ci-circleci"
-  },
-  "eslintConfig": {
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "paths": [
-            "src"
-          ]
-        }
-      }
-    },
-    "parserOptions": {
-      "project": "./tsconfig.json",
-      "tsconfigRootDir": "./"
-    },
-    "extends": [
-      "react-app",
-      "airbnb-typescript-prettier"
-    ],
-    "rules": {
-      "import/prefer-default-export": 0,
-      "react-hooks/exhaustive-deps": 0,
-      "@typescript-eslint/no-explicit-any": 0,
-      "@typescript-eslint/ban-ts-ignore ": 0,
-      "@typescript-eslint/no-unused-vars": 0,
-      "no-restricted-imports": [
-        "error",
-        {
-          "paths": [
-            {
-              "name": "styled-components",
-              "message": "Please import from styled-components/macro."
-            }
-          ],
-          "patterns": [
-            "!styled-components/macro"
-          ]
-        }
-      ]
-    },
-    "overrides": [
-      {
-        "files": [
-          "**/*.ts?(x)"
-        ],
-        "rules": {
-          "no-shadow": "off",
-          "no-unused-vars": "off",
-          "react/destructuring-assignment": 0,
-          "react/jsx-fragments": 0,
-          "react/jsx-props-no-spreading": 0,
-          "react-hooks/exhaustive-deps": 0,
-          "@typescript-eslint/no-explicit-any": 0,
-          "@typescript-eslint/ban-ts-ignore ": 0,
-          "@typescript-eslint/no-unused-vars": 0,
-          "@typescript-eslint/no-empty-function": 0,
-          "no-underscore-dangle": "off",
-          "no-useless-escape": "off"
-        }
-      }
-    ]
   },
   "prettier": {
     "singleQuote": true,
@@ -212,6 +138,5 @@
     "branches": [
       "master"
     ]
-  },
-  "proxy": "http://localhost:4200"
+  }
 }

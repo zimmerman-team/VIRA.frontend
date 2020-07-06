@@ -1,8 +1,9 @@
 // @ts-nocheck
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ProjectPalette, TextStyle } from 'app/theme';
+import { MuiTheme } from 'material-ui/styles';
 
-export const reportsVariant = createMuiTheme({
+export const reportsVariant: MuiTheme = createMuiTheme({
   overrides: {
     MuiSvgIcon: {
       root: {
@@ -12,6 +13,7 @@ export const reportsVariant = createMuiTheme({
     MUIDataTableToolbar: {
       root: {
         paddingLeft: 0,
+        // outline: '2px solid red',
       },
       titleText: {
         fontFamily: TextStyle.fontFamily,
@@ -55,6 +57,11 @@ export const reportsVariant = createMuiTheme({
         '& a': {
           fontWeight: '600',
         },
+      },
+    },
+    MuiPaper: {
+      root: {
+        boxShadow: 'none!important',
       },
     },
     MuiTablePagination: {

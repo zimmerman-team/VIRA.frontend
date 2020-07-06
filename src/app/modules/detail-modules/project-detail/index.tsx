@@ -11,10 +11,8 @@ import {
 } from 'app/modules/detail-modules/project-detail/model';
 
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
-import {
-  formatTableDataForReport,
-  getBaseTableForReport,
-} from 'app/modules/list-module/utils';
+import { getBaseTableForReport } from 'app/modules/list-module/utils/getBaseTableForReport';
+import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTableDataForReport';
 
 import { AppConfig } from 'app/data';
 
@@ -97,6 +95,7 @@ const ProjectDetailModuleF = (props: any) => {
           start_date: projectDetailRecord[0].start_date,
           end_date: projectDetailRecord[0].end_date,
           total_amount: projectDetailRecord[0].total_amount,
+          total_insinger_contribution: projectDetailRecord[0].allocated_amount,
           decision_date: projectDetailRecord[0].decision_date,
           decision: projectDetailRecord[0].decision,
           allocated_amount: projectDetailRecord[0].allocated_amount,
@@ -104,24 +103,13 @@ const ProjectDetailModuleF = (props: any) => {
           paid_amount: projectDetailRecord[0].paid_amount,
           organisation: projectDetailRecord[0].organisation.organisation_name,
           organisation_link: `/grantee/${projectDetailRecord[0].organisation._id}/detail`,
-          org_type: '',
-          street: 'Postbus',
-          house_number: '193',
-          additional_house_number: '',
-          postcode: '3780 BD',
-          place: 'Voorthuizen',
-          country: 'Nederland',
-          telephone: '',
-          organisation_email: 'penningmeester@ngkdeontmoeting.nl',
-          website: 'https://www.ngkdeontmoeting.nl',
-          family_name: 'Reijersen',
-          initial: 'Albert',
-          insertion: '',
-          title: '',
-          email: 'penningmeester@ngkdeontmoeting.nl',
-          login_email: 'penningmeester@ngkdeontmoeting.nl',
-          sex: 'male',
-          role: 'voorzitter kerkenraad',
+          place: '',
+          country: '',
+          responsible_person_email: get(
+            projectDetailRecord[0],
+            'person.email',
+            ''
+          ),
           generateReport: () => {
             generateReport();
           },
@@ -171,6 +159,7 @@ const ProjectDetailModuleF = (props: any) => {
     }
   }, [projectDetailData]);
 
+  /* todo: resolve duplicate code */
   function onBarChartLegendClick(legend: string) {
     const prevBarChartLegends = [...barChartLegends];
     const legendIndex = findIndex(prevBarChartLegends, { label: legend });

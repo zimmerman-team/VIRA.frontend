@@ -37,11 +37,13 @@ export function ContactsCard(props: ContactsCardModel) {
             <Typography variant="body1">{props.email}</Typography>
           </Grid>
 
-          <Grid container item xs={12} xl={12} direction="row">
-            <StyledPhoneIcon />
-            <Box width="16px" />
-            <Typography variant="body1">{props.phonenumber}</Typography>
-          </Grid>
+          {props.phonenumber && (
+            <Grid container item xs={12} xl={12} direction="row">
+              <StyledPhoneIcon />
+              <Box width="16px" />
+              <Typography variant="body1">{props.phonenumber}</Typography>
+            </Grid>
+          )}
 
           <Grid container item xs={12} xl={12} direction="row">
             <StyledGlobeIcon />

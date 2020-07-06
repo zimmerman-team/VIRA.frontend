@@ -24,14 +24,15 @@ import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-te
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { TabNavMock } from 'app/modules/list-module/mock';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
 import { AppConfig } from 'app/data';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
 import findIndex from 'lodash/findIndex';
 import { useClearPersistedState } from './utils/useClearPersistedState';
+import { TabNavMock } from 'app/mock/tabnav';
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -42,6 +43,12 @@ function redirectUnAuth<ReactModule>(
   allowedRoles?: string[]
 ) {
   if (!user) {
+    if (
+      window.location.pathname !== '/callback' &&
+      window.location.pathname !== '/login'
+    ) {
+      sessionStorage.setItem('redirectTo', window.location.pathname);
+    }
     return <Redirect to="/login" />;
   }
   if (role) {
@@ -50,7 +57,7 @@ function redirectUnAuth<ReactModule>(
         return <Redirect to="/" />;
       }
     }
-    if (!allowedRoles && role !== 'Administrator') {
+    if (!allowedRoles && role !== 'Administrator' && role !== 'Super admin') {
       return <Redirect to="/" />;
     }
   }
@@ -125,10 +132,7 @@ export function MainRoutes() {
       </Route>
 
       <Route path="/report/:projectID">
-        {redirectUnAuth(CreateReport, storeUser, {}, userRole, [
-          'Administrator',
-          'Manager',
-        ])}
+        {redirectUnAuth(CreateReport, storeUser)}
       </Route>
 
       <Route exact path="/grantees/detail">
@@ -231,8 +235,9 @@ export function MainRoutes() {
               ...manageUserEditMock.form,
               radioButtonGroup: {
                 title: 'User Role',
-                items:
-                  userRoles || manageUserEditMock.form.radioButtonGroup.items,
+                items: userRoles
+                  ? filter(userRoles, (ur: any) => ur.name !== 'Super admin')
+                  : manageUserEditMock.form.radioButtonGroup.items,
               },
               selectOptions: userGroups,
             },

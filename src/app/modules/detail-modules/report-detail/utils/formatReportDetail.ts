@@ -5,6 +5,7 @@ import { ProjectPalette } from 'app/theme';
 import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
 import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
 
+/* todo: stefanos, can this one be removed? */
 const ppToSdg = {
   poverty: {
     // name: 'No poverty',
@@ -77,6 +78,9 @@ export function formatReportDetail(data: any) {
     project: {
       name: reportDetailRecord.project.project_name,
       id: reportDetailRecord.project.project_number,
+      person: {
+        email: get(reportDetailRecord, 'project.person.email', ''),
+      },
     },
     key_outcomes: reportDetailRecord.key_outcomes,
     monitor_report_outcomes: reportDetailRecord.monitor_report_outcomes,

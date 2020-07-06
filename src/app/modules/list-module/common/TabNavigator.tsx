@@ -19,6 +19,8 @@ export function TabNavigator(props: TabNavigatorParams) {
       setValue(props.initialTabIndex);
     }
   }, [props.initialTabIndex]);
+
+  /* todo: stefanos, can this be removed? */
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     if (props.onTabChange) {
       props.onTabChange(newValue);

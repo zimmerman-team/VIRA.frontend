@@ -11,31 +11,17 @@ export interface ProjectModel {
   start_date: string;
   end_date: string;
   total_amount: string;
+  total_insinger_contribution: number;
   decision_date: string;
   decision: string;
   allocated_amount: string;
   released_amount: string;
   paid_amount: string;
   organisation: string;
-  org_type: string;
-  street: string;
-  house_number: string;
-  additional_house_number: string;
-  postcode: string;
   place: string;
   country: string;
-  telephone: string;
-  organisation_email: string;
+  responsible_person_email: string;
   organisation_link: string;
-  website: string;
-  family_name: string;
-  initial: string;
-  insertion: string;
-  title: string;
-  email: string;
-  login_email: string;
-  sex: string;
-  role: string;
   generateReport: Function;
 }
 
@@ -70,29 +56,15 @@ export const projectMock: ProjectModel = {
   total_amount: '245410',
   decision_date: '30-9-2019',
   decision: 'Toekenning',
+  total_insinger_contribution: 0,
   allocated_amount: '15000',
   released_amount: '',
   paid_amount: '',
   organisation: 'NGK De Ontmoeting',
-  org_type: '',
-  street: 'Postbus',
-  house_number: '193',
-  additional_house_number: '',
-  postcode: '3780 BD',
   place: 'Voorthuizen',
   country: 'Nederland',
-  telephone: '',
-  organisation_email: 'penningmeester@ngkdeontmoeting.nl',
   organisation_link: '',
-  website: 'https://www.ngkdeontmoeting.nl',
-  family_name: 'Reijersen',
-  initial: 'Albert',
-  insertion: '',
-  title: '',
-  email: 'penningmeester@ngkdeontmoeting.nl',
-  login_email: 'penningmeester@ngkdeontmoeting.nl',
-  sex: 'male',
-  role: 'voorzitter kerkenraad',
+  responsible_person_email: '',
   generateReport: () => {},
 };
 

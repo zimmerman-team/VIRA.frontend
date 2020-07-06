@@ -38,7 +38,7 @@ describe('generate report page', () => {
     cy.get('.react-geocoder-results > :nth-child(1)').click();
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
+    cy.findByTestId('next-button').click();
 
     cy.get('#autocomplete-countries').click();
     cy.get('#autocomplete-countries').type('Refugees');
@@ -68,6 +68,13 @@ describe('generate report page', () => {
       .type('{backspace}')
       .type(1000);
 
+    // open funders list and click top option
+    cy.findByTestId('other-funders')
+      .should('exist')
+      .click()
+      .type('funder one');
+    cy.get('#autocomplete-countries-option-0').click();
+
     cy.findByTestId('which-when-item-0')
       .should('exist')
       .click()
@@ -81,7 +88,7 @@ describe('generate report page', () => {
       .type(25);
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
+    cy.findByTestId('next-button').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -96,7 +103,7 @@ describe('generate report page', () => {
       .type('Lorem ipsum dolor simet text area 2');
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
+    cy.findByTestId('next-button').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -123,7 +130,8 @@ describe('generate report page', () => {
       .type('Lorem ipsum dolor simet text area 4');
 
     // next
-    cy.get('.bottom-nav___StyledContainedButton5-sc-7nwiqa-6').click();
+    cy.findByTestId('next-button').click();
+
     cy.get('body').happoScreenshot({
       component: 'Create report',
       variant: 'base',

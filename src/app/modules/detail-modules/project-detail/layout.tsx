@@ -16,10 +16,17 @@ import get from 'lodash/get';
 
 export const ProjectDetailLayout = (props: any) => {
   const { t } = useTranslation();
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
   const showGenerateBtn = useStoreState(
     state =>
+      get(state.userDetails.data, 'role', '') === 'Super admin' ||
       get(state.userDetails.data, 'role', '') === 'Administrator' ||
-      get(state.userDetails.data, 'role', '') === 'Manager'
+      get(state.userDetails.data, 'role', '') === 'Manager' ||
+      get(state.userDetails.data, 'email', '_') ===
+        props.projectDetail.responsible_person_email
   );
   return (
     <React.Fragment>
@@ -58,13 +65,22 @@ export const ProjectDetailLayout = (props: any) => {
           url_note={props.projectDetail.organisation}
           url={props.projectDetail.organisation_link}
           stats={[
-            // {
-            //   label: '',
-            //   value: '',
-            // },
             {
               label: t('projects.detail.stats.total_budget'),
-              value: parseInt(props.projectDetail.total_amount || '', 10)
+              value: parseInt(props.projectDetail.total_amount || 0, 10)
+                .toLocaleString(undefined, {
+                  currency: 'EUR',
+                  currencyDisplay: 'symbol',
+                  style: 'currency',
+                })
+                .replace('.00', ''),
+            },
+            {
+              label: t('projects.detail.stats.insinger_contribution'),
+              value: parseInt(
+                props.projectDetail.total_insinger_contribution || 0,
+                10
+              )
                 .toLocaleString(undefined, {
                   currency: 'EUR',
                   currencyDisplay: 'symbol',
@@ -85,6 +101,8 @@ export const ProjectDetailLayout = (props: any) => {
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
       <Viztabs
+        value={value}
+        onTabClick={handleChange}
         barChartData={props.ppVizData}
         barChartLegends={props.barChartLegends}
         onBarChartLegendClick={props.onBarChartLegendClick}

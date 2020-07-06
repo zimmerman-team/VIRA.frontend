@@ -5,12 +5,12 @@ import Card from '@material-ui/core/Card';
 
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import { ProjectListMock } from 'app/modules/list-module/mock';
 import TableModule from 'app/components/datadisplay/Table';
 
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
 import graph1 from 'app/assets/images/graph_sdg.png';
 import { PriorityAreaNavMock } from 'app/modules/priority-area/mock';
+import { ProjectListMock } from 'app/mock/lists/ProjectListMock';
 
 export const SdgModule = () => {
   return (

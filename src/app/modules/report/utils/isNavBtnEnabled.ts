@@ -5,6 +5,7 @@ import { validatePolicyPrioritiesFields } from 'app/modules/report/utils/validat
 
 export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
   if (btnType === 'back') {
+    /* todo: can this be simplified? */
     if (tabIndex === 0) {
       return false;
     }
@@ -23,7 +24,8 @@ export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
         data.policyPriority,
         data.budget,
         data.remainBudget,
-        data.insContribution
+        data.insContribution,
+        data.funder
       );
     case 2:
       return validateIndVerFields(data.keyOutcomes, data.monRepOutcomes);
