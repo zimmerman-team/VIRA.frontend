@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState } from 'react';
-import { DateRangePicker } from '@matharumanpreet00/react-daterange-picker';
+// import { DateRangePicker } from '@matharumanpreet00/react-daterange-picker';
 import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableOptions,
@@ -16,6 +16,7 @@ import i18n from 'app/languages';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
+import { DateRangePicker } from 'app/components/daterange';
 
 const options: MUIDataTableOptions = {
   filter: true,

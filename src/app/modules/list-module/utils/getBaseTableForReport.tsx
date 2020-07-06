@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState } from 'react';
-import { DateRangePicker } from '@matharumanpreet00/react-daterange-picker';
+// import { DateRangePicker } from '@matharumanpreet00/react-daterange-picker';
 import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableOptions,
@@ -20,6 +20,7 @@ import get from 'lodash/get';
 import find from 'lodash/find';
 import i18n from 'app/languages';
 import { ReportListMock } from 'app/mock/lists/ReportListMock';
+import { DateRangePicker } from 'app/components/daterange';
 
 const options: MUIDataTableOptions = {
   filter: true,
