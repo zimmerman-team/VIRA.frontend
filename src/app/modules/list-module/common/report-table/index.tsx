@@ -34,6 +34,7 @@ interface ReportsOverviewTableProps {
 export const ReportsOverviewTable = (props: ReportsOverviewTableProps) => {
   const [openDatePicker, setDatePickerOpen] = React.useState(true);
 
+  /* todo: resolve duplicate code */
   const ColumnTitle: MUIDataTableColumn = {
     name: i18n.t('reports.overview.table.title'),
     options: {

@@ -159,6 +159,7 @@ const ProjectDetailModuleF = (props: any) => {
     }
   }, [projectDetailData]);
 
+  /* todo: resolve duplicate code */
   function onBarChartLegendClick(legend: string) {
     const prevBarChartLegends = [...barChartLegends];
     const legendIndex = findIndex(prevBarChartLegends, { label: legend });

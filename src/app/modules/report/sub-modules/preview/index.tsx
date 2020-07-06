@@ -24,7 +24,6 @@ interface PreviewParams {
 
 export const PreviewLayout = (props: PreviewParams) => {
   const { t } = useTranslation();
-  const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   return (
     <React.Fragment>

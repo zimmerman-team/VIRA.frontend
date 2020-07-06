@@ -43,13 +43,14 @@ export const TabNavMockViz: TabNavigatorParams = {
   items: navItemMockViz,
 };
 
+/* todo: get rid of the 'any' types and replace with something more specific */
 export interface GranteeParams {
   match?: any;
   breadcrumbs: BreadcrumbModel;
   title: TitleParams;
   description: DescriptionParams;
   contact: ContactsCardModel;
-  mockData: HorizontalBarChartModel;
+  mockData?: HorizontalBarChartModel;
   barChartLegends: any;
   onBarChartLegendClick?: any;
   ppVizData: any;
@@ -57,7 +58,7 @@ export interface GranteeParams {
   selectedSDG: string;
   onBubbleSelect: Function;
   geoMapData: any;
-  projectParams: any;
+  projectParams?: any;
 }
 
 export const propsMock = {

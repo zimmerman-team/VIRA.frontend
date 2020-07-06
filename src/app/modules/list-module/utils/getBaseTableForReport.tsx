@@ -34,6 +34,7 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
           `${i18n.t('reports.overview.table.id')}: ${value}`,
       },
     },
+    /* todo: resolve duplicate code, is the same as ColumnTitle const */
     {
       name: i18n.t('reports.overview.table.title'),
       options: {

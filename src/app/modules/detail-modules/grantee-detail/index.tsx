@@ -191,6 +191,7 @@ export function GranteeDetailModule(props: any) {
   }
 
   return (
+    /* todo: look into why we're not passing mockData */
     <GranteeDetailLayout
       match={props.match}
       loading={loading}
