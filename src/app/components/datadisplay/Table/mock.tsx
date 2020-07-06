@@ -240,6 +240,7 @@ export const mockDataVar2: TableModuleModel = {
       if (colIndex === 0) {
         indexStr = `[${colIndex}].name`;
       }
+      /* todo: juan, please look into refactoring this piece */
       const sortedData = data.sort((a, b) => {
         const v1 = get(a.data, indexStr, '');
         const v2 = get(b.data, indexStr, '');

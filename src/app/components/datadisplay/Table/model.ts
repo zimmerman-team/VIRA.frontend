@@ -23,8 +23,8 @@ export interface TableModuleModel {
   columns: MUIDataTableColumnDef[];
   options: MUIDataTableOptions;
   columnsCell?: string[];
-  totalCell?: boolean | undefined;
-  expandableData?: any[][][] | undefined;
+  totalCell?: boolean;
+  expandableData?: any[][][];
   totalRowColsDef?: TotalRowColModel[];
   changeTableRowColor?: number;
   cssVariant?:

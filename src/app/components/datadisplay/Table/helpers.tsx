@@ -37,6 +37,7 @@ export function getExpandableTableCell(
   value: string | string[],
   link: string | undefined
 ): React.ReactNode {
+  /* todo: juan, please look into refactoring this piece */
   switch (type) {
     case 'LinkCellModule':
       return <LinkCellModule value={value} link={link as string} />;

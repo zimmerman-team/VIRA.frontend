@@ -58,7 +58,7 @@ export function GranteeDetailModule(props: any) {
   const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
   const granteeDetailData = useStoreState(state => state.orgDetail.data);
   const ProjectsData = useStoreState(state => state.allProjects.data);
-  const ReportsData = useStoreState(state => state.allReports.data);
+
   const loading = useStoreState(
     state =>
       state.orgDetail.loading ||
