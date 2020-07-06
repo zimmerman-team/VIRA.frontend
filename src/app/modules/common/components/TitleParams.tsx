@@ -8,7 +8,6 @@ import { StatItem } from 'app/modules/common/components/StatItem';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Hidden } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 
 export interface TitleParams {
