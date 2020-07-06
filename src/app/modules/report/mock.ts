@@ -9,19 +9,6 @@ export const breadcrumbs: BreadcrumbModel = {
   ],
 };
 
-export const outcomeCheckboxes = [
-  { label: 'Refugees', value: 'refugees' },
-  { label: 'Drug use', value: 'drug_use' },
-  { label: 'The Elderly', value: 'elderly' },
-  { label: 'Prostitution', value: 'prostitution' },
-  {
-    label: 'Poverty reduction with a focus on youth and children',
-    value: 'poverty_reduction',
-  },
-  { label: 'Homelessness', value: 'homelessness' },
-  { label: 'Prisoner rehabilitation / reintegration', value: 'prisoner_rehab' },
-];
-
 export const tabs: NavItemParams[] = [
   {
     label: 'reports.form.steps.outcomes',

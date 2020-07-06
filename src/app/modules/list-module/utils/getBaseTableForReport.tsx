@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React from 'react';
 
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
