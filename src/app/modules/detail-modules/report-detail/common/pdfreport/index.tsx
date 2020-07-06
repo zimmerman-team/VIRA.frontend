@@ -32,7 +32,7 @@ export function PDFreport(props: any) {
         visibility: hidden;
       `}
     >
-      <div id="page1" css="padding: 16px;">
+      <div id="page1" css="padding: 64px;">
         <Grid item xs={12} lg={12}>
           <TitleFragment
             showMoreThanTitle
@@ -127,7 +127,7 @@ export function PDFreport(props: any) {
           setSelectedBubble={props.onBubbleSelect}
         />
       </div>
-      <div id="page2" css="padding: 16px;">
+      <div id="page2" css="padding: 64px;">
         <h4
           css={`
             font-size: 20px;
@@ -170,7 +170,7 @@ export function PDFreport(props: any) {
           />
         </Grid>
       </div>
-      <div id="page3" css="padding: 16px;">
+      <div id="page3" css="padding: 64px;">
         {props.report.media.length > 0 && (
           <Grid
             key={props.cardData[2].title}

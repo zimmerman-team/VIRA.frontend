@@ -117,7 +117,7 @@ export const ReportDetailLayout = (props: any) => {
             pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-            pdf.save('download.pdf');
+            pdf.save(`${props.report.title}.pdf`);
 
             node.style.visibility = 'visible';
             pdfnode.style.visibility = 'hidden';
@@ -231,6 +231,8 @@ export const ReportDetailLayout = (props: any) => {
         {/* ---------------------------------------------------------------------*/}
         {/* charts */}
         <Viztabs
+          value={value}
+          onTabClick={handleChange}
           barChartData={props.report.barChartData}
           barChartLegends={props.barChartLegends}
           onBarChartLegendClick={props.onBarChartLegendClick}
