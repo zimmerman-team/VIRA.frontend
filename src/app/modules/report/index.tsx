@@ -429,7 +429,8 @@ function CreateReportFunc(props: any) {
   React.useEffect(() => {
     if (
       get(projectBudgetData, 'data', null) &&
-      get(projectBudgetData, 'data.person_email', '-') !== signedInUserEmail
+      get(projectBudgetData, 'data.person_email', '-') !== signedInUserEmail &&
+      signedInUserRole === 'Grantee user'
     ) {
       props.history.replace('/');
     }
