@@ -18,7 +18,7 @@ import { formatTableDataForProject } from 'app/modules/list-module/utils/formatT
 import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
-import { ReportsOverviewTable } from 'app/modules/list-module/common/report-table';
+
 import {
   getGranteesBySDG,
   getProjectsBySDG,

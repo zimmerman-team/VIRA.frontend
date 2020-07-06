@@ -4,17 +4,7 @@ import React from 'react';
 import Providers from 'app/Providers';
 import { Container, Grid } from '@material-ui/core';
 import Table from './index';
-import {
-  mockDataVar1,
-  mockDataVar2,
-  mockDataVar3,
-  mockDataVar4,
-  mockDataVar5,
-  mockDataVar6,
-  mockDataVar7,
-  projectsTableConfig,
-  addTeamMemberTableConfig,
-} from './mock';
+
 import { getBaseTableForGrantee } from 'app/modules/list-module/utils/getBaseTableForGrantee';
 import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
 export default { title: 'Components ' };

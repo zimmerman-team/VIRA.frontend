@@ -1,7 +1,6 @@
 import { DefinedRange } from 'app/components/daterange/types';
 
 import {
-  addDays,
   startOfWeek,
   endOfWeek,
   addWeeks,

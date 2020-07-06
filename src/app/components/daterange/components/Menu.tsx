@@ -1,16 +1,13 @@
 import React from 'react';
 import {
-  Paper,
   Grid,
-  Typography,
-  Divider,
   createStyles,
   WithStyles,
   Theme,
   withStyles,
 } from '@material-ui/core';
-import { format, differenceInCalendarMonths } from 'date-fns';
-import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
+import { differenceInCalendarMonths } from 'date-fns';
+
 import Month from 'app/components/daterange/components/Month';
 import DefinedRanges from 'app/components/daterange/components/DefinedRanges';
 import {

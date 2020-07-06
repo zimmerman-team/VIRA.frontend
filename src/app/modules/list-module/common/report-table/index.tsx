@@ -1,13 +1,12 @@
 // @ts-nocheck
-import React, { useState } from 'react';
-// import { DateRangePicker } from '@matharumanpreet00/react-daterange-picker';
+import React from 'react';
+
 import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableOptions,
 } from 'mui-datatables';
 
 import { ColumnID } from 'app/modules/list-module/common/report-table/columns/ColumnID';
-import { ColumnTitle } from 'app/modules/list-module/common/report-table/columns/ColumnTitle';
 import { ColumnDate } from 'app/modules/list-module/common/report-table/columns/ColumnDate';
 import { data } from './data';
 import { MuiThemeProvider } from '@material-ui/core/styles';
