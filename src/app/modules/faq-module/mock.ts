@@ -16,7 +16,7 @@ export const mockData: FaqsModel = {
     {
       title: '3. Bij wie kan ik terecht voor vragen?',
       expl:
-        'Indien u vragen heeft over het gebruik van deze tool, dan verzoeken wij u contact op te nemen met De Insinger Stichting op e-mail adres: help@help.nl ',
+        'Indien u vragen heeft over het gebruik van deze tool, dan verzoeken wij u contact op te nemen met De Insinger Stichting op e-mail adres: monitoringtool@oamconsult.com',
     },
     {
       title: '4. Ondersteunt deze tool ook de optie tot een nieuwe aanvraag?',
