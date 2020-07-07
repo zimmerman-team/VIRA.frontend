@@ -36,6 +36,7 @@ export function TabNavigator(props: TabNavigatorParams) {
           path={item.path}
           label={item.label}
           disabled={item.disabled}
+          testid={item.label}
         />
       ))}
     </Box>
