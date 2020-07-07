@@ -9,6 +9,7 @@ import find from 'lodash/find';
 import i18n from 'app/languages';
 import { ReportListMock } from 'app/mock/lists/ReportListMock';
 import { DateRangePicker } from 'app/components/daterange';
+import { formatDate } from 'app/modules/list-module/utils/formatDate';
 
 const options: MUIDataTableOptions = {
   filter: true,
@@ -19,22 +20,6 @@ const options: MUIDataTableOptions = {
   selectableRows: false,
   viewColumns: false,
 };
-
-function formatDate(epoch: number) {
-  const date = new Date(epoch * 1000);
-  let day = date.getUTCDate().toString();
-  let month = (date.getUTCMonth() + 1).toString();
-  let year = date.getUTCFullYear().toString();
-  let formatted = '';
-  if (day.length === 1) {
-    day = `0${day}`;
-  }
-  if (month.length === 1) {
-    month = `0${month}`;
-  }
-  formatted = `${day}-${month}-${year}`;
-  return formatted;
-}
 
 export const getBaseTableForReport = (data: any): TableModuleModel => {
   const tableConfig = { ...ReportListMock, data: [] };
@@ -88,49 +73,42 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
         filter: true,
         filterType: 'custom',
         display: false,
-        // customFilterListOptions: {
-        //   render: epoch => {
-        //     let startDate = formatDate(epoch[0]);
-        //     let endDate = formatDate(epoch[1]);
-        //     if (startDate && endDate && dateFilterChecked) {
-        //       return [`Start Date: ${startDate}`, `End Date: ${endDate}`];
-        //     }
-        //     if (startDate && endDate && !dateFilterChecked) {
-        //       return `From: ${startDate}, To: ${endDate}`;
-        //     }
-        //     if (startDate) {
-        //       return `From: ${startDate}`;
-        //     }
-        //     if (endDate) {
-        //       return `To: ${endDate}`;
-        //     }
-        //     return [];
-        //   },
-        //   update: (filterList, filterPos, index) => {
-        //     console.log(
-        //       'customFilterListOnDelete: ',
-        //       filterList,
-        //       filterPos,
-        //       index
-        //     );
+        // customFilterListOptions takes care of the filter badges
+        // todo: needs some styling (margin bottom)
+        customFilterListOptions: {
+          render: epoch => {
+            const startDate = formatDate(epoch[0]);
+            const endDate = formatDate(epoch[1]);
+            if (startDate && endDate) {
+              return [`From: ${startDate}   To: ${endDate}`];
+            }
+            if (startDate) {
+              return `From: ${startDate}`;
+            }
+            if (endDate) {
+              return `To: ${endDate}`;
+            }
+            return [];
+          },
+          update: (filterList, filterPos, index) => {
+            console.log(
+              'customFilterListOnDelete: ',
+              filterList,
+              filterPos,
+              index
+            );
+            filterList[index] = [];
 
-        //     if (filterPos === 0) {
-        //       filterList[index].splice(filterPos, 1, '');
-        //     } else if (filterPos === 1) {
-        //       filterList[index].splice(filterPos, 1);
-        //     } else if (filterPos === -1) {
-        //       filterList[index] = [];
-        //     }
-
-        //     return filterList;
-        //   },
-        // },
+            return filterList;
+          },
+        },
         filterOptions: {
           names: [],
           logic(date, filters) {
             if (filters[0] && filters[1]) {
               return date < filters[0] || date > filters[1];
-            } else if (filters[0]) {
+            }
+            if (filters[0]) {
               return date < filters[0];
             } else if (filters[1]) {
               return date > filters[1];
@@ -142,7 +120,6 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
               filterList[index][0] = Date.parse(dateRange.startDate) / 1000;
               filterList[index][1] = Date.parse(dateRange.endDate) / 1000;
               onChange(filterList[index], index, column);
-              console.log('filterlist', filterList[index][0]);
             }
 
             return (
