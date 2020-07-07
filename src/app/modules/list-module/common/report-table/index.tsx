@@ -86,7 +86,10 @@ export const ReportsOverviewTable = (props: ReportsOverviewTableProps) => {
           return (
             <DateRangePicker
               open={openDatePicker}
-              onChange={range => updateAll(range)}
+              onChange={range => {
+                console.log(range);
+                updateAll(range);
+              }}
             />
           );
         },
