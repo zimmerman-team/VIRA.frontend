@@ -72,6 +72,8 @@ export const ReportDetailLayout = (props: any) => {
     },
   ];
 
+  console.log('render report detail');
+
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}

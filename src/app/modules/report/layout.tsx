@@ -22,6 +22,9 @@ const ReportTitleStyle = css`
 
 export function CreateReportLayout(props: CreateReportLayoutModel) {
   const { t } = useTranslation();
+
+  console.log('render report creator');
+
   return (
     <React.Fragment>
       {props.loading && <PageLoader />}
