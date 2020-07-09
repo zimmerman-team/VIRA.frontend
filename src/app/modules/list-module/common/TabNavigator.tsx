@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import { NavItemParams } from 'app/modules/common/consts';
 
 export interface TabNavigatorParams {
+  /* todo: can we simplify or fragment what's happening here? */
   map(arg0: (tab: any) => JSX.Element): React.ReactNode;
   items: NavItemParams[];
   onTabChange?: Function;

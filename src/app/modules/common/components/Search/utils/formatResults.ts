@@ -23,6 +23,7 @@ export function formatResults(data: any) {
   data.reports.forEach((report: any) => {
     results.reports.push({
       title: report.title,
+      /* todo: if possible remove underscore dangle from id property */
       link: `/reports/${report._id}`,
     } as never);
   });
