@@ -146,20 +146,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       {/* --------------------------------- */}
       {/* budget */}
       <Grid item xs={12} lg={12}>
-        {/*{isMobileWidth ? (
-          <PreviewCardTextField
-            title="reports.form.cards.key_outcomes"
-            tooltip="reports.form.cards.key_outcomes"
-            content={props.indicatorVerificationProps.keyOutcomes}
-          />
-        ) : (
-          <PreviewCard
-            title="reports.form.cards.key_outcomes"
-            tooltip="reports.form.cards.key_outcomes"
-            content={props.indicatorVerificationProps.keyOutcomes}
-          />
-        )}*/}
-
         <PreviewCard
           title="reports.form.cards.key_outcomes"
           tooltip="reports.form.cards.key_outcomes"
@@ -177,20 +163,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       </Hidden>
 
       <Grid item xs={12} lg={12}>
-        {/*{isMobileWidth ? (
-          <PreviewCardTextField
-            title="reports.form.cards.monitor"
-            tooltip="reports.form.cards.monitor_expl"
-            content={props.indicatorVerificationProps.monRepOutcomes}
-          />
-        ) : (
-          <PreviewCard
-            title="reports.form.cards.monitor"
-            tooltip="reports.form.cards.monitor_expl"
-            content={props.indicatorVerificationProps.monRepOutcomes}
-          />
-        )}*/}
-
         <PreviewCard
           title="reports.form.cards.monitor"
           tooltip="reports.form.cards.monitor_expl"
@@ -208,22 +180,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       </Hidden>
 
       <Grid item xs={12} lg={12}>
-        {/*{isMobileWidth ? (
-          <PreviewCardTextField
-            title="reports.form.cards.key_implementation_challenges"
-            tooltip="reports.form.cards.key_implementation_challenges"
-            content={props.challengesPlansProps.keyImplChallenges}
-            explanation="reports.form.cards.key_implementation_challenges_expl"
-          />
-        ) : (
-          <PreviewCard
-            title="reports.form.cards.key_implementation_challenges"
-            tooltip="reports.form.cards.key_implementation_challenges"
-            content={props.challengesPlansProps.keyImplChallenges}
-            explanation="reports.form.cards.key_implementation_challenges_expl"
-          />
-        )}*/}
-
         <PreviewCard
           title="reports.form.cards.key_implementation_challenges"
           tooltip="reports.form.cards.key_implementation_challenges"
@@ -242,22 +198,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       </Hidden>
 
       <Grid item xs={12} lg={12}>
-        {/*{isMobileWidth ? (
-          <PreviewCardTextField
-            title="reports.form.cards.other_project"
-            tooltip="reports.form.cards.other_project"
-            content={props.challengesPlansProps.otherProjOutObs}
-            explanation="reports.form.cards.other_project_expl"
-          />
-        ) : (
-          <PreviewCard
-            title="reports.form.cards.other_project"
-            tooltip="reports.form.cards.other_project"
-            content={props.challengesPlansProps.otherProjOutObs}
-            explanation="reports.form.cards.other_project_expl"
-          />
-        )}*/}
-
         <PreviewCard
           title="reports.form.cards.other_project"
           tooltip="reports.form.cards.other_project"
@@ -276,22 +216,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       </Hidden>
 
       <Grid item xs={12} lg={12}>
-        {/*{isMobileWidth ? (
-          <PreviewCardTextField
-            title="reports.form.cards.future_plans"
-            tooltip="reports.form.cards.future_plans"
-            content={props.challengesPlansProps.futurePlans}
-            explanation="reports.form.cards.future_plans_expl"
-          />
-        ) : (
-          <PreviewCard
-            title="reports.form.cards.future_plans"
-            tooltip="reports.form.cards.future_plans"
-            content={props.challengesPlansProps.futurePlans}
-            explanation="reports.form.cards.future_plans_expl"
-          />
-        )}*/}
-
         <PreviewCard
           title="reports.form.cards.future_plans"
           tooltip="reports.form.cards.future_plans"
@@ -310,22 +234,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       </Hidden>
 
       <Grid item xs={12} lg={12}>
-        {/* {isMobileWidth ? (
-          <PreviewCardTextField
-            title="reports.form.cards.other_comments"
-            tooltip="reports.form.cards.other_comments"
-            content={props.challengesPlansProps.otherComms}
-            explanation="reports.form.cards.other_comments_expl"
-          />
-        ) : (
-          <PreviewCard
-            title="reports.form.cards.other_comments"
-            tooltip="reports.form.cards.other_comments"
-            content={props.challengesPlansProps.otherComms}
-            explanation="reports.form.cards.other_comments_expl"
-          />
-        )}*/}
-
         <PreviewCard
           title="reports.form.cards.other_comments"
           tooltip="reports.form.cards.other_comments"
