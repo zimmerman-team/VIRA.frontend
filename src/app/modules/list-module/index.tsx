@@ -16,14 +16,17 @@ import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTa
 import { formatTableDataForGrantee } from 'app/modules/list-module/utils/formatTableDataForGrantee';
 import { formatTableDataForProject } from 'app/modules/list-module/utils/formatTableDataForProject';
 import get from 'lodash/get';
-import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
-import { PageLoader } from '../common/page-loader';
-
 import {
   getGranteesBySDG,
   getProjectsBySDG,
   getReportsBySDG,
 } from 'app/modules/list-module/common/TableDataBySDG';
+import { PageLoader } from 'app/modules/common/page-loader';
+import {
+  TabStyle,
+  a11yProps,
+  TabPanel,
+} from 'app/modules/list-module/common/TabPanelProps';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
@@ -257,19 +260,19 @@ export const ListModule = (props: ListModuleParams) => {
       <Grid item xs={12}>
         <TabPanel data-cy="projects-panel" value={value} index={0}>
           {/* projects table */}
-          {/*{console.log('render project list')}*/}
+          {/* {console.log('render project list')}*/}
           <TableModule {...baseTableForProject} />
         </TabPanel>
 
         <TabPanel data-cy="grantees-panel" value={value} index={1}>
           {/* grantees table */}
-          {/*{console.log('render grantees list')}*/}
+          {/* {console.log('render grantees list')}*/}
           <TableModule {...baseTableForGrantee} />
         </TabPanel>
 
         <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
-          {/*{console.log('render reports list')}*/}
+          {/* {console.log('render reports list')}*/}
           <TableModule {...baseTableForReport} />
         </TabPanel>
       </Grid>

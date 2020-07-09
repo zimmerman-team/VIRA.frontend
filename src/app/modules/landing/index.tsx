@@ -119,11 +119,12 @@ function LandingLayout(props: any) {
         <StatCard data-cy="stat-card" stats={stats} />
       </Grid>
 
+      {/* hide on mobile */}
       <Hidden smDown>
         <Box width="100%" height="12px" />
       </Hidden>
 
-      {/* todo: description */}
+      {/* the viztabs contains the tab navigaion */}
       <Viztabs
         value={value}
         onTabClick={handleChange}
@@ -136,12 +137,13 @@ function LandingLayout(props: any) {
         geoMapData={geoMapData}
       />
 
+      {/* hide on mobile */}
       <Hidden smDown>
         <Box width="100%" height="86px" />
       </Hidden>
       <Box width="100%" height="18px" />
 
-      {/* todo: description */}
+      {/* The list module contains the project/report/grantee lists */}
       <ListModule
         selectedSDG={selectedSDG}
         loadData
