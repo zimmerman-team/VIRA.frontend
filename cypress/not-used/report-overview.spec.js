@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+// NO LONGER NEEDED
 describe('report overview', () => {
   it('test report overview page', () => {
     // authenticate
