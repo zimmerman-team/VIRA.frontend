@@ -9,7 +9,7 @@ import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
 import { GranteeParams } from 'app/modules/detail-modules/grantee-detail/mock';
 import { Box, Grid, Hidden } from '@material-ui/core';
 import { ListModule } from 'app/modules/list-module';
-import { TabNavMockList } from 'app/modules/landing/statsMock';
+import { NavItemsGeneralConfig } from 'app/modules/landing/config';
 import { useTranslation } from 'react-i18next';
 
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
@@ -95,7 +95,7 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
       <ListModule
         data-cy="grantee-detail-projects"
         hideGrantees
-        tabNav={getNavTabItems(TabNavMockList, 'viz')}
+        tabNav={getNavTabItems(NavItemsGeneralConfig, 'viz')}
       />
     </React.Fragment>
   );

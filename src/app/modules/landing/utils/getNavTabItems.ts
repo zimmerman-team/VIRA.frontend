@@ -1,6 +1,6 @@
-export function getNavTabItems(mockItems: any, replaceParam: any) {
+export function getNavTabItems(navItems: any, replaceParam: any) {
   return {
-    items: mockItems.items.map((item: any) => ({
+    items: navItems.map((item: any) => ({
       label: item.label,
       path: item.path.replace('/-', `/${replaceParam}`),
     })),

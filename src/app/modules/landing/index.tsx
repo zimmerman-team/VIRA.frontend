@@ -11,10 +11,10 @@ import 'styled-components/macro';
 import { Grid, Box, Hidden } from '@material-ui/core';
 import { ListModule } from 'app/modules/list-module';
 import {
-  statsMock,
+  StatItemsConfig,
   StatItemParams,
-  TabNavMockList,
-} from 'app/modules/landing/statsMock';
+  NavItemsGeneralConfig,
+} from 'app/modules/landing/config';
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
@@ -29,7 +29,7 @@ function LandingLayout(props: any) {
   // set window title
   useTitle(`${AppConfig.appTitleLong} Dashboard`);
   /** prop1 description */
-  const [stats, setStats] = React.useState(statsMock);
+  const [stats, setStats] = React.useState(StatItemsConfig);
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
       label: 'charts.barchart.target',
@@ -146,7 +146,7 @@ function LandingLayout(props: any) {
         selectedSDG={selectedSDG}
         loadData
         tabNav={getNavTabItems(
-          TabNavMockList,
+          NavItemsGeneralConfig,
           get(props.match.params, 'viz', '')
         )}
       />
