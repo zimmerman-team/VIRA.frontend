@@ -1,4 +1,3 @@
-// @ts-nocheck
 import 'styled-components/macro';
 import React from 'react';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
