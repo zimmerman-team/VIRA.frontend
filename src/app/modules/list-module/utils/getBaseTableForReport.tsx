@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from 'react';
+import React, { useState } from 'react';
 
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
@@ -9,6 +9,7 @@ import find from 'lodash/find';
 import i18n from 'app/languages';
 import { ReportListMock } from 'app/mock/lists/ReportListMock';
 import { DateRangePicker } from 'app/components/daterange';
+import { formatDate } from 'app/modules/list-module/utils/formatDate';
 
 const options: MUIDataTableOptions = {
   filter: true,
@@ -72,12 +73,42 @@ export const getBaseTableForReport = (data: any): TableModuleModel => {
         filter: true,
         filterType: 'custom',
         display: false,
+        // customFilterListOptions takes care of the filter badges
+        // todo: needs some styling (margin bottom)
+        customFilterListOptions: {
+          render: epoch => {
+            const startDate = formatDate(epoch[0]);
+            const endDate = formatDate(epoch[1]);
+            if (startDate && endDate) {
+              return [`From: ${startDate}   To: ${endDate}`];
+            }
+            if (startDate) {
+              return `From: ${startDate}`;
+            }
+            if (endDate) {
+              return `To: ${endDate}`;
+            }
+            return [];
+          },
+          update: (filterList, filterPos, index) => {
+            console.log(
+              'customFilterListOnDelete: ',
+              filterList,
+              filterPos,
+              index
+            );
+            filterList[index] = [];
+
+            return filterList;
+          },
+        },
         filterOptions: {
           names: [],
           logic(date, filters) {
             if (filters[0] && filters[1]) {
               return date < filters[0] || date > filters[1];
-            } else if (filters[0]) {
+            }
+            if (filters[0]) {
               return date < filters[0];
             } else if (filters[1]) {
               return date > filters[1];

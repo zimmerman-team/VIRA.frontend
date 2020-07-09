@@ -200,6 +200,8 @@ export const ListModule = (props: ListModuleParams) => {
     }
   };
 
+  console.log('render lists');
+
   return (
     <React.Fragment>
       {/* loader */}
@@ -255,16 +257,19 @@ export const ListModule = (props: ListModuleParams) => {
       <Grid item xs={12}>
         <TabPanel data-cy="projects-panel" value={value} index={0}>
           {/* projects table */}
+          {/*{console.log('render project list')}*/}
           <TableModule {...baseTableForProject} />
         </TabPanel>
 
         <TabPanel data-cy="grantees-panel" value={value} index={1}>
           {/* grantees table */}
+          {/*{console.log('render grantees list')}*/}
           <TableModule {...baseTableForGrantee} />
         </TabPanel>
 
         <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
+          {/*{console.log('render reports list')}*/}
           <TableModule {...baseTableForReport} />
         </TabPanel>
       </Grid>

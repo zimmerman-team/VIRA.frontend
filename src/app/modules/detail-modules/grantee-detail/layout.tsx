@@ -24,6 +24,8 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
     setValue(newValue);
   };
 
+  console.log('render grantee detail');
+
   return (
     <React.Fragment>
       {props.loading && <PageLoader />}

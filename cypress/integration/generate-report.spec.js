@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 describe('generate report page', () => {
-  it('test generate report page', () => {
+  it('go to generate report page', () => {
     // authenticate
     cy.auth();
 
@@ -8,7 +8,10 @@ describe('generate report page', () => {
     cy.get('[data-testid=MuiDataTableBodyCell-3-0]')
       .children()
       .click();
+  });
 
+  it('check overview', () => {
+    cy.findByTestId('BreadCrumbs').should('exist');
     cy.findByTestId('project-title').should('exist');
 
     // report button
@@ -25,7 +28,9 @@ describe('generate report page', () => {
     cy.findByTestId('outcomes-title').should('exist');
     cy.findByTestId('add-location').should('exist');
     cy.findByTestId('exact-location').should('exist');
+  });
 
+  it('fill in all the fields', () => {
     cy.get('#outcome1').type('e2e report title');
 
     cy.get('#autocomplete-countries').click();
@@ -44,11 +49,10 @@ describe('generate report page', () => {
     cy.get('#autocomplete-countries').type('Refugees');
     cy.get('#autocomplete-countries-option-0').click();
 
-    cy.findByTestId('budget-field')
-      .should('exist')
+    cy.get('[data-cy=budget-field]')
       .click()
-      .type('{backspace}')
-      .type(1);
+      .type('{selectall}{backspace}')
+      .type(10);
 
     cy.findByTestId('insinger-contribution-field')
       .should('exist')
@@ -101,7 +105,21 @@ describe('generate report page', () => {
       .click()
       .type('{backspace}')
       .type('Lorem ipsum dolor simet text area 2');
+  });
 
+  it('add media', () => {
+    cy.get('[testattr=media-button]')
+      .should('exist')
+      .click();
+
+    cy.findByText('Drag and Drop picture').should('exist');
+    // todo: add actual media file
+
+    cy.get('[data-cy=media-cancel-button]')
+      .should('exist')
+      .click();
+  });
+  it('fill in rest of the fields', () => {
     // next
     cy.findByTestId('next-button').click();
 
@@ -131,7 +149,9 @@ describe('generate report page', () => {
 
     // next
     cy.findByTestId('next-button').click();
+  });
 
+  it('make screenshot', () => {
     cy.get('body').happoScreenshot({
       component: 'Create report',
       variant: 'base',

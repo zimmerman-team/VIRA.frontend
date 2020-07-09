@@ -28,6 +28,9 @@ export const ProjectDetailLayout = (props: any) => {
       get(state.userDetails.data, 'email', '_') ===
         props.projectDetail.responsible_person_email
   );
+
+  console.log('render project detail');
+
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
