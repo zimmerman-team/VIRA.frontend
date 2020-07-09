@@ -21,6 +21,7 @@ import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { AppConfig } from 'app/data';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { Viztabs } from '../common/components/Viztabs';
+import { DateRangePicker } from 'app/components/daterange';
 
 /**
  * Landing layout.
@@ -66,11 +67,15 @@ function LandingLayout(props: any) {
   const signedInUserEmail = useStoreState(state =>
     get(state.userDetails.data, 'email', '')
   );
+  // console.log(ppVizData);
+  console.log(allReportsData);
 
   React.useEffect(() => {
     getPPVizData({
       socketName: 'getPolicyPriorityBarChart',
       values: {
+        startDate: new Date(2020, 7, 10),
+        endDate: new Date(2020, 7, 10),
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
       },
@@ -135,6 +140,7 @@ function LandingLayout(props: any) {
         onBubbleSelect={onBubbleSelect}
         geoMapData={geoMapData}
       />
+      <DataDaterangePicker />
 
       <Hidden smDown>
         <Box width="100%" height="86px" />

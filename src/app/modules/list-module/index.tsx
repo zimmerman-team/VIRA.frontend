@@ -109,7 +109,12 @@ export const ListModule = (props: ListModuleParams) => {
       });
       allReportsAction({
         socketName: 'allReport',
-        values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+        values: {
+          userRole: signedInUserRole,
+          userEmail: signedInUserEmail,
+          startDate: new Date('2020-06-08T11:31:47.000Z'),
+          endDate: new Date('2020-08-10T11:31:47.150Z'),
+        },
       });
     }
   }, [signedInUserRole, signedInUserEmail]);
@@ -199,8 +204,6 @@ export const ListModule = (props: ListModuleParams) => {
       history.push(`/list/${newValue}`);
     }
   };
-
-  console.log('render lists');
 
   return (
     <React.Fragment>

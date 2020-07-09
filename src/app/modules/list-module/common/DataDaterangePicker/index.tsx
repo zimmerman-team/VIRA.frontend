@@ -16,6 +16,7 @@ export const DataDaterangePicker = () => {
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
+    console.log(date);
   };
 
   return (
