@@ -45,6 +45,7 @@ export const RadioButtonsGroup = (props: RadioButtonsGroupModel) => {
         <RadioGroup value={props.value}>
           {props.items.map(item => (
             <RadioGroupItem
+              data-cy={item.value}
               disabled={item.disabled}
               key={item.value}
               value={item.value}
