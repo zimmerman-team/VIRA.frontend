@@ -30,9 +30,10 @@ import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 import Cluster from './common/MapCluster';
 import { ClusterElement } from './common/MapCluster/ClusterElement';
 import { MapControls } from './common/MapControls';
+import { HorizontalBarChartValueModel } from 'src/app/components/charts/BarCharts/HorizontalBarChart/model';
 
 type Props = {
-  data?: any;
+  data?: HorizontalBarChartValueModel;
   width?: number;
   height?: number;
   noData?: boolean;
@@ -41,6 +42,7 @@ type Props = {
 };
 
 export function GeoMap(props: Props) {
+  console.log('data', props.data);
   const mapRef: React.RefObject<InteractiveMap> = React.useRef(null);
   const [maxPinValue, setMaxPinValue] = React.useState(
     Math.max(...get(props.data, 'mapMarkers', []).map((m: any) => m.value))
