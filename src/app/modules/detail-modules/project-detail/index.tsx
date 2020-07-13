@@ -8,6 +8,7 @@ import { ProjectDetailLayout } from 'app/modules/detail-modules/project-detail/l
 import {
   projectMock,
   ProjectModel,
+  PropsModel,
 } from 'app/modules/detail-modules/project-detail/model';
 
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
@@ -16,11 +17,11 @@ import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTa
 
 import { AppConfig } from 'app/data';
 
-const ProjectDetailModuleF = (props: any) => {
+const ProjectDetailModuleF = (props: PropsModel | null) => {
   useTitle(`${AppConfig.appTitleLong} Project detail`);
 
-  const projectNumber: any = useParams();
-  const project_number: any = projectNumber.code;
+  const projectNumber: { code: string } = useParams();
+  const project_number: string = projectNumber.code;
   const projectDetail: ProjectModel = projectMock;
   const [projectDetails, setprojectDetails] = useState(projectDetail);
   const [baseTableForReport, setBaseTableForReport] = React.useState(
@@ -72,6 +73,8 @@ const ProjectDetailModuleF = (props: any) => {
   }, [project_number]);
 
   function generateReport() {
+    // todo: refactor routing
+    // @ts-ignore
     props.history.push(`/report/${project_number}/outcomes`);
   }
 
@@ -186,6 +189,7 @@ const ProjectDetailModuleF = (props: any) => {
       selectedSDG={selectedSDG}
       onBubbleSelect={onBubbleSelect}
       geoMapData={geoMapData}
+      // @ts-ignore
       match={props.match}
     />
   );

@@ -21,19 +21,10 @@ import {
   a11yProps,
   TabPanel,
 } from 'app/modules/list-module/common/TabPanelProps';
-
-type Props = {
-  value: number;
-  onTabClick: any;
-  focus?: number;
-  barChartData: any;
-  barChartLegends: any;
-  onBarChartLegendClick: any;
-  bubbleChartData: any;
-  selectedBubble: any;
-  onBubbleSelect: any;
-  geoMapData: any;
-};
+import {
+  PropsModel,
+  BarChartItemModel,
+} from 'app/modules/common/components/Viztabs/model';
 
 function getTitle(index: number): string {
   switch (index) {
@@ -48,7 +39,7 @@ function getTitle(index: number): string {
   }
 }
 
-export function Viztabs(props: Props) {
+export function Viztabs(props: PropsModel) {
   const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
@@ -135,12 +126,12 @@ export function Viztabs(props: Props) {
                 ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
                   [],
                 'value2Color'
-              ).map((item: any) => item.value2Color),
+              ).map((item: BarChartItemModel) => item.value2Color),
               ...uniqBy(
                 ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
                   [],
                 'value4Color'
-              ).map((item: any) => item.value4Color),
+              ).map((item: BarChartItemModel) => item.value4Color),
             ]}
             values={
               ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
@@ -150,7 +141,7 @@ export function Viztabs(props: Props) {
               ...(
                 ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
                 []
-              ).map((item: any) => item.value1 + item.value2)
+              ).map((item: BarChartItemModel) => item.value1 + item.value2)
             )}
             chartLegends={props.barChartLegends}
             onChartLegendClick={props.onBarChartLegendClick}

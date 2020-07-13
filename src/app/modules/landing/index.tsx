@@ -19,13 +19,14 @@ import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { AppConfig } from 'app/data';
+import { PropsModel } from 'app/modules/common/components/Viztabs/model';
 import { getNavTabItems } from './utils/getNavTabItems';
 import { Viztabs } from '../common/components/Viztabs';
 
 /**
  * Landing layout.
  */
-function LandingLayout(props: any) {
+function LandingLayout(props: PropsModel) {
   // set window title
   useTitle(`${AppConfig.appTitleLong} Dashboard`);
   /** prop1 description */

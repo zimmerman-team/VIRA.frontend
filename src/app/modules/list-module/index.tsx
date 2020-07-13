@@ -203,8 +203,6 @@ export const ListModule = (props: ListModuleParams) => {
     }
   };
 
-  console.log('render lists');
-
   return (
     <React.Fragment>
       {/* loader */}

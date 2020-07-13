@@ -22,6 +22,7 @@ const options: MUIDataTableOptions = {
 };
 
 export const getBaseTableForReport = (data: any): TableModuleModel => {
+  console.log(data);
   const tableConfig = { ...ReportListMock, data: [] };
 
   tableConfig.options = options;

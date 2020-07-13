@@ -42,10 +42,9 @@ type Props = {
 };
 
 export function GeoMap(props: Props) {
-  console.log('data', props.data);
   const mapRef: React.RefObject<InteractiveMap> = React.useRef(null);
   const [maxPinValue, setMaxPinValue] = React.useState(
-    Math.max(...get(props.data, 'mapMarkers', []).map((m: any) => m.value))
+    Math.max(...get(props.data, 'mapMarkers', []).map((m: []) => m.value))
   );
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const containerRef: React.RefObject<HTMLDivElement> = React.createRef();
@@ -76,7 +75,7 @@ export function GeoMap(props: Props) {
   React.useEffect(
     () =>
       setMaxPinValue(
-        Math.max(...get(props.data, 'mapMarkers', []).map((m: any) => m.value))
+        Math.max(...get(props.data, 'mapMarkers', []).map((m: []) => m.value))
       ),
     [get(props.data, 'mapMarkers', [])]
   );
@@ -100,7 +99,7 @@ export function GeoMap(props: Props) {
     }
   }, [props.pointSelection]);
 
-  function onGeoCoderSelected(viewport: any, item: any) {
+  function onGeoCoderSelected(viewport: [], item: []) {
     setViewport(prev => ({ ...prev, ...viewport }));
     if (props.setPointSelection) {
       const iso3 = wc([
@@ -148,7 +147,7 @@ export function GeoMap(props: Props) {
     longitude: number,
     latitude: number
   ) {
-    setViewport((prev: any) => ({
+    setViewport((prev: []) => ({
       ...prev,
       zoom,
       longitude,
@@ -241,14 +240,14 @@ export function GeoMap(props: Props) {
                 extent={512}
                 nodeSize={22}
                 minZoom={viewport.minZoom}
-                element={(clusterProps: any) => (
+                element={(clusterProps: []) => (
                   <ClusterElement
                     {...clusterProps}
                     onClick={handleClusterClick}
                   />
                 )}
               >
-                {(props.data.mapMarkers || []).map((m: any) => (
+                {(props.data.mapMarkers || []).map((m: []) => (
                   <MapPin
                     key={getRandomKey()}
                     name={m.name}
