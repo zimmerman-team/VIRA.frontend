@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { Viztabs } from 'app/modules/common/components/Viztabs';
-import { checkIfPPData } from 'app/modules/common/components/Viztabs/utils';
+import { checkIfPPData } from 'app/modules/common/components/Viztabs/utils/checkIfPPData';
 import { ContactsCardMobile } from 'app/components/surfaces/Cards/ContactsCardMobile';
 
 export const GranteeDetailLayout = (props: GranteeParams) => {

@@ -21,23 +21,20 @@ import {
   a11yProps,
   TabPanel,
 } from 'app/modules/list-module/common/TabPanelProps';
-import {
-  PropsModel,
-  BarChartItemModel,
-} from 'app/modules/common/components/Viztabs/model';
+import { getTitle } from 'app/modules/common/components/Viztabs/utils/getTitle';
 
-function getTitle(index: number): string {
-  switch (index) {
-    case 0:
-      return 'home.chart_nav.priority_area';
-    case 1:
-      return 'home.chart_nav.sdg';
-    case 2:
-      return 'home.chart_nav.map';
-    default:
-      return 'home.chart_nav.priority_area';
-  }
-}
+type PropsModel = {
+  value: number;
+  onTabClick: any;
+  focus?: number;
+  barChartData: any;
+  barChartLegends: any;
+  onBarChartLegendClick: any;
+  bubbleChartData: any;
+  selectedBubble: any;
+  onBubbleSelect: any;
+  geoMapData: any;
+};
 
 export function Viztabs(props: PropsModel) {
   const { t } = useTranslation();
