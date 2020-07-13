@@ -4,7 +4,6 @@ import React from 'react';
 import { useTitle } from 'react-use';
 import get from 'lodash/get';
 import findIndex from 'lodash/findIndex';
-import { withRouter } from 'react-router-dom';
 import 'styled-components/macro';
 
 // absolute
@@ -19,7 +18,7 @@ import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { AppConfig } from 'app/data';
-import { getNavTabItems } from './utils/getNavTabItems';
+import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 import { Viztabs } from '../common/components/Viztabs';
 
 /**
@@ -95,20 +94,8 @@ function LandingLayout(props: any) {
     setStats(updatedStats);
   }, [allProjectsData, allReportsData]);
 
-  /* todo: contains duplicate code */
   function onBarChartLegendClick(legend: string) {
-    const prevBarChartLegends = [...barChartLegends];
-    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
-    if (legendIndex !== -1) {
-      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
-        legendIndex
-      ].selected;
-      setBarChartLegends(prevBarChartLegends);
-    }
-  }
-
-  function onBubbleSelect(bubble: string) {
-    setSelectedSDG(bubble);
+    barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
   return (
@@ -123,7 +110,7 @@ function LandingLayout(props: any) {
         <Box width="100%" height="12px" />
       </Hidden>
 
-      {/* todo: description */}
+      {/* viz tabs */}
       <Viztabs
         value={value}
         onTabClick={handleChange}
@@ -132,7 +119,7 @@ function LandingLayout(props: any) {
         onBarChartLegendClick={onBarChartLegendClick}
         bubbleChartData={{ ...bubbleMockData, children: SDGVizData }}
         selectedBubble={selectedSDG}
-        onBubbleSelect={onBubbleSelect}
+        onBubbleSelect={setSelectedSDG}
         geoMapData={geoMapData}
       />
 
@@ -141,17 +128,10 @@ function LandingLayout(props: any) {
       </Hidden>
       <Box width="100%" height="18px" />
 
-      {/* todo: description */}
-      <ListModule
-        selectedSDG={selectedSDG}
-        loadData
-        tabNav={getNavTabItems(
-          TabNavMockList,
-          get(props.match.params, 'viz', '')
-        )}
-      />
+      {/* list module */}
+      <ListModule selectedSDG={selectedSDG} loadData />
     </React.Fragment>
   );
 }
 
-export default withRouter(LandingLayout);
+export default LandingLayout;

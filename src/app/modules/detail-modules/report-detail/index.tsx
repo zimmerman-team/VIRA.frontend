@@ -8,9 +8,9 @@ import { useParams, withRouter } from 'react-router-dom';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail/layout';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import get from 'lodash/get';
-import findIndex from 'lodash/findIndex';
-import { formatReportDetail } from './utils/formatReportDetail';
 import { AppConfig } from 'app/data';
+import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
+import { formatReportDetail } from './utils/formatReportDetail';
 
 export const ReportDetailModuleF = (props: any) => {
   useTitle(`${AppConfig.appTitleLong}  Report detail`);
@@ -88,20 +88,8 @@ export const ReportDetailModuleF = (props: any) => {
     }
   }, [reportDetailData]);
 
-  /* todo: resolve duplicate code */
   function onBarChartLegendClick(legend: string) {
-    const prevBarChartLegends = [...barChartLegends];
-    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
-    if (legendIndex !== -1) {
-      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
-        legendIndex
-      ].selected;
-      setBarChartLegends(prevBarChartLegends);
-    }
-  }
-
-  function onBubbleSelect(bubble: string) {
-    setSelectedSDG(bubble);
+    barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
   function editReport() {
@@ -116,7 +104,7 @@ export const ReportDetailModuleF = (props: any) => {
       report={reportDetails}
       editReport={editReport}
       selectedSDG={selectedSDG}
-      onBubbleSelect={onBubbleSelect}
+      onBubbleSelect={setSelectedSDG}
       barChartLegends={barChartLegends}
       onBarChartLegendClick={onBarChartLegendClick}
     />

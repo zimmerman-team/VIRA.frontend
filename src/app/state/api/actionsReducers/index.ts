@@ -63,8 +63,11 @@ export const socketAPIModel = <QueryModel, ResponseModel>(): ApiModel<
   }),
   fetch: thunk(async (actions, query: RequestValues<QueryModel>) => {
     actions.onRequest();
-    socket.emit(query.socketName, query.values, (res: any) =>
-      actions.onSuccess(JSON.parse(res))
-    );
+    return new Promise((resolve: Function, reject: Function) => {
+      socket.emit(query.socketName, query.values, (res: any) => {
+        actions.onSuccess(JSON.parse(res));
+        resolve(JSON.parse(res));
+      });
+    });
   }),
 });
