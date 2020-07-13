@@ -4,7 +4,7 @@ export function formatDate(epoch: number) {
   const date = new Date(epoch * 1000 + twoHours);
   let day = date.getUTCDate().toString();
   let month = (date.getUTCMonth() + 1).toString();
-  let year = date.getUTCFullYear().toString();
+  const year = date.getUTCFullYear().toString();
   let formatted = '';
   if (day.length === 1) {
     day = `0${day}`;

@@ -24,9 +24,5 @@ export function validatePolicyPrioritiesFields(
   if (budget > remainBudget) {
     return false;
   }
-  /* todo: can this be simplified? */
-  if (funder === '') {
-    return false;
-  }
-  return true;
+  return funder !== '';
 }

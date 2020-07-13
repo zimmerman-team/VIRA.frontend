@@ -13,9 +13,5 @@ export function validateChallengesPlans(
   if (str3 === '') {
     return false;
   }
-  /* todo: can this be simplified? */
-  if (str4 === '') {
-    return false;
-  }
-  return true;
+  return str4 !== '';
 }
