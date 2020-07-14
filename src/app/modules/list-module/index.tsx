@@ -18,12 +18,7 @@ import { formatTableDataForProject } from 'app/modules/list-module/utils/formatT
 import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
-
-import {
-  getGranteesBySDG,
-  getProjectsBySDG,
-  getReportsBySDG,
-} from 'app/modules/list-module/common/TableDataBySDG';
+import { SDGFilter } from './common/SDGFilter';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
@@ -60,27 +55,6 @@ export const ListModule = (props: ListModuleParams) => {
   );
   const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
 
-  // get state
-  const allProjectsData = useStoreState(state => state.allProjects.data);
-  const allOrganisationsData = useStoreState(
-    state => state.allOrganisations.data
-  );
-  const allReportsData = useStoreState(state => state.allReports.data);
-
-  // get datasets by selected SDG
-  let sdgReportsData;
-  let sdgProjectData;
-  let sdgOrgranisationData;
-
-  if (props.selectedSDG !== '' && props.selectedSDG !== undefined) {
-    sdgReportsData = getReportsBySDG(props.selectedSDG, allReportsData);
-    sdgProjectData = getProjectsBySDG(allProjectsData, sdgReportsData);
-    sdgOrgranisationData = getGranteesBySDG(
-      allOrganisationsData,
-      sdgProjectData
-    );
-  }
-
   const reduxLng = useStoreState(state => state.syncVariables.lng);
   const loading = useStoreState(
     state =>
@@ -96,97 +70,76 @@ export const ListModule = (props: ListModuleParams) => {
     get(state.userDetails.data, 'email', '')
   );
 
+  const isInitialMount = React.useRef(true);
+
+  const doLoadData = React.useCallback(() => {
+    allProjectsAction({
+      socketName: 'allProject',
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+    }).then((projectsRes: any) => {
+      setBaseTableForProject({
+        ...baseTableForProject,
+        data: formatTableDataForProject(get(projectsRes, 'data', [])),
+      });
+    });
+    allOrganisationsAction({
+      socketName: 'allOrg',
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+    }).then((organisationsRes: any) => {
+      setBaseTableForGrantee({
+        ...baseTableForGrantee,
+        data: formatTableDataForGrantee(get(organisationsRes, 'data', [])),
+      });
+    });
+    allReportsAction({
+      socketName: 'allReport',
+      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+    }).then((reportsRes: any) => {
+      setBaseTableForReport({
+        ...getBaseTableForReport(get(reportsRes, 'data', [])),
+        data: formatTableDataForReport(get(reportsRes, 'data', [])),
+      });
+    });
+  }, []);
+
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
-    if (props.loadData) {
-      allProjectsAction({
-        socketName: 'allProject',
-        values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
-      });
-      allOrganisationsAction({
-        socketName: 'allOrg',
-        values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
-      });
-      allReportsAction({
-        socketName: 'allReport',
-        values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
-      });
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      if (props.loadData) {
+        doLoadData();
+      }
     }
-  }, [signedInUserRole, signedInUserEmail]);
-
-  // Format the projects on componentDidUpdate when allProjectsData change
-  if (props.selectedSDG === '' || props.selectedSDG === undefined) {
-    React.useEffect(() => {
-      setBaseTableForProject({
-        ...baseTableForProject,
-        data: formatTableDataForProject(get(allProjectsData, 'data', [])),
-      });
-    }, [allProjectsData]);
-  } else {
-    React.useEffect(() => {
-      setBaseTableForProject({
-        ...baseTableForProject,
-        data: formatTableDataForProject(get(sdgProjectData, 'data', [])),
-      });
-    }, [props.selectedSDG]);
-  }
-
-  // Format the projects on componentDidUpdate when allOrganisationsData change
-  if (props.selectedSDG === '' || props.selectedSDG === undefined) {
-    React.useEffect(() => {
-      setBaseTableForGrantee({
-        ...baseTableForGrantee,
-        data: formatTableDataForGrantee(get(allOrganisationsData, 'data', [])),
-      });
-    }, [allOrganisationsData]);
-  } else {
-    React.useEffect(() => {
-      setBaseTableForGrantee({
-        ...baseTableForGrantee,
-        data: formatTableDataForGrantee(get(sdgOrgranisationData, 'data', [])),
-      });
-    }, [props.selectedSDG]);
-  }
-
-  // Format the reports on componentDidUpdate when allReportsData change
-  if (props.selectedSDG === '' || props.selectedSDG === undefined) {
-    React.useEffect(() => {
-      setBaseTableForReport({
-        ...getBaseTableForReport(get(allReportsData, 'data', [])),
-        data: formatTableDataForReport(get(allReportsData, 'data', [])),
-      });
-    }, [allReportsData]);
-  } else {
-    React.useEffect(() => {
-      setBaseTableForReport({
-        ...getBaseTableForReport(get(sdgReportsData, 'data', [])),
-        data: formatTableDataForReport(get(sdgReportsData, 'data', [])),
-      });
-    }, [props.selectedSDG]);
-  }
+  }, []);
 
   React.useEffect(() => {
-    if (parseInt(id, 10) < 3) {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else if (parseInt(id, 10) < 3) {
       setValue(parseInt(id, 10));
     }
   }, [id]);
 
   React.useEffect(() => {
-    setBaseTableForProject({
-      ...baseTableForProject,
-      ...getBaseTableForProject(),
-      data: baseTableForProject.data,
-    });
-    setBaseTableForGrantee({
-      ...baseTableForGrantee,
-      ...getBaseTableForGrantee(),
-      data: baseTableForGrantee.data,
-    });
-    setBaseTableForReport({
-      ...baseTableForReport,
-      ...getBaseTableForReport(),
-      data: baseTableForReport.data,
-    });
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      setBaseTableForProject({
+        ...baseTableForProject,
+        ...getBaseTableForProject(),
+        data: baseTableForProject.data,
+      });
+      setBaseTableForGrantee({
+        ...baseTableForGrantee,
+        ...getBaseTableForGrantee(),
+        data: baseTableForGrantee.data,
+      });
+      setBaseTableForReport({
+        ...baseTableForReport,
+        ...getBaseTableForReport(),
+        data: baseTableForReport.data,
+      });
+    }
   }, [reduxLng]);
 
   const [value, setValue] = React.useState(
@@ -206,6 +159,16 @@ export const ListModule = (props: ListModuleParams) => {
     <React.Fragment>
       {/* loader */}
       {loading && <PageLoader />}
+
+      {/* SDG filter module */}
+      {!props.listPage && (
+        <SDGFilter
+          selectedSDG={props.selectedSDG}
+          setBaseTableForReport={setBaseTableForReport}
+          setBaseTableForGrantee={setBaseTableForGrantee}
+          setBaseTableForProject={setBaseTableForProject}
+        />
+      )}
 
       {/* tab navigation */}
       <Grid item xs={12} container justify="flex-end">
@@ -269,7 +232,7 @@ export const ListModule = (props: ListModuleParams) => {
 
         <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
-          {/*{console.log('render reports list')}*/}
+          {/* {console.log('render reports list')} */}
           <TableModule {...baseTableForReport} />
         </TabPanel>
       </Grid>

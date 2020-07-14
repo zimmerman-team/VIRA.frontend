@@ -9,6 +9,7 @@ import {
 } from 'app/modules/detail-modules/grantee-detail/mock';
 import { TitleParams } from 'app/modules/common/components/TitleParams';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 import {
@@ -176,14 +177,7 @@ export function GranteeDetailModule(props: any) {
   ]);
 
   function onBarChartLegendClick(legend: string) {
-    const prevBarChartLegends = [...barChartLegends];
-    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
-    if (legendIndex !== -1) {
-      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
-        legendIndex
-      ].selected;
-      setBarChartLegends(prevBarChartLegends);
-    }
+    barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
   function onBubbleSelect(bubble: string) {
