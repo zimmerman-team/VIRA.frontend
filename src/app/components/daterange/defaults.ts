@@ -22,11 +22,13 @@ const getDefaultRanges = (date: Date): DefinedRange[] => [
   },*/
   {
     label: 'This Week',
+    // data-testid:'this-week'
     startDate: startOfWeek(date),
     endDate: endOfWeek(date),
   },
   {
     label: 'Last Week',
+    // data-testid: 'last-week'
     startDate: startOfWeek(addWeeks(date, -1)),
     endDate: endOfWeek(addWeeks(date, -1)),
   },

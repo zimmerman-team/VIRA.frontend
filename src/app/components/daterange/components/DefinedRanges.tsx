@@ -22,7 +22,12 @@ const DefinedRanges: React.FunctionComponent<DefinedRangesProps> = props => {
   return (
     <List>
       {props.ranges.map((range, idx) => (
-        <ListItem button key={idx} onClick={() => props.setRange(range)}>
+        <ListItem
+          button
+          key={idx}
+          data-cy={`daterange-item-${idx}`}
+          onClick={() => props.setRange(range)}
+        >
           <ListItemText
             primaryTypographyProps={{
               variant: 'body2',
