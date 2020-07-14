@@ -132,6 +132,7 @@ export function BubbleChart(props: Props) {
                         color: ProjectPalette.common.white,
                         cursor: hasData ? 'pointer' : 'initial',
                         fontWeight: 700,
+                        fontSize: (style.r * (isMobileWidth ? 3 : 2.3)) / 5,
                         border:
                           selectedBubbleObj &&
                           selectedBubbleObj.number === node.data.number
