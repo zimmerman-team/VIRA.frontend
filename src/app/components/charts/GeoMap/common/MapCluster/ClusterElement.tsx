@@ -20,7 +20,6 @@ const Value = styled.div`
 `;
 
 export const ClusterElement = (props: any) => {
-  console.log(props);
   const clusterValue = props.cluster.properties.point_count;
   return (
     <div

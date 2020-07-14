@@ -3,7 +3,6 @@ import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
 
 export const MapGeoCoderInputListItem = (props: any) => {
-  console.log('props', props);
   return (
     <div
       css={`

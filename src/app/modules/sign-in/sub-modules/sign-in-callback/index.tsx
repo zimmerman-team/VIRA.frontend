@@ -8,6 +8,18 @@ import useTitle from 'react-use/lib/useTitle';
 import { PageLoader } from 'app/modules/common/page-loader';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
+export interface ResultsModel {
+  accessToken: string;
+  idToken: string;
+  idTokenPayload: any;
+  appState: any;
+  refreshToken: any;
+  state: string;
+  expiresIn: number;
+  tokenType: string;
+  scope: string;
+}
+
 function LoginCallback(props: any) {
   useTitle(`Project - Login`);
   const [error, setError] = useState('');
@@ -18,11 +30,10 @@ function LoginCallback(props: any) {
   const userDetailsAction = useStoreActions(
     actions => actions.userDetails.fetch
   );
-
   useEffect(() => {
     props.auth
       .handleAuthentication()
-      .then((results: any) => {
+      .then((results: ResultsModel) => {
         let name =
           results.idTokenPayload[
             `https://${process.env.REACT_APP_AUTH_CUSTOM_DOMAIN}_user_metadata`

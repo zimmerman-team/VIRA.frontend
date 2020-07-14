@@ -35,6 +35,7 @@ export const MediaBlock = (props: MediaBlockProps) => {
   return (
     <div css={styles.container}>
       {props.addedMedia.map((item: any) => {
+        console.log('item', item);
         const nameSplits = item.path.split('-');
         const name = nameSplits[nameSplits.length - 1];
         return (
