@@ -23,6 +23,7 @@ const TableModule = (props: TableModuleModel) => {
       );
     }
   }, [props.data, props.totalCell, props.totalRowColsDef]);
+
   const [localTableState, setLocalTableState] = React.useState({
     page: 1,
     prevAction: '',

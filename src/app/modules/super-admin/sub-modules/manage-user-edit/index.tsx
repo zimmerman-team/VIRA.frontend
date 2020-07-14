@@ -17,8 +17,6 @@ import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // direct
 import 'styled-components/macro';
-import { ProjectPalette } from 'app/theme';
-import { TeamSelectNew } from 'app/components/inputs/select-team-new';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {
@@ -219,6 +217,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           value={firstName}
           setValue={setFirstName}
           id="First Name"
+          data-cy="FirstName"
           label={t('user_management.user.first_name')}
           bigLabel
         />
@@ -228,6 +227,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           value={lastName}
           setValue={setLastName}
           id="Last Name"
+          data-cy="LastName"
           label={t('user_management.user.last_name')}
           bigLabel
         />
@@ -238,6 +238,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           setValue={setEmail}
           id="Email"
           label={t('user_management.user.email')}
+          data-cy="Email"
           bigLabel
         />
         <Box width="100%" height="32px" />
@@ -260,6 +261,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           <Grid container>
             <Grid item xs={12} md={12} lg={6} xl={6}>
               <RadioButtonsGroup
+                data-cy="TeamSelect"
                 value={role}
                 onChange={(e: any) => setRole(e.target.value)}
                 {...props.form.radioButtonGroup}
@@ -268,6 +270,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
             {props.mode === 'add' && (
               <Grid item xs={12} md={12} lg={6} xl={6}>
                 <TeamSelect
+                  data-cy="TeamSelect1"
                   title={t('user_management.user.select_team')}
                   selectedItem={group}
                   items={props.form.selectOptions}

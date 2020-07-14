@@ -1,16 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import { css } from 'styled-components/macro';
-import { ExpansionPanel as MuiExpansionPanel } from '@material-ui/core';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import 'styled-components/macro';
+
+import {
+  AccordionDetails,
+  Accordion,
+  AccordionSummary,
+} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ExpansionPanelModel } from 'app/components/surfaces/ExpansionPanel/model';
 import Box from '@material-ui/core/Box';
 import { ProjectPalette } from 'app/theme';
+import { css } from 'styled-components/macro';
 
-const ExpansionPanelStyle = `
+const ExpansionPanelStyle = css`
   //margin: 8px !important;
   margin-bottom: 8px !important;
 
@@ -25,7 +29,7 @@ const ExpansionPanelStyle = `
   }
 `;
 
-const ExpansionPanelSummaryStyle = `
+const ExpansionPanelSummaryStyle = css`
   && {
     height: 80px;
     padding: 0 32px 0 32px;
@@ -42,17 +46,17 @@ const ExpansionPanelSummaryStyle = `
   }
 `;
 
-const SubtitleStyle = `
+const SubtitleStyle = css`
   color: ${ProjectPalette.common.black} !important;
   font-size: 16px !important;
   font-weight: 500 !important;
 `;
 
-const ExpandMoreIconStyle = `
+const ExpandMoreIconStyle = css`
   color: #a1aebd;
 `;
 
-const ExpansionPanelDetailsStyle = `
+const ExpansionPanelDetailsStyle = css`
   && {
     padding: 33px 29.7px 33px 29.7px;
   }
@@ -62,13 +66,13 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
   return (
     <Box width="100%">
       {props.faqItems.map((question, index) => (
-        <MuiExpansionPanel
+        <Accordion
           square
           css={ExpansionPanelStyle}
           key={`question-${index}`}
           data-cy={`question-${index}`}
         >
-          <ExpansionPanelSummary
+          <AccordionSummary
             css={ExpansionPanelSummaryStyle}
             expandIcon={<ExpandMoreIcon css={ExpandMoreIconStyle} />}
           >
@@ -79,14 +83,14 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
             >
               {question.title}
             </Typography>
-          </ExpansionPanelSummary>
+          </AccordionSummary>
 
-          <ExpansionPanelDetails css={ExpansionPanelDetailsStyle}>
+          <AccordionDetails css={ExpansionPanelDetailsStyle}>
             <Typography variant="body1" data-cy={`question-${index}-expl`}>
               {question.expl}
             </Typography>
-          </ExpansionPanelDetails>
-        </MuiExpansionPanel>
+          </AccordionDetails>
+        </Accordion>
       ))}
     </Box>
   );

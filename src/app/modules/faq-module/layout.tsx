@@ -1,6 +1,5 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import { css } from 'styled-components/macro';
 
 import { ExpansionPanel } from 'app/components/surfaces/ExpansionPanel';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';

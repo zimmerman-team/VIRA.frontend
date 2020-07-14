@@ -1,14 +1,13 @@
 import { css } from 'styled-components/macro';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { Box, Grid, Hidden } from '@material-ui/core';
 import { ProjectPalette } from 'app/theme';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import { StatItem } from 'app/modules/common/components/StatItem';
-import Grid from '@material-ui/core/Grid';
+
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Hidden } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 
 export interface TitleParams {
@@ -105,12 +104,14 @@ export const TitleFragment = (props: TitleParams) => {
               </Typography>
             )}
           </Grid>
-          <div
-            css={`
-              width: 100%;
-              height: 24px;
-            `}
-          />
+          <Hidden lgUp>
+            <div
+              css={`
+                width: 100%;
+                height: 24px;
+              `}
+            />
+          </Hidden>
 
           {/* ---------------------------------------------------------------------*/}
           {/* button: generate report */}
@@ -133,7 +134,7 @@ export const TitleFragment = (props: TitleParams) => {
               item
               container
               xs={12}
-              lg={4}
+              md={4}
               justify="flex-end"
               wrap="nowrap"
             >

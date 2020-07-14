@@ -24,8 +24,5 @@ export function validatePolicyPrioritiesFields(
   if (budget > remainBudget) {
     return false;
   }
-  if (funder === '') {
-    return false;
-  }
-  return true;
+  return funder !== '';
 }

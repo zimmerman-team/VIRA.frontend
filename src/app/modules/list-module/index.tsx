@@ -6,20 +6,19 @@ import { useTranslation } from 'react-i18next';
 import { Grid, Tabs, Tab } from '@material-ui/core';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import TableModule from 'app/components/datadisplay/Table';
-import {
-  formatTableDataForGrantee,
-  formatTableDataForProject,
-  formatTableDataForReport,
-  getBaseTableForGrantee,
-  getBaseTableForProject,
-  getBaseTableForReport,
-} from 'app/modules/list-module/utils';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { useParams, useHistory } from 'react-router-dom';
 /* utils */
+import { getBaseTableForReport } from 'app/modules/list-module/utils/getBaseTableForReport';
+import { getBaseTableForGrantee } from 'app/modules/list-module/utils/getBaseTableForGrantee';
+import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
+import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTableDataForReport';
+import { formatTableDataForGrantee } from 'app/modules/list-module/utils/formatTableDataForGrantee';
+import { formatTableDataForProject } from 'app/modules/list-module/utils/formatTableDataForProject';
 import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
+
 import {
   getGranteesBySDG,
   getProjectsBySDG,
@@ -201,6 +200,8 @@ export const ListModule = (props: ListModuleParams) => {
     }
   };
 
+  console.log('render lists');
+
   return (
     <React.Fragment>
       {/* loader */}
@@ -256,16 +257,19 @@ export const ListModule = (props: ListModuleParams) => {
       <Grid item xs={12}>
         <TabPanel data-cy="projects-panel" value={value} index={0}>
           {/* projects table */}
+          {/*{console.log('render project list')}*/}
           <TableModule {...baseTableForProject} />
         </TabPanel>
 
         <TabPanel data-cy="grantees-panel" value={value} index={1}>
           {/* grantees table */}
+          {/*{console.log('render grantees list')}*/}
           <TableModule {...baseTableForGrantee} />
         </TabPanel>
 
         <TabPanel data-cy="reports-panel" value={value} index={2}>
           {/* reports table */}
+          {/*{console.log('render reports list')}*/}
           <TableModule {...baseTableForReport} />
         </TabPanel>
       </Grid>

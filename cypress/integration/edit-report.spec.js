@@ -1,6 +1,21 @@
 /// <reference types="Cypress" />
 
 describe('edit report page', () => {
+  it('test report overview page', () => {
+    // authenticate
+    cy.auth();
+    // goto page
+    // cy.visit('/list/2');
+    cy.findByTestId('sidebar-item-3').click();
+
+    cy.listTabs();
+
+    cy.get('body').happoScreenshot({
+      component: 'Report overview',
+      variant: 'base',
+    });
+    // cy.get('body').happoScreenshot();
+  });
   it('test edit report page', () => {
     // authenticate
     cy.auth();
@@ -38,6 +53,12 @@ describe('edit report page', () => {
 
     // next
     cy.findByTestId('next-button').click();
+
+    cy.findByTestId('other-funders')
+      .click()
+      .type('funder one');
+    cy.get('#autocomplete-countries-option-0').click();
+
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
@@ -46,7 +67,7 @@ describe('edit report page', () => {
     cy.findByTestId('submit-button').click();
 
     // go to report
-    cy.wait(5000);
+    cy.wait(2000);
     cy.findByTestId('dialog-button').click();
 
     // check if title has been updated

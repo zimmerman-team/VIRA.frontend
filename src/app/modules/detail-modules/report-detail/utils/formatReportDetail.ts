@@ -5,51 +5,6 @@ import { ProjectPalette } from 'app/theme';
 import { policyPriorities } from 'app/modules/report/sub-modules/policy-priorities/mock';
 import { getMediaTileData } from 'app/modules/detail-modules/report-detail/utils/getMediaTileData';
 
-const ppToSdg = {
-  poverty: {
-    // name: 'No poverty',
-    name: 'sdgs.1',
-    color: '#E5243D',
-    number: 1,
-  },
-  refugees: {
-    // name: 'Zero hunger',
-    name: 'sdgs.2',
-    color: '#DDA73B',
-    number: 2,
-  },
-  elderly: {
-    // name: 'Reduced inequialities',
-    name: 'sdgs.10',
-    color: '#E01383',
-    number: 10,
-  },
-  prisoner: {
-    // name: 'Peace, Justice and strong institutions',
-    name: 'sdgs.16',
-    color: '#136A9F',
-    number: 16,
-  },
-  drug_use: {
-    // name: 'Decent work and economic growth',
-    name: 'sdgs.8',
-    color: '#A31C44',
-    number: 8,
-  },
-  prostitution: {
-    // name: 'Gender equality',
-    name: 'sdgs.5',
-    color: '#EF402E',
-    number: 5,
-  },
-  homelessness: {
-    // name: 'Good health and well-being',
-    name: 'sdgs.3',
-    color: '#4CA146',
-    number: 3,
-  },
-};
-
 export function formatReportDetail(data: any) {
   const reportDetailRecord = data.report;
   const splits = reportDetailRecord.date.split('/');

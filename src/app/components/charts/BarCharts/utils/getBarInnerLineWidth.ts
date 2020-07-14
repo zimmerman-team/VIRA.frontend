@@ -11,6 +11,7 @@ export function getBarInnerLineWidth(
     .map((item: any) => item.value3 || 0)
     .concat(allData.map((item: any) => item.value4 || 0));
   const maxValue = Math.max(...lineValues);
+  /* todo: can be removed? */
   const res = !isNaN((value / maxValue) * width)
     ? (value / maxValue) * width
     : 0;

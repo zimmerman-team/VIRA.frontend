@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { css, CSSProp } from 'styled-components/macro';
+import { css } from 'styled-components/macro';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Theme } from '@material-ui/core/styles';

@@ -2,8 +2,6 @@ import { Box, Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { css } from 'styled-components/macro';
-// todo: change to absolute path
-import { DataDaterangePicker } from './DataDaterangePicker';
 
 interface TabPanelProps {
   children?: React.ReactNode;

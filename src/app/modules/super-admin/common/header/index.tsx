@@ -60,6 +60,7 @@ export const AdminManageOverviewToolbar = (props: HeaderParams) => {
               letter-spacing: 0.5px;
             }
           `}
+          data-cy="InputBase"
           fullWidth
           inputProps={{ 'aria-label': 'subject' }}
           value={props.searchValue}
@@ -69,7 +70,11 @@ export const AdminManageOverviewToolbar = (props: HeaderParams) => {
         />
       )}
       {!searchOpen && (
-        <IconButton css={ButtonIconStyle} onClick={() => setSearchOpen(true)}>
+        <IconButton
+          css={ButtonIconStyle}
+          data-cy="Search"
+          onClick={() => setSearchOpen(true)}
+        >
           <Search />
         </IconButton>
       )}
