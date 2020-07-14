@@ -128,20 +128,6 @@ export function PDFreport(props: any) {
         />
       </div>
       <div id="page2" css="padding: 64px;">
-        <h4
-          css={`
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: 10px;
-          `}
-        >
-          {t('home.chart_nav.map')}
-        </h4>
-        <GeoMap data={props.report.mapData} />
-
-        <div css="width: 100%;height: 200px;" />
-
         <Grid
           key={props.cardData[0].title}
           data-cy={props.cardData[0].testID}
@@ -169,8 +155,9 @@ export function PDFreport(props: any) {
             description={props.cardData[1].description}
           />
         </Grid>
-      </div>
-      <div id="page3" css="padding: 64px;">
+
+        <div css="width: 100%;height: 200px;" />
+
         {props.report.media.length > 0 && (
           <Grid
             key={props.cardData[2].title}
@@ -185,7 +172,9 @@ export function PDFreport(props: any) {
             />
           </Grid>
         )}
+
         <div css="width: 100%;height: 100px;" />
+
         <Grid
           key={props.cardData[3].title}
           data-cy={props.cardData[3].testID}
@@ -198,7 +187,8 @@ export function PDFreport(props: any) {
             description={props.cardData[3].description}
           />
         </Grid>
-        <div css="width: 100%;height: 100px;" />
+      </div>
+      <div id="page3" css="padding: 64px;">
         <Grid
           key={props.cardData[4].title}
           data-cy={props.cardData[4].testID}
