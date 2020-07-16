@@ -19,6 +19,7 @@ import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
 import { SDGFilter } from './common/SDGFilter';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
@@ -29,6 +30,12 @@ type ListModuleParams = {
   loadData?: boolean;
   listPage?: boolean;
   selectedSDG?: string;
+  dateFilter: dateFilterType;
+};
+
+type dateFilterType = {
+  start: MaterialUiPickersDate | null;
+  end: MaterialUiPickersDate | null;
 };
 
 export const ListModule = (props: ListModuleParams) => {
@@ -96,8 +103,8 @@ export const ListModule = (props: ListModuleParams) => {
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
-        startDate: new Date('1999-06-08'),
-        endDate: new Date('1999-06-09'),
+        startDate: props.dateFilter.start._d,
+        endDate: props.dateFilter.end._d,
       },
     }).then((reportsRes: any) => {
       setBaseTableForReport({
@@ -105,9 +112,8 @@ export const ListModule = (props: ListModuleParams) => {
         data: formatTableDataForReport(get(reportsRes, 'data', [])),
       });
     });
-  }, []);
-  //startDate: new Date('2020-06-08T11:31:47.000Z'),
-  //endDate: new Date('2020-08-10T11:31:47.150Z'),
+  }, [props.dateFilter.start, props.dateFilter.end]);
+
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
     if (isInitialMount.current) {
@@ -117,6 +123,12 @@ export const ListModule = (props: ListModuleParams) => {
       }
     }
   }, []);
+
+  React.useEffect(() => {
+    if (props.loadData) {
+      doLoadData();
+    }
+  }, [props.dateFilter.start, props.dateFilter.end]);
 
   React.useEffect(() => {
     if (isInitialMount.current) {
@@ -158,8 +170,6 @@ export const ListModule = (props: ListModuleParams) => {
       history.push(`/list/${newValue}`);
     }
   };
-
-  console.log('render lists');
 
   return (
     <React.Fragment>

@@ -100,11 +100,11 @@ function LandingLayout(props: any) {
   const [
     selectedStartDate,
     setSelectedStartDate,
-  ] = React.useState<MaterialUiPickersDate | null>();
+  ] = React.useState<MaterialUiPickersDate | null>(new Date());
   const [
     selectedEndDate,
     setSelectedEndDate,
-  ] = React.useState<MaterialUiPickersDate | null>();
+  ] = React.useState<MaterialUiPickersDate | null>(new Date());
 
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
@@ -138,8 +138,8 @@ function LandingLayout(props: any) {
       <DataDaterangePicker
         startDate={selectedStartDate}
         endDate={selectedEndDate}
-        onStartDateSelect={setSelectedStartDate}
-        onEndDateSelect={setSelectedEndDate}
+        onStartDateSelect={date => setSelectedStartDate(date)}
+        onEndDateSelect={date => setSelectedEndDate(date)}
       />
 
       <Hidden smDown>
@@ -148,7 +148,11 @@ function LandingLayout(props: any) {
       <Box width="100%" height="18px" />
 
       {/* list module */}
-      <ListModule selectedSDG={selectedSDG} loadData />
+      <ListModule
+        selectedSDG={selectedSDG}
+        loadData
+        dateFilter={{ start: selectedStartDate, end: selectedEndDate }}
+      />
     </React.Fragment>
   );
 }
