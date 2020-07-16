@@ -93,7 +93,12 @@ export const ListModule = (props: ListModuleParams) => {
     });
     allReportsAction({
       socketName: 'allReport',
-      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+        startDate: new Date('1999-06-08'),
+        endDate: new Date('1999-06-09'),
+      },
     }).then((reportsRes: any) => {
       setBaseTableForReport({
         ...getBaseTableForReport(get(reportsRes, 'data', [])),
