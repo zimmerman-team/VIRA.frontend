@@ -145,7 +145,7 @@ i18n
           //  --------------------
           'Drug use': 'drugsgebruik',
           Homelessness: 'Dakloos',
-          'Poverty reduction with a focuson youth and children':
+          'Poverty reduction with a focus on youth and children':
             'Armoedebestrijding met een focus op jeugd en kinderen',
           'Prisoner rehabilitation /reintegration':
             'Rehabilitatie / reïntegratie van gevangenen',
@@ -363,7 +363,7 @@ i18n
           //  --------------------
           'Drug use': 'drugsgebruik',
           Homelessness: 'Dakloos',
-          'Poverty reduction with a focuson youth and children':
+          'Poverty reduction with a focus on youth and children':
             'Armoedebestrijding met een focus op jeugd en kinderen',
           'Prisoner rehabilitation /reintegration':
             'Rehabilitatie / reïntegratie van gevangenen',

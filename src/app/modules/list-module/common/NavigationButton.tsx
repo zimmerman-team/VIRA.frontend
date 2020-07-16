@@ -17,6 +17,7 @@ export const NavigationButton = (props: NavItemParams) => {
     <NavLink
       to={props.path}
       activeStyle={{ borderBottom: '4px solid #25baa4' }}
+      data-cy={props.testid}
       css={`
         && {
           margin-right: 15px;

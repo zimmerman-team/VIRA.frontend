@@ -8,7 +8,12 @@ executors:
   cypress-executor:
     docker:
       - image: "cypress/included:4.10.0"
-    resource_class: large
+    resource_class: medium+
+
+  cypress-executor-med:
+    docker:
+      - image: "cypress/included:4.10.0"
+    resource_class: medium
 
 jobs:
   deploy:
@@ -66,9 +71,9 @@ workflows:
           requires:
             - cypress/install
       - cypress/run:
-          executor: cypress-executor
+#          executor: cypress-executor-med
           yarn: true
-          command: yarn happo-cypress -- -- yarn cypress run --record
+          command: yarn happo-cypress -- -- yarn cypress run --record --parallel
           browser: chrome
           requires:
             - deploy

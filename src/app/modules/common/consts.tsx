@@ -10,6 +10,7 @@ export interface NavItemParams {
   path: string;
   icon?: React.ReactElement;
   disabled?: boolean;
+  testid?: string;
 }
 
 export const NavItems: NavItemParams[] = [
