@@ -1,24 +1,27 @@
 import 'date-fns';
 import React from 'react';
 
-import DateFnsUtils from '@date-io/date-fns';
+import MomentUtils from '@date-io/moment';
+
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
-// import {css} from 'styled-components/macro'
-
-export const DataDaterangePicker = () => {
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    new Date('2014-08-18T21:11:54')
-  );
-
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-    console.log(date);
-  };
-
+interface DataDaterangePickerProps {
+  startDate?: MaterialUiPickersDate | null;
+  endDate?: MaterialUiPickersDate | null;
+  onStartDateSelect: (
+    date: MaterialUiPickersDate,
+    value?: string | null | undefined
+  ) => void;
+  onEndDateSelect: (
+    date: MaterialUiPickersDate,
+    value?: string | null | undefined
+  ) => void;
+}
+export const DataDaterangePicker = (props: DataDaterangePickerProps) => {
   return (
     <div
       css={`
@@ -26,12 +29,10 @@ export const DataDaterangePicker = () => {
         flex-direction: column;
       `}
     >
-      {/*<span>Filter by date:</span>*/}
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
         <div
           css={`
             display: flex;
-            //width: 50%;
             justify-content: space-between;
             align-items: center;
           `}
@@ -39,20 +40,19 @@ export const DataDaterangePicker = () => {
           <KeyboardDatePicker
             disableToolbar
             variant="inline"
-            format="dd/MM/yyyy"
+            format="DD/MM/yyyy"
             margin="normal"
             id="date-picker-inline"
-            // label="From:"
             css={`
               && {
                 margin-top: 8px !important;
                 margin-right: 20px;
               }
             `}
-            value={selectedDate}
-            onChange={handleDateChange}
+            value={props.startDate}
+            onChange={props.onStartDateSelect}
             KeyboardButtonProps={{
-              'aria-label': 'change date',
+              'aria-label': 'change start date',
             }}
           />
           <KeyboardDatePicker
@@ -63,12 +63,11 @@ export const DataDaterangePicker = () => {
               }
             `}
             id="date-picker-dialog"
-            // label="To:"
-            format="dd/MM/yyyy"
-            value={selectedDate}
-            onChange={handleDateChange}
+            format="DD/MM/yyyy"
+            value={props.endDate}
+            onChange={props.onEndDateSelect}
             KeyboardButtonProps={{
-              'aria-label': 'change date',
+              'aria-label': 'change end date',
             }}
           />
         </div>
@@ -76,11 +75,3 @@ export const DataDaterangePicker = () => {
     </div>
   );
 };
-
-// export const DataDaterangePicker = () => {
-//   return (
-//     <div>
-//       <p>This will be a daterangepicker one day</p>
-//     </div>
-//   );
-// };

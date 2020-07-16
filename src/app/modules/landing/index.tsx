@@ -21,6 +21,8 @@ import { AppConfig } from 'app/data';
 import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 import { Viztabs } from '../common/components/Viztabs';
 import { DateRangePicker } from 'app/components/daterange';
+import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterangePicker';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 /**
  * Landing layout.
@@ -95,6 +97,15 @@ function LandingLayout(props: any) {
     setStats(updatedStats);
   }, [allProjectsData, allReportsData]);
 
+  const [
+    selectedStartDate,
+    setSelectedStartDate,
+  ] = React.useState<MaterialUiPickersDate | null>();
+  const [
+    selectedEndDate,
+    setSelectedEndDate,
+  ] = React.useState<MaterialUiPickersDate | null>();
+
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
@@ -123,7 +134,13 @@ function LandingLayout(props: any) {
         onBubbleSelect={setSelectedSDG}
         geoMapData={geoMapData}
       />
-      {/*<DataDaterangePicker />*/}
+
+      <DataDaterangePicker
+        startDate={selectedStartDate}
+        endDate={selectedEndDate}
+        onStartDateSelect={setSelectedStartDate}
+        onEndDateSelect={setSelectedEndDate}
+      />
 
       <Hidden smDown>
         <Box width="100%" height="86px" />
