@@ -20,7 +20,7 @@ import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { AppConfig } from 'app/data';
 import { PropsModel } from 'app/modules/common/components/Viztabs/model';
-import { getNavTabItems } from './utils/getNavTabItems';
+import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 import { Viztabs } from '../common/components/Viztabs';
 
 /**
@@ -96,20 +96,8 @@ function LandingLayout(props: PropsModel) {
     setStats(updatedStats);
   }, [allProjectsData, allReportsData]);
 
-  /* todo: contains duplicate code */
   function onBarChartLegendClick(legend: string) {
-    const prevBarChartLegends = [...barChartLegends];
-    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
-    if (legendIndex !== -1) {
-      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
-        legendIndex
-      ].selected;
-      setBarChartLegends(prevBarChartLegends);
-    }
-  }
-
-  function onBubbleSelect(bubble: string) {
-    setSelectedSDG(bubble);
+    barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
   return (
@@ -125,6 +113,7 @@ function LandingLayout(props: PropsModel) {
         <Box width="100%" height="12px" />
       </Hidden>
 
+      {/* viz tabs */}
       {/* the viztabs contains the tab navigaion */}
       <Viztabs
         value={value}
@@ -134,7 +123,7 @@ function LandingLayout(props: PropsModel) {
         onBarChartLegendClick={onBarChartLegendClick}
         bubbleChartData={{ ...bubbleMockData, children: SDGVizData }}
         selectedBubble={selectedSDG}
-        onBubbleSelect={onBubbleSelect}
+        onBubbleSelect={setSelectedSDG}
         geoMapData={geoMapData}
       />
 
@@ -144,6 +133,8 @@ function LandingLayout(props: PropsModel) {
       </Hidden>
       <Box width="100%" height="18px" />
 
+      {/* list module */}
+      {/*<ListModule selectedSDG={selectedSDG} loadData />*/}
       {/* The list module contains the project/report/grantee lists */}
       <ListModule
         selectedSDG={selectedSDG}
@@ -157,4 +148,4 @@ function LandingLayout(props: PropsModel) {
   );
 }
 
-export default withRouter(LandingLayout);
+export default LandingLayout;

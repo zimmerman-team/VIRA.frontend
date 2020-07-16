@@ -63,6 +63,7 @@ export const AdminManageOverviewLayout = (props: PageModuleModel) => {
 
       <Grid item xs={7} lg={12}>
         <AdminAddButton
+          data-cy="admin-add-button"
           text={t(props.addBtnText)}
           icon={<Add />}
           onClick={() => {

@@ -35,6 +35,7 @@ export const ManageAccount = (props: ManageAccountModel) => {
         <SingleMultiLineTextField
           id={'First Name'}
           label={t('First Name')}
+          data-cy={'FirstName'}
           bigLabel
         />
         <Box width="100%" height="32px" />
@@ -42,11 +43,17 @@ export const ManageAccount = (props: ManageAccountModel) => {
         <SingleMultiLineTextField
           id={'Last Name'}
           label={t('Last Name')}
+          data-cy={'LastName'}
           bigLabel
         />
         <Box width="100%" height="32px" />
 
-        <SingleMultiLineTextField id={'Email'} label={t('Email')} bigLabel />
+        <SingleMultiLineTextField
+          id={'Email'}
+          label={t('Email')}
+          data-cy={'Email'}
+          bigLabel
+        />
         <SingleMultiLineTextField
           id={'Password'}
           label={t('Password')}

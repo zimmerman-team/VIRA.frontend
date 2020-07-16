@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+// DONE
 describe('dashboard page', () => {
   it('test dashboard page', () => {
     // perform

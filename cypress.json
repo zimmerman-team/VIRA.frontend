@@ -4,5 +4,7 @@
   "stepDefinitionTemp": "cypress/steps-compiled.json",
   "baseUrl": "http://app.ins.dev.nyuki.io",
   "experimentalGetCookiesSameSite": true,
+  "experimentalSourceRewriting": true,
+  "experimentalShadowDomSupport": true,
   "chromeWebSecurity": false
 }

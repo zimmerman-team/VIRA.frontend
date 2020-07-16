@@ -40,19 +40,21 @@ export const breadcrumbsMock: BreadcrumbModel = {
   ],
 };
 
+const TeamUserCards = [
+  TeamUserCardMock,
+  TeamUserCardMock,
+  TeamUserCardMock,
+  TeamUserCardMock,
+  TeamUserCardMock,
+  TeamUserCardMock,
+  TeamUserCardMock,
+  TeamUserCardMock,
+  TeamUserCardMock,
+];
+
 export const pageModuleMockUsers: PageModuleModel = {
   title: 'user_management.general.users',
-  teamCards: [
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-  ],
+  teamCards: TeamUserCards,
   pagination: {
     count: 0,
     page: 0,
@@ -107,17 +109,7 @@ export const pageModuleMockUsers: PageModuleModel = {
 
 export const pageModuleMockTeams: PageModuleModel = {
   title: 'user_management.general.teams',
-  teamCards: [
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-    TeamUserCardMock,
-  ],
+  teamCards: TeamUserCards,
   pagination: {
     count: 0,
     page: 0,
