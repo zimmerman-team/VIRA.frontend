@@ -19,6 +19,11 @@ import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
 import { SDGFilter } from './common/SDGFilter';
+import {
+  getGranteesBySDG,
+  getProjectsBySDG,
+  getReportsBySDG,
+} from 'app/modules/list-module/common/TableDataBySDG';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;

@@ -22,6 +22,7 @@ import { AppConfig } from 'app/data';
 import { PropsModel } from 'app/modules/common/components/Viztabs/model';
 import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 import { Viztabs } from '../common/components/Viztabs';
+import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
 
 /**
  * Landing layout.
@@ -148,4 +149,4 @@ function LandingLayout(props: PropsModel) {
   );
 }
 
-export default LandingLayout;
+export default withRouter(LandingLayout);
