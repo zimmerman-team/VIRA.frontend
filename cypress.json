@@ -4,7 +4,5 @@
   "stepDefinitionTemp": "cypress/steps-compiled.json",
   "baseUrl": "http://localhost:3000/",
   "experimentalGetCookiesSameSite": true,
-  "experimentalSourceRewriting": true,
-  "experimentalShadowDomSupport": true,
   "chromeWebSecurity": false
 }

@@ -6,18 +6,20 @@ describe('date range filter test', () => {
   });
 
   it('daterange picker exists', () => {
-    cy.findByTestId('Filter Table-iconButton')
+    cy.get('[data-testid="Filter Table-iconButton"]')
       .should('exist')
       .click();
 
-    cy.findByTestId('daterange-picker').should('exist');
-    cy.findByTestId('daterange-item-0').should('exist');
-    cy.findByTestId('daterange-item-1').should('exist');
-    cy.findByTestId('daterange-item-2').should('exist');
-    cy.findByTestId('daterange-item-3').should('exist');
+    cy.findByText('This Week').should('exist');
+    cy.findByText('Last Week').should('exist');
+    cy.findByText('This Month').should('exist');
+    cy.findByText('Last Month').should('exist');
   });
 
-  it('todo: daterangepicker is functional', () => {
-    //   todo: test daterange filter functionality
+  it('make screenshot', () => {
+    cy.get('body').happoScreenshot({
+      component: 'Filter by date',
+      variant: 'base',
+    });
   });
 });
