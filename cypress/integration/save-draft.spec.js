@@ -5,7 +5,7 @@ describe('save draft', () => {
     cy.auth();
 
     cy.findByTestId('sidebar-item-1').click();
-    cy.get('[data-testid=MuiDataTableBodyCell-3-0]')
+    cy.get('[data-testid=MuiDataTableBodyCell-3-1]')
       .children()
       .click();
 
@@ -46,14 +46,15 @@ describe('save draft', () => {
 
     cy.findByTestId('budget-field')
       .should('exist')
+      .children()
       .click()
-      .type('{backspace}')
+      .clear()
       .type(1);
 
     cy.findByTestId('insinger-contribution-field')
       .should('exist')
       .click()
-      .type('{backspace}')
+      .type('{selectall}')
       .type(1);
 
     cy.findByTestId('target-beneficiaries-field')
@@ -66,7 +67,13 @@ describe('save draft', () => {
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(1000);
+      .type(10);
+
+    cy.findByTestId('other-funders')
+      .should('exist')
+      .click()
+      .type('funder one');
+    cy.get('#autocomplete-countries-option-0').click();
 
     cy.findByTestId('which-when-item-0')
       .should('exist')
@@ -129,7 +136,7 @@ describe('save draft', () => {
     cy.findByTestId('draft-button').click();
 
     // continue
-    cy.wait(5000);
+    cy.wait(1000);
     cy.findByTestId('dialog-button').click();
 
     // go to reports
@@ -146,6 +153,6 @@ describe('save draft', () => {
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
-    cy.findByTestId('submit-button').click();
+    cy.findByTestId('delete-button').click();
   });
 });
