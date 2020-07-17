@@ -4,8 +4,7 @@ describe('edit report page', () => {
   it('test report overview page', () => {
     // authenticate
     cy.auth();
-    // goto page
-    // cy.visit('/list/2');
+
     cy.findByTestId('sidebar-item-3').click();
 
     cy.listTabs();
@@ -17,12 +16,7 @@ describe('edit report page', () => {
     // cy.get('body').happoScreenshot();
   });
   it('test edit report page', () => {
-    // authenticate
-    cy.auth();
-
-    // reports
     cy.findByTestId('sidebar-item-3').click();
-
     // save previous title
     const prevTitle = '';
     cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
@@ -37,8 +31,7 @@ describe('edit report page', () => {
       .click()
       // click edit button if report is not a draft
       .then(() => {
-        !prevTitle.includes('[Draft]') &&
-          cy.findByTestId('contained-button').click();
+        !prevTitle.includes('[Draft]') && cy.findByText('Edit report').click();
       });
 
     // use exact time as new title
@@ -54,9 +47,7 @@ describe('edit report page', () => {
     // next
     cy.findByTestId('next-button').click();
 
-    cy.findByTestId('other-funders')
-      .click()
-      .type('funder one');
+    cy.findByTestId('other-funders').click();
     cy.get('#autocomplete-countries-option-0').click();
 
     cy.findByTestId('next-button').click();
