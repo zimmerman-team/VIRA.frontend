@@ -154,5 +154,6 @@ describe('save draft', () => {
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
     cy.findByTestId('delete-button').click();
+    cy.get('.bWwSEd').click();
   });
 });

@@ -19,14 +19,14 @@ describe('edit report page', () => {
     cy.findByTestId('sidebar-item-3').click();
     // save previous title
     const prevTitle = '';
-    cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
+    cy.get('[data-testid=MuiDataTableBodyCell-1-1]')
       .invoke('text')
       .then(text1 => {
         prevTitle = text1;
       });
 
     // click top report
-    cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
+    cy.get('[data-testid=MuiDataTableBodyCell-1-1]')
       .children()
       .click()
       // click edit button if report is not a draft
