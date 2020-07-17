@@ -148,7 +148,7 @@ describe('save draft', () => {
       .contains('[Draft]')
       .click();
 
-    // save draft
+    // delete draft
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
