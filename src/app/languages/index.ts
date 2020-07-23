@@ -161,6 +161,7 @@ i18n
           Map: 'Kaart',
           ID: 'identifier',
           'Decision date': 'Beslissingsdatum',
+          'Allocated amount': 'Toegewezen bedrag',
           'Project title': 'Titel project',
           Organisation: 'Organisatie',
           //  --------------------
