@@ -129,9 +129,6 @@ function LandingLayout(props: any) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
-  // console.log("", allProjectsData)
-  console.log('', selectedEndDate);
-
   return (
     <React.Fragment>
       {/* -------------------------------------------------------------- */}

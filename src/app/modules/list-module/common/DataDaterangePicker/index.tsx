@@ -38,8 +38,6 @@ export const DataDaterangePicker = (props: DataDaterangePickerProps) => {
           `}
         >
           <KeyboardDatePicker
-            disableToolbar
-            variant="inline"
             format="DD/MM/yyyy"
             margin="normal"
             id="date-picker-inline"

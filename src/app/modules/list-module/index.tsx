@@ -78,14 +78,18 @@ export const ListModule = (props: ListModuleParams) => {
   );
 
   const isInitialMount = React.useRef(true);
+
+  const dateFilterStart = get(props.dateFilter, 'start._d', undefined);
+  const dateFilterEnd = get(props.dateFilter, 'end._d', undefined);
+
   const doLoadData = React.useCallback(() => {
     allProjectsAction({
       socketName: 'allProject',
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
-        startDate: props.dateFilter.start._d,
-        endDate: props.dateFilter.end._d,
+        startDate: dateFilterStart,
+        endDate: dateFilterEnd,
       },
     }).then((projectsRes: any) => {
       setBaseTableForProject({
@@ -107,8 +111,8 @@ export const ListModule = (props: ListModuleParams) => {
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
-        startDate: props.dateFilter.start._d,
-        endDate: props.dateFilter.end._d,
+        startDate: dateFilterStart,
+        endDate: dateFilterEnd,
       },
     }).then((reportsRes: any) => {
       setBaseTableForReport({
@@ -116,7 +120,7 @@ export const ListModule = (props: ListModuleParams) => {
         data: formatTableDataForReport(get(reportsRes, 'data', [])),
       });
     });
-  }, [props.dateFilter.start, props.dateFilter.end]);
+  }, [dateFilterEnd, dateFilterStart]);
 
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
@@ -132,7 +136,7 @@ export const ListModule = (props: ListModuleParams) => {
     if (props.loadData) {
       doLoadData();
     }
-  }, [props.dateFilter.start, props.dateFilter.end]);
+  }, [dateFilterEnd, dateFilterStart]);
 
   React.useEffect(() => {
     if (isInitialMount.current) {
