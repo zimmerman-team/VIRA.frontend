@@ -20,9 +20,9 @@ import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { AppConfig } from 'app/data';
 import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 import { Viztabs } from '../common/components/Viztabs';
-import { DateRangePicker } from 'app/components/daterange';
 import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterangePicker';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
+import MomentAdapter from '@date-io/moment';
 
 /**
  * Landing layout.
@@ -68,6 +68,22 @@ function LandingLayout(props: any) {
   const signedInUserEmail = useStoreState(state =>
     get(state.userDetails.data, 'email', '')
   );
+  const moment = new MomentAdapter();
+
+  // TODO: replace hardcoded initalstate with getEarliestDate() => see app/utils
+  const [
+    selectedStartDate,
+    setSelectedStartDate,
+  ] = React.useState<MaterialUiPickersDate | null>(
+    moment.date(new Date(2018, 2 - 1, 11)).startOf('day')
+  ); // Months are 0 based...
+
+  const [
+    selectedEndDate,
+    setSelectedEndDate,
+  ] = React.useState<MaterialUiPickersDate | null>(
+    moment.date(new Date()).endOf('day')
+  );
 
   React.useEffect(() => {
     getPPVizData({
@@ -75,17 +91,29 @@ function LandingLayout(props: any) {
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getSDGVizData({
       socketName: 'getSDGBubbleChart',
-      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
+      },
     });
     getGeoMapData({
       socketName: 'getGeoMapData',
-      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
+      },
     });
-  }, [signedInUserRole, signedInUserEmail]);
+  }, [signedInUserRole, signedInUserEmail, selectedStartDate, selectedEndDate]);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];
@@ -97,18 +125,12 @@ function LandingLayout(props: any) {
     setStats(updatedStats);
   }, [allProjectsData, allReportsData]);
 
-  const [
-    selectedStartDate,
-    setSelectedStartDate,
-  ] = React.useState<MaterialUiPickersDate | null>(new Date());
-  const [
-    selectedEndDate,
-    setSelectedEndDate,
-  ] = React.useState<MaterialUiPickersDate | null>(new Date());
-
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
+
+  // console.log("", allProjectsData)
+  console.log('', selectedEndDate);
 
   return (
     <React.Fragment>
@@ -138,8 +160,8 @@ function LandingLayout(props: any) {
       <DataDaterangePicker
         startDate={selectedStartDate}
         endDate={selectedEndDate}
-        onStartDateSelect={date => setSelectedStartDate(date)}
-        onEndDateSelect={date => setSelectedEndDate(date)}
+        onStartDateSelect={date => setSelectedStartDate(date.startOf('day'))}
+        onEndDateSelect={date => setSelectedEndDate(date.endOf('day'))}
       />
 
       <Hidden smDown>
