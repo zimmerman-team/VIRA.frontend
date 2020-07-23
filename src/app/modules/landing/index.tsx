@@ -4,31 +4,34 @@ import React from 'react';
 import { useTitle } from 'react-use';
 import get from 'lodash/get';
 import findIndex from 'lodash/findIndex';
+import { withRouter } from 'react-router-dom';
 import 'styled-components/macro';
 
 // absolute
 import { Grid, Box, Hidden } from '@material-ui/core';
 import { ListModule } from 'app/modules/list-module';
 import {
-  statsMock,
+  StatItemsConfig,
   StatItemParams,
-  TabNavMockList,
-} from 'app/modules/landing/statsMock';
+  NavItemsGeneralConfig,
+} from 'app/modules/landing/config';
 import { useStoreState, useStoreActions } from 'app/state/store/hooks';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { AppConfig } from 'app/data';
+import { PropsModel } from 'app/modules/common/components/Viztabs/model';
 import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 import { Viztabs } from '../common/components/Viztabs';
+import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
 
 /**
  * Landing layout.
  */
-function LandingLayout(props: any) {
+function LandingLayout(props: PropsModel) {
   // set window title
   useTitle(`${AppConfig.appTitleLong} Dashboard`);
   /** prop1 description */
-  const [stats, setStats] = React.useState(statsMock);
+  const [stats, setStats] = React.useState(StatItemsConfig);
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
       label: 'charts.barchart.target',
@@ -106,11 +109,13 @@ function LandingLayout(props: any) {
         <StatCard data-cy="stat-card" stats={stats} />
       </Grid>
 
+      {/* hide on mobile */}
       <Hidden smDown>
         <Box width="100%" height="12px" />
       </Hidden>
 
       {/* viz tabs */}
+      {/* the viztabs contains the tab navigaion */}
       <Viztabs
         value={value}
         onTabClick={handleChange}
@@ -123,15 +128,25 @@ function LandingLayout(props: any) {
         geoMapData={geoMapData}
       />
 
+      {/* hide on mobile */}
       <Hidden smDown>
         <Box width="100%" height="86px" />
       </Hidden>
       <Box width="100%" height="18px" />
 
       {/* list module */}
-      <ListModule selectedSDG={selectedSDG} loadData />
+      {/*<ListModule selectedSDG={selectedSDG} loadData />*/}
+      {/* The list module contains the project/report/grantee lists */}
+      <ListModule
+        selectedSDG={selectedSDG}
+        loadData
+        tabNav={getNavTabItems(
+          NavItemsGeneralConfig,
+          get(props.match.params, 'viz', '')
+        )}
+      />
     </React.Fragment>
   );
 }
 
-export default LandingLayout;
+export default withRouter(LandingLayout);

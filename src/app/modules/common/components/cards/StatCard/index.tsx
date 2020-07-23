@@ -4,7 +4,7 @@ import { useMediaQuery } from '@material-ui/core';
 import { StatItem } from 'app/modules/landing/common/stats/StatItem';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import { Card, CardContent, Grid } from '@material-ui/core';
-import { StatItemParams } from 'app/modules/landing/statsMock';
+import { StatItemParams } from 'app/modules/landing/config';
 import { useTranslation } from 'react-i18next';
 export interface StatsCard {
   stats: StatItemParams[];

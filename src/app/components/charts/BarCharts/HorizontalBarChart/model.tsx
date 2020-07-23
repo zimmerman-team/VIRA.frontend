@@ -10,11 +10,11 @@ export type BarChartLegendModel = {
 
 export type HorizontalBarChartValueModel = {
   name: string;
-  value1: number | null;
-  value2?: number | null;
-  value3?: number | null;
-  value4?: number | null; //Insinger Contribution
-  value1Color: string;
+  value1?: number | undefined;
+  value2?: number | undefined;
+  value3?: number | undefined;
+  value4?: number | undefined; //Insinger Contribution
+  value1Color?: string;
   value2Color?: string;
   value4Color?: string;
   tooltip?: ChartTooltipItemModel;

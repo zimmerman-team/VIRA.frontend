@@ -19,6 +19,11 @@ import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
 import { SDGFilter } from './common/SDGFilter';
+import {
+  getGranteesBySDG,
+  getProjectsBySDG,
+  getReportsBySDG,
+} from 'app/modules/list-module/common/TableDataBySDG';
 
 type ListModuleParams = {
   tabNav: TabNavigatorParams;
@@ -54,6 +59,27 @@ export const ListModule = (props: ListModuleParams) => {
     actions => actions.allOrganisations.fetch
   );
   const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
+
+  // get state
+  const allProjectsData = useStoreState(state => state.allProjects.data);
+  const allOrganisationsData = useStoreState(
+    state => state.allOrganisations.data
+  );
+  const allReportsData = useStoreState(state => state.allReports.data);
+
+  // get datasets by selected SDG
+  let sdgReportsData;
+  let sdgProjectData;
+  let sdgOrgranisationData;
+
+  if (props.selectedSDG !== '' && props.selectedSDG !== undefined) {
+    sdgReportsData = getReportsBySDG(props.selectedSDG, allReportsData);
+    sdgProjectData = getProjectsBySDG(allProjectsData, sdgReportsData);
+    sdgOrgranisationData = getGranteesBySDG(
+      allOrganisationsData,
+      sdgProjectData
+    );
+  }
 
   const reduxLng = useStoreState(state => state.syncVariables.lng);
   const loading = useStoreState(

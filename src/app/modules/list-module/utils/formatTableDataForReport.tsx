@@ -1,4 +1,6 @@
-export const formatTableDataForReport = (data: any): any[] => {
+import { DataModel } from 'app/modules/list-module/model';
+
+export const formatTableDataForReport = (data: DataModel[]): any[] => {
   let tempArray: any[] = [];
   const bigTempArray: any[][] = [];
   data.forEach((row: any) => {

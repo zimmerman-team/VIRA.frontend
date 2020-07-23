@@ -1,4 +1,3 @@
-// @ts-nocheck
 import 'styled-components/macro';
 import React from 'react';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
@@ -28,8 +27,6 @@ export const ProjectDetailLayout = (props: any) => {
       get(state.userDetails.data, 'email', '_') ===
         props.projectDetail.responsible_person_email
   );
-
-  console.log('render project detail');
 
   return (
     <React.Fragment>

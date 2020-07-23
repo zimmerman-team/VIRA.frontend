@@ -3,7 +3,7 @@ import { css } from 'styled-components/macro';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
-import { StatItemParams } from 'app/modules/landing/statsMock';
+import { StatItemParams } from 'app/modules/landing/config';
 import { ProjectPalette } from 'app/theme';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

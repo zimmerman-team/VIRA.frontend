@@ -5,8 +5,8 @@ import { css } from 'styled-components/macro';
 
 interface TabPanelProps {
   children?: React.ReactNode;
-  index: any;
-  value: any;
+  index: number;
+  value: number;
 }
 
 export const TabStyle = css`
@@ -42,7 +42,7 @@ export function TabPanel(props: TabPanelProps) {
     </Typography>
   );
 }
-export function a11yProps(index: any) {
+export function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,

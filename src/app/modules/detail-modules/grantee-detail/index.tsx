@@ -25,12 +25,42 @@ import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import findIndex from 'lodash/findIndex';
 import { AppConfig } from 'app/data';
 
+export interface ProjectModel {
+  _id: string;
+  project_number: string;
+  project_name: string;
+  project_description: string;
+  duration: string;
+  start_date: string;
+  end_date: string;
+  total_amount?: number;
+  decision_date: string;
+  decision: string;
+  allocated_amount?: number;
+  released_amount?: any;
+  paid_amount?: number;
+  organisation: Organisation;
+  category: Category;
+  responsible_person: string;
+  __v: number;
+}
+
+export interface Organisation {
+  _id: string;
+  organisation_name: string;
+}
+
+export interface Category {
+  _id: string;
+  name: string;
+}
+
 export function GranteeDetailModule(props: any) {
   // set window title
   useTitle(`${AppConfig.appTitleLong} Grantee detail`);
 
-  const params: any = useParams();
-  const granteeID: any = params.code;
+  const params: { code: string } = useParams();
+  const granteeID: string = params.code;
   const granteeTitleMock: TitleParams = GranteeTitleMock;
   const breadcrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
   const descriptionMock: DescriptionParams = GranteeDescriptionMock;
@@ -133,25 +163,25 @@ export function GranteeDetailModule(props: any) {
       getPPVizData({
         socketName: 'getPolicyPriorityBarChart',
         values: {
-          projectID: projects.map((p: any) => p._id),
+          projectID: projects.map((project: ProjectModel) => project._id),
         },
       });
       getSDGVizData({
         socketName: 'getSDGBubbleChart',
         values: {
-          projectID: projects.map((p: any) => p._id),
+          projectID: projects.map((project: ProjectModel) => project._id),
         },
       });
       getGeoMapData({
         socketName: 'getGeoMapData',
         values: {
-          projectID: projects.map((p: any) => p._id),
+          projectID: projects.map((project: ProjectModel) => project._id),
         },
       });
       allReportsAction({
         socketName: 'allReport',
         values: {
-          projectID: projects.map((p: any) => p._id),
+          projectID: projects.map((project: ProjectModel) => project._id),
         },
       });
     }
