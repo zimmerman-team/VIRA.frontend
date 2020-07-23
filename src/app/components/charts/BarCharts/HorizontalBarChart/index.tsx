@@ -240,7 +240,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
           {(showBudgetLine || showContribLine) && (
             <TopAxis>
               <TopAxisValue>0€</TopAxisValue>
-              <TopAxisValue>{maxBudgetVal}€</TopAxisValue>
+              <TopAxisValue>{`${Math.round(maxBudgetVal)}€`}</TopAxisValue>
             </TopAxis>
           )}
           <div
