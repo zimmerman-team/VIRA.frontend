@@ -78,11 +78,15 @@ export const ListModule = (props: ListModuleParams) => {
   );
 
   const isInitialMount = React.useRef(true);
-
   const doLoadData = React.useCallback(() => {
     allProjectsAction({
       socketName: 'allProject',
-      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+        startDate: props.dateFilter.start._d,
+        endDate: props.dateFilter.end._d,
+      },
     }).then((projectsRes: any) => {
       setBaseTableForProject({
         ...baseTableForProject,
