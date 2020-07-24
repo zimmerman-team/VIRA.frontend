@@ -3,7 +3,6 @@
 import React from 'react';
 import { useTitle } from 'react-use';
 import get from 'lodash/get';
-import findIndex from 'lodash/findIndex';
 import { withRouter } from 'react-router-dom';
 import 'styled-components/macro';
 
@@ -21,8 +20,11 @@ import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { AppConfig } from 'app/data';
 import { PropsModel } from 'app/modules/common/components/Viztabs/model';
 import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
-import { Viztabs } from '../common/components/Viztabs';
+import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterangePicker';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
+import MomentAdapter from '@date-io/moment';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
+import { Viztabs } from '../common/components/Viztabs';
 
 /**
  * Landing layout.
@@ -68,6 +70,22 @@ function LandingLayout(props: PropsModel) {
   const signedInUserEmail = useStoreState(state =>
     get(state.userDetails.data, 'email', '')
   );
+  const moment = new MomentAdapter();
+
+  // TODO: replace hardcoded initalstate with getEarliestDate() => see app/utils
+  const [
+    selectedStartDate,
+    setSelectedStartDate,
+  ] = React.useState<MaterialUiPickersDate | null>(
+    moment.date(new Date(2018, 2 - 1, 11)).startOf('day')
+  ); // Months are 0 based...
+
+  const [
+    selectedEndDate,
+    setSelectedEndDate,
+  ] = React.useState<MaterialUiPickersDate | null>(
+    moment.date(new Date()).endOf('day')
+  );
 
   React.useEffect(() => {
     getPPVizData({
@@ -75,17 +93,29 @@ function LandingLayout(props: PropsModel) {
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getSDGVizData({
       socketName: 'getSDGBubbleChart',
-      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
+      },
     });
     getGeoMapData({
       socketName: 'getGeoMapData',
-      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
+      },
     });
-  }, [signedInUserRole, signedInUserEmail]);
+  }, [signedInUserRole, signedInUserEmail, selectedStartDate, selectedEndDate]);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];
@@ -128,18 +158,25 @@ function LandingLayout(props: PropsModel) {
         geoMapData={geoMapData}
       />
 
+      <DataDaterangePicker
+        startDate={selectedStartDate}
+        endDate={selectedEndDate}
+        onStartDateSelect={date => setSelectedStartDate(date.startOf('day'))}
+        onEndDateSelect={date => setSelectedEndDate(date.endOf('day'))}
+      />
+
       {/* hide on mobile */}
+
       <Hidden smDown>
         <Box width="100%" height="86px" />
       </Hidden>
       <Box width="100%" height="18px" />
 
       {/* list module */}
-      {/*<ListModule selectedSDG={selectedSDG} loadData />*/}
-      {/* The list module contains the project/report/grantee lists */}
       <ListModule
         selectedSDG={selectedSDG}
         loadData
+        dateFilter={{ start: selectedStartDate, end: selectedEndDate }}
         tabNav={getNavTabItems(
           NavItemsGeneralConfig,
           get(props.match.params, 'viz', '')

@@ -19,6 +19,7 @@ import get from 'lodash/get';
 import { TabStyle, a11yProps, TabPanel } from './common/TabPanelProps';
 import { PageLoader } from '../common/page-loader';
 import { SDGFilter } from './common/SDGFilter';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import {
   getGranteesBySDG,
   getProjectsBySDG,
@@ -34,6 +35,12 @@ type ListModuleParams = {
   loadData?: boolean;
   listPage?: boolean;
   selectedSDG?: string;
+  dateFilter: dateFilterType;
+};
+
+type dateFilterType = {
+  start: MaterialUiPickersDate | null;
+  end: MaterialUiPickersDate | null;
 };
 
 export const ListModule = (props: ListModuleParams) => {
@@ -98,10 +105,18 @@ export const ListModule = (props: ListModuleParams) => {
 
   const isInitialMount = React.useRef(true);
 
+  const dateFilterStart = get(props.dateFilter, 'start._d', undefined);
+  const dateFilterEnd = get(props.dateFilter, 'end._d', undefined);
+
   const doLoadData = React.useCallback(() => {
     allProjectsAction({
       socketName: 'allProject',
-      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+        startDate: dateFilterStart,
+        endDate: dateFilterEnd,
+      },
     }).then((projectsRes: any) => {
       setBaseTableForProject({
         ...baseTableForProject,
@@ -119,14 +134,19 @@ export const ListModule = (props: ListModuleParams) => {
     });
     allReportsAction({
       socketName: 'allReport',
-      values: { userRole: signedInUserRole, userEmail: signedInUserEmail },
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+        startDate: dateFilterStart,
+        endDate: dateFilterEnd,
+      },
     }).then((reportsRes: any) => {
       setBaseTableForReport({
         ...getBaseTableForReport(get(reportsRes, 'data', [])),
         data: formatTableDataForReport(get(reportsRes, 'data', [])),
       });
     });
-  }, []);
+  }, [dateFilterEnd, dateFilterStart]);
 
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
@@ -137,6 +157,12 @@ export const ListModule = (props: ListModuleParams) => {
       }
     }
   }, []);
+
+  React.useEffect(() => {
+    if (props.loadData) {
+      doLoadData();
+    }
+  }, [dateFilterEnd, dateFilterStart]);
 
   React.useEffect(() => {
     if (isInitialMount.current) {
