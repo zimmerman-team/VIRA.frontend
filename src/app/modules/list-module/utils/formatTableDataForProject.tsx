@@ -3,13 +3,14 @@ import { DataModel } from 'app/modules/list-module/model';
 export const formatTableDataForProject = (data: DataModel[]): any[] => {
   let tempArray: any[] = [];
   const bigTempArray: any[][] = [];
+  console.log(data);
   data.forEach((row: any) => {
     tempArray.push(
-      row.project_number,
-      row.decision_date,
-      row.decision,
+      row.organisation.organisation_name,
       row.project_name,
-      row.organisation.organisation_name
+      row.decision,
+      row.decision_date,
+      `€ ${row.allocated_amount}`
     );
     bigTempArray.push(tempArray);
     tempArray = [];
