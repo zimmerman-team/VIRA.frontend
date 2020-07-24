@@ -3,7 +3,6 @@
 import React from 'react';
 import { useTitle } from 'react-use';
 import get from 'lodash/get';
-import findIndex from 'lodash/findIndex';
 import { withRouter } from 'react-router-dom';
 import 'styled-components/macro';
 
@@ -21,12 +20,11 @@ import { StatCard } from 'app/modules/common/components/cards/StatCard';
 import { AppConfig } from 'app/data';
 import { PropsModel } from 'app/modules/common/components/Viztabs/model';
 import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
-import { Viztabs } from '../common/components/Viztabs';
 import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterangePicker';
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import MomentAdapter from '@date-io/moment';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
-
+import { Viztabs } from '../common/components/Viztabs';
 
 /**
  * Landing layout.
@@ -168,7 +166,7 @@ function LandingLayout(props: PropsModel) {
       />
 
       {/* hide on mobile */}
-      <Hidden smDown>
+
       <Hidden smDown>
         <Box width="100%" height="86px" />
       </Hidden>
