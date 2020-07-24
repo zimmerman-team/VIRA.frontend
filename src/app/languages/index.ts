@@ -161,7 +161,7 @@ i18n
           Map: 'Kaart',
           ID: 'identifier',
           'Decision date': 'Beslissingsdatum',
-          'Allocated amount': 'Toegewezen bedrag',
+          allocated_amount: 'Toegewezen bedrag',
           'Project title': 'Titel project',
           Organisation: 'Organisatie',
           //  --------------------
@@ -339,6 +339,7 @@ i18n
           'project id:': 'project id:',
           // table 2
           'Decision date': 'Decision date',
+          'Allocated amount': 'Toegewezen bedrag',
           Decision: 'Decision',
           'Project title': 'Project title',
           Organisation: 'Organisation',
