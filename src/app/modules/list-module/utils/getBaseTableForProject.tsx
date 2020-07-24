@@ -4,6 +4,10 @@ import i18n from 'app/languages';
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import React from 'react';
 
+const sortDate = (data: []) => {
+  return data.sort((a: any, b: any) => b - a);
+};
+
 export const getBaseTableForProject = (): TableModuleModel => {
   const tableConfig = projectsTableConfig;
   tableConfig.columns = [
@@ -47,6 +51,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
       name: i18n.t('projects.overview.table.decision_date'),
       options: {
         sortDirection: 'desc',
+        // customSort: sortDate(i18n.t.date),
         filter: true,
         filterType: 'checkbox',
         customFilterListRender: value =>
