@@ -32,8 +32,7 @@ import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-
-const BarComponent = (props: {
+interface BarComponentPropsModel {
   [x: string]: any;
   color?: any;
   y?: any;
@@ -54,7 +53,8 @@ const BarComponent = (props: {
   containerWidth?: any;
   showBar?: boolean;
   showLine?: boolean;
-}) => {
+}
+const BarComponent = (props: BarComponentPropsModel) => {
   const {
     borderRadius,
     borderWidth,
@@ -240,7 +240,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
           {(showBudgetLine || showContribLine) && (
             <TopAxis>
               <TopAxisValue>0€</TopAxisValue>
-              <TopAxisValue>{maxBudgetVal}€</TopAxisValue>
+              <TopAxisValue>{`${Math.round(maxBudgetVal)}€`}</TopAxisValue>
             </TopAxis>
           )}
           <div

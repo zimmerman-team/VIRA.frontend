@@ -74,7 +74,7 @@ const Menu = (props: MenuProps) => {
   const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
 
   return (
-    <Grid container direction="row" wrap="nowrap">
+    <Grid container direction="row" data-cy="daterange-picker" wrap="nowrap">
       <Grid item lg={10}>
         {/*<Grid container className={classes.header} alignItems="center">
           <Grid item className={classes.headerItem}>

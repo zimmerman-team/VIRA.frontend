@@ -14,7 +14,18 @@ interface SidebarNavButtonParams extends RouteComponentProps {
   icon?: React.ReactElement;
 }
 
-function isNavLinkActive(props: any) {
+interface NavLinkPropsModel {
+  text: string;
+  path: string;
+  index: number;
+  open: boolean;
+  icon: any;
+  history: any;
+  location: any;
+  match: any;
+}
+
+function isNavLinkActive(props: NavLinkPropsModel) {
   if (props.location.pathname === props.path) {
     return true;
   }

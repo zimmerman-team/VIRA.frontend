@@ -15,8 +15,8 @@ import { formatReportDetail } from './utils/formatReportDetail';
 export const ReportDetailModuleF = (props: any) => {
   useTitle(`${AppConfig.appTitleLong}  Report detail`);
 
-  const report_obj: any = useParams();
-  const report_id: any = report_obj.code;
+  const report_obj: { code: string } = useParams();
+  const report_id: string = report_obj.code;
   const [reportDetails, setreportDetails] = useState({
     id: '',
     title: '',

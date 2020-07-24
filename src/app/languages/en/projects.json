@@ -11,11 +11,11 @@
   "overview": {
     "title": "",
     "table": {
-      "id": "ID",
-      "decision_date": "Decision date",
-      "decision": "Decision",
+      "organisation": "Organisation",
       "project_title": "Project title",
-      "organisation": "Organisation"
+      "decision": "Decision",
+      "decision_date": "Decision date",
+      "allocated_amount": "Allocated amount"
     }
   }
 }

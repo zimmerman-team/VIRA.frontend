@@ -1,4 +1,6 @@
-export const formatTableDataForGrantee = (data: any): any[] => {
+import { DataModel } from 'app/modules/list-module/model';
+
+export const formatTableDataForGrantee = (data: DataModel[]) => {
   let tempArray: any[] = [];
   const bigTempArray: any[][] = [];
   data.forEach((row: any) => {

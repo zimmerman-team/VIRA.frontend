@@ -161,6 +161,7 @@ const DateRangePickerImpl: React.FunctionComponent<DateRangePickerProps> = props
 
   return open ? (
     <Menu
+      data-cy="daterange-picker"
       dateRange={dateRange}
       minDate={minDateValid}
       maxDate={maxDateValid}

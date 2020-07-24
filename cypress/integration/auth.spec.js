@@ -1,8 +1,13 @@
+const currentDate = new Date();
+const id = currentDate.getTime();
+
 describe('auth related tests', () => {
-  it('go to users overview', () => {
+  it('authenticate', () => {
     // auth
     cy.auth();
+  });
 
+  it('go to users overview', () => {
     cy.findByTestId('usercard-button').click();
     cy.findByTestId('usercard-manage-teams-button').click();
     cy.findByTestId('user_management.general.users').click();
@@ -15,20 +20,21 @@ describe('auth related tests', () => {
       .type('Cypress');
     cy.findByTestId('LastName')
       .click()
-      .type('User00');
+      .type(id);
     cy.findByTestId('Email')
       .click()
-      .type('test@user.test');
+      .type(`${id}@user.test`);
     cy.get('#select-outlined').click();
     cy.get('[data-value="e0d70f9c-30e3-476e-b25f-a663daa1acb9"]').click();
     cy.findByTestId('contained-button').click();
+    cy.wait(1000);
     cy.findByTestId('usercard-button').click();
     cy.findByTestId('usercard-manage-teams-button').click();
     cy.findByTestId('user_management.general.users').click();
-    cy.findByText('Cypress User00').click();
   });
 
   it('adjust user auth permissions', () => {
+    cy.findByText(`Cypress ${id}`).click();
     cy.findByTestId('Administrator').click();
     cy.findByTestId('contained-button').click();
 
@@ -42,7 +48,8 @@ describe('auth related tests', () => {
   });
 
   it('delete user', () => {
-    cy.findByTestId('delete-Cypress User00').click();
+    cy.findByTestId(`delete-Cypress ${id}`).click();
     cy.findByText('Delete').click();
+    cy.wait(1000);
   });
 });

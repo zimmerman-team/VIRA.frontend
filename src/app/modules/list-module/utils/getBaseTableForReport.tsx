@@ -2,7 +2,10 @@
 import React, { useState } from 'react';
 
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
-import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+import {
+  TableModuleModel,
+  BaseTableReportDataModel,
+} from 'app/components/datadisplay/Table/model';
 
 import get from 'lodash/get';
 import find from 'lodash/find';
@@ -21,7 +24,9 @@ const options: MUIDataTableOptions = {
   viewColumns: false,
 };
 
-export const getBaseTableForReport = (data: any): TableModuleModel => {
+export const getBaseTableForReport = (
+  data: BaseTableReportDataModel[] | []
+): TableModuleModel => {
   const tableConfig = { ...ReportListMock, data: [] };
 
   tableConfig.options = options;
