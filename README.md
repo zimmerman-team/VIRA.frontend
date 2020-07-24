@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## What is the Insinger monitoring and evaluation tool?
+
+The Insinger monitoring and evaluation tool allows you to easily generate reports on projects that have been co-funded by the Insinger foundation. After logging in you get acces to project information as well as report any developments.
+
+## About the project
+
+- Website: <a href="" target="_blank">t.b.a.</a>
+- Authors: <a href="https://www.zimmerman.team/" target="_blank">Zimmerman</a>
+- License: AGPLv3 (see included <a href="https://github.com/zimmerman-zimmerman/query-builder-iati.cloud/blob/develop/LICENSE.MD" target="_blank">LICENSE</a> file for full license)
+- Github Repo: <a href="https://github.com/zimmerman-zimmerman/query-builder-iati.cloud/" target="_blank">github.com/zimmerman-zimmerman/query-builder-iati.cloud</a>
+- Bug Tracker: <a href="https://github.com/zimmerman-zimmerman/query-builder-iati.cloud/issues" target="_blank">github.com/zimmerman-zimmerman/query-builder-iati.cloud/issues</a>
+
 ## Available Scripts
 
 Before running any of the scripts, please make sure you add an `.env` file in the root directory of the project containing the following:
