@@ -40,6 +40,7 @@ export const DataDaterangePicker = (props: DataDaterangePickerProps) => {
           <KeyboardDatePicker
             format="DD/MM/yyyy"
             margin="normal"
+            data-cy="date-picker-inline"
             id="date-picker-inline"
             css={`
               && {
@@ -60,6 +61,7 @@ export const DataDaterangePicker = (props: DataDaterangePickerProps) => {
                 margin-top: 8px !important;
               }
             `}
+            data-cy="date-picker-dialog"
             id="date-picker-dialog"
             format="DD/MM/yyyy"
             value={props.endDate}
