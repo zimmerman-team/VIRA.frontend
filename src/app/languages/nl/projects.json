@@ -15,7 +15,8 @@
       "decision_date": "Beslissingsdatum",
       "decision": "Besluit",
       "project_title": "Titel project",
-      "organisation": "Organisatie"
+      "organisation": "Organisatie",
+      "allocated_amount": "Toegewezen bedrag"
     }
   }
 }
