@@ -146,7 +146,7 @@ export const ListModule = (props: ListModuleParams) => {
         data: formatTableDataForReport(get(reportsRes, 'data', [])),
       });
     });
-  }, [dateFilterEnd, dateFilterStart]);
+  }, [dateFilterEnd, dateFilterStart, signedInUserRole, signedInUserEmail]);
 
   // Load the projects and orgs on componentDidMount
   React.useEffect(() => {
@@ -162,7 +162,7 @@ export const ListModule = (props: ListModuleParams) => {
     if (props.loadData) {
       doLoadData();
     }
-  }, [dateFilterEnd, dateFilterStart]);
+  }, [dateFilterEnd, dateFilterStart, signedInUserRole, signedInUserEmail]);
 
   React.useEffect(() => {
     if (isInitialMount.current) {
