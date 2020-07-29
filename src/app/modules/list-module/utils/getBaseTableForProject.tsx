@@ -26,11 +26,13 @@ export const getBaseTableForProject = (): TableModuleModel => {
         filter: true,
         filterType: 'dropdown',
         customBodyRender: (value, tableMeta, updateValue) => {
+          if (value) {
+            const temp_value = value.split(' && ');
+            value = temp_value[0];
+            updateValue = temp_value[1];
+          }
           return (
-            <LinkCellModule
-              link={`/projects/${tableMeta.rowData[0]}`}
-              value={value}
-            />
+            <LinkCellModule link={`/projects/${updateValue}`} value={value} />
           );
         },
         customFilterListRender: value =>
