@@ -194,6 +194,23 @@ export const ListModule = (props: ListModuleParams) => {
     }
   }, [reduxLng]);
 
+  React.useEffect(() => {
+    if (!props.loadData) {
+      setBaseTableForProject({
+        ...baseTableForProject,
+        data: formatTableDataForProject(get(allProjectsData, 'data', [])),
+      });
+      setBaseTableForGrantee({
+        ...baseTableForGrantee,
+        data: formatTableDataForGrantee(get(allOrganisationsData, 'data', [])),
+      });
+      setBaseTableForReport({
+        ...getBaseTableForReport(get(allReportsData, 'data', [])),
+        data: formatTableDataForReport(get(allReportsData, 'data', [])),
+      });
+    }
+  }, [allProjectsData, allOrganisationsData, allReportsData]);
+
   const [value, setValue] = React.useState(
     props.focus || parseInt(id, 10) ? props.focus || parseInt(id, 10) : 0
   );
@@ -205,7 +222,7 @@ export const ListModule = (props: ListModuleParams) => {
     }
   };
 
-  console.log('render lists');
+  // console.log('render lists');
 
   return (
     <React.Fragment>
