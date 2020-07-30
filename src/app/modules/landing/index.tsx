@@ -25,6 +25,7 @@ import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import MomentAdapter from '@date-io/moment';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
 import { Viztabs } from '../common/components/Viztabs';
+import { css } from 'styled-components/macro';
 
 /**
  * Landing layout.
@@ -163,6 +164,7 @@ function LandingLayout(props: PropsModel) {
         endDate={selectedEndDate}
         onStartDateSelect={date => setSelectedStartDate(date.startOf('day'))}
         onEndDateSelect={date => setSelectedEndDate(date.endOf('day'))}
+        tabValue={value}
       />
 
       {/* hide on mobile */}

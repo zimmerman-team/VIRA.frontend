@@ -20,6 +20,7 @@ interface DataDaterangePickerProps {
     date: MaterialUiPickersDate,
     value?: string | null | undefined
   ) => void;
+  tabValue?: number;
 }
 export const DataDaterangePicker = (props: DataDaterangePickerProps) => {
   return (
@@ -27,6 +28,8 @@ export const DataDaterangePicker = (props: DataDaterangePickerProps) => {
       css={`
         display: flex;
         flex-direction: column;
+        position: ${props.tabValue === 0 ? 'relative' : ''};
+        top: ${props.tabValue === 0 ? '-53px' : ''};
       `}
     >
       <MuiPickersUtilsProvider utils={MomentUtils}>
