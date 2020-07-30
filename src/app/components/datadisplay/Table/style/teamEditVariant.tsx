@@ -73,10 +73,11 @@ export const teamEditVariant = createMuiTheme({
         '& a': {
           fontWeight: '600',
         },
-        '&:nth-child(2)': {
+        '&:nth-child(1)&:nth-child(1)': {
+          border: '1px solid red',
           // padding: '13px 0 13px 24px',
-          // width: '63px',
-          // maxWidth: '63px',
+          width: '63px',
+          maxWidth: '63px',
         },
         '&:nth-child(6)': {
           // padding: '13px 27px',
