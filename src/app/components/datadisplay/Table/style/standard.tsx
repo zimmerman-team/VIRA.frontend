@@ -44,7 +44,7 @@ export const standard = createMuiTheme({
         fontWeight: 'normal',
         letterSpacing: '0.42px',
         lineHeight: '1.33',
-        padding: '17px 24px',
+        // padding: '17px 24px',
 
         color: 'rgba(1, 1, 10, 0.6)',
       },
@@ -55,7 +55,7 @@ export const standard = createMuiTheme({
     MUIDataTableBodyCell: {
       root: {
         fontSize: '14px',
-        padding: '13px 24px',
+        // padding: '13px 24px',
         color: ProjectPalette.common.black,
         fontWeight: 'normal',
         '& a': {
