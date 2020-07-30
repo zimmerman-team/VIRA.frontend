@@ -56,7 +56,8 @@ export function BubbleChart(props: Props) {
 
   React.useEffect(() => {
     if (props.data.children) {
-      setMinValue(get(minBy(props.data.children, 'loc'), 'loc', 0));
+      const newMinValue = get(minBy(props.data.children, 'loc'), 'loc', 0);
+      setMinValue(newMinValue === 0 ? 1 : newMinValue);
     }
   }, [props.data]);
 
@@ -98,7 +99,10 @@ export function BubbleChart(props: Props) {
                 root={{
                   ...props.data,
                   children: [
-                    ...props.data.children,
+                    ...props.data.children.map(child => ({
+                      ...child,
+                      loc: child.loc > 0 ? child.loc : minValue,
+                    })),
                     ...otherSdgs.map(os => ({ ...os, loc: minValue })),
                   ],
                 }}
