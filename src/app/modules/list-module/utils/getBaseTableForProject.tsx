@@ -6,6 +6,10 @@ import { projectsTableConfig } from 'app/components/datadisplay/Table/mock';
 import i18n from 'app/languages';
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import React from 'react';
+import {
+  sortOnDate,
+  sortOnMoney,
+} from 'app/modules/list-module/utils/sortFunctions';
 
 const sortDate = (data: []) => {
   return data.sort((a: any, b: any) => b - a);
@@ -61,24 +65,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
         customFilterListRender: value =>
           `${i18n.t('projects.overview.table.decision_date')}: ${value}`,
         sortCompare: order => {
-          return (obj1, obj2) => {
-            // Create correct date objects
-            const dayMonthYear1 = obj1.data.split('-');
-            const dayMonthYear2 = obj2.data.split('-');
-
-            const date = new Date(
-              dayMonthYear1[2],
-              dayMonthYear1[1] - 1,
-              dayMonthYear1[0]
-            );
-            const comparison = new Date(
-              dayMonthYear2[2],
-              dayMonthYear2[1] - 1,
-              dayMonthYear2[0]
-            );
-
-            return (date - comparison) * (order === 'asc' ? 1 : -1);
-          };
+          return (obj1, obj2) => sortOnDate(obj1, obj2, order);
         },
       },
     },
@@ -90,14 +77,7 @@ export const getBaseTableForProject = (): TableModuleModel => {
         customFilterListRender: value =>
           `${i18n.t('projects.overview.table.allocated')}: ${value}`,
         sortCompare: order => {
-          return (obj1, obj2) => {
-            // Removes everything after the .
-            // Removes all characters that are not numbers
-            const number = obj1.data.split('.')[0].replace(/\D/g, '');
-            const comparison = obj2.data.split('.')[0].replace(/\D/g, '');
-
-            return (number - comparison) * (order === 'asc' ? 1 : -1);
-          };
+          return (obj1, obj2) => sortOnMoney(obj1, obj2, order);
         },
       },
     },
