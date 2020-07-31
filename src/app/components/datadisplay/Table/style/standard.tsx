@@ -80,6 +80,11 @@ export const standard = createMuiTheme({
         border: 'solid 1px rgba(198, 198, 198, 0.2)',
       },
     },
+    MUIDataTableFilterList: {
+      chip: {
+        marginBottom: '8px',
+      },
+    },
   },
 });
 
