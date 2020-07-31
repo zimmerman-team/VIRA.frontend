@@ -13,6 +13,7 @@ import i18n from 'app/languages';
 import { ReportListMock } from 'app/mock/lists/ReportListMock';
 import { DateRangePicker } from 'app/components/daterange';
 import { formatDate } from 'app/modules/list-module/utils/formatDate';
+import { sortOnDate } from 'app/modules/list-module/utils/sortFunctions';
 
 const options: MUIDataTableOptions = {
   filter: true,
@@ -69,6 +70,9 @@ export const getBaseTableForReport = (
         filter: false,
         customFilterListRender: value =>
           `${i18n.t('reports.overview.table.date')}: ${value}`,
+        sortCompare: order => {
+          return (obj1, obj2) => sortOnDate(obj1, obj2, order);
+        },
       },
     },
     {

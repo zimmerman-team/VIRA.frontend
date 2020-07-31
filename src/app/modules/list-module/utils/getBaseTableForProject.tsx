@@ -1,8 +1,15 @@
+//@ts-nocheck
+//TODO: Please check if https://www.npmjs.com/package/@types/mui-datatables has hit v3.3.0
+//TODO: Then remove ts-nocheck
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { projectsTableConfig } from 'app/components/datadisplay/Table/mock';
 import i18n from 'app/languages';
 import { LinkCellModule } from 'app/components/datadisplay/Table/common/LinkCell';
 import React from 'react';
+import {
+  sortOnDate,
+  sortOnMoney,
+} from 'app/modules/list-module/utils/sortFunctions';
 
 const sortDate = (data: []) => {
   return data.sort((a: any, b: any) => b - a);
@@ -48,7 +55,6 @@ export const getBaseTableForProject = (): TableModuleModel => {
           `${i18n.t('projects.overview.table.decision')}: ${value}`,
       },
     },
-    // todo: fix sorting by date
     {
       name: i18n.t('projects.overview.table.decision_date'),
       options: {
@@ -58,9 +64,11 @@ export const getBaseTableForProject = (): TableModuleModel => {
         filterType: 'checkbox',
         customFilterListRender: value =>
           `${i18n.t('projects.overview.table.decision_date')}: ${value}`,
+        sortCompare: order => {
+          return (obj1, obj2) => sortOnDate(obj1, obj2, order);
+        },
       },
     },
-    // todo: fix sorting by amount
     {
       name: i18n.t('projects.overview.table.allocated_amount'),
       options: {
@@ -68,6 +76,9 @@ export const getBaseTableForProject = (): TableModuleModel => {
         filterType: 'dropdown',
         customFilterListRender: value =>
           `${i18n.t('projects.overview.table.allocated')}: ${value}`,
+        sortCompare: order => {
+          return (obj1, obj2) => sortOnMoney(obj1, obj2, order);
+        },
       },
     },
   ];
