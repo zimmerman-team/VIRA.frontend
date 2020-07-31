@@ -1,4 +1,5 @@
 import sumBy from 'lodash/sumBy';
+import { LabelValueModel } from '../model';
 
 export function validatePolicyPrioritiesFields(
   tarBenTotal: number,
@@ -7,7 +8,7 @@ export function validatePolicyPrioritiesFields(
   budget: number,
   remainBudget: number,
   insContribution: number,
-  funder: string
+  funders: LabelValueModel[]
 ) {
   if (policyPriority === '') {
     return false;
@@ -24,5 +25,5 @@ export function validatePolicyPrioritiesFields(
   if (budget > remainBudget) {
     return false;
   }
-  return funder !== '';
+  return funders.length > 0;
 }
