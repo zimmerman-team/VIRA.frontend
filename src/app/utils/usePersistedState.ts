@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function usePersistedState(key: string, defaultValue: any) {
-  console.log(defaultValue);
+  // console.log(defaultValue);
   const [state, setState] = React.useState(() =>
     localStorage.getItem(key)
       ? JSON.parse(localStorage.getItem(key) || '')

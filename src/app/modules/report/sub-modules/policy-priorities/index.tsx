@@ -178,12 +178,13 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.other_funders')} />
           <CardContent>
             <Autocomplete
+              multiple
               values={funderList.map((funder: FunderProps) => ({
                 ...funder,
                 label: t(funder.label),
               }))}
-              value={props.funder}
-              setValue={props.setFunder}
+              value={props.funders}
+              setValue={props.setFunders}
             />
             {/*<Box height="14px" width="100%" />*/}
           </CardContent>

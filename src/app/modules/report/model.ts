@@ -62,8 +62,8 @@ export type PolicyPrioritiesPropsModel = {
   remainBudget: number;
   insContribution: number;
   setInsContribution: Function;
-  funder: LabelValueModel;
-  setFunder: Function;
+  funders: string[];
+  setFunders: Function;
 };
 
 export type IndicatorVerificationPropsModel = {

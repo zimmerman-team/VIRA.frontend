@@ -116,10 +116,7 @@ function CreateReportFunc(props: any) {
     'report_insContribution',
     0
   );
-  const [funder, setFunder] = usePersistedState('report_funder', {
-    label: '',
-    value: '',
-  });
+  const [funders, setFunders] = usePersistedState('report_funder', []);
 
   // Indicator and verification state
   const [keyOutcomes, setKeyOutcomes] = usePersistedState(
@@ -356,10 +353,11 @@ function CreateReportFunc(props: any) {
       }
       setBudget(get(reportDetailData, 'report.budget', 0));
       setInsContribution(get(reportDetailData, 'report.insContribution', 0));
-      setFunder({
-        label: get(reportDetailData, 'report.funder.name', ''),
-        value: get(reportDetailData, 'report.funder.name', ''),
-      });
+      setFunders(
+        get(reportDetailData, 'report.funders', []).map(
+          (funder: any) => funder.name
+        )
+      );
       setKeyOutcomes(get(reportDetailData, 'report.key_outcomes', ''));
       setMonRepOutcomes(
         get(reportDetailData, 'report.monitor_report_outcomes', '')
@@ -538,7 +536,7 @@ function CreateReportFunc(props: any) {
       budget,
       get(projectBudgetData, 'data.remainBudget', 0),
       insContribution,
-      funder.value
+      funders
     );
 
   const step4Enabled =
@@ -587,7 +585,7 @@ function CreateReportFunc(props: any) {
             plans: futurePlans,
             other_comments: otherComms,
             isDraft: false,
-            funder: funder.label,
+            funders,
           },
         },
       });
@@ -631,7 +629,7 @@ function CreateReportFunc(props: any) {
             plans: futurePlans === '' ? ' ' : futurePlans,
             other_comments: otherComms === '' ? ' ' : otherComms,
             isDraft: true,
-            funder: funder.label,
+            funders,
           },
         },
       });
@@ -686,8 +684,8 @@ function CreateReportFunc(props: any) {
         remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
         insContribution,
         setInsContribution,
-        funder,
-        setFunder,
+        funders,
+        setFunders,
       }}
       indicatorVerificationProps={{
         keyOutcomes,
@@ -729,7 +727,7 @@ function CreateReportFunc(props: any) {
           policyPriority,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
           insContribution,
-          funder: funder.value,
+          funders,
         })
       }
       backBtnDisabled={!isNavBtnEnabled('back', initialTabIndex, {})}
