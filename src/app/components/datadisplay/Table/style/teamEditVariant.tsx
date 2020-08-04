@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ProjectPalette, TextStyle } from 'app/theme';
-import { commonStyles } from 'components/datadisplay/Table/style/common/commonStyles';
+import { commonStyles } from 'app/components/datadisplay/Table/style/common/commonStyles';
 
 export const teamEditVariant = createMuiTheme({
   overrides: {
