@@ -2,8 +2,10 @@
   "detail": {
     "title": "",
     "generateReportBtn": "Genereer rapport",
+    "tooltip": "Met het resterende budget kan geen rapport worden gemaakt.",
     "stats": {
-      "total_budget": "Totaal project budget",
+      "total_budget": "Totaal budget",
+      "remaining_budget": "Resterende budget",
       "insinger_contribution": "Insinger contributie",
       "duration": "Duur project"
     }
