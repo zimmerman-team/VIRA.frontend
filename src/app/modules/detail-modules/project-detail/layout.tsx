@@ -28,6 +28,9 @@ export const ProjectDetailLayout = (props: any) => {
         props.projectDetail.responsible_person_email
   );
 
+  // TODO: grey out generate button if remaining budget = 0
+  // TODO: add tooltip is to why the button is greyed out
+
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -55,6 +58,8 @@ export const ProjectDetailLayout = (props: any) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* title fragment */}
+      {/*TODO: add remaining budget stat*/}
+      {/*TODO: remove "project" from stats*/}
       <Grid item xs={12} lg={12}>
         <TitleFragment
           showMoreThanTitle
