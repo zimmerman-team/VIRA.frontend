@@ -2,8 +2,10 @@
   "detail": {
     "title": "",
     "generateReportBtn": "Generate report",
+    "tooltip": "No budget left to create a report.",
     "stats": {
-      "total_budget": "Total project budget",
+      "total_budget": "Total budget",
+      "remaining_budget": "Remaining budget",
       "insinger_contribution": "Insinger contribution",
       "duration": "Project duration"
     }

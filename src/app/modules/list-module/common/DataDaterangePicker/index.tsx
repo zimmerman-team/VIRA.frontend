@@ -30,6 +30,7 @@ export const DataDaterangePicker = (props: DataDaterangePickerProps) => {
         flex-direction: column;
         position: ${props.tabValue === 0 ? 'relative' : ''};
         top: ${props.tabValue === 0 ? '-53px' : ''};
+        padding-left: 16px;
       `}
     >
       <MuiPickersUtilsProvider utils={MomentUtils}>

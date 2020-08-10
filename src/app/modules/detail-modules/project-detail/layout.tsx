@@ -12,6 +12,7 @@ import { Viztabs } from 'app/modules/common/components/Viztabs';
 import { useTranslation } from 'react-i18next';
 import { useStoreState } from 'app/state/store/hooks';
 import get from 'lodash/get';
+import { TooltipButton } from 'app/components/inputs/buttons/TooltipButton';
 
 export const ProjectDetailLayout = (props: any) => {
   const { t } = useTranslation();
@@ -48,7 +49,11 @@ export const ProjectDetailLayout = (props: any) => {
             <ContainedButton
               text={t('projects.detail.generateReportBtn')}
               onClick={props.projectDetail.generateReport}
+              disabled={props.remainingBudget.data.remainBudget <= 0}
             />
+            {props.remainingBudget.data.remainBudget <= 0 && (
+              <TooltipButton tip={t('projects.detail.tooltip')} />
+            )}
           </Grid>
         </Hidden>
       )}
@@ -68,6 +73,16 @@ export const ProjectDetailLayout = (props: any) => {
             {
               label: t('projects.detail.stats.total_budget'),
               value: parseInt(props.projectDetail.total_amount || 0, 10)
+                .toLocaleString(undefined, {
+                  currency: 'EUR',
+                  currencyDisplay: 'symbol',
+                  style: 'currency',
+                })
+                .replace('.00', ''),
+            },
+            {
+              label: t('projects.detail.stats.remaining_budget'),
+              value: parseInt(props.remainingBudget.data.remainBudget || 0, 10)
                 .toLocaleString(undefined, {
                   currency: 'EUR',
                   currencyDisplay: 'symbol',

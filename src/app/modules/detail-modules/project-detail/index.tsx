@@ -58,9 +58,15 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
   const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
   const getGeoMapData = useStoreActions(actions => actions.getGeoMapData.fetch);
+  const projectBudgetDataAction = useStoreActions(
+    actions => actions.projectBudgetData.fetch
+  );
   const ppVizData = useStoreState(state => state.getPPVizData.data);
   const SDGVizData = useStoreState(state => state.getSDGVizData.data);
   const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const projectBudgetData = useStoreState(
+    state => state.projectBudgetData.data
+  );
 
   const loadReports = useCallback((projectID: string) => {
     allReportsAction({
@@ -103,6 +109,12 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
             socketName: 'getGeoMapData',
             values: {
               projectID: projectDetailRecord[0]._id,
+            },
+          });
+          projectBudgetDataAction({
+            socketName: 'getProjectBudgetData',
+            values: {
+              projectID: projectDetailRecord[0].project_number,
             },
           });
           setprojectDetails({
@@ -168,6 +180,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
       selectedSDG={selectedSDG}
       onBubbleSelect={setSelectedSDG}
       geoMapData={geoMapData}
+      remainingBudget={projectBudgetData}
       // @ts-ignore
       match={props.match}
     />
