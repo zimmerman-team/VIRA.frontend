@@ -100,12 +100,6 @@ export const getBaseTableForReport = (
             return [];
           },
           update: (filterList, filterPos, index) => {
-            console.log(
-              'customFilterListOnDelete: ',
-              filterList,
-              filterPos,
-              index
-            );
             filterList[index] = [];
 
             return filterList;

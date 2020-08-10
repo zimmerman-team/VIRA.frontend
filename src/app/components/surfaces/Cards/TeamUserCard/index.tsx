@@ -147,7 +147,6 @@ export function TeamUserCard(props: TeamUserCardModel) {
             <ButtonIcon
               data-cy={`delete-${props.title}`}
               onClick={(e: any) => {
-                console.log('props', props);
                 e.stopPropagation();
                 if (props.deleteUser) {
                   props.deleteUser(props._id);
