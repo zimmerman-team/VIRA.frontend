@@ -7,11 +7,13 @@ This tool allows you to easily generate reports on the basis of projects that ha
 
 ## About the project
 
-- Website: TBA
+- Website: Private
 - Authors: <a href="https://www.zimmerman.team/" target="_blank">Zimmerman</a>
-- License: TBA
+* License:          AGPLv3 
 - Github Frontend Repo: <a href="https://github.com/zimmerman-zimmerman/insinger-frontend" target="_blank">github.com/zimmerman-zimmerman/insinger-frontend</a>
 - Github Backend Repo: <a href="https://github.com/zimmerman-zimmerman/insinger-backend" target="_blank">github.com/zimmerman-zimmerman/insinger-backend</a>
+
+
 
 ## Installing
 
