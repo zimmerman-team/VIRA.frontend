@@ -28,6 +28,7 @@ export const ProjectDetailLayout = (props: any) => {
       get(state.userDetails.data, 'email', '_') ===
         props.projectDetail.responsible_person_email
   );
+  const remainingBudget = get(props.remainingBudget, 'data.remainBudget', '');
 
   return (
     <React.Fragment>
@@ -49,9 +50,9 @@ export const ProjectDetailLayout = (props: any) => {
             <ContainedButton
               text={t('projects.detail.generateReportBtn')}
               onClick={props.projectDetail.generateReport}
-              disabled={props.remainingBudget.data.remainBudget <= 0}
+              disabled={remainingBudget <= 0}
             />
-            {props.remainingBudget.data.remainBudget <= 0 && (
+            {remainingBudget <= 0 && (
               <TooltipButton tip={t('projects.detail.tooltip')} />
             )}
           </Grid>
@@ -82,7 +83,7 @@ export const ProjectDetailLayout = (props: any) => {
             },
             {
               label: t('projects.detail.stats.remaining_budget'),
-              value: parseInt(props.remainingBudget.data.remainBudget || 0, 10)
+              value: parseInt(remainingBudget || 0, 10)
                 .toLocaleString(undefined, {
                   currency: 'EUR',
                   currencyDisplay: 'symbol',

@@ -67,6 +67,9 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   const projectBudgetData = useStoreState(
     state => state.projectBudgetData.data
   );
+  const projectBudgetClearAction = useStoreActions(
+    actions => actions.projectBudgetData.clear
+  );
 
   const loadReports = useCallback((projectID: string) => {
     allReportsAction({
@@ -86,75 +89,75 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
 
   const init = useCallback(
     () =>
-      projectDetailAction({
-        socketName: 'allProject',
-        values: { project_number },
-      }).then((res: any) => {
-        const projectDetailRecord: any = get(res, 'data', null);
-        if (projectDetailRecord && projectDetailRecord.length === 1) {
-          loadReports(projectDetailRecord[0]._id);
-          getPPVizData({
-            socketName: 'getPolicyPriorityBarChart',
-            values: {
-              projectID: projectDetailRecord[0]._id,
-            },
-          });
-          getSDGVizData({
-            socketName: 'getSDGBubbleChart',
-            values: {
-              projectID: projectDetailRecord[0]._id,
-            },
-          });
-          getGeoMapData({
-            socketName: 'getGeoMapData',
-            values: {
-              projectID: projectDetailRecord[0]._id,
-            },
-          });
-          projectBudgetDataAction({
-            socketName: 'getProjectBudgetData',
-            values: {
-              projectID: projectDetailRecord[0].project_number,
-            },
-          });
-          setprojectDetails({
-            project_id: projectDetailRecord[0].project_number,
-            project: projectDetailRecord[0].project_name,
-            project_description: projectDetailRecord[0].project_description,
-            category: get(projectDetailRecord[0].category, 'name', ''),
-            duration: projectDetailRecord[0].duration,
-            start_date: projectDetailRecord[0].start_date,
-            end_date: projectDetailRecord[0].end_date,
-            total_amount: projectDetailRecord[0].total_amount,
-            total_insinger_contribution:
-              projectDetailRecord[0].allocated_amount,
-            decision_date: projectDetailRecord[0].decision_date,
-            decision: projectDetailRecord[0].decision,
-            allocated_amount: projectDetailRecord[0].allocated_amount,
-            released_amount: projectDetailRecord[0].released_amount,
-            paid_amount: projectDetailRecord[0].paid_amount,
-            organisation: projectDetailRecord[0].organisation.organisation_name,
-            organisation_link: `/grantee/${projectDetailRecord[0].organisation._id}/detail`,
-            place: '',
-            country: '',
-            responsible_person_email: get(
-              projectDetailRecord[0],
-              'person.email',
-              ''
-            ),
-            generateReport: () => {
-              generateReport();
-            },
-          });
-        }
+      projectBudgetDataAction({
+        socketName: 'getProjectBudgetData',
+        values: {
+          projectID: project_number,
+        },
       }),
-    []
+    projectDetailAction({
+      socketName: 'allProject',
+      values: { project_number },
+    }).then((res: any) => {
+      const projectDetailRecord: any = get(res, 'data', null);
+      if (projectDetailRecord && projectDetailRecord.length === 1) {
+        loadReports(projectDetailRecord[0]._id);
+        getPPVizData({
+          socketName: 'getPolicyPriorityBarChart',
+          values: {
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getSDGVizData({
+          socketName: 'getSDGBubbleChart',
+          values: {
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getGeoMapData({
+          socketName: 'getGeoMapData',
+          values: {
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+
+        setprojectDetails({
+          project_id: projectDetailRecord[0].project_number,
+          project: projectDetailRecord[0].project_name,
+          project_description: projectDetailRecord[0].project_description,
+          category: get(projectDetailRecord[0].category, 'name', ''),
+          duration: projectDetailRecord[0].duration,
+          start_date: projectDetailRecord[0].start_date,
+          end_date: projectDetailRecord[0].end_date,
+          total_amount: projectDetailRecord[0].total_amount,
+          total_insinger_contribution: projectDetailRecord[0].allocated_amount,
+          decision_date: projectDetailRecord[0].decision_date,
+          decision: projectDetailRecord[0].decision,
+          allocated_amount: projectDetailRecord[0].allocated_amount,
+          released_amount: projectDetailRecord[0].released_amount,
+          paid_amount: projectDetailRecord[0].paid_amount,
+          organisation: projectDetailRecord[0].organisation.organisation_name,
+          organisation_link: `/grantee/${projectDetailRecord[0].organisation._id}/detail`,
+          place: '',
+          country: '',
+          responsible_person_email: get(
+            projectDetailRecord[0],
+            'person.email',
+            ''
+          ),
+          generateReport: () => {
+            generateReport();
+          },
+        });
+      }
+    }, [])
   );
 
   React.useEffect(() => {
     init();
     return () => {
       // allProjectsClearAction();
+      projectBudgetClearAction();
       projectDetailClearAction();
     };
   }, [project_number]);
