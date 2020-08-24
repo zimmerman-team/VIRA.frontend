@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   LinkCellModule,
   ExternalLinkCellModule,
@@ -14,7 +15,11 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
     {
       name: i18n.t('grantees.overview.table.name'),
       options: {
-        sortDirection: 'asc',
+        // sortDirection: 'asc',
+        sortOrder: {
+          // name: 'Date',
+          direction: 'asc',
+        },
         filter: true,
         filterType: 'dropdown',
         customBodyRender: (value, tableMeta, updateValue) => {
@@ -30,8 +35,10 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
             />
           );
         },
-        customFilterListRender: updateValue =>
-          `${i18n.t('grantees.overview.table.name')}: ${updateValue}`,
+        customFilterListOptions: {
+          render: updateValue =>
+            `${i18n.t('grantees.overview.table.name')}: ${updateValue}`,
+        },
       },
     },
     {
@@ -39,8 +46,10 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value =>
-          `${i18n.t('grantees.overview.table.type')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('grantees.overview.table.type')}: ${value}`,
+        },
       },
     },
     {
@@ -48,8 +57,10 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value =>
-          `${i18n.t('grantees.overview.table.place')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('grantees.overview.table.place')}: ${value}`,
+        },
       },
     },
     {
@@ -57,8 +68,10 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customFilterListRender: value =>
-          `${i18n.t('grantees.overview.table.country')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('grantees.overview.table.country')}: ${value}`,
+        },
       },
     },
     {
@@ -69,8 +82,10 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
         customBodyRender: (value, tableMeta, updateValue) => {
           return <ExternalLinkCellModule extLink link={value} value={value} />;
         },
-        customFilterListRender: value =>
-          `${i18n.t('grantees.overview.table.email')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('grantees.overview.table.email')}: ${value}`,
+        },
       },
     },
     {
@@ -81,8 +96,10 @@ export const getBaseTableForGrantee = (): TableModuleModel => {
         customBodyRender: (value, tableMeta, updateValue) => {
           return <ExternalLinkCellModule extLink link={value} value={value} />;
         },
-        customFilterListRender: value =>
-          `${i18n.t('grantees.overview.table.website')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('grantees.overview.table.website')}: ${value}`,
+        },
       },
     },
   ];

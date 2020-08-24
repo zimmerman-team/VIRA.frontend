@@ -21,7 +21,7 @@ const options: MUIDataTableOptions = {
   responsive: 'standard',
   download: false,
   print: false,
-  selectableRows: false,
+  selectableRows: 'none',
   viewColumns: false,
 };
 
@@ -35,10 +35,15 @@ export const getBaseTableForReport = (
     {
       name: i18n.t('reports.overview.table.id'),
       options: {
-        sortDirection: 'desc',
+        // sortDirection: 'desc',
+        sortOrder: {
+          // name: 'Date',
+          direction: 'desc',
+        },
         filter: false,
-        customFilterListRender: value =>
-          `${i18n.t('reports.overview.table.id')}: ${value}`,
+        customFilterListOptions: {
+          render: value => `${i18n.t('reports.overview.table.id')}: ${value}`,
+        },
       },
     },
     /* todo: resolve duplicate code, is the same as ColumnTitle const */
@@ -46,8 +51,10 @@ export const getBaseTableForReport = (
       name: i18n.t('reports.overview.table.title'),
       options: {
         filter: false,
-        customFilterListRender: value =>
-          `${i18n.t('reports.overview.table.title')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('reports.overview.table.title')}: ${value}`,
+        },
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowAllData = find(data, { reportID: tableMeta.rowData[0] });
           const id = get(rowAllData, '_id', '');
@@ -68,8 +75,9 @@ export const getBaseTableForReport = (
       name: i18n.t('reports.overview.table.date'),
       options: {
         filter: false,
-        customFilterListRender: value =>
-          `${i18n.t('reports.overview.table.date')}: ${value}`,
+        customFilterListOptions: {
+          render: value => `${i18n.t('reports.overview.table.date')}: ${value}`,
+        },
         sortCompare: order => {
           return (obj1, obj2) => sortOnDate(obj1, obj2, order);
         },

@@ -23,7 +23,7 @@ const options: MUIDataTableOptions = {
   responsive: 'standard',
   download: false,
   print: false,
-  selectableRows: false,
+  selectableRows: 'none',
   viewColumns: false,
 };
 
@@ -39,8 +39,9 @@ export const ReportsOverviewTable = (props: ReportsOverviewTableProps) => {
     name: i18n.t('reports.overview.table.title'),
     options: {
       filter: false,
-      customFilterListRender: value =>
-        `${i18n.t('reports.overview.table.title')}: ${value}`,
+      customFilterListOptions: {
+        render: value => `${i18n.t('reports.overview.table.title')}: ${value}`,
+      },
       customBodyRender: (value, tableMeta, updateValue) => {
         const rowAllData = find(data, { reportID: tableMeta.rowData[0] });
         const id = get(rowAllData, '_id', '');

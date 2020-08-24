@@ -23,8 +23,10 @@ export const getBaseTableForProject = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customFilterListRender: value =>
-          `${i18n.t('projects.overview.table.organisation')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('projects.overview.table.organisation')}: ${value}`,
+        },
       },
     },
     {
@@ -42,8 +44,10 @@ export const getBaseTableForProject = (): TableModuleModel => {
             <LinkCellModule link={`/projects/${updateValue}`} value={value} />
           );
         },
-        customFilterListRender: value =>
-          `${i18n.t('projects.overview.table.project_title')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('projects.overview.table.project_title')}: ${value}`,
+        },
       },
     },
     {
@@ -51,19 +55,28 @@ export const getBaseTableForProject = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value =>
-          `${i18n.t('projects.overview.table.decision')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('projects.overview.table.decision')}: ${value}`,
+        },
       },
     },
     {
       name: i18n.t('projects.overview.table.decision_date'),
       options: {
-        sortDirection: 'desc',
+        // sortDirection: 'desc',
+
+        sortOrder: {
+          // name: 'Date',
+          direction: 'desc',
+        },
         // customSort: sortDate(i18n.t.date),
         filter: true,
         filterType: 'checkbox',
-        customFilterListRender: value =>
-          `${i18n.t('projects.overview.table.decision_date')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('projects.overview.table.decision_date')}: ${value}`,
+        },
         sortCompare: order => {
           return (obj1, obj2) => sortOnDate(obj1, obj2, order);
         },
@@ -74,8 +87,10 @@ export const getBaseTableForProject = (): TableModuleModel => {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value =>
-          `${i18n.t('projects.overview.table.allocated')}: ${value}`,
+        customFilterListOptions: {
+          render: value =>
+            `${i18n.t('projects.overview.table.allocated')}: ${value}`,
+        },
         sortCompare: order => {
           return (obj1, obj2) => sortOnMoney(obj1, obj2, order);
         },
