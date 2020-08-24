@@ -1,40 +1,30 @@
 /// <reference types="Cypress" />
-describe('generate report page', () => {
-  it('go to generate report page', () => {
+describe('report flow', () => {
+  it('go to generate report module', () => {
     // authenticate
     cy.auth();
 
-    cy.findByTestId('sidebar-item-1').click();
-    cy.get('[data-testid=MuiDataTableBodyCell-3-0]')
-      .children()
+    cy.findByTestId('sidebar-item-1')
+      .should('exist')
+      .click();
+    cy.wait(3000);
+    cy.get(
+      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(2) > [class^=LinkCell__CustomLink]'
+    )
+      .should('exist')
+      .click();
+
+    // report button
+    cy.findByTestId('generate-report-button')
+      .should('exist')
       .click();
   });
 
-  it('check overview', () => {
-    cy.findByTestId('sidebar-item-1').click();
-
-    cy.get('[data-testid=MuiDataTableBodyCell-3-1]').click();
-
-    // cy.findByTestId('BreadCrumbs').should('exist');
-    cy.findByTestId('project-title').should('exist');
-
-    // report button
-    cy.findByTestId('contained-button').should('exist');
-
-    // viz tabs
-    cy.viztabs();
-
-    // reports table
-    cy.findByTestId('reports-table').should('exist');
-
-    cy.findByTestId('contained-button').click();
-
+  it('fill in outcomes', () => {
     cy.findByTestId('outcomes-title').should('exist');
     cy.findByTestId('add-location').should('exist');
     cy.findByTestId('exact-location').should('exist');
-  });
 
-  it('fill in all the fields', () => {
     cy.get('#outcome1').type('e2e report title');
 
     cy.get('#autocomplete-countries').click();
@@ -42,15 +32,22 @@ describe('generate report page', () => {
     cy.get('#autocomplete-countries-option-0').click();
 
     cy.get('.react-geocoder > .MuiInputBase-root > .MuiInputBase-input').type(
-      'Afghanistan {enter}'
+      'Netherlands {enter}'
     );
     cy.get('.react-geocoder-results > :nth-child(1)').click();
+  });
 
-    // next
-    cy.findByTestId('next-button').click();
+  it('fill in policy priorities', () => {
+    // go to policy priorities tab
+    cy.findByTestId('next-button')
+      .should('exist')
+      .click();
 
-    cy.get('#autocomplete-countries').click();
-    cy.get('#autocomplete-countries').type('Refugees');
+    cy.get('#autocomplete-countries')
+      .should('exist')
+      .click()
+      .type('Homelessness');
+
     cy.get('#autocomplete-countries-option-0').click();
 
     cy.get('[data-cy=budget-field]')
@@ -62,41 +59,44 @@ describe('generate report page', () => {
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(1);
+      .type(2);
 
     cy.findByTestId('target-beneficiaries-field')
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(50);
+      .type(1);
 
     cy.findByTestId('total-committed-field')
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(1000);
+      .type(10);
 
     // open funders list and click top option
     cy.findByTestId('other-funders')
       .should('exist')
       .click()
-      .type('funder one');
+      .type('Utopa');
     cy.get('#autocomplete-countries-option-0').click();
 
     cy.findByTestId('which-when-item-0')
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(25);
+      .type(1);
 
-    cy.findByTestId('which-when-item-1')
+    /*cy.findByTestId('which-when-item-1')
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(25);
+      .type(1);*/
+  });
 
-    // next
-    cy.findByTestId('next-button').click();
+  it('fill in indicator & verification', () => {
+    cy.findByTestId('next-button')
+      .should('exist')
+      .click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -111,21 +111,10 @@ describe('generate report page', () => {
       .type('Lorem ipsum dolor simet text area 2');
   });
 
-  it('add media', () => {
-    cy.get('[testattr=media-button]')
+  it('fill in chalenges & plans', () => {
+    cy.findByTestId('next-button')
       .should('exist')
       .click();
-
-    cy.findByText('Drag and Drop picture').should('exist');
-    // todo: add actual media file
-
-    cy.get('[data-cy=media-cancel-button]')
-      .should('exist')
-      .click();
-  });
-  it('fill in rest of the fields', () => {
-    // next
-    cy.findByTestId('next-button').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -150,15 +139,58 @@ describe('generate report page', () => {
       .click()
       .type('{backspace}')
       .type('Lorem ipsum dolor simet text area 4');
-
-    // next
-    cy.findByTestId('next-button').click();
   });
 
-  it('make screenshot', () => {
+  it('preview report', () => {
+    cy.findByTestId('next-button')
+      .should('exist')
+      .click();
+
+    cy.findByTestId('title-preview-card').should('exist');
+    cy.findByTestId('location-preview-card').should('exist');
+    cy.findByTestId('policy-priority-preview-card').should('exist');
+    cy.findByTestId('budget-preview-card').should('exist');
+    cy.findByTestId('target-beneficiaries-preview-card').should('exist');
+    cy.findByTestId('include-ben-preview-card').should('exist');
+    cy.findByTestId('key-outcomes-preview-card').should('exist');
+    cy.findByTestId('outcomes-preview-card').should('exist');
+    cy.findByTestId('key-implementation-challenges-preview-card').should(
+      'exist'
+    );
+    cy.findByTestId('other-project-preview-card').should('exist');
+    cy.findByTestId('future-plans-preview-card').should('exist');
+    cy.findByTestId('other-comments-preview-card').should('exist');
+  });
+
+  it('submit report', () => {
+    cy.findByTestId('submit-button')
+      .should('exist')
+      .click();
+  });
+
+  it('click away dialog', () => {
+    cy.findByTestId('dialog-button')
+      .should('exist')
+      .click();
+  });
+
+  /*it('add media', () => {
+    cy.get('[testattr=media-button]')
+      .should('exist')
+      .click();
+
+    cy.findByText('Drag and Drop picture').should('exist');
+    // todo: add actual media file
+
+    cy.get('[data-cy=media-cancel-button]')
+      .should('exist')
+      .click();
+  });*/
+
+  /*it('make screenshot', () => {
     cy.get('body').happoScreenshot({
       component: 'Create report',
       variant: 'base',
     });
-  });
+  });*/
 });
