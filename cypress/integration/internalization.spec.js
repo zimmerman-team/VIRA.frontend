@@ -12,9 +12,9 @@ describe('test internalization', () => {
 
     cy.findByTestId('stat-item-text-0').should('contain.text', 'Projecten');
 
-    cy.get('body').happoScreenshot({
+    /*cy.get('body').happoScreenshot({
       component: 'Privacy page',
       variant: 'base',
-    });
+    });*/
   });
 });

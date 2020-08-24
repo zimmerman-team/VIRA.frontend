@@ -16,10 +16,10 @@ describe('date range filter test', () => {
     cy.findByText('Last Month').should('exist');
   });
 
-  it('make screenshot', () => {
+  /* it('make screenshot', () => {
     cy.get('body').happoScreenshot({
       component: 'Filter by date',
       variant: 'base',
     });
-  });
+  });*/
 });

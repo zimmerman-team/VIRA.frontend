@@ -14,10 +14,10 @@ describe('test overview of all pages', () => {
     cy.findByTestId('usercard-privacy-button').should('exist');
 
     // cy.get('body').happoScreenshot();
-    cy.get('body').happoScreenshot({
+    /*cy.get('body').happoScreenshot({
       component: 'Usercard',
       variant: 'base',
-    });
+    });*/
   });
 
   it('test dashboard overview', () => {
@@ -41,10 +41,10 @@ describe('test overview of all pages', () => {
 
     // cy.get('body').happoScreenshot();
 
-    cy.get('body').happoScreenshot({
+    /*cy.get('body').happoScreenshot({
       component: 'Project overview',
       variant: 'base',
-    });
+    });*/
   });
 
   it('test grantee overview page', () => {
@@ -55,10 +55,10 @@ describe('test overview of all pages', () => {
     cy.findByTestId('sidebar-item-2').click();
     cy.listTabs();
 
-    cy.get('body').happoScreenshot({
+    /*cy.get('body').happoScreenshot({
       component: 'Grantee overview',
       variant: 'base',
-    });
+    });*/
   });
 
   it('test report page', () => {
@@ -67,10 +67,10 @@ describe('test overview of all pages', () => {
 
     cy.listTabs();
 
-    cy.get('body').happoScreenshot({
+    /*cy.get('body').happoScreenshot({
       component: 'Report overview',
       variant: 'base',
-    });
+    });*/
     // cy.get('body').happoScreenshot();
   });
 
@@ -89,10 +89,10 @@ describe('test overview of all pages', () => {
     cy.findByTestId('question-2-expl').should('exist');
     cy.findByTestId('question-3-expl').should('exist');
 
-    cy.get('body').happoScreenshot({
+    /* cy.get('body').happoScreenshot({
       component: 'FAQ page',
       variant: 'base',
-    });
+    });*/
   });
 
   it('test privacy page', () => {
@@ -106,9 +106,9 @@ describe('test overview of all pages', () => {
     cy.findByTestId('privacy-item-0-title').should('exist');
     cy.findByTestId('privacy-item-0-description').should('exist');
 
-    cy.get('body').happoScreenshot({
+    /*cy.get('body').happoScreenshot({
       component: 'Privacy page',
       variant: 'base',
-    });
+    });*/
   });
 });
