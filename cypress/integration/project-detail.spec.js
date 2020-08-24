@@ -4,9 +4,6 @@ describe('project detail page', () => {
     // authenticate
     cy.auth();
 
-    // goto page
-    // cy.visit('/projects/2017161');
-
     cy.findByTestId('sidebar-item-1').click();
 
     cy.wait(3000);
@@ -17,7 +14,7 @@ describe('project detail page', () => {
     cy.findByTestId('project-title').should('exist');
 
     // report button
-    cy.findByTestId('contained-button').should('exist');
+    cy.findByTestId('generate-report-button').should('exist');
 
     // viz tabs
     cy.viztabs();
@@ -29,11 +26,9 @@ describe('project detail page', () => {
     // reports table
     cy.findByTestId('reports-table').should('exist');
 
-    // cy.get('body').happoScreenshot();
-
-    cy.get('body').happoScreenshot({
+    /*cy.get('body').happoScreenshot({
       component: 'Project detail',
       variant: 'base',
-    });
+    });*/
   });
 });
