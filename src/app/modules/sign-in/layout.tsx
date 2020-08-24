@@ -1,6 +1,6 @@
 import React from 'react';
 import 'styled-components/macro';
-import { Grid, Hidden, useMediaQuery } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import { InputForm } from 'app/modules/sign-in/common/InputForm';
 import { LayoutModel } from 'app/modules/sign-in/models';
 import { SignInDeco } from './common/SignInDeco';
@@ -9,15 +9,16 @@ import { SignInDecoDesktop } from 'app/modules/sign-in/common/SignInDecoDesktop'
 // TODO: so a lot of code is repeated in recovery in sign in
 // TODO: Also the sign in flow should be outside of the generel wrapper component
 export const SignInLayout = (props: LayoutModel) => {
-  const isMobileWidth = useMediaQuery('(max-width: 600px)');
-
   return (
     <Grid
       container
       css={`
-        padding: ${isMobileWidth && '0 36px'};
         overflow: hidden;
         height: 100vh;
+
+        @media (max-width: 768px) {
+          padding: 0 36px;
+        }
       `}
     >
       <Hidden smDown>

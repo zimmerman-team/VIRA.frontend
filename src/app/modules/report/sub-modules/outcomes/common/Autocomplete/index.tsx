@@ -42,9 +42,6 @@ const Input = withStyles((theme: Theme) =>
       lineHeight: '2rem',
       paddingBottom: '30px',
     },
-    inputLabel: {
-      root: {},
-    },
   })
 )(InputBase);
 
