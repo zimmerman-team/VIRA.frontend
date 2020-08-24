@@ -9,10 +9,10 @@ describe('project detail page', () => {
 
     cy.findByTestId('sidebar-item-1').click();
 
-    cy.wait(5000);
-    cy.get('[data-testid=MuiDataTableBodyCell-3-0]')
-      .children()
-      .click();
+    cy.wait(3000);
+    cy.get(
+      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(2) > [class^=LinkCell__CustomLink]'
+    ).click();
 
     cy.findByTestId('project-title').should('exist');
 
