@@ -16,7 +16,7 @@ export interface IntentTexFieldSingleLineParams {
   disabled?: boolean;
   smallWidth?: boolean;
   fullWidth?: boolean;
-  testAttr?: string;
+  testattr?: string;
 }
 
 export const IntentTexFieldSingleLine = (
@@ -51,7 +51,7 @@ export const IntentTexFieldSingleLine = (
         fullWidth={props.fullWidth}
         type={props.type || 'text'}
         min={props.min}
-        testAttr={props.testAttr}
+        testattr={props.testattr}
         css={`
           width: ${props.smallWidth ? '88px' : ''};
           height: ${props.smallWidth ? '32px' : ''};

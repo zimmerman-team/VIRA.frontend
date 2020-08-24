@@ -14,7 +14,7 @@ export interface IntentTextAreaParams {
   componentID?: string;
   value: string;
   setValue: Function;
-  testAttr?: string;
+  testattr?: string;
 }
 
 export const IntentTexArea = (props: IntentTextAreaParams) => (
@@ -34,7 +34,7 @@ export const IntentTexArea = (props: IntentTextAreaParams) => (
     </div>
     <Box width="100%" height="20px" />
     <SingleMultiLineTextField
-      testAttr={props.testAttr}
+      testattr={props.testattr}
       fullWidth
       multiline
       // placeholder="Type"

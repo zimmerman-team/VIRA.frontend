@@ -45,7 +45,7 @@ export const IndicatorVerificationLayout = (
         <Card css={styles.card}>
           <CardContent>
             <IntentTexArea
-              testAttr="text-area-1"
+              testattr="text-area-1"
               componentID="indVer1"
               value={props.keyOutcomes}
               setValue={props.setKeyOutcomes}
@@ -65,7 +65,7 @@ export const IndicatorVerificationLayout = (
         <Card css={styles.card}>
           <CardContent>
             <IntentTexArea
-              testAttr="text-area-2"
+              testattr="text-area-2"
               componentID="indVer2"
               value={props.monRepOutcomes}
               setValue={props.setMonRepOutcomes}
@@ -86,7 +86,7 @@ export const IndicatorVerificationLayout = (
       {/* add media button 1 */}
       <Grid item xs={12} lg={12}>
         <ContainedButton
-          testAttr="media-button"
+          testattr="media-button"
           text={t('reports.form.cards.media')}
           icon={<GetAppIcon />}
           onClick={() => props.setOpenMediaModal(true)}

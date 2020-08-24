@@ -50,7 +50,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
           />
           <CardContent css={styles.cardContent}>
             <IntentTexField
-              testAttr="outcome-title"
+              testattr="outcome-title"
               value={props.title}
               componentID="outcome1"
               setValue={props.setTitle}
@@ -122,7 +122,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
                 </div>
                 <Box width="100%" height="14px" />
                 <ContainedButton
-                  testAttr="remove-button"
+                  testattr="remove-button"
                   text="Remove"
                   onClick={() => props.setLocation(null)}
                 />

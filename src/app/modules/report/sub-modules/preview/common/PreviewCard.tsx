@@ -16,6 +16,7 @@ export type Props = {
   tooltip?: string;
   explanation?: string;
   content: string | string[] | number;
+  testattr?: string;
 };
 
 const styles: any = {
@@ -66,7 +67,10 @@ export const PreviewCard = (props: Props) => {
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   return (
-    <Card css={isMobileWidth ? styles.cardMobile : styles.card}>
+    <Card
+      css={isMobileWidth ? styles.cardMobile : styles.card}
+      data-cy={props.testattr ? props.testattr : 'generic-preview-card'}
+    >
       <div css={styles.header}>
         <FieldDescription text={t(props.title)} />
         {props.tooltip && <Tooltip tip={t(props.tooltip)} />}

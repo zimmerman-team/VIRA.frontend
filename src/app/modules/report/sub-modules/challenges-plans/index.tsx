@@ -41,7 +41,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         <Card css={styles.card}>
           <CardContent>
             <IntentTexArea
-              testAttr="text-area-1"
+              testattr="text-area-1"
               {...ChallengeAreaMock[0]}
               explanation=""
               description={t(ChallengeAreaMock[0].description)}
@@ -66,7 +66,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         <Card css={styles.card}>
           <CardContent>
             <IntentTexArea
-              testAttr="text-area-2"
+              testattr="text-area-2"
               {...ChallengeAreaMock[1]}
               explanation=""
               description={t(ChallengeAreaMock[1].description)}
@@ -91,7 +91,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         <Card css={styles.card}>
           <CardContent>
             <IntentTexArea
-              testAttr="text-area-3"
+              testattr="text-area-3"
               {...ChallengeAreaMock[2]}
               explanation=""
               description={t(ChallengeAreaMock[2].description)}
@@ -116,7 +116,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         <Card css={styles.card}>
           <CardContent>
             <IntentTexArea
-              testAttr="text-area-4"
+              testattr="text-area-4"
               {...ChallengeAreaMock[3]}
               explanation=""
               description={t(ChallengeAreaMock[3].description)}

@@ -21,7 +21,7 @@ export interface MultilineTextfieldParams extends InputBaseProps {
   placeholder?: string;
   type?: string;
   min?: number;
-  testAttr?: string;
+  testattr?: string;
   autoComplete?: string;
 }
 
@@ -83,7 +83,7 @@ export const SingleMultiLineTextField = (props: MultilineTextfieldParams) => {
     <FormControl fullWidth={props.fullWidth}>
       {renderLabel(props)}
       <Input
-        data-cy={props.testAttr}
+        data-cy={props.testattr}
         {...inputProps}
         inputProps={{ min }}
         placeholder={props.placeholder}

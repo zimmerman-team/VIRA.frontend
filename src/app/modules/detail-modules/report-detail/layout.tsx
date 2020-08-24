@@ -202,7 +202,7 @@ export const ReportDetailLayout = (props: any) => {
             url_note={`${props.report.project.name}`}
             editReport={props.editReport}
             showEditBtn={showEditBtn}
-            testAttr="report-title"
+            testattr="report-title"
             stats={[
               {
                 label: t('reports.detail.stats.targetBeneficiaries'),

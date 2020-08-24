@@ -74,7 +74,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.budget')} />
           <CardContent>
             <IntentTexFieldSingleLine
-              testAttr="budget-field"
+              testattr="budget-field"
               fullWidth
               type="number"
               min={0}
@@ -97,7 +97,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.contribution')} />
           <CardContent>
             <IntentTexFieldSingleLine
-              testAttr="insinger-contribution-field"
+              testattr="insinger-contribution-field"
               fullWidth
               type="number"
               min={0}
@@ -128,7 +128,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent>
             <IntentTexFieldSingleLine
-              testAttr="target-beneficiaries-field"
+              testattr="target-beneficiaries-field"
               fullWidth
               type="number"
               min={0}
@@ -152,7 +152,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.total_commited')} />
           <CardContent css={styles.cardContent}>
             <IntentTexFieldSingleLine
-              testAttr="total-committed-field"
+              testattr="total-committed-field"
               fullWidth
               type="number"
               min={0}
@@ -209,7 +209,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               {props.beneficiaryCounts.map((item: any, index: number) => (
                 <Grid item xs={12} md={6} lg={4} key={item.name}>
                   <IntentTexFieldSingleLine
-                    testAttr={`which-when-item-${index}`}
+                    testattr={`which-when-item-${index}`}
                     type="number"
                     min={0}
                     value={item.value}

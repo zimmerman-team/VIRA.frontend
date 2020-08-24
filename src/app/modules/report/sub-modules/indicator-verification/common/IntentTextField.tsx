@@ -15,7 +15,7 @@ export interface IntentTextFieldParams {
   text?: string;
   explanation?: string;
   componentID?: string;
-  testAttr?: string;
+  testattr?: string;
 }
 
 export const IntentTexField = (props: IntentTextFieldParams) => (
@@ -28,7 +28,7 @@ export const IntentTexField = (props: IntentTextFieldParams) => (
       </>
     )}
     <SingleMultiLineTextField
-      testAttr={props.testAttr}
+      testattr={props.testattr}
       fullWidth
       placeholder={props.placeholder}
       value={props.value}

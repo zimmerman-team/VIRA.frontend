@@ -51,6 +51,7 @@ export const ProjectDetailLayout = (props: any) => {
               text={t('projects.detail.generateReportBtn')}
               onClick={props.projectDetail.generateReport}
               disabled={remainingBudget <= 0}
+              testattr="generate-report-button"
             />
             {remainingBudget <= 0 && (
               <TooltipButton tip={t('projects.detail.tooltip')} />
@@ -64,7 +65,7 @@ export const ProjectDetailLayout = (props: any) => {
       <Grid item xs={12} lg={12}>
         <TitleFragment
           showMoreThanTitle
-          testAttr="project-title"
+          testattr="project-title"
           title={props.projectDetail.project}
           id={`${t('project id:')} ${props.projectDetail.project_id}`}
           date={t('*earliest and latest activity start dates')}

@@ -10,7 +10,7 @@ export const FaqsLayout = (props: FaqsModel) => (
     {/* ---------------------------------------------------------------------*/}
     {/* title fragment */}
     <Grid item container xs={12} lg={12}>
-      <TitleFragment testAttr="faq-title" title={props.title} />
+      <TitleFragment testattr="faq-title" title={props.title} />
     </Grid>
 
     {/* ---------------------------------------------------------------------*/}

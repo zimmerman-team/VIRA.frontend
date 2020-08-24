@@ -33,6 +33,7 @@ export const PreviewLayout = (props: PreviewParams) => {
         <PreviewCard
           title="reports.form.textfield.preview_title"
           content={props.outcomesProps.title}
+          testattr={'title-preview-card'}
         />
       </Grid>
 
@@ -52,6 +53,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.textfield.location"
           content={props.outcomesProps.country.label}
           explanation={t('reports.form.textfield.location_expl')}
+          testattr={'location-preview-card'}
         />
       </Grid>
 
@@ -72,6 +74,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           tooltip="reports.form.textfield.insinger_f_policy_priorities"
           content={props.policyPrioritiesProps.policyPriority.label}
           explanation="reports.form.textfield.sdg_mapping_expl"
+          testattr={'policy-priority-preview-card'}
         />
       </Grid>
 
@@ -91,6 +94,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.textfield.budget"
           tooltip="reports.form.textfield.budget"
           content={props.policyPrioritiesProps.budget}
+          testattr={'budget-preview-card'}
         />
       </Grid>
 
@@ -110,6 +114,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.textfield.target_beneficiaries"
           tooltip="reports.form.textfield.target_beneficiaries"
           content={props.policyPrioritiesProps.tarBenTotal}
+          testattr={'target-beneficiaries-preview-card'}
         />
       </Grid>
 
@@ -131,6 +136,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           content={props.policyPrioritiesProps.beneficiaryCounts.map(
             (b: BeneficiaryCountsModel) => `${b.name}: ${b.value}`
           )}
+          testattr={'include-ben-preview-card'}
         />
       </Grid>
 
@@ -150,6 +156,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.cards.key_outcomes"
           tooltip="reports.form.cards.key_outcomes"
           content={props.indicatorVerificationProps.keyOutcomes}
+          testattr={'key-outcomes-preview-card'}
         />
       </Grid>
 
@@ -167,6 +174,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.cards.monitor"
           tooltip="reports.form.cards.monitor_expl"
           content={props.indicatorVerificationProps.monRepOutcomes}
+          testattr={'outcomes-preview-card'}
         />
       </Grid>
 
@@ -185,6 +193,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           tooltip="reports.form.cards.key_implementation_challenges"
           content={props.challengesPlansProps.keyImplChallenges}
           explanation="reports.form.cards.key_implementation_challenges_expl"
+          testattr={'key-implementation-challenges-preview-card'}
         />
       </Grid>
 
@@ -203,6 +212,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           tooltip="reports.form.cards.other_project"
           content={props.challengesPlansProps.otherProjOutObs}
           explanation="reports.form.cards.other_project_expl"
+          testattr={'other-project-preview-card'}
         />
       </Grid>
 
@@ -221,6 +231,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           tooltip="reports.form.cards.future_plans"
           content={props.challengesPlansProps.futurePlans}
           explanation="reports.form.cards.future_plans_expl"
+          testattr={'future-plans-preview-card'}
         />
       </Grid>
 
@@ -239,6 +250,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           tooltip="reports.form.cards.other_comments"
           content={props.challengesPlansProps.otherComms}
           explanation="reports.form.cards.other_comments_expl"
+          testattr={'other-comments-preview-card'}
         />
       </Grid>
       <div

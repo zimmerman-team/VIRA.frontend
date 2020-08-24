@@ -43,7 +43,7 @@ export function PDFreport(props: any) {
             url={`/projects/${props.report.project.id}`}
             url_note={`${props.report.project.name}`}
             editReport={props.editReport}
-            testAttr="report-title"
+            testattr="report-title"
             stats={[
               {
                 label: t('reports.detail.stats.targetBeneficiaries'),

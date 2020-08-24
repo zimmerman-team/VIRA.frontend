@@ -79,13 +79,13 @@ export const AddMediaNavContainer = (props: {
 export interface AddMediaButtonParams {
   text: string;
   onClick: Function;
-  testAttr: string;
+  testattr: string;
 }
 
 export const AddMediaButton = (props: AddMediaButtonParams) => {
   return (
     <div
-      data-cy={props.testAttr}
+      data-cy={props.testattr}
       onClick={() => props.onClick()}
       css={`
         font-size: 14px;
