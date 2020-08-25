@@ -76,7 +76,8 @@ workflows:
       - cypress/run:
 #          executor: cypress-executor-med
           yarn: true
-          command: yarn happo-cypress -- -- yarn cypress run --record --parallel
+#          command: yarn happo-cypress -- -- yarn cypress run --record --parallel
+          command: yarn cypress:record:chrome
           browser: chrome
           requires:
             - deploy

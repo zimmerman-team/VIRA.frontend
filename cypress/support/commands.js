@@ -32,7 +32,7 @@ configure({ testIdAttribute: 'data-cy' });
 
 Cypress.Commands.add('auth', (overrides = {}) => {
   cy.visit('/login');
-  cy.wait(6000);
+
   cy.findByTestId('login-email')
     .should('exist')
     .type(Cypress.env('username'));
@@ -42,6 +42,7 @@ Cypress.Commands.add('auth', (overrides = {}) => {
   cy.findByTestId('login-button')
     .should('exist')
     .click();
+  cy.wait(6000);
 });
 
 Cypress.Commands.add('viztabs', (overrides = {}) => {

@@ -6,8 +6,9 @@
   "chromeWebSecurity": false,
   "viewportWidth": 1440,
   "viewportHeight": 900,
+  "video": false,
   "retries": {
-    "runMode": 1,
+    "runMode": 0,
     "openMode": 0
   }
 }
