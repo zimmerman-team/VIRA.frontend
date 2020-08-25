@@ -32,7 +32,7 @@ configure({ testIdAttribute: 'data-cy' });
 
 Cypress.Commands.add('auth', (overrides = {}) => {
   cy.visit('/login');
-  // cy.wait(6000);
+  cy.wait(6000);
   cy.findByTestId('login-email')
     .should('exist')
     .type(Cypress.env('username'));
