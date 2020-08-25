@@ -58,10 +58,10 @@ workflows:
                     echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
                     echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
                   elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-                    echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+                    echo 'export REACT_APP_PROJECT_URL="https://app.ins.test.nyuki.io"' >> $BASH_ENV
                     echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
                   else
-                    echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+                    echo 'export REACT_APP_PROJECT_URL="https://app.ins.dev.nyuki.io"' >> $BASH_ENV
                     echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
                   fi
                   source $BASH_ENV
