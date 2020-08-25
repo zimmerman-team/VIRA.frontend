@@ -74,13 +74,13 @@ workflows:
           requires:
             - cypress/install
       - cypress/run:
-#          executor: cypress-executor-med
-          yarn: true
-#          command: yarn happo-cypress -- -- yarn cypress run --record --parallel
-          command: yarn cypress:record:chrome
-          browser: chrome
+          executor: cypress-executor
           requires:
             - deploy
+          yarn: true
+#          command: yarn happo-cypress -- -- yarn cypress run --record --parallel
+#          command: yarn cypress:record:chrome
+          browser: chrome
           record: true
           parallel: true
           parallelism: 6
