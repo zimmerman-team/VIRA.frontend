@@ -1,3 +1,4 @@
+import { getRandomInt } from '../support/utils';
 /// <reference types="Cypress" />
 describe('report flow', () => {
   it('go to generate report module', () => {
@@ -10,9 +11,7 @@ describe('report flow', () => {
       cy.wait(3000).then(() => {
         storedProjects = JSON.parse(localStorage.getItem('projectsE2E'));
         cy.findByText(storedProjects[getRandomInt(0, 9)]).click();
-        cy.findByTestId('generate-report-button')
-          .should('exist')
-          .click();
+        cy.findByTestId('generate-report-button').should('exist').click();
       });
     });
   });
@@ -36,9 +35,7 @@ describe('report flow', () => {
 
   it('fill in policy priorities', () => {
     // go to policy priorities tab
-    cy.findByTestId('next-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('next-button').should('exist').click();
 
     cy.get('#autocomplete-countries')
       .should('exist')
@@ -71,10 +68,7 @@ describe('report flow', () => {
       .type(10);
 
     // open funders list and click top option
-    cy.findByTestId('other-funders')
-      .should('exist')
-      .click()
-      .type('Utopa');
+    cy.findByTestId('other-funders').should('exist').click().type('Utopa');
     cy.get('#autocomplete-countries-option-0').click();
 
     cy.findByTestId('which-when-item-0')
@@ -91,9 +85,7 @@ describe('report flow', () => {
   });
 
   it('fill in indicator & verification', () => {
-    cy.findByTestId('next-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('next-button').should('exist').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -109,9 +101,7 @@ describe('report flow', () => {
   });
 
   it('fill in chalenges & plans', () => {
-    cy.findByTestId('next-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('next-button').should('exist').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -139,9 +129,7 @@ describe('report flow', () => {
   });
 
   it('preview report', () => {
-    cy.findByTestId('next-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('next-button').should('exist').click();
 
     cy.findByTestId('title-preview-card').should('exist');
     cy.findByTestId('location-preview-card').should('exist');
@@ -160,15 +148,11 @@ describe('report flow', () => {
   });
 
   it('submit report', () => {
-    cy.findByTestId('submit-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('submit-button').should('exist').click();
   });
 
   it('click away dialog', () => {
-    cy.findByTestId('dialog-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('dialog-button').should('exist').click();
   });
 
   /*it('add media', () => {
@@ -190,10 +174,4 @@ describe('report flow', () => {
       variant: 'base',
     });
   });*/
-
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 });

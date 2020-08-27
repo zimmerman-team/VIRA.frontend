@@ -1,3 +1,4 @@
+import { getRandomInt } from '../support/utils';
 /// <reference types="Cypress" />
 describe('project detail page', () => {
   it('test project detail page', () => {
@@ -27,10 +28,4 @@ describe('project detail page', () => {
       variant: 'base',
     });
   });*/
-
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 });
