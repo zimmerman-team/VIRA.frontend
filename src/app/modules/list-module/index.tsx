@@ -122,6 +122,14 @@ export const ListModule = (props: ListModuleParams) => {
         ...baseTableForProject,
         data: formatTableDataForProject(get(projectsRes, 'data', [])),
       });
+
+      /* E2E: we're storing first 10 project in localstorage so that we can read them out in cypress */
+      const projectsE2E = [];
+      projectsRes.data.map((item, index) => {
+        index <= 9 && projectsE2E.push(item.project_name);
+        index == 9 &&
+          localStorage.setItem('projectsE2E', JSON.stringify(projectsE2E));
+      });
     });
     allOrganisationsAction({
       socketName: 'allOrg',
