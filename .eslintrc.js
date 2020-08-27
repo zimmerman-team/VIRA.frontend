@@ -20,6 +20,7 @@ module.exports = {
   ],
   plugins: ['sonarjs'],
   rules: {
+    '@typescript-eslint/explicit-function-return-type': 'off',
     'react/no-array-index-key': 0,
     'react/jsx-fragments': ['off', 'element'],
     'react/jsx-props-no-spreading': 0,
