@@ -21,6 +21,7 @@
     "generate-draft-report.spec.js",
     "daterangefilter.spec.js",
     "internalization.spec.js",
-    "user-management.spec.js"
+    "user-management.spec.js",
+    "sdg-viz-tab.spec.js"
   ]
 }
