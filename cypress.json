@@ -8,7 +8,7 @@
   "viewportHeight": 900,
   "video": false,
   "retries": {
-    "runMode": 0,
+    "runMode": 1,
     "openMode": 0
   },
   "testFiles": [
