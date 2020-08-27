@@ -99,7 +99,9 @@ Cypress.Commands.add('selectRandomProject', (overrides = {}) => {
 
   cy.wait(3000).then(() => {
     storedProjects = JSON.parse(localStorage.getItem('projectsE2E'));
-    cy.findByText(storedProjects[getRandomInt(0, 9)]).click();
+    cy.findByText(
+      storedProjects[getRandomInt(0, storedProjects.length - 1)]
+    ).click();
   });
 });
 Cypress.Commands.add('selectRandomReport', (overrides = {}) => {});

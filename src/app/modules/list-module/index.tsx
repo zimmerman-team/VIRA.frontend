@@ -60,19 +60,21 @@ export const ListModule = (props: ListModuleParams) => {
 
   // actions
   const allProjectsAction = useStoreActions(
-    actions => actions.allProjects.fetch
+    (actions) => actions.allProjects.fetch
   );
   const allOrganisationsAction = useStoreActions(
-    actions => actions.allOrganisations.fetch
+    (actions) => actions.allOrganisations.fetch
   );
-  const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
+  const allReportsAction = useStoreActions(
+    (actions) => actions.allReports.fetch
+  );
 
   // get state
-  const allProjectsData = useStoreState(state => state.allProjects.data);
+  const allProjectsData = useStoreState((state) => state.allProjects.data);
   const allOrganisationsData = useStoreState(
-    state => state.allOrganisations.data
+    (state) => state.allOrganisations.data
   );
-  const allReportsData = useStoreState(state => state.allReports.data);
+  const allReportsData = useStoreState((state) => state.allReports.data);
 
   // get datasets by selected SDG
   let sdgReportsData;
@@ -88,18 +90,18 @@ export const ListModule = (props: ListModuleParams) => {
     );
   }
 
-  const reduxLng = useStoreState(state => state.syncVariables.lng);
+  const reduxLng = useStoreState((state) => state.syncVariables.lng);
   const loading = useStoreState(
-    state =>
+    (state) =>
       state.allProjects.loading ||
       state.allOrganisations.loading ||
       state.allReports.loading
   );
 
-  const signedInUserRole = useStoreState(state =>
+  const signedInUserRole = useStoreState((state) =>
     get(state.userDetails.data, 'role', 'Grantee user')
   );
-  const signedInUserEmail = useStoreState(state =>
+  const signedInUserEmail = useStoreState((state) =>
     get(state.userDetails.data, 'email', '')
   );
 
@@ -126,10 +128,15 @@ export const ListModule = (props: ListModuleParams) => {
       /* E2E: we're storing first 10 project in localstorage so that we can read them out in cypress */
       const projectsE2E = [];
       projectsRes.data.map((item, index) => {
-        index <= 9 && projectsE2E.push(item.project_name);
+        if (index <= 9 && item.total_amount > 200) {
+          projectsE2E.push(item.project_name);
+        }
+
         index == 9 &&
           localStorage.setItem('projectsE2E', JSON.stringify(projectsE2E));
       });
+
+      console.log(projectsE2E);
     });
     allOrganisationsAction({
       socketName: 'allOrg',
