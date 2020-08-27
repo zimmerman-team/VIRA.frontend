@@ -10,5 +10,17 @@
   "retries": {
     "runMode": 0,
     "openMode": 0
-  }
+  },
+  "testFiles": [
+    "overview.spec.js",
+    "project-detail.spec.js",
+    "multiyear-projectview.spec.js",
+    "search.spec.js",
+    "generate-report.spec.js",
+    "edit-report.spec.js",
+    "generate-draft-report.spec.js",
+    "daterangefilter.spec.js",
+    "internalization.spec.js",
+    "user-management.spec.js"
+  ]
 }
