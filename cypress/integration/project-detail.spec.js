@@ -2,33 +2,35 @@
 describe('project detail page', () => {
   it('test project detail page', () => {
     // authenticate
-    cy.auth();
+    cy.auth().then(() => {
+      cy.findByTestId('sidebar-item-1').click();
 
-    cy.findByTestId('sidebar-item-1').click();
+      let storedProjects = [];
 
-    cy.wait(3000);
-    cy.get(
-      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(2) > [class^=LinkCell__CustomLink]'
-    ).click();
+      cy.wait(3000).then(() => {
+        storedProjects = JSON.parse(localStorage.getItem('projectsE2E'));
+        cy.findByText(storedProjects[getRandomInt(0, 9)]).click();
+      });
+    });
+  });
 
+  it('should check project detail', () => {
     cy.findByTestId('project-title').should('exist');
 
     // report button
     cy.findByTestId('generate-report-button').should('exist');
+  });
 
-    // viz tabs
-    cy.viztabs();
-
-    // outcomes
-    // cy.findByTestId('key-outcomes').should('exist');
-    // cy.findByTestId('indicator-verification').should('exist');
-
-    // reports table
-    cy.findByTestId('reports-table').should('exist');
-
-    /*cy.get('body').happoScreenshot({
+  /*it('make a screenshot', () => {
+    cy.get('body').happoScreenshot({
       component: 'Project detail',
       variant: 'base',
-    });*/
-  });
+    });
+  });*/
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 });

@@ -2,22 +2,19 @@
 describe('report flow', () => {
   it('go to generate report module', () => {
     // authenticate
-    cy.auth();
+    cy.auth().then(() => {
+      cy.findByTestId('sidebar-item-1').click();
 
-    cy.findByTestId('sidebar-item-1')
-      .should('exist')
-      .click();
-    cy.wait(3000);
-    cy.get(
-      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(2) > [class^=LinkCell__CustomLink]'
-    )
-      .should('exist')
-      .click();
+      let storedProjects = [];
 
-    // report button
-    cy.findByTestId('generate-report-button')
-      .should('exist')
-      .click();
+      cy.wait(3000).then(() => {
+        storedProjects = JSON.parse(localStorage.getItem('projectsE2E'));
+        cy.findByText(storedProjects[getRandomInt(0, 9)]).click();
+        cy.findByTestId('generate-report-button')
+          .should('exist')
+          .click();
+      });
+    });
   });
 
   it('fill in outcomes', () => {
@@ -193,4 +190,10 @@ describe('report flow', () => {
       variant: 'base',
     });
   });*/
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 });
