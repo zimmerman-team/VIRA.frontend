@@ -15,7 +15,7 @@ describe('edit an existing report', () => {
     let prevTitle = '';
 
     cy.get(
-      '[data-testid=MuiDataTableBodyCell-1-0] > [class^=MUIDataTableBodyCell-root] > [class^=LinkCell__CustomLink]'
+      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(1) > :nth-child(1)'
     )
       .should('exist')
       .invoke('text')
@@ -25,8 +25,9 @@ describe('edit an existing report', () => {
       });
 
     // click top report
+
     cy.get(
-      '[data-testid=MuiDataTableBodyCell-1-0] > [class^=MUIDataTableBodyCell-root] > [class^=LinkCell__CustomLink]'
+      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(1) > :nth-child(1)'
     )
       .should('exist')
       .click()
