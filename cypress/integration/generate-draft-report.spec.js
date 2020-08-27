@@ -2,22 +2,13 @@
 describe('draft report flow', () => {
   it('go to generate report module', () => {
     // authenticate
-    cy.auth();
+    cy.auth().then(() => {
+      cy.goToProjectsOverview();
 
-    cy.findByTestId('sidebar-item-1')
-      .should('exist')
-      .click();
-    cy.wait(3000);
-    cy.get(
-      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(2) > [class^=LinkCell__CustomLink]'
-    )
-      .should('exist')
-      .click();
-
-    // report button
-    cy.findByTestId('generate-report-button')
-      .should('exist')
-      .click();
+      cy.selectRandomProject().then(() => {
+        cy.findByTestId('generate-report-button').should('exist').click();
+      });
+    });
   });
 
   it('fill in outcomes', () => {
@@ -39,9 +30,7 @@ describe('draft report flow', () => {
 
   it('fill in policy priorities', () => {
     // go to policy priorities tab
-    cy.findByTestId('next-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('next-button').should('exist').click();
 
     cy.get('#autocomplete-countries')
       .should('exist')
@@ -74,10 +63,7 @@ describe('draft report flow', () => {
       .type(10);
 
     // open funders list and click top option
-    cy.findByTestId('other-funders')
-      .should('exist')
-      .click()
-      .type('Utopa');
+    cy.findByTestId('other-funders').should('exist').click().type('Utopa');
     cy.get('#autocomplete-countries-option-0').click();
 
     cy.findByTestId('which-when-item-0')
@@ -94,9 +80,7 @@ describe('draft report flow', () => {
   });
 
   it('fill in indicator & verification', () => {
-    cy.findByTestId('next-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('next-button').should('exist').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -112,9 +96,7 @@ describe('draft report flow', () => {
   });
 
   it('fill in chalenges & plans', () => {
-    cy.findByTestId('next-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('next-button').should('exist').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -142,9 +124,7 @@ describe('draft report flow', () => {
   });
 
   it('preview report', () => {
-    cy.findByTestId('next-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('next-button').should('exist').click();
 
     cy.findByTestId('title-preview-card').should('exist');
     cy.findByTestId('location-preview-card').should('exist');
@@ -161,9 +141,7 @@ describe('draft report flow', () => {
     cy.findByTestId('future-plans-preview-card').should('exist');
     cy.findByTestId('other-comments-preview-card').should('exist');
 
-    cy.findByTestId('draft-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('draft-button').should('exist').click();
   });
 
   /* it('submit draft report', () => {
@@ -173,9 +151,7 @@ describe('draft report flow', () => {
   });*/
 
   it('click away dialog', () => {
-    cy.findByTestId('dialog-button')
-      .should('exist')
-      .click();
+    cy.findByTestId('dialog-button').should('exist').click();
   });
 
   /*it('add media', () => {

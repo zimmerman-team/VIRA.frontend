@@ -4,13 +4,9 @@ describe('report flow', () => {
   it('go to generate report module', () => {
     // authenticate
     cy.auth().then(() => {
-      cy.findByTestId('sidebar-item-1').click();
+      cy.goToProjectsOverview();
 
-      let storedProjects = [];
-
-      cy.wait(3000).then(() => {
-        storedProjects = JSON.parse(localStorage.getItem('projectsE2E'));
-        cy.findByText(storedProjects[getRandomInt(0, 9)]).click();
+      cy.selectRandomProject().then(() => {
         cy.findByTestId('generate-report-button').should('exist').click();
       });
     });

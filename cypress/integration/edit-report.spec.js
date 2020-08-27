@@ -3,21 +3,13 @@
 describe('edit an existing report', () => {
   it('go to reports overview page', () => {
     // authenticate
-    cy.auth();
-
-    cy.findByTestId('sidebar-item-3').click();
-
-    cy.listTabs();
-
-    /*cy.get('body').happoScreenshot({
-      component: 'Report overview',
-      variant: 'base',
-    });*/
-    // cy.get('body').happoScreenshot();
+    cy.auth().then(() => {
+      // go to reports overview
+      cy.goToReportsOverview();
+    });
   });
 
   it('edit report page', () => {
-    cy.findByTestId('sidebar-item-3').click();
     // save previous title
     // todo: maybe use a cookie or localstorage for this?
     let prevTitle = '';
@@ -27,17 +19,11 @@ describe('edit an existing report', () => {
     )
       .should('exist')
       .invoke('text')
-      .then(text1 => {
+      .then((text1) => {
         prevTitle = text1;
         console.log('text1', text1);
       });
 
-    /*cy.get('[data-testid=MuiDataTableBodyCell-1-1]')
-      .invoke('text')
-      .then(text1 => {
-        prevTitle = text1;
-      });
-*/
     // click top report
     cy.get(
       '[data-testid=MuiDataTableBodyCell-1-0] > [class^=MUIDataTableBodyCell-root] > [class^=LinkCell__CustomLink]'
@@ -54,10 +40,7 @@ describe('edit an existing report', () => {
     const newTitle = currentDate.getTime();
 
     // type new title
-    cy.findByTestId('outcome-title')
-      .children()
-      .clear()
-      .type(newTitle);
+    cy.findByTestId('outcome-title').children().clear().type(newTitle);
 
     // next
     cy.findByTestId('next-button').click();
