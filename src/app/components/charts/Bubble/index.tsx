@@ -31,13 +31,13 @@ const ChartContainer = styled.div`
   justify-content: center;
 `;
 
-const Card = styled(props => <MuiCard {...props} />)`
+const Card = styled((props) => <MuiCard {...props} />)`
   && {
     box-shadow: 0 0 2px 1px rgba(130, 136, 148, 0.08);
   }
 `;
 
-const Content = styled(props => <CardContent {...props} />)`
+const Content = styled((props) => <CardContent {...props} />)`
   display: flex;
   flex-direction: column;
   && {
@@ -71,6 +71,8 @@ export function BubbleChart(props: Props) {
     }
   }, [props.selectedBubble]);
 
+  console.log('bullchart data', props.data);
+
   return (
     <Card>
       <Content>
@@ -99,16 +101,16 @@ export function BubbleChart(props: Props) {
                 root={{
                   ...props.data,
                   children: [
-                    ...props.data.children.map(child => ({
+                    ...props.data.children.map((child) => ({
                       ...child,
                       loc: child.loc > 0 ? child.loc : minValue,
                     })),
-                    ...otherSdgs.map(os => ({ ...os, loc: minValue })),
+                    ...otherSdgs.map((os) => ({ ...os, loc: minValue })),
                   ],
                 }}
                 isZoomable={false}
                 enableLabel={false}
-                colorBy={v => v.color}
+                colorBy={(v) => v.color}
                 nodeComponent={({ node, style, handlers }) => {
                   if (style.r <= 0) return null;
                   const hasData = !node.data.opacity || node.data.opacity === 1;
@@ -116,6 +118,10 @@ export function BubbleChart(props: Props) {
                   return (
                     <div
                       id={(node.data && node.data.id
+                        ? node.data.id
+                        : node.id
+                      ).replace(/[^\w]/gi, '-')}
+                      data-cy={(node.data && node.data.id
                         ? node.data.id
                         : node.id
                       ).replace(/[^\w]/gi, '-')}
@@ -144,7 +150,7 @@ export function BubbleChart(props: Props) {
                             : '',
                       }}
                       {...handlers}
-                      onClick={_e =>
+                      onClick={(_e) =>
                         hasData && props.setSelectedBubble(node.id)
                       }
                     >
@@ -152,7 +158,7 @@ export function BubbleChart(props: Props) {
                     </div>
                   );
                 }}
-                tooltip={tProps => {
+                tooltip={(tProps) => {
                   if (tProps.data.opacity === 0.2 || isMobileWidth) {
                     return null;
                   }
@@ -196,7 +202,7 @@ export function BubbleChart(props: Props) {
                     />
                   );
                 }}
-                colors={props.data.children.map(item => item.color)}
+                colors={props.data.children.map((item) => item.color)}
                 margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
                 theme={{
                   tooltip: {

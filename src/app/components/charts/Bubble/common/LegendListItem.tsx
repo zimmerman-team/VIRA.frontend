@@ -28,6 +28,7 @@ export function LegendListItem(props: LegendListItemProps) {
         margin-bottom: 16px;
         cursor: ${hasData ? 'pointer' : 'default'};
       `}
+      data-cy={`list-item-${props.name}`}
       onClick={() => props.onClick && hasData && props.onClick(props.name)}
     >
       <div
@@ -38,9 +39,9 @@ export function LegendListItem(props: LegendListItemProps) {
           border-radius: 50%;
           background-color: ${hasData
             ? props.color
-            : `rgba(${rgbColor?.r}, ${rgbColor?.g}, ${
-                rgbColor?.b
-              }, ${props.opacity || 1})`};
+            : `rgba(${rgbColor?.r}, ${rgbColor?.g}, ${rgbColor?.b}, ${
+                props.opacity || 1
+              })`};
         `}
       />
       <div
