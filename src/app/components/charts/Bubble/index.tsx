@@ -71,8 +71,6 @@ export function BubbleChart(props: Props) {
     }
   }, [props.selectedBubble]);
 
-  console.log('bullchart data', props.data);
-
   return (
     <Card>
       <Content>

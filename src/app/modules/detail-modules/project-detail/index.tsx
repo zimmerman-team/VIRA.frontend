@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useCallback } from 'react';
@@ -45,30 +46,36 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   const [selectedSDG, setSelectedSDG] = React.useState('');
 
   const projectDetailAction = useStoreActions(
-    actions => actions.projectDetail.fetch
+    (actions) => actions.projectDetail.fetch
   );
   const projectDetailData = useStoreState(
-    actions => actions.projectDetail.data
+    (actions) => actions.projectDetail.data
   );
   const projectDetailClearAction = useStoreActions(
-    actions => actions.projectDetail.clear
+    (actions) => actions.projectDetail.clear
   );
-  const ReportsData = useStoreState(state => state.allReports.data);
-  const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
-  const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
-  const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
-  const getGeoMapData = useStoreActions(actions => actions.getGeoMapData.fetch);
+  const ReportsData = useStoreState((state) => state.allReports.data);
+  const allReportsAction = useStoreActions(
+    (actions) => actions.allReports.fetch
+  );
+  const getPPVizData = useStoreActions((actions) => actions.getPPVizData.fetch);
+  const getSDGVizData = useStoreActions(
+    (actions) => actions.getSDGVizData.fetch
+  );
+  const getGeoMapData = useStoreActions(
+    (actions) => actions.getGeoMapData.fetch
+  );
   const projectBudgetDataAction = useStoreActions(
-    actions => actions.projectBudgetData.fetch
+    (actions) => actions.projectBudgetData.fetch
   );
-  const ppVizData = useStoreState(state => state.getPPVizData.data);
-  const SDGVizData = useStoreState(state => state.getSDGVizData.data);
-  const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const ppVizData = useStoreState((state) => state.getPPVizData.data);
+  const SDGVizData = useStoreState((state) => state.getSDGVizData.data);
+  const geoMapData = useStoreState((state) => state.getGeoMapData.data);
   const projectBudgetData = useStoreState(
-    state => state.projectBudgetData.data
+    (state) => state.projectBudgetData.data
   );
   const projectBudgetClearAction = useStoreActions(
-    actions => actions.projectBudgetData.clear
+    (actions) => actions.projectBudgetData.clear
   );
 
   const loadReports = useCallback((projectID: string) => {
@@ -87,14 +94,13 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     });
   }, []);
 
-  const init = useCallback(
-    () =>
-      projectBudgetDataAction({
-        socketName: 'getProjectBudgetData',
-        values: {
-          projectID: project_number,
-        },
-      }),
+  const init = useCallback(() => {
+    projectBudgetDataAction({
+      socketName: 'getProjectBudgetData',
+      values: {
+        projectID: project_number,
+      },
+    });
     projectDetailAction({
       socketName: 'allProject',
       values: { project_number },
@@ -150,8 +156,8 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
           },
         });
       }
-    }, [])
-  );
+    });
+  }, []);
 
   React.useEffect(() => {
     init();
