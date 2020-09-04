@@ -1,3 +1,5 @@
+import { ItemModel } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
+
 export interface PolicyPriorityProps {
   label: string;
   value: string;
@@ -15,6 +17,17 @@ export const policyPriorities: PolicyPriorityProps[] = [
   {
     label: 'charts.items.prisoner',
     value: 'Prisoner rehabilitation / reintegration',
+  },
+];
+
+export const pillars: ItemModel[] = [
+  {
+    value: 'Pillar 1: Church Restorations',
+    label: 'Pillar 1: Church Restorations',
+  },
+  {
+    value: 'Pillar 2: Social Good',
+    label: 'Pillar 2: Social Good',
   },
 ];
 

@@ -43,7 +43,7 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import { AppConfig } from 'app/data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
-  findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
+  findIndex(tabs, (tab) => `/report/${projectID}/${tab.path}` === pathname);
 
 function CreateReportFunc(props: any) {
   useTitle(`${AppConfig.appTitleLong} Create report`);
@@ -65,6 +65,12 @@ function CreateReportFunc(props: any) {
     LocationModel | null,
     Function
   ] = usePersistedState('report_location', null);
+
+  // Pillar
+  const [pillar, setPillar] = usePersistedState(
+    'report_pillar',
+    'Pillar 1: Church Restorations'
+  );
 
   // Policy Priorities
   const [tarBenTotal, setTarBenTotal] = usePersistedState(
@@ -110,7 +116,9 @@ function CreateReportFunc(props: any) {
 
   const [budget, setBudget] = usePersistedState(
     'report_budget',
-    useStoreState(state => get(state.projectBudgetData, 'data.remainBudget', 0))
+    useStoreState((state) =>
+      get(state.projectBudgetData, 'data.remainBudget', 0)
+    )
   );
   const [insContribution, setInsContribution] = usePersistedState(
     'report_insContribution',
@@ -175,7 +183,8 @@ function CreateReportFunc(props: any) {
       </div>
     ),
     buttons: [] as DialogBtnType[],
-    onClose: () => setDialogProps(prevState => ({ ...prevState, open: false })),
+    onClose: () =>
+      setDialogProps((prevState) => ({ ...prevState, open: false })),
   });
 
   const deleteReport = () => {
@@ -208,61 +217,61 @@ function CreateReportFunc(props: any) {
       },
     ],
     onClose: () =>
-      setDelDialogProps(prevState => ({ ...prevState, open: false })),
+      setDelDialogProps((prevState) => ({ ...prevState, open: false })),
   });
 
   const openDelDialog = () => {
-    setDelDialogProps(d => ({ ...d, open: true }));
+    setDelDialogProps((d) => ({ ...d, open: true }));
   };
 
   // redux actions
   const allProjectsAction = useStoreActions(
-    actions => actions.allProjects.fetch
+    (actions) => actions.allProjects.fetch
   );
-  const addReportAction = useStoreActions(actions => actions.addReport.fetch);
+  const addReportAction = useStoreActions((actions) => actions.addReport.fetch);
   const deleteReportAction = useStoreActions(
-    actions => actions.deleteReport.fetch
+    (actions) => actions.deleteReport.fetch
   );
   const addReportClearAction = useStoreActions(
-    actions => actions.addReport.clear
+    (actions) => actions.addReport.clear
   );
   const deleteReportClearAction = useStoreActions(
-    actions => actions.deleteReport.clear
+    (actions) => actions.deleteReport.clear
   );
   const snackbarAction = useStoreActions(
-    actions => actions.syncVariables.setSnackbar
+    (actions) => actions.syncVariables.setSnackbar
   );
   const projectBudgetDataAction = useStoreActions(
-    actions => actions.projectBudgetData.fetch
+    (actions) => actions.projectBudgetData.fetch
   );
   const reportDetailAction = useStoreActions(
-    actions => actions.reportDetail.fetch
+    (actions) => actions.reportDetail.fetch
   );
   const reportDetailClearAction = useStoreActions(
-    actions => actions.reportDetail.clear
+    (actions) => actions.reportDetail.clear
   );
   // redux data
-  const allProjectsData = useStoreState(state =>
+  const allProjectsData = useStoreState((state) =>
     get(state.allProjects.data, 'data', [])
   );
 
   // console.log("allProjectsData", allProjectsData);
 
-  const addReportData = useStoreState(state => state.addReport.data);
-  const addReportLoading = useStoreState(state => state.addReport.loading);
-  const deleteReportData = useStoreState(state => state.deleteReport.data);
+  const addReportData = useStoreState((state) => state.addReport.data);
+  const addReportLoading = useStoreState((state) => state.addReport.loading);
+  const deleteReportData = useStoreState((state) => state.deleteReport.data);
   const deleteReportLoading = useStoreState(
-    state => state.deleteReport.loading
+    (state) => state.deleteReport.loading
   );
   const projectBudgetData = useStoreState(
-    state => state.projectBudgetData.data
+    (state) => state.projectBudgetData.data
   );
-  const reportDetailData = useStoreState(state => state.reportDetail.data);
+  const reportDetailData = useStoreState((state) => state.reportDetail.data);
 
-  const signedInUserRole = useStoreState(state =>
+  const signedInUserRole = useStoreState((state) =>
     get(state.userDetails.data, 'role', 'Grantee user')
   );
-  const signedInUserEmail = useStoreState(state =>
+  const signedInUserEmail = useStoreState((state) =>
     get(state.userDetails.data, 'email', '')
   );
 
@@ -560,6 +569,7 @@ function CreateReportFunc(props: any) {
           data: {
             rid,
             title,
+            pillar,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
             policy_priority: policyPriority.value,
@@ -600,6 +610,7 @@ function CreateReportFunc(props: any) {
         values: {
           data: {
             rid,
+            pillar,
             title: title === '' ? ' ' : title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
@@ -671,6 +682,8 @@ function CreateReportFunc(props: any) {
         setLocation,
       }}
       policyPrioritiesProps={{
+        pillar,
+        setPillar,
         tarBenTotal,
         tarBenTotal2,
         setTarBenTotal,

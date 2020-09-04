@@ -16,11 +16,13 @@ import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
 
 /* ui */
 import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
+import { RadioButtonsGroup } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
 import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 
 /* mock */
 import {
+  pillars,
   funderList,
   FunderProps,
   policyPriorities,
@@ -41,6 +43,18 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
 
   return (
     <React.Fragment>
+      {/* ---------------------------------------------------------------------*/}
+      {/* Pillar */}
+      <Grid data-cy="pillar-radio-buttons" item xs={12} md={12} lg={12}>
+        <RadioButtonsGroup
+          items={pillars}
+          value={props.pillar}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            props.setPillar(event.target.value)
+          }
+        />
+      </Grid>
+
       {/* ---------------------------------------------------------------------*/}
       {/* Policy Priorities */}
       <Grid data-cy="policy-priority" item xs={12} md={12} lg={4}>

@@ -49,6 +49,8 @@ export type OutcomesPropsModel = {
 };
 
 export type PolicyPrioritiesPropsModel = {
+  pillar: string;
+  setPillar: Function;
   tarBenTotal: number;
   setTarBenTotal: Function;
   tarBenTotal2: number;
