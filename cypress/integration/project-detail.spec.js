@@ -5,7 +5,6 @@ describe('project detail page', () => {
     // authenticate
     cy.auth().then(() => {
       cy.goToProjectsOverview();
-
       cy.selectRandomProject();
     });
   });
@@ -15,12 +14,9 @@ describe('project detail page', () => {
 
     // report button
     cy.findByTestId('generate-report-button').should('exist');
-  });
 
-  /*it('make a screenshot', () => {
     cy.get('body').happoScreenshot({
-      component: 'Project detail',
-      variant: 'base',
+      component: 'project detail',
     });
-  });*/
+  });
 });

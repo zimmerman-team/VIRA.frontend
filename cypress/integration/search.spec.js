@@ -5,6 +5,10 @@ describe('search', () => {
     cy.auth();
 
     cy.findByTestId('search-button').click();
+    cy.get('body').happoScreenshot({
+      component: 'search',
+      variant: 'empty',
+    });
     cy.findByTestId('search-field').type('amsterdam');
     cy.findByTestId('search-result').should('exist');
     cy.wait(3000);
@@ -13,11 +17,9 @@ describe('search', () => {
     cy.findByTestId('search-nav-item-2').click();
     cy.findByTestId('search-nav-item-3').click();
 
-    // cy.get('body').happoScreenshot();
-
-    /*cy.get('body').happoScreenshot({
-      component: 'Search',
-      variant: 'base',
-    });*/
+    cy.get('body').happoScreenshot({
+      component: 'search',
+      variant: 'filled',
+    });
   });
 });

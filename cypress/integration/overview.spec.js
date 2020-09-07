@@ -13,11 +13,9 @@ describe('test overview of all pages', () => {
     cy.findByTestId('usercard-signout-button').should('exist');
     cy.findByTestId('usercard-privacy-button').should('exist');
 
-    // cy.get('body').happoScreenshot();
-    /*cy.get('body').happoScreenshot({
-      component: 'Usercard',
-      variant: 'base',
-    });*/
+    cy.get('body').happoScreenshot({
+      component: 'usercard',
+    });
   });
 
   it('test dashboard overview', () => {
@@ -31,6 +29,10 @@ describe('test overview of all pages', () => {
     cy.viztabs();
 
     cy.listTabs();
+
+    cy.get('body').happoScreenshot({
+      component: 'dashboard overview',
+    });
   });
 
   it('test project overview', () => {
@@ -39,26 +41,19 @@ describe('test overview of all pages', () => {
     cy.findByTestId('sidebar-item-1').click();
     cy.listTabs();
 
-    // cy.get('body').happoScreenshot();
-
-    /*cy.get('body').happoScreenshot({
-      component: 'Project overview',
-      variant: 'base',
-    });*/
+    cy.wait(2000);
+    cy.get('body').happoScreenshot({
+      component: 'project overview',
+    });
   });
 
   it('test grantee overview page', () => {
-    // goto page
-    // cy.visit('/list/1');
-    // cy.get([data-cy=sidebar-item-2] > .MuiButtonBase-root
-
     cy.findByTestId('sidebar-item-2').click();
     cy.listTabs();
 
-    /*cy.get('body').happoScreenshot({
-      component: 'Grantee overview',
-      variant: 'base',
-    });*/
+    cy.get('body').happoScreenshot({
+      component: 'grantee overview',
+    });
   });
 
   it('test report page', () => {
@@ -67,11 +62,9 @@ describe('test overview of all pages', () => {
 
     cy.listTabs();
 
-    /*cy.get('body').happoScreenshot({
-      component: 'Report overview',
-      variant: 'base',
-    });*/
-    // cy.get('body').happoScreenshot();
+    cy.get('body').happoScreenshot({
+      component: 'report overview',
+    });
   });
 
   it('test faq page', () => {
@@ -93,6 +86,9 @@ describe('test overview of all pages', () => {
       component: 'FAQ page',
       variant: 'base',
     });*/
+    cy.get('body').happoScreenshot({
+      component: 'faq',
+    });
   });
 
   it('test privacy page', () => {
@@ -110,5 +106,8 @@ describe('test overview of all pages', () => {
       component: 'Privacy page',
       variant: 'base',
     });*/
+    cy.get('body').happoScreenshot({
+      component: 'privacy',
+    });
   });
 });
