@@ -1,8 +1,21 @@
-import { Box } from '@material-ui/core';
-import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';
-import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
 import React from 'react';
 import 'styled-components/macro';
+import {
+  Box,
+  Typography,
+  AccordionDetails,
+  Accordion,
+  AccordionSummary,
+} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';
+import {
+  ExpandMoreIconStyle,
+  ExpansionPanelStyle,
+  ExpansionPanelSummaryStyle,
+  ExpansionPanelDetailsStyle,
+} from 'app/components/surfaces/ExpansionPanel';
+import { SingleMultiLineTextField } from 'app/components/inputs/textfields/SingleMultiLineTextField';
 import { InfoCaption } from './InfoCaption';
 import { FieldDescription } from './FieldDescription';
 
@@ -18,35 +31,54 @@ export interface IntentTextAreaParams {
 }
 
 export const IntentTexArea = (props: IntentTextAreaParams) => (
-  <React.Fragment>
-    <div
-      css={`
-        display: flex;
-        align-items: center;
-
-        @media (max-width: 768px) {
-          align-items: flex-start;
-        }
-      `}
+  <Accordion
+    square
+    css={ExpansionPanelStyle}
+    key={props.description}
+    data-cy={`question-${props.description}`}
+  >
+    <AccordionSummary
+      css={ExpansionPanelSummaryStyle}
+      expandIcon={<ExpandMoreIcon css={ExpandMoreIconStyle} />}
     >
-      <FieldDescription text={props.description} />
-      {props.tooltip && <Tooltip tip={props.tooltip} />}
-    </div>
-    <Box width="100%" height="20px" />
-    <SingleMultiLineTextField
-      testattr={props.testattr}
-      fullWidth
-      multiline
-      // placeholder="Type"
-      value={props.value}
-      id={props.componentID}
-      setValue={props.setValue}
-    />
-    {props.explanation && (
-      <React.Fragment>
-        <InfoCaption text={props.explanation} />{' '}
-        <Box width="100%" height="30px" />{' '}
-      </React.Fragment>
-    )}
-  </React.Fragment>
+      <div
+        css={`
+          display: flex;
+          align-items: center;
+
+          @media (max-width: 768px) {
+            align-items: flex-start;
+          }
+        `}
+      >
+        <FieldDescription text={props.description} />
+        {props.tooltip && <Tooltip tip={props.tooltip} />}
+      </div>
+    </AccordionSummary>
+    <AccordionDetails css={ExpansionPanelDetailsStyle}>
+      <SingleMultiLineTextField
+        testattr={props.testattr}
+        fullWidth
+        multiline
+        // placeholder="Type"
+        value={props.value}
+        id={props.componentID}
+        setValue={props.setValue}
+      />
+      {props.explanation && (
+        <Typography
+          variant="body2"
+          color="secondary"
+          css={`
+            font-style: normal;
+            font-weight: 300;
+            font-size: 12px;
+            bottom: 0;
+          `}
+        >
+          {props.explanation}
+        </Typography>
+      )}
+    </AccordionDetails>
+  </Accordion>
 );

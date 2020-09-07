@@ -261,7 +261,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         container
         sm={12}
         md={12}
-        lg={8}
+        lg={10}
         css={isBlur ? styles.blurBlock : ``}
         spacing={0}
       >
@@ -270,7 +270,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardContent>
             <Grid item container lg={12} spacing={4}>
               {props.beneficiaryCounts.map((item: any, index: number) => (
-                <Grid item xs={12} md={6} lg={4} key={item.name}>
+                <Grid item xs={12} md={6} lg={3} key={item.name}>
                   <IntentTexFieldSingleLine
                     testattr={`which-when-item-${index}`}
                     type="number"
