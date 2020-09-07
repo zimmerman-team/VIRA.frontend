@@ -28,6 +28,11 @@ export type LabelValueModel = {
   value: string;
 };
 
+export type LabelWeightModel = {
+  label: string;
+  weight: number;
+};
+
 export type OutcomesPropsModel = {
   title: string;
   setTitle: Function;
@@ -57,8 +62,8 @@ export type PolicyPrioritiesPropsModel = {
   setTarBenTotal2: Function;
   beneficiaryCounts: BeneficiaryCountsModel[];
   setBeneficiaryCounts: Function;
-  policyPriority: LabelValueModel;
-  setPolicyPriority: Function;
+  policyPriorities: LabelWeightModel[];
+  setPolicyPriorities: Function;
   budget: number;
   setBudget: Function;
   remainBudget: number;

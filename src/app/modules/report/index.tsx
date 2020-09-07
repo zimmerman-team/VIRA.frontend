@@ -106,12 +106,9 @@ function CreateReportFunc(props: any) {
       },
     ]
   );
-  const [policyPriority, setPolicyPriority] = usePersistedState(
-    'report_policyPriority',
-    {
-      label: '',
-      value: '',
-    }
+  const [policyPriorities, setPolicyPriorities] = usePersistedState(
+    'report_policyPriorities',
+    []
   );
 
   const [budget, setBudget] = usePersistedState(
@@ -349,10 +346,11 @@ function CreateReportFunc(props: any) {
           []
         ).map((b: any) => ({ name: b.name, value: b.value }))
       );
-      setPolicyPriority({
-        label: get(reportDetailData, 'report.policy_priority.name', ''),
-        value: get(reportDetailData, 'report.policy_priority.name', ''),
-      });
+      // todo: set policy priorities on edit
+      // setPolicyPriority({
+      //   label: get(reportDetailData, 'report.policy_priority.name', ''),
+      //   value: get(reportDetailData, 'report.policy_priority.name', ''),
+      // });
       if (get(reportDetailData, 'report.media', []).length > 0) {
         setMediaAdded(
           get(reportDetailData, 'report.media', []).map((m: any) => ({
@@ -541,7 +539,7 @@ function CreateReportFunc(props: any) {
     validatePolicyPrioritiesFields(
       tarBenTotal,
       beneficiaryCounts,
-      policyPriority.value,
+      policyPriorities,
       budget,
       get(projectBudgetData, 'data.remainBudget', 0),
       insContribution,
@@ -572,7 +570,7 @@ function CreateReportFunc(props: any) {
             pillar,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priority: policyPriority.value,
+            policy_priorities: policyPriorities,
             /* todo: stefanos, please look into refactoring this piece */
             location: location
               ? {
@@ -614,7 +612,7 @@ function CreateReportFunc(props: any) {
             title: title === '' ? ' ' : title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priority: policyPriority.value,
+            policy_priorities: policyPriorities,
             /* todo: stefanos, please look into refactoring this piece */
             location: location
               ? {
@@ -688,8 +686,8 @@ function CreateReportFunc(props: any) {
         tarBenTotal2,
         setTarBenTotal,
         setTarBenTotal2,
-        policyPriority,
-        setPolicyPriority,
+        policyPriorities,
+        setPolicyPriorities,
         beneficiaryCounts,
         setBeneficiaryCounts,
         budget,
@@ -737,7 +735,7 @@ function CreateReportFunc(props: any) {
           futurePlans,
           otherComms,
           budget,
-          policyPriority,
+          policyPriorities,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
           insContribution,
           funders,

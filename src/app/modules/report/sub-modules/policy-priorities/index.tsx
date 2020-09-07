@@ -18,6 +18,7 @@ import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
 import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
 import { RadioButtonsGroup } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
 import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
+import { PercentageDropdown } from 'app/modules/report/sub-modules/policy-priorities/common/percentage-dropdown';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 
 /* mock */
@@ -35,17 +36,24 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
 
   React.useEffect(() => {
     setIsBlur(
-      props.policyPriority.value === '' ||
+      props.policyPriorities.length > 0 ||
         props.budget === 0 ||
         props.insContribution === 0
     );
-  }, [props.policyPriority, props.budget, props.insContribution]);
+  }, [props.policyPriorities, props.budget, props.insContribution]);
 
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
       {/* Pillar */}
-      <Grid data-cy="pillar-radio-buttons" item xs={12} md={12} lg={12}>
+      <Grid
+        item
+        xs={12}
+        md={12}
+        lg={12}
+        data-cy="pillar-radio-buttons"
+        css="padding-left: 32px !important;"
+      >
         <RadioButtonsGroup
           items={pillars}
           value={props.pillar}
@@ -63,20 +71,17 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
             title={t('reports.form.textfield.insinger_f_policy_priorities')}
           />
           <CardContent>
-            <Autocomplete
+            <PercentageDropdown
               values={policyPriorities.map(
                 (policyPriority: PolicyPriorityProps) => ({
                   ...policyPriority,
                   label: t(policyPriority.label),
                 })
               )}
-              value={props.policyPriority}
-              setValue={props.setPolicyPriority}
+              value={props.policyPriorities}
+              setValue={props.setPolicyPriorities}
             />
             <Box height="14px" width="100%" />
-            <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {t('reports.form.textfield.sdg_mapping_expl')}
-            </Typography>
           </CardContent>
         </Card>
       </Grid>
