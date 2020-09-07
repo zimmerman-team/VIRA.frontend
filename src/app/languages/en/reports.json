@@ -27,10 +27,10 @@
   "form": {
     "title": "Report",
     "steps": {
-      "outcomes": "Outcomes",
-      "policy_priorities": "Policy priorities",
-      "indicator_verification": "Indicator and verification",
-      "challenges_plans": "Challenges and plans",
+      "outcomes": "Project info",
+      "policy_priorities": "Policy Priorities",
+      "indicator_verification": "Goals and Outcomes",
+      "challenges_plans": "Challenges & Future Plans",
       "preview": "Preview"
     },
     "textfield": {
@@ -40,13 +40,14 @@
       "location_expl": "In which of the following geographical locations will the project be implemented",
       "exact_location": "Select exact location",
       "insinger_f_policy_priorities": "Insinger Foundation policy priorities",
+      "sdgs": "SDGs",
       "other_funders": "Other funders",
       "budget": "Budget",
       "remaining": "Remaning for this project",
       "contribution": "Insinger Contribution",
-      "target_beneficiaries": "Target beneficiaries",
-      "total_commited": "Total committed number",
-      "of_which_ben": "Of which the beneficiaries will likely include approximately (Optional)",
+      "target_beneficiaries": "Please indicate how many people your project aimed to reach",
+      "total_commited": "Please indicate how many people benefited from your project in total",
+      "of_which_ben": "Please indicate how many people your project aims to reach",
       "sdg_mapping_expl": "For each priority selected, the relevant SDGs appear and can beselected based on our mapping"
     },
     "cards": {

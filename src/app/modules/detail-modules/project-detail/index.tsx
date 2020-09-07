@@ -171,7 +171,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   function generateReport() {
     // todo: refactor routing
     // @ts-ignore
-    props.history.push(`/report/${project_number}/outcomes`);
+    props.history.push(`/report/${project_number}/project-info`);
   }
 
   function onBarChartLegendClick(legend: string) {

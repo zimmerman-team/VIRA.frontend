@@ -4,10 +4,10 @@ import find from 'lodash/find';
 import { useHistory } from 'react-router-dom';
 
 const tabs = [
-  'outcomes',
+  'project-info',
   'policy-priorities',
-  'indicator-verification',
-  'challenges-plans',
+  'goals-and-outcomes',
+  'challenges-and-future-plans',
   'preview',
 ];
 const keys = [
@@ -17,7 +17,9 @@ const keys = [
   'report_tarBenTotal',
   'report_tarBenTotal2',
   'report_beneficiaryCounts',
-  'report_policyPriority',
+  'report_policyPriorities',
+  'report_pillar',
+  'report_sdgs',
   'report_budget',
   'report_insContribution',
   'report_keyOutcomes',

@@ -4,7 +4,7 @@ describe('reports', () => {
     // authenticate
     cy.auth();
     // goto page
-    cy.visit('/report/2017161/outcomes');
+    cy.visit('/report/2017161/project-info');
     cy.findByTestId('BreadCrumbs').should('exist');
 
     //

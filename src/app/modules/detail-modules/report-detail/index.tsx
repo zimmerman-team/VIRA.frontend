@@ -63,12 +63,12 @@ export const ReportDetailModuleF = (props: any) => {
   const [selectedSDG, setSelectedSDG] = React.useState('');
 
   const reportDetailAction = useStoreActions(
-    actions => actions.reportDetail.fetch
+    (actions) => actions.reportDetail.fetch
   );
   const reportDetailClearData = useStoreActions(
-    actions => actions.reportDetail.clear
+    (actions) => actions.reportDetail.clear
   );
-  const reportDetailData = useStoreState(state => state.reportDetail.data);
+  const reportDetailData = useStoreState((state) => state.reportDetail.data);
 
   React.useEffect(() => {
     return () => reportDetailClearData();
@@ -94,7 +94,7 @@ export const ReportDetailModuleF = (props: any) => {
 
   function editReport() {
     props.history.push(
-      `/report/${reportDetails.project.id}/outcomes?rid=${reportDetails.id}`
+      `/report/${reportDetails.project.id}/project-info?rid=${reportDetails.id}`
     );
   }
 
