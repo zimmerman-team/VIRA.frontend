@@ -11,6 +11,7 @@ import { Box } from '@material-ui/core';
 import findIndex from 'lodash/findIndex';
 import { ProjectPalette } from 'app/theme';
 import { css } from 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 import { ExpandMore } from '@material-ui/icons';
 import { LabelWeightModel } from 'app/modules/report/model';
 // import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -19,10 +20,11 @@ import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verif
 import { PercentageDropdownItem } from 'app/modules/report/sub-modules/policy-priorities/common/percentage-dropdown-item';
 
 export interface PercentageDropdownProps {
+  text?: string;
+  setValue: Function;
   description?: string;
   value: LabelWeightModel[];
-  setValue: Function;
-  text?: string;
+  listItemTooltipPath?: string;
   values: PolicyPriorityProps[];
 }
 
@@ -120,6 +122,7 @@ const buttoncss = (bgcolor: string) => css`
 `;
 
 export const PercentageDropdown = (props: PercentageDropdownProps) => {
+  const { t } = useTranslation();
   const [openList, setOpenList] = React.useState(false);
   const [selections, setSelections] = React.useState(props.value);
 
@@ -129,7 +132,7 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
     }
   }, [openList]);
 
-  function onWeightChange(label: string, value: number) {
+  function onWeightChange(label: string, value: number, code?: number) {
     let newSelections = [...selections];
     const fIndex = findIndex(selections, { label });
     const availableWeight =
@@ -151,6 +154,7 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
         newSelections.push({
           label,
           weight: value,
+          code,
         });
       }
       setSelections(newSelections);
@@ -197,9 +201,15 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
               return (
                 <PercentageDropdownItem
                   key={option.label}
+                  code={option.code}
                   label={option.label}
                   value={get(fItem, 'weight', 0)}
                   onWeightChange={onWeightChange}
+                  tooltip={
+                    props.listItemTooltipPath
+                      ? t(`${props.listItemTooltipPath}.${option.code}`)
+                      : undefined
+                  }
                 />
               );
             })}

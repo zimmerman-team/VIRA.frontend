@@ -31,6 +31,7 @@ export type LabelValueModel = {
 export type LabelWeightModel = {
   label: string;
   weight: number;
+  code?: number;
 };
 
 export type OutcomesPropsModel = {
@@ -64,6 +65,8 @@ export type PolicyPrioritiesPropsModel = {
   setBeneficiaryCounts: Function;
   policyPriorities: LabelWeightModel[];
   setPolicyPriorities: Function;
+  sdgs: LabelWeightModel[];
+  setSDGs: Function;
   budget: number;
   setBudget: Function;
   remainBudget: number;

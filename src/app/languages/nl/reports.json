@@ -27,10 +27,10 @@
   "form": {
     "title": "Rapporteren",
     "steps": {
-      "outcomes": "Resultaten",
+      "outcomes": "Project info",
       "policy_priorities": "Beleidsprioriteiten",
-      "indicator_verification": "Indicator en verificatie",
-      "challenges_plans": "Uitdagingen en plannen",
+      "indicator_verification": "Doelen en resultaten",
+      "challenges_plans": "Uitdagingen en toekomstplannen",
       "preview": "Voorvertoning"
     },
     "textfield": {
@@ -40,13 +40,14 @@
       "location_expl": "Op welke van de volgende geografische locaties wordt het project uitgevoerd",
       "exact_location": "Selecteer de exacte locatie",
       "insinger_f_policy_priorities": "Themas Insinger Stichting",
+      "sdgs": "SDGs",
       "other_funders": "Andere financiers",
       "budget": "Budget",
       "remaining": "Resterende voor dit project",
       "contribution": "Insinger Bijdrage",
-      "target_beneficiaries": "Doel begunstigden",
-      "total_commited": "Totaal toegewijd aantal",
-      "of_which_ben": "Waarvan de begunstigden waarschijnlijk ongeveer zullen opnemen",
+      "target_beneficiaries": "Geef aan hoeveel mensen u met uw project wilde bereiken",
+      "total_commited": "Geef aan hoeveel mensen in totaal van uw project hebben geprofiteerd",
+      "of_which_ben": "Geef aan hoeveel mensen uw project wil bereiken",
       "sdg_mapping_expl": "Voor elke geselecteerde prioriteit verschijnen de relevante SDG's die kunnen worden geselecteerd op basis van onze mapping"
     },
     "cards": {

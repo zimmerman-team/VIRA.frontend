@@ -69,7 +69,7 @@ function CreateReportFunc(props: any) {
   // Pillar
   const [pillar, setPillar] = usePersistedState(
     'report_pillar',
-    'Pillar 1: Church Restorations'
+    'Pillar 1: Social Good'
   );
 
   // Policy Priorities
@@ -110,6 +110,7 @@ function CreateReportFunc(props: any) {
     'report_policyPriorities',
     []
   );
+  const [sdgs, setSDGs] = usePersistedState('report_sdgs', []);
 
   const [budget, setBudget] = usePersistedState(
     'report_budget',
@@ -540,6 +541,7 @@ function CreateReportFunc(props: any) {
       tarBenTotal,
       beneficiaryCounts,
       policyPriorities,
+      sdgs,
       budget,
       get(projectBudgetData, 'data.remainBudget', 0),
       insContribution,
@@ -688,6 +690,8 @@ function CreateReportFunc(props: any) {
         setTarBenTotal2,
         policyPriorities,
         setPolicyPriorities,
+        sdgs,
+        setSDGs,
         beneficiaryCounts,
         setBeneficiaryCounts,
         budget,
@@ -736,6 +740,7 @@ function CreateReportFunc(props: any) {
           otherComms,
           budget,
           policyPriorities,
+          sdgs,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
           insContribution,
           funders,

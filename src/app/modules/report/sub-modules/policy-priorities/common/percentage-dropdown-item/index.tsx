@@ -1,9 +1,12 @@
 import React from 'react';
 import { css } from 'styled-components/macro';
+import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';
 
 type PercentageDropdownItemProps = {
   label: string;
   value: number;
+  code?: number;
+  tooltip?: string;
   onWeightChange: Function;
 };
 
@@ -20,6 +23,8 @@ const listitemcss = css`
 `;
 
 const labelcss = css`
+  display: flex;
+  align-items: center;
   width: calc(100% - 80px);
 `;
 
@@ -52,7 +57,10 @@ export function PercentageDropdownItem(props: PercentageDropdownItemProps) {
 
   return (
     <li css={listitemcss}>
-      <div css={labelcss}>{props.label}</div>
+      <div css={labelcss}>
+        {props.label}
+        {props.tooltip && <Tooltip tip={props.tooltip} />}
+      </div>
       <div css={inputcss}>
         <input
           min={0}
@@ -61,7 +69,11 @@ export function PercentageDropdownItem(props: PercentageDropdownItemProps) {
           value={props.value}
           onFocus={handleFocus}
           onChange={(e: any) =>
-            props.onWeightChange(props.label, parseInt(e.target.value, 10))
+            props.onWeightChange(
+              props.label,
+              parseInt(e.target.value, 10),
+              props.code
+            )
           }
         />
         <div>%</div>

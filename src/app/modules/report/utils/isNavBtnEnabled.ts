@@ -18,7 +18,8 @@ export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
       return validatePolicyPrioritiesFields(
         data.tarBenTotal,
         data.beneficiaryCounts,
-        data.policyPriority,
+        data.policyPriorities,
+        data.sdgs,
         data.budget,
         data.remainBudget,
         data.insContribution,

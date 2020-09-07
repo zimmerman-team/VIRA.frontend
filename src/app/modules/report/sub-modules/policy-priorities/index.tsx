@@ -7,6 +7,7 @@ import {
   CardContent,
   Box,
 } from '@material-ui/core';
+import { useIsMount } from 'app/utils/useIsMount';
 
 /* multilabg */
 import { useTranslation } from 'react-i18next';
@@ -23,24 +24,29 @@ import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicat
 
 /* mock */
 import {
+  sdgs,
   pillars,
   funderList,
   FunderProps,
-  policyPriorities,
   PolicyPriorityProps,
+  pillar1PolicyPriorities,
+  pillar2PolicyPriorities,
 } from 'app/modules/report/sub-modules/policy-priorities/mock';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
+  const isMount = useIsMount();
   const { t } = useTranslation();
   const [isBlur, setIsBlur] = React.useState(false);
 
   React.useEffect(() => {
-    setIsBlur(
-      props.policyPriorities.length > 0 ||
-        props.budget === 0 ||
-        props.insContribution === 0
-    );
-  }, [props.policyPriorities, props.budget, props.insContribution]);
+    setIsBlur(props.policyPriorities.length === 0 || props.sdgs.length === 0);
+  }, [props.policyPriorities, props.sdgs]);
+
+  React.useEffect(() => {
+    if (!isMount) {
+      props.setPolicyPriorities([]);
+    }
+  }, [props.pillar]);
 
   return (
     <React.Fragment>
@@ -72,12 +78,13 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent>
             <PercentageDropdown
-              values={policyPriorities.map(
-                (policyPriority: PolicyPriorityProps) => ({
-                  ...policyPriority,
-                  label: t(policyPriority.label),
-                })
-              )}
+              values={(props.pillar === 'Pillar 1: Social Good'
+                ? pillar1PolicyPriorities
+                : pillar2PolicyPriorities
+              ).map((policyPriority: PolicyPriorityProps) => ({
+                ...policyPriority,
+                label: t(policyPriority.label),
+              }))}
               value={props.policyPriorities}
               setValue={props.setPolicyPriorities}
             />
@@ -87,8 +94,37 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
+      {/* SDGs */}
+      <Grid data-cy="sdgs" item xs={12} md={12} lg={4}>
+        <Card css={styles.card}>
+          <CardHeader title={t('reports.form.textfield.sdgs')} />
+          <CardContent>
+            <PercentageDropdown
+              values={sdgs.map((sdg: PolicyPriorityProps) => ({
+                ...sdg,
+                label: t(sdg.label),
+              }))}
+              value={props.sdgs}
+              setValue={props.setSDGs}
+              listItemTooltipPath="sdg_descriptions"
+            />
+            <Box height="14px" width="100%" />
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xs={false} sm={false} md={false} lg={4} />
+
+      {/* ---------------------------------------------------------------------*/}
       {/* Budget */}
-      <Grid data-cy="budget-container" item xs={12} md={6} lg={4}>
+      <Grid
+        data-cy="budget-container"
+        item
+        xs={12}
+        md={6}
+        lg={4}
+        css={isBlur ? styles.blurBlock : ``}
+      >
         <Card css={styles.card}>
           <CardHeader title={t('reports.form.textfield.budget')} />
           <CardContent>
@@ -111,7 +147,14 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* Insinger contribution */}
-      <Grid data-cy="insinger-contribution" item xs={12} md={6} lg={4}>
+      <Grid
+        data-cy="insinger-contribution"
+        item
+        xs={12}
+        md={6}
+        lg={4}
+        css={isBlur ? styles.blurBlock : ``}
+      >
         <Card css={styles.card}>
           <CardHeader title={t('reports.form.textfield.contribution')} />
           <CardContent>
@@ -132,7 +175,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
 
       {/* --------------------------------------------------------------------- */}
       {/* Target beneficiaries */}
-
       <Grid
         item
         xs={12}
@@ -159,6 +201,8 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         </Card>
       </Grid>
 
+      {/* --------------------------------------------------------------------- */}
+      {/* Total committed number */}
       <Grid
         item
         xs={12}
@@ -250,9 +294,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
                 height: 24px;
               `}
             />
-            <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {t('reports.form.textfield.sdg_mapping_expl')}
-            </Typography>
           </CardContent>
         </Card>
       </Grid>

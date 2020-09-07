@@ -1,12 +1,15 @@
 {
   "items": {
-    "drug_use": "Drug use",
-    "elderly": "The Elderly",
-    "homelessness": "Homelessness",
-    "poverty": "Poverty reduction with a focus on youth and children",
-    "prisoner": "Prisoner rehabilitation /reintegration",
-    "prostitution": "Prostitution",
-    "refugees": "Refugees"
+    "poverty": "Poverty reduction",
+    "prisoner": "Prisoner rehabilitation",
+    "prostitution": "Reducing forced prostitution",
+    "refugees": "Helping refugees",
+    "children_youth_engagement": "Children & Youth engagement",
+    "vulnerable_groups": "Vulnerable groups in society (i.e. lower-income, elderly, disabled)",
+    "drugs": "Reducing drug abuse & helping drug addicts",
+    "sustainability": "Sustainability",
+    "emancipation": "Emancipation of women and girls",
+    "heritage": "Cultural Heritage"
   },
   "barchart": {
     "target": "Target",
