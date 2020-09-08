@@ -266,6 +266,7 @@ i18n
           Title: 'Titel',
           Country: 'Land',
           Submit: 'Verstuur',
+          'People reached out of targeted': 'Mensen bereikten een doelwit',
         },
       },
       en: {
@@ -485,6 +486,7 @@ i18n
           Title: 'Title',
           Country: 'Country',
           Submit: 'Submit',
+          'People reached out of targeted': 'People reached out of targeted',
         },
       },
     },

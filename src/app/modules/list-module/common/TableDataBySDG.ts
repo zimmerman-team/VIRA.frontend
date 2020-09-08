@@ -1,58 +1,22 @@
-//TODO: Find a way to keep the insinger-backend const en front-end in sync.
-export const policyPriorities = [
-  {
-    key: 'poverty',
-    name: 'Poverty reduction with a focus on youth and children',
-    sdgs: [1, 3, 4, 8, 10],
-  },
-  {
-    key: 'Refugees',
-    name: 'Refugees',
-    sdgs: [1, 2, 3, 4, 5, 8, 10],
-  },
-  {
-    key: 'The Elderly',
-    name: 'Elderly',
-    sdgs: [1, 3, 8, 10],
-  },
-  {
-    key: 'prisoner',
-    name: 'Prisoner rehabilitation / reintegration',
-    sdgs: [1, 3, 4, 5, 8, 10],
-  },
-  {
-    key: 'drug_use',
-    name: 'Drug use',
-    sdgs: [1, 3, 8, 10],
-  },
-  {
-    key: 'Prostitution',
-    name: 'Prostitution',
-    sdgs: [1, 3, 5, 8, 10],
-  },
-  {
-    key: 'Homelessness',
-    name: 'Homelessness',
-    sdgs: [1, 2, 3, 4, 5, 8, 10, 11],
-  },
-];
+/* eslint-disable no-plusplus */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-restricted-globals */
+import get from 'lodash/get';
 
 // In order for us to reduce the number of any types used, we should make a Model folder containing the business objects (report, user etc)
 export function getReportsBySDG(selectedSDG: string, allReportsData: any) {
   let data = allReportsData;
-  const regExp: RegExpMatchArray | null = selectedSDG.match(/\d/g);
+  const sdgCode = parseInt(get(selectedSDG.split('.'), '[1]', ''), 10);
 
-  if (regExp) {
-    const sdgNumber = parseInt(regExp.join(''));
+  if (sdgCode && !isNaN(sdgCode)) {
     const reportsBySDG: any = [];
 
-    //Check if a reports policy priority matches the given sdg
-    allReportsData.data.map((report: any) => {
-      let found = policyPriorities.find(policyPriority => {
-        return policyPriority.name == report.policy_priority.name;
+    allReportsData.data.forEach((report: any) => {
+      let pass = false;
+      report.sdgs.forEach((sdg: any) => {
+        pass = pass || sdg.sdg.code === sdgCode;
       });
-
-      if (found != undefined && found.sdgs.includes(sdgNumber)) {
+      if (pass) {
         reportsBySDG.push(report);
       }
     });
@@ -73,11 +37,10 @@ export function getProjectsBySDG(allProjectsData: any, reportsData: any) {
     for (let j = 0; j < allProjectsData.data.length; j++) {
       if (
         allProjectsData.data[j].project_number ===
-        reportsData.data[i].project.project_number
+          reportsData.data[i].project.project_number &&
+        !projectsBySDG.includes(allProjectsData.data[j])
       ) {
-        if (!projectsBySDG.includes(allProjectsData.data[j])) {
-          projectsBySDG.push(allProjectsData.data[j]);
-        }
+        projectsBySDG.push(allProjectsData.data[j]);
       }
     }
   }
@@ -94,11 +57,10 @@ export function getGranteesBySDG(allGranteesData: any, projectsData: any) {
   for (let i = 0; i < projectsData.data.length; i++) {
     for (let j = 0; j < allGranteesData.data.length; j++) {
       if (
-        allGranteesData.data[j]._id === projectsData.data[i].organisation._id
+        allGranteesData.data[j]._id === projectsData.data[i].organisation._id &&
+        !granteesBySDG.includes(allGranteesData.data[j])
       ) {
-        if (!granteesBySDG.includes(allGranteesData.data[j])) {
-          granteesBySDG.push(allGranteesData.data[j]);
-        }
+        granteesBySDG.push(allGranteesData.data[j]);
       }
     }
   }

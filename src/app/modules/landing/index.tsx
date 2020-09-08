@@ -25,7 +25,6 @@ import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import MomentAdapter from '@date-io/moment';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
 import { Viztabs } from '../common/components/Viztabs';
-import { css } from 'styled-components/macro';
 
 /**
  * Landing layout.
@@ -50,25 +49,29 @@ function LandingLayout(props: PropsModel) {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
-  const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
-  const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
-  const getGeoMapData = useStoreActions(actions => actions.getGeoMapData.fetch);
-  const ppVizData = useStoreState(state => state.getPPVizData.data);
-  const SDGVizData = useStoreState(state => state.getSDGVizData.data);
-  const allProjectsData = useStoreState(state => state.allProjects.data);
-  const allReportsData = useStoreState(state => state.allReports.data);
-  const allGranteesData = useStoreState(state => state.allOrganisations.data);
-  const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const getPPVizData = useStoreActions((actions) => actions.getPPVizData.fetch);
+  const getSDGVizData = useStoreActions(
+    (actions) => actions.getSDGVizData.fetch
+  );
+  const getGeoMapData = useStoreActions(
+    (actions) => actions.getGeoMapData.fetch
+  );
+  const ppVizData = useStoreState((state) => state.getPPVizData.data);
+  const SDGVizData = useStoreState((state) => state.getSDGVizData.data);
+  const allProjectsData = useStoreState((state) => state.allProjects.data);
+  const allReportsData = useStoreState((state) => state.allReports.data);
+  const allGranteesData = useStoreState((state) => state.allOrganisations.data);
+  const geoMapData = useStoreState((state) => state.getGeoMapData.data);
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
     setSelectedSDG('');
   };
 
-  const signedInUserRole = useStoreState(state =>
+  const signedInUserRole = useStoreState((state) =>
     get(state.userDetails.data, 'role', 'Grantee user')
   );
-  const signedInUserEmail = useStoreState(state =>
+  const signedInUserEmail = useStoreState((state) =>
     get(state.userDetails.data, 'email', '')
   );
   const moment = new MomentAdapter();
@@ -162,8 +165,8 @@ function LandingLayout(props: PropsModel) {
       <DataDaterangePicker
         startDate={selectedStartDate}
         endDate={selectedEndDate}
-        onStartDateSelect={date => setSelectedStartDate(date.startOf('day'))}
-        onEndDateSelect={date => setSelectedEndDate(date.endOf('day'))}
+        onStartDateSelect={(date) => setSelectedStartDate(date.startOf('day'))}
+        onEndDateSelect={(date) => setSelectedEndDate(date.endOf('day'))}
         tabValue={value}
       />
 

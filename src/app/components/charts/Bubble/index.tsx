@@ -10,11 +10,11 @@ import styled from 'styled-components/macro';
 import { ResponsiveBubbleHtml } from '@nivo/circle-packing';
 import { Grid, Card as MuiCard, useMediaQuery } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
+import { hexToRgb } from 'app/utils/hexToRgb';
+import { useTranslation } from 'react-i18next';
 import { LegendList } from './common/LegendList';
 import { BubbleInfoBlock } from './common/BubbleInfoBlock';
-import { otherSdgs } from './mock';
 import { ChartTooltip } from '../BarCharts/common/ChartTooltip';
-import { hexToRgb } from 'app/utils/hexToRgb';
 
 type Props = {
   data: object;
@@ -49,6 +49,7 @@ const Content = styled((props) => <CardContent {...props} />)`
 `;
 
 export function BubbleChart(props: Props) {
+  const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [minValue, setMinValue] = React.useState(0);
   const [selectedBubbleObj, setSelectedBubbleObj] = React.useState(null);
@@ -78,9 +79,9 @@ export function BubbleChart(props: Props) {
           {!isMobileWidth && (
             <Grid item xs={false} sm={false} lg={3}>
               <LegendList
+                items={props.data.children}
                 activeBubble={props.selectedBubble}
                 setActiveBubble={props.setSelectedBubble}
-                items={[...props.data.children, ...otherSdgs]}
               />
             </Grid>
           )}
@@ -98,13 +99,10 @@ export function BubbleChart(props: Props) {
                 identity="name"
                 root={{
                   ...props.data,
-                  children: [
-                    ...props.data.children.map((child) => ({
-                      ...child,
-                      loc: child.loc > 0 ? child.loc : minValue,
-                    })),
-                    ...otherSdgs.map((os) => ({ ...os, loc: minValue })),
-                  ],
+                  children: props.data.children.map((child) => ({
+                    ...child,
+                    loc: child.loc > 0 ? child.loc : minValue,
+                  })),
                 }}
                 isZoomable={false}
                 enableLabel={false}
@@ -165,9 +163,9 @@ export function BubbleChart(props: Props) {
                       title={tProps.id}
                       items={[
                         {
-                          label: `Target (${tProps.data.targetPercentage.toFixed(
-                            2
-                          )}%)`,
+                          label: `${t(
+                            'People reached out of targeted'
+                          )} (${tProps.data.targetPercentage.toFixed(2)}%)`,
                           value: tProps.data.targetValue,
                           percentage: tProps.data.targetPercentage,
                         },
@@ -184,7 +182,7 @@ export function BubbleChart(props: Props) {
                               .replace('.00', ''),
                         },
                         {
-                          label: 'charts.barchart.commitment',
+                          label: t('charts.barchart.commitment'),
                           value: tProps.data.insContribution
                             ? tProps.data.insContribution.toLocaleString(
                                 undefined,

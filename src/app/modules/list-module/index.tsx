@@ -136,7 +136,7 @@ export const ListModule = (props: ListModuleParams) => {
           localStorage.setItem('projectsE2E', JSON.stringify(projectsE2E));
       });
 
-      console.log(projectsE2E);
+      // console.log(projectsE2E);
     });
     allOrganisationsAction({
       socketName: 'allOrg',
