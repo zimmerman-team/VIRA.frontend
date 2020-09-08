@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
@@ -35,10 +36,19 @@ export const ReportDetailModuleF = (props: any) => {
     key_outcomes: '',
     monitor_report_outcomes: '',
     media: [],
-    policy_priority: {},
+    policy_priorities: [],
+    pillar: '',
+    sdgs: [],
     key_implementation_challenges: '',
     other_project_outcomes: '',
-    plans: '',
+    inputs_invested: '',
+    activities_undertaken: '',
+    projectgoals_socialbenefits: '',
+    important_factors: '',
+    orgs_partners: '',
+    how_address_challenges: '',
+    how_important_insinger_support: '',
+    apply_for_more_funding: '',
     other_comments: '',
     reportID: '',
     barChartData: [],

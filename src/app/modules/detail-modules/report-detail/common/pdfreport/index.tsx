@@ -6,7 +6,6 @@ import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 // absolute
-import { GeoMap } from 'app/components/charts/GeoMap';
 import { BubbleChart } from 'app/components/charts/Bubble';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
@@ -17,6 +16,9 @@ import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/Ho
 // direct
 import 'styled-components/macro';
 import { ProjectPalette } from 'app/theme';
+
+const Spacer1 = () => <div css="width: 100%;height: 200px;" />;
+const Spacer2 = () => <div css="width: 100%;height: 100px;" />;
 
 export function PDFreport(props: any) {
   const { t } = useTranslation();
@@ -62,9 +64,7 @@ export function PDFreport(props: any) {
             ]}
           />
         </Grid>
-
-        <div css="width: 100%;height: 200px;" />
-
+        <Spacer1 />
         <h4
           css={`
             font-size: 20px;
@@ -105,9 +105,7 @@ export function PDFreport(props: any) {
           chartLegends={props.barChartLegends}
           onChartLegendClick={props.onBarChartLegendClick}
         />
-
-        <div css="width: 100%;height: 200px;" />
-
+        <Spacer1 />
         <h4
           css={`
             font-size: 20px;
@@ -140,9 +138,7 @@ export function PDFreport(props: any) {
             description={props.cardData[0].description}
           />
         </Grid>
-
-        <div css="width: 100%;height: 200px;" />
-
+        <Spacer1 />
         <Grid
           key={props.cardData[1].title}
           data-cy={props.cardData[1].testID}
@@ -155,9 +151,7 @@ export function PDFreport(props: any) {
             description={props.cardData[1].description}
           />
         </Grid>
-
-        <div css="width: 100%;height: 200px;" />
-
+        <Spacer1 />
         {props.report.media.length > 0 && (
           <Grid
             key={props.cardData[2].title}
@@ -172,9 +166,7 @@ export function PDFreport(props: any) {
             />
           </Grid>
         )}
-
-        <div css="width: 100%;height: 100px;" />
-
+        <Spacer2 />
         <Grid
           key={props.cardData[3].title}
           data-cy={props.cardData[3].testID}
@@ -201,7 +193,7 @@ export function PDFreport(props: any) {
             description={props.cardData[4].description}
           />
         </Grid>
-        <div css="width: 100%;height: 100px;" />
+        <Spacer2 />
         <Grid
           key={props.cardData[5].title}
           data-cy={props.cardData[5].testID}
@@ -214,7 +206,7 @@ export function PDFreport(props: any) {
             description={props.cardData[5].description}
           />
         </Grid>
-        <div css="width: 100%;height: 100px;" />
+        <Spacer2 />
         <Grid
           key={props.cardData[6].title}
           data-cy={props.cardData[6].testID}
@@ -225,6 +217,99 @@ export function PDFreport(props: any) {
           <OutcomeCard
             title={t(props.cardData[6].title)}
             description={props.cardData[6].description}
+          />
+        </Grid>
+        <Spacer2 />
+        <Grid
+          key={props.cardData[7].title}
+          data-cy={props.cardData[7].testID}
+          item
+          xs={12}
+          lg={12}
+        >
+          <OutcomeCard
+            title={t(props.cardData[7].title)}
+            description={props.cardData[7].description}
+          />
+        </Grid>
+      </div>
+      <div id="page4" css="padding: 64px;">
+        <Grid
+          key={props.cardData[8].title}
+          data-cy={props.cardData[8].testID}
+          item
+          xs={12}
+          lg={12}
+        >
+          <OutcomeCard
+            title={t(props.cardData[8].title)}
+            description={props.cardData[8].description}
+          />
+        </Grid>
+        <Spacer2 />
+        <Grid
+          key={props.cardData[9].title}
+          data-cy={props.cardData[9].testID}
+          item
+          xs={12}
+          lg={12}
+        >
+          <OutcomeCard
+            title={t(props.cardData[9].title)}
+            description={props.cardData[9].description}
+          />
+        </Grid>
+        <Spacer2 />
+        <Grid
+          key={props.cardData[10].title}
+          data-cy={props.cardData[10].testID}
+          item
+          xs={12}
+          lg={12}
+        >
+          <OutcomeCard
+            title={t(props.cardData[10].title)}
+            description={props.cardData[10].description}
+          />
+        </Grid>
+      </div>
+      <div id="page5" css="padding: 64px;">
+        <Grid
+          key={props.cardData[11].title}
+          data-cy={props.cardData[11].testID}
+          item
+          xs={12}
+          lg={12}
+        >
+          <OutcomeCard
+            title={t(props.cardData[11].title)}
+            description={props.cardData[11].description}
+          />
+        </Grid>
+        <Spacer2 />
+        <Grid
+          key={props.cardData[12].title}
+          data-cy={props.cardData[12].testID}
+          item
+          xs={12}
+          lg={12}
+        >
+          <OutcomeCard
+            title={t(props.cardData[12].title)}
+            description={props.cardData[12].description}
+          />
+        </Grid>
+        <Spacer2 />
+        <Grid
+          key={props.cardData[13].title}
+          data-cy={props.cardData[13].testID}
+          item
+          xs={12}
+          lg={12}
+        >
+          <OutcomeCard
+            title={t(props.cardData[13].title)}
+            description={props.cardData[13].description}
           />
         </Grid>
       </div>

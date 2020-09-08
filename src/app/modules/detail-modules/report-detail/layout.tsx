@@ -16,15 +16,15 @@ import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 
 // direct
 import 'styled-components/macro';
+import { PageLoader } from 'app/modules/common/page-loader';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { Viztabs } from 'app/modules/common/components/Viztabs';
 import { PDFreport } from './common/pdfreport';
-import { PageLoader } from 'app/modules/common/page-loader';
 
 export const ReportDetailLayout = (props: any) => {
   const { t } = useTranslation();
   const showEditBtn = useStoreState(
-    state =>
+    (state) =>
       get(state.userDetails.data, 'role', '') === 'Super admin' ||
       get(state.userDetails.data, 'role', '') === 'Administrator' ||
       get(state.userDetails.data, 'role', '') === 'Manager' ||
@@ -53,25 +53,59 @@ export const ReportDetailLayout = (props: any) => {
       title: 'reports.detail.cards.media',
       media: props.report.media,
     },
-
+    {
+      testID: 'inputs-invested-card',
+      title: 'reports.form.cards.inputs_invested',
+      description: props.report.inputs_invested,
+    },
+    {
+      testID: 'activities-undertaken-card',
+      title: 'reports.form.cards.activities_undertaken',
+      description: props.report.activities_undertaken,
+    },
+    {
+      testID: 'projectgoals-socialbenefits-card',
+      title: 'reports.form.cards.projectgoals_socialbenefits',
+      description: props.report.projectgoals_socialbenefits,
+    },
+    {
+      testID: 'important-factors-card',
+      title: 'reports.form.cards.important_factors',
+      description: props.report.important_factors,
+    },
+    {
+      testID: 'orgs-partners-card',
+      title: 'reports.form.cards.orgs_partners',
+      description: props.report.orgs_partners,
+    },
     {
       testID: 'challenges-card',
       title: 'reports.detail.cards.key_implementation_challenges',
       description: props.report.key_implementation_challenges,
     },
     {
+      testID: 'address-challenges-card',
+      title: 'reports.form.cards.how_address_challenges',
+      description: props.report.how_address_challenges,
+    },
+    {
       testID: 'observations-card',
-      title: 'reports.detail.cards.other_project',
+      title: 'reports.form.cards.other_project',
       description: props.report.other_project_outcomes,
     },
     {
-      testID: 'future-plans-card',
-      title: 'reports.detail.cards.future_plans',
-      description: props.report.plans,
+      testID: 'how-important-insinger-support-card',
+      title: 'reports.form.cards.how_important_insinger_support',
+      description: props.report.how_important_insinger_support,
+    },
+    {
+      testID: 'apply-for-more-funding-card',
+      title: 'reports.form.cards.apply_for_more_funding',
+      description: props.report.apply_for_more_funding,
     },
     {
       testID: 'other-comments-card',
-      title: 'reports.detail.cards.other_comments',
+      title: 'reports.form.cards.other_comments',
       description: props.report.other_comments,
     },
   ];
@@ -84,6 +118,8 @@ export const ReportDetailLayout = (props: any) => {
       document.getElementById('page1'),
       document.getElementById('page2'),
       document.getElementById('page3'),
+      document.getElementById('page4'),
+      document.getElementById('page5'),
     ];
 
     node.style.visibility = 'hidden';
@@ -91,44 +127,70 @@ export const ReportDetailLayout = (props: any) => {
     pdfloader.style.display = 'block';
 
     const pdf = new JSPDF();
-    html2canvas(pages[0], { allowTaint: true, useCORS: true }).then(canvas => {
-      let imgData = canvas.toDataURL('image/png');
-      let imgProps = pdf.getImageProperties(imgData);
-      let pdfWidth = pdf.internal.pageSize.getWidth();
-      let pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      html2canvas(pages[1], {
-        allowTaint: true,
-        useCORS: true,
-        removeContainer: false,
-      }).then(canvas1 => {
-        pdf.addPage();
-        imgData = canvas1.toDataURL('image/png');
-        imgProps = pdf.getImageProperties(imgData);
-        pdfWidth = pdf.internal.pageSize.getWidth();
-        pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    html2canvas(pages[0], { allowTaint: true, useCORS: true }).then(
+      (canvas) => {
+        let imgData = canvas.toDataURL('image/png');
+        let imgProps = pdf.getImageProperties(imgData);
+        let pdfWidth = pdf.internal.pageSize.getWidth();
+        let pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        html2canvas(pages[2], { allowTaint: true, useCORS: true }).then(
-          canvas2 => {
+        html2canvas(pages[1], {
+          allowTaint: true,
+          useCORS: true,
+          removeContainer: false,
+        }).then((canvas1) => {
+          pdf.addPage();
+          imgData = canvas1.toDataURL('image/png');
+          imgProps = pdf.getImageProperties(imgData);
+          pdfWidth = pdf.internal.pageSize.getWidth();
+          pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          html2canvas(pages[2], {
+            allowTaint: true,
+            useCORS: true,
+            removeContainer: false,
+          }).then((canvas2) => {
             pdf.addPage();
             imgData = canvas2.toDataURL('image/png');
             imgProps = pdf.getImageProperties(imgData);
             pdfWidth = pdf.internal.pageSize.getWidth();
             pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            html2canvas(pages[3], {
+              allowTaint: true,
+              useCORS: true,
+              removeContainer: false,
+            }).then((canvas3) => {
+              pdf.addPage();
+              imgData = canvas3.toDataURL('image/png');
+              imgProps = pdf.getImageProperties(imgData);
+              pdfWidth = pdf.internal.pageSize.getWidth();
+              pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+              pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+              html2canvas(pages[4], { allowTaint: true, useCORS: true }).then(
+                (canvas4) => {
+                  pdf.addPage();
+                  imgData = canvas4.toDataURL('image/png');
+                  imgProps = pdf.getImageProperties(imgData);
+                  pdfWidth = pdf.internal.pageSize.getWidth();
+                  pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-            pdf.save(`${props.report.title}.pdf`);
+                  pdf.save(`${props.report.title}.pdf`);
 
-            node.style.visibility = 'visible';
-            pdfnode.style.visibility = 'hidden';
-            pdfloader.style.display = 'none';
-          }
-        );
-      });
-    });
+                  node.style.visibility = 'visible';
+                  pdfnode.style.visibility = 'hidden';
+                  pdfloader.style.display = 'none';
+                }
+              );
+            });
+          });
+        });
+      }
+    );
   }
 
-  console.log('render report detail');
+  // console.log('render report detail');
 
   return (
     <div
@@ -251,7 +313,7 @@ export const ReportDetailLayout = (props: any) => {
         {/* ---------------------------------------------------------------------*/}
         {/* cards */}
 
-        {cardData.map(card =>
+        {cardData.map((card) =>
           card.media ? (
             card.media.length > 0 && (
               <Grid key={card.title} data-cy={card.testID} item xs={12} lg={12}>
