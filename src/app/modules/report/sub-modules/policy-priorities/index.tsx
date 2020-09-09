@@ -78,7 +78,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent>
             <PercentageDropdown
-              values={(props.pillar === 'Pillar 1: Social Good'
+              values={(props.pillar === 'Pillar 1: Social Good Projects'
                 ? pillar1PolicyPriorities
                 : pillar2PolicyPriorities
               ).map((policyPriority: PolicyPriorityProps) => ({

@@ -69,7 +69,7 @@ function CreateReportFunc(props: any) {
   // Pillar
   const [pillar, setPillar] = usePersistedState(
     'report_pillar',
-    'Pillar 1: Social Good'
+    'Pillar 1: Social Good Projects'
   );
 
   // Policy Priorities
