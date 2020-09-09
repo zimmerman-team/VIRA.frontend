@@ -1,4 +1,6 @@
 import React from 'react';
+import find from 'lodash/find';
+import filter from 'lodash/filter';
 import {
   Grid,
   Typography,
@@ -13,7 +15,10 @@ import { useIsMount } from 'app/utils/useIsMount';
 import { useTranslation } from 'react-i18next';
 
 /* data */
-import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
+import {
+  BeneficiaryCountsModel,
+  PolicyPrioritiesPropsModel,
+} from 'app/modules/report/model';
 
 /* ui */
 import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
@@ -32,11 +37,15 @@ import {
   pillar1PolicyPriorities,
   pillar2PolicyPriorities,
 } from 'app/modules/report/sub-modules/policy-priorities/mock';
+import { InfoCaption } from '../indicator-verification/common/InfoCaption';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   const isMount = useIsMount();
   const { t } = useTranslation();
   const [isBlur, setIsBlur] = React.useState(false);
+  const [showTargetGroupMessage, setShowTargetGroupMessage] = React.useState(
+    ''
+  );
 
   React.useEffect(() => {
     setIsBlur(props.policyPriorities.length === 0 || props.sdgs.length === 0);
@@ -47,6 +56,22 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
       props.setPolicyPriorities([]);
     }
   }, [props.pillar]);
+
+  React.useEffect(() => {
+    const fTargetGroups = filter(
+      props.beneficiaryCounts,
+      (bc: BeneficiaryCountsModel) => bc.value > 0
+    );
+    let message = '';
+    if (find(fTargetGroups, { name: 'Women & Girls' })) {
+      message =
+        'NOTE: Please select "Gender equality" and "Reduced inequialities" in the SDGs dropdown selection above';
+    } else if (fTargetGroups.length > 0) {
+      message =
+        'NOTE: Please select "Reduced inequialities" in the SDGs dropdown selection above';
+    }
+    setShowTargetGroupMessage(message);
+  }, [props.beneficiaryCounts]);
 
   return (
     <React.Fragment>
@@ -127,7 +152,14 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
       >
         <Card css={styles.card}>
           <CardHeader title={t('reports.form.textfield.budget')} />
-          <CardContent>
+          <CardContent
+            css={`
+              padding-bottom: 6px !important;
+              > div:first-of-type {
+                height: inherit;
+              }
+            `}
+          >
             <IntentTexFieldSingleLine
               testattr="budget-field"
               fullWidth
@@ -137,7 +169,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               setValue={props.setBudget}
               description=""
             />
-            <Box height="14px" width="100%" />
+            <Box height="5px" width="100%" />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
               {t('reports.form.textfield.remaining')}: {props.remainBudget}€
             </Typography>
@@ -197,6 +229,8 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               description=""
               setValue={props.setTarBenTotal}
             />
+
+            <Box height="14px" width="100%" />
           </CardContent>
         </Card>
       </Grid>
@@ -237,7 +271,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         lg={4}
         css={isBlur ? styles.blurBlock : ``}
       >
-        <Card css={styles.cardSecondary}>
+        <Card css={styles.card}>
           <CardHeader title={t('reports.form.textfield.other_funders')} />
           <CardContent>
             <Autocomplete
@@ -294,6 +328,16 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
                 height: 24px;
               `}
             />
+
+            {showTargetGroupMessage !== '' && (
+              <Typography
+                color="secondary"
+                variant="subtitle1"
+                css={styles.infoText}
+              >
+                {showTargetGroupMessage}
+              </Typography>
+            )}
           </CardContent>
         </Card>
       </Grid>

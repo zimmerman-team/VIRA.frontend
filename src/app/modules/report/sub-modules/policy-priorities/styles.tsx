@@ -1,8 +1,19 @@
 import { css } from 'styled-components/macro';
+
 export const styles: any = {
   card: css`
     height: 100%;
+    display: flex;
+    min-height: 154px;
     overflow: visible;
+    flex-direction: column;
+    justify-content: space-between;
+
+    > div:first-of-type {
+      > div {
+        height: 61px;
+      }
+    }
   `,
   cardSecondary: css`
     //height: 100%;
