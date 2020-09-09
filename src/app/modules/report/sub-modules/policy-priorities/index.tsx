@@ -1,6 +1,6 @@
 import React from 'react';
 import find from 'lodash/find';
-import filter from 'lodash/filter';
+import sumBy from 'lodash/sumBy';
 import {
   Grid,
   Typography,
@@ -48,7 +48,9 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   );
 
   React.useEffect(() => {
-    setIsBlur(props.policyPriorities.length === 0 || props.sdgs.length === 0);
+    const ppTotal = sumBy(props.policyPriorities, 'weight');
+    const sdgsTotal = sumBy(props.sdgs, 'weight');
+    setIsBlur(ppTotal < 100 || sdgsTotal < 100);
   }, [props.policyPriorities, props.sdgs]);
 
   React.useEffect(() => {
@@ -58,19 +60,18 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   }, [props.pillar]);
 
   React.useEffect(() => {
-    const fTargetGroups = filter(
-      props.beneficiaryCounts,
-      (bc: BeneficiaryCountsModel) => bc.value > 0
-    );
-    let message = '';
-    if (find(fTargetGroups, { name: 'Women & Girls' })) {
-      message =
-        'NOTE: Please select "Gender equality" and "Reduced inequialities" in the SDGs dropdown selection above';
-    } else if (fTargetGroups.length > 0) {
-      message =
-        'NOTE: Please select "Reduced inequialities" in the SDGs dropdown selection above';
+    if (
+      find(
+        props.beneficiaryCounts,
+        (bc: BeneficiaryCountsModel) => bc.value > 0
+      )
+    ) {
+      setShowTargetGroupMessage(
+        t('reports.form.textfield.target_group_sdg_expl')
+      );
+    } else {
+      setShowTargetGroupMessage('');
     }
-    setShowTargetGroupMessage(message);
   }, [props.beneficiaryCounts]);
 
   return (
@@ -113,7 +114,11 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               value={props.policyPriorities}
               setValue={props.setPolicyPriorities}
             />
-            <Box height="14px" width="100%" />
+            {/* <Box height="14px" width="100%" /> */}
+            <Box height="5px" width="100%" />
+            <Typography variant="body2" color="secondary" css={styles.infoText}>
+              {t('reports.form.textfield.percentage_expl')}
+            </Typography>
           </CardContent>
         </Card>
       </Grid>
@@ -133,7 +138,11 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               setValue={props.setSDGs}
               listItemTooltipPath="sdg_descriptions"
             />
-            <Box height="14px" width="100%" />
+            {/* <Box height="14px" width="100%" /> */}
+            <Box height="5px" width="100%" />
+            <Typography variant="body2" color="secondary" css={styles.infoText}>
+              {t('reports.form.textfield.percentage_expl')}
+            </Typography>
           </CardContent>
         </Card>
       </Grid>

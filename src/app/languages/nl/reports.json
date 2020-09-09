@@ -48,7 +48,9 @@
       "target_beneficiaries": "Geef aan hoeveel mensen u met uw project wilde bereiken",
       "total_commited": "Geef aan hoeveel mensen in totaal van uw project hebben geprofiteerd",
       "of_which_ben": "Geef aan hoeveel mensen uw project wil bereiken",
-      "sdg_mapping_expl": "Voor elke geselecteerde prioriteit verschijnen de relevante SDG's die kunnen worden geselecteerd op basis van onze mapping"
+      "sdg_mapping_expl": "Voor elke geselecteerde prioriteit verschijnen de relevante SDG's die kunnen worden geselecteerd op basis van onze mapping",
+      "percentage_expl": "De som van geselecteerde velden moet gelijk zijn aan 100%",
+      "target_group_sdg_expl": "OPMERKING: selecteer “Minder ongelijkheden“ in de vervolgkeuzelijst SDG's hierboven. Als uw project gericht was op vrouwen en meisjes, selecteer dan ook “Gendergelijkheid“ als SDG"
     },
     "cards": {
       "key_outcomes": "Beschrijf de belangrijkste resultaten die het project wil bereiken",

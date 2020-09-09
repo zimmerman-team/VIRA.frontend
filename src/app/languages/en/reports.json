@@ -48,7 +48,9 @@
       "target_beneficiaries": "Please indicate how many people your project aimed to reach",
       "total_commited": "Please indicate how many people benefited from your project in total",
       "of_which_ben": "Please indicate how many people your project aims to reach",
-      "sdg_mapping_expl": "For each priority selected, the relevant SDGs appear and can beselected based on our mapping"
+      "sdg_mapping_expl": "For each priority selected, the relevant SDGs appear and can beselected based on our mapping",
+      "percentage_expl": "The sum of selected fields must be equal to 100%",
+      "target_group_sdg_expl": "NOTE: Please select “Reduced inequalities” in the SDGs dropdown selection above. If your project targeted women & girls, please also select “Gender equality” as SDG"
     },
     "cards": {
       "key_outcomes": "Please describe the key outcomes the project aims to achieve",

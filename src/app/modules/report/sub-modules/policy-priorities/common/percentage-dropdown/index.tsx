@@ -7,6 +7,7 @@ import get from 'lodash/get';
 import find from 'lodash/find';
 import sumBy from 'lodash/sumBy';
 import filter from 'lodash/filter';
+import cloneDeep from 'lodash/cloneDeep';
 import { Box } from '@material-ui/core';
 import findIndex from 'lodash/findIndex';
 import { ProjectPalette } from 'app/theme';
@@ -124,11 +125,11 @@ const buttoncss = (bgcolor: string) => css`
 export const PercentageDropdown = (props: PercentageDropdownProps) => {
   const { t } = useTranslation();
   const [openList, setOpenList] = React.useState(false);
-  const [selections, setSelections] = React.useState(props.value);
+  const [selections, setSelections] = React.useState(cloneDeep(props.value));
 
   React.useEffect(() => {
     if (openList) {
-      setSelections(props.value);
+      setSelections(cloneDeep(props.value));
     }
   }, [openList]);
 
