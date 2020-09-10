@@ -18,7 +18,7 @@ module.exports = {
     'airbnb-typescript-prettier',
     'plugin:sonarjs/recommended',
   ],
-  plugins: ['sonarjs'],
+  plugins: ['sonarjs', 'jsx-a11y', 'prettier'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/no-array-index-key': 0,
