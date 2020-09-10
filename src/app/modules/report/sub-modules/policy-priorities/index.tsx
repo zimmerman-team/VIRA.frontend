@@ -1,4 +1,6 @@
 import React from 'react';
+import find from 'lodash/find';
+import sumBy from 'lodash/sumBy';
 import {
   Grid,
   Typography,
@@ -7,40 +9,92 @@ import {
   CardContent,
   Box,
 } from '@material-ui/core';
+import { useIsMount } from 'app/utils/useIsMount';
 
 /* multilabg */
 import { useTranslation } from 'react-i18next';
 
 /* data */
-import { PolicyPrioritiesPropsModel } from 'app/modules/report/model';
+import {
+  BeneficiaryCountsModel,
+  PolicyPrioritiesPropsModel,
+} from 'app/modules/report/model';
 
 /* ui */
 import { styles } from 'app/modules/report/sub-modules/policy-priorities/styles';
+import { RadioButtonsGroup } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
 import { Autocomplete } from 'app/modules/report/sub-modules/outcomes/common/Autocomplete';
+import { PercentageDropdown } from 'app/modules/report/sub-modules/policy-priorities/common/percentage-dropdown';
 import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 
 /* mock */
 import {
+  sdgs,
+  pillars,
   funderList,
   FunderProps,
-  policyPriorities,
   PolicyPriorityProps,
+  pillar1PolicyPriorities,
+  pillar2PolicyPriorities,
 } from 'app/modules/report/sub-modules/policy-priorities/mock';
+import { InfoCaption } from '../indicator-verification/common/InfoCaption';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
+  const isMount = useIsMount();
   const { t } = useTranslation();
   const [isBlur, setIsBlur] = React.useState(false);
+  const [showTargetGroupMessage, setShowTargetGroupMessage] = React.useState(
+    ''
+  );
 
   React.useEffect(() => {
-    setIsBlur(
-      props.policyPriority.value === '' ||
-        props.budget === 0 ||
-        props.insContribution === 0
-    );
-  }, [props.policyPriority, props.budget, props.insContribution]);
+    const ppTotal = sumBy(props.policyPriorities, 'weight');
+    const sdgsTotal = sumBy(props.sdgs, 'weight');
+    setIsBlur(ppTotal < 100 || sdgsTotal < 100);
+  }, [props.policyPriorities, props.sdgs]);
+
+  React.useEffect(() => {
+    if (!isMount) {
+      props.setPolicyPriorities([]);
+    }
+  }, [props.pillar]);
+
+  React.useEffect(() => {
+    if (
+      find(
+        props.beneficiaryCounts,
+        (bc: BeneficiaryCountsModel) => bc.value > 0
+      )
+    ) {
+      setShowTargetGroupMessage(
+        t('reports.form.textfield.target_group_sdg_expl')
+      );
+    } else {
+      setShowTargetGroupMessage('');
+    }
+  }, [props.beneficiaryCounts]);
 
   return (
     <React.Fragment>
+      {/* ---------------------------------------------------------------------*/}
+      {/* Pillar */}
+      <Grid
+        item
+        xs={12}
+        md={12}
+        lg={12}
+        data-cy="pillar-radio-buttons"
+        css="padding-left: 32px !important;"
+      >
+        <RadioButtonsGroup
+          items={pillars}
+          value={props.pillar}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            props.setPillar(event.target.value)
+          }
+        />
+      </Grid>
+
       {/* ---------------------------------------------------------------------*/}
       {/* Policy Priorities */}
       <Grid data-cy="policy-priority" item xs={12} md={12} lg={4}>
@@ -49,30 +103,72 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
             title={t('reports.form.textfield.insinger_f_policy_priorities')}
           />
           <CardContent>
-            <Autocomplete
-              values={policyPriorities.map(
-                (policyPriority: PolicyPriorityProps) => ({
-                  ...policyPriority,
-                  label: t(policyPriority.label),
-                })
-              )}
-              value={props.policyPriority}
-              setValue={props.setPolicyPriority}
+            <PercentageDropdown
+              values={(props.pillar === 'Pillar 1: Social Good Projects'
+                ? pillar1PolicyPriorities
+                : pillar2PolicyPriorities
+              ).map((policyPriority: PolicyPriorityProps) => ({
+                ...policyPriority,
+                label: t(policyPriority.label),
+              }))}
+              value={props.policyPriorities}
+              setValue={props.setPolicyPriorities}
             />
-            <Box height="14px" width="100%" />
+            {/* <Box height="14px" width="100%" /> */}
+            <Box height="5px" width="100%" />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {t('reports.form.textfield.sdg_mapping_expl')}
+              {t('reports.form.textfield.percentage_expl')}
             </Typography>
           </CardContent>
         </Card>
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
+      {/* SDGs */}
+      <Grid data-cy="sdgs" item xs={12} md={12} lg={4}>
+        <Card css={styles.card}>
+          <CardHeader title={t('reports.form.textfield.sdgs')} />
+          <CardContent>
+            <PercentageDropdown
+              values={sdgs.map((sdg: PolicyPriorityProps) => ({
+                ...sdg,
+                label: t(sdg.label),
+              }))}
+              value={props.sdgs}
+              setValue={props.setSDGs}
+              listItemTooltipPath="sdg_descriptions"
+            />
+            {/* <Box height="14px" width="100%" /> */}
+            <Box height="5px" width="100%" />
+            <Typography variant="body2" color="secondary" css={styles.infoText}>
+              {t('reports.form.textfield.percentage_expl')}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xs={false} sm={false} md={false} lg={4} />
+
+      {/* ---------------------------------------------------------------------*/}
       {/* Budget */}
-      <Grid data-cy="budget-container" item xs={12} md={6} lg={4}>
+      <Grid
+        data-cy="budget-container"
+        item
+        xs={12}
+        md={6}
+        lg={4}
+        css={isBlur ? styles.blurBlock : ``}
+      >
         <Card css={styles.card}>
           <CardHeader title={t('reports.form.textfield.budget')} />
-          <CardContent>
+          <CardContent
+            css={`
+              padding-bottom: 6px !important;
+              > div:first-of-type {
+                height: inherit;
+              }
+            `}
+          >
             <IntentTexFieldSingleLine
               testattr="budget-field"
               fullWidth
@@ -82,7 +178,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               setValue={props.setBudget}
               description=""
             />
-            <Box height="14px" width="100%" />
+            <Box height="5px" width="100%" />
             <Typography variant="body2" color="secondary" css={styles.infoText}>
               {t('reports.form.textfield.remaining')}: {props.remainBudget}€
             </Typography>
@@ -92,7 +188,14 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* Insinger contribution */}
-      <Grid data-cy="insinger-contribution" item xs={12} md={6} lg={4}>
+      <Grid
+        data-cy="insinger-contribution"
+        item
+        xs={12}
+        md={6}
+        lg={4}
+        css={isBlur ? styles.blurBlock : ``}
+      >
         <Card css={styles.card}>
           <CardHeader title={t('reports.form.textfield.contribution')} />
           <CardContent>
@@ -113,7 +216,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
 
       {/* --------------------------------------------------------------------- */}
       {/* Target beneficiaries */}
-
       <Grid
         item
         xs={12}
@@ -136,10 +238,14 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               description=""
               setValue={props.setTarBenTotal}
             />
+
+            <Box height="14px" width="100%" />
           </CardContent>
         </Card>
       </Grid>
 
+      {/* --------------------------------------------------------------------- */}
+      {/* Total committed number */}
       <Grid
         item
         xs={12}
@@ -174,7 +280,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         lg={4}
         css={isBlur ? styles.blurBlock : ``}
       >
-        <Card css={styles.cardSecondary}>
+        <Card css={styles.card}>
           <CardHeader title={t('reports.form.textfield.other_funders')} />
           <CardContent>
             <Autocomplete
@@ -198,7 +304,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         container
         sm={12}
         md={12}
-        lg={8}
+        lg={10}
         css={isBlur ? styles.blurBlock : ``}
         spacing={0}
       >
@@ -207,7 +313,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardContent>
             <Grid item container lg={12} spacing={4}>
               {props.beneficiaryCounts.map((item: any, index: number) => (
-                <Grid item xs={12} md={6} lg={4} key={item.name}>
+                <Grid item xs={12} md={6} lg={3} key={item.name}>
                   <IntentTexFieldSingleLine
                     testattr={`which-when-item-${index}`}
                     type="number"
@@ -231,9 +337,16 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
                 height: 24px;
               `}
             />
-            <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {t('reports.form.textfield.sdg_mapping_expl')}
-            </Typography>
+
+            {showTargetGroupMessage !== '' && (
+              <Typography
+                color="secondary"
+                variant="subtitle1"
+                css={styles.infoText}
+              >
+                {showTargetGroupMessage}
+              </Typography>
+            )}
           </CardContent>
         </Card>
       </Grid>

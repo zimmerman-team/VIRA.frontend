@@ -18,19 +18,30 @@ export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
       return validatePolicyPrioritiesFields(
         data.tarBenTotal,
         data.beneficiaryCounts,
-        data.policyPriority,
+        data.policyPriorities,
+        data.sdgs,
         data.budget,
         data.remainBudget,
         data.insContribution,
         data.funders
       );
     case 2:
-      return validateIndVerFields(data.keyOutcomes, data.monRepOutcomes);
+      return validateIndVerFields(
+        data.keyOutcomes,
+        data.monRepOutcomes,
+        data.inputsInvested,
+        data.activitiesUndertaken,
+        data.projectgoalsSocialbenefits,
+        data.importantFactors,
+        data.orgsPartners
+      );
     case 3:
       return validateChallengesPlans(
         data.keyImplChallenges,
         data.otherProjOutObs,
-        data.futurePlans,
+        data.addressChallenges,
+        data.howImportantInsingerSupport,
+        data.applyForMoreFunding,
         data.otherComms
       );
     default:

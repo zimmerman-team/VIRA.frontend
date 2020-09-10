@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import 'styled-components/macro';
 
 import {
   AccordionDetails,
@@ -14,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import { ProjectPalette } from 'app/theme';
 import { css } from 'styled-components/macro';
 
-const ExpansionPanelStyle = css`
+export const ExpansionPanelStyle = css`
   //margin: 8px !important;
   margin-bottom: 8px !important;
 
@@ -29,7 +28,7 @@ const ExpansionPanelStyle = css`
   }
 `;
 
-const ExpansionPanelSummaryStyle = css`
+export const ExpansionPanelSummaryStyle = css`
   && {
     height: 80px;
     padding: 0 32px 0 32px;
@@ -46,18 +45,19 @@ const ExpansionPanelSummaryStyle = css`
   }
 `;
 
-const SubtitleStyle = css`
+export const SubtitleStyle = css`
   color: ${ProjectPalette.common.black} !important;
   font-size: 16px !important;
   font-weight: 500 !important;
 `;
 
-const ExpandMoreIconStyle = css`
+export const ExpandMoreIconStyle = css`
   color: #a1aebd;
 `;
 
-const ExpansionPanelDetailsStyle = css`
+export const ExpansionPanelDetailsStyle = css`
   && {
+    flex-direction: column;
     padding: 33px 29.7px 33px 29.7px;
   }
 `;

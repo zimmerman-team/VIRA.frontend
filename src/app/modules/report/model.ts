@@ -28,6 +28,12 @@ export type LabelValueModel = {
   value: string;
 };
 
+export type LabelWeightModel = {
+  label: string;
+  weight: number;
+  code?: number;
+};
+
 export type OutcomesPropsModel = {
   title: string;
   setTitle: Function;
@@ -49,14 +55,18 @@ export type OutcomesPropsModel = {
 };
 
 export type PolicyPrioritiesPropsModel = {
+  pillar: string;
+  setPillar: Function;
   tarBenTotal: number;
   setTarBenTotal: Function;
   tarBenTotal2: number;
   setTarBenTotal2: Function;
   beneficiaryCounts: BeneficiaryCountsModel[];
   setBeneficiaryCounts: Function;
-  policyPriority: LabelValueModel;
-  setPolicyPriority: Function;
+  policyPriorities: LabelWeightModel[];
+  setPolicyPriorities: Function;
+  sdgs: LabelWeightModel[];
+  setSDGs: Function;
   budget: number;
   setBudget: Function;
   remainBudget: number;
@@ -71,6 +81,16 @@ export type IndicatorVerificationPropsModel = {
   setKeyOutcomes: Function;
   monRepOutcomes: string;
   setMonRepOutcomes: Function;
+  inputsInvested: string;
+  setInputsInvested: Function;
+  activitiesUndertaken: string;
+  setActivitiesUndertaken: Function;
+  projectgoalsSocialbenefits: string;
+  setProjectgoalsSocialbenefits: Function;
+  importantFactors: string;
+  setImportantFactors: Function;
+  orgsPartners: string;
+  setOrgsPartners: Function;
   media: MediaModel;
   setMedia: Function;
   mediaAdded: any;
@@ -86,8 +106,12 @@ export type ChallengesPlansPropsModel = {
   setKetImplChallenges: Function;
   otherProjOutObs: string;
   setOtherProjOutObs: Function;
-  futurePlans: string;
-  setFuturePlans: Function;
+  addressChallenges: string;
+  setAddressChallenges: Function;
+  howImportantInsingerSupport: string;
+  setHowImportantInsingerSupport: Function;
+  applyForMoreFunding: string;
+  setApplyForMoreFunding: Function;
   otherComms: string;
   setOtherComms: Function;
 };

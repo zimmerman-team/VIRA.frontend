@@ -42,7 +42,7 @@ export const getBaseTableForReport = (
         },
         filter: false,
         customFilterListOptions: {
-          render: value => `${i18n.t('reports.overview.table.id')}: ${value}`,
+          render: (value) => `${i18n.t('reports.overview.table.id')}: ${value}`,
         },
       },
     },
@@ -52,7 +52,7 @@ export const getBaseTableForReport = (
       options: {
         filter: false,
         customFilterListOptions: {
-          render: value =>
+          render: (value) =>
             `${i18n.t('reports.overview.table.title')}: ${value}`,
         },
         customBodyRender: (value, tableMeta, updateValue) => {
@@ -60,7 +60,7 @@ export const getBaseTableForReport = (
           const id = get(rowAllData, '_id', '');
           const isDraft = get(rowAllData, 'isDraft', false);
           const link = isDraft
-            ? `/report/${rowAllData.project.project_number}/outcomes?rid=${id}`
+            ? `/report/${rowAllData.project.project_number}/project-info?rid=${id}`
             : `/reports/${id}`;
           return (
             <LinkCellModule
@@ -76,9 +76,10 @@ export const getBaseTableForReport = (
       options: {
         filter: false,
         customFilterListOptions: {
-          render: value => `${i18n.t('reports.overview.table.date')}: ${value}`,
+          render: (value) =>
+            `${i18n.t('reports.overview.table.date')}: ${value}`,
         },
-        sortCompare: order => {
+        sortCompare: (order) => {
           return (obj1, obj2) => sortOnDate(obj1, obj2, order);
         },
       },
@@ -93,7 +94,7 @@ export const getBaseTableForReport = (
         // customFilterListOptions takes care of the filter badges
         // todo: needs some styling (margin bottom)
         customFilterListOptions: {
-          render: epoch => {
+          render: (epoch) => {
             const startDate = formatDate(epoch[0]);
             const endDate = formatDate(epoch[1]);
             if (startDate && endDate) {
@@ -136,7 +137,7 @@ export const getBaseTableForReport = (
             return (
               <DateRangePicker
                 open={true}
-                onChange={range => updateAll(range)}
+                onChange={(range) => updateAll(range)}
               />
             );
           },

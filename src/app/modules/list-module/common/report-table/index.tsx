@@ -40,14 +40,15 @@ export const ReportsOverviewTable = (props: ReportsOverviewTableProps) => {
     options: {
       filter: false,
       customFilterListOptions: {
-        render: value => `${i18n.t('reports.overview.table.title')}: ${value}`,
+        render: (value) =>
+          `${i18n.t('reports.overview.table.title')}: ${value}`,
       },
       customBodyRender: (value, tableMeta, updateValue) => {
         const rowAllData = find(data, { reportID: tableMeta.rowData[0] });
         const id = get(rowAllData, '_id', '');
         const isDraft = get(rowAllData, 'isDraft', false);
         const link = isDraft
-          ? `/report/${rowAllData.project.project_number}/outcomes?rid=${id}`
+          ? `/report/${rowAllData.project.project_number}/project-info?rid=${id}`
           : `/reports/${id}`;
         return (
           <LinkCellModule
@@ -87,7 +88,7 @@ export const ReportsOverviewTable = (props: ReportsOverviewTableProps) => {
           return (
             <DateRangePicker
               open={openDatePicker}
-              onChange={range => {
+              onChange={(range) => {
                 updateAll(range);
               }}
             />

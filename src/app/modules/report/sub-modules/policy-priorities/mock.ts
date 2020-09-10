@@ -1,6 +1,9 @@
+import { ItemModel } from 'app/components/inputs/radiobuttons/RadioButtonGroup';
+
 export interface PolicyPriorityProps {
   label: string;
   value: string;
+  code?: number;
 }
 export const policyPriorities: PolicyPriorityProps[] = [
   { label: 'charts.items.refugees', value: 'Refugees' },
@@ -15,6 +18,17 @@ export const policyPriorities: PolicyPriorityProps[] = [
   {
     label: 'charts.items.prisoner',
     value: 'Prisoner rehabilitation / reintegration',
+  },
+];
+
+export const pillars: ItemModel[] = [
+  {
+    value: 'Pillar 1: Social Good Projects',
+    label: 'Pillar 1: Social Good',
+  },
+  {
+    value: 'Pillar 2: Church & Organ restorations projects',
+    label: 'Pillar 2: Church Restorations',
   },
 ];
 
@@ -107,4 +121,75 @@ export const funderList: FunderProps[] = [
     label: 'Stichting Mundo Crastino Meliori',
     value: 'Stichting Mundo Crastino Meliori',
   },
+];
+
+export const sdgs: PolicyPriorityProps[] = [
+  { label: 'sdgs.1', value: 'No poverty', code: 1 },
+  { label: 'sdgs.2', value: 'Zero hunger', code: 2 },
+  { label: 'sdgs.3', value: 'Good health and well-being', code: 3 },
+  { label: 'sdgs.4', value: 'Quality education', code: 4 },
+  { label: 'sdgs.5', value: 'Gender equality', code: 5 },
+  { label: 'sdgs.6', value: 'Clean water and sanitation', code: 6 },
+  { label: 'sdgs.7', value: 'Affordable and clean energy', code: 7 },
+  { label: 'sdgs.8', value: 'Decent work and economic growth', code: 8 },
+  {
+    label: 'sdgs.9',
+    value: 'Industry, innovation and infrastructure',
+    code: 9,
+  },
+  { label: 'sdgs.10', value: 'Reduce inequalities', code: 10 },
+  { label: 'sdgs.11', value: 'Sustainable cities and communities', code: 11 },
+  { label: 'sdgs.12', value: 'Sustainable cities and communities', code: 12 },
+  { label: 'sdgs.13', value: 'Climate action', code: 13 },
+  { label: 'sdgs.14', value: 'Life below water', code: 14 },
+  { label: 'sdgs.15', value: 'Life on land', code: 15 },
+  {
+    label: 'sdgs.16',
+    value: 'Peace, justice and strong institutions',
+    code: 16,
+  },
+  { label: 'sdgs.17', value: 'Partnerships for the goals', code: 17 },
+];
+
+export const pillar1PolicyPriorities: PolicyPriorityProps[] = [
+  {
+    label: 'charts.items.poverty',
+    value: 'Poverty reduction',
+  },
+  {
+    label: 'charts.items.children_youth_engagement',
+    value: 'Children & Youth engagement',
+  },
+  {
+    label: 'charts.items.vulnerable_groups',
+    value: 'Vulnerable groups in society',
+  },
+  {
+    label: 'charts.items.refugees',
+    value: 'Helping refugees',
+  },
+  {
+    label: 'charts.items.prostitution',
+    value: 'Reducing forced prostitution',
+  },
+  {
+    label: 'charts.items.drugs',
+    value: 'Reducing drug abuse & helping drug addicts',
+  },
+  {
+    label: 'charts.items.emancipation',
+    value: 'Emancipation of women and girls',
+  },
+  {
+    label: 'charts.items.prisoner',
+    value: 'Prisoner rehabilitation',
+  },
+  {
+    label: 'charts.items.sustainability',
+    value: 'Sustainability',
+  },
+];
+
+export const pillar2PolicyPriorities: PolicyPriorityProps[] = [
+  { label: 'charts.items.heritage', value: 'Cultural Heritage' },
 ];

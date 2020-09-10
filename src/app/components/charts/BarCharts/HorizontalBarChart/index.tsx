@@ -151,7 +151,7 @@ const BarComponent = (props: BarComponentPropsModel) => {
   );
 };
 
-const BarChart = styled(props => <ResponsiveBar {...props} />)``;
+const BarChart = styled((props) => <ResponsiveBar {...props} />)``;
 
 const ChartContainer = styled.div`
   display: flex;
@@ -160,7 +160,7 @@ const ChartContainer = styled.div`
   align-items: center;
 `;
 
-const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
+const NoDataMessage = styled((props) => <Typography variant="h6" {...props} />)`
   && {
     font-size: 1rem;
     font-family: Inter;
@@ -291,7 +291,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
                   display: flex;
                 `}
               >
-                {props.chartLegends.map(legend => (
+                {props.chartLegends.map((legend) => (
                   <LegendControl
                     {...legend}
                     key={legend.label}
@@ -331,7 +331,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
             `}
           />
           <Legends>
-            {props.chartLegends.map(legend => (
+            {props.chartLegends.map((legend) => (
               <LegendControl
                 {...legend}
                 key={legend.label}

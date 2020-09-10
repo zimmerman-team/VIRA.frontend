@@ -29,6 +29,8 @@ import search_en from 'app/languages/en/search.json';
 import search_nl from 'app/languages/nl/search.json';
 import breadcrumbs_en from 'app/languages/en/breadcrumbs.json';
 import breadcrumbs_nl from 'app/languages/nl/breadcrumbs.json';
+import sdg_descriptions_en from 'app/languages/en/sdg_descriptions.json';
+import sdg_descriptions_nl from 'app/languages/nl/sdg_descriptions.json';
 
 i18n
   .use(LanguageDetector)
@@ -62,6 +64,7 @@ i18n
           user_management: user_management_nl,
           search: search_nl,
           breadcrumbs: breadcrumbs_nl,
+          sdg_descriptions: sdg_descriptions_nl,
           'Manage teams & users': 'Beheer teams & gebruikers',
           'Manage your account': 'Beheer jouw account',
           'Sign out': 'Uitloggen',
@@ -263,6 +266,7 @@ i18n
           Title: 'Titel',
           Country: 'Land',
           Submit: 'Verstuur',
+          'People reached out of targeted': 'Mensen bereikten een doelwit',
         },
       },
       en: {
@@ -279,6 +283,7 @@ i18n
           user_management: user_management_en,
           search: search_en,
           breadcrumbs: breadcrumbs_en,
+          sdg_descriptions: sdg_descriptions_en,
           'Manage teams & users': 'Manage teams & users',
           'Manage your account': 'Manage your account',
           'Sign out': 'Sign out',
@@ -481,6 +486,7 @@ i18n
           Title: 'Title',
           Country: 'Country',
           Submit: 'Submit',
+          'People reached out of targeted': 'People reached out of targeted',
         },
       },
     },

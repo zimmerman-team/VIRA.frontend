@@ -17,13 +17,13 @@ const ReportTitleStyle = css`
   font-weight: 500;
   line-height: 28px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #e8e8e8;
+  // border-bottom: 1px solid #e8e8e8;
 `;
 
 export function CreateReportLayout(props: CreateReportLayoutModel) {
   const { t } = useTranslation();
 
-  console.log('render report creator');
+  // console.log('render report creator');
 
   return (
     <React.Fragment>
@@ -52,7 +52,7 @@ export function CreateReportLayout(props: CreateReportLayoutModel) {
         xs={12}
         lg={12}
         css={`
-          overflow-x: scroll;
+          overflow-x: auto;
         `}
       >
         <HorizontalStepper

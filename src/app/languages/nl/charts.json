@@ -1,12 +1,15 @@
 {
   "items": {
-    "drug_use": "Drugsgebruik",
-    "elderly": "Ouderen",
-    "homelessness": "Dakloos",
-    "poverty": "Armoedebestrijding met een focus op jeugd en kinderen",
-    "prisoner": "Rehabilitatie / reïntegratie van gevangenen",
-    "prostitution": "Prostitutie",
-    "refugees": "Vluchtelingen"
+    "poverty": "Armoede vermindering",
+    "prisoner": "Rehabilitatie van gevangenen",
+    "prostitution": "Het terugdringen van gedwongen prostitutie",
+    "refugees": "Vluchtelingen helpen",
+    "children_youth_engagement": "Betrokkenheid van kinderen en jongeren",
+    "vulnerable_groups": "Kwetsbare groepen in de samenleving (d.w.z. lagere inkomens, ouderen, gehandicapten)",
+    "drugs": "Drugsmisbruik verminderen en drugsverslaafden helpen",
+    "sustainability": "Duurzaamheid",
+    "emancipation": "Emancipatie van vrouwen en meisjes",
+    "heritage": "Cultureel erfgoed"
   },
   "barchart": {
     "target": "Doel",

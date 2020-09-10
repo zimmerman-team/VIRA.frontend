@@ -1,16 +1,23 @@
 import sumBy from 'lodash/sumBy';
-import { LabelValueModel } from '../model';
+import { LabelValueModel, LabelWeightModel } from '../model';
 
 export function validatePolicyPrioritiesFields(
   tarBenTotal: number,
   beneficiaryCounts: any,
-  policyPriority: string,
+  policyPriorities: LabelWeightModel[],
+  sdgs: LabelWeightModel[],
   budget: number,
   remainBudget: number,
   insContribution: number,
   funders: LabelValueModel[]
 ) {
-  if (policyPriority === '') {
+  if (
+    policyPriorities.length === 0 ||
+    sumBy(policyPriorities, 'weight') < 100
+  ) {
+    return false;
+  }
+  if (sdgs.length === 0 || sumBy(sdgs, 'weight') < 100) {
     return false;
   }
   if (tarBenTotal === 0 || tarBenTotal < sumBy(beneficiaryCounts, 'value')) {

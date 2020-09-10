@@ -22,6 +22,17 @@ interface PreviewParams {
   challengesPlansProps: ChallengesPlansPropsModel;
 }
 
+const Spacer = () => (
+  <Hidden smUp>
+    <div
+      css={`
+        width: 100%;
+        height: 25px;
+      `}
+    />
+  </Hidden>
+);
+
 export const PreviewLayout = (props: PreviewParams) => {
   const { t } = useTranslation();
 
@@ -33,18 +44,11 @@ export const PreviewLayout = (props: PreviewParams) => {
         <PreviewCard
           title="reports.form.textfield.preview_title"
           content={props.outcomesProps.title}
-          testattr={'title-preview-card'}
+          testattr="title-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
-        />
-      </Hidden>
+      <Spacer />
 
       {/* --------------------------------- */}
       {/* location */}
@@ -53,18 +57,11 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.textfield.location"
           content={props.outcomesProps.country.label}
           explanation={t('reports.form.textfield.location_expl')}
-          testattr={'location-preview-card'}
+          testattr="location-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
-        />
-      </Hidden>
+      <Spacer />
 
       {/* --------------------------------- */}
       {/* insinger policy priorities */}
@@ -72,20 +69,30 @@ export const PreviewLayout = (props: PreviewParams) => {
         <PreviewCard
           title="reports.form.textfield.insinger_f_policy_priorities"
           tooltip="reports.form.textfield.insinger_f_policy_priorities"
-          content={props.policyPrioritiesProps.policyPriority.label}
-          explanation="reports.form.textfield.sdg_mapping_expl"
-          testattr={'policy-priority-preview-card'}
+          content={props.policyPrioritiesProps.policyPriorities.map(
+            (pp) => `${pp.label}: ${pp.weight}%`
+          )}
+          // explanation="reports.form.textfield.sdg_mapping_expl"
+          testattr="policy-priority-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
+      <Spacer />
+
+      {/* --------------------------------- */}
+      {/* SDGs */}
+      <Grid item xs={12} lg={6}>
+        <PreviewCard
+          title="reports.form.textfield.sdgs"
+          tooltip="reports.form.textfield.sdgs"
+          content={props.policyPrioritiesProps.sdgs.map(
+            (pp) => `${pp.label}: ${pp.weight}%`
+          )}
+          testattr="sdgs-preview-card"
         />
-      </Hidden>
+      </Grid>
+
+      <Spacer />
 
       {/* --------------------------------- */}
       {/* budget */}
@@ -94,18 +101,24 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.textfield.budget"
           tooltip="reports.form.textfield.budget"
           content={props.policyPrioritiesProps.budget}
-          testattr={'budget-preview-card'}
+          testattr="budget-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
+      <Spacer />
+
+      {/* --------------------------------- */}
+      {/* insinger contribution */}
+      <Grid item xs={12} lg={6}>
+        <PreviewCard
+          title="reports.form.textfield.contribution"
+          tooltip="reports.form.textfield.contribution"
+          content={props.policyPrioritiesProps.insContribution}
+          testattr="contribution-preview-card"
         />
-      </Hidden>
+      </Grid>
+
+      <Spacer />
 
       {/* --------------------------------- */}
       {/* target beneficiaries */}
@@ -114,18 +127,24 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.textfield.target_beneficiaries"
           tooltip="reports.form.textfield.target_beneficiaries"
           content={props.policyPrioritiesProps.tarBenTotal}
-          testattr={'target-beneficiaries-preview-card'}
+          testattr="target-beneficiaries-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
+      <Spacer />
+
+      {/* --------------------------------- */}
+      {/* total committed */}
+      <Grid item xs={12} lg={6}>
+        <PreviewCard
+          title="reports.form.textfield.total_commited"
+          tooltip="reports.form.textfield.total_commited"
+          content={props.policyPrioritiesProps.tarBenTotal2}
+          testattr="target-beneficiaries-2-preview-card"
         />
-      </Hidden>
+      </Grid>
+
+      <Spacer />
 
       {/* --------------------------------- */}
       {/* Of which the beneficiaries will likely include approximately (Optional) */}
@@ -136,56 +155,101 @@ export const PreviewLayout = (props: PreviewParams) => {
           content={props.policyPrioritiesProps.beneficiaryCounts.map(
             (b: BeneficiaryCountsModel) => `${b.name}: ${b.value}`
           )}
-          testattr={'include-ben-preview-card'}
+          testattr="include-ben-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
-        />
-      </Hidden>
+      <Spacer />
 
       {/* --------------------------------- */}
-      {/* budget */}
+      {/* Other funders */}
+      <Grid item xs={12} lg={6}>
+        <PreviewCard
+          title="reports.form.textfield.other_funders"
+          tooltip="reports.form.textfield.other_funders"
+          content={props.policyPrioritiesProps.funders}
+          testattr="other-funders-preview-card"
+        />
+      </Grid>
+
+      <Spacer />
+
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.key_outcomes"
           tooltip="reports.form.cards.key_outcomes"
           content={props.indicatorVerificationProps.keyOutcomes}
-          testattr={'key-outcomes-preview-card'}
+          testattr="key-outcomes-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
-        />
-      </Hidden>
+      <Spacer />
 
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.monitor"
           tooltip="reports.form.cards.monitor_expl"
           content={props.indicatorVerificationProps.monRepOutcomes}
-          testattr={'outcomes-preview-card'}
+          testattr="outcomes-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
+      <Spacer />
+
+      <Grid item xs={12} lg={12}>
+        <PreviewCard
+          title="reports.form.cards.inputs_invested"
+          tooltip="reports.form.cards.inputs_invested"
+          content={props.indicatorVerificationProps.inputsInvested}
+          testattr="inputs-invested-preview-card"
         />
-      </Hidden>
+      </Grid>
+
+      <Spacer />
+
+      <Grid item xs={12} lg={12}>
+        <PreviewCard
+          title="reports.form.cards.activities_undertaken"
+          tooltip="reports.form.cards.activities_undertaken"
+          content={props.indicatorVerificationProps.activitiesUndertaken}
+          testattr="activities-undertaken-preview-card"
+        />
+      </Grid>
+
+      <Spacer />
+
+      <Grid item xs={12} lg={12}>
+        <PreviewCard
+          title="reports.form.cards.projectgoals_socialbenefits"
+          tooltip="reports.form.cards.projectgoals_socialbenefits"
+          content={props.indicatorVerificationProps.projectgoalsSocialbenefits}
+          testattr="projectgoals-socialbenefits-preview-card"
+        />
+      </Grid>
+
+      <Spacer />
+
+      <Grid item xs={12} lg={12}>
+        <PreviewCard
+          title="reports.form.cards.important_factors"
+          tooltip="reports.form.cards.important_factors"
+          content={props.indicatorVerificationProps.importantFactors}
+          testattr="important-factors-preview-card"
+        />
+      </Grid>
+
+      <Spacer />
+
+      <Grid item xs={12} lg={12}>
+        <PreviewCard
+          title="reports.form.cards.orgs_partners"
+          tooltip="reports.form.cards.orgs_partners"
+          content={props.indicatorVerificationProps.orgsPartners}
+          testattr="orgs-partners-preview-card"
+        />
+      </Grid>
+
+      <Spacer />
 
       <Grid item xs={12} lg={12}>
         <PreviewCard
@@ -193,56 +257,54 @@ export const PreviewLayout = (props: PreviewParams) => {
           tooltip="reports.form.cards.key_implementation_challenges"
           content={props.challengesPlansProps.keyImplChallenges}
           explanation="reports.form.cards.key_implementation_challenges_expl"
-          testattr={'key-implementation-challenges-preview-card'}
+          testattr="key-implementation-challenges-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
+      <Spacer />
+
+      <Grid item xs={12} lg={12}>
+        <PreviewCard
+          title="reports.form.cards.how_address_challenges"
+          tooltip="reports.form.cards.how_address_challenges"
+          content={props.challengesPlansProps.addressChallenges}
+          testattr="how-address-challenges-preview-card"
         />
-      </Hidden>
+      </Grid>
+
+      <Spacer />
 
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.other_project"
           tooltip="reports.form.cards.other_project"
           content={props.challengesPlansProps.otherProjOutObs}
-          explanation="reports.form.cards.other_project_expl"
-          testattr={'other-project-preview-card'}
+          testattr="other-project-preview-card"
         />
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
-        />
-      </Hidden>
+      <Spacer />
 
-      <Grid item xs={12} lg={12}>
-        <PreviewCard
-          title="reports.form.cards.future_plans"
-          tooltip="reports.form.cards.future_plans"
-          content={props.challengesPlansProps.futurePlans}
-          explanation="reports.form.cards.future_plans_expl"
-          testattr={'future-plans-preview-card'}
-        />
+      <Grid item container xs={12} lg={12}>
+        <Grid item xs={12} lg={6}>
+          <PreviewCard
+            title="reports.form.cards.how_important_insinger_support"
+            tooltip="reports.form.cards.how_important_insinger_support"
+            content={props.challengesPlansProps.howImportantInsingerSupport}
+            testattr="how-important-insinger-support-preview-card"
+          />
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <PreviewCard
+            title="reports.form.cards.apply_for_more_funding"
+            tooltip="reports.form.cards.apply_for_more_funding"
+            content={props.challengesPlansProps.applyForMoreFunding}
+            testattr="apply-for-more-funding-preview-card"
+          />
+        </Grid>
       </Grid>
 
-      <Hidden smUp>
-        <div
-          css={`
-            width: 100%;
-            height: 25px;
-          `}
-        />
-      </Hidden>
+      <Spacer />
 
       <Grid item xs={12} lg={12}>
         <PreviewCard
@@ -250,9 +312,10 @@ export const PreviewLayout = (props: PreviewParams) => {
           tooltip="reports.form.cards.other_comments"
           content={props.challengesPlansProps.otherComms}
           explanation="reports.form.cards.other_comments_expl"
-          testattr={'other-comments-preview-card'}
+          testattr="other-comments-preview-card"
         />
       </Grid>
+
       <div
         css={`
           width: 100%;

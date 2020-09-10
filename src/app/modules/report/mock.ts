@@ -12,7 +12,7 @@ export const breadcrumbs: BreadcrumbModel = {
 export const tabs: NavItemParams[] = [
   {
     label: 'reports.form.steps.outcomes',
-    path: 'outcomes',
+    path: 'project-info',
     disabled: false,
   },
   {
@@ -22,12 +22,12 @@ export const tabs: NavItemParams[] = [
   },
   {
     label: 'reports.form.steps.indicator_verification',
-    path: 'indicator-verification',
+    path: 'goals-and-outcomes',
     disabled: true,
   },
   {
     label: 'reports.form.steps.challenges_plans',
-    path: 'challenges-plans',
+    path: 'challenges-and-future-plans',
     disabled: true,
   },
   {
