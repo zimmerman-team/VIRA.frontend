@@ -7,6 +7,14 @@
     "sdg": "SDGs",
     "map": "Map"
   },
+  "chart_description": {
+    "pillars": "Overzicht van projecten per pilaar",
+    "priority_area": "Overzicht van projecten per prioriteitsgebied in een grafiek",
+    "target_group": "De doelgroep en het gespendeerde budget",
+    "one_year_and_multi_year": "Projecten over een enkel en meerdere jaren",
+    "sdg": "",
+    "map": ""
+  },
   "dashboard": {
     "grantees": "Grantees",
     "projects": "Projecten",

@@ -21,7 +21,10 @@ import {
   a11yProps,
   TabPanel,
 } from 'app/modules/list-module/common/TabPanelProps';
-import { getTitle } from 'app/modules/common/components/Viztabs/utils/getTitle';
+import {
+  getTitle,
+  getTitleDesc,
+} from 'app/modules/common/components/Viztabs/utils/getTitle';
 
 type PropsModel = {
   value: number;
@@ -48,7 +51,7 @@ export function Viztabs(props: PropsModel) {
           item
           xs={12}
           sm={4}
-          lg={6}
+          lg={5}
           css={`
             order: ${isMobileWidth ? 1 : 0};
             margin-top: ${isMobileWidth ? '28px' : 0};
@@ -65,13 +68,23 @@ export function Viztabs(props: PropsModel) {
           >
             {t(getTitle(props.value))}
           </Typography>
+          <Typography
+            data-cy="viz-tabs-title-desc"
+            variant="subtitle1"
+            css={`
+              font-size: 14px;
+              margin-top: 4px;
+            `}
+          >
+            {t(getTitleDesc(props.value))}
+          </Typography>
         </Grid>
 
         <Hidden smUp>
           <Grid item xs={3} />
         </Hidden>
 
-        <Grid item xs={12} container justify="flex-end">
+        <Grid item xs={7} container justify="flex-end">
           <Tabs
             value={props.value}
             onChange={props.onTabClick}

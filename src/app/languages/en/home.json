@@ -7,6 +7,14 @@
     "sdg": "SDGs",
     "map": "Map"
   },
+  "chart_description": {
+    "pillars": "Overview Projects per Insinger Foundation Pillar",
+    "priority_area": "Overview Projects per Priority area chart",
+    "target_group": "Target groups & Budget Spent",
+    "one_year_and_multi_year": "One year & multi year projects",
+    "sdg": "",
+    "map": ""
+  },
   "dashboard": {
     "grantees": "Grantees",
     "projects": "Projects",
