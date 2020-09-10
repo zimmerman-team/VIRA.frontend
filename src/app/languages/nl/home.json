@@ -1,8 +1,11 @@
 {
   "chart_nav": {
-    "map": "Map",
+    "pillars": "Pilaren",
     "priority_area": "Prioriteitsgebied",
-    "sdg": "SDGs"
+    "target_group": "Doelgroep",
+    "one_year_and_multi_year": "Enkel&multi jaar",
+    "sdg": "SDGs",
+    "map": "Map"
   },
   "dashboard": {
     "grantees": "Grantees",

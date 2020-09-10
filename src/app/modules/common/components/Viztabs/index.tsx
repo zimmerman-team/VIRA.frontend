@@ -85,22 +85,40 @@ export function Viztabs(props: PropsModel) {
             `}
           >
             <Tab
+              data-cy="pillars-tab"
+              css={TabStyle}
+              label={t('home.chart_nav.pillars')}
+              {...a11yProps(0)}
+            />
+            <Tab
               data-cy="prio-tab"
               css={TabStyle}
               label={t('home.chart_nav.priority_area')}
-              {...a11yProps(0)}
+              {...a11yProps(1)}
+            />
+            <Tab
+              data-cy="target-group-tab"
+              css={TabStyle}
+              label={t('home.chart_nav.target_group')}
+              {...a11yProps(2)}
+            />
+            <Tab
+              data-cy="multi-year-tab"
+              css={TabStyle}
+              label={t('home.chart_nav.one_year_and_multi_year')}
+              {...a11yProps(3)}
             />
             <Tab
               data-cy="sdg-tab"
               css={TabStyle}
               label={t('home.chart_nav.sdg')}
-              {...a11yProps(1)}
+              {...a11yProps(4)}
             />
             <Tab
               data-cy="map-tab"
               css={TabStyle}
               label={t('home.chart_nav.map')}
-              {...a11yProps(2)}
+              {...a11yProps(5)}
             />
           </Tabs>
         </Grid>
@@ -114,7 +132,11 @@ export function Viztabs(props: PropsModel) {
           width: 100%;
         `}
       >
-        <TabPanel value={props.value} index={0} data-cy="prio-panel">
+        <TabPanel value={props.value} index={0} data-cy="pillars-panel">
+          <h1>TODO</h1>
+        </TabPanel>
+
+        <TabPanel value={props.value} index={1} data-cy="prio-panel">
           {/* Priority Area horizontal bar chart */}
           <HorizontalBarChart
             colors={[
@@ -145,7 +167,15 @@ export function Viztabs(props: PropsModel) {
           />
         </TabPanel>
 
-        <TabPanel value={props.value} index={1} data-cy="sdg-panel">
+        <TabPanel value={props.value} index={2} data-cy="target-group-panel">
+          <h1>TODO</h1>
+        </TabPanel>
+
+        <TabPanel value={props.value} index={3} data-cy="multi-year-panel">
+          <h1>TODO</h1>
+        </TabPanel>
+
+        <TabPanel value={props.value} index={4} data-cy="sdg-panel">
           {/* SDG bubble chart */}
           <BubbleChart
             data={props.bubbleChartData}
@@ -154,7 +184,7 @@ export function Viztabs(props: PropsModel) {
           />
         </TabPanel>
 
-        <TabPanel value={props.value} index={2} data-cy="map-panel">
+        <TabPanel value={props.value} index={5} data-cy="map-panel">
           {/* Geomap */}
           <GeoMap data={props.geoMapData} />
         </TabPanel>

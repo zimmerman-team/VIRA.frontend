@@ -17,7 +17,7 @@ export const TabStyle = css`
   background-color: white;
   text-transform: capitalize;
   max-width: 140px;
-  margin-left: 14px;
+  margin-left: 24px;
 `;
 
 export function TabPanel(props: TabPanelProps) {

@@ -1,10 +1,16 @@
 export function getTitle(index: number): string {
   switch (index) {
     case 0:
-      return 'home.chart_nav.priority_area';
+      return 'home.chart_nav.pillars';
     case 1:
-      return 'home.chart_nav.sdg';
+      return 'home.chart_nav.priority_area';
     case 2:
+      return 'home.chart_nav.target_group';
+    case 3:
+      return 'home.chart_nav.one_year_and_multi_year';
+    case 4:
+      return 'home.chart_nav.sdg';
+    case 5:
       return 'home.chart_nav.map';
     default:
       return 'home.chart_nav.priority_area';
