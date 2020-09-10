@@ -39,10 +39,15 @@ import projectBudgetData from 'app/state/api/actionsReducers/projectBudgetData';
 import getSDGVizData from 'app/state/api/actionsReducers/getSDGVizData';
 import getGeoMapData from 'app/state/api/actionsReducers/getGeoMapData';
 import deleteReport from 'app/state/api/actionsReducers/deleteReport';
+import getPillarDataByBudget from 'app/state/api/actionsReducers/getPillarDataByBudget';
+import getPillarDataByDuration from 'app/state/api/actionsReducers/getPillarDataByDuration';
+import getPriorityAreaBarChartData from 'app/state/api/actionsReducers/getPriorityAreaBarChartData';
+import getTargetGroupBarChartData from 'app/state/api/actionsReducers/getTargetGroupBarChartData';
+import getOneMultiYearBarChartData from 'app/state/api/actionsReducers/getOneMultiYearBarChartData';
 
 const encryptor = createEncryptor({
   secretKey: process.env.REACT_APP_REDUX_ENCRYPT_SECRET as string,
-  onError: error => {
+  onError: (error) => {
     // Handle the error
   },
 });
@@ -78,6 +83,11 @@ export interface ApplicationStoreModel {
   addReport: SocketAPIResonseInterface;
   getReports: SocketAPIResonseInterface;
   getPPVizData: SocketAPIResonseInterface;
+  getPillarDataByBudget: SocketAPIResonseInterface;
+  getPillarDataByDuration: SocketAPIResonseInterface;
+  getPriorityAreaBarChartData: SocketAPIResonseInterface;
+  getTargetGroupBarChartData: SocketAPIResonseInterface;
+  getOneMultiYearBarChartData: SocketAPIResonseInterface;
   projectBudgetData: SocketAPIResonseInterface;
   getSDGVizData: SocketAPIResonseInterface;
   getGeoMapData: SocketAPIResonseInterface;
@@ -108,6 +118,11 @@ const applicationStore: ApplicationStoreModel = {
   addReport,
   getReports,
   getPPVizData,
+  getPillarDataByBudget,
+  getPillarDataByDuration,
+  getPriorityAreaBarChartData,
+  getTargetGroupBarChartData,
+  getOneMultiYearBarChartData,
   projectBudgetData,
   getSDGVizData,
   getGeoMapData,
@@ -115,7 +130,7 @@ const applicationStore: ApplicationStoreModel = {
 };
 
 export const appStore = createStore(applicationStore, {
-  reducerEnhancer: reducer => {
+  reducerEnhancer: (reducer) => {
     // TODO: check why persistor throws error with encryptor
     return persistReducer(persistConfig, reducer);
   },

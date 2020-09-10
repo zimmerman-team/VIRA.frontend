@@ -56,6 +56,39 @@ function LandingLayout(props: PropsModel) {
   const getGeoMapData = useStoreActions(
     (actions) => actions.getGeoMapData.fetch
   );
+
+  const getPillarDataByBudget = useStoreActions(
+    (actions) => actions.getPillarDataByBudget.fetch
+  );
+  const getPillarDataByDuration = useStoreActions(
+    (actions) => actions.getPillarDataByDuration.fetch
+  );
+  const getPriorityAreaBarChartData = useStoreActions(
+    (actions) => actions.getPriorityAreaBarChartData.fetch
+  );
+  const getTargetGroupBarChartData = useStoreActions(
+    (actions) => actions.getTargetGroupBarChartData.fetch
+  );
+  const getOneMultiYearBarChartData = useStoreActions(
+    (actions) => actions.getOneMultiYearBarChartData.fetch
+  );
+
+  const pillarDataByBudget = useStoreState(
+    (state) => state.getPillarDataByBudget.data
+  );
+  const pillarDataByDuration = useStoreState(
+    (state) => state.getPillarDataByDuration.data
+  );
+  const priorityAreaBarChartData = useStoreState(
+    (state) => state.getPriorityAreaBarChartData.data
+  );
+  const targetGroupBarChartData = useStoreState(
+    (state) => state.getTargetGroupBarChartData.data
+  );
+  const oneMultiYearBarChartData = useStoreState(
+    (state) => state.getOneMultiYearBarChartData.data
+  );
+
   const ppVizData = useStoreState((state) => state.getPPVizData.data);
   const SDGVizData = useStoreState((state) => state.getSDGVizData.data);
   const allProjectsData = useStoreState((state) => state.allProjects.data);
@@ -119,6 +152,44 @@ function LandingLayout(props: PropsModel) {
         endDate: selectedEndDate._d,
       },
     });
+    getPillarDataByBudget({
+      socketName: 'getPillarDataByBudget',
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
+    getPillarDataByDuration({
+      socketName: 'getPillarDataByDuration',
+      values: {
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
+    getPriorityAreaBarChartData({
+      socketName: 'getPriorityAreaBarChartData',
+      values: {
+        breakdownBy: 'none',
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
+    getTargetGroupBarChartData({
+      socketName: 'getTargetGroupBarChartData',
+      values: {
+        breakdownBy: 'none',
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
+    getOneMultiYearBarChartData({
+      socketName: 'getOneMultiYearBarChartData',
+      values: {
+        breakdownBy: 'none',
+        userRole: signedInUserRole,
+        userEmail: signedInUserEmail,
+      },
+    });
   }, [signedInUserRole, signedInUserEmail, selectedStartDate, selectedEndDate]);
 
   React.useEffect(() => {
@@ -134,7 +205,13 @@ function LandingLayout(props: PropsModel) {
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
-
+  console.log('=========================================================');
+  console.log('pillarDataByBudget', pillarDataByBudget);
+  console.log('pillarDataByDuration', pillarDataByDuration);
+  console.log('priorityAreaBarChartData', priorityAreaBarChartData);
+  console.log('targetGroupBarChartData', targetGroupBarChartData);
+  console.log('oneMultiYearBarChartData', oneMultiYearBarChartData);
+  console.log('=========================================================');
   return (
     <React.Fragment>
       {/* -------------------------------------------------------------- */}
@@ -154,6 +231,7 @@ function LandingLayout(props: PropsModel) {
         value={value}
         onTabClick={handleChange}
         barChartData={ppVizData}
+        // barChartDataPriority={pillarDataByBudget}
         barChartLegends={barChartLegends}
         onBarChartLegendClick={onBarChartLegendClick}
         bubbleChartData={{ ...bubbleMockData, children: SDGVizData }}
