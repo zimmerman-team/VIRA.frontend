@@ -111,10 +111,12 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
           <Card
             css={`
               overflow: visible;
+              height: 100%;
+              margin-right: 24px;
             `}
           >
             <CardHeader
-              css={styles.cardHeader}
+              css={styles.cardHeader + 'margin-bottom: 23px;'}
               title={t('reports.form.cards.how_important_insinger_support')}
             />
             <CardContent css={styles.cardContent}>
