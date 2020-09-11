@@ -9,29 +9,20 @@ const ChartKeys = ['Spent', 'Not Spent'];
 
 /* ------------------------------------------------------------ */
 /* base */
-const ChartData = [
-  {
-    name: 'Pillar 2: Social Good',
-    Spent: 5000,
-    SpentColor: Pillar1Colors[0],
-    'Not Spent': 500,
-    'Not SpentColor': Pillar1Colors[1],
-  },
-  {
-    name: 'Pillar 1: Church Restorations',
-    Spent: 9000,
-    SpentColor: Pillar1Colors[0],
-    'Not Spent': 900,
-    'Not SpentColor': Pillar1Colors[1],
-  },
-];
+interface ChartDataProps {
+  name: string;
+  Spent: number;
+  SpentColor: string;
+  'Not Spent': number;
+  'Not SpentColor': string;
+}
 
 // @ts-ignore
 export const PillarConfigBase: BarSvgProps = {
   ...CommonBarProps,
   ...CommonBarPropsHorizontal,
   indexBy: 'name',
-  keys: ChartKeys, //Loose it up
+  keys: ChartKeys,
 };
 
 type pillarProps = {
@@ -41,7 +32,7 @@ type pillarProps = {
 };
 
 export function formatPillarData(data: pillarProps[]): any[] {
-  const chartData: any[] = [];
+  const chartData: ChartDataProps[] = [];
 
   data.map((pillar: pillarProps) => {
     chartData.push({
@@ -52,7 +43,7 @@ export function formatPillarData(data: pillarProps[]): any[] {
       'Not SpentColor': Pillar1Colors[1],
     });
   });
-  console.log('chartData', chartData);
+
   return chartData;
 }
 

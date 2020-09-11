@@ -9,14 +9,16 @@ import {
   formatPillarData,
   PillarConfigBase,
 } from 'app/components/charts/Pillars/data';
+import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 
 interface PillarContainerProps {
   data: any;
   keys: any;
+  breakdown: string[];
+  setBreakdown: Function;
 }
 
 export const PillarContainer = (props: PillarContainerProps) => {
-  console.log(props.data);
   return (
     <div
       css={`
@@ -24,7 +26,8 @@ export const PillarContainer = (props: PillarContainerProps) => {
       `}
     >
       <PillarCountContainer />
-      <ChartWrapper height={200}>
+      <BreakdownSelect />
+      <ChartWrapper height={120}>
         <ResponsiveBar
           {...PillarConfigBase}
           data={formatPillarData(props.data)}

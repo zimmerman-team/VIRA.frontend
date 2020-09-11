@@ -33,11 +33,11 @@ export const LegendData: LegendItemProps[] = [
 
 export const LegendDataPillars: LegendItemProps[] = [
   {
-    legendColor: '#242E42',
-    legendName: 'Spent',
-  },
-  {
     legendColor: '#828894',
     legendName: 'Not Spent',
+  },
+  {
+    legendColor: '#242E42',
+    legendName: 'Spent',
   },
 ];

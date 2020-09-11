@@ -7,8 +7,8 @@ import { BarChartBottomAxis } from 'app/components/charts/common/BarChartBottomA
 export const CommonBarProps: BarSvgProps = {
   margin: {
     top: 0,
-    right: 20,
-    bottom: 60,
+    right: 0,
+    bottom: 0,
     left: 255,
   },
   enableGridY: true,

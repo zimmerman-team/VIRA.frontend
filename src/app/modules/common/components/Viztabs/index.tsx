@@ -40,7 +40,6 @@ type PropsModel = {
   onBubbleSelect: any;
   geoMapData: any;
   pillarData: any;
-  // barChartDataPriority: any;
 };
 
 export function Viztabs(props: PropsModel) {
@@ -150,10 +149,7 @@ export function Viztabs(props: PropsModel) {
         `}
       >
         <TabPanel value={props.value} index={0} data-cy="pillars-panel">
-          <PillarContainer
-            data={props.pillarData}
-            keys={['Spent', 'Not Spent']}
-          />
+          <PillarContainer data={props.pillarData} />
         </TabPanel>
 
         <TabPanel value={props.value} index={1} data-cy="prio-panel">

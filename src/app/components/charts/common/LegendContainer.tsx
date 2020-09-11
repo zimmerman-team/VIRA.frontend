@@ -20,12 +20,12 @@ export const LegendContainer = (props: LegendContainerProps) => {
         width: 500px;
         flex-wrap: wrap;
         justify-content: ${props.justify ? props.justify : 'initial'};
-        outline: 1px solid red;
       `}
     >
-      {props.items.map((item: LegendItemProps) => (
+      {props.items.map((item: LegendItemProps, index) => (
         <LegendItem
           key={item.legendName}
+          index={index}
           legendColor={item.legendColor}
           legendName={item.legendName}
         />
