@@ -8,7 +8,7 @@ export const CustomBarComponent = (props: BarItemProps) => (
     rx={0}
     ry={0}
     width={props.width}
-    height="25"
+    height="24"
     fill={props.color}
   />
 );

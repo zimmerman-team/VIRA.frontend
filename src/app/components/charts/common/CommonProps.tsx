@@ -1,13 +1,13 @@
 import React from 'react';
 import { BarSvgProps } from '@nivo/bar';
-import { CustomBarComponent } from 'app/components/graphs/common/CustomBarComponent';
-import { BarChartLeftAxis } from 'app/components/graphs/common/BarChartLeftAxis';
-import { BarChartBottomAxis } from 'app/components/graphs/common/BarChartBottomAxis';
+import { CustomBarComponent } from 'app/components/charts/common/CustomBarComponent';
+import { BarChartLeftAxis } from 'app/components/charts/common/BarChartLeftAxis';
+import { BarChartBottomAxis } from 'app/components/charts/common/BarChartBottomAxis';
 
 export const CommonBarProps: BarSvgProps = {
   margin: {
     top: 0,
-    right: 0,
+    right: 20,
     bottom: 60,
     left: 255,
   },

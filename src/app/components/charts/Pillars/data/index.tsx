@@ -30,11 +30,31 @@ const ChartData = [
 export const PillarConfigBase: BarSvgProps = {
   ...CommonBarProps,
   ...CommonBarPropsHorizontal,
-  data: ChartData, //Loose it up
   indexBy: 'name',
   keys: ChartKeys, //Loose it up
-  maxValue: 15000,
 };
+
+type pillarProps = {
+  name: string;
+  budget: number;
+  spent: number;
+};
+
+export function formatPillarData(data: pillarProps[]): any[] {
+  const chartData: any[] = [];
+
+  data.map((pillar: pillarProps) => {
+    chartData.push({
+      name: pillar.name,
+      Spent: pillar.spent,
+      SpentColor: Pillar1Colors[0],
+      'Not Spent': pillar.budget - pillar.spent,
+      'Not SpentColor': Pillar1Colors[1],
+    });
+  });
+  console.log('chartData', chartData);
+  return chartData;
+}
 
 /* ------------------------------------------------------------ */
 /* multiyear */

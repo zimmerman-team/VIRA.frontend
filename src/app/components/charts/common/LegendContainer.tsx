@@ -2,7 +2,7 @@ import React from 'react';
 import {
   LegendItemProps,
   LegendItem,
-} from 'app/components/graphs/common/LegendItem';
+} from 'app/components/charts/common/LegendItem';
 
 export interface LegendContainerProps {
   items: LegendItemProps[];

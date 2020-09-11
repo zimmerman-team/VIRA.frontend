@@ -5,7 +5,10 @@ import { ResponsiveBar } from '@nivo/bar';
 import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
 import { LegendContainer } from 'app/components/charts/common/LegendContainer';
 import { LegendDataPillars } from 'app/components/charts/common/LegendData';
-import { PillarConfigBase } from 'app/components/charts/Pillars/data';
+import {
+  formatPillarData,
+  PillarConfigBase,
+} from 'app/components/charts/Pillars/data';
 
 interface PillarContainerProps {
   data: any;
@@ -13,6 +16,7 @@ interface PillarContainerProps {
 }
 
 export const PillarContainer = (props: PillarContainerProps) => {
+  console.log(props.data);
   return (
     <div
       css={`
@@ -22,9 +26,8 @@ export const PillarContainer = (props: PillarContainerProps) => {
       <PillarCountContainer />
       <ChartWrapper height={200}>
         <ResponsiveBar
-          data={props.data}
-          keys={props.data}
           {...PillarConfigBase}
+          data={formatPillarData(props.data)}
         />
       </ChartWrapper>
       <div
