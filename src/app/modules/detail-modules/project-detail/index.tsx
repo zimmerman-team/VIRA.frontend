@@ -68,6 +68,46 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   const projectBudgetDataAction = useStoreActions(
     (actions) => actions.projectBudgetData.fetch
   );
+
+  const getPillarDataByBudget = useStoreActions(
+    (actions) => actions.getPillarDataByBudget.fetch
+  );
+  const getPillarDataByDuration = useStoreActions(
+    (actions) => actions.getPillarDataByDuration.fetch
+  );
+  const getPriorityAreaBarChartData = useStoreActions(
+    (actions) => actions.getPriorityAreaBarChartData.fetch
+  );
+  const getTargetGroupBarChartData = useStoreActions(
+    (actions) => actions.getTargetGroupBarChartData.fetch
+  );
+  const getOneMultiYearBarChartData = useStoreActions(
+    (actions) => actions.getOneMultiYearBarChartData.fetch
+  );
+
+  const signedInUserRole = useStoreState((state) =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState((state) =>
+    get(state.userDetails.data, 'email', '')
+  );
+
+  const pillarDataByBudget = useStoreState(
+    (state) => state.getPillarDataByBudget.data
+  );
+  const pillarDataByDuration = useStoreState(
+    (state) => state.getPillarDataByDuration.data
+  );
+  const priorityAreaBarChartData = useStoreState(
+    (state) => state.getPriorityAreaBarChartData.data
+  );
+  const targetGroupBarChartData = useStoreState(
+    (state) => state.getTargetGroupBarChartData.data
+  );
+  const oneMultiYearBarChartData = useStoreState(
+    (state) => state.getOneMultiYearBarChartData.data
+  );
+
   const ppVizData = useStoreState((state) => state.getPPVizData.data);
   const SDGVizData = useStoreState((state) => state.getSDGVizData.data);
   const geoMapData = useStoreState((state) => state.getGeoMapData.data);
@@ -126,6 +166,45 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
             projectID: projectDetailRecord[0]._id,
           },
         });
+        getPillarDataByBudget({
+          socketName: 'getPillarDataByBudget',
+          values: {
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getPillarDataByDuration({
+          socketName: 'getPillarDataByDuration',
+          values: {
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+          },
+        });
+        getPriorityAreaBarChartData({
+          socketName: 'getPriorityAreaBarChartData',
+          values: {
+            breakdownBy: 'none',
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+          },
+        });
+        getTargetGroupBarChartData({
+          socketName: 'getTargetGroupBarChartData',
+          values: {
+            breakdownBy: 'none',
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+          },
+        });
+        getOneMultiYearBarChartData({
+          socketName: 'getOneMultiYearBarChartData',
+          values: {
+            breakdownBy: 'none',
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+          },
+        });
 
         setprojectDetails({
           project_id: projectDetailRecord[0].project_number,
@@ -178,6 +257,14 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
+  console.log('=========================================================');
+  console.log('pillarDataByBudget', pillarDataByBudget);
+  console.log('pillarDataByDuration', pillarDataByDuration);
+  console.log('priorityAreaBarChartData', priorityAreaBarChartData);
+  console.log('targetGroupBarChartData', targetGroupBarChartData);
+  console.log('oneMultiYearBarChartData', oneMultiYearBarChartData);
+  console.log('=========================================================');
+
   return (
     <ProjectDetailLayout
       projectDetail={projectDetails}
@@ -192,6 +279,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
       remainingBudget={projectBudgetData}
       // @ts-ignore
       match={props.match}
+      pillarData={pillarDataByBudget}
     />
   );
 };
