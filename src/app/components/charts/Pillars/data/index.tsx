@@ -31,7 +31,7 @@ type pillarProps = {
   spent: number;
 };
 
-export function formatPillarData(data: pillarProps[]): any[] {
+export function formatPillarData(data: pillarProps[]): ChartDataProps[] {
   const chartData: ChartDataProps[] = [];
 
   data.map((pillar: pillarProps) => {

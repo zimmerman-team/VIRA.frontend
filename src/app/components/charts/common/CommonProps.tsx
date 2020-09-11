@@ -13,16 +13,6 @@ export const CommonBarProps: BarSvgProps = {
   },
   enableGridY: true,
   enableGridX: false,
-  /*theme: {
-    grid: {
-      line: {
-        stroke: "pink",
-        strokeWidth: 2,
-        strokeDasharray: "4 4",
-      },
-    },
-  },*/
-
   // @ts-ignore
   axisLeft: { renderTick: BarChartLeftAxis },
   // @ts-ignore

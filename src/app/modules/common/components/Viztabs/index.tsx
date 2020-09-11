@@ -27,6 +27,7 @@ import {
 } from 'app/modules/common/components/Viztabs/utils/getTitle';
 import { PillarCountContainer } from 'app/components/charts/BarCharts/common/PillarCount';
 import { PillarContainer } from 'app/components/charts/Pillars';
+import { PriorityAreaContainer } from 'app/components/charts/PriorityArea';
 
 type PropsModel = {
   value: number;
@@ -40,6 +41,9 @@ type PropsModel = {
   onBubbleSelect: any;
   geoMapData: any;
   pillarData: any;
+  priorityAreaData: any;
+  targetGroupData: any;
+  oneAndMultiYearData: any;
 };
 
 export function Viztabs(props: PropsModel) {
@@ -154,33 +158,7 @@ export function Viztabs(props: PropsModel) {
 
         <TabPanel value={props.value} index={1} data-cy="prio-panel">
           {/* Priority Area horizontal bar chart */}
-          <HorizontalBarChart
-            colors={[
-              ProjectPalette.primary.main,
-              ...uniqBy(
-                ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-                  [],
-                'value2Color'
-              ).map((item: BarChartItemModel) => item.value2Color),
-              ...uniqBy(
-                ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-                  [],
-                'value4Color'
-              ).map((item: BarChartItemModel) => item.value4Color),
-            ]}
-            values={
-              ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-              []
-            }
-            maxValue={Math.max(
-              ...(
-                ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-                []
-              ).map((item: BarChartItemModel) => item.value1 + item.value2)
-            )}
-            chartLegends={props.barChartLegends}
-            onChartLegendClick={props.onBarChartLegendClick}
-          />
+          <PriorityAreaContainer data={props.priorityAreaData} />
         </TabPanel>
 
         <TabPanel value={props.value} index={2} data-cy="target-group-panel">

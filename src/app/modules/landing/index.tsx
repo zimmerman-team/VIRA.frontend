@@ -230,12 +230,15 @@ function LandingLayout(props: PropsModel) {
       </Hidden>
 
       {/* viz tabs */}
-      {/* the viztabs contains the tab navigaion */}
+      {/* the viztabs contains the tab navigation */}
       <Viztabs
         value={value}
         onTabClick={handleChange}
         barChartData={ppVizData}
         pillarData={pillarDataByBudget}
+        priorityAreaData={priorityAreaBarChartData}
+        targetGroupData={targetGroupBarChartData}
+        oneAndMultiYearData={oneMultiYearBarChartData}
         barChartLegends={barChartLegends}
         onBarChartLegendClick={onBarChartLegendClick}
         bubbleChartData={{ ...bubbleMockData, children: SDGVizData }}

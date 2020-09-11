@@ -1,36 +1,34 @@
 import React from 'react';
-import { PillarCountContainer } from 'app/components/charts/Pillars/info';
 import { ResponsiveBar } from '@nivo/bar';
-
 import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
-import { LegendContainer } from 'app/components/charts/common/LegendContainer';
-import { LegendDataPillars } from 'app/components/charts/common/LegendData';
-import {
-  formatPillarData,
-  PillarConfigBase,
-} from 'app/components/charts/Pillars/data';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
+import {
+  formatPriorityAreaData,
+  PriorityAreaConfigBase,
+} from 'app/components/charts/PriorityArea/data';
 
-interface PillarContainerProps {
+interface PriorityAreaContainerProps {
   data: any;
   keys: any;
   breakdown: string[];
   setBreakdown: Function;
 }
 
-export const PillarContainer = (props: PillarContainerProps) => {
+export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
+  console.log('data', props.data);
   return (
     <div
       css={`
         width: 100%;
       `}
     >
-      <PillarCountContainer />
       <BreakdownSelect />
-      <ChartWrapper height={60 * 2}>
+      <ChartWrapper height={60 * 9}>
+        {' '}
+        // 60 is the height for 1 bar, there are 9 bars in this case
         <ResponsiveBar
-          {...PillarConfigBase}
-          data={formatPillarData(props.data)}
+          {...PriorityAreaConfigBase}
+          data={formatPriorityAreaData(props.data)}
         />
       </ChartWrapper>
       <div
@@ -42,7 +40,7 @@ export const PillarContainer = (props: PillarContainerProps) => {
           align-items: flex-end;
         `}
       >
-        <LegendContainer items={LegendDataPillars} justify="flex-end" />
+        {/*<LegendContainer items={LegendDataPillars} justify="flex-end" />*/}
       </div>
     </div>
   );

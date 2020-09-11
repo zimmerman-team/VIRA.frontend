@@ -18,7 +18,6 @@ export const BarChartBottomAxis = (props: BarChartBottomAxisProps) => {
           dominantBaseline: 'auto',
         }}
         textAnchor="start"
-        // transform="translate(0, -10)"
       >
         {props.value}
       </text>

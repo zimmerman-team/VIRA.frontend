@@ -128,6 +128,9 @@ export const ProjectDetailLayout = (props: any) => {
         onBubbleSelect={props.onBubbleSelect}
         geoMapData={props.geoMapData}
         pillarData={props.pillarData}
+        priorityAreaData={props.priorityAreaBarChartData}
+        targetGroupData={props.targetGroupBarChartData}
+        oneAndMultiYearData={props.oneAndMultiYearData}
       />
 
       {/* ---------------------------------------------------------------------*/}

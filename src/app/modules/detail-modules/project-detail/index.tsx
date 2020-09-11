@@ -18,6 +18,7 @@ import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTa
 import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 
 import { AppConfig } from 'app/data';
+import { Viztabs } from 'app/modules/common/components/Viztabs';
 
 const ProjectDetailModuleF = (props: PropsModel | null) => {
   useTitle(`${AppConfig.appTitleLong} Project detail`);
@@ -280,6 +281,9 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
       // @ts-ignore
       match={props.match}
       pillarData={pillarDataByBudget}
+      priorityAreaData={priorityAreaBarChartData}
+      targetGroupData={targetGroupBarChartData}
+      oneAndMultiYearData={oneMultiYearBarChartData}
     />
   );
 };
