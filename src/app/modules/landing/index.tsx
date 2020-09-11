@@ -25,7 +25,6 @@ import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import MomentAdapter from '@date-io/moment';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
 import { Viztabs } from '../common/components/Viztabs';
-import { formatPillarData } from 'app/components/charts/Pillars/data';
 
 /**
  * Landing layout.
@@ -158,6 +157,8 @@ function LandingLayout(props: PropsModel) {
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getPillarDataByDuration({
@@ -165,6 +166,8 @@ function LandingLayout(props: PropsModel) {
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getPriorityAreaBarChartData({
@@ -173,6 +176,8 @@ function LandingLayout(props: PropsModel) {
         breakdownBy: 'none',
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getTargetGroupBarChartData({
@@ -181,6 +186,8 @@ function LandingLayout(props: PropsModel) {
         breakdownBy: 'none',
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getOneMultiYearBarChartData({
@@ -189,6 +196,8 @@ function LandingLayout(props: PropsModel) {
         breakdownBy: 'none',
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
   }, [signedInUserRole, signedInUserEmail, selectedStartDate, selectedEndDate]);
@@ -206,13 +215,7 @@ function LandingLayout(props: PropsModel) {
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
-  // console.log('=========================================================');
-  // console.log('pillarDataByBudget', pillarDataByBudget);
-  // console.log('pillarDataByDuration', pillarDataByDuration);
-  // console.log('priorityAreaBarChartData', priorityAreaBarChartData);
-  // console.log('targetGroupBarChartData', targetGroupBarChartData);
-  // console.log('oneMultiYearBarChartData', oneMultiYearBarChartData);
-  // console.log('=========================================================');
+
   return (
     <React.Fragment>
       {/* -------------------------------------------------------------- */}
