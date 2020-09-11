@@ -231,7 +231,7 @@ function LandingLayout(props: PropsModel) {
         value={value}
         onTabClick={handleChange}
         barChartData={ppVizData}
-        // barChartDataPriority={pillarDataByBudget}
+        pillarDataByBudget={pillarDataByBudget}
         barChartLegends={barChartLegends}
         onBarChartLegendClick={onBarChartLegendClick}
         bubbleChartData={{ ...bubbleMockData, children: SDGVizData }}

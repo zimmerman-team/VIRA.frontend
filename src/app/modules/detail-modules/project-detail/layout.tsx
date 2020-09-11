@@ -21,7 +21,7 @@ export const ProjectDetailLayout = (props: any) => {
     setValue(newValue);
   };
   const showGenerateBtn = useStoreState(
-    state =>
+    (state) =>
       get(state.userDetails.data, 'role', '') === 'Super admin' ||
       get(state.userDetails.data, 'role', '') === 'Administrator' ||
       get(state.userDetails.data, 'role', '') === 'Manager' ||
@@ -127,6 +127,7 @@ export const ProjectDetailLayout = (props: any) => {
         selectedBubble={props.selectedSDG}
         onBubbleSelect={props.onBubbleSelect}
         geoMapData={props.geoMapData}
+        pillarData={{}}
       />
 
       {/* ---------------------------------------------------------------------*/}

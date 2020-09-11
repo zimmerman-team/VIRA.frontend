@@ -25,6 +25,8 @@ import {
   getTitle,
   getTitleDesc,
 } from 'app/modules/common/components/Viztabs/utils/getTitle';
+import { PillarCountContainer } from 'app/components/charts/BarCharts/common/PillarCount';
+import { PillarContainer } from 'app/components/charts/Pillars';
 
 type PropsModel = {
   value: number;
@@ -37,6 +39,8 @@ type PropsModel = {
   selectedBubble: any;
   onBubbleSelect: any;
   geoMapData: any;
+  pillarData: any;
+  // barChartDataPriority: any;
 };
 
 export function Viztabs(props: PropsModel) {
@@ -146,7 +150,10 @@ export function Viztabs(props: PropsModel) {
         `}
       >
         <TabPanel value={props.value} index={0} data-cy="pillars-panel">
-          <h1>TODO</h1>
+          <PillarContainer
+            data={props.pillarData}
+            keys={['Spent', 'Not Spent']}
+          />
         </TabPanel>
 
         <TabPanel value={props.value} index={1} data-cy="prio-panel">
