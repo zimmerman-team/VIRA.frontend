@@ -27,7 +27,7 @@ export const PillarContainer = (props: PillarContainerProps) => {
     >
       <PillarCountContainer />
       <BreakdownSelect />
-      <ChartWrapper height={60 * 2}>
+      <ChartWrapper height={60 * props.data.length}>
         <ResponsiveBar
           {...PillarConfigBase}
           data={formatPillarData(props.data)}

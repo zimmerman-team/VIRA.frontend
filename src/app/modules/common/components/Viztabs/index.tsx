@@ -14,8 +14,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import { GeoMap } from 'app/components/charts/GeoMap';
 import { BubbleChart } from 'app/components/charts/Bubble';
-import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import {
   TabStyle,
   a11yProps,
@@ -25,9 +23,10 @@ import {
   getTitle,
   getTitleDesc,
 } from 'app/modules/common/components/Viztabs/utils/getTitle';
-import { PillarCountContainer } from 'app/components/charts/BarCharts/common/PillarCount';
 import { PillarContainer } from 'app/components/charts/Pillars';
 import { PriorityAreaContainer } from 'app/components/charts/PriorityArea';
+import { TargetGroupContainer } from 'app/components/charts/TargetGroup';
+import { OneYearAndMultiYearContainer } from 'app/components/charts/OneYearAndMultiYear';
 
 type PropsModel = {
   value: number;
@@ -162,11 +161,13 @@ export function Viztabs(props: PropsModel) {
         </TabPanel>
 
         <TabPanel value={props.value} index={2} data-cy="target-group-panel">
-          <h1>TODO</h1>
+          {console.log('targetgroupdata', props.targetGroupData)}
+          <TargetGroupContainer data={props.targetGroupData} />
         </TabPanel>
 
         <TabPanel value={props.value} index={3} data-cy="multi-year-panel">
-          <h1>TODO</h1>
+          {console.log('OneYearAndMultiYear', props.oneAndMultiYearData)}
+          <OneYearAndMultiYearContainer data={props.oneAndMultiYearData} />
         </TabPanel>
 
         <TabPanel value={props.value} index={4} data-cy="sdg-panel">

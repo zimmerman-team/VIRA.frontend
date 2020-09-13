@@ -3,18 +3,18 @@ import { ResponsiveBar } from '@nivo/bar';
 import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 import {
-  formatPriorityAreaData,
-  PriorityAreaConfigBase,
-} from 'app/components/charts/PriorityArea/data';
+  formatTargetGroupData,
+  TargetGroupConfigBase,
+} from 'app/components/charts/TargetGroup/data';
 
-interface PriorityAreaContainerProps {
+interface TargetGroupContainerProps {
   data: any;
   keys: any;
   breakdown: string[];
   setBreakdown: Function;
 }
 
-export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
+export const TargetGroupContainer = (props: TargetGroupContainerProps) => {
   return (
     <div
       css={`
@@ -24,8 +24,8 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
       <BreakdownSelect />
       <ChartWrapper height={60 * props.data.length}>
         <ResponsiveBar
-          {...PriorityAreaConfigBase}
-          data={formatPriorityAreaData(props.data)}
+          {...TargetGroupConfigBase}
+          data={formatTargetGroupData(props.data)}
         />
       </ChartWrapper>
       <div
