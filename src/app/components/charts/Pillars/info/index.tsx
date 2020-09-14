@@ -1,4 +1,7 @@
 import React from 'react';
+import get from 'lodash/get';
+import find from 'lodash/find';
+import sumBy from 'lodash/sumBy';
 import { useTranslation } from 'react-i18next';
 
 interface PillarItemProps {
@@ -7,7 +10,8 @@ interface PillarItemProps {
 }
 
 interface PillarInfoProps {
-  items?: PillarItemProps[];
+  data: any[];
+  // items?: PillarItemProps[];
 }
 
 export const PillarCountDivider = () => (
@@ -28,26 +32,60 @@ export const PillarCountDivider = () => (
 
 export const PillarInfoData: PillarItemProps[] = [
   {
-    name: 'Churches & Organs',
-    count: '13',
+    name: 'Social good',
+    count: '0',
   },
   {
-    name: 'Social good',
-    count: '67',
+    name: 'Churches & Organs',
+    count: '0',
   },
   {
     name: 'Budget Spent Pillar 1',
-    count: '250000',
+    count: '0',
   },
   {
     name: 'Budget Spent Pillar 2',
-    count: '650000',
+    count: '0',
   },
   {
     name: 'People reachout of People targeted',
-    count: '746/893',
+    count: '0/0',
   },
 ];
+
+function getItems(data: any[]) {
+  const items = [...PillarInfoData];
+  items[0].count = get(
+    find(data, (item: any) => item.name === 'Pillar 1: Social Good Projects'),
+    'count',
+    0
+  );
+  items[2].count = get(
+    find(data, (item: any) => item.name === 'Pillar 1: Social Good Projects'),
+    'spent',
+    0
+  );
+  items[1].count = get(
+    find(
+      data,
+      (item: any) =>
+        item.name === 'Pillar 2: Church & Organ restorations projects'
+    ),
+    'count',
+    0
+  );
+  items[3].count = get(
+    find(
+      data,
+      (item: any) =>
+        item.name === 'Pillar 2: Church & Organ restorations projects'
+    ),
+    'spent',
+    0
+  );
+  items[4].count = `${sumBy(data, 'reached')}/${sumBy(data, 'targeted')}`;
+  return items;
+}
 
 export const PillarCountItem = (props: PillarItemProps) => {
   const { t, i18n } = useTranslation();
@@ -102,7 +140,7 @@ export const PillarCountContainer = (props: PillarInfoProps) => {
         margin-bottom: 50px;
       `}
     >
-      {PillarInfoData.map((item: PillarItemProps) => (
+      {getItems(props.data).map((item: PillarItemProps) => (
         <React.Fragment key={item.name}>
           <PillarCountItem name={item.name} count={item.count} />
           <PillarCountDivider />

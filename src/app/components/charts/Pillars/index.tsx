@@ -1,4 +1,5 @@
 import React from 'react';
+import get from 'lodash/get';
 import { PillarCountContainer } from 'app/components/charts/Pillars/info';
 import { ResponsiveBar } from '@nivo/bar';
 
@@ -25,12 +26,12 @@ export const PillarContainer = (props: PillarContainerProps) => {
         width: 100%;
       `}
     >
-      <PillarCountContainer />
+      <PillarCountContainer data={props.data} />
       {/* <BreakdownSelect /> */}
-      <ChartWrapper height={60 * props.data.length}>
+      <ChartWrapper height={60 * get(props.data, 'length', 0)}>
         <ResponsiveBar
           {...PillarConfigBase}
-          data={formatPillarData(props.data)}
+          data={formatPillarData(props.data || [])}
         />
       </ChartWrapper>
       <div

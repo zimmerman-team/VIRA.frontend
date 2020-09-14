@@ -39,7 +39,12 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
       <ChartWrapper height={56 * props.data.length}>
         <ResponsiveBar
           {...PriorityAreaConfigBase}
-          data={formatPriorityAreaData(props.selectedBreakdown, props.data)}
+          data={
+            formatPriorityAreaData(
+              props.selectedBreakdown,
+              props.data
+            ) as object[]
+          }
           keys={getKeys(props.selectedBreakdown)}
         />
       </ChartWrapper>
@@ -51,7 +56,7 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
           justify-content: flex-end;
           align-items: flex-end;
         `}
-      ></div>
+      />
     </div>
   );
 };
