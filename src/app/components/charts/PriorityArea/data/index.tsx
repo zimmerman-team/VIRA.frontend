@@ -46,6 +46,7 @@ export function getKeys(selectedBreakdown: string) {
       return ['Budget'];
     case 'Target Group':
       return [
+        'Children & youth (up to +/- 30 years)',
         'The Elderly (65+)',
         'Women & Girls',
         'Refugees',
@@ -211,7 +212,7 @@ export function formatPriorityAreaOneMultiYearData(
 /* ------------------------------------------------------------ */
 /* People Reached */
 
-interface PriorityAreaPopleReachedProps {
+export interface PriorityAreaPopleReachedProps {
   budget: number;
   contribution: number;
   name: string;
@@ -219,7 +220,7 @@ interface PriorityAreaPopleReachedProps {
   target_Value: number;
 }
 
-interface ChartDataPropsPeopleReached {
+export interface ChartDataPropsPeopleReached {
   name: string;
   'People Reached': number;
   'People ReachedColor': string;
@@ -233,7 +234,7 @@ export function formatPriorityAreaPeopleReachedData(
   const chartData: ChartDataPropsPeopleReached[] = [];
   const colors = ['#242E42', '#828894'];
 
-  data.map((priorityArea: PriorityAreaPopleReachedProps) => {
+  data.forEach((priorityArea: PriorityAreaPopleReachedProps) => {
     chartData.push({
       name: priorityArea.name,
       // 'People Reached': get(priorityArea, 'reached_Value', 0),
@@ -251,7 +252,7 @@ export function formatPriorityAreaPeopleReachedData(
 /* ------------------------------------------------------------ */
 /* SDG's */
 
-interface PriorityAreaSDGsProps {
+export interface PriorityAreaSDGsProps {
   name: string;
   budget: number;
   children: ChildSDG;
@@ -260,7 +261,7 @@ interface PriorityAreaSDGsProps {
   target: number;
 }
 
-interface ChildSDG {
+export interface ChildSDG {
   name: string;
   budget: number;
   contribution: number;
@@ -270,7 +271,7 @@ interface ChildSDG {
 }
 
 // TODO: Unclear from data vs design which data to use.
-interface ChartDataPropsSDGs {
+export interface ChartDataPropsSDGs {
   name: string;
   'No poverty': number;
   'No povertyColor': string;

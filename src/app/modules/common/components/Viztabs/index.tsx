@@ -168,7 +168,11 @@ export function Viztabs(props: PropsModel) {
         </TabPanel>
 
         <TabPanel value={props.value} index={2} data-cy="target-group-panel">
-          <TargetGroupContainer data={props.targetGroupData} />
+          <TargetGroupContainer
+            data={props.targetGroupData}
+            selectedBreakdown={props.selectedBreakdown}
+            setSelectedBreakdown={props.onBreakdownSelect}
+          />
         </TabPanel>
 
         <TabPanel value={props.value} index={3} data-cy="multi-year-panel">

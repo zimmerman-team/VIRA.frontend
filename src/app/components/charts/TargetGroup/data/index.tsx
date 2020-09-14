@@ -3,8 +3,12 @@ import {
   CommonBarProps,
   CommonBarPropsHorizontal,
 } from 'app/components/charts/common/CommonProps';
+import {
+  ChartDataPropsPeopleReached,
+  formatPriorityAreaSDGsData,
+} from '../../PriorityArea/data';
 
-const BarColor: string = '#242E42';
+const BarColor = '#242E42';
 const ChartKeys: string[] = ['Budget'];
 
 /* ------------------------------------------------------------ */
@@ -31,12 +35,15 @@ type TargetGroupDataProps = {
   target: number;
 };
 
-export function formatTargetGroupData(
+/* ------------------------------------------------------------ */
+/* Target Group */
+
+export function formatTargetGroupDataBudget(
   data: TargetGroupDataProps[]
 ): ChartDataProps[] {
   const chartData: ChartDataProps[] = [];
 
-  data.map((TargetGroup: TargetGroupDataProps) => {
+  data.forEach((TargetGroup: TargetGroupDataProps) => {
     chartData.push({
       name: TargetGroup.name,
       Budget: TargetGroup.budget,
@@ -48,13 +55,56 @@ export function formatTargetGroupData(
 }
 
 /* ------------------------------------------------------------ */
-/* Target Group */
-
-/* ------------------------------------------------------------ */
-/* One Year & Multi Year */
-
-/* ------------------------------------------------------------ */
 /* People Reached */
+
+export interface PriorityAreaPopleReachedProps {
+  budget: number;
+  contribution: number;
+  name: string;
+  reached: number;
+  target: number;
+}
+
+export function formatPriorityAreaPeopleReachedData(
+  data: PriorityAreaPopleReachedProps[]
+): ChartDataPropsPeopleReached[] {
+  const chartData: ChartDataPropsPeopleReached[] = [];
+  const colors = ['#242E42', '#828894'];
+
+  data.forEach((priorityArea: PriorityAreaPopleReachedProps) => {
+    chartData.push({
+      name: priorityArea.name,
+      'People Reached': priorityArea.reached,
+      'People ReachedColor': colors[0],
+      'People Targeted': priorityArea.target,
+      'People TargetedColor': colors[1],
+    });
+  });
+
+  return chartData;
+}
 
 /* ------------------------------------------------------------ */
 /* SDG's */
+
+/* ------------------------------------------------------------ */
+/* Generic */
+
+export function formatTargetGroupData(selectedBreakdown: string, data: any) {
+  let formattedData = {};
+
+  switch (selectedBreakdown) {
+    case 'None':
+      formattedData = formatTargetGroupDataBudget(data);
+      break;
+    case 'People Reached':
+      formattedData = formatPriorityAreaPeopleReachedData(data);
+      break;
+    case 'SDGs':
+      formattedData = formatPriorityAreaSDGsData(data);
+      break;
+    default:
+      formattedData = formatTargetGroupDataBudget(data);
+  }
+  return formattedData;
+}

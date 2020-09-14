@@ -185,7 +185,7 @@ function LandingLayout(props: PropsModel) {
     getTargetGroupBarChartData({
       socketName: 'getTargetGroupBarChartData',
       values: {
-        breakdownBy: 'none',
+        breakdownBy: selectedBreakdown,
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
         startDate: selectedStartDate._d,
