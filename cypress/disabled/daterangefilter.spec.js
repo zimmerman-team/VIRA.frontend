@@ -6,9 +6,7 @@ describe('date range filter test', () => {
   });
 
   it('daterange picker exists', () => {
-    cy.get('[data-testid="Filter Table-iconButton"]')
-      .should('exist')
-      .click();
+    cy.get('[data-testid="Filter Table-iconButton"]').should('exist').click();
 
     cy.findByText('This Week').should('exist');
     cy.findByText('Last Week').should('exist');

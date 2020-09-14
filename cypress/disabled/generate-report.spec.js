@@ -13,6 +13,10 @@ describe('report flow', () => {
   });
 
   it('fill in outcomes', () => {
+    cy.get('.header').happoScreenshot({
+      component: 'Outcomes fields',
+      variant: 'large',
+    });
     cy.findByTestId('outcomes-title').should('exist');
     cy.findByTestId('add-location').should('exist');
     cy.findByTestId('exact-location').should('exist');
@@ -164,10 +168,10 @@ describe('report flow', () => {
       .click();
   });*/
 
-  /*it('make screenshot', () => {
+  it('make screenshot', () => {
     cy.get('body').happoScreenshot({
-      component: 'Create report',
+      component: 'Generate report',
       variant: 'base',
     });
-  });*/
+  });
 });

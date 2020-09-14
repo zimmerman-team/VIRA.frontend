@@ -45,6 +45,7 @@ export const AdminManageOverviewToolbar = (props: HeaderParams) => {
       {searchOpen && (
         <InputBase
           autoFocus
+          // focusout={() => props.searchValue === '' && setSearchOpen(false)}
           onBlur={() => props.searchValue === '' && setSearchOpen(false)}
           css={`
             height: 30px;
@@ -64,7 +65,7 @@ export const AdminManageOverviewToolbar = (props: HeaderParams) => {
           fullWidth
           inputProps={{ 'aria-label': 'subject' }}
           value={props.searchValue}
-          onChange={e =>
+          onChange={(e) =>
             props.onSearchChange && props.onSearchChange(e.target.value)
           }
         />
@@ -86,7 +87,7 @@ export const AdminManageOverviewToolbar = (props: HeaderParams) => {
         }
         content={[
           <List key="list">
-            {(props.sortOptions || []).map(option => (
+            {(props.sortOptions || []).map((option) => (
               <ListItem
                 button
                 key={option.value}

@@ -12,13 +12,13 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-/**
- * @type {Cypress.PluginConfig}
- */
-module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
-};
+// /**
+//  * @type {Cypress.PluginConfig}
+//  */
+// module.exports = (on, config) => {
+//   // `on` is used to hook into various events Cypress emits
+//   // `config` is the resolved Cypress config
+// };
 
 // const pickle = require('picklejs/cypress/plugin');
 
@@ -44,7 +44,7 @@ dotenv.load();
 
 const happoTask = require('happo-cypress/task');
 
-const overrideEnvVars = config => {
+const overrideEnvVars = (config) => {
   const baseUrl = getenv.string('REACT_APP_CYPRESS_baseUrl', '');
   const username = getenv.string('REACT_APP_CYPRESS_USER', '');
   const password = getenv.string('REACT_APP_CYPRESS_PASS', '');
