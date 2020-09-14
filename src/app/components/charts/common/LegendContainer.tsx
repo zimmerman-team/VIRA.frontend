@@ -19,6 +19,8 @@ export const LegendContainer = (props: LegendContainerProps) => {
         display: flex;
         width: 500px;
         flex-wrap: wrap;
+        overflow-y: auto;
+        max-height: 150px;
         justify-content: ${props.justify ? props.justify : 'initial'};
       `}
     >

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface LegendItemProps {
   legendColor?: string;
@@ -7,6 +8,7 @@ export interface LegendItemProps {
 }
 
 export const LegendItem = (props: LegendItemProps) => {
+  const { t } = useTranslation();
   return (
     <li
       css={`
@@ -35,7 +37,7 @@ export const LegendItem = (props: LegendItemProps) => {
           font-weight: 400;
         `}
       >
-        {props.legendName}
+        {t(props.legendName || '')}
       </span>
     </li>
   );

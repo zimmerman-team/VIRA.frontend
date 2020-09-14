@@ -8,6 +8,12 @@ import {
   PriorityAreaConfigBase,
 } from 'app/components/charts/PriorityArea/data';
 import { LegendContainer } from '../common/LegendContainer';
+import {
+  LegendDataSDGs,
+  LegendDataReached,
+  LegendDataDuration,
+  LegendDataTargetGroups,
+} from '../common/LegendData';
 
 interface PriorityAreaContainerProps {
   data: any;
@@ -23,6 +29,23 @@ const breakdownOptions = [
   'People Reached',
   'SDGs',
 ];
+
+function getLegendData(breakdown: string) {
+  switch (breakdown) {
+    case breakdownOptions[0]:
+      return [];
+    case breakdownOptions[1]:
+      return LegendDataTargetGroups;
+    case breakdownOptions[2]:
+      return LegendDataDuration;
+    case breakdownOptions[3]:
+      return LegendDataReached;
+    case breakdownOptions[4]:
+      return LegendDataSDGs;
+    default:
+      return [];
+  }
+}
 
 export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
   return (
@@ -56,7 +79,17 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
           justify-content: flex-end;
           align-items: flex-end;
         `}
-      />
+      >
+        <LegendContainer
+          justify={
+            props.selectedBreakdown !== breakdownOptions[1] &&
+            props.selectedBreakdown !== breakdownOptions[4]
+              ? 'flex-end'
+              : 'initial'
+          }
+          items={getLegendData(props.selectedBreakdown)}
+        />
+      </div>
     </div>
   );
 };
