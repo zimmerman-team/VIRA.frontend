@@ -18,6 +18,7 @@ import { formatTableDataForReport } from 'app/modules/list-module/utils/formatTa
 import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 
 import { AppConfig } from 'app/data';
+import { Viztabs } from 'app/modules/common/components/Viztabs';
 
 const ProjectDetailModuleF = (props: PropsModel | null) => {
   useTitle(`${AppConfig.appTitleLong} Project detail`);
@@ -44,6 +45,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
+  const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
 
   const projectDetailAction = useStoreActions(
     (actions) => actions.projectDetail.fetch
@@ -68,6 +70,46 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   const projectBudgetDataAction = useStoreActions(
     (actions) => actions.projectBudgetData.fetch
   );
+
+  const getPillarDataByBudget = useStoreActions(
+    (actions) => actions.getPillarDataByBudget.fetch
+  );
+  const getPillarDataByDuration = useStoreActions(
+    (actions) => actions.getPillarDataByDuration.fetch
+  );
+  const getPriorityAreaBarChartData = useStoreActions(
+    (actions) => actions.getPriorityAreaBarChartData.fetch
+  );
+  const getTargetGroupBarChartData = useStoreActions(
+    (actions) => actions.getTargetGroupBarChartData.fetch
+  );
+  const getOneMultiYearBarChartData = useStoreActions(
+    (actions) => actions.getOneMultiYearBarChartData.fetch
+  );
+
+  const signedInUserRole = useStoreState((state) =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
+  const signedInUserEmail = useStoreState((state) =>
+    get(state.userDetails.data, 'email', '')
+  );
+
+  const pillarDataByBudget = useStoreState(
+    (state) => state.getPillarDataByBudget.data
+  );
+  const pillarDataByDuration = useStoreState(
+    (state) => state.getPillarDataByDuration.data
+  );
+  const priorityAreaBarChartData = useStoreState(
+    (state) => state.getPriorityAreaBarChartData.data
+  );
+  const targetGroupBarChartData = useStoreState(
+    (state) => state.getTargetGroupBarChartData.data
+  );
+  const oneMultiYearBarChartData = useStoreState(
+    (state) => state.getOneMultiYearBarChartData.data
+  );
+
   const ppVizData = useStoreState((state) => state.getPPVizData.data);
   const SDGVizData = useStoreState((state) => state.getSDGVizData.data);
   const geoMapData = useStoreState((state) => state.getGeoMapData.data);
@@ -126,6 +168,49 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
             projectID: projectDetailRecord[0]._id,
           },
         });
+        getPillarDataByBudget({
+          socketName: 'getPillarDataByBudget',
+          values: {
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getPillarDataByDuration({
+          socketName: 'getPillarDataByDuration',
+          values: {
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getPriorityAreaBarChartData({
+          socketName: 'getPriorityAreaBarChartData',
+          values: {
+            breakdownBy: selectedBreakdown,
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getTargetGroupBarChartData({
+          socketName: 'getTargetGroupBarChartData',
+          values: {
+            breakdownBy: 'none',
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
+        getOneMultiYearBarChartData({
+          socketName: 'getOneMultiYearBarChartData',
+          values: {
+            breakdownBy: 'none',
+            userRole: signedInUserRole,
+            userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
+          },
+        });
 
         setprojectDetails({
           project_id: projectDetailRecord[0].project_number,
@@ -157,7 +242,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
         });
       }
     });
-  }, []);
+  }, [selectedBreakdown]);
 
   React.useEffect(() => {
     init();
@@ -192,6 +277,12 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
       remainingBudget={projectBudgetData}
       // @ts-ignore
       match={props.match}
+      pillarData={pillarDataByBudget}
+      priorityAreaData={priorityAreaBarChartData}
+      targetGroupData={targetGroupBarChartData}
+      oneAndMultiYearData={oneMultiYearBarChartData}
+      selectedBreakdown={selectedBreakdown}
+      onBreakdownSelect={setSelectedBreakdown}
     />
   );
 };

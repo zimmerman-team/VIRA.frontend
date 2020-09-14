@@ -49,6 +49,7 @@ function LandingLayout(props: PropsModel) {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
+  const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
   const getPPVizData = useStoreActions((actions) => actions.getPPVizData.fetch);
   const getSDGVizData = useStoreActions(
     (actions) => actions.getSDGVizData.fetch
@@ -99,6 +100,7 @@ function LandingLayout(props: PropsModel) {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
     setSelectedSDG('');
+    setSelectedBreakdown('None');
   };
 
   const signedInUserRole = useStoreState((state) =>
@@ -157,6 +159,8 @@ function LandingLayout(props: PropsModel) {
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getPillarDataByDuration({
@@ -164,14 +168,18 @@ function LandingLayout(props: PropsModel) {
       values: {
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getPriorityAreaBarChartData({
       socketName: 'getPriorityAreaBarChartData',
       values: {
-        breakdownBy: 'none',
+        breakdownBy: selectedBreakdown,
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getTargetGroupBarChartData({
@@ -180,6 +188,8 @@ function LandingLayout(props: PropsModel) {
         breakdownBy: 'none',
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
     getOneMultiYearBarChartData({
@@ -188,9 +198,17 @@ function LandingLayout(props: PropsModel) {
         breakdownBy: 'none',
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
+        startDate: selectedStartDate._d,
+        endDate: selectedEndDate._d,
       },
     });
-  }, [signedInUserRole, signedInUserEmail, selectedStartDate, selectedEndDate]);
+  }, [
+    signedInUserRole,
+    signedInUserEmail,
+    selectedStartDate,
+    selectedEndDate,
+    selectedBreakdown,
+  ]);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];
@@ -205,13 +223,7 @@ function LandingLayout(props: PropsModel) {
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
-  console.log('=========================================================');
-  console.log('pillarDataByBudget', pillarDataByBudget);
-  console.log('pillarDataByDuration', pillarDataByDuration);
-  console.log('priorityAreaBarChartData', priorityAreaBarChartData);
-  console.log('targetGroupBarChartData', targetGroupBarChartData);
-  console.log('oneMultiYearBarChartData', oneMultiYearBarChartData);
-  console.log('=========================================================');
+
   return (
     <React.Fragment>
       {/* -------------------------------------------------------------- */}
@@ -226,17 +238,22 @@ function LandingLayout(props: PropsModel) {
       </Hidden>
 
       {/* viz tabs */}
-      {/* the viztabs contains the tab navigaion */}
+      {/* the viztabs contains the tab navigation */}
       <Viztabs
         value={value}
         onTabClick={handleChange}
         barChartData={ppVizData}
-        // barChartDataPriority={pillarDataByBudget}
+        pillarData={pillarDataByBudget}
+        priorityAreaData={priorityAreaBarChartData}
+        targetGroupData={targetGroupBarChartData}
+        oneAndMultiYearData={oneMultiYearBarChartData}
         barChartLegends={barChartLegends}
         onBarChartLegendClick={onBarChartLegendClick}
         bubbleChartData={{ ...bubbleMockData, children: SDGVizData }}
         selectedBubble={selectedSDG}
         onBubbleSelect={setSelectedSDG}
+        selectedBreakdown={selectedBreakdown}
+        onBreakdownSelect={setSelectedBreakdown}
         geoMapData={geoMapData}
       />
 

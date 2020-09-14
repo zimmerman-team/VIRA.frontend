@@ -14,8 +14,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import { GeoMap } from 'app/components/charts/GeoMap';
 import { BubbleChart } from 'app/components/charts/Bubble';
-import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
 import {
   TabStyle,
   a11yProps,
@@ -25,6 +23,11 @@ import {
   getTitle,
   getTitleDesc,
 } from 'app/modules/common/components/Viztabs/utils/getTitle';
+import { PillarContainer } from 'app/components/charts/Pillars';
+import { PriorityAreaContainer } from 'app/components/charts/PriorityArea';
+import { TargetGroupContainer } from 'app/components/charts/TargetGroup';
+import { OneYearAndMultiYearContainer } from 'app/components/charts/OneYearAndMultiYear';
+import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 
 type PropsModel = {
   value: number;
@@ -37,6 +40,12 @@ type PropsModel = {
   selectedBubble: any;
   onBubbleSelect: any;
   geoMapData: any;
+  pillarData: any;
+  priorityAreaData: any;
+  targetGroupData: any;
+  oneAndMultiYearData: any;
+  selectedBreakdown: any;
+  onBreakdownSelect: any;
 };
 
 export function Viztabs(props: PropsModel) {
@@ -146,46 +155,24 @@ export function Viztabs(props: PropsModel) {
         `}
       >
         <TabPanel value={props.value} index={0} data-cy="pillars-panel">
-          <h1>TODO</h1>
+          <PillarContainer data={props.pillarData} />
         </TabPanel>
 
         <TabPanel value={props.value} index={1} data-cy="prio-panel">
           {/* Priority Area horizontal bar chart */}
-          <HorizontalBarChart
-            colors={[
-              ProjectPalette.primary.main,
-              ...uniqBy(
-                ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-                  [],
-                'value2Color'
-              ).map((item: BarChartItemModel) => item.value2Color),
-              ...uniqBy(
-                ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-                  [],
-                'value4Color'
-              ).map((item: BarChartItemModel) => item.value4Color),
-            ]}
-            values={
-              ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-              []
-            }
-            maxValue={Math.max(
-              ...(
-                ((props.barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-                []
-              ).map((item: BarChartItemModel) => item.value1 + item.value2)
-            )}
-            chartLegends={props.barChartLegends}
-            onChartLegendClick={props.onBarChartLegendClick}
+          <PriorityAreaContainer
+            data={props.priorityAreaData}
+            selectedBreakdown={props.selectedBreakdown}
+            setSelectedBreakdown={props.onBreakdownSelect}
           />
         </TabPanel>
 
         <TabPanel value={props.value} index={2} data-cy="target-group-panel">
-          <h1>TODO</h1>
+          <TargetGroupContainer data={props.targetGroupData} />
         </TabPanel>
 
         <TabPanel value={props.value} index={3} data-cy="multi-year-panel">
-          <h1>TODO</h1>
+          <OneYearAndMultiYearContainer data={props.oneAndMultiYearData} />
         </TabPanel>
 
         <TabPanel value={props.value} index={4} data-cy="sdg-panel">
