@@ -21,7 +21,7 @@ export const TargetGroupContainer = (props: TargetGroupContainerProps) => {
         width: 100%;
       `}
     >
-      <BreakdownSelect />
+      {/* <BreakdownSelect /> */}
       <ChartWrapper height={60 * props.data.length}>
         <ResponsiveBar
           {...TargetGroupConfigBase}

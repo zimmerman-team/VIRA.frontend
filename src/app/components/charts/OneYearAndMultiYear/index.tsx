@@ -28,7 +28,7 @@ export const OneYearAndMultiYearContainer = (
       `}
     >
       <ChartCountContainer items={formatCountData(props.data)} />
-      <BreakdownSelect />
+      {/* <BreakdownSelect /> */}
       <ChartWrapper height={60 * props.data.length}>
         <ResponsiveBar
           {...OneYearAndMultiYearConfigBase}

@@ -27,6 +27,7 @@ import { PillarContainer } from 'app/components/charts/Pillars';
 import { PriorityAreaContainer } from 'app/components/charts/PriorityArea';
 import { TargetGroupContainer } from 'app/components/charts/TargetGroup';
 import { OneYearAndMultiYearContainer } from 'app/components/charts/OneYearAndMultiYear';
+import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 
 type PropsModel = {
   value: number;
@@ -43,6 +44,8 @@ type PropsModel = {
   priorityAreaData: any;
   targetGroupData: any;
   oneAndMultiYearData: any;
+  selectedBreakdown: any;
+  onBreakdownSelect: any;
 };
 
 export function Viztabs(props: PropsModel) {
@@ -157,16 +160,19 @@ export function Viztabs(props: PropsModel) {
 
         <TabPanel value={props.value} index={1} data-cy="prio-panel">
           {/* Priority Area horizontal bar chart */}
-          <PriorityAreaContainer data={props.priorityAreaData} />
+          {console.log('prio', props.priorityAreaData)}
+          <PriorityAreaContainer
+            data={props.priorityAreaData}
+            selectedBreakdown={props.selectedBreakdown}
+            setSelectedBreakdown={props.onBreakdownSelect}
+          />
         </TabPanel>
 
         <TabPanel value={props.value} index={2} data-cy="target-group-panel">
-          {console.log('targetgroupdata', props.targetGroupData)}
           <TargetGroupContainer data={props.targetGroupData} />
         </TabPanel>
 
         <TabPanel value={props.value} index={3} data-cy="multi-year-panel">
-          {console.log('OneYearAndMultiYear', props.oneAndMultiYearData)}
           <OneYearAndMultiYearContainer data={props.oneAndMultiYearData} />
         </TabPanel>
 

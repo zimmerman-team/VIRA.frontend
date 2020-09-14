@@ -258,13 +258,13 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
-  console.log('=========================================================');
-  console.log('pillarDataByBudget', pillarDataByBudget);
-  console.log('pillarDataByDuration', pillarDataByDuration);
-  console.log('priorityAreaBarChartData', priorityAreaBarChartData);
-  console.log('targetGroupBarChartData', targetGroupBarChartData);
-  console.log('oneMultiYearBarChartData', oneMultiYearBarChartData);
-  console.log('=========================================================');
+  // console.log('=========================================================');
+  // console.log('pillarDataByBudget', pillarDataByBudget);
+  // console.log('pillarDataByDuration', pillarDataByDuration);
+  // console.log('priorityAreaBarChartData', priorityAreaBarChartData);
+  // console.log('targetGroupBarChartData', targetGroupBarChartData);
+  // console.log('oneMultiYearBarChartData', oneMultiYearBarChartData);
+  // console.log('=========================================================');
 
   return (
     <ProjectDetailLayout

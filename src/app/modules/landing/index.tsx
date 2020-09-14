@@ -49,6 +49,7 @@ function LandingLayout(props: PropsModel) {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
+  const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
   const getPPVizData = useStoreActions((actions) => actions.getPPVizData.fetch);
   const getSDGVizData = useStoreActions(
     (actions) => actions.getSDGVizData.fetch
@@ -99,6 +100,7 @@ function LandingLayout(props: PropsModel) {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
     setSelectedSDG('');
+    setSelectedBreakdown('None');
   };
 
   const signedInUserRole = useStoreState((state) =>
@@ -173,7 +175,7 @@ function LandingLayout(props: PropsModel) {
     getPriorityAreaBarChartData({
       socketName: 'getPriorityAreaBarChartData',
       values: {
-        breakdownBy: 'none',
+        breakdownBy: selectedBreakdown,
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
         startDate: selectedStartDate._d,
@@ -200,7 +202,13 @@ function LandingLayout(props: PropsModel) {
         endDate: selectedEndDate._d,
       },
     });
-  }, [signedInUserRole, signedInUserEmail, selectedStartDate, selectedEndDate]);
+  }, [
+    signedInUserRole,
+    signedInUserEmail,
+    selectedStartDate,
+    selectedEndDate,
+    selectedBreakdown,
+  ]);
 
   React.useEffect(() => {
     const updatedStats: StatItemParams[] = [...stats];
@@ -215,6 +223,8 @@ function LandingLayout(props: PropsModel) {
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
+
+  console.log('selectedBreakdown', selectedBreakdown);
 
   return (
     <React.Fragment>
@@ -244,6 +254,8 @@ function LandingLayout(props: PropsModel) {
         bubbleChartData={{ ...bubbleMockData, children: SDGVizData }}
         selectedBubble={selectedSDG}
         onBubbleSelect={setSelectedSDG}
+        selectedBreakdown={selectedBreakdown}
+        onBreakdownSelect={setSelectedBreakdown}
         geoMapData={geoMapData}
       />
 

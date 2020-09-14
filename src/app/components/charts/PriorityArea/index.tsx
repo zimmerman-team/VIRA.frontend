@@ -4,15 +4,24 @@ import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 import {
   formatPriorityAreaData,
+  getKeys,
   PriorityAreaConfigBase,
 } from 'app/components/charts/PriorityArea/data';
 
 interface PriorityAreaContainerProps {
   data: any;
   keys: any;
-  breakdown: string[];
-  setBreakdown: Function;
+  selectedBreakdown: any;
+  setSelectedBreakdown: any;
 }
+
+const breakdownOptions = [
+  'None',
+  'Target Group',
+  'One Year & Multi Year',
+  'People Reached',
+  'SDGs',
+];
 
 export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
   return (
@@ -21,11 +30,16 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
         width: 100%;
       `}
     >
-      <BreakdownSelect />
+      <BreakdownSelect
+        breakdownOptions={breakdownOptions}
+        selectedBreakdown={props.selectedBreakdown}
+        setSelectedBreakdown={props.setSelectedBreakdown}
+      />
       <ChartWrapper height={60 * props.data.length}>
         <ResponsiveBar
           {...PriorityAreaConfigBase}
-          data={formatPriorityAreaData(props.data)}
+          data={formatPriorityAreaData(props.selectedBreakdown, props.data)}
+          keys={getKeys(props.selectedBreakdown)}
         />
       </ChartWrapper>
       <div

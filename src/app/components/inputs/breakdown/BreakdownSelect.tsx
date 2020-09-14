@@ -25,25 +25,36 @@ const Typo = styled(Typography)`
   color: #000000;
 `;
 
-export default function BreakdownSelect() {
-  const [item, setItem] = React.useState('');
+interface BreakdownSelectProps {
+  setSelectedBreakdown: Function;
+  selectedBreakdown: string;
+  breakdownOptions: string[];
+}
 
+export default function BreakdownSelect(props: BreakdownSelectProps) {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setItem(event.target.value as string);
+    props.setSelectedBreakdown(event.target.value as string);
   };
+
+  const menuItems = props.breakdownOptions.map((breakdown) => (
+    <MenuItem value={breakdown} key={breakdown}>
+      {breakdown}
+    </MenuItem>
+  ));
 
   return (
     <Wrapper>
       <Typo>Breakdown by</Typo>
       <FormControl>
         <Select
-          value={item}
+          value={props.selectedBreakdown}
           onChange={handleChange}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
         >
-          <MenuItem value="">None</MenuItem>
-          <MenuItem value={10}>One Year & Multi Year</MenuItem>
+          {/* <MenuItem value="">None</MenuItem>
+          <MenuItem value={10}>One Year & Multi Year</MenuItem> */}
+          {menuItems}
         </Select>
       </FormControl>
     </Wrapper>
