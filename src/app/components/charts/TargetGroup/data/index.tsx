@@ -71,12 +71,16 @@ export function formatPriorityAreaPeopleReachedData(
   const chartData: ChartDataPropsPeopleReached[] = [];
   const colors = ['#242E42', '#828894'];
 
-  data.forEach((priorityArea: PriorityAreaPopleReachedProps) => {
+  data.forEach((targetGroup: PriorityAreaPopleReachedProps) => {
     chartData.push({
-      name: priorityArea.name,
-      'People Reached': priorityArea.reached,
+      name: targetGroup.name,
+      'People Reached': targetGroup.reached,
       'People ReachedColor': colors[0],
-      'People Targeted': priorityArea.target,
+      // do this calculation so we show the bars as percentages
+      'People Targeted':
+        targetGroup.target - targetGroup.reached > 0
+          ? targetGroup.target - targetGroup.reached
+          : 0,
       'People TargetedColor': colors[1],
     });
   });

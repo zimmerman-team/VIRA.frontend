@@ -237,11 +237,13 @@ export function formatPriorityAreaPeopleReachedData(
   data.forEach((priorityArea: PriorityAreaPopleReachedProps) => {
     chartData.push({
       name: priorityArea.name,
-      // 'People Reached': get(priorityArea, 'reached_Value', 0),
       'People Reached': priorityArea.reached_Value,
       'People ReachedColor': colors[0],
-      // 'People Targeted': get(priorityArea, 'target_Value', 0),
-      'People Targeted': priorityArea.target_Value,
+      // do this calculation so we show the bars as percentages
+      'People Targeted':
+        priorityArea.target_Value - priorityArea.reached_Value > 0
+          ? priorityArea.target_Value - priorityArea.reached_Value
+          : 0,
       'People TargetedColor': colors[1],
     });
   });

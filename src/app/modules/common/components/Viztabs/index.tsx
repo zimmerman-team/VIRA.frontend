@@ -176,7 +176,11 @@ export function Viztabs(props: PropsModel) {
         </TabPanel>
 
         <TabPanel value={props.value} index={3} data-cy="multi-year-panel">
-          <OneYearAndMultiYearContainer data={props.oneAndMultiYearData} />
+          <OneYearAndMultiYearContainer
+            data={props.oneAndMultiYearData}
+            selectedBreakdown={props.selectedBreakdown}
+            setSelectedBreakdown={props.onBreakdownSelect}
+          />
         </TabPanel>
 
         <TabPanel value={props.value} index={4} data-cy="sdg-panel">

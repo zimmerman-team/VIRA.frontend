@@ -195,7 +195,7 @@ function LandingLayout(props: PropsModel) {
     getOneMultiYearBarChartData({
       socketName: 'getOneMultiYearBarChartData',
       values: {
-        breakdownBy: 'none',
+        breakdownBy: selectedBreakdown,
         userRole: signedInUserRole,
         userEmail: signedInUserEmail,
         startDate: selectedStartDate._d,
