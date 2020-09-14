@@ -224,8 +224,6 @@ function LandingLayout(props: PropsModel) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
-  console.log('selectedBreakdown', selectedBreakdown);
-
   return (
     <React.Fragment>
       {/* -------------------------------------------------------------- */}

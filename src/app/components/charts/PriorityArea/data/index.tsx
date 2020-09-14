@@ -5,7 +5,6 @@ import {
 } from 'app/components/charts/common/CommonProps';
 import get from 'lodash/get';
 
-const ChartKeys: string[] = ['Budget'];
 /* ------------------------------------------------------------ */
 /* Common */
 
@@ -59,7 +58,13 @@ export function getKeys(selectedBreakdown: string) {
     case 'People Reached':
       return ['People Reached', 'People Targeted'];
     case 'SDGs':
-      break;
+      return [
+        'No poverty',
+        'Clean water and sanitation',
+        'Good health and well-being',
+        'Gender equality',
+        'Quality education',
+      ];
     default:
       return ['Budget'];
   }
@@ -246,22 +251,37 @@ export function formatPriorityAreaPeopleReachedData(
 /* ------------------------------------------------------------ */
 /* SDG's */
 
-interface PriorityAreaSDGsProps {}
+interface PriorityAreaSDGsProps {
+  name: string;
+  budget: number;
+  children: ChildSDG;
+  contribution: number;
+  reached: number;
+  target: number;
+}
 
+interface ChildSDG {
+  name: string;
+  budget: number;
+  contribution: number;
+  target: number;
+  reached: number;
+  color: string;
+}
+
+// TODO: Unclear from data vs design which data to use.
 interface ChartDataPropsSDGs {
   name: string;
-  'The Elderly (65+)': number;
-  'The Elderly (65+)Color': string;
-  'Women & Girls': number;
-  'Women & GirlsColor': string;
-  Refugees: number;
-  RefugeesColor: string;
-  'People with lower income': number;
-  'People with lower incomeColor': string;
-  'Homeless people': number;
-  'Homeless peopleColor': string;
-  'People with disabilities': number;
-  'People with disabilitiesColor': string;
+  'No poverty': number;
+  'No povertyColor': string;
+  'Clean water and sanitation': number;
+  'Clean water and sanitationColor': string;
+  'Good health and well-being': number;
+  'Good health and well-beingColor': string;
+  'Gender equality': number;
+  'Gender equalityColor': string;
+  'Quality education': number;
+  'Quality educationColor': string;
 }
 
 export function formatPriorityAreaSDGsData(
@@ -272,26 +292,24 @@ export function formatPriorityAreaSDGsData(
   data.map((priorityArea: PriorityAreaSDGsProps) => {
     chartData.push({
       name: priorityArea.name,
-      'The Elderly (65+)': get(priorityArea, 'children[0].value', 0),
-      'The Elderly (65+)Color': get(priorityArea, 'children[0].color', ''),
-      'Women & Girls': get(priorityArea, 'children[1].value', 0),
-      'Women & GirlsColor': get(priorityArea, 'children[1].color', ''),
-      Refugees: get(priorityArea, 'children[2].value', 0),
-      RefugeesColor: get(priorityArea, 'children[2].color', ''),
-      'People with lower income': get(priorityArea, 'children[3].value', 0),
-      'People with lower incomeColor': get(
+      'No poverty': get(priorityArea, 'children[0].reached', 0),
+      'No povertyColor': get(priorityArea, 'children[0].color', ''),
+      'Clean water and sanitation': get(priorityArea, 'children[1].reached', 0),
+      'Clean water and sanitationColor': get(
         priorityArea,
-        'children[3].color',
+        'children[1].color',
         ''
       ),
-      'Homeless people': get(priorityArea, 'children[4].value', 0),
-      'Homeless peopleColor': get(priorityArea, 'children[4].color', ''),
-      'People with disabilities': get(priorityArea, 'children[5].value', 0),
-      'People with disabilitiesColor': get(
+      'Good health and well-being': get(priorityArea, 'children[2].reached', 0),
+      'Good health and well-beingColor': get(
         priorityArea,
-        'children[5].color',
+        'children[2].color',
         ''
       ),
+      'Gender equality': get(priorityArea, 'children[3].reached', 0),
+      'Gender equalityColor': get(priorityArea, 'children[3].color', ''),
+      'Quality education': get(priorityArea, 'children[4].color', 0),
+      'Quality educationColor': get(priorityArea, 'children[4].color', ''),
     });
   });
 

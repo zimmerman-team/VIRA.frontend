@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-bottom: 16px;
 `;
 
 const Typo = styled(Typography)`

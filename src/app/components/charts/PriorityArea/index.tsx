@@ -7,6 +7,7 @@ import {
   getKeys,
   PriorityAreaConfigBase,
 } from 'app/components/charts/PriorityArea/data';
+import { LegendContainer } from '../common/LegendContainer';
 
 interface PriorityAreaContainerProps {
   data: any;
@@ -35,7 +36,7 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
         selectedBreakdown={props.selectedBreakdown}
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
-      <ChartWrapper height={60 * props.data.length}>
+      <ChartWrapper height={56 * props.data.length}>
         <ResponsiveBar
           {...PriorityAreaConfigBase}
           data={formatPriorityAreaData(props.selectedBreakdown, props.data)}
@@ -50,9 +51,7 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
           justify-content: flex-end;
           align-items: flex-end;
         `}
-      >
-        {/* <LegendContainer items={LegendDataPillars} justify="flex-end" /> */}
-      </div>
+      ></div>
     </div>
   );
 };

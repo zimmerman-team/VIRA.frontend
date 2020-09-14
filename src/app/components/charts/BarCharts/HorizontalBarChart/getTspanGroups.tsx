@@ -41,7 +41,11 @@ export const getTspanGroups = (
   //for now, only take first 2 lines due to tick spacing and possible overflow
   const lines = allLines.slice(0, maxLines);
   let children: JSX.Element[] = [];
-  let dy = 5;
+  let dy = -20;
+
+  if (lines.length < 3) {
+    dy = 5;
+  }
 
   lines.forEach((lineText, i) => {
     if (lines.length > 1 && i === 0) {

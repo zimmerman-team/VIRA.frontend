@@ -2,6 +2,22 @@
 import React from 'react';
 
 interface BarChartBottomAxisProps {
+  textBaseLine:
+    | 'alphabetic'
+    | 'hanging'
+    | 'ideographic'
+    | 'mathematical'
+    | 'auto'
+    | 'baseline'
+    | 'before-edge'
+    | 'text-before-edge'
+    | 'middle'
+    | 'central'
+    | 'after-edge'
+    | 'text-after-edge'
+    | 'inherit'
+    | undefined;
+  textAnchor: string | undefined;
   value: string;
   x: number;
   y: number;
@@ -9,7 +25,7 @@ interface BarChartBottomAxisProps {
 
 export const BarChartBottomAxis = (props: BarChartBottomAxisProps) => {
   return (
-    <g transform={`translate(${props.x},${props.y - 12})`}>
+    <g transform={`translate(${props.x},${props.y})`}>
       <text
         style={{
           fontWeight: 400,
@@ -17,7 +33,7 @@ export const BarChartBottomAxis = (props: BarChartBottomAxisProps) => {
           fontSize: 14,
           dominantBaseline: 'auto',
         }}
-        textAnchor="start"
+        textAnchor={props.textAnchor}
       >
         {props.value}
       </text>

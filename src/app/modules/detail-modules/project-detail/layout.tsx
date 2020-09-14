@@ -117,7 +117,7 @@ export const ProjectDetailLayout = (props: any) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
-      {/* <Viztabs
+      <Viztabs
         value={value}
         onTabClick={handleChange}
         barChartData={props.ppVizData}
@@ -131,7 +131,9 @@ export const ProjectDetailLayout = (props: any) => {
         priorityAreaData={props.priorityAreaData}
         targetGroupData={props.targetGroupData}
         oneAndMultiYearData={props.oneAndMultiYearData}
-      /> */}
+        selectedBreakdown={props.selectedBreakdown}
+        onBreakdownSelect={props.onBreakdownSelect}
+      />
 
       {/* ---------------------------------------------------------------------*/}
       {/* reports */}

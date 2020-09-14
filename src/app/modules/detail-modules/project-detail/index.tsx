@@ -45,6 +45,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
+  const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
 
   const projectDetailAction = useStoreActions(
     (actions) => actions.projectDetail.fetch
@@ -180,14 +181,16 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
           values: {
             userRole: signedInUserRole,
             userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
           },
         });
         getPriorityAreaBarChartData({
           socketName: 'getPriorityAreaBarChartData',
           values: {
-            breakdownBy: 'none',
+            breakdownBy: selectedBreakdown,
             userRole: signedInUserRole,
             userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
           },
         });
         getTargetGroupBarChartData({
@@ -196,6 +199,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
             breakdownBy: 'none',
             userRole: signedInUserRole,
             userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
           },
         });
         getOneMultiYearBarChartData({
@@ -204,6 +208,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
             breakdownBy: 'none',
             userRole: signedInUserRole,
             userEmail: signedInUserEmail,
+            projectID: projectDetailRecord[0]._id,
           },
         });
 
@@ -237,7 +242,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
         });
       }
     });
-  }, []);
+  }, [selectedBreakdown]);
 
   React.useEffect(() => {
     init();
@@ -258,14 +263,6 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
-  // console.log('=========================================================');
-  // console.log('pillarDataByBudget', pillarDataByBudget);
-  // console.log('pillarDataByDuration', pillarDataByDuration);
-  // console.log('priorityAreaBarChartData', priorityAreaBarChartData);
-  // console.log('targetGroupBarChartData', targetGroupBarChartData);
-  // console.log('oneMultiYearBarChartData', oneMultiYearBarChartData);
-  // console.log('=========================================================');
-
   return (
     <ProjectDetailLayout
       projectDetail={projectDetails}
@@ -284,6 +281,8 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
       priorityAreaData={priorityAreaBarChartData}
       targetGroupData={targetGroupBarChartData}
       oneAndMultiYearData={oneMultiYearBarChartData}
+      selectedBreakdown={selectedBreakdown}
+      onBreakdownSelect={setSelectedBreakdown}
     />
   );
 };

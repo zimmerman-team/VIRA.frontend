@@ -52,11 +52,11 @@ export function formatCountData(
 ): ChartCountItemProps[] {
   const countData: ChartCountItemProps[] = [
     {
-      name: 'One Year \n',
+      name: 'Number of One Year projects',
       count: data[0].count.toString(),
     },
     {
-      name: 'Multi Year \n',
+      name: 'Number of Multi Year projects',
       count: data[1].count.toString(),
     },
     {

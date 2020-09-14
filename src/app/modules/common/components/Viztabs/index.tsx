@@ -160,7 +160,6 @@ export function Viztabs(props: PropsModel) {
 
         <TabPanel value={props.value} index={1} data-cy="prio-panel">
           {/* Priority Area horizontal bar chart */}
-          {console.log('prio', props.priorityAreaData)}
           <PriorityAreaContainer
             data={props.priorityAreaData}
             selectedBreakdown={props.selectedBreakdown}
