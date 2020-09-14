@@ -101,7 +101,7 @@ function formatPriorityAreaDataNone(
 ): ChartDataPropsNone[] {
   const chartData: ChartDataPropsNone[] = [];
 
-  data.map((priorityArea: priorityAreaDataProps) => {
+  data.forEach((priorityArea: priorityAreaDataProps) => {
     chartData.push({
       name: priorityArea.name,
       Budget: priorityArea.budget,
@@ -196,7 +196,7 @@ export function formatPriorityAreaOneMultiYearData(
   const chartData: ChartDataPropsOneMultiYear[] = [];
   const colors = ['#242E42', '#828894'];
 
-  data.map((priorityArea: PriorityAreaOneAndMultiYearProps) => {
+  data.forEach((priorityArea: PriorityAreaOneAndMultiYearProps) => {
     chartData.push({
       name: priorityArea.name,
       'Budget One Year': get(priorityArea, 'budget_One', 0),

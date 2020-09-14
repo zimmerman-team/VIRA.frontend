@@ -11,6 +11,7 @@ import {
   PillarConfigBase,
 } from 'app/components/charts/Pillars/data';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
+import { BudgetTooltip } from './tooltips/Budget';
 
 interface PillarContainerProps {
   data: any;
@@ -32,6 +33,7 @@ export const PillarContainer = (props: PillarContainerProps) => {
         <ResponsiveBar
           {...PillarConfigBase}
           data={formatPillarData(props.data || [])}
+          tooltip={BudgetTooltip}
         />
       </ChartWrapper>
       <div

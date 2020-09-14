@@ -1,8 +1,7 @@
-import React from 'react';
 import { BarSvgProps } from '@nivo/bar';
-import { CustomBarComponent } from 'app/components/charts/common/CustomBarComponent';
 import { BarChartLeftAxis } from 'app/components/charts/common/BarChartLeftAxis';
 import { BarChartBottomAxis } from 'app/components/charts/common/BarChartBottomAxis';
+// import { CustomBarComponent } from 'app/components/charts/common/CustomBarComponent';
 
 export const CommonBarProps: BarSvgProps = {
   margin: {
@@ -22,9 +21,18 @@ export const CommonBarProps: BarSvgProps = {
   groupMode: 'stacked',
   maxValue: 'auto',
   colors: ({ id, data }) => data[`${id}Color`],
+  theme: {
+    tooltip: {
+      container: {
+        width: 382,
+        color: '#ffffff',
+        background: '#242e42',
+      },
+    },
+  },
 };
 
 export const CommonBarPropsHorizontal = {
   layout: 'horizontal',
-  barComponent: CustomBarComponent,
+  // barComponent: CustomBarComponent,
 };

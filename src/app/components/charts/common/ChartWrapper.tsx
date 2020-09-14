@@ -38,6 +38,21 @@ export const ChartWrapper = (props: BarChartWrapperProps) => {
             background: ${ProjectPalette.grey[500]};
           }
         }
+
+        svg {
+          > g {
+            > g:nth-of-type(2) {
+              transform: translate(0px, 8px);
+            }
+            > g:last-of-type {
+              > g {
+                > rect {
+                  height: 24px;
+                }
+              }
+            }
+          }
+        }
       `}
     >
       {props.children}

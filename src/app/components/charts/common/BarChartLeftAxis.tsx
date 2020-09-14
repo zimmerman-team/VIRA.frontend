@@ -14,7 +14,7 @@ export const BarChartLeftAxis = (props: BarChartLeftAxisProps) => {
   const { t, i18n } = useTranslation();
 
   return (
-    <g transform={`translate(${props.x},${props.y})`}>
+    <g transform={`translate(${props.x},${props.y + 8})`}>
       <text
         style={{
           fontWeight: 400,

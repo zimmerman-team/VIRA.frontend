@@ -76,7 +76,6 @@ export function formatPriorityAreaPeopleReachedData(
       name: targetGroup.name,
       'People Reached': targetGroup.reached,
       'People ReachedColor': colors[0],
-      // do this calculation so we show the bars as percentages
       'People Targeted':
         targetGroup.target - targetGroup.reached > 0
           ? targetGroup.target - targetGroup.reached

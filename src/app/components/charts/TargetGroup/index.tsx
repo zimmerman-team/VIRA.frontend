@@ -9,6 +9,9 @@ import {
 } from 'app/components/charts/TargetGroup/data';
 import { LegendContainer } from '../common/LegendContainer';
 import { LegendDataSDGs, LegendDataReached } from '../common/LegendData';
+import { BudgetTooltip } from '../PriorityArea/tooltips/Budget';
+import { ReachedTooltip } from '../PriorityArea/tooltips/Reached';
+import { TargetGroupTooltip } from '../PriorityArea/tooltips/TargetGroup';
 
 interface TargetGroupContainerProps {
   data: any;
@@ -29,6 +32,19 @@ function getLegendData(breakdown: string) {
       return LegendDataSDGs;
     default:
       return [];
+  }
+}
+
+function getTooltip(breakdown: string) {
+  switch (breakdown) {
+    case breakdownOptions[0]:
+      return BudgetTooltip;
+    case breakdownOptions[1]:
+      return ReachedTooltip;
+    case breakdownOptions[2]:
+      return TargetGroupTooltip;
+    default:
+      return BudgetTooltip;
   }
 }
 
@@ -54,6 +70,7 @@ export const TargetGroupContainer = (props: TargetGroupContainerProps) => {
             ) as object[]
           }
           keys={getKeys(props.selectedBreakdown)}
+          tooltip={getTooltip(props.selectedBreakdown)}
         />
       </ChartWrapper>
       <div

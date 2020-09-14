@@ -16,7 +16,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.44",
     "@material-ui/pickers": "^3.2.10",
-    "@nivo/bar": "^0.59.2",
+    "@nivo/bar": "^0.62.0",
     "@nivo/circle-packing": "^0.61.0",
     "@turf/helpers": "^6.1.4",
     "@types/material-ui": "^0.21.8",

@@ -14,6 +14,10 @@ import {
   LegendDataDuration,
   LegendDataTargetGroups,
 } from '../common/LegendData';
+import { BudgetTooltip } from './tooltips/Budget';
+import { TargetGroupTooltip } from './tooltips/TargetGroup';
+import { ReachedTooltip } from './tooltips/Reached';
+import { DurationTooltip } from './tooltips/Duration';
 
 interface PriorityAreaContainerProps {
   data: any;
@@ -47,6 +51,23 @@ function getLegendData(breakdown: string) {
   }
 }
 
+function getTooltip(breakdown: string) {
+  switch (breakdown) {
+    case breakdownOptions[0]:
+      return BudgetTooltip;
+    case breakdownOptions[1]:
+      return TargetGroupTooltip;
+    case breakdownOptions[2]:
+      return DurationTooltip;
+    case breakdownOptions[3]:
+      return ReachedTooltip;
+    case breakdownOptions[4]:
+      return TargetGroupTooltip;
+    default:
+      return BudgetTooltip;
+  }
+}
+
 export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
   return (
     <div
@@ -69,6 +90,7 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
             ) as object[]
           }
           keys={getKeys(props.selectedBreakdown)}
+          tooltip={getTooltip(props.selectedBreakdown)}
         />
       </ChartWrapper>
       <div

@@ -15,6 +15,9 @@ import {
   LegendDataReached,
   LegendDataTargetGroups,
 } from '../common/LegendData';
+import { CountTooltip } from './tooltips/Count';
+import { ReachedTooltip } from '../PriorityArea/tooltips/Reached';
+import { TargetGroupTooltip } from '../PriorityArea/tooltips/TargetGroup';
 
 interface OneYearAndMultiYearContainerProps {
   data: any;
@@ -35,6 +38,19 @@ function getLegendData(breakdown: string) {
       return LegendDataTargetGroups;
     default:
       return [];
+  }
+}
+
+function getTooltip(breakdown: string) {
+  switch (breakdown) {
+    case breakdownOptions[0]:
+      return CountTooltip;
+    case breakdownOptions[1]:
+      return ReachedTooltip;
+    case breakdownOptions[2]:
+      return TargetGroupTooltip;
+    default:
+      return CountTooltip;
   }
 }
 
@@ -63,6 +79,7 @@ export const OneYearAndMultiYearContainer = (
             ) as object[]
           }
           keys={getKeys(props.selectedBreakdown)}
+          tooltip={getTooltip(props.selectedBreakdown)}
         />
       </ChartWrapper>
       <div

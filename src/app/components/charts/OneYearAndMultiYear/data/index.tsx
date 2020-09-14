@@ -79,7 +79,6 @@ export function formatOneYearAndMultiYearPeopleReachedData(data: any[]): any[] {
       name: item.name,
       'People Reached': item.reached,
       'People ReachedColor': colors[0],
-      // do this calculation so we show the bars as percentages
       'People Targeted':
         item.targeted - item.reached > 0 ? item.targeted - item.reached : 0,
       'People TargetedColor': colors[1],

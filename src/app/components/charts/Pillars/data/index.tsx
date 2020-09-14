@@ -34,7 +34,7 @@ type pillarProps = {
 export function formatPillarData(data: pillarProps[]): ChartDataProps[] {
   const chartData: ChartDataProps[] = [];
 
-  data.map((pillar: pillarProps) => {
+  data.forEach((pillar: pillarProps) => {
     chartData.push({
       name: pillar.name,
       Spent: pillar.spent,
