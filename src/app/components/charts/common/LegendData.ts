@@ -134,3 +134,14 @@ export const LegendDataPillars: LegendItemProps[] = [
     legendName: 'Spent',
   },
 ];
+
+export const LegendMultiyearPillars: LegendItemProps[] = [
+  {
+    legendColor: '#828894',
+    legendName: 'Multi year projecs',
+  },
+  {
+    legendColor: '#242E42',
+    legendName: 'One year projects',
+  },
+];
