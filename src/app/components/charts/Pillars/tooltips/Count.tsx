@@ -11,7 +11,6 @@ const row = css`
 `;
 
 export const CountTooltip = (props: any) => {
-  console.log(props);
   const { t } = useTranslation();
   return (
     <div
