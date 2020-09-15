@@ -11,19 +11,21 @@ import {
 } from 'app/components/charts/common/LegendData';
 import {
   formatPillarData,
+  getKeys,
   PillarConfigBase,
   PillarMultiYearConfig,
 } from 'app/components/charts/Pillars/data';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
-import { BudgetTooltip } from 'app/components/charts/Pillars/tooltips/Budget';
+import { BudgetTooltip } from './tooltips/Budget';
+import { ReachedTooltip } from 'app/components/charts/PriorityArea/tooltips/Reached';
+import { TargetGroupTooltip } from 'app/components/charts/PriorityArea/tooltips/TargetGroup';
 
 interface PillarContainerProps {
   data: any;
   keys: any;
-  breakdown: string[];
-  setBreakdown: Function;
-  selectedBreakdown: any;
-  setSelectedBreakdown: any;
+  durationData: any;
+  selectedBreakdown: string;
+  setSelectedBreakdown: Function;
 }
 
 const breakdownOptions = ['None', 'One Year & Multi Year'];
@@ -52,6 +54,15 @@ function getTooltip(breakdown: string) {
 }
 
 export const PillarContainer = (props: PillarContainerProps) => {
+  const data =
+    props.selectedBreakdown === breakdownOptions[0]
+      ? props.data
+      : props.durationData;
+  const config =
+    props.selectedBreakdown === breakdownOptions[0]
+      ? PillarConfigBase
+      : PillarMultiYearConfig;
+  console.log(data);
   return (
     <div
       css={`
@@ -64,26 +75,14 @@ export const PillarContainer = (props: PillarContainerProps) => {
         selectedBreakdown={props.selectedBreakdown}
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
-
-      {props.selectedBreakdown == breakdownOptions[0] && (
-        <ChartWrapper height={60 * get(props.data, 'length', 0)}>
-          <ResponsiveBar
-            {...PillarConfigBase}
-            data={formatPillarData(props.data || [])}
-            tooltip={BudgetTooltip}
-          />
-        </ChartWrapper>
-      )}
-      {props.selectedBreakdown == breakdownOptions[1] && (
-        <ChartWrapper height={100 * get(props.data, 'length', 0)}>
-          <ResponsiveBar
-            {...PillarMultiYearConfig}
-            data={formatPillarData(props.data || [])}
-            tooltip={BudgetTooltip}
-          />
-        </ChartWrapper>
-      )}
-
+      <ChartWrapper height={60 * get(props.data, 'length', 0)}>
+        <ResponsiveBar
+          {...config}
+          keys={getKeys(props.selectedBreakdown)}
+          tooltip={getTooltip(props.selectedBreakdown)}
+          data={formatPillarData(data || [], props.selectedBreakdown)}
+        />
+      </ChartWrapper>
       <div
         css={`
           width: 100%;
@@ -94,13 +93,8 @@ export const PillarContainer = (props: PillarContainerProps) => {
         `}
       >
         <LegendContainer
-          items={
-            (props.selectedBreakdown == breakdownOptions[0] &&
-              LegendDataPillars) ||
-            (props.selectedBreakdown == breakdownOptions[1] &&
-              LegendMultiyearPillars)
-          }
           justify="flex-end"
+          items={getLegendData(props.selectedBreakdown)}
         />
       </div>
     </div>
