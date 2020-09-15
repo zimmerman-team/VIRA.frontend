@@ -71,6 +71,7 @@ export const ReportDetailModuleF = (props: any) => {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
+  const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
 
   const reportDetailAction = useStoreActions(
     (actions) => actions.reportDetail.fetch
@@ -79,6 +80,38 @@ export const ReportDetailModuleF = (props: any) => {
     (actions) => actions.reportDetail.clear
   );
   const reportDetailData = useStoreState((state) => state.reportDetail.data);
+
+  const getPillarDataByBudget = useStoreActions(
+    (actions) => actions.getPillarDataByBudget.fetch
+  );
+  const getPillarDataByDuration = useStoreActions(
+    (actions) => actions.getPillarDataByDuration.fetch
+  );
+  const getPriorityAreaBarChartData = useStoreActions(
+    (actions) => actions.getPriorityAreaBarChartData.fetch
+  );
+  const getTargetGroupBarChartData = useStoreActions(
+    (actions) => actions.getTargetGroupBarChartData.fetch
+  );
+  const getOneMultiYearBarChartData = useStoreActions(
+    (actions) => actions.getOneMultiYearBarChartData.fetch
+  );
+
+  const pillarDataByBudget = useStoreState(
+    (state) => state.getPillarDataByBudget.data
+  );
+  const pillarDataByDuration = useStoreState(
+    (state) => state.getPillarDataByDuration.data
+  );
+  const priorityAreaBarChartData = useStoreState(
+    (state) => state.getPriorityAreaBarChartData.data
+  );
+  const targetGroupBarChartData = useStoreState(
+    (state) => state.getTargetGroupBarChartData.data
+  );
+  const oneMultiYearBarChartData = useStoreState(
+    (state) => state.getOneMultiYearBarChartData.data
+  );
 
   React.useEffect(() => {
     return () => reportDetailClearData();
@@ -90,6 +123,42 @@ export const ReportDetailModuleF = (props: any) => {
       values: { id: report_id },
     });
   }, [report_id]);
+
+  React.useEffect(() => {
+    getPillarDataByBudget({
+      socketName: 'getPillarDataByBudget',
+      values: {
+        reportID: report_id,
+      },
+    });
+    getPillarDataByDuration({
+      socketName: 'getPillarDataByDuration',
+      values: {
+        reportID: report_id,
+      },
+    });
+    getPriorityAreaBarChartData({
+      socketName: 'getPriorityAreaBarChartData',
+      values: {
+        reportID: report_id,
+        breakdownBy: selectedBreakdown,
+      },
+    });
+    getTargetGroupBarChartData({
+      socketName: 'getTargetGroupBarChartData',
+      values: {
+        reportID: report_id,
+        breakdownBy: selectedBreakdown,
+      },
+    });
+    getOneMultiYearBarChartData({
+      socketName: 'getOneMultiYearBarChartData',
+      values: {
+        reportID: report_id,
+        breakdownBy: selectedBreakdown,
+      },
+    });
+  }, [report_id, selectedBreakdown]);
 
   React.useEffect(() => {
     if (get(reportDetailData, 'report', false)) {
@@ -117,6 +186,12 @@ export const ReportDetailModuleF = (props: any) => {
       onBubbleSelect={setSelectedSDG}
       barChartLegends={barChartLegends}
       onBarChartLegendClick={onBarChartLegendClick}
+      pillarData={pillarDataByBudget}
+      priorityAreaData={priorityAreaBarChartData}
+      targetGroupData={targetGroupBarChartData}
+      oneAndMultiYearData={oneMultiYearBarChartData}
+      selectedBreakdown={selectedBreakdown}
+      onBreakdownSelect={setSelectedBreakdown}
     />
   );
 };

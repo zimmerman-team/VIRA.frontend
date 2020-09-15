@@ -22,6 +22,8 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    props.onBubbleSelect('');
+    props.onBreakdownSelect('None');
   };
 
   return (
@@ -71,20 +73,24 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
-      {checkIfPPData(props.ppVizData) && !props.loading && (
-        <Viztabs
-          value={value}
-          onTabClick={handleChange}
-          data-cy="grantee-detail-viztabs"
-          barChartData={props.ppVizData}
-          barChartLegends={props.barChartLegends}
-          onBarChartLegendClick={props.onBarChartLegendClick}
-          bubbleChartData={{ ...bubbleMockData, children: props.SDGVizData }}
-          selectedBubble={props.selectedSDG}
-          onBubbleSelect={props.onBubbleSelect}
-          geoMapData={props.geoMapData}
-        />
-      )}
+      <Viztabs
+        value={value}
+        onTabClick={handleChange}
+        data-cy="grantee-detail-viztabs"
+        barChartData={props.ppVizData}
+        barChartLegends={props.barChartLegends}
+        onBarChartLegendClick={props.onBarChartLegendClick}
+        bubbleChartData={{ ...bubbleMockData, children: props.SDGVizData }}
+        selectedBubble={props.selectedSDG}
+        onBubbleSelect={props.onBubbleSelect}
+        geoMapData={props.geoMapData}
+        pillarData={props.pillarData}
+        priorityAreaData={props.priorityAreaData}
+        targetGroupData={props.targetGroupData}
+        oneAndMultiYearData={props.oneAndMultiYearData}
+        selectedBreakdown={props.selectedBreakdown}
+        onBreakdownSelect={props.onBreakdownSelect}
+      />
 
       {/* ---------------------------------------------------------------------*/}
       {/* projects */}

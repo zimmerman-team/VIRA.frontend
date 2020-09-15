@@ -76,22 +76,25 @@ export function GranteeDetailModule(props: any) {
     address: '',
   });
   const [projectTableData, setProjectTableData] = useState([[]]);
+  const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
 
   const granteeDetailAction = useStoreActions(
-    actions => actions.orgDetail.fetch
+    (actions) => actions.orgDetail.fetch
   );
   const granteeDetailClearAction = useStoreActions(
-    actions => actions.orgDetail.clear
+    (actions) => actions.orgDetail.clear
   );
   const allProjectsAction = useStoreActions(
-    actions => actions.allProjects.fetch
+    (actions) => actions.allProjects.fetch
   );
-  const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
-  const granteeDetailData = useStoreState(state => state.orgDetail.data);
-  const ProjectsData = useStoreState(state => state.allProjects.data);
+  const allReportsAction = useStoreActions(
+    (actions) => actions.allReports.fetch
+  );
+  const granteeDetailData = useStoreState((state) => state.orgDetail.data);
+  const ProjectsData = useStoreState((state) => state.allProjects.data);
 
   const loading = useStoreState(
-    state =>
+    (state) =>
       state.orgDetail.loading ||
       state.allProjects.loading ||
       state.allReports.loading ||
@@ -100,12 +103,48 @@ export function GranteeDetailModule(props: any) {
       state.getGeoMapData.loading
   );
   const [selectedSDG, setSelectedSDG] = React.useState('');
-  const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
-  const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
-  const getGeoMapData = useStoreActions(actions => actions.getGeoMapData.fetch);
-  const ppVizData = useStoreState(state => state.getPPVizData.data);
-  const SDGVizData = useStoreState(state => state.getSDGVizData.data);
-  const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const getPPVizData = useStoreActions((actions) => actions.getPPVizData.fetch);
+  const getSDGVizData = useStoreActions(
+    (actions) => actions.getSDGVizData.fetch
+  );
+  const getGeoMapData = useStoreActions(
+    (actions) => actions.getGeoMapData.fetch
+  );
+  const ppVizData = useStoreState((state) => state.getPPVizData.data);
+  const SDGVizData = useStoreState((state) => state.getSDGVizData.data);
+  const geoMapData = useStoreState((state) => state.getGeoMapData.data);
+
+  const getPillarDataByBudget = useStoreActions(
+    (actions) => actions.getPillarDataByBudget.fetch
+  );
+  const getPillarDataByDuration = useStoreActions(
+    (actions) => actions.getPillarDataByDuration.fetch
+  );
+  const getPriorityAreaBarChartData = useStoreActions(
+    (actions) => actions.getPriorityAreaBarChartData.fetch
+  );
+  const getTargetGroupBarChartData = useStoreActions(
+    (actions) => actions.getTargetGroupBarChartData.fetch
+  );
+  const getOneMultiYearBarChartData = useStoreActions(
+    (actions) => actions.getOneMultiYearBarChartData.fetch
+  );
+
+  const pillarDataByBudget = useStoreState(
+    (state) => state.getPillarDataByBudget.data
+  );
+  const pillarDataByDuration = useStoreState(
+    (state) => state.getPillarDataByDuration.data
+  );
+  const priorityAreaBarChartData = useStoreState(
+    (state) => state.getPriorityAreaBarChartData.data
+  );
+  const targetGroupBarChartData = useStoreState(
+    (state) => state.getTargetGroupBarChartData.data
+  );
+  const oneMultiYearBarChartData = useStoreState(
+    (state) => state.getOneMultiYearBarChartData.data
+  );
 
   React.useEffect(() => {
     granteeDetailAction({
@@ -188,6 +227,44 @@ export function GranteeDetailModule(props: any) {
   }, [ProjectsData]);
 
   React.useEffect(() => {
+    const projects = get(ProjectsData, 'data', []);
+    if (projects.length > 0) {
+      const projectsIds = projects.map((project: ProjectModel) => project._id);
+      getPillarDataByBudget({
+        socketName: 'getPillarDataByBudget',
+        values: {
+          projectID: projectsIds,
+        },
+      });
+      getPillarDataByDuration({
+        socketName: 'getPillarDataByDuration',
+        values: { projectID: projectsIds },
+      });
+      getPriorityAreaBarChartData({
+        socketName: 'getPriorityAreaBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          projectID: projectsIds,
+        },
+      });
+      getTargetGroupBarChartData({
+        socketName: 'getTargetGroupBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          projectID: projectsIds,
+        },
+      });
+      getOneMultiYearBarChartData({
+        socketName: 'getOneMultiYearBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          projectID: projectsIds,
+        },
+      });
+    }
+  }, [ProjectsData, selectedBreakdown]);
+
+  React.useEffect(() => {
     baseTableForProject.data = projectTableData;
   }, [projectTableData]);
 
@@ -230,6 +307,12 @@ export function GranteeDetailModule(props: any) {
       geoMapData={geoMapData}
       barChartLegends={barChartLegends}
       onBarChartLegendClick={onBarChartLegendClick}
+      pillarData={pillarDataByBudget}
+      priorityAreaData={priorityAreaBarChartData}
+      targetGroupData={targetGroupBarChartData}
+      oneAndMultiYearData={oneMultiYearBarChartData}
+      selectedBreakdown={selectedBreakdown}
+      onBreakdownSelect={setSelectedBreakdown}
     />
   );
 }

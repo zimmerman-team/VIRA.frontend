@@ -26,6 +26,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   const projectNumber: { code: string } = useParams();
   const project_number: string = projectNumber.code;
   const projectDetail: ProjectModel = projectMock;
+  const [projectID, setProjectID] = React.useState('');
   const [projectDetails, setprojectDetails] = useState(projectDetail);
   const [baseTableForReport, setBaseTableForReport] = React.useState(
     getBaseTableForReport([])
@@ -120,11 +121,11 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     (actions) => actions.projectBudgetData.clear
   );
 
-  const loadReports = useCallback((projectID: string) => {
+  const loadReports = useCallback((projectid: string) => {
     allReportsAction({
       socketName: 'allReport',
       values: {
-        projectID,
+        projectID: projectid,
       },
     }).then((res: any) => {
       if (res) {
@@ -149,69 +150,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     }).then((res: any) => {
       const projectDetailRecord: any = get(res, 'data', null);
       if (projectDetailRecord && projectDetailRecord.length === 1) {
-        loadReports(projectDetailRecord[0]._id);
-        getPPVizData({
-          socketName: 'getPolicyPriorityBarChart',
-          values: {
-            projectID: projectDetailRecord[0]._id,
-          },
-        });
-        getSDGVizData({
-          socketName: 'getSDGBubbleChart',
-          values: {
-            projectID: projectDetailRecord[0]._id,
-          },
-        });
-        getGeoMapData({
-          socketName: 'getGeoMapData',
-          values: {
-            projectID: projectDetailRecord[0]._id,
-          },
-        });
-        getPillarDataByBudget({
-          socketName: 'getPillarDataByBudget',
-          values: {
-            userRole: signedInUserRole,
-            userEmail: signedInUserEmail,
-            projectID: projectDetailRecord[0]._id,
-          },
-        });
-        getPillarDataByDuration({
-          socketName: 'getPillarDataByDuration',
-          values: {
-            userRole: signedInUserRole,
-            userEmail: signedInUserEmail,
-            projectID: projectDetailRecord[0]._id,
-          },
-        });
-        getPriorityAreaBarChartData({
-          socketName: 'getPriorityAreaBarChartData',
-          values: {
-            breakdownBy: selectedBreakdown,
-            userRole: signedInUserRole,
-            userEmail: signedInUserEmail,
-            projectID: projectDetailRecord[0]._id,
-          },
-        });
-        getTargetGroupBarChartData({
-          socketName: 'getTargetGroupBarChartData',
-          values: {
-            breakdownBy: 'none',
-            userRole: signedInUserRole,
-            userEmail: signedInUserEmail,
-            projectID: projectDetailRecord[0]._id,
-          },
-        });
-        getOneMultiYearBarChartData({
-          socketName: 'getOneMultiYearBarChartData',
-          values: {
-            breakdownBy: 'none',
-            userRole: signedInUserRole,
-            userEmail: signedInUserEmail,
-            projectID: projectDetailRecord[0]._id,
-          },
-        });
-
+        setProjectID(projectDetailRecord[0]._id);
         setprojectDetails({
           project_id: projectDetailRecord[0].project_number,
           project: projectDetailRecord[0].project_name,
@@ -242,7 +181,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
         });
       }
     });
-  }, [selectedBreakdown]);
+  }, []);
 
   React.useEffect(() => {
     init();
@@ -252,6 +191,73 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
       projectDetailClearAction();
     };
   }, [project_number]);
+
+  React.useEffect(() => {
+    if (projectID && projectID !== '') {
+      loadReports(projectID);
+      getPPVizData({
+        socketName: 'getPolicyPriorityBarChart',
+        values: {
+          projectID,
+        },
+      });
+      getSDGVizData({
+        socketName: 'getSDGBubbleChart',
+        values: {
+          projectID,
+        },
+      });
+      getGeoMapData({
+        socketName: 'getGeoMapData',
+        values: {
+          projectID,
+        },
+      });
+      getPillarDataByBudget({
+        socketName: 'getPillarDataByBudget',
+        values: {
+          userRole: signedInUserRole,
+          userEmail: signedInUserEmail,
+          projectID,
+        },
+      });
+      getPillarDataByDuration({
+        socketName: 'getPillarDataByDuration',
+        values: {
+          userRole: signedInUserRole,
+          userEmail: signedInUserEmail,
+          projectID,
+        },
+      });
+      getPriorityAreaBarChartData({
+        socketName: 'getPriorityAreaBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          userRole: signedInUserRole,
+          userEmail: signedInUserEmail,
+          projectID,
+        },
+      });
+      getTargetGroupBarChartData({
+        socketName: 'getTargetGroupBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          userRole: signedInUserRole,
+          userEmail: signedInUserEmail,
+          projectID,
+        },
+      });
+      getOneMultiYearBarChartData({
+        socketName: 'getOneMultiYearBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          userRole: signedInUserRole,
+          userEmail: signedInUserEmail,
+          projectID,
+        },
+      });
+    }
+  }, [projectID, selectedBreakdown]);
 
   function generateReport() {
     // todo: refactor routing
