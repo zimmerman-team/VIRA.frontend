@@ -79,3 +79,6 @@ cypress/screenshots/*
 public/media/*
 
 cypress.env.json
+
+/rsync/
+.idea/watcherTasks.xml
