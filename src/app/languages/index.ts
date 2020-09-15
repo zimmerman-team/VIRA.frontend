@@ -133,6 +133,7 @@ i18n
           Website: 'Website',
           'Title of Reports': 'Titel van Rapporten',
           Date: 'Date',
+          'Enable date filter': 'Datumfilter inschakelen',
 
           //  --------------------
           UK: 'NL',
@@ -503,6 +504,7 @@ i18n
           Yes: 'Yes',
           No: 'No',
           Maybe: 'Maybe',
+          'Enable date filter': 'Enable date filter',
         },
       },
     },
