@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';
 
 type PercentageDropdownItemProps = {
@@ -7,6 +8,7 @@ type PercentageDropdownItemProps = {
   value: number;
   code?: number;
   tooltip?: string;
+  labelValue: string;
   onWeightChange: Function;
 };
 
@@ -51,6 +53,7 @@ const inputcss = css`
 `;
 
 export function PercentageDropdownItem(props: PercentageDropdownItemProps) {
+  const { t } = useTranslation();
   function handleFocus(event: any) {
     event.target.select();
   }
@@ -58,7 +61,7 @@ export function PercentageDropdownItem(props: PercentageDropdownItemProps) {
   return (
     <li css={listitemcss}>
       <div css={labelcss}>
-        {props.label}
+        {t(props.label)}
         {props.tooltip && <Tooltip tip={props.tooltip} />}
       </div>
       <div css={inputcss}>

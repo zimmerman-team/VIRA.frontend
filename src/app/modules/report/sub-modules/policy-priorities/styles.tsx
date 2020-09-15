@@ -29,6 +29,14 @@ export const styles: any = {
     font-size: 12px;
     font-weight: 300;
   `,
+  infoTextWithIcon: css`
+    bottom: 0;
+    display: flex;
+    font-size: 12px;
+    font-weight: 300;
+    align-items: center;
+    justify-content: space-between;
+  `,
   blurBlock: css`
     opacity: 0.2;
     pointer-events: none;
