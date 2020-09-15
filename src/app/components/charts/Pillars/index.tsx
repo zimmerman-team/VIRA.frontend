@@ -1,6 +1,7 @@
 import React from 'react';
 import get from 'lodash/get';
 import max from 'lodash/max';
+import isEmpty from 'lodash/isEmpty';
 import { PillarCountContainer } from 'app/components/charts/Pillars/info';
 import { ResponsiveBar } from '@nivo/bar';
 
@@ -18,8 +19,6 @@ import {
 } from 'app/components/charts/Pillars/data';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 import { BudgetTooltip } from './tooltips/Budget';
-import { ReachedTooltip } from 'app/components/charts/PriorityArea/tooltips/Reached';
-import { TargetGroupTooltip } from 'app/components/charts/PriorityArea/tooltips/TargetGroup';
 import { CountTooltip } from './tooltips/Count';
 
 interface PillarContainerProps {
@@ -70,7 +69,9 @@ export const PillarContainer = (props: PillarContainerProps) => {
       : 350;
   const x: number =
     max(
-      data.map((d: any) => (d.oneYear > d.multiYear ? d.oneYear : d.multiYear))
+      (!isEmpty(data) ? data : []).map((d: any) =>
+        d.oneYear > d.multiYear ? d.oneYear : d.multiYear
+      )
     ) || 1;
   const maxValue: number | 'auto' | undefined =
     props.selectedBreakdown === breakdownOptions[0] ? 'auto' : x * 2;
@@ -95,7 +96,10 @@ export const PillarContainer = (props: PillarContainerProps) => {
           maxValue={maxValue}
           keys={getKeys(props.selectedBreakdown)}
           tooltip={getTooltip(props.selectedBreakdown)}
-          data={formatPillarData(data || [], props.selectedBreakdown)}
+          data={formatPillarData(
+            !isEmpty(data) ? data : [],
+            props.selectedBreakdown
+          )}
         />
       </ChartWrapper>
       <div
