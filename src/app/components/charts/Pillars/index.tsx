@@ -11,7 +11,9 @@ import {
 } from 'app/components/charts/common/LegendData';
 import {
   formatPillarData,
+  getKeys,
   PillarConfigBase,
+  PillarMultiYearConfig,
 } from 'app/components/charts/Pillars/data';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 import { BudgetTooltip } from './tooltips/Budget';
@@ -21,8 +23,9 @@ import { TargetGroupTooltip } from 'app/components/charts/PriorityArea/tooltips/
 interface PillarContainerProps {
   data: any;
   keys: any;
-  breakdown: string[];
-  setBreakdown: Function;
+  durationData: any;
+  selectedBreakdown: string;
+  setSelectedBreakdown: Function;
 }
 
 const breakdownOptions = ['None', 'One Year & Multi Year'];
@@ -51,24 +54,33 @@ function getTooltip(breakdown: string) {
 }
 
 export const PillarContainer = (props: PillarContainerProps) => {
+  const data =
+    props.selectedBreakdown === breakdownOptions[0]
+      ? props.data
+      : props.durationData;
+  const config =
+    props.selectedBreakdown === breakdownOptions[0]
+      ? PillarConfigBase
+      : PillarMultiYearConfig;
+  console.log(data);
   return (
     <div
       css={`
         width: 100%;
       `}
     >
+      <PillarCountContainer data={props.data} />
       <BreakdownSelect
         breakdownOptions={breakdownOptions}
-        // selectedBreakdown={props.selectedBreakdown}
-        // setSelectedBreakdown={props.setSelectedBreakdown}
+        selectedBreakdown={props.selectedBreakdown}
+        setSelectedBreakdown={props.setSelectedBreakdown}
       />
-      <PillarCountContainer data={props.data} />
-      {/* <BreakdownSelect /> */}
       <ChartWrapper height={60 * get(props.data, 'length', 0)}>
         <ResponsiveBar
-          {...PillarConfigBase}
-          data={formatPillarData(props.data || [])}
-          tooltip={BudgetTooltip}
+          {...config}
+          keys={getKeys(props.selectedBreakdown)}
+          tooltip={getTooltip(props.selectedBreakdown)}
+          data={formatPillarData(data || [], props.selectedBreakdown)}
         />
       </ChartWrapper>
       <div
@@ -80,7 +92,10 @@ export const PillarContainer = (props: PillarContainerProps) => {
           align-items: flex-end;
         `}
       >
-        <LegendContainer items={LegendDataPillars} justify="flex-end" />
+        <LegendContainer
+          justify="flex-end"
+          items={getLegendData(props.selectedBreakdown)}
+        />
       </div>
     </div>
   );

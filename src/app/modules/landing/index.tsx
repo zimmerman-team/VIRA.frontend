@@ -244,6 +244,7 @@ function LandingLayout(props: PropsModel) {
         onTabClick={handleChange}
         barChartData={ppVizData}
         pillarData={pillarDataByBudget}
+        pillarDataByDuration={pillarDataByDuration}
         priorityAreaData={priorityAreaBarChartData}
         targetGroupData={targetGroupBarChartData}
         oneAndMultiYearData={oneMultiYearBarChartData}
