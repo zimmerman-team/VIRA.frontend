@@ -152,7 +152,11 @@ export function Viztabs(props: PropsModel) {
         `}
       >
         <TabPanel value={props.value} index={0} data-cy="pillars-panel">
-          <PillarContainer data={props.pillarData} />
+          <PillarContainer
+            data={props.pillarData}
+            selectedBreakdown={props.selectedBreakdown}
+            setSelectedBreakdown={props.onBreakdownSelect}
+          />
         </TabPanel>
 
         <TabPanel value={props.value} index={1} data-cy="prio-panel">
