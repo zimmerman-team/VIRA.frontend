@@ -85,6 +85,7 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
         onBubbleSelect={props.onBubbleSelect}
         geoMapData={props.geoMapData}
         pillarData={props.pillarData}
+        pillarDataByDuration={props.pillarDataByDuration}
         priorityAreaData={props.priorityAreaData}
         targetGroupData={props.targetGroupData}
         oneAndMultiYearData={props.oneAndMultiYearData}

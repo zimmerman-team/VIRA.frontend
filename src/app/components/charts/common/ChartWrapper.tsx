@@ -1,10 +1,11 @@
 import { ProjectPalette } from 'app/theme';
 import React, { ReactNode } from 'react';
-import { css } from 'styled-components';
+import 'styled-components/macro';
 
 interface BarChartWrapperProps {
   children?: ReactNode;
   height?: number;
+  noSvgCss?: boolean;
 }
 
 export const ChartWrapper = (props: BarChartWrapperProps) => {
@@ -39,7 +40,8 @@ export const ChartWrapper = (props: BarChartWrapperProps) => {
           }
         }
 
-        svg {
+        ${!props.noSvgCss &&
+        `svg {
           > g {
             > g:nth-of-type(2) {
               transform: translate(0px, 8px);
@@ -52,7 +54,7 @@ export const ChartWrapper = (props: BarChartWrapperProps) => {
               }
             }
           }
-        }
+        }`}
       `}
     >
       {props.children}

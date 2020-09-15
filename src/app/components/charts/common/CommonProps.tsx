@@ -10,9 +10,15 @@ export const CommonBarProps: BarSvgProps = {
   maxValue: 'auto',
   colors: ({ id, data }) => data[`${id}Color`],
   theme: {
-    fontSize: '14px',
-    fontFamily: 'Inter',
-    fontWeight: 400,
+    axis: {
+      ticks: {
+        text: {
+          fontSize: '14px',
+          fontFamily: 'Inter',
+          fontWeight: 400,
+        },
+      },
+    },
     tooltip: {
       container: {
         width: 382,

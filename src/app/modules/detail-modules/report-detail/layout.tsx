@@ -310,6 +310,7 @@ export const ReportDetailLayout = (props: any) => {
           onBubbleSelect={props.onBubbleSelect}
           geoMapData={props.report.mapData}
           pillarData={props.pillarData}
+          pillarDataByDuration={props.pillarDataByDuration}
           priorityAreaData={props.priorityAreaData}
           targetGroupData={props.targetGroupData}
           oneAndMultiYearData={props.oneAndMultiYearData}

@@ -187,6 +187,7 @@ export const ReportDetailModuleF = (props: any) => {
       barChartLegends={barChartLegends}
       onBarChartLegendClick={onBarChartLegendClick}
       pillarData={pillarDataByBudget}
+      pillarDataByDuration={pillarDataByDuration}
       priorityAreaData={priorityAreaBarChartData}
       targetGroupData={targetGroupBarChartData}
       oneAndMultiYearData={oneMultiYearBarChartData}

@@ -38,6 +38,7 @@ type PropsModel = {
   onBubbleSelect: any;
   geoMapData: any;
   pillarData: any;
+  pillarDataByDuration: any;
   priorityAreaData: any;
   targetGroupData: any;
   oneAndMultiYearData: any;
