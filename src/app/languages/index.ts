@@ -267,6 +267,15 @@ i18n
           Country: 'Land',
           Submit: 'Verstuur',
           'People reached out of targeted': 'Mensen bereikten een doelwit',
+          'Social good': 'Sociaal goed',
+          'Churches & Organs': 'Kerken en organen',
+          'Budget Spent Pillar 1': 'Pijler besteed aan budget 1',
+          'Budget Spent Pillar 2': 'Pijler besteed aan budget 2',
+          'People reachout of People targeted': 'Mensen bereiken de doelgroep',
+          'Church & Organ restorations projects':
+            'Restauratieprojecten van kerk en orgel',
+          'Social Good Projects': 'Sociale goede projecten',
+          'Breakdown by': 'Uitsplitsing door',
         },
       },
       en: {
@@ -487,6 +496,16 @@ i18n
           Country: 'Country',
           Submit: 'Submit',
           'People reached out of targeted': 'People reached out of targeted',
+          'Social good': 'Social good',
+          'Churches & Organs': 'Churches & Organs',
+          'Budget Spent Pillar 1': 'Budget Spent Pillar 1',
+          'Budget Spent Pillar 2': 'Budget Spent Pillar 2',
+          'People reachout of People targeted':
+            'People reachout of People targeted',
+          'Church & Organ restorations projects':
+            'Church & Organ restorations projects',
+          'Social Good Projects': 'Social Good Projects',
+          'Breakdown by': 'Breakdown by',
         },
       },
     },
