@@ -15,9 +15,7 @@ import {
   PillarMultiYearConfig,
 } from 'app/components/charts/Pillars/data';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
-import { BudgetTooltip } from './tooltips/Budget';
-import { ReachedTooltip } from 'app/components/charts/PriorityArea/tooltips/Reached';
-import { TargetGroupTooltip } from 'app/components/charts/PriorityArea/tooltips/TargetGroup';
+import { BudgetTooltip } from 'app/components/charts/Pillars/tooltips/Budget';
 
 interface PillarContainerProps {
   data: any;
@@ -66,22 +64,26 @@ export const PillarContainer = (props: PillarContainerProps) => {
         selectedBreakdown={props.selectedBreakdown}
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
-      <ChartWrapper height={60 * get(props.data, 'length', 0)}>
-        {props.selectedBreakdown == breakdownOptions[0] && (
+
+      {props.selectedBreakdown == breakdownOptions[0] && (
+        <ChartWrapper height={60 * get(props.data, 'length', 0)}>
           <ResponsiveBar
             {...PillarConfigBase}
             data={formatPillarData(props.data || [])}
             tooltip={BudgetTooltip}
           />
-        )}
-        {props.selectedBreakdown == breakdownOptions[1] && (
+        </ChartWrapper>
+      )}
+      {props.selectedBreakdown == breakdownOptions[1] && (
+        <ChartWrapper height={100 * get(props.data, 'length', 0)}>
           <ResponsiveBar
             {...PillarMultiYearConfig}
             data={formatPillarData(props.data || [])}
             tooltip={BudgetTooltip}
           />
-        )}
-      </ChartWrapper>
+        </ChartWrapper>
+      )}
+
       <div
         css={`
           width: 100%;

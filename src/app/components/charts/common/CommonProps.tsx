@@ -1,7 +1,6 @@
 import { BarSvgProps } from '@nivo/bar';
 import { BarChartLeftAxis } from 'app/components/charts/common/axis/BarChartLeftAxis';
 import { BarChartBottomAxis } from 'app/components/charts/common/axis/BarChartBottomAxis';
-// import { CustomBarComponent } from 'app/components/charts/common/CustomBarComponent';
 
 // @ts-ignore
 export const CommonBarProps: BarSvgProps = {
@@ -11,6 +10,8 @@ export const CommonBarProps: BarSvgProps = {
   maxValue: 'auto',
   colors: ({ id, data }) => data[`${id}Color`],
   theme: {
+    fontSize: '14px',
+    fontWeight: 500,
     tooltip: {
       container: {
         width: 382,
