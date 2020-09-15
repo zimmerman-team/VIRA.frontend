@@ -159,6 +159,12 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
         });
       }
       setSelections(newSelections);
+    } else if (isNaN(value)) {
+      newSelections = filter(
+        newSelections,
+        (s: LabelWeightModel) => s.label !== label
+      );
+      setSelections(newSelections);
     }
   }
 
