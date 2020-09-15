@@ -7,11 +7,11 @@ import {
   formatTargetGroupData,
   TargetGroupConfigBase,
 } from 'app/components/charts/TargetGroup/data';
-import { LegendContainer } from '../common/LegendContainer';
+import { LegendContainer } from 'app/components/charts/common/LegendContainer';
 import { LegendDataSDGs, LegendDataReached } from '../common/LegendData';
-import { BudgetTooltip } from '../PriorityArea/tooltips/Budget';
-import { ReachedTooltip } from '../PriorityArea/tooltips/Reached';
-import { TargetGroupTooltip } from '../PriorityArea/tooltips/TargetGroup';
+import { BudgetTooltip } from 'app/components/charts/PriorityArea/tooltips/Budget';
+import { ReachedTooltip } from 'app/components/charts/PriorityArea/tooltips/Reached';
+import { TargetGroupTooltip } from 'app/components/charts/PriorityArea/tooltips/TargetGroup';
 
 interface TargetGroupContainerProps {
   data: any;

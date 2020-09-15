@@ -1,8 +1,6 @@
 // @ts-nocheck
 import React from 'react';
 import 'styled-components/macro';
-import uniqBy from 'lodash/uniqBy';
-import { ProjectPalette } from 'app/theme';
 import {
   Grid,
   Tabs,
@@ -27,7 +25,6 @@ import { PillarContainer } from 'app/components/charts/Pillars';
 import { PriorityAreaContainer } from 'app/components/charts/PriorityArea';
 import { TargetGroupContainer } from 'app/components/charts/TargetGroup';
 import { OneYearAndMultiYearContainer } from 'app/components/charts/OneYearAndMultiYear';
-import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 
 type PropsModel = {
   value: number;

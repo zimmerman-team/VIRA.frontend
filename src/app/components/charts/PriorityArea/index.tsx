@@ -7,13 +7,13 @@ import {
   getKeys,
   PriorityAreaConfigBase,
 } from 'app/components/charts/PriorityArea/data';
-import { LegendContainer } from '../common/LegendContainer';
+import { LegendContainer } from 'app/components/charts/common/LegendContainer';
 import {
   LegendDataSDGs,
   LegendDataReached,
   LegendDataDuration,
   LegendDataTargetGroups,
-} from '../common/LegendData';
+} from 'app/components/charts/common/LegendData';
 import { BudgetTooltip } from './tooltips/Budget';
 import { TargetGroupTooltip } from './tooltips/TargetGroup';
 import { ReachedTooltip } from './tooltips/Reached';

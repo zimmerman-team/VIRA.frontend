@@ -24,7 +24,7 @@ import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterang
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import MomentAdapter from '@date-io/moment';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
-import { Viztabs } from '../common/components/Viztabs';
+import { Viztabs } from 'app/modules/common/components/Viztabs';
 
 /**
  * Landing layout.
