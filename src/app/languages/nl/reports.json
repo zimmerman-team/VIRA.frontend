@@ -47,13 +47,13 @@
       "contribution": "Insinger Bijdrage",
       "target_beneficiaries": "Geef aan hoeveel mensen u met uw project wilde bereiken",
       "total_commited": "Geef aan hoeveel mensen in totaal van uw project hebben geprofiteerd",
-      "of_which_ben": "Geef aan hoeveel mensen uw project wil bereiken",
+      "of_which_ben": "Welke doelgroep (en) heeft uw project geholpen? Kies meerdere indien van toepassing.",
       "sdg_mapping_expl": "Voor elke geselecteerde prioriteit verschijnen de relevante SDG's die kunnen worden geselecteerd op basis van onze mapping",
       "percentage_expl": "De som van geselecteerde velden moet gelijk zijn aan 100%",
       "target_group_sdg_expl": "OPMERKING: selecteer “Minder ongelijkheden“ in de vervolgkeuzelijst SDG's hierboven. Als uw project gericht was op vrouwen en meisjes, selecteer dan ook “Gendergelijkheid“ als SDG"
     },
     "cards": {
-      "key_outcomes": "Beschrijf de belangrijkste resultaten die het project wil bereiken",
+      "key_outcomes": "Beschrijf de belangrijkste resultaten die het project beoogde te bereiken",
       "monitor": "Vertel ons alstublieft hoe u de hierboven genoemde resultaten heeft gecontroleerd",
       "monitor_expl": "Bijvoorbeeld: a) Toename van prostituees die bankrekeningen en creditcards gebruiken en een permanent verblijf kunnen onderhouden. b) De frequentie van bezoeken aan gezondheids- en sociale ondersteuning is toegenomen, preventieve medische hulp is verbeterd en begunstigden melden een verbeterde gezondheid. c) Aantal gedetineerden dat een diploma van tertiair en beroepsonderwijs behaalt, aansluiting op de arbeidsmarkt één jaar na vrijlating uit de gevangenis.\nAls u basisgegevens heeft (de gegevens waarmee u de voortgang bijhoudt) en een verificatiemiddel (hoe u de gegevens wilt verkrijgen en uit welke bronnen), geef dan ook die informatie op.",
       "inputs_invested": "Welke input is in het project geïnvesteerd?",

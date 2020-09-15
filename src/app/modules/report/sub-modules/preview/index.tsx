@@ -70,7 +70,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.textfield.insinger_f_policy_priorities"
           tooltip="reports.form.textfield.insinger_f_policy_priorities"
           content={props.policyPrioritiesProps.policyPriorities.map(
-            (pp) => `${pp.label}: ${pp.weight}%`
+            (pp) => `${t(pp.label)}: ${pp.weight}%`
           )}
           // explanation="reports.form.textfield.sdg_mapping_expl"
           testattr="policy-priority-preview-card"
@@ -86,7 +86,7 @@ export const PreviewLayout = (props: PreviewParams) => {
           title="reports.form.textfield.sdgs"
           tooltip="reports.form.textfield.sdgs"
           content={props.policyPrioritiesProps.sdgs.map(
-            (pp) => `${pp.label}: ${pp.weight}%`
+            (sdg) => `${t(sdg.label)}: ${sdg.weight}%`
           )}
           testattr="sdgs-preview-card"
         />
@@ -290,7 +290,11 @@ export const PreviewLayout = (props: PreviewParams) => {
           <PreviewCard
             title="reports.form.cards.how_important_insinger_support"
             tooltip="reports.form.cards.how_important_insinger_support"
-            content={props.challengesPlansProps.howImportantInsingerSupport}
+            content={
+              t(
+                props.challengesPlansProps.howImportantInsingerSupport
+              ) as string
+            }
             testattr="how-important-insinger-support-preview-card"
           />
         </Grid>
@@ -298,7 +302,9 @@ export const PreviewLayout = (props: PreviewParams) => {
           <PreviewCard
             title="reports.form.cards.apply_for_more_funding"
             tooltip="reports.form.cards.apply_for_more_funding"
-            content={props.challengesPlansProps.applyForMoreFunding}
+            content={
+              t(props.challengesPlansProps.applyForMoreFunding) as string
+            }
             testattr="apply-for-more-funding-preview-card"
           />
         </Grid>

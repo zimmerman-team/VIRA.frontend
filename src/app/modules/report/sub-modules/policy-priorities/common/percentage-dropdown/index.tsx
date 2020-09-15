@@ -191,7 +191,7 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
           <ul css={inputlistcss}>
             {props.value.map((v: LabelWeightModel) => (
               <li>
-                <div>{v.label}</div>
+                <div>{t(v.label)}</div>
                 <div>{v.weight}%</div>
               </li>
             ))}
@@ -210,6 +210,7 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
                   key={option.label}
                   code={option.code}
                   label={option.label}
+                  labelValue={option.value}
                   value={get(fItem, 'weight', 0)}
                   onWeightChange={onWeightChange}
                   tooltip={
