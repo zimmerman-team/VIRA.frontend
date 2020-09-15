@@ -93,7 +93,15 @@ export const PillarContainer = (props: PillarContainerProps) => {
           align-items: flex-end;
         `}
       >
-        <LegendContainer items={LegendDataPillars} justify="flex-end" />
+        <LegendContainer
+          items={
+            (props.selectedBreakdown == breakdownOptions[0] &&
+              LegendDataPillars) ||
+            (props.selectedBreakdown == breakdownOptions[1] &&
+              LegendMultiyearPillars)
+          }
+          justify="flex-end"
+        />
       </div>
     </div>
   );

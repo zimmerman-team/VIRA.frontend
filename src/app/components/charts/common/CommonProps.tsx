@@ -11,7 +11,8 @@ export const CommonBarProps: BarSvgProps = {
   colors: ({ id, data }) => data[`${id}Color`],
   theme: {
     fontSize: '14px',
-    fontWeight: 500,
+    fontFamily: 'Inter',
+    fontWeight: 400,
     tooltip: {
       container: {
         width: 382,
