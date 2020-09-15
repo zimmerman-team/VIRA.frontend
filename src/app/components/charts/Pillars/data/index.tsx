@@ -60,20 +60,11 @@ export const PillarMultiYearConfig: BarSvgProps = {
     bottom: 60,
     left: 48,
   },
-
   layout: 'vertical',
-  // @ts-ignore
-  // axisLeft: { renderTick: BarChartLeftVerticalAxis },
-  // @ts-ignore
-  // axisBottom: { renderTick: BarChartBottomVerticalAxis },
-  // @ts-ignore
-
   groupMode: 'grouped',
   innerPadding: 32,
-  // data: PillarMultiYearData,
   indexBy: 'name',
   keys: ChartKeys,
-  maxValue: 'auto',
 };
 
 export function formatPillarData(
@@ -98,7 +89,7 @@ export function formatPillarData(
         name: pillar.name,
         'Budget One Year': pillar.oneYear,
         'Budget One YearColor': Pillar1Colors[0],
-        'Budget Multi Year': pillar.multiyear,
+        'Budget Multi Year': pillar.multiYear,
         'Budget Multi YearColor': Pillar1Colors[1],
       });
     });
@@ -106,6 +97,3 @@ export function formatPillarData(
 
   return chartData;
 }
-
-/* ------------------------------------------------------------ */
-/* multiyear */

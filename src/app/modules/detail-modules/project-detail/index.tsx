@@ -284,6 +284,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
       // @ts-ignore
       match={props.match}
       pillarData={pillarDataByBudget}
+      pillarDataByDuration={pillarDataByDuration}
       priorityAreaData={priorityAreaBarChartData}
       targetGroupData={targetGroupBarChartData}
       oneAndMultiYearData={oneMultiYearBarChartData}
