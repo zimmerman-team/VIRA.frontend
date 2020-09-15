@@ -19,6 +19,8 @@ export const ProjectDetailLayout = (props: any) => {
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    props.onBubbleSelect('');
+    props.onBreakdownSelect('None');
   };
   const showGenerateBtn = useStoreState(
     (state) =>

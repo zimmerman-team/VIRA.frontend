@@ -35,6 +35,8 @@ export const ReportDetailLayout = (props: any) => {
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    props.onBubbleSelect('');
+    props.onBreakdownSelect('None');
   };
 
   const cardData = [
@@ -307,6 +309,12 @@ export const ReportDetailLayout = (props: any) => {
           selectedBubble={props.selectedSDG}
           onBubbleSelect={props.onBubbleSelect}
           geoMapData={props.report.mapData}
+          pillarData={props.pillarData}
+          priorityAreaData={props.priorityAreaData}
+          targetGroupData={props.targetGroupData}
+          oneAndMultiYearData={props.oneAndMultiYearData}
+          selectedBreakdown={props.selectedBreakdown}
+          onBreakdownSelect={props.onBreakdownSelect}
         />
 
         <div css="width: 100%;height: 50px;" />

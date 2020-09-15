@@ -17,7 +17,6 @@ const row = css`
 
 export const TargetGroupTooltip = (props: any) => {
   const { t } = useTranslation();
-  console.log(props);
   const itemKeys = filter(
     Object.keys(props.data),
     (key: string) =>
