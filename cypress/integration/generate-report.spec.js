@@ -1,4 +1,3 @@
-import { getRandomInt } from '../support/utils';
 /// <reference types="Cypress" />
 describe('report flow', () => {
   it('go to generate report module', () => {
@@ -40,39 +39,39 @@ describe('report flow', () => {
 
     cy.get('#autocomplete-countries-option-0').click();
 
-    cy.get('[data-cy=budget-field]')
+    /*cy.get('[data-cy=budget-field]')
       .click()
       .type('{selectall}{backspace}')
       .type(10);
-
-    cy.findByTestId('insinger-contribution-field')
+*/
+    /*cy.findByTestId('insinger-contribution-field')
       .should('exist')
       .click()
       .type('{backspace}')
       .type(2);
-
-    cy.findByTestId('target-beneficiaries-field')
+*/
+    /*cy.findByTestId('target-beneficiaries-field')
       .should('exist')
       .click()
       .type('{backspace}')
       .type(1);
-
-    cy.findByTestId('total-committed-field')
+*/
+    /*  cy.findByTestId('total-committed-field')
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(10);
+      .type(10);*/
 
     // open funders list and click top option
-    cy.findByTestId('other-funders').should('exist').click().type('Utopa');
-    cy.get('#autocomplete-countries-option-0').click();
+    // cy.findByTestId('other-funders').should('exist').click().type('Utopa');
+    // cy.get('#autocomplete-countries-option-0').click();
 
-    cy.findByTestId('which-when-item-0')
+    /*cy.findByTestId('which-when-item-0')
       .should('exist')
       .click()
       .type('{backspace}')
       .type(1);
-
+*/
     /*cy.findByTestId('which-when-item-1')
       .should('exist')
       .click()
@@ -80,7 +79,7 @@ describe('report flow', () => {
       .type(1);*/
   });
 
-  it('fill in indicator & verification', () => {
+  /*  it('fill in indicator & verification', () => {
     cy.findByTestId('next-button').should('exist').click();
 
     cy.findByTestId('text-area-1')
@@ -149,7 +148,7 @@ describe('report flow', () => {
 
   it('click away dialog', () => {
     cy.findByTestId('dialog-button').should('exist').click();
-  });
+  });*/
 
   /*it('add media', () => {
     cy.get('[testattr=media-button]')

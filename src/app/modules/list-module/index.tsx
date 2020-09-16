@@ -127,6 +127,8 @@ export const ListModule = (props: ListModuleParams) => {
 
       /* E2E: we're storing first 10 project in localstorage so that we can read them out in cypress */
       const projectsE2E = [];
+      console.log(projectsRes);
+
       projectsRes.data.map((item, index) => {
         if (index <= 9 && item.total_amount > 200) {
           projectsE2E.push(item.project_name);

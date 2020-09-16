@@ -10,8 +10,6 @@ import filter from 'lodash/filter';
 import cloneDeep from 'lodash/cloneDeep';
 import { Box } from '@material-ui/core';
 import findIndex from 'lodash/findIndex';
-import { ProjectPalette } from 'app/theme';
-import { css } from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { ExpandMore } from '@material-ui/icons';
 import { LabelWeightModel } from 'app/modules/report/model';
@@ -19,6 +17,13 @@ import { LabelWeightModel } from 'app/modules/report/model';
 import { PolicyPriorityProps } from 'app/modules/report/sub-modules/policy-priorities/mock';
 import { FieldDescription } from 'app/modules/report/sub-modules/indicator-verification/common/FieldDescription';
 import { PercentageDropdownItem } from 'app/modules/report/sub-modules/policy-priorities/common/percentage-dropdown-item';
+import {
+  inputcss,
+  inputlistcss,
+  listboxcss,
+  listcss,
+  buttoncss,
+} from 'app/modules/report/sub-modules/policy-priorities/common/percentage-dropdown/inputcss';
 
 export interface PercentageDropdownProps {
   text?: string;
@@ -27,100 +32,8 @@ export interface PercentageDropdownProps {
   value: LabelWeightModel[];
   listItemTooltipPath?: string;
   values: PolicyPriorityProps[];
+  testid?: string;
 }
-
-const inputcss = (hasSelections: boolean) => css`
-  width: 100%;
-  display: flex;
-  cursor: pointer;
-  background: #f0f3f7;
-  flex-direction: row;
-  align-items: center;
-  padding: 5px 0 5px 10px;
-  justify-content: space-between;
-  height: ${hasSelections ? 'fit-content' : '48px'};
-
-  > div {
-    width: 100%;
-  }
-  > svg {
-    margin-right: 10px;
-  }
-`;
-
-const inputlistcss = css`
-  margin: 0;
-  width: 100%;
-  list-style: none;
-  overflow-y: auto;
-  padding: 5px 10px;
-  max-height: 100px;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-    border-radius: 50%;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${ProjectPalette.grey[400]};
-  }
-
-  > li {
-    width: 100%;
-    padding: 6px;
-    display: flex;
-    font-size: 14px;
-    align-items: center;
-    flex-direction: row;
-    font-weight: normal;
-    justify-content: space-between;
-  }
-`;
-
-const listboxcss = css`
-  margin: 0;
-  padding: 0;
-  z-index: 1;
-  width: 100%;
-  background: #fff;
-  position: absolute;
-  border-radius: 2px;
-  box-shadow: 0 4px 14px -2px rgba(130, 136, 148, 0.28),
-    0 0 2px 0 rgba(130, 136, 148, 0.22);
-`;
-
-const listcss = css`
-  width: 100%;
-  list-style: none;
-  overflow-y: auto;
-  padding: 5px 10px;
-  max-height: 300px;
-  margin: 0 0 10px 0;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-    border-radius: 50%;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${ProjectPalette.grey[400]};
-  }
-`;
-
-const buttoncss = (bgcolor: string) => css`
-  width: 50%;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 15px 0;
-  font-weight: 600;
-  text-align: center;
-  background: ${bgcolor};
-`;
 
 export const PercentageDropdown = (props: PercentageDropdownProps) => {
   const { t } = useTranslation();
@@ -183,14 +96,18 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
         </>
       )}
 
+      {/* ------------------------------------------ */}
+      {/* todo: what does this do? */}
       <div
         css={inputcss(props.value.length > 0)}
         onClick={() => setOpenList(!openList)}
+        data-cy={props.testid}
       >
         <div>
           <ul css={inputlistcss}>
+            {/* todo: please rename "v" to something more descriptive */}
             {props.value.map((v: LabelWeightModel) => (
-              <li>
+              <li key={v.label}>
                 <div>{t(v.label)}</div>
                 <div>{v.weight}%</div>
               </li>
@@ -199,7 +116,8 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
         </div>
         {props.value.length === 0 && <ExpandMore />}
       </div>
-
+      {/* ------------------------------------------ */}
+      {/* todo: what does this do? */}
       {openList && (
         <div css={listboxcss}>
           <ul css={listcss}>

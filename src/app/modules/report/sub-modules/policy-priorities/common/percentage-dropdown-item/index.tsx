@@ -59,13 +59,14 @@ export function PercentageDropdownItem(props: PercentageDropdownItemProps) {
   }
 
   return (
-    <li css={listitemcss}>
+    <li css={listitemcss} data-cy={'dropdown-item-container'}>
       <div css={labelcss}>
         {t(props.label)}
         {props.tooltip && <Tooltip tip={props.tooltip} />}
       </div>
       <div css={inputcss}>
         <input
+          data-cy={'percentage-dropdown-item-input'}
           min={0}
           max={100}
           type="number"

@@ -104,6 +104,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent>
             <PercentageDropdown
+              testid={'dropdown-one'}
               values={
                 props.pillar === 'Pillar 1: Social Good Projects'
                   ? pillar1PolicyPriorities
@@ -135,6 +136,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.sdgs')} />
           <CardContent>
             <PercentageDropdown
+              testid={'dropdown-two'}
               values={sdgs}
               value={props.sdgs}
               setValue={props.setSDGs}

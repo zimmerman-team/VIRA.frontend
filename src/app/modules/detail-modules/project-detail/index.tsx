@@ -268,7 +268,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
-
+  console.log('detail', projectBudgetData);
   return (
     <ProjectDetailLayout
       projectDetail={projectDetails}

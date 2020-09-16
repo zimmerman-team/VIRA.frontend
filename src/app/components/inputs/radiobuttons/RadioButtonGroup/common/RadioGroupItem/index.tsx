@@ -10,5 +10,7 @@ type Props = {
 };
 
 export const RadioGroupItem = (props: Props) => {
-  return <FormItemLabel {...props} control={<RadioButton />} />;
+  return (
+    <FormItemLabel {...props} control={<RadioButton data-cy="test-iets" />} />
+  );
 };
