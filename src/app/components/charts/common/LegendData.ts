@@ -38,7 +38,7 @@ export const LegendDataDuration: LegendItemProps[] = [
   },
   {
     legendColor: '#242E42',
-    legendName: 'One year project',
+    legendName: 'One year projects',
   },
 ];
 
@@ -138,7 +138,7 @@ export const LegendDataPillars: LegendItemProps[] = [
 export const LegendMultiyearPillars: LegendItemProps[] = [
   {
     legendColor: '#828894',
-    legendName: 'Multi year projecs',
+    legendName: 'Multi year projects',
   },
   {
     legendColor: '#242E42',

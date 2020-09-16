@@ -38,11 +38,11 @@ export const DurationTooltip = (props: any) => {
         `}
       />
       <div css={row}>
-        <div>One Year projects Budget</div>
+        <div>{t('One Year projects Budget')}</div>
         <div>€{props.data['Budget One Year']}</div>
       </div>
       <div css={row}>
-        <div>Multi Year projects Budget</div>
+        <div>{t('Multi Year projects Budget')}</div>
         <div>€{props.data['Budget Multi Year']}</div>
       </div>
     </div>
