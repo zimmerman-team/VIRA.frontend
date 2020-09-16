@@ -1,10 +1,13 @@
 import React from 'react';
 import get from 'lodash/get';
 import max from 'lodash/max';
+import find from 'lodash/find';
 import isEmpty from 'lodash/isEmpty';
-import { PillarCountContainer } from 'app/components/charts/Pillars/info';
 import { ResponsiveBar } from '@nivo/bar';
+import { useStoreState } from 'app/state/store/hooks';
+import { PillarCountContainer } from 'app/components/charts/Pillars/info';
 
+import { NoData } from 'app/components/charts/common/NoData';
 import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
 import { LegendContainer } from 'app/components/charts/common/LegendContainer';
 import {
@@ -54,7 +57,23 @@ function getTooltip(breakdown: string) {
   }
 }
 
+function checkIfNoData(data: any[], breakdown: string) {
+  switch (breakdown) {
+    case breakdownOptions[0]:
+      return find(data, (item: any) => item.budget > 0);
+    case breakdownOptions[1]:
+      return find(data, (item: any) => item.oneYear > 0 || item.multiYear > 0);
+    default:
+      return true;
+  }
+}
+
 export const PillarContainer = (props: PillarContainerProps) => {
+  const loading = useStoreState(
+    (state) =>
+      state.getPillarDataByBudget.loading ||
+      state.getPillarDataByDuration.loading
+  );
   const data =
     props.selectedBreakdown === breakdownOptions[0]
       ? props.data
@@ -91,16 +110,20 @@ export const PillarContainer = (props: PillarContainerProps) => {
         height={chartHeight}
         noSvgCss={props.selectedBreakdown === breakdownOptions[1]}
       >
-        <ResponsiveBar
-          {...config}
-          maxValue={maxValue}
-          keys={getKeys(props.selectedBreakdown)}
-          tooltip={getTooltip(props.selectedBreakdown)}
-          data={formatPillarData(
-            !isEmpty(data) ? data : [],
-            props.selectedBreakdown
-          )}
-        />
+        {!checkIfNoData(data, props.selectedBreakdown) ? (
+          <NoData loading={loading} />
+        ) : (
+          <ResponsiveBar
+            {...config}
+            maxValue={maxValue}
+            keys={getKeys(props.selectedBreakdown)}
+            tooltip={getTooltip(props.selectedBreakdown)}
+            data={formatPillarData(
+              !isEmpty(data) ? data : [],
+              props.selectedBreakdown
+            )}
+          />
+        )}
       </ChartWrapper>
       <div
         css={`

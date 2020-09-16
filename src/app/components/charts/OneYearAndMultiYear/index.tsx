@@ -1,5 +1,7 @@
 import React from 'react';
+import find from 'lodash/find';
 import { ResponsiveBar } from '@nivo/bar';
+import { useStoreState } from 'app/state/store/hooks';
 
 import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
 import {
@@ -8,6 +10,7 @@ import {
   formatOneYearAndMultiYearData,
   OneYearAndMultiYearConfigBase,
 } from 'app/components/charts/OneYearAndMultiYear/data';
+import { NoData } from 'app/components/charts/common/NoData';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 import { ChartCountContainer } from '../common/ChartCount';
 import { LegendContainer } from '../common/LegendContainer';
@@ -54,9 +57,27 @@ function getTooltip(breakdown: string) {
   }
 }
 
+function checkIfNoData(data: any[], breakdown: string) {
+  switch (breakdown) {
+    case breakdownOptions[0]:
+      return find(data, (item: any) => item.count > 0);
+    case breakdownOptions[1]:
+      return find(data, (item: any) => item.reached > 0 || item.target > 0);
+    case breakdownOptions[2]:
+      return find(data, (item: any) =>
+        find(item.children, (child: any) => child.value > 0)
+      );
+    default:
+      return true;
+  }
+}
+
 export const OneYearAndMultiYearContainer = (
   props: OneYearAndMultiYearContainerProps
 ) => {
+  const loading = useStoreState(
+    (state) => state.getOneMultiYearBarChartData.loading
+  );
   return (
     <div
       css={`
@@ -70,17 +91,21 @@ export const OneYearAndMultiYearContainer = (
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
       <ChartWrapper height={60 * props.data.length}>
-        <ResponsiveBar
-          {...OneYearAndMultiYearConfigBase}
-          data={
-            formatOneYearAndMultiYearData(
-              props.selectedBreakdown,
-              props.data
-            ) as object[]
-          }
-          keys={getKeys(props.selectedBreakdown)}
-          tooltip={getTooltip(props.selectedBreakdown)}
-        />
+        {!checkIfNoData(props.data, props.selectedBreakdown) ? (
+          <NoData loading={loading} />
+        ) : (
+          <ResponsiveBar
+            {...OneYearAndMultiYearConfigBase}
+            data={
+              formatOneYearAndMultiYearData(
+                props.selectedBreakdown,
+                props.data
+              ) as object[]
+            }
+            keys={getKeys(props.selectedBreakdown)}
+            tooltip={getTooltip(props.selectedBreakdown)}
+          />
+        )}
       </ChartWrapper>
       <div
         css={`
