@@ -38,7 +38,7 @@ export const BudgetTooltip = (props: any) => {
         `}
       />
       <div css={row}>
-        <div>Budget</div>
+        <div>{t('Budget')}</div>
         <div>€{props.data.Budget}</div>
       </div>
     </div>

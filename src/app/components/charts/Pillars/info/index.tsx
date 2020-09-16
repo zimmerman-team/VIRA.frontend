@@ -88,7 +88,7 @@ function getItems(data: any[]) {
 }
 
 export const PillarCountItem = (props: PillarItemProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -125,7 +125,7 @@ export const PillarCountItem = (props: PillarItemProps) => {
           text-align: center;
         `}
       >
-        {props.name}
+        {t(props.name)}
       </div>
     </div>
   );
