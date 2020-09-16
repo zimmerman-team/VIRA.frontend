@@ -1,6 +1,7 @@
 /* core */
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
+
 /* third-party */
 import CircularProgress from '@material-ui/core/CircularProgress';
 

@@ -1,5 +1,7 @@
 import React from 'react';
+import find from 'lodash/find';
 import { ResponsiveBar } from '@nivo/bar';
+import { useStoreState } from 'app/state/store/hooks';
 import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 import {
@@ -7,6 +9,7 @@ import {
   getKeys,
   PriorityAreaConfigBase,
 } from 'app/components/charts/PriorityArea/data';
+import { NoData } from 'app/components/charts/common/NoData';
 import { LegendContainer } from 'app/components/charts/common/LegendContainer';
 import {
   LegendDataSDGs,
@@ -68,7 +71,37 @@ function getTooltip(breakdown: string) {
   }
 }
 
+function checkIfNoData(data: any[], breakdown: string) {
+  switch (breakdown) {
+    case breakdownOptions[0]:
+      return find(data, (item: any) => item.budget > 0);
+    case breakdownOptions[1]:
+      return find(data, (item: any) =>
+        find(item.children, (child: any) => child.value > 0)
+      );
+    case breakdownOptions[2]:
+      return find(
+        data,
+        (item: any) => item.budget_One > 0 || item.budget_Multi > 0
+      );
+    case breakdownOptions[3]:
+      return find(
+        data,
+        (item: any) => item.reached_Value > 0 || item.target_Value > 0
+      );
+    case breakdownOptions[4]:
+      return find(data, (item: any) =>
+        find(item.children, (child: any) => child.reached > 0)
+      );
+    default:
+      return true;
+  }
+}
+
 export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
+  const loading = useStoreState(
+    (state) => state.getPriorityAreaBarChartData.loading
+  );
   return (
     <div
       css={`
@@ -81,17 +114,21 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
       <ChartWrapper height={56 * props.data.length}>
-        <ResponsiveBar
-          {...PriorityAreaConfigBase}
-          data={
-            formatPriorityAreaData(
-              props.selectedBreakdown,
-              props.data
-            ) as object[]
-          }
-          keys={getKeys(props.selectedBreakdown)}
-          tooltip={getTooltip(props.selectedBreakdown)}
-        />
+        {!checkIfNoData(props.data, props.selectedBreakdown) ? (
+          <NoData loading={loading} />
+        ) : (
+          <ResponsiveBar
+            {...PriorityAreaConfigBase}
+            data={
+              formatPriorityAreaData(
+                props.selectedBreakdown,
+                props.data
+              ) as object[]
+            }
+            keys={getKeys(props.selectedBreakdown)}
+            tooltip={getTooltip(props.selectedBreakdown)}
+          />
+        )}
       </ChartWrapper>
       <div
         css={`
