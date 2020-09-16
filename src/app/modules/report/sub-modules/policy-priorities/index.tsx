@@ -37,7 +37,7 @@ import {
   pillar1PolicyPriorities,
   pillar2PolicyPriorities,
 } from 'app/modules/report/sub-modules/policy-priorities/mock';
-import { InfoCaption } from '../indicator-verification/common/InfoCaption';
+import SmallIconChecked from 'app/assets/icons/SmallIconChecked';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   const isMount = useIsMount();
@@ -104,20 +104,25 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent>
             <PercentageDropdown
-              values={(props.pillar === 'Pillar 1: Social Good Projects'
-                ? pillar1PolicyPriorities
-                : pillar2PolicyPriorities
-              ).map((policyPriority: PolicyPriorityProps) => ({
-                ...policyPriority,
-                label: t(policyPriority.label),
-              }))}
+              values={
+                props.pillar === 'Pillar 1: Social Good Projects'
+                  ? pillar1PolicyPriorities
+                  : pillar2PolicyPriorities
+              }
               value={props.policyPriorities}
               setValue={props.setPolicyPriorities}
             />
             {/* <Box height="14px" width="100%" /> */}
             <Box height="5px" width="100%" />
-            <Typography variant="body2" color="secondary" css={styles.infoText}>
+            <Typography
+              variant="body2"
+              color="secondary"
+              css={styles.infoTextWithIcon}
+            >
               {t('reports.form.textfield.percentage_expl')}
+              {sumBy(props.policyPriorities, 'weight') === 100 && (
+                <SmallIconChecked />
+              )}
             </Typography>
           </CardContent>
         </Card>
@@ -130,18 +135,20 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.sdgs')} />
           <CardContent>
             <PercentageDropdown
-              values={sdgs.map((sdg: PolicyPriorityProps) => ({
-                ...sdg,
-                label: t(sdg.label),
-              }))}
+              values={sdgs}
               value={props.sdgs}
               setValue={props.setSDGs}
               listItemTooltipPath="sdg_descriptions"
             />
             {/* <Box height="14px" width="100%" /> */}
             <Box height="5px" width="100%" />
-            <Typography variant="body2" color="secondary" css={styles.infoText}>
+            <Typography
+              variant="body2"
+              color="secondary"
+              css={styles.infoTextWithIcon}
+            >
               {t('reports.form.textfield.percentage_expl')}
+              {sumBy(props.sdgs, 'weight') === 100 && <SmallIconChecked />}
             </Typography>
           </CardContent>
         </Card>

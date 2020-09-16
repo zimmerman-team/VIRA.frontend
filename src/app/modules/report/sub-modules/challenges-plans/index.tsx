@@ -122,16 +122,18 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             <CardContent css={styles.cardContent}>
               <Autocomplete
                 values={[
-                  { label: 'Not at all', value: 'Not at all' },
-                  { label: 'A little', value: 'A little' },
-                  { label: 'A lot', value: 'A lot' },
+                  { label: t('Not at all'), value: 'Not at all' },
+                  { label: t('A little'), value: 'A little' },
+                  { label: t('A lot'), value: 'A lot' },
                   {
-                    label: 'It was crucial/ I couldn’t have done it otherwise',
+                    label: t(
+                      'It was crucial/ I couldn’t have done it otherwise'
+                    ),
                     value: 'It was crucial/ I couldn’t have done it otherwise',
                   },
                 ]}
                 value={{
-                  label: props.howImportantInsingerSupport,
+                  label: t(props.howImportantInsingerSupport),
                   value: props.howImportantInsingerSupport,
                 }}
                 setValue={(e: LabelValueModel) =>
@@ -162,12 +164,12 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             <CardContent css={styles.cardContent}>
               <Autocomplete
                 values={[
-                  { label: 'Yes', value: 'Yes' },
-                  { label: 'No', value: 'No' },
-                  { label: 'Maybe', value: 'Maybe' },
+                  { label: t('Yes'), value: 'Yes' },
+                  { label: t('No'), value: 'No' },
+                  { label: t('Maybe'), value: 'Maybe' },
                 ]}
                 value={{
-                  label: props.applyForMoreFunding,
+                  label: t(props.applyForMoreFunding),
                   value: props.applyForMoreFunding,
                 }}
                 setValue={(e: LabelValueModel) =>

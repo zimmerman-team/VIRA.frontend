@@ -133,6 +133,7 @@ i18n
           Website: 'Website',
           'Title of Reports': 'Titel van Rapporten',
           Date: 'Date',
+          'Enable date filter': 'Datumfilter inschakelen',
 
           //  --------------------
           UK: 'NL',
@@ -276,6 +277,14 @@ i18n
             'Restauratieprojecten van kerk en orgel',
           'Social Good Projects': 'Sociale goede projecten',
           'Breakdown by': 'Uitsplitsing door',
+          'Not at all': 'Helemaal niet',
+          'A little': 'Een beetje',
+          'A lot': 'Veel',
+          'It was crucial/ I couldn’t have done it otherwise':
+            'Het was cruciaal / ik had het niet anders kunnen doen',
+          Yes: 'Ja',
+          No: 'Nee',
+          Maybe: 'Kan zijn',
         },
       },
       en: {
@@ -506,6 +515,15 @@ i18n
             'Church & Organ restorations projects',
           'Social Good Projects': 'Social Good Projects',
           'Breakdown by': 'Breakdown by',
+          'Not at all': 'Not at all',
+          'A little': 'A little',
+          'A lot': 'A lot',
+          'It was crucial/ I couldn’t have done it otherwise':
+            'It was crucial/ I couldn’t have done it otherwise',
+          Yes: 'Yes',
+          No: 'No',
+          Maybe: 'Maybe',
+          'Enable date filter': 'Enable date filter',
         },
       },
     },

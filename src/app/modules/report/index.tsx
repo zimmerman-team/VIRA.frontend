@@ -2,6 +2,7 @@
 import React from 'react';
 import 'styled-components/macro';
 import { withRouter } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import CheckIcon from '@material-ui/icons/Check';
 
 /* utils thirdparty */
@@ -46,6 +47,8 @@ const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, (tab) => `/report/${projectID}/${tab.path}` === pathname);
 
 function CreateReportFunc(props: any) {
+  const { t, i18n } = useTranslation();
+  const en = i18n.getFixedT('en');
   useTitle(`${AppConfig.appTitleLong} Create report`);
   const query = useQuery();
   // state
@@ -654,11 +657,11 @@ function CreateReportFunc(props: any) {
             target_beneficiaries: beneficiaryCounts,
             policy_priorities: policyPriorities.map((pp: LabelWeightModel) => ({
               ...pp,
-              name: pp.label,
+              name: en(pp.label),
             })),
             sdgs: sdgs.map((sdg: LabelWeightModel) => ({
               ...sdg,
-              name: sdg.label,
+              name: en(sdg.label),
             })),
             /* todo: stefanos, please look into refactoring this piece */
             location: location

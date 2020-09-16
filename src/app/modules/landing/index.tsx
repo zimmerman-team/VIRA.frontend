@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 // @ts-nocheck
 // global
 import React from 'react';
@@ -5,6 +7,7 @@ import { useTitle } from 'react-use';
 import get from 'lodash/get';
 import { withRouter } from 'react-router-dom';
 import 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 
 // absolute
 import { Grid, Box, Hidden } from '@material-ui/core';
@@ -25,6 +28,7 @@ import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import MomentAdapter from '@date-io/moment';
 import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
 import { Viztabs } from 'app/modules/common/components/Viztabs';
+import { Checkbox } from 'app/components/inputs/checkboxes/Checkbox';
 
 /**
  * Landing layout.
@@ -33,6 +37,7 @@ function LandingLayout(props: PropsModel) {
   // set window title
   useTitle(`${AppConfig.appTitleLong} Dashboard`);
   /** prop1 description */
+  const { t } = useTranslation();
   const [stats, setStats] = React.useState(StatItemsConfig);
   const [barChartLegends, setBarChartLegends] = React.useState([
     {
@@ -49,6 +54,7 @@ function LandingLayout(props: PropsModel) {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
+  const [dateFilterEnabled, setDateFilterEnabled] = React.useState(false);
   const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
   const getPPVizData = useStoreActions((actions) => actions.getPPVizData.fetch);
   const getSDGVizData = useStoreActions(
@@ -127,79 +133,56 @@ function LandingLayout(props: PropsModel) {
   );
 
   React.useEffect(() => {
-    getPPVizData({
-      socketName: 'getPolicyPriorityBarChart',
-      values: {
-        userRole: signedInUserRole,
-        userEmail: signedInUserEmail,
+    let values = {
+      userRole: signedInUserRole,
+      userEmail: signedInUserEmail,
+    };
+    if (dateFilterEnabled) {
+      values = {
+        ...values,
         startDate: selectedStartDate._d,
         endDate: selectedEndDate._d,
-      },
+      };
+    }
+    getPPVizData({
+      socketName: 'getPolicyPriorityBarChart',
+      values,
     });
     getSDGVizData({
       socketName: 'getSDGBubbleChart',
-      values: {
-        userRole: signedInUserRole,
-        userEmail: signedInUserEmail,
-        startDate: selectedStartDate._d,
-        endDate: selectedEndDate._d,
-      },
+      values,
     });
     getGeoMapData({
       socketName: 'getGeoMapData',
-      values: {
-        userRole: signedInUserRole,
-        userEmail: signedInUserEmail,
-        startDate: selectedStartDate._d,
-        endDate: selectedEndDate._d,
-      },
+      values,
     });
     getPillarDataByBudget({
       socketName: 'getPillarDataByBudget',
-      values: {
-        userRole: signedInUserRole,
-        userEmail: signedInUserEmail,
-        startDate: selectedStartDate._d,
-        endDate: selectedEndDate._d,
-      },
+      values,
     });
     getPillarDataByDuration({
       socketName: 'getPillarDataByDuration',
-      values: {
-        userRole: signedInUserRole,
-        userEmail: signedInUserEmail,
-        startDate: selectedStartDate._d,
-        endDate: selectedEndDate._d,
-      },
+      values,
     });
     getPriorityAreaBarChartData({
       socketName: 'getPriorityAreaBarChartData',
       values: {
+        ...values,
         breakdownBy: selectedBreakdown,
-        userRole: signedInUserRole,
-        userEmail: signedInUserEmail,
-        startDate: selectedStartDate._d,
-        endDate: selectedEndDate._d,
       },
     });
     getTargetGroupBarChartData({
       socketName: 'getTargetGroupBarChartData',
       values: {
+        ...values,
         breakdownBy: selectedBreakdown,
-        userRole: signedInUserRole,
-        userEmail: signedInUserEmail,
-        startDate: selectedStartDate._d,
-        endDate: selectedEndDate._d,
       },
     });
     getOneMultiYearBarChartData({
       socketName: 'getOneMultiYearBarChartData',
       values: {
+        ...values,
         breakdownBy: selectedBreakdown,
-        userRole: signedInUserRole,
-        userEmail: signedInUserEmail,
-        startDate: selectedStartDate._d,
-        endDate: selectedEndDate._d,
       },
     });
   }, [
@@ -208,6 +191,7 @@ function LandingLayout(props: PropsModel) {
     selectedStartDate,
     selectedEndDate,
     selectedBreakdown,
+    dateFilterEnabled,
   ]);
 
   React.useEffect(() => {
@@ -258,13 +242,51 @@ function LandingLayout(props: PropsModel) {
         geoMapData={geoMapData}
       />
 
-      <DataDaterangePicker
-        startDate={selectedStartDate}
-        endDate={selectedEndDate}
-        onStartDateSelect={(date) => setSelectedStartDate(date.startOf('day'))}
-        onEndDateSelect={(date) => setSelectedEndDate(date.endOf('day'))}
-        tabValue={value}
-      />
+      <div
+        css={`
+          display: flex;
+          align-items: start;
+          flex-direction: column;
+          top: ${value === 0 ? '-48px' : ''};
+          position: ${value === 0 ? 'relative' : ''};
+        `}
+      >
+        <div
+          onClick={() => setDateFilterEnabled(!dateFilterEnabled)}
+          css={`
+            display: flex;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            padding-left: 4px;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+          `}
+        >
+          <Checkbox checked={dateFilterEnabled} />
+          <div>{t('Enable date filter')}</div>
+        </div>
+        <div
+          css={
+            !dateFilterEnabled
+              ? `
+                opacity: 0.5;
+                pointer-events: none;
+              `
+              : ''
+          }
+        >
+          <DataDaterangePicker
+            startDate={selectedStartDate}
+            endDate={selectedEndDate}
+            onStartDateSelect={(date) =>
+              setSelectedStartDate(date.startOf('day'))
+            }
+            onEndDateSelect={(date) => setSelectedEndDate(date.endOf('day'))}
+            tabValue={value}
+          />
+        </div>
+      </div>
 
       {/* hide on mobile */}
 
@@ -277,7 +299,10 @@ function LandingLayout(props: PropsModel) {
       <ListModule
         selectedSDG={selectedSDG}
         loadData
-        dateFilter={{ start: selectedStartDate, end: selectedEndDate }}
+        dateFilter={{
+          start: dateFilterEnabled ? selectedStartDate : null,
+          end: dateFilterEnabled ? selectedEndDate : null,
+        }}
         tabNav={getNavTabItems(
           NavItemsGeneralConfig,
           get(props.match.params, 'viz', '')
