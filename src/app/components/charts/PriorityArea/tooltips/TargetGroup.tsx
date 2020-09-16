@@ -56,7 +56,7 @@ export const TargetGroupTooltip = (props: any) => {
         return (
           <div key={key} css="padding: 5px 0;">
             <div css={row}>
-              <div>{key}</div>
+              <div>{t(key)}</div>
               <div>{props.data[key]}</div>
             </div>
             <ProgressBarContainer>

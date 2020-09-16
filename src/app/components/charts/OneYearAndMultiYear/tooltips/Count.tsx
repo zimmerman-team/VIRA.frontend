@@ -38,7 +38,7 @@ export const CountTooltip = (props: any) => {
         `}
       />
       <div css={row}>
-        <div>Project count</div>
+        <div>{t('Project count')}</div>
         <div>{props.data.count}</div>
       </div>
     </div>

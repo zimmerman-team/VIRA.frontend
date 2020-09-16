@@ -42,12 +42,13 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
 /* global variables */
 import { AppConfig } from 'app/data';
+import { policyPrioritiesToLangKey } from './data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
   findIndex(tabs, (tab) => `/report/${projectID}/${tab.path}` === pathname);
 
 function CreateReportFunc(props: any) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const en = i18n.getFixedT('en');
   useTitle(`${AppConfig.appTitleLong} Create report`);
   const query = useQuery();
@@ -390,14 +391,14 @@ function CreateReportFunc(props: any) {
       setPolicyPriorities(
         get(reportDetailData, 'report.policy_priorities', []).map(
           (pp: any) => ({
-            label: pp.policy_priority.name,
+            label: policyPrioritiesToLangKey(pp.policy_priority.name),
             weight: pp.weight,
           })
         )
       );
       setSDGs(
         get(reportDetailData, 'report.sdgs', []).map((sdg: any) => ({
-          label: sdg.sdg.name,
+          label: `sdgs.${sdg.sdg.code}`,
           weight: sdg.weight,
           code: sdg.sdg.code,
         }))

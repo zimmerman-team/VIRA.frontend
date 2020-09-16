@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -33,6 +34,7 @@ interface BreakdownSelectProps {
 }
 
 export default function BreakdownSelect(props: BreakdownSelectProps) {
+  const { t } = useTranslation();
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     props.setSelectedBreakdown(event.target.value as string);
   };
@@ -45,7 +47,7 @@ export default function BreakdownSelect(props: BreakdownSelectProps) {
 
   return (
     <Wrapper>
-      <Typo>Breakdown by</Typo>
+      <Typo>{t('Breakdown by')}</Typo>
       <FormControl>
         <Select
           value={props.selectedBreakdown}
