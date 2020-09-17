@@ -73,6 +73,9 @@ export const ChartCountItem = (props: ChartCountItemProps) => {
           display: flex;
           justify-content: center;
           align-items: center;
+          @media (max-width: 600px) {
+            font-size: 16px;
+          }
         `}
       >
         {props.count}
@@ -85,6 +88,9 @@ export const ChartCountItem = (props: ChartCountItemProps) => {
           letter-spacing: 0.250795px;
           color: #000000;
           text-align: center;
+          @media (max-width: 600px) {
+            font-size: 14px;
+          }
         `}
       >
         {props.name}
@@ -98,8 +104,10 @@ export const ChartCountContainer = (props: ChartCountInfoProps) => {
     <div
       css={`
         display: flex;
-        width: 60%;
+        width: 100%;
         margin-bottom: 50px;
+        align-items: flex-start;
+        overflow: scroll;
       `}
     >
       {props.items.map((item: ChartCountItemProps) => (

@@ -40,7 +40,6 @@ function getLegendData(breakdown: string) {
       return LegendDataPillars;
     case breakdownOptions[1]:
       return LegendMultiyearPillars;
-
     default:
       return [];
   }
