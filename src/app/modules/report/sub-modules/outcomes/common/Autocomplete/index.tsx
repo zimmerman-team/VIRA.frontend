@@ -144,6 +144,7 @@ export const Autocomplete = (props: AutocompleteParams) => {
         width: 100%;
         position: relative;
       `}
+      data-cy={props.testAttr}
     >
       {props.description && (
         <>

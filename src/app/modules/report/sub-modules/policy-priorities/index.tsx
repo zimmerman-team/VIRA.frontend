@@ -302,7 +302,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               value={props.funders}
               setValue={props.setFunders}
             />
-            {/*<Box height="14px" width="100%" />*/}
           </CardContent>
         </Card>
       </Grid>
