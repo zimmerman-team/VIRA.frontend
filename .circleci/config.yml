@@ -78,8 +78,8 @@ workflows:
           requires:
             - deploy
           yarn: true
-#          command: yarn happo-cypress -- -- yarn cypress run --record --parallel
-#          command: yarn cypress:record:chrome
+          #          command: yarn happo-cypress -- -- yarn cypress run --record --parallel
+          #          command: yarn cypress:record:chrome
           browser: chrome
           record: true
           parallel: true
@@ -90,4 +90,6 @@ workflows:
             - deploy
           filters:
             branches:
-              only: master
+              only:
+                - master
+                - develop
