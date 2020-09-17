@@ -56,16 +56,16 @@ describe('test sdg', () => {
     sdgBubbleChartItem.map((item) => cy.findByTestId(item));
   });
 
-  it('check list items and corresponding bubbles', () => {
-    sdgItemList.map((item, index) => {
-      cy.findByTestId(item).click({ force: true });
-      cy.findByTestId(sdgBubbleChartItem[index]).should(
-        'have.css',
-        'border',
-        '3px solid rgb(37, 186, 164)'
-      );
-    });
-  });
+  // it('check list items and corresponding bubbles', () => {
+  //   sdgItemList.map((item, index) => {
+  //     cy.findByTestId(item).click({ force: true });
+  //     cy.findByTestId(sdgBubbleChartItem[index]).should(
+  //       'have.css',
+  //       'border',
+  //       '3px solid rgb(37, 186, 164)'
+  //     );
+  //   });
+  // });
 
   /*it('make a screenshot', () => {
     cy.get('body').happoScreenshot({

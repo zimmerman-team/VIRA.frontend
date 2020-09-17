@@ -121,11 +121,12 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
       {openList && (
         <div css={listboxcss}>
           <ul css={listcss}>
-            {props.values.map((option: PolicyPriorityProps) => {
+            {props.values.map((option: PolicyPriorityProps, index) => {
               const fItem = find(selections, { label: option.label });
               return (
                 <PercentageDropdownItem
-                  key={option.label}
+                  key={'dropdown-item-' + index}
+                  testid={'dropdown-item-' + index}
                   code={option.code}
                   label={option.label}
                   labelValue={option.value}
@@ -148,10 +149,15 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
               align-items: center;
             `}
           >
-            <div css={buttoncss('#D8D8D8')} onClick={() => setOpenList(false)}>
+            <div
+              data-cy="dropdown-close-button"
+              css={buttoncss('#D8D8D8')}
+              onClick={() => setOpenList(false)}
+            >
               Close
             </div>
             <div
+              data-cy="dropdown-apply-button"
               css={buttoncss('#30C2B0')}
               onClick={() => {
                 setOpenList(false);

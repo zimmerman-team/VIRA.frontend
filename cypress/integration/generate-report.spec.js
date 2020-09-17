@@ -32,55 +32,86 @@ describe('report flow', () => {
     // go to policy priorities tab
     cy.findByTestId('next-button').should('exist').click();
 
-    cy.get('#autocomplete-countries')
+    /* cy.get('#autocomplete-countries')
       .should('exist')
       .click()
-      .type('Homelessness');
+      .type('Homelessness');*/
 
-    cy.get('#autocomplete-countries-option-0').click();
+    cy.findByTestId('dropdown-one').click();
+    cy.findByTestId('dropdown-item-0').click().type('20');
+    cy.findByTestId('dropdown-item-1').click().type('20');
+    cy.findByTestId('dropdown-item-2').click().type('20');
+    cy.findByTestId('dropdown-item-3').click().type('20');
+    cy.findByTestId('dropdown-item-4').click().type('20');
 
-    /*cy.get('[data-cy=budget-field]')
+    cy.findByTestId('dropdown-apply-button').click();
+
+    cy.findByTestId('dropdown-one').click();
+    cy.findByTestId('dropdown-close-button').click();
+
+    cy.findByTestId('dropdown-two').click();
+    cy.findByTestId('dropdown-item-0').click().type('20');
+    cy.findByTestId('dropdown-item-1').click().type('20');
+    cy.findByTestId('dropdown-item-2').click().type('20');
+    cy.findByTestId('dropdown-item-3').click().type('20');
+    cy.findByTestId('dropdown-item-4').click().type('20');
+
+    cy.findByTestId('dropdown-apply-button').click();
+
+    cy.findByTestId('dropdown-one').click();
+    cy.findByTestId('dropdown-close-button').click();
+
+    cy.get('[data-cy=budget-field]')
       .click()
       .type('{selectall}{backspace}')
       .type(10);
-*/
-    /*cy.findByTestId('insinger-contribution-field')
+    cy.findByTestId('insinger-contribution-field')
       .should('exist')
       .click()
       .type('{backspace}')
       .type(2);
-*/
-    /*cy.findByTestId('target-beneficiaries-field')
+    cy.findByTestId('target-beneficiaries-field')
       .should('exist')
       .click()
       .type('{backspace}')
       .type(1);
-*/
-    /*  cy.findByTestId('total-committed-field')
+    cy.findByTestId('total-committed-field')
       .should('exist')
       .click()
       .type('{backspace}')
-      .type(10);*/
+      .type(10);
 
     // open funders list and click top option
+    cy.findByTestId('dropdown-jan').should('exist').click().type('Utopa');
     // cy.findByTestId('other-funders').should('exist').click().type('Utopa');
-    // cy.get('#autocomplete-countries-option-0').click();
+    cy.get('#autocomplete-countries-option-0').click();
 
     /*cy.findByTestId('which-when-item-0')
       .should('exist')
       .click()
       .type('{backspace}')
       .type(1);
-*/
-    /*cy.findByTestId('which-when-item-1')
+    cy.findByTestId('which-when-item-1')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type(1);
+    cy.findByTestId('which-when-item-2')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type(1);
+    cy.findByTestId('which-when-item-3')
       .should('exist')
       .click()
       .type('{backspace}')
       .type(1);*/
   });
 
-  /*  it('fill in indicator & verification', () => {
+  it('fill in indicator & verification', () => {
     cy.findByTestId('next-button').should('exist').click();
+
+    cy.findByTestId('text-area-1-container').should('exist').click();
 
     cy.findByTestId('text-area-1')
       .should('exist')
@@ -88,27 +119,15 @@ describe('report flow', () => {
       .type('{backspace}')
       .type('Lorem ipsum dolor simet text area 1');
 
-    cy.findByTestId('text-area-2')
-      .should('exist')
-      .click()
-      .type('{backspace}')
-      .type('Lorem ipsum dolor simet text area 2');
-  });
-
-  it('fill in chalenges & plans', () => {
-    cy.findByTestId('next-button').should('exist').click();
-
-    cy.findByTestId('text-area-1')
-      .should('exist')
-      .click()
-      .type('{backspace}')
-      .type('Lorem ipsum dolor simet text area 1');
+    cy.findByTestId('text-area-2-container').should('exist').click();
 
     cy.findByTestId('text-area-2')
       .should('exist')
       .click()
       .type('{backspace}')
       .type('Lorem ipsum dolor simet text area 2');
+
+    cy.findByTestId('text-area-3-container').should('exist').click();
 
     cy.findByTestId('text-area-3')
       .should('exist')
@@ -116,11 +135,83 @@ describe('report flow', () => {
       .type('{backspace}')
       .type('Lorem ipsum dolor simet text area 3');
 
+    cy.findByTestId('text-area-4-container').should('exist').click();
+
     cy.findByTestId('text-area-4')
       .should('exist')
       .click()
       .type('{backspace}')
       .type('Lorem ipsum dolor simet text area 4');
+
+    cy.findByTestId('text-area-5-container').should('exist').click();
+
+    cy.findByTestId('text-area-5')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type('Lorem ipsum dolor simet text area 5');
+
+    cy.findByTestId('text-area-6-container').should('exist').click();
+
+    cy.findByTestId('text-area-6')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type('Lorem ipsum dolor simet text area 6');
+
+    cy.findByTestId('text-area-7-container').should('exist').click();
+
+    cy.findByTestId('text-area-7')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type('Lorem ipsum dolor simet text area 7');
+  });
+
+  it('fill in chalenges & plans', () => {
+    cy.findByTestId('next-button').should('exist').click();
+
+    cy.findByTestId('text-area-1-container').should('exist').click();
+
+    cy.findByTestId('text-area-1')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type('Lorem ipsum dolor simet text area 1');
+
+    cy.findByTestId('text-area-2-container').should('exist').click();
+
+    cy.findByTestId('text-area-2')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type('Lorem ipsum dolor simet text area 2');
+
+    cy.findByTestId('text-area-3-container').should('exist').click();
+
+    cy.findByTestId('text-area-3')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type('Lorem ipsum dolor simet text area 3');
+
+    // open funders list and click top option
+    cy.findByTestId('dropdown-1').should('exist').click().type('A little');
+    // cy.findByTestId('other-funders').should('exist').click().type('Utopa');
+    cy.get('#autocomplete-countries-option-0').click();
+
+    // open funders list and click top option
+    cy.findByTestId('dropdown-2').should('exist').click().type('Yes');
+    // cy.findByTestId('other-funders').should('exist').click().type('Utopa');
+    cy.get('#autocomplete-countries-option-0').click();
+
+    cy.findByTestId('text-area-6-container').should('exist').click();
+
+    cy.findByTestId('text-area-6')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type('Lorem ipsum dolor simet text area 6');
   });
 
   it('preview report', () => {
@@ -138,7 +229,7 @@ describe('report flow', () => {
       'exist'
     );
     cy.findByTestId('other-project-preview-card').should('exist');
-    cy.findByTestId('future-plans-preview-card').should('exist');
+
     cy.findByTestId('other-comments-preview-card').should('exist');
   });
 
@@ -148,7 +239,7 @@ describe('report flow', () => {
 
   it('click away dialog', () => {
     cy.findByTestId('dialog-button').should('exist').click();
-  });*/
+  });
 
   /*it('add media', () => {
     cy.get('[testattr=media-button]')
