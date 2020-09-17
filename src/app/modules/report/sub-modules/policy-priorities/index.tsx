@@ -53,11 +53,11 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
     setIsBlur(ppTotal < 100 || sdgsTotal < 100);
   }, [props.policyPriorities, props.sdgs]);
 
-  React.useEffect(() => {
-    if (!isMount) {
-      props.setPolicyPriorities([]);
-    }
-  }, [props.pillar]);
+  // React.useEffect(() => {
+  //   if (!isMount) {
+  //     props.setPolicyPriorities([]);
+  //   }
+  // }, [props.pillar]);
 
   React.useEffect(() => {
     if (

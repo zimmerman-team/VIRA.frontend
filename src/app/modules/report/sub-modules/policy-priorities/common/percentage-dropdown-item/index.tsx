@@ -9,6 +9,7 @@ type PercentageDropdownItemProps = {
   code?: number;
   tooltip?: string;
   labelValue: string;
+  disabled?: boolean;
   onWeightChange: Function;
   testid?: string;
 };
@@ -33,6 +34,7 @@ export function PercentageDropdownItem(props: PercentageDropdownItemProps) {
           type="number"
           value={props.value}
           onFocus={handleFocus}
+          disabled={props.disabled}
           onChange={(e: any) =>
             props.onWeightChange(
               props.label,

@@ -22,6 +22,7 @@ import {
   inputlistcss,
   listboxcss,
   listcss,
+  totalcss,
   buttoncss,
 } from 'app/modules/report/sub-modules/policy-priorities/common/percentage-dropdown/inputcss';
 
@@ -39,12 +40,13 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
   const { t } = useTranslation();
   const [openList, setOpenList] = React.useState(false);
   const [selections, setSelections] = React.useState(cloneDeep(props.value));
+  const [total, setTotal] = React.useState(sumBy(selections, 'weight'));
 
   React.useEffect(() => {
-    if (openList) {
-      setSelections(cloneDeep(props.value));
-    }
-  }, [openList]);
+    setSelections(cloneDeep(props.value));
+  }, [props.value]);
+
+  React.useEffect(() => setTotal(sumBy(selections, 'weight')), [selections]);
 
   function onWeightChange(label: string, value: number, code?: number) {
     let newSelections = [...selections];
@@ -97,7 +99,7 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
       )}
 
       {/* ------------------------------------------ */}
-      {/* todo: what does this do? */}
+      {/* Opens the dropdown list, shows selected items with their values */}
       <div
         css={inputcss(props.value.length > 0)}
         onClick={() => setOpenList(!openList)}
@@ -117,7 +119,7 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
         {props.value.length === 0 && <ExpandMore />}
       </div>
       {/* ------------------------------------------ */}
-      {/* todo: what does this do? */}
+      {/* Actual dropdown list with items */}
       {openList && (
         <div css={listboxcss}>
           <ul css={listcss}>
@@ -141,6 +143,15 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
               );
             })}
           </ul>
+          <div css={totalcss(total)}>
+            <PercentageDropdownItem
+              disabled
+              label="Total"
+              value={total}
+              labelValue="Total"
+              onWeightChange={() => {}}
+            />
+          </div>
           <div
             css={`
               width: 100%;
