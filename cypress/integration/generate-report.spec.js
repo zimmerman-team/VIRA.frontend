@@ -82,7 +82,7 @@ describe('report flow', () => {
       .type(10);
 
     // open funders list and click top option
-    cy.findByTestId('dropdown-jan').should('exist').click().type('Utopa');
+    cy.findByTestId('dropdown-funders').should('exist').click().type('Utopa');
     // cy.findByTestId('other-funders').should('exist').click().type('Utopa');
     cy.get('#autocomplete-countries-option-0').click();
 

@@ -293,7 +293,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.other_funders')} />
           <CardContent>
             <Autocomplete
-              testAttr="dropdown-jan"
+              testAttr="dropdown-funders"
               multiple
               values={funderList.map((funder: FunderProps) => ({
                 ...funder,
