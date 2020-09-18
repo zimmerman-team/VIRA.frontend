@@ -40,26 +40,41 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
   const { t } = useTranslation();
   const [openList, setOpenList] = React.useState(false);
   const [selections, setSelections] = React.useState(cloneDeep(props.value));
-  const [total, setTotal] = React.useState(sumBy(selections, 'weight'));
+  const [total, setTotal] = React.useState(
+    sumBy(selections, (s: any) => (isNaN(s.weight) ? 0 : s.weight))
+  );
 
   React.useEffect(() => {
     setSelections(cloneDeep(props.value));
   }, [props.value]);
 
-  React.useEffect(() => setTotal(sumBy(selections, 'weight')), [selections]);
+  React.useEffect(
+    () =>
+      setTotal(sumBy(selections, (s: any) => (isNaN(s.weight) ? 0 : s.weight))),
+    [selections]
+  );
 
   function onWeightChange(label: string, value: number, code?: number) {
     let newSelections = [...selections];
     const fIndex = findIndex(selections, { label });
+    let fIndexWeight = get(selections, `[${fIndex}].weight`, 0);
+    fIndexWeight = isNaN(fIndexWeight) ? 0 : fIndexWeight;
     const availableWeight =
       100 -
-      sumBy(selections, 'weight') +
-      get(selections, `[${fIndex}].weight`, 0);
-    if (
-      !isNaN(value) &&
-      (value < availableWeight || value === availableWeight)
-    ) {
-      if (value === 0) {
+      sumBy(selections, (s: any) => (isNaN(s.weight) ? 0 : s.weight)) +
+      fIndexWeight;
+    if (isNaN(value)) {
+      if (fIndex > -1) {
+        newSelections[fIndex].weight = value;
+      } else {
+        newSelections.push({
+          label,
+          weight: value,
+          code,
+        });
+      }
+    } else if (value < availableWeight || value === availableWeight) {
+      if (value < 1) {
         newSelections = filter(
           newSelections,
           (s: LabelWeightModel) => s.label !== label
@@ -73,14 +88,8 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
           code,
         });
       }
-      setSelections(newSelections);
-    } else if (isNaN(value)) {
-      newSelections = filter(
-        newSelections,
-        (s: LabelWeightModel) => s.label !== label
-      );
-      setSelections(newSelections);
     }
+    setSelections(newSelections);
   }
 
   return (
@@ -172,7 +181,9 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
               css={buttoncss('#30C2B0')}
               onClick={() => {
                 setOpenList(false);
-                props.setValue(selections);
+                props.setValue(
+                  filter(selections, (s: any) => !isNaN(s.weight))
+                );
               }}
             >
               Apply
