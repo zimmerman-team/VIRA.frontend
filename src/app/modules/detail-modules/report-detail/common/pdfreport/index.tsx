@@ -1,27 +1,68 @@
 // @ts-nocheck
 // global
 import React from 'react';
-import uniqBy from 'lodash/uniqBy';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 // absolute
 import { BubbleChart } from 'app/components/charts/Bubble';
+import { PillarContainer } from 'app/components/charts/Pillars';
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { OutcomeCard } from 'app/modules/common/components/OutcomeCard';
+import { TargetGroupContainer } from 'app/components/charts/TargetGroup';
 import { TitleFragment } from 'app/modules/common/components/TitleParams';
-import { HorizontalBarChart } from 'app/components/charts/BarCharts/HorizontalBarChart';
-import { HorizontalBarChartValueModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
+import { PriorityAreaContainer } from 'app/components/charts/PriorityArea';
+import { OneYearAndMultiYearContainer } from 'app/components/charts/OneYearAndMultiYear';
 
 // direct
 import 'styled-components/macro';
-import { ProjectPalette } from 'app/theme';
 
-const Spacer1 = () => <div css="width: 100%;height: 200px;" />;
-const Spacer2 = () => <div css="width: 100%;height: 100px;" />;
+const Spacer = () => <div css="width: 100%;height: 50px;" />;
+
+const getVizHeader = (title: string, description?: string) => {
+  return (
+    <React.Fragment>
+      <h4
+        css={`
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 1.5;
+        `}
+      >
+        {title}
+      </h4>
+      {description && (
+        <h6
+          css={`
+            font-size: 14px;
+            margin-top: 4px;
+          `}
+        >
+          {description}
+        </h6>
+      )}
+      <div
+        css="width: 100%;   margin-bottom: 10px;
+        "
+      />
+    </React.Fragment>
+  );
+};
 
 export function PDFreport(props: any) {
   const { t } = useTranslation();
+  const interval = setInterval(() => {
+    const container = document.getElementById('pdf-report-container');
+    const svgTextElements = container.getElementsByTagName('text');
+    [...svgTextElements].forEach((textElement: any) => {
+      textElement.style.fontFamily = 'Helvetica';
+      textElement.setAttribute('font-family', 'Helvetica');
+      textElement.replaceWith(textElement);
+    });
+    if ([...svgTextElements].length > 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
 
   return (
     <div
@@ -64,58 +105,55 @@ export function PDFreport(props: any) {
             ]}
           />
         </Grid>
-        <Spacer1 />
-        <h4
-          css={`
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: 10px;
-          `}
-        >
-          {t('home.chart_nav.priority_area')}
-        </h4>
-        <HorizontalBarChart
-          colors={[
-            ProjectPalette.primary.main,
-            ...uniqBy(
-              ((props.report
-                .barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-                [],
-              'value2Color'
-            ).map((item: any) => item.value2Color),
-            ...uniqBy(
-              ((props.report
-                .barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-                [],
-              'value4Color'
-            ).map((item: any) => item.value4Color),
-          ]}
-          values={
-            ((props.report
-              .barChartData as unknown) as HorizontalBarChartValueModel[]) || []
+        <Spacer />
+        {getVizHeader(
+          t('home.chart_nav.pillars'),
+          t('home.chart_description.pillars')
+        )}
+        <PillarContainer
+          data={
+            props.selectedBreakdown === 'None'
+              ? props.pillarData
+              : props.pillarDataByDuration
           }
-          maxValue={Math.max(
-            ...(
-              ((props.report
-                .barChartData as unknown) as HorizontalBarChartValueModel[]) ||
-              []
-            ).map((item: any) => item.value1 + item.value2)
-          )}
-          chartLegends={props.barChartLegends}
-          onChartLegendClick={props.onBarChartLegendClick}
+          durationData={props.pillarDataByDuration}
+          selectedBreakdown={props.selectedBreakdown}
+          setSelectedBreakdown={props.onBreakdownSelect}
         />
-        <Spacer1 />
-        <h4
-          css={`
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: 10px;
-          `}
-        >
-          {t('home.chart_nav.sdg')}
-        </h4>
+        <Spacer />
+        {getVizHeader(
+          t('home.chart_nav.priority_area'),
+          t('home.chart_description.priority_area')
+        )}
+        <PriorityAreaContainer
+          data={props.priorityAreaData}
+          selectedBreakdown={props.selectedBreakdown}
+          setSelectedBreakdown={props.onBreakdownSelect}
+        />
+      </div>
+      <div id="page2" css="padding: 64px;">
+        {getVizHeader(
+          t('home.chart_nav.target_group'),
+          t('home.chart_description.target_group')
+        )}
+        <TargetGroupContainer
+          data={props.targetGroupData}
+          selectedBreakdown={props.selectedBreakdown}
+          setSelectedBreakdown={props.onBreakdownSelect}
+        />
+        <Spacer />
+        {getVizHeader(
+          t('home.chart_nav.one_year_and_multi_year'),
+          t('home.chart_description.one_year_and_multi_year')
+        )}
+        <OneYearAndMultiYearContainer
+          data={props.oneAndMultiYearData}
+          selectedBreakdown={props.selectedBreakdown}
+          setSelectedBreakdown={props.onBreakdownSelect}
+        />
+      </div>
+      <div id="page3" css="padding: 64px;">
+        {getVizHeader(t('home.chart_nav.sdg'))}
         <BubbleChart
           data={{
             ...bubbleMockData,
@@ -124,8 +162,7 @@ export function PDFreport(props: any) {
           selectedBubble={props.selectedSDG}
           setSelectedBubble={props.onBubbleSelect}
         />
-      </div>
-      <div id="page2" css="padding: 64px;">
+        <Spacer />
         <Grid
           key={props.cardData[0].title}
           data-cy={props.cardData[0].testID}
@@ -138,7 +175,7 @@ export function PDFreport(props: any) {
             description={props.cardData[0].description}
           />
         </Grid>
-        <Spacer1 />
+        <Spacer />
         <Grid
           key={props.cardData[1].title}
           data-cy={props.cardData[1].testID}
@@ -151,7 +188,8 @@ export function PDFreport(props: any) {
             description={props.cardData[1].description}
           />
         </Grid>
-        <Spacer1 />
+      </div>
+      <div id="page4" css="padding: 64px;">
         {props.report.media.length > 0 && (
           <Grid
             key={props.cardData[2].title}
@@ -166,7 +204,7 @@ export function PDFreport(props: any) {
             />
           </Grid>
         )}
-        <Spacer2 />
+        <Spacer />
         <Grid
           key={props.cardData[3].title}
           data-cy={props.cardData[3].testID}
@@ -179,8 +217,7 @@ export function PDFreport(props: any) {
             description={props.cardData[3].description}
           />
         </Grid>
-      </div>
-      <div id="page3" css="padding: 64px;">
+        <Spacer />
         <Grid
           key={props.cardData[4].title}
           data-cy={props.cardData[4].testID}
@@ -193,7 +230,7 @@ export function PDFreport(props: any) {
             description={props.cardData[4].description}
           />
         </Grid>
-        <Spacer2 />
+        <Spacer />
         <Grid
           key={props.cardData[5].title}
           data-cy={props.cardData[5].testID}
@@ -206,7 +243,7 @@ export function PDFreport(props: any) {
             description={props.cardData[5].description}
           />
         </Grid>
-        <Spacer2 />
+        <Spacer />
         <Grid
           key={props.cardData[6].title}
           data-cy={props.cardData[6].testID}
@@ -219,7 +256,8 @@ export function PDFreport(props: any) {
             description={props.cardData[6].description}
           />
         </Grid>
-        <Spacer2 />
+      </div>
+      <div id="page5" css="padding: 64px;">
         <Grid
           key={props.cardData[7].title}
           data-cy={props.cardData[7].testID}
@@ -232,8 +270,7 @@ export function PDFreport(props: any) {
             description={props.cardData[7].description}
           />
         </Grid>
-      </div>
-      <div id="page4" css="padding: 64px;">
+        <Spacer />
         <Grid
           key={props.cardData[8].title}
           data-cy={props.cardData[8].testID}
@@ -246,7 +283,7 @@ export function PDFreport(props: any) {
             description={props.cardData[8].description}
           />
         </Grid>
-        <Spacer2 />
+        <Spacer />
         <Grid
           key={props.cardData[9].title}
           data-cy={props.cardData[9].testID}
@@ -259,7 +296,7 @@ export function PDFreport(props: any) {
             description={props.cardData[9].description}
           />
         </Grid>
-        <Spacer2 />
+        <Spacer />
         <Grid
           key={props.cardData[10].title}
           data-cy={props.cardData[10].testID}
@@ -273,7 +310,7 @@ export function PDFreport(props: any) {
           />
         </Grid>
       </div>
-      <div id="page5" css="padding: 64px;">
+      <div id="page6" css="padding: 64px;">
         <Grid
           key={props.cardData[11].title}
           data-cy={props.cardData[11].testID}
@@ -286,7 +323,7 @@ export function PDFreport(props: any) {
             description={props.cardData[11].description}
           />
         </Grid>
-        <Spacer2 />
+        <Spacer />
         <Grid
           key={props.cardData[12].title}
           data-cy={props.cardData[12].testID}
@@ -299,7 +336,7 @@ export function PDFreport(props: any) {
             description={props.cardData[12].description}
           />
         </Grid>
-        <Spacer2 />
+        <Spacer />
         <Grid
           key={props.cardData[13].title}
           data-cy={props.cardData[13].testID}

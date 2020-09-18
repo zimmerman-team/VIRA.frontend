@@ -122,6 +122,7 @@ export const ReportDetailLayout = (props: any) => {
       document.getElementById('page3'),
       document.getElementById('page4'),
       document.getElementById('page5'),
+      document.getElementById('page6'),
     ];
 
     node.style.visibility = 'hidden';
@@ -177,12 +178,23 @@ export const ReportDetailLayout = (props: any) => {
                   pdfWidth = pdf.internal.pageSize.getWidth();
                   pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
                   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                  html2canvas(pages[5], {
+                    allowTaint: true,
+                    useCORS: true,
+                  }).then((canvas5) => {
+                    pdf.addPage();
+                    imgData = canvas5.toDataURL('image/png');
+                    imgProps = pdf.getImageProperties(imgData);
+                    pdfWidth = pdf.internal.pageSize.getWidth();
+                    pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-                  pdf.save(`${props.report.title}.pdf`);
+                    pdf.save(`${props.report.title}.pdf`);
 
-                  node.style.visibility = 'visible';
-                  pdfnode.style.visibility = 'hidden';
-                  pdfloader.style.display = 'none';
+                    node.style.visibility = 'visible';
+                    pdfnode.style.visibility = 'hidden';
+                    pdfloader.style.display = 'none';
+                  });
                 }
               );
             });
@@ -219,128 +231,144 @@ export const ReportDetailLayout = (props: any) => {
         `}
         id="report-container"
       >
-        {/* ---------------------------------------------------------------------*/}
-        {/* breadcrumbs */}
-        <Grid item xs={12} lg={12}>
-          <BreadCrumbs
-            currentLocation={props.report.title}
-            previousLocations={[{ label: 'Reports', url: '/list/2' }]}
-          />
-        </Grid>
+        <Grid container spacing={4}>
+          {/* ---------------------------------------------------------------------*/}
+          {/* breadcrumbs */}
+          <Grid item xs={12} lg={12}>
+            <BreadCrumbs
+              currentLocation={props.report.title}
+              previousLocations={[{ label: 'Reports', url: '/list/2' }]}
+            />
+          </Grid>
 
-        {/* ---------------------------------------------------------------------*/}
-        {/* button: generate report */}
-        <Grid item lg={12} container justify="flex-end">
-          <Hidden xsDown>
+          {/* ---------------------------------------------------------------------*/}
+          {/* button: generate report */}
+          <Grid item lg={12} container justify="flex-end">
+            <Hidden xsDown>
+              <Grid
+                item
+                container
+                xs={false}
+                sm={3}
+                md={3}
+                lg={2}
+                justify="flex-end"
+              >
+                {showEditBtn && (
+                  <ContainedButton
+                    text={t('reports.detail.editReportBtn')}
+                    onClick={props.editReport}
+                  />
+                )}
+              </Grid>
+            </Hidden>
             <Grid
               item
               container
-              xs={false}
+              xs={12}
               sm={3}
               md={3}
               lg={2}
               justify="flex-end"
             >
-              {showEditBtn && (
-                <ContainedButton
-                  text={t('reports.detail.editReportBtn')}
-                  onClick={props.editReport}
-                />
-              )}
+              <ContainedButton text="Download" onClick={onDownloadClick} />
             </Grid>
-          </Hidden>
-          <Grid item container xs={12} sm={3} md={3} lg={2} justify="flex-end">
-            <ContainedButton text="Download" onClick={onDownloadClick} />
           </Grid>
-        </Grid>
 
-        {/* ---------------------------------------------------------------------*/}
-        {/* title fragment */}
-        <Grid item xs={12} lg={12}>
-          <TitleFragment
-            showMoreThanTitle
-            note={props.report.date}
-            title={props.report.title}
-            id={`Report ID: ${props.report.reportID}`}
-            url={`/projects/${props.report.project.id}`}
-            url_note={`${props.report.project.name}`}
-            editReport={props.editReport}
-            showEditBtn={showEditBtn}
-            testattr="report-title"
-            stats={[
-              {
-                label: t('reports.detail.stats.targetBeneficiaries'),
-                value: props.report.total_target_beneficiaries,
-              },
-              {
-                label: t('reports.detail.stats.budget'),
-                value: parseInt(props.report.budget || '', 10)
-                  .toLocaleString(undefined, {
-                    currency: 'EUR',
-                    currencyDisplay: 'symbol',
-                    style: 'currency',
-                  })
-                  .replace('.00', ''),
-              },
-            ]}
+          {/* ---------------------------------------------------------------------*/}
+          {/* title fragment */}
+          <Grid item xs={12} lg={12}>
+            <TitleFragment
+              showMoreThanTitle
+              note={props.report.date}
+              title={props.report.title}
+              id={`Report ID: ${props.report.reportID}`}
+              url={`/projects/${props.report.project.id}`}
+              url_note={`${props.report.project.name}`}
+              editReport={props.editReport}
+              showEditBtn={showEditBtn}
+              testattr="report-title"
+              stats={[
+                {
+                  label: t('reports.detail.stats.targetBeneficiaries'),
+                  value: props.report.total_target_beneficiaries,
+                },
+                {
+                  label: t('reports.detail.stats.budget'),
+                  value: parseInt(props.report.budget || '', 10)
+                    .toLocaleString(undefined, {
+                      currency: 'EUR',
+                      currencyDisplay: 'symbol',
+                      style: 'currency',
+                    })
+                    .replace('.00', ''),
+                },
+              ]}
+            />
+          </Grid>
+          <Hidden smDown>
+            <div
+              css={`
+                width: 100%;
+                height: 32px;
+              `}
+            />
+          </Hidden>
+
+          {/* ---------------------------------------------------------------------*/}
+          {/* charts */}
+          <Viztabs
+            value={value}
+            onTabClick={handleChange}
+            barChartData={props.report.barChartData}
+            barChartLegends={props.barChartLegends}
+            onBarChartLegendClick={props.onBarChartLegendClick}
+            bubbleChartData={{
+              ...bubbleMockData,
+              children: props.report.bubbleChartData,
+            }}
+            selectedBubble={props.selectedSDG}
+            onBubbleSelect={props.onBubbleSelect}
+            geoMapData={props.report.mapData}
+            pillarData={props.pillarData}
+            pillarDataByDuration={props.pillarDataByDuration}
+            priorityAreaData={props.priorityAreaData}
+            targetGroupData={props.targetGroupData}
+            oneAndMultiYearData={props.oneAndMultiYearData}
+            selectedBreakdown={props.selectedBreakdown}
+            onBreakdownSelect={props.onBreakdownSelect}
           />
-        </Grid>
-        <Hidden smDown>
-          <div
-            css={`
-              width: 100%;
-              height: 32px;
-            `}
-          />
-        </Hidden>
 
-        {/* ---------------------------------------------------------------------*/}
-        {/* charts */}
-        <Viztabs
-          value={value}
-          onTabClick={handleChange}
-          barChartData={props.report.barChartData}
-          barChartLegends={props.barChartLegends}
-          onBarChartLegendClick={props.onBarChartLegendClick}
-          bubbleChartData={{
-            ...bubbleMockData,
-            children: props.report.bubbleChartData,
-          }}
-          selectedBubble={props.selectedSDG}
-          onBubbleSelect={props.onBubbleSelect}
-          geoMapData={props.report.mapData}
-          pillarData={props.pillarData}
-          pillarDataByDuration={props.pillarDataByDuration}
-          priorityAreaData={props.priorityAreaData}
-          targetGroupData={props.targetGroupData}
-          oneAndMultiYearData={props.oneAndMultiYearData}
-          selectedBreakdown={props.selectedBreakdown}
-          onBreakdownSelect={props.onBreakdownSelect}
-        />
+          <div css="width: 100%;height: 50px;" />
+          {/* ---------------------------------------------------------------------*/}
+          {/* cards */}
 
-        <div css="width: 100%;height: 50px;" />
-        {/* ---------------------------------------------------------------------*/}
-        {/* cards */}
-
-        {cardData.map((card) =>
-          card.media ? (
-            card.media.length > 0 && (
+          {cardData.map((card) =>
+            card.media ? (
+              card.media.length > 0 && (
+                <Grid
+                  key={card.title}
+                  data-cy={card.testID}
+                  item
+                  xs={12}
+                  lg={12}
+                >
+                  <OutcomeCard
+                    title={t(card.title)}
+                    media={{ tileData: props.report.media }}
+                  />
+                </Grid>
+              )
+            ) : (
               <Grid key={card.title} data-cy={card.testID} item xs={12} lg={12}>
                 <OutcomeCard
                   title={t(card.title)}
-                  media={{ tileData: props.report.media }}
+                  description={card.description}
                 />
               </Grid>
             )
-          ) : (
-            <Grid key={card.title} data-cy={card.testID} item xs={12} lg={12}>
-              <OutcomeCard
-                title={t(card.title)}
-                description={card.description}
-              />
-            </Grid>
-          )
-        )}
+          )}
+        </Grid>
       </div>
       <PDFreport {...props} cardData={cardData} />
     </div>
