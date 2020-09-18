@@ -15,7 +15,7 @@ export const LegendItem = (props: LegendItemProps) => {
         display: flex;
         align-items: center;
         margin-top: 18px;
-        margin-right: ${props.index === 1 ? 0 : 20}px;
+        margin-right: ${20}px;
         flex-shrink: 0;
       `}
     >

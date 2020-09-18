@@ -9,7 +9,7 @@ interface NoDataProps {
 export const NoData = (props: NoDataProps) => (
   <div
     css={`
-      width: 100%;
+      width: 100vw;
       height: 100%;
       display: flex;
       font-size: 14px;

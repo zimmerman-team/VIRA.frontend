@@ -22,6 +22,15 @@ export const LegendContainer = (props: LegendContainerProps) => {
         overflow-y: auto;
         max-height: 150px;
         justify-content: ${props.justify ? props.justify : 'initial'};
+
+        @media (max-width: 600px) {
+          overflow-y: unset;
+          max-height: 100%;
+          width: 100%;
+          margin-bottom: 16px;
+          justify-content: flex-end;
+          margin-right: -20px;
+        }
       `}
     >
       {props.items.map((item: LegendItemProps, index) => (
