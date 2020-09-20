@@ -21,6 +21,7 @@ import { BudgetTooltip } from './tooltips/Budget';
 import { TargetGroupTooltip } from './tooltips/TargetGroup';
 import { ReachedTooltip } from './tooltips/Reached';
 import { DurationTooltip } from './tooltips/Duration';
+import get from 'lodash/get';
 
 interface PriorityAreaContainerProps {
   data: any;
@@ -113,7 +114,7 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
         selectedBreakdown={props.selectedBreakdown}
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
-      <ChartWrapper height={56 * props.data.length}>
+      <ChartWrapper height={56 * get(props, 'data.length', 2)}>
         {!checkIfNoData(props.data, props.selectedBreakdown) ? (
           <NoData loading={loading} />
         ) : (

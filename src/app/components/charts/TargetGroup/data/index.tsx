@@ -43,13 +43,15 @@ export function formatTargetGroupDataBudget(
 ): ChartDataProps[] {
   const chartData: ChartDataProps[] = [];
 
-  data.forEach((TargetGroup: TargetGroupDataProps) => {
-    chartData.push({
-      name: TargetGroup.name,
-      Budget: TargetGroup.budget,
-      BudgetColor: BarColor,
+  if (data != null) {
+    data.forEach((TargetGroup: TargetGroupDataProps) => {
+      chartData.push({
+        name: TargetGroup.name,
+        Budget: TargetGroup.budget,
+        BudgetColor: BarColor,
+      });
     });
-  });
+  }
 
   return chartData;
 }
@@ -71,18 +73,20 @@ export function formatPriorityAreaPeopleReachedData(
   const chartData: ChartDataPropsPeopleReached[] = [];
   const colors = ['#242E42', '#828894'];
 
-  data.forEach((targetGroup: PriorityAreaPopleReachedProps) => {
-    chartData.push({
-      name: targetGroup.name,
-      'People Reached': targetGroup.reached,
-      'People ReachedColor': colors[0],
-      'People Targeted':
-        targetGroup.target - targetGroup.reached > 0
-          ? targetGroup.target - targetGroup.reached
-          : 0,
-      'People TargetedColor': colors[1],
+  if (data != null) {
+    data.forEach((targetGroup: PriorityAreaPopleReachedProps) => {
+      chartData.push({
+        name: targetGroup.name,
+        'People Reached': targetGroup.reached,
+        'People ReachedColor': colors[0],
+        'People Targeted':
+          targetGroup.target - targetGroup.reached > 0
+            ? targetGroup.target - targetGroup.reached
+            : 0,
+        'People TargetedColor': colors[1],
+      });
     });
-  });
+  }
 
   return chartData;
 }

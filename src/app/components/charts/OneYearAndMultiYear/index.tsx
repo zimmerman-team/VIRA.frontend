@@ -21,6 +21,7 @@ import {
 import { CountTooltip } from './tooltips/Count';
 import { ReachedTooltip } from '../PriorityArea/tooltips/Reached';
 import { TargetGroupTooltip } from '../PriorityArea/tooltips/TargetGroup';
+import get from 'lodash/get';
 
 interface OneYearAndMultiYearContainerProps {
   data: any;
@@ -90,7 +91,7 @@ export const OneYearAndMultiYearContainer = (
         selectedBreakdown={props.selectedBreakdown}
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
-      <ChartWrapper height={60 * props.data.length}>
+      <ChartWrapper height={60 * get(props, 'data.length', 2)}>
         {!checkIfNoData(props.data, props.selectedBreakdown) ? (
           <NoData loading={loading} />
         ) : (

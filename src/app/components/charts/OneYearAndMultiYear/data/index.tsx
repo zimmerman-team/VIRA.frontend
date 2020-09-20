@@ -5,7 +5,7 @@ import {
 } from 'app/components/charts/common/CommonProps';
 import { ChartCountItemProps } from '../../common/ChartCount';
 import { formatPriorityAreaTargetGroupData } from '../../PriorityArea/data';
-import { formatPriorityAreaPeopleReachedData } from '../../TargetGroup/data';
+import get from 'lodash/get';
 
 const OneYearAndMultiYear1Colors = ['#242E42', '#828894'];
 const ChartKeys = ['count'];
@@ -94,19 +94,19 @@ export function formatCountData(
   const countData: ChartCountItemProps[] = [
     {
       name: 'Number of One Year projects',
-      count: data[0].count.toString(),
+      count: get(data, '[0]count', 0).toString(),
     },
     {
       name: 'Number of Multi Year projects',
-      count: data[1].count.toString(),
+      count: get(data, '[1]count', 0).toString(),
     },
     {
       name: 'One year projects budget spent',
-      count: data[0].budget_Spent.toString(),
+      count: get(data, '[0]budget_Spent', 0).toString(),
     },
     {
       name: 'Multi year projects budget spent',
-      count: data[1].budget_Spent.toString(),
+      count: get(data, '[1]count', 0).toString(),
     },
   ];
 

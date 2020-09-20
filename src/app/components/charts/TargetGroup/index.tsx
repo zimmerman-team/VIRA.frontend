@@ -18,6 +18,7 @@ import { LegendContainer } from 'app/components/charts/common/LegendContainer';
 import { BudgetTooltip } from 'app/components/charts/PriorityArea/tooltips/Budget';
 import { ReachedTooltip } from 'app/components/charts/PriorityArea/tooltips/Reached';
 import { TargetGroupTooltip } from 'app/components/charts/PriorityArea/tooltips/TargetGroup';
+import get from 'lodash/get';
 
 interface TargetGroupContainerProps {
   data: any;
@@ -85,7 +86,7 @@ export const TargetGroupContainer = (props: TargetGroupContainerProps) => {
         selectedBreakdown={props.selectedBreakdown}
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
-      <ChartWrapper height={56 * props.data.length}>
+      <ChartWrapper height={56 * get(props, 'data.length', 2)}>
         {!checkIfNoData(props.data, props.selectedBreakdown) ? (
           <NoData loading={loading} />
         ) : (
