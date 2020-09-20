@@ -21,8 +21,9 @@ import {
   PillarMultiYearConfig,
 } from 'app/components/charts/Pillars/data';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
-import { BudgetTooltip } from './tooltips/Budget';
-import { CountTooltip } from './tooltips/Count';
+import { BudgetTooltip, BudgetTooltipMobile } from './tooltips/Budget';
+import { CountTooltip, CountTooltipMobile } from './tooltips/Count';
+import { useMediaQuery } from '@material-ui/core';
 
 interface PillarContainerProps {
   data: any;
@@ -45,14 +46,14 @@ function getLegendData(breakdown: string) {
   }
 }
 
-function getTooltip(breakdown: string) {
+function getTooltip(breakdown: string, isMobileWidth: boolean) {
   switch (breakdown) {
     case breakdownOptions[0]:
-      return BudgetTooltip;
+      return isMobileWidth ? BudgetTooltipMobile : BudgetTooltip;
     case breakdownOptions[1]:
-      return CountTooltip;
+      return isMobileWidth ? CountTooltipMobile : CountTooltip;
     default:
-      return BudgetTooltip;
+      return isMobileWidth ? BudgetTooltipMobile : BudgetTooltip;
   }
 }
 
@@ -93,6 +94,9 @@ export const PillarContainer = (props: PillarContainerProps) => {
     ) || 1;
   const maxValue: number | 'auto' | undefined =
     props.selectedBreakdown === breakdownOptions[0] ? 'auto' : x * 2;
+
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <div
       css={`
@@ -116,7 +120,10 @@ export const PillarContainer = (props: PillarContainerProps) => {
             {...config}
             maxValue={maxValue}
             keys={getKeys(props.selectedBreakdown)}
-            tooltip={getTooltip(props.selectedBreakdown)}
+            onClick={() => {
+              getTooltip(props.selectedBreakdown, isMobileWidth);
+            }}
+            tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
             data={formatPillarData(
               !isEmpty(data) ? data : [],
               props.selectedBreakdown
