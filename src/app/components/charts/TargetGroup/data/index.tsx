@@ -19,6 +19,25 @@ interface ChartDataProps {
   BudgetColor: string;
 }
 
+export function getKeys(selectedBreakdown: string) {
+  switch (selectedBreakdown) {
+    case 'None':
+      return ['Budget'];
+    case 'People Reached':
+      return ['People Reached', 'People Targeted'];
+    case 'SDGs':
+      return [
+        'No poverty',
+        'Clean water and sanitation',
+        'Good health and well-being',
+        'Gender equality',
+        'Quality education',
+      ];
+    default:
+      return ['Budget'];
+  }
+}
+
 // @ts-ignore
 export const TargetGroupConfigBase: BarSvgProps = {
   ...CommonBarProps,

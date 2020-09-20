@@ -53,11 +53,11 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
     setIsBlur(ppTotal < 100 || sdgsTotal < 100);
   }, [props.policyPriorities, props.sdgs]);
 
-  React.useEffect(() => {
-    if (!isMount) {
-      props.setPolicyPriorities([]);
-    }
-  }, [props.pillar]);
+  // React.useEffect(() => {
+  //   if (!isMount) {
+  //     props.setPolicyPriorities([]);
+  //   }
+  // }, [props.pillar]);
 
   React.useEffect(() => {
     if (
@@ -293,6 +293,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.other_funders')} />
           <CardContent>
             <Autocomplete
+              testAttr="dropdown-funders"
               multiple
               values={funderList.map((funder: FunderProps) => ({
                 ...funder,
@@ -301,7 +302,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               value={props.funders}
               setValue={props.setFunders}
             />
-            {/*<Box height="14px" width="100%" />*/}
           </CardContent>
         </Card>
       </Grid>

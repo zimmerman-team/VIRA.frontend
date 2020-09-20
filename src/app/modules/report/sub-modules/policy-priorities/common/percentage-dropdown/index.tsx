@@ -22,6 +22,7 @@ import {
   inputlistcss,
   listboxcss,
   listcss,
+  totalcss,
   buttoncss,
 } from 'app/modules/report/sub-modules/policy-priorities/common/percentage-dropdown/inputcss';
 
@@ -39,25 +40,41 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
   const { t } = useTranslation();
   const [openList, setOpenList] = React.useState(false);
   const [selections, setSelections] = React.useState(cloneDeep(props.value));
+  const [total, setTotal] = React.useState(
+    sumBy(selections, (s: any) => (isNaN(s.weight) ? 0 : s.weight))
+  );
 
   React.useEffect(() => {
-    if (openList) {
-      setSelections(cloneDeep(props.value));
-    }
-  }, [openList]);
+    setSelections(cloneDeep(props.value));
+  }, [props.value]);
+
+  React.useEffect(
+    () =>
+      setTotal(sumBy(selections, (s: any) => (isNaN(s.weight) ? 0 : s.weight))),
+    [selections]
+  );
 
   function onWeightChange(label: string, value: number, code?: number) {
     let newSelections = [...selections];
     const fIndex = findIndex(selections, { label });
+    let fIndexWeight = get(selections, `[${fIndex}].weight`, 0);
+    fIndexWeight = isNaN(fIndexWeight) ? 0 : fIndexWeight;
     const availableWeight =
       100 -
-      sumBy(selections, 'weight') +
-      get(selections, `[${fIndex}].weight`, 0);
-    if (
-      !isNaN(value) &&
-      (value < availableWeight || value === availableWeight)
-    ) {
-      if (value === 0) {
+      sumBy(selections, (s: any) => (isNaN(s.weight) ? 0 : s.weight)) +
+      fIndexWeight;
+    if (isNaN(value)) {
+      if (fIndex > -1) {
+        newSelections[fIndex].weight = value;
+      } else {
+        newSelections.push({
+          label,
+          weight: value,
+          code,
+        });
+      }
+    } else if (value < availableWeight || value === availableWeight) {
+      if (value < 1) {
         newSelections = filter(
           newSelections,
           (s: LabelWeightModel) => s.label !== label
@@ -71,14 +88,8 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
           code,
         });
       }
-      setSelections(newSelections);
-    } else if (isNaN(value)) {
-      newSelections = filter(
-        newSelections,
-        (s: LabelWeightModel) => s.label !== label
-      );
-      setSelections(newSelections);
     }
+    setSelections(newSelections);
   }
 
   return (
@@ -97,7 +108,7 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
       )}
 
       {/* ------------------------------------------ */}
-      {/* todo: what does this do? */}
+      {/* Opens the dropdown list, shows selected items with their values */}
       <div
         css={inputcss(props.value.length > 0)}
         onClick={() => setOpenList(!openList)}
@@ -117,15 +128,16 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
         {props.value.length === 0 && <ExpandMore />}
       </div>
       {/* ------------------------------------------ */}
-      {/* todo: what does this do? */}
+      {/* Actual dropdown list with items */}
       {openList && (
         <div css={listboxcss}>
           <ul css={listcss}>
-            {props.values.map((option: PolicyPriorityProps) => {
+            {props.values.map((option: PolicyPriorityProps, index) => {
               const fItem = find(selections, { label: option.label });
               return (
                 <PercentageDropdownItem
-                  key={option.label}
+                  key={'dropdown-item-' + index}
+                  testid={'dropdown-item-' + index}
                   code={option.code}
                   label={option.label}
                   labelValue={option.value}
@@ -140,6 +152,15 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
               );
             })}
           </ul>
+          <div css={totalcss(total)}>
+            <PercentageDropdownItem
+              disabled
+              label="Total"
+              value={total}
+              labelValue="Total"
+              onWeightChange={() => {}}
+            />
+          </div>
           <div
             css={`
               width: 100%;
@@ -148,14 +169,21 @@ export const PercentageDropdown = (props: PercentageDropdownProps) => {
               align-items: center;
             `}
           >
-            <div css={buttoncss('#D8D8D8')} onClick={() => setOpenList(false)}>
+            <div
+              data-cy="dropdown-close-button"
+              css={buttoncss('#D8D8D8')}
+              onClick={() => setOpenList(false)}
+            >
               Close
             </div>
             <div
+              data-cy="dropdown-apply-button"
               css={buttoncss('#30C2B0')}
               onClick={() => {
                 setOpenList(false);
-                props.setValue(selections);
+                props.setValue(
+                  filter(selections, (s: any) => !isNaN(s.weight))
+                );
               }}
             >
               Apply

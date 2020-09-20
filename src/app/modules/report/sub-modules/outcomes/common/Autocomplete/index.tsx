@@ -25,6 +25,7 @@ export interface AutocompleteParams {
   text?: string;
   values: any[];
   multiple?: boolean;
+  testAttr?: string;
 }
 
 const Input = withStyles((theme: Theme) =>
@@ -133,7 +134,7 @@ export const Autocomplete = (props: AutocompleteParams) => {
     multiple: props.multiple,
     options: props.values,
     disableCloseOnSelect: props.multiple,
-    getOptionLabel: option => option.label,
+    getOptionLabel: (option) => option.label,
   });
 
   return (
@@ -143,6 +144,7 @@ export const Autocomplete = (props: AutocompleteParams) => {
         width: 100%;
         position: relative;
       `}
+      data-cy={props.testAttr}
     >
       {props.description && (
         <>
@@ -207,6 +209,8 @@ export const Autocomplete = (props: AutocompleteParams) => {
             };
             return (
               <li
+                key={'funder-item-' + index}
+                data-cy={'funder-item-' + index}
                 {...optionProps}
                 className={classes.listitem}
                 onClick={(e: any) => onClick(e, option)}

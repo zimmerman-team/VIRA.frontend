@@ -2,10 +2,10 @@ import React from 'react';
 import find from 'lodash/find';
 import { ResponsiveBar } from '@nivo/bar';
 import { useStoreState } from 'app/state/store/hooks';
-import { getKeys } from 'app/components/charts/PriorityArea/data';
 import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 import {
+  getKeys,
   formatTargetGroupData,
   TargetGroupConfigBase,
 } from 'app/components/charts/TargetGroup/data';

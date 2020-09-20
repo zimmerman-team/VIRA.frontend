@@ -35,7 +35,7 @@ export const IntentTexArea = (props: IntentTextAreaParams) => (
     square
     css={ExpansionPanelStyle}
     key={props.description}
-    data-cy={`question-${props.description}`}
+    data-cy={`${props.testattr}-container`}
   >
     <AccordionSummary
       css={ExpansionPanelSummaryStyle}

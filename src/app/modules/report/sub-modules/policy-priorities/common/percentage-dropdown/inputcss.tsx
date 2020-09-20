@@ -79,6 +79,30 @@ export const listcss = css`
     background: ${ProjectPalette.grey[400]};
   }
 `;
+
+export const totalcss = (value: number) => css`
+  width: 100%;
+  display: flex;
+  background: #f0f3f7;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 16px 5px 10px;
+  justify-content: space-between;
+
+  > li {
+    background: #f0f3f7;
+    > div:nth-child(2) {
+      ${value === 100 && 'color: #fff;'}
+      background: ${value === 100 ? '#30C2B0' : '#fff'};
+
+      > input {
+        ${value === 100 && 'color: #fff;'}
+        background: ${value === 100 ? '#30C2B0' : '#fff'};
+      }
+    }
+  }
+`;
+
 export const buttoncss = (bgcolor: string) => css`
   width: 50%;
   color: #fff;

@@ -121,6 +121,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             />
             <CardContent css={styles.cardContent}>
               <Autocomplete
+                testAttr="dropdown-1"
                 values={[
                   { label: t('Not at all'), value: 'Not at all' },
                   { label: t('A little'), value: 'A little' },
@@ -163,6 +164,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             />
             <CardContent css={styles.cardContent}>
               <Autocomplete
+                testAttr="dropdown-2"
                 values={[
                   { label: t('Yes'), value: 'Yes' },
                   { label: t('No'), value: 'No' },

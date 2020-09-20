@@ -118,10 +118,14 @@ function CreateReportFunc(props: any) {
       },
     ]
   );
-  const [policyPriorities, setPolicyPriorities] = usePersistedState(
-    'report_policyPriorities',
-    []
-  );
+  const [
+    policyPrioritiesPillar1,
+    setPolicyPrioritiesPillar1,
+  ] = usePersistedState('report_policyPriorities1', []);
+  const [
+    policyPrioritiesPillar2,
+    setPolicyPrioritiesPillar2,
+  ] = usePersistedState('report_policyPriorities2', []);
   const [sdgs, setSDGs] = usePersistedState('report_sdgs', []);
 
   const [budget, setBudget] = usePersistedState(
@@ -388,14 +392,28 @@ function CreateReportFunc(props: any) {
         ).map((b: any) => ({ name: b.name, value: b.value }))
       );
       setPillar(get(reportDetailData, 'report.pillar.name', ''));
-      setPolicyPriorities(
-        get(reportDetailData, 'report.policy_priorities', []).map(
-          (pp: any) => ({
-            label: policyPrioritiesToLangKey(pp.policy_priority.name),
-            weight: pp.weight,
-          })
-        )
-      );
+      if (
+        get(reportDetailData, 'report.pillar.name', '') ===
+        'Pillar 2: Church & Organ restorations projects'
+      ) {
+        setPolicyPrioritiesPillar2(
+          get(reportDetailData, 'report.policy_priorities', []).map(
+            (pp: any) => ({
+              label: policyPrioritiesToLangKey(pp.policy_priority.name),
+              weight: pp.weight,
+            })
+          )
+        );
+      } else {
+        setPolicyPrioritiesPillar1(
+          get(reportDetailData, 'report.policy_priorities', []).map(
+            (pp: any) => ({
+              label: policyPrioritiesToLangKey(pp.policy_priority.name),
+              weight: pp.weight,
+            })
+          )
+        );
+      }
       setSDGs(
         get(reportDetailData, 'report.sdgs', []).map((sdg: any) => ({
           label: `sdgs.${sdg.sdg.code}`,
@@ -608,12 +626,19 @@ function CreateReportFunc(props: any) {
 
   const step2Enabled = validateOutcomeFields(title, country.label);
 
+  let activePolicyPriorities = policyPrioritiesPillar1;
+  let activePolicyPrioritiesAction = setPolicyPrioritiesPillar1;
+  if (pillar === 'Pillar 2: Church & Organ restorations projects') {
+    activePolicyPriorities = policyPrioritiesPillar2;
+    activePolicyPrioritiesAction = setPolicyPrioritiesPillar2;
+  }
+
   const step3Enabled =
     step2Enabled &&
     validatePolicyPrioritiesFields(
       tarBenTotal,
       beneficiaryCounts,
-      policyPriorities,
+      activePolicyPriorities,
       sdgs,
       budget,
       get(projectBudgetData, 'data.remainBudget', 0),
@@ -656,10 +681,12 @@ function CreateReportFunc(props: any) {
             pillar,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priorities: policyPriorities.map((pp: LabelWeightModel) => ({
-              ...pp,
-              name: en(pp.label),
-            })),
+            policy_priorities: activePolicyPriorities.map(
+              (pp: LabelWeightModel) => ({
+                ...pp,
+                name: en(pp.label),
+              })
+            ),
             sdgs: sdgs.map((sdg: LabelWeightModel) => ({
               ...sdg,
               name: en(sdg.label),
@@ -712,10 +739,12 @@ function CreateReportFunc(props: any) {
             title: title === '' ? ' ' : title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priorities: policyPriorities.map((pp: LabelWeightModel) => ({
-              ...pp,
-              name: pp.label,
-            })),
+            policy_priorities: activePolicyPriorities.map(
+              (pp: LabelWeightModel) => ({
+                ...pp,
+                name: pp.label,
+              })
+            ),
             sdgs: sdgs.map((sdg: LabelWeightModel) => ({
               ...sdg,
               name: sdg.label,
@@ -809,8 +838,8 @@ function CreateReportFunc(props: any) {
         tarBenTotal2,
         setTarBenTotal,
         setTarBenTotal2,
-        policyPriorities,
-        setPolicyPriorities,
+        policyPriorities: activePolicyPriorities,
+        setPolicyPriorities: activePolicyPrioritiesAction,
         sdgs,
         setSDGs,
         beneficiaryCounts,
@@ -879,7 +908,7 @@ function CreateReportFunc(props: any) {
           addressChallenges,
           otherComms,
           budget,
-          policyPriorities,
+          policyPriorities: activePolicyPriorities,
           sdgs,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
           insContribution,
