@@ -27,6 +27,7 @@ interface PriorityAreaContainerProps {
   keys: any;
   selectedBreakdown: any;
   setSelectedBreakdown: any;
+  fullWidthLegends?: boolean;
 }
 
 const breakdownOptions = [
@@ -140,6 +141,7 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
         `}
       >
         <LegendContainer
+          fullWidthLegends={props.fullWidthLegends}
           justify={
             props.selectedBreakdown !== breakdownOptions[1] &&
             props.selectedBreakdown !== breakdownOptions[4]

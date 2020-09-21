@@ -27,6 +27,7 @@ interface OneYearAndMultiYearContainerProps {
   keys: any;
   selectedBreakdown: string;
   setSelectedBreakdown: Function;
+  fullWidthLegends?: boolean;
 }
 
 const breakdownOptions = ['None', 'People Reached', 'Target Group'];
@@ -117,6 +118,7 @@ export const OneYearAndMultiYearContainer = (
         `}
       >
         <LegendContainer
+          fullWidthLegends={props.fullWidthLegends}
           justify={
             props.selectedBreakdown !== breakdownOptions[2]
               ? 'flex-end'
