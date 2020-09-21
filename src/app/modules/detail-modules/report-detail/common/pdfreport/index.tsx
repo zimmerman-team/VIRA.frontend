@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 // @ts-nocheck
 // global
 import React from 'react';
@@ -53,14 +54,16 @@ export function PDFreport(props: any) {
   const { t } = useTranslation();
   const interval = setInterval(() => {
     const container = document.getElementById('pdf-report-container');
-    const svgTextElements = container.getElementsByTagName('text');
-    [...svgTextElements].forEach((textElement: any) => {
-      textElement.style.fontFamily = 'Helvetica';
-      textElement.setAttribute('font-family', 'Helvetica');
-      textElement.replaceWith(textElement);
-    });
-    if ([...svgTextElements].length > 0) {
-      clearInterval(interval);
+    if (container) {
+      const svgTextElements = container.getElementsByTagName('text');
+      [...svgTextElements].forEach((textElement: any) => {
+        textElement.style.fontFamily = 'Helvetica';
+        textElement.setAttribute('font-family', 'Helvetica');
+        textElement.replaceWith(textElement);
+      });
+      if ([...svgTextElements].length > 0) {
+        clearInterval(interval);
+      }
     }
   }, 1000);
 
