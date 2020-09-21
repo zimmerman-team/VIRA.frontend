@@ -75,17 +75,17 @@ export const PillarContainer = (props: PillarContainerProps) => {
       state.getPillarDataByDuration.loading
   );
   const data =
-    props.selectedBreakdown === breakdownOptions[0]
-      ? props.data
-      : props.durationData;
+    props.selectedBreakdown === breakdownOptions[1]
+      ? props.durationData
+      : props.data;
   const config =
-    props.selectedBreakdown === breakdownOptions[0]
-      ? PillarConfigBase
-      : PillarMultiYearConfig;
+    props.selectedBreakdown === breakdownOptions[1]
+      ? PillarMultiYearConfig
+      : PillarConfigBase;
   const chartHeight =
-    props.selectedBreakdown === breakdownOptions[0]
-      ? 60 * get(props.data, 'length', 1)
-      : 350;
+    props.selectedBreakdown === breakdownOptions[1]
+      ? 350
+      : 60 * get(props.data, 'length', 1);
   const x: number =
     max(
       (!isEmpty(data) ? data : []).map((d: any) =>
