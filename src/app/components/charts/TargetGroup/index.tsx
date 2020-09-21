@@ -15,10 +15,20 @@ import {
 } from 'app/components/charts/common/LegendData';
 import { NoData } from 'app/components/charts/common/NoData';
 import { LegendContainer } from 'app/components/charts/common/LegendContainer';
-import { BudgetTooltip } from 'app/components/charts/PriorityArea/tooltips/Budget';
-import { ReachedTooltip } from 'app/components/charts/PriorityArea/tooltips/Reached';
-import { TargetGroupTooltip } from 'app/components/charts/PriorityArea/tooltips/TargetGroup';
+import {
+  BudgetTooltip,
+  BudgetTooltipMobile,
+} from 'app/components/charts/PriorityArea/tooltips/Budget';
+import {
+  ReachedTooltip,
+  ReachedTooltipMobile,
+} from 'app/components/charts/PriorityArea/tooltips/Reached';
+import {
+  TargetGroupTooltip,
+  TargetGroupTooltipMobile,
+} from 'app/components/charts/PriorityArea/tooltips/TargetGroup';
 import get from 'lodash/get';
+import { useMediaQuery } from '@material-ui/core';
 
 interface TargetGroupContainerProps {
   data: any;
@@ -42,16 +52,16 @@ function getLegendData(breakdown: string) {
   }
 }
 
-function getTooltip(breakdown: string) {
+function getTooltip(breakdown: string, isMobileWidth: boolean) {
   switch (breakdown) {
     case breakdownOptions[0]:
-      return BudgetTooltip;
+      return isMobileWidth ? BudgetTooltipMobile : BudgetTooltip;
     case breakdownOptions[1]:
-      return ReachedTooltip;
+      return isMobileWidth ? ReachedTooltipMobile : ReachedTooltip;
     case breakdownOptions[2]:
-      return TargetGroupTooltip;
+      return isMobileWidth ? TargetGroupTooltipMobile : TargetGroupTooltip;
     default:
-      return BudgetTooltip;
+      return isMobileWidth ? BudgetTooltipMobile : BudgetTooltip;
   }
 }
 
@@ -75,6 +85,8 @@ export const TargetGroupContainer = (props: TargetGroupContainerProps) => {
     (state) => state.getTargetGroupBarChartData.loading
   );
   const chartData = formatTargetGroupData(props.selectedBreakdown, props.data);
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <div
       css={`
@@ -94,7 +106,10 @@ export const TargetGroupContainer = (props: TargetGroupContainerProps) => {
             {...TargetGroupConfigBase}
             data={chartData as object[]}
             keys={getKeys(props.selectedBreakdown)}
-            tooltip={getTooltip(props.selectedBreakdown)}
+            onClick={() => {
+              getTooltip(props.selectedBreakdown, isMobileWidth);
+            }}
+            tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
           />
         )}
       </ChartWrapper>

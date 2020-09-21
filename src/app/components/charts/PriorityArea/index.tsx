@@ -17,11 +17,15 @@ import {
   LegendDataDuration,
   LegendDataTargetGroups,
 } from 'app/components/charts/common/LegendData';
-import { BudgetTooltip } from './tooltips/Budget';
-import { TargetGroupTooltip } from './tooltips/TargetGroup';
-import { ReachedTooltip } from './tooltips/Reached';
-import { DurationTooltip } from './tooltips/Duration';
+import { BudgetTooltip, BudgetTooltipMobile } from './tooltips/Budget';
+import {
+  TargetGroupTooltip,
+  TargetGroupTooltipMobile,
+} from './tooltips/TargetGroup';
+import { ReachedTooltip, ReachedTooltipMobile } from './tooltips/Reached';
+import { DurationTooltip, DurationTooltipMobile } from './tooltips/Duration';
 import get from 'lodash/get';
+import { useMediaQuery } from '@material-ui/core';
 
 interface PriorityAreaContainerProps {
   data: any;
@@ -55,20 +59,20 @@ function getLegendData(breakdown: string) {
   }
 }
 
-function getTooltip(breakdown: string) {
+function getTooltip(breakdown: string, isMobileWidth: boolean) {
   switch (breakdown) {
     case breakdownOptions[0]:
-      return BudgetTooltip;
+      return isMobileWidth ? BudgetTooltipMobile : BudgetTooltip;
     case breakdownOptions[1]:
-      return TargetGroupTooltip;
+      return isMobileWidth ? TargetGroupTooltipMobile : TargetGroupTooltip;
     case breakdownOptions[2]:
-      return DurationTooltip;
+      return isMobileWidth ? DurationTooltipMobile : DurationTooltip;
     case breakdownOptions[3]:
-      return ReachedTooltip;
+      return isMobileWidth ? ReachedTooltipMobile : ReachedTooltip;
     case breakdownOptions[4]:
-      return TargetGroupTooltip;
+      return isMobileWidth ? TargetGroupTooltipMobile : TargetGroupTooltip;
     default:
-      return BudgetTooltip;
+      return isMobileWidth ? BudgetTooltipMobile : BudgetTooltip;
   }
 }
 
@@ -103,6 +107,9 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
   const loading = useStoreState(
     (state) => state.getPriorityAreaBarChartData.loading
   );
+
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <div
       css={`
@@ -127,7 +134,10 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
               ) as object[]
             }
             keys={getKeys(props.selectedBreakdown)}
-            tooltip={getTooltip(props.selectedBreakdown)}
+            onClick={() => {
+              getTooltip(props.selectedBreakdown, isMobileWidth);
+            }}
+            tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
           />
         )}
       </ChartWrapper>

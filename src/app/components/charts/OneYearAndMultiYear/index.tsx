@@ -18,10 +18,17 @@ import {
   LegendDataReached,
   LegendDataTargetGroups,
 } from '../common/LegendData';
-import { CountTooltip } from './tooltips/Count';
-import { ReachedTooltip } from '../PriorityArea/tooltips/Reached';
-import { TargetGroupTooltip } from '../PriorityArea/tooltips/TargetGroup';
+import { CountTooltip, CountTooltipMobile } from './tooltips/Count';
+import {
+  ReachedTooltip,
+  ReachedTooltipMobile,
+} from '../PriorityArea/tooltips/Reached';
+import {
+  TargetGroupTooltip,
+  TargetGroupTooltipMobile,
+} from '../PriorityArea/tooltips/TargetGroup';
 import get from 'lodash/get';
+import { useMediaQuery } from '@material-ui/core';
 
 interface OneYearAndMultiYearContainerProps {
   data: any;
@@ -45,16 +52,16 @@ function getLegendData(breakdown: string) {
   }
 }
 
-function getTooltip(breakdown: string) {
+function getTooltip(breakdown: string, isMobileWidth: Boolean) {
   switch (breakdown) {
     case breakdownOptions[0]:
-      return CountTooltip;
+      return isMobileWidth ? CountTooltipMobile : CountTooltip;
     case breakdownOptions[1]:
-      return ReachedTooltip;
+      return isMobileWidth ? ReachedTooltipMobile : ReachedTooltip;
     case breakdownOptions[2]:
-      return TargetGroupTooltip;
+      return isMobileWidth ? TargetGroupTooltipMobile : TargetGroupTooltip;
     default:
-      return CountTooltip;
+      return isMobileWidth ? CountTooltipMobile : CountTooltip;
   }
 }
 
@@ -79,6 +86,8 @@ export const OneYearAndMultiYearContainer = (
   const loading = useStoreState(
     (state) => state.getOneMultiYearBarChartData.loading
   );
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
   return (
     <div
       css={`
@@ -104,7 +113,10 @@ export const OneYearAndMultiYearContainer = (
               ) as object[]
             }
             keys={getKeys(props.selectedBreakdown)}
-            tooltip={getTooltip(props.selectedBreakdown)}
+            onClick={() => {
+              getTooltip(props.selectedBreakdown, isMobileWidth);
+            }}
+            tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
           />
         )}
       </ChartWrapper>
