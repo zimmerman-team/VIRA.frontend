@@ -1,5 +1,5 @@
 // global
-import { Box, Typography, useMediaQuery } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 // aboslute
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
