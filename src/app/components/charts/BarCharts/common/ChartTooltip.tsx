@@ -79,7 +79,7 @@ export const ChartTooltip = (props: ChartTooltipModel) => {
       <Title variant="subtitle2">{t(props.title as string)}</Title>
       <Divider />
       {props.items.map((item: ChartTooltipItemModel, index: number) => {
-        const label = (item.label as string).split(' ');
+        // const label = (item.label as string).split(' ');
         return (
           <React.Fragment key={item.label}>
             <Item

@@ -1,9 +1,10 @@
 import 'styled-components/macro';
 import React from 'react';
-import { BaseCard } from 'app/modules/common/components/cards/common/BaseCard';
-import { BaseCardParams } from 'app/modules/common/components/cards/common/BaseCard';
 import Typography from '@material-ui/core/Typography';
-import { useTranslation } from 'react-i18next';
+import {
+  BaseCard,
+  BaseCardParams,
+} from 'app/modules/common/components/cards/common/BaseCard';
 
 export interface ContactCardParams extends BaseCardParams {
   name?: string;
@@ -15,7 +16,6 @@ export interface ContactCardParams extends BaseCardParams {
   country?: string;
 }
 export const ContactCard = (props: ContactCardParams) => {
-  const { t, i18n } = useTranslation();
   return (
     <BaseCard title={props.title}>
       <React.Fragment>

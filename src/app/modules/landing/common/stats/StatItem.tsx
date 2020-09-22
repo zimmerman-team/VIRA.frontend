@@ -50,7 +50,7 @@ const LinkStyle = css`
 `;
 
 export const StatItem = (props: StatItemParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Grid
       item

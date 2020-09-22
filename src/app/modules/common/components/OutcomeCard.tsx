@@ -43,7 +43,7 @@ const styles: any = {
 };
 
 export const OutcomeCard = (props: OutcomeCardParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       <Card css={props.media ? styles.card : null}>

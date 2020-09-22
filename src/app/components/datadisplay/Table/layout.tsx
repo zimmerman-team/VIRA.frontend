@@ -18,7 +18,7 @@ import { useMediaQuery } from '@material-ui/core';
 import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll';
 
 function setTableVariant(cssVariant: string) {
-  switch (('cssvar', cssVariant)) {
+  switch (cssVariant) {
     /* todo: rename variant9 to something more descriptive */
     case 'variant9':
       return variant9;

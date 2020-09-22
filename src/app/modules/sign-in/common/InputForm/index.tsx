@@ -1,18 +1,16 @@
 // @ts-nocheck
 /* base */
 import React from 'react';
-import styled from 'styled-components';
 import { Link as RouteLink } from 'react-router-dom';
-import { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 
 /* components */
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 import { LayoutModel } from 'app/modules/sign-in/models';
 import { PasswordTextField } from 'app/components/inputs/textfields/PasswordTextField';
 import { FormSingleLineField } from 'app/components/inputs/textfields/FormSingleLineField';
-import { Grid, Typography, Box } from '@material-ui/core/';
+import { Grid, Typography, Box, useMediaQuery } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { useMediaQuery } from '@material-ui/core';
 
 const Link = styled(RouteLink)`
   color: #d7d8d9;
@@ -36,7 +34,7 @@ const FormStyle = css`
 
 export const InputForm = (props: LayoutModel) => {
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <React.Fragment>

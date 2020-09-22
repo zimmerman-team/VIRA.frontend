@@ -61,19 +61,6 @@ const LanguageButtonStyle = css`
 
 export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
   const { i18n } = useTranslation();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
-  const [open, setOpen] = React.useState(false);
-  const [placement, setPlacement] = React.useState<PopperPlacementType>();
-
-  const handleClick = (newPlacement: PopperPlacementType) => (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    setAnchorEl(event.currentTarget);
-    setOpen(prev => placement !== newPlacement || !prev);
-    setPlacement(newPlacement);
-  };
 
   const [
     anchorElAccount,
@@ -88,14 +75,14 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     setAnchorElAccount(event.currentTarget);
-    setOpenAccount(prev => placementAccount !== newPlacement || !prev);
+    setOpenAccount((prev) => placementAccount !== newPlacement || !prev);
     setPlacementAccount(newPlacement);
   };
 
   const [openSearch, setOpenSearch] = React.useState(false);
 
   const handleClickSearch = () => {
-    setOpenSearch(prev => !prev);
+    setOpenSearch((prev) => !prev);
   };
 
   /* todo: refactor, deprecated symbol */
@@ -106,18 +93,18 @@ export function TopBarDesktopSection(props: TopBarDesktopSectionParams) {
   });
 
   const handleChangeLanguage = useStoreActions(
-    actions => actions.syncVariables.setLng
+    (actions) => actions.syncVariables.setLng
   );
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
     handleChangeLanguage(lng);
   };
 
-  const avatar = useStoreState(state =>
+  const avatar = useStoreState((state) =>
     get(state.syncVariables.user, 'name', '')
   )
     .split(' ')
-    .map(i => i.slice(0, 1))
+    .map((i) => i.slice(0, 1))
     .join('');
 
   const DutchLangBtnStyle = css`

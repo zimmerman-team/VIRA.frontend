@@ -51,13 +51,9 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   const projectDetailAction = useStoreActions(
     (actions) => actions.projectDetail.fetch
   );
-  const projectDetailData = useStoreState(
-    (actions) => actions.projectDetail.data
-  );
   const projectDetailClearAction = useStoreActions(
     (actions) => actions.projectDetail.clear
   );
-  const ReportsData = useStoreState((state) => state.allReports.data);
   const allReportsAction = useStoreActions(
     (actions) => actions.allReports.fetch
   );

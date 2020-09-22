@@ -1,7 +1,6 @@
-import 'styled-components/macro';
 import React from 'react';
+import styled from 'styled-components/macro';
 import { Typography } from '@material-ui/core';
-import styled from 'styled-components';
 import { ProjectPalette } from 'app/theme';
 import { IconWarning } from 'app/modules/common/components/Notifications/common/icons/IconWarning';
 import { useTranslation } from 'react-i18next';
@@ -38,11 +37,13 @@ function setNotificationType(param: string) {
           `}
         />
       );
+    default:
+      return <BaseNotificationIcon />;
   }
 }
 
 export const NotificationItem = (props: NotificationItemParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div
       css={`

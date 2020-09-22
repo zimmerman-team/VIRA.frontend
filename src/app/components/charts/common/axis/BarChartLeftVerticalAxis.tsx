@@ -13,7 +13,7 @@ interface BarChartLeftVerticalAxisProps {
 export const BarChartLeftVerticalAxis = (
   props: BarChartLeftVerticalAxisProps
 ) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <g transform={`translate(${props.x},${props.y})`}>
