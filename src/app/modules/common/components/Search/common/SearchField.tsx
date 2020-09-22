@@ -21,7 +21,7 @@ const StyledInput = withStyles((theme: Theme) =>
 )(InputBase);
 
 export const SearchField = (props: Props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div
       css={`
@@ -41,7 +41,7 @@ export const SearchField = (props: Props) => {
         fullWidth
         value={props.value}
         placeholder={t('search.placeholder')}
-        onChange={e => props.setValue(e.target.value)}
+        onChange={(e) => props.setValue(e.target.value)}
       />
       <IconSearch
         css={`

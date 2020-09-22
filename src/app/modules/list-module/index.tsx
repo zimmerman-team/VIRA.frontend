@@ -79,15 +79,15 @@ export const ListModule = (props: ListModuleParams) => {
   // get datasets by selected SDG
   let sdgReportsData;
   let sdgProjectData;
-  let sdgOrgranisationData;
+  // let sdgOrgranisationData;
 
   if (props.selectedSDG !== '' && props.selectedSDG !== undefined) {
     sdgReportsData = getReportsBySDG(props.selectedSDG, allReportsData);
     sdgProjectData = getProjectsBySDG(allProjectsData, sdgReportsData);
-    sdgOrgranisationData = getGranteesBySDG(
-      allOrganisationsData,
-      sdgProjectData
-    );
+    // sdgOrgranisationData = getGranteesBySDG(
+    //   allOrganisationsData,
+    //   sdgProjectData
+    // );
   }
 
   const reduxLng = useStoreState((state) => state.syncVariables.lng);

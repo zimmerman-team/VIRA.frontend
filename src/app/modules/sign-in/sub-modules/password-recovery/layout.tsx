@@ -16,7 +16,7 @@ const Form = styled.form`
 
 export const PasswordRecoveryLayout = (props: PasswordRecoveryLayoutModel) => {
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Grid

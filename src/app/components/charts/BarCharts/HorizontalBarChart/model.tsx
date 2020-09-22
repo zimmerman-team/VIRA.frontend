@@ -10,10 +10,10 @@ export type BarChartLegendModel = {
 
 export type HorizontalBarChartValueModel = {
   name: string;
-  value1?: number | undefined;
-  value2?: number | undefined;
-  value3?: number | undefined;
-  value4?: number | undefined; //Insinger Contribution
+  value1?: number;
+  value2?: number;
+  value3?: number;
+  value4?: number; // Insinger Contribution
   value1Color?: string;
   value2Color?: string;
   value4Color?: string;
@@ -28,7 +28,7 @@ export type HorizontalBarChartModel = {
 };
 
 // todo: add BarSvgProps when<Box height={'62px'} width={'1px'} /> axis/renderTick function declaration is included
-export const getBarModel = t => ({
+export const getBarModel = (t) => ({
   data: [],
   minValue: 0,
   keys: ['value1', 'value2'],
@@ -83,7 +83,7 @@ export const getBarModel = t => ({
   legends: [],
   motionStiffness: 90,
   motionDamping: 15,
-  colorBy: e => e.data[`${e.id}Color`],
+  colorBy: (e) => e.data[`${e.id}Color`],
   enableGridX: true,
   enableGridY: true,
   theme: {
@@ -158,10 +158,12 @@ const getTspanGroups = (value: string, maxLineLength: number, maxLines = 3) => {
     }
     children.push(
       <tspan x={0} dy={dy} key={i}>
-        {// if on the second line, and that line's length is within 3 of the max length, add ellipsis
-        2 === i && allLines.length > 2
-          ? lineText.slice(0, maxLineLength - 3) + '...'
-          : lineText}
+        {
+          // if on the second line, and that line's length is within 3 of the max length, add ellipsis
+          2 === i && allLines.length > 2
+            ? lineText.slice(0, maxLineLength - 3) + '...'
+            : lineText
+        }
       </tspan>
     );
     //increment dy to render next line text below
