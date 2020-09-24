@@ -136,7 +136,7 @@ export function formatPriorityAreaTargetGroupData(
 ): ChartDataPropsTargetGroup[] {
   const chartData: ChartDataPropsTargetGroup[] = [];
 
-  data.map((priorityArea: priorityAreaDataProps) => {
+  data.forEach((priorityArea: priorityAreaDataProps) => {
     chartData.push({
       name: priorityArea.name,
       'The Elderly (65+)': get(priorityArea, 'children[0].value', 0),
@@ -292,7 +292,7 @@ export function formatPriorityAreaSDGsData(
 ): ChartDataPropsSDGs[] {
   const chartData: ChartDataPropsSDGs[] = [];
   if (data != null) {
-    data.map((priorityArea: PriorityAreaSDGsProps) => {
+    data.forEach((priorityArea: PriorityAreaSDGsProps) => {
       chartData.push({
         name: priorityArea.name,
         'No poverty': get(priorityArea, 'children[0].reached', 0),
@@ -324,6 +324,5 @@ export function formatPriorityAreaSDGsData(
       });
     });
   }
-
   return chartData;
 }

@@ -7,6 +7,7 @@ import {
 export interface LegendContainerProps {
   items: LegendItemProps[];
   justify?: string;
+  fullWidthLegends?: boolean;
 }
 
 export const LegendContainer = (props: LegendContainerProps) => {
@@ -15,12 +16,10 @@ export const LegendContainer = (props: LegendContainerProps) => {
       css={`
         margin: 0;
         padding: 0;
-        list-style: none;
         display: flex;
-        width: 500px;
         flex-wrap: wrap;
-        overflow-y: auto;
-        max-height: 150px;
+        list-style: none;
+        width: ${props.fullWidthLegends ? '100%' : '500px'};
         justify-content: ${props.justify ? props.justify : 'initial'};
 
         @media (max-width: 600px) {
@@ -31,6 +30,7 @@ export const LegendContainer = (props: LegendContainerProps) => {
           justify-content: flex-end;
           margin-right: -20px;
         }
+        ${!props.fullWidthLegends ? 'overflow-y: auto;max-height: 150px;' : ''}
       `}
     >
       {props.items.map((item: LegendItemProps, index) => (

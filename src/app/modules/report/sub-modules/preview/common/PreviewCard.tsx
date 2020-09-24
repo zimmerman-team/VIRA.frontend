@@ -63,7 +63,7 @@ const styles: any = {
 };
 
 export const PreviewCard = (props: Props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
   return (

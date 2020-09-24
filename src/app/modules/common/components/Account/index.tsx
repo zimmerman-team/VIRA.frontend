@@ -19,16 +19,16 @@ type AccountProps = {
 };
 
 export const Account = (props: AccountProps) => {
-  const storeUserName = useStoreState(state =>
+  const storeUserName = useStoreState((state) =>
     get(state.syncVariables.user, 'name', '')
   );
-  const userID = useStoreState(state =>
+  const userID = useStoreState((state) =>
     get(state.syncVariables.user, '_id', '')
   );
-  const userDetails = useStoreState(state => state.userDetails.data);
+  const userDetails = useStoreState((state) => state.userDetails.data);
   const clearUser = useStoreActions(
-    actions =>
-      function() {
+    (actions) =>
+      function () {
         actions.syncVariables.clearUser();
         actions.userDetails.clear();
         actions.allOrganisations.clear();
@@ -41,10 +41,10 @@ export const Account = (props: AccountProps) => {
   );
   const avatar = storeUserName
     .split(' ')
-    .map(i => i.slice(0, 1))
+    .map((i) => i.slice(0, 1))
     .join('');
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Container>

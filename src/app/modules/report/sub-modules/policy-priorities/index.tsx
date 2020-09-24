@@ -9,7 +9,7 @@ import {
   CardContent,
   Box,
 } from '@material-ui/core';
-import { useIsMount } from 'app/utils/useIsMount';
+// import { useIsMount } from 'app/utils/useIsMount';
 
 /* multilabg */
 import { useTranslation } from 'react-i18next';
@@ -40,7 +40,7 @@ import {
 import SmallIconChecked from 'app/assets/icons/SmallIconChecked';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
-  const isMount = useIsMount();
+  // const isMount = useIsMount();
   const { t } = useTranslation();
   const [isBlur, setIsBlur] = React.useState(false);
   const [showTargetGroupMessage, setShowTargetGroupMessage] = React.useState(

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 interface OneYearAndMultiYearItemProps {
   name: string;
@@ -52,7 +52,7 @@ export const OneYearAndMultiYearInfoData: OneYearAndMultiYearItemProps[] = [
 export const OneYearAndMultiYearCountItem = (
   props: OneYearAndMultiYearItemProps
 ) => {
-  const { t, i18n } = useTranslation();
+  // const { t, i18n } = useTranslation();
 
   return (
     <div

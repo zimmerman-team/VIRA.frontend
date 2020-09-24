@@ -8,7 +8,7 @@ export interface DescriptionParams {
   project_description: string;
 }
 export const Description = (props: DescriptionParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Typography
       css={`

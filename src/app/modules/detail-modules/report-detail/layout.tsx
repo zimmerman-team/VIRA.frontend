@@ -122,7 +122,6 @@ export const ReportDetailLayout = (props: any) => {
       document.getElementById('page3'),
       document.getElementById('page4'),
       document.getElementById('page5'),
-      document.getElementById('page6'),
     ];
 
     node.style.visibility = 'hidden';
@@ -178,23 +177,27 @@ export const ReportDetailLayout = (props: any) => {
                   pdfWidth = pdf.internal.pageSize.getWidth();
                   pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
                   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                  html2canvas(pages[5], {
-                    allowTaint: true,
-                    useCORS: true,
-                  }).then((canvas5) => {
+
+                  if (props.report.media.length > 0) {
                     pdf.addPage();
-                    imgData = canvas5.toDataURL('image/png');
-                    imgProps = pdf.getImageProperties(imgData);
-                    pdfWidth = pdf.internal.pageSize.getWidth();
-                    pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                    pdf.textWithLink('Media', 12, 20, { url: '' });
+                    props.report.media.forEach((media: any, index: number) => {
+                      pdf.textWithLink(
+                        `- ${media.name}`,
+                        12,
+                        20 + (index + 1) * 10,
+                        {
+                          url: `${window.location.hostname}${media.url}`,
+                        }
+                      );
+                    });
+                  }
 
-                    pdf.save(`${props.report.title}.pdf`);
+                  pdf.save(`${props.report.title}.pdf`);
 
-                    node.style.visibility = 'visible';
-                    pdfnode.style.visibility = 'hidden';
-                    pdfloader.style.display = 'none';
-                  });
+                  node.style.visibility = 'visible';
+                  pdfnode.style.visibility = 'hidden';
+                  pdfloader.style.display = 'none';
                 }
               );
             });

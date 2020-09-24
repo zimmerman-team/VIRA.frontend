@@ -10,15 +10,12 @@ import { GranteeParams } from 'app/modules/detail-modules/grantee-detail/mock';
 import { Box, Grid, Hidden } from '@material-ui/core';
 import { ListModule } from 'app/modules/list-module';
 import { NavItemsGeneralConfig } from 'app/modules/landing/config';
-import { useTranslation } from 'react-i18next';
 
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { Viztabs } from 'app/modules/common/components/Viztabs';
-import { checkIfPPData } from 'app/modules/common/components/Viztabs/utils/checkIfPPData';
 import { ContactsCardMobile } from 'app/components/surfaces/Cards/ContactsCardMobile';
 
 export const GranteeDetailLayout = (props: GranteeParams) => {
-  const { t } = useTranslation();
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);

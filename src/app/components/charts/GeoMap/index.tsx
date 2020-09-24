@@ -58,7 +58,7 @@ export function GeoMap(props: Props) {
   });
 
   React.useEffect(() => {
-    setViewport(prev => ({
+    setViewport((prev) => ({
       ...prev,
       zoom: props.noData ? 1 : isMobileWidth ? 0 : 1,
       height: props.height || (isMobileWidth ? 200 : 557),
@@ -66,7 +66,7 @@ export function GeoMap(props: Props) {
   }, [isMobileWidth]);
 
   React.useEffect(() => {
-    setViewport(prev => ({
+    setViewport((prev) => ({
       ...prev,
       width: get(containerRef.current, 'offsetWidth', 0),
     }));
@@ -95,12 +95,17 @@ export function GeoMap(props: Props) {
 
   React.useEffect(() => {
     if (!props.pointSelection) {
-      setViewport(prev => ({ ...prev, latitude: 13, longitude: 25, zoom: 1 }));
+      setViewport((prev) => ({
+        ...prev,
+        latitude: 13,
+        longitude: 25,
+        zoom: 1,
+      }));
     }
   }, [props.pointSelection]);
 
-  function onGeoCoderSelected(viewport: [], item: []) {
-    setViewport(prev => ({ ...prev, ...viewport }));
+  function onGeoCoderSelected(viewportVar: [], item: []) {
+    setViewport((prev) => ({ ...prev, ...viewportVar }));
     if (props.setPointSelection) {
       const iso3 = wc([
         item.geometry.coordinates[0],
@@ -132,7 +137,7 @@ export function GeoMap(props: Props) {
         country: country || { label: '', value: '' },
       });
     }
-    setViewport(prev => ({
+    setViewport((prev) => ({
       ...prev,
       zoom: prev.zoom > 10 ? prev.zoom : 10,
       longitude: e.lngLat[0],
@@ -158,7 +163,7 @@ export function GeoMap(props: Props) {
   }
 
   function handleZoomIn() {
-    setViewport(prev => ({
+    setViewport((prev) => ({
       ...prev,
       zoom: prev.zoom + 0.5,
       transitionInterpolator: new LinearInterpolator(),
@@ -168,7 +173,7 @@ export function GeoMap(props: Props) {
 
   function handleZoomOut() {
     if (viewport.zoom - 0.5 >= viewport.minZoom) {
-      setViewport(prev => ({
+      setViewport((prev) => ({
         ...prev,
         zoom: prev.zoom - 0.5,
         transitionInterpolator: new LinearInterpolator(),

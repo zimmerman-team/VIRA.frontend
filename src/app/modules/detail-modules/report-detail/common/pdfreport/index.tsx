@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 // @ts-nocheck
 // global
 import React from 'react';
@@ -53,14 +54,16 @@ export function PDFreport(props: any) {
   const { t } = useTranslation();
   const interval = setInterval(() => {
     const container = document.getElementById('pdf-report-container');
-    const svgTextElements = container.getElementsByTagName('text');
-    [...svgTextElements].forEach((textElement: any) => {
-      textElement.style.fontFamily = 'Helvetica';
-      textElement.setAttribute('font-family', 'Helvetica');
-      textElement.replaceWith(textElement);
-    });
-    if ([...svgTextElements].length > 0) {
-      clearInterval(interval);
+    if (container) {
+      const svgTextElements = container.getElementsByTagName('text');
+      [...svgTextElements].forEach((textElement: any) => {
+        textElement.style.fontFamily = 'Helvetica';
+        textElement.setAttribute('font-family', 'Helvetica');
+        textElement.replaceWith(textElement);
+      });
+      if ([...svgTextElements].length > 0) {
+        clearInterval(interval);
+      }
     }
   }, 1000);
 
@@ -126,6 +129,7 @@ export function PDFreport(props: any) {
           t('home.chart_description.priority_area')
         )}
         <PriorityAreaContainer
+          fullWidthLegends
           data={props.priorityAreaData}
           selectedBreakdown={props.selectedBreakdown}
           setSelectedBreakdown={props.onBreakdownSelect}
@@ -137,6 +141,7 @@ export function PDFreport(props: any) {
           t('home.chart_description.target_group')
         )}
         <TargetGroupContainer
+          fullWidthLegends
           data={props.targetGroupData}
           selectedBreakdown={props.selectedBreakdown}
           setSelectedBreakdown={props.onBreakdownSelect}
@@ -147,6 +152,7 @@ export function PDFreport(props: any) {
           t('home.chart_description.one_year_and_multi_year')
         )}
         <OneYearAndMultiYearContainer
+          fullWidthLegends
           data={props.oneAndMultiYearData}
           selectedBreakdown={props.selectedBreakdown}
           setSelectedBreakdown={props.onBreakdownSelect}
@@ -190,20 +196,6 @@ export function PDFreport(props: any) {
         </Grid>
       </div>
       <div id="page4" css="padding: 64px;">
-        {props.report.media.length > 0 && (
-          <Grid
-            key={props.cardData[2].title}
-            data-cy={props.cardData[2].testID}
-            item
-            xs={12}
-            lg={12}
-          >
-            <OutcomeCard
-              title={t(props.cardData[2].title)}
-              media={{ tileData: props.report.media }}
-            />
-          </Grid>
-        )}
         <Spacer />
         <Grid
           key={props.cardData[3].title}
@@ -256,8 +248,6 @@ export function PDFreport(props: any) {
             description={props.cardData[6].description}
           />
         </Grid>
-      </div>
-      <div id="page5" css="padding: 64px;">
         <Grid
           key={props.cardData[7].title}
           data-cy={props.cardData[7].testID}
@@ -270,7 +260,8 @@ export function PDFreport(props: any) {
             description={props.cardData[7].description}
           />
         </Grid>
-        <Spacer />
+      </div>
+      <div id="page5" css="padding: 64px;">
         <Grid
           key={props.cardData[8].title}
           data-cy={props.cardData[8].testID}
@@ -309,8 +300,7 @@ export function PDFreport(props: any) {
             description={props.cardData[10].description}
           />
         </Grid>
-      </div>
-      <div id="page6" css="padding: 64px;">
+        <Spacer />
         <Grid
           key={props.cardData[11].title}
           data-cy={props.cardData[11].testID}

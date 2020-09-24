@@ -30,7 +30,7 @@ const style: any = {
   `,
 };
 export const PrivacyModule = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <React.Fragment>

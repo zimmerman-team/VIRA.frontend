@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 interface PillarItemProps {
   name: string;
@@ -50,7 +50,7 @@ export const PillarInfoData: PillarItemProps[] = [
 ];
 
 export const PillarCountItem = (props: PillarItemProps) => {
-  const { t, i18n } = useTranslation();
+  // const { t, i18n } = useTranslation();
 
   return (
     <div

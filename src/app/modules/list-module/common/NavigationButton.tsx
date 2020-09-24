@@ -3,15 +3,11 @@ import 'styled-components/macro';
 import React from 'react';
 import { Box } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 import { NavItemParams } from 'app/modules/common/consts';
 import { useTranslation } from 'react-i18next';
 
 export const NavigationButton = (props: NavItemParams) => {
-  const { t, i18n } = useTranslation();
-
-  const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <NavLink

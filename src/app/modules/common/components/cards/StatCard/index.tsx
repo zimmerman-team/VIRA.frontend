@@ -1,19 +1,16 @@
 import 'styled-components/macro';
 import React from 'react';
-import { useMediaQuery } from '@material-ui/core';
 import { StatItem } from 'app/modules/landing/common/stats/StatItem';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
-import { Card, CardContent, Grid } from '@material-ui/core';
+import { Card, CardContent, Grid, useMediaQuery } from '@material-ui/core';
 import { StatItemParams } from 'app/modules/landing/config';
-import { useTranslation } from 'react-i18next';
+
 export interface StatsCard {
   stats: StatItemParams[];
 }
 
 export const StatCard = (props: StatsCard) => {
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
-
-  const { t, i18n } = useTranslation();
 
   function renderCard(content: any) {
     return (

@@ -14,24 +14,9 @@ export interface TabNavigatorParams {
 }
 
 export function TabNavigator(props: TabNavigatorParams) {
-  const [value, setValue] = React.useState(props.initialTabIndex || 0);
-  React.useEffect(() => {
-    if (props.initialTabIndex !== undefined) {
-      setValue(props.initialTabIndex);
-    }
-  }, [props.initialTabIndex]);
-
-  /* todo: stefanos, can this be removed? */
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    if (props.onTabChange) {
-      props.onTabChange(newValue);
-    } else {
-      setValue(newValue);
-    }
-  };
   return (
     <Box display="flex" flexDirection="row" justifyContent="space-between">
-      {props.items.map(item => (
+      {props.items.map((item) => (
         <NavigationButton
           key={item.label}
           path={item.path}

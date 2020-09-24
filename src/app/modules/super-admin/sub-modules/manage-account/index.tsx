@@ -9,7 +9,7 @@ import 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 
 export const ManageAccount = (props: ManageAccountModel) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}

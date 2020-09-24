@@ -35,6 +35,7 @@ interface TargetGroupContainerProps {
   keys: any;
   selectedBreakdown: any;
   setSelectedBreakdown: any;
+  fullWidthLegends?: boolean;
 }
 
 const breakdownOptions = ['None', 'People Reached', 'SDGs'];
@@ -132,6 +133,7 @@ export const TargetGroupContainer = (props: TargetGroupContainerProps) => {
           `}
         >
           <LegendContainer
+            fullWidthLegends={props.fullWidthLegends}
             justify={
               props.selectedBreakdown !== breakdownOptions[2]
                 ? 'flex-end'

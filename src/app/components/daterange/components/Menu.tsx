@@ -68,7 +68,6 @@ const Menu = (props: MenuProps) => {
     helpers,
     handlers,
   } = props;
-  const { startDate, endDate } = dateRange;
   const canNavigateCloser =
     differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
