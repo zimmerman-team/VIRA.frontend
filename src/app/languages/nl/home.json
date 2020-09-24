@@ -16,12 +16,12 @@
     "map": ""
   },
   "dashboard": {
-    "grantees": "Grantees",
+    "grantees": "Begunstigden",
     "projects": "Projecten",
     "reports": "Totaal rapporten"
   },
   "overview_nav": {
-    "grantees": "Grantees",
+    "grantees": "Begunstigden",
     "projects": "Projecten",
     "reports": "Reports"
   }
