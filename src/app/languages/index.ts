@@ -36,8 +36,8 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: 'nl',
-    fallbackLng: 'en',
+    lng: 'en',
+    fallbackLng: 'nl',
     debug: false,
 
     // have a common namespace used around the full app
