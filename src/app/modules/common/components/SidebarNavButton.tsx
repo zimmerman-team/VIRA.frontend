@@ -41,7 +41,7 @@ function isNavLinkActive(props: NavLinkPropsModel) {
 
 function SidebarNavButtonF(props: SidebarNavButtonParams): JSX.Element {
   const [isActive, setIsActive] = React.useState(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     setIsActive(isNavLinkActive(props));
