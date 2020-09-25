@@ -41,7 +41,7 @@ export default function BreakdownSelect(props: BreakdownSelectProps) {
 
   const menuItems = props.breakdownOptions.map((breakdown) => (
     <MenuItem value={breakdown} key={breakdown}>
-      {breakdown}
+      {breakdown === 'None' ? 'Budget' : breakdown}
     </MenuItem>
   ));
 
