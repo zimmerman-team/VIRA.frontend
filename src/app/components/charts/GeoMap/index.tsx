@@ -7,6 +7,8 @@ import 'styled-components/macro';
 import React from 'react';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import sumBy from 'lodash/sumBy';
+import filter from 'lodash/filter';
 import wc from 'which-country';
 import Geocoder from 'react-mapbox-gl-geocoder';
 import ReactMapGL, {
@@ -31,6 +33,7 @@ import Cluster from './common/MapCluster';
 import { ClusterElement } from './common/MapCluster/ClusterElement';
 import { MapControls } from './common/MapControls';
 import { HorizontalBarChartValueModel } from 'src/app/components/charts/BarCharts/HorizontalBarChart/model';
+import { MapPopup } from './common/MapPopup';
 
 type Props = {
   data?: HorizontalBarChartValueModel;
@@ -56,6 +59,8 @@ export function GeoMap(props: Props) {
     zoom: props.noData ? 1 : isMobileWidth ? 0 : 1,
     minZoom: 0,
   });
+  const [hoveredPin, setHoveredPin] = React.useState(null);
+  const [hoveredLayer, setHoveredLayer] = React.useState(null);
 
   React.useEffect(() => {
     setViewport((prev) => ({
@@ -182,6 +187,34 @@ export function GeoMap(props: Props) {
     }
   }
 
+  function onHover(event) {
+    if (!hoveredPin) {
+      let hoverLayerInfo = null;
+      const { features } = event;
+
+      const feature = features && features.find((f) => f.layer.id === 'data');
+      if (feature) {
+        hoverLayerInfo = {
+          lngLat: event.lngLat,
+          properties: feature.properties,
+        };
+        setHoveredLayer({
+          name: feature.properties.name,
+          value: sumBy(
+            filter(props.data.mapMarkers, { name: feature.properties.name }),
+            'value'
+          ),
+          latitude: event.lngLat[1],
+          longitude: event.lngLat[0],
+        });
+      } else {
+        setHoveredLayer(null);
+      }
+    } else if (hoveredLayer) {
+      setHoveredLayer(null);
+    }
+  }
+
   return (
     <div
       css={`
@@ -218,6 +251,7 @@ export function GeoMap(props: Props) {
       <ReactMapGL
         ref={mapRef}
         {...viewport}
+        onHover={onHover}
         onViewportChange={setViewport}
         mapStyle={props.noData ? mapStyle2 : 'mapbox://styles/mapbox/light-v10'}
         onClick={props.noData ? onMapClick : undefined}
@@ -260,6 +294,7 @@ export function GeoMap(props: Props) {
                     latitude={m.latitude}
                     maxValue={maxPinValue}
                     longitude={m.longitude}
+                    onHover={setHoveredPin}
                     // onClick={onMapPinClick}
                   />
                 ))}
@@ -273,10 +308,13 @@ export function GeoMap(props: Props) {
             maxValue={1}
             key="point-selection"
             name="point-selection"
+            onHover={setHoveredPin}
             latitude={get(props.pointSelection, 'latitude', 0)}
             longitude={get(props.pointSelection, 'longitude', 0)}
           />
         )}
+        {hoveredLayer && <MapPopup {...hoveredLayer} />}
+        {hoveredPin && <MapPopup {...hoveredPin} />}
       </ReactMapGL>
       <MapControls zoomIn={handleZoomIn} zoomOut={handleZoomOut} />
     </div>

@@ -535,7 +535,10 @@ function CreateReportFunc(props: any) {
     ) {
       props.history.replace('/');
     }
-    setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+    const rid = query.get('rid');
+    if (!rid) {
+      setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+    }
   }, [projectBudgetData]);
 
   const onStepChange = (tabIndex: number) => {

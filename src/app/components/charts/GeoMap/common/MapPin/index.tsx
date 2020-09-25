@@ -16,6 +16,7 @@ type Props = {
   maxValue: number;
   longitude: number;
   onClick?: Function;
+  onHover?: Function;
 };
 
 function getWidth(value: number, maxValue: number) {
@@ -37,6 +38,16 @@ export function MapPin(props: Props) {
         role="button"
         onClick={() =>
           props.onClick && props.onClick([props.longitude, props.latitude])
+        }
+        onMouseLeave={() => props.onHover && props.onHover(null)}
+        onMouseEnter={() =>
+          props.onHover &&
+          props.onHover({
+            name: props.name,
+            value: props.value,
+            latitude: parseFloat(props.latitude.toString()),
+            longitude: parseFloat(props.longitude.toString()),
+          })
         }
         css={`
           width: ${width}px;
