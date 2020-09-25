@@ -5,6 +5,14 @@ import {
   ProgressBar,
   ProgressBarContainer,
 } from 'app/components/charts/BarCharts/common/ChartTooltip';
+import {
+  Row,
+  Tooltip,
+  TooltipContent,
+  TooltipHeader,
+  XsContainer,
+} from 'app/components/charts/Pillars/tooltips/styles';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const row = css`
   display: flex;
@@ -58,5 +66,40 @@ export const ReachedTooltip = (props: any) => {
         </ProgressBarContainer>
       </div>
     </div>
+  );
+};
+
+export const ReachedTooltipMobile = (props: any) => {
+  const { t } = useTranslation();
+
+  const percentage =
+    (props.data['People Reached'] * 100) /
+    (props.data['People Reached'] + props.data['People Targeted']);
+
+  return (
+    <XsContainer>
+      <ClickAwayListener onClickAway={() => {}}>
+        <Tooltip>
+          <TooltipHeader>
+            <div> </div>
+            {t(props.data.name)}
+          </TooltipHeader>
+          <line></line>
+          <TooltipContent>
+            <Row>
+              <div>{t('People Reached')}</div>
+              <div>{props.data['People Reached']}</div>
+            </Row>
+            <ProgressBarContainer>
+              <ProgressBar
+                css={`
+                  width: ${percentage > 100 ? 100 : percentage}%;
+                `}
+              />
+            </ProgressBarContainer>
+          </TooltipContent>
+        </Tooltip>
+      </ClickAwayListener>
+    </XsContainer>
   );
 };

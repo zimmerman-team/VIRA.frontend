@@ -126,7 +126,7 @@ export const mockDataVar2: TableModuleModel = {
           );
         },
         customFilterListOptions: {
-          render: value => `Publishing organisation: ${value}`,
+          render: (value) => `Publishing organisation: ${value}`,
         },
       },
     },
@@ -136,7 +136,7 @@ export const mockDataVar2: TableModuleModel = {
         filter: true,
         filterType: 'dropdown',
         customFilterListOptions: {
-          render: value => `GB signatory: ${value}`,
+          render: (value) => `GB signatory: ${value}`,
         },
       },
     },
@@ -146,7 +146,7 @@ export const mockDataVar2: TableModuleModel = {
         filter: true,
         filterType: 'dropdown',
         customFilterListOptions: {
-          render: value => `Organisation type: ${value}`,
+          render: (value) => `Organisation type: ${value}`,
         },
       },
     },
@@ -156,7 +156,7 @@ export const mockDataVar2: TableModuleModel = {
         filter: true,
         filterType: 'checkbox',
         customFilterListOptions: {
-          render: value => `Latest IATI version: ${value}`,
+          render: (value) => `Latest IATI version: ${value}`,
         },
       },
     },
@@ -170,7 +170,7 @@ export const mockDataVar2: TableModuleModel = {
           return <IconCellModule value={value} />;
         },
         customFilterListOptions: {
-          render: value => `Publishing hum.data?: ${value}`,
+          render: (value) => `Publishing hum.data?: ${value}`,
         },
       },
     },
@@ -184,7 +184,7 @@ export const mockDataVar2: TableModuleModel = {
           return <IconCellModule value={value} />;
         },
         customFilterListOptions: {
-          render: value => `Publishing v2.02 hum. data?: ${value}`,
+          render: (value) => `Publishing v2.02 hum. data?: ${value}`,
         },
       },
     },
@@ -198,7 +198,7 @@ export const mockDataVar2: TableModuleModel = {
           return <IconCellModule value={value} />;
         },
         customFilterListOptions: {
-          render: value => `Publishing v2.03 hum. data?: ${value}`,
+          render: (value) => `Publishing v2.03 hum. data?: ${value}`,
         },
       },
     },
@@ -212,7 +212,7 @@ export const mockDataVar2: TableModuleModel = {
           return <IconCellModule value={value} />;
         },
         customFilterListOptions: {
-          render: value => `Incoming TS traceability: ${value}`,
+          render: (value) => `Incoming TS traceability: ${value}`,
         },
       },
     },
@@ -237,14 +237,14 @@ export const mockDataVar2: TableModuleModel = {
     ) => {
       let csvData = '';
       // building header
-      columns.forEach(column => {
+      columns.forEach((column) => {
         csvData = csvData
           .concat('"'.concat(column.name).concat('"'))
           .concat(',');
       });
       csvData = csvData.concat('\n');
       // building body
-      data.forEach(row => {
+      data.forEach((row) => {
         row.data.forEach((cell: any, index: number) => {
           // console.log('mock - cell', typeof cell);
           const cellVal = index === 0 ? cell.name : cell;
@@ -712,7 +712,7 @@ export const mockDataVar7: TableModuleModel = {
     rowHover: false,
     pagination: false,
     viewColumns: true,
-    responsive: 'vertical',
+    responsive: 'standard',
     filterType: 'checkbox',
     selectableRows: 'none',
   },
@@ -741,7 +741,7 @@ export const projectsTableConfig: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return (
             <LinkCellModule
               css={`
@@ -769,7 +769,7 @@ export const projectsTableConfig: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <LinkCellModule value={value} link="" />;
         },
       },
@@ -786,7 +786,7 @@ export const projectsTableConfig: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customBodyRender: label => {
+        customBodyRender: (label) => {
           return <ButtonCellModule label="Label" disabled={false} />;
         },
       },
@@ -800,7 +800,7 @@ export const projectsTableConfig: TableModuleModel = {
     rowHover: false,
     pagination: true,
     viewColumns: false,
-    responsive: 'vertical',
+    responsive: 'standard',
     filterType: 'checkbox',
     selectableRows: 'none',
     fixedSelectColumn: false,
@@ -818,7 +818,7 @@ export const addTeamMemberTableConfig: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <Checkbox />;
         },
       },
@@ -827,7 +827,7 @@ export const addTeamMemberTableConfig: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return (
             <LinkCellModule
               css={`
@@ -860,7 +860,7 @@ export const addTeamMemberTableConfig: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <IconCellModule value="Edit" />;
         },
       },
@@ -897,7 +897,7 @@ export const mockDataVar10: TableModuleModel = {
       name: 'Name of User Grantee',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return (
             <LinkCellModule
               css={`
@@ -930,7 +930,7 @@ export const mockDataVar10: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <IconCellModule value="Edit" />;
         },
       },
@@ -939,7 +939,7 @@ export const mockDataVar10: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <IconCellModule value="Delete" />;
         },
       },

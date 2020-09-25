@@ -16,6 +16,7 @@ import {
   TabStyle,
   a11yProps,
   TabPanel,
+  tabStyle,
 } from 'app/modules/list-module/common/TabPanelProps';
 import {
   getTitle,
@@ -91,7 +92,13 @@ export function Viztabs(props: PropsModel) {
           <Grid item xs={3} />
         </Hidden>
 
-        <Grid item xs={7} container justify="flex-end">
+        <Grid
+          item
+          md={7}
+          sm={8}
+          container
+          justify={isMobileWidth ? 'flex-start' : 'flex-end'}
+        >
           <Tabs
             value={props.value}
             onChange={props.onTabClick}
@@ -99,14 +106,18 @@ export function Viztabs(props: PropsModel) {
             data-cy="tabs-container"
             css={`
               width: 100%;
+              && [class*='MuiTabs-fixed'] {
+                overflow-x: ${isMobileWidth ? 'scroll !important' : 'hidden'};
+              }
+
               [class*='MuiTabs-flexContainer'] {
-                justify-content: flex-end;
+                justify-content: ${isMobileWidth ? 'flex-start' : 'flex-end'};
               }
             `}
           >
             <Tab
               data-cy="pillars-tab"
-              css={TabStyle}
+              css={tabStyle(0)}
               label={t('home.chart_nav.pillars')}
               {...a11yProps(0)}
             />

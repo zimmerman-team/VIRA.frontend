@@ -13,16 +13,19 @@ export function isNavBtnEnabled(btnType: string, tabIndex: number, data: any) {
   }
   switch (tabIndex) {
     case 0:
-      return validateOutcomeFields(data.title, data.country.label);
+      return validateOutcomeFields(
+        data.title,
+        data.country.label,
+        data.budget,
+        data.remainBudget,
+        data.insContribution
+      );
     case 1:
       return validatePolicyPrioritiesFields(
         data.tarBenTotal,
         data.beneficiaryCounts,
         data.policyPriorities,
         data.sdgs,
-        data.budget,
-        data.remainBudget,
-        data.insContribution,
         data.funders
       );
     case 2:

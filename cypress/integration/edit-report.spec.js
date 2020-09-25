@@ -4,6 +4,8 @@ describe('edit an existing report', () => {
   it('go to reports overview page', () => {
     // authenticate
     cy.auth().then(() => {
+      cy.findByTestId('language-en').click();
+      cy.wait(2000);
       // go to reports overview
       cy.goToReportsOverview();
     });

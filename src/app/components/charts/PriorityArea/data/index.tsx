@@ -291,30 +291,38 @@ export function formatPriorityAreaSDGsData(
   data: PriorityAreaSDGsProps[]
 ): ChartDataPropsSDGs[] {
   const chartData: ChartDataPropsSDGs[] = [];
-
-  data.forEach((priorityArea: PriorityAreaSDGsProps) => {
-    chartData.push({
-      name: priorityArea.name,
-      'No poverty': get(priorityArea, 'children[0].reached', 0),
-      'No povertyColor': get(priorityArea, 'children[0].color', ''),
-      'Clean water and sanitation': get(priorityArea, 'children[1].reached', 0),
-      'Clean water and sanitationColor': get(
-        priorityArea,
-        'children[1].color',
-        ''
-      ),
-      'Good health and well-being': get(priorityArea, 'children[2].reached', 0),
-      'Good health and well-beingColor': get(
-        priorityArea,
-        'children[2].color',
-        ''
-      ),
-      'Gender equality': get(priorityArea, 'children[3].reached', 0),
-      'Gender equalityColor': get(priorityArea, 'children[3].color', ''),
-      'Quality education': get(priorityArea, 'children[4].color', 0),
-      'Quality educationColor': get(priorityArea, 'children[4].color', ''),
+  if (data != null) {
+    data.forEach((priorityArea: PriorityAreaSDGsProps) => {
+      chartData.push({
+        name: priorityArea.name,
+        'No poverty': get(priorityArea, 'children[0].reached', 0),
+        'No povertyColor': get(priorityArea, 'children[0].color', ''),
+        'Clean water and sanitation': get(
+          priorityArea,
+          'children[1].reached',
+          0
+        ),
+        'Clean water and sanitationColor': get(
+          priorityArea,
+          'children[1].color',
+          ''
+        ),
+        'Good health and well-being': get(
+          priorityArea,
+          'children[2].reached',
+          0
+        ),
+        'Good health and well-beingColor': get(
+          priorityArea,
+          'children[2].color',
+          ''
+        ),
+        'Gender equality': get(priorityArea, 'children[3].reached', 0),
+        'Gender equalityColor': get(priorityArea, 'children[3].color', ''),
+        'Quality education': get(priorityArea, 'children[4].color', 0),
+        'Quality educationColor': get(priorityArea, 'children[4].color', ''),
+      });
     });
-  });
-
+  }
   return chartData;
 }

@@ -41,7 +41,6 @@ import SmallIconChecked from 'app/assets/icons/SmallIconChecked';
 import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
-  // const isMount = useIsMount();
   const { t } = useTranslation();
   const [isBlur, setIsBlur] = React.useState(false);
   const [showTargetGroupMessage, setShowTargetGroupMessage] = React.useState(
@@ -53,12 +52,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
     const sdgsTotal = sumBy(props.sdgs, 'weight');
     setIsBlur(ppTotal < 100 || sdgsTotal < 100);
   }, [props.policyPriorities, props.sdgs]);
-
-  // React.useEffect(() => {
-  //   if (!isMount) {
-  //     props.setPolicyPriorities([]);
-  //   }
-  // }, [props.pillar]);
 
   React.useEffect(() => {
     if (
@@ -110,7 +103,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           />
           <CardContent>
             <PercentageDropdown
-              testid={'dropdown-one'}
+              testid="dropdown-one"
               values={
                 props.pillar === 'Pillar 1: Social Good Projects'
                   ? pillar1PolicyPriorities
@@ -142,7 +135,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
           <CardHeader title={t('reports.form.textfield.sdgs')} />
           <CardContent>
             <PercentageDropdown
-              testid={'dropdown-two'}
+              testid="dropdown-two"
               values={sdgs}
               value={props.sdgs}
               setValue={props.setSDGs}
@@ -163,71 +156,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
       </Grid>
 
       <Grid item xs={false} sm={false} md={false} lg={4} />
-
-      {/* ---------------------------------------------------------------------*/}
-      {/* Budget */}
-      <Grid
-        data-cy="budget-container"
-        item
-        xs={12}
-        md={6}
-        lg={4}
-        css={isBlur ? styles.blurBlock : ``}
-      >
-        <Card css={styles.card}>
-          <CardHeader title={t('reports.form.textfield.budget')} />
-          <CardContent
-            css={`
-              padding-bottom: 6px !important;
-              > div:first-of-type {
-                height: inherit;
-              }
-            `}
-          >
-            <IntentTexFieldSingleLine
-              testattr="budget-field"
-              fullWidth
-              type="number"
-              min={0}
-              value={props.budget}
-              setValue={props.setBudget}
-              description=""
-            />
-            <Box height="5px" width="100%" />
-            <Typography variant="body2" color="secondary" css={styles.infoText}>
-              {t('reports.form.textfield.remaining')}: {props.remainBudget}€
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-
-      {/* ---------------------------------------------------------------------*/}
-      {/* Insinger contribution */}
-      <Grid
-        data-cy="insinger-contribution"
-        item
-        xs={12}
-        md={6}
-        lg={4}
-        css={isBlur ? styles.blurBlock : ``}
-      >
-        <Card css={styles.card}>
-          <CardHeader title={t('reports.form.textfield.contribution')} />
-          <CardContent>
-            <IntentTexFieldSingleLine
-              testattr="insinger-contribution-field"
-              fullWidth
-              type="number"
-              min={0}
-              value={props.insContribution}
-              setValue={props.setInsContribution}
-              description=""
-            />
-
-            <Box height="14px" width="100%" />
-          </CardContent>
-        </Card>
-      </Grid>
 
       {/* --------------------------------------------------------------------- */}
       {/* Target beneficiaries */}
@@ -253,8 +181,6 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
               description=""
               setValue={props.setTarBenTotal}
             />
-
-            <Box height="14px" width="100%" />
           </CardContent>
         </Card>
       </Grid>
@@ -320,8 +246,8 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         sm={12}
         md={12}
         lg={10}
-        css={isBlur ? styles.blurBlock : ``}
         spacing={0}
+        css={isBlur ? styles.blurBlock : ``}
       >
         <Card css={styles.card}>
           <CardHeader title={t('reports.form.textfield.of_which_ben')} />

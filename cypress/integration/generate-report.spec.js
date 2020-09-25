@@ -5,6 +5,9 @@ describe('report flow', () => {
     cy.auth().then(() => {
       cy.goToProjectsOverview();
 
+      cy.findByTestId('language-en').click();
+      cy.wait(2000);
+
       cy.selectRandomProject().then(() => {
         cy.findByTestId('generate-report-button').should('exist').click();
       });
@@ -26,6 +29,15 @@ describe('report flow', () => {
       'Netherlands {enter}'
     );
     cy.get('.react-geocoder-results > :nth-child(1)').click();
+    cy.get('[data-cy=budget-field]')
+      .click()
+      .type('{selectall}{backspace}')
+      .type(10);
+    cy.findByTestId('insinger-contribution-field')
+      .should('exist')
+      .click()
+      .type('{backspace}')
+      .type(2);
   });
 
   it('fill in policy priorities', () => {
@@ -61,15 +73,6 @@ describe('report flow', () => {
     cy.findByTestId('dropdown-one').click();
     cy.findByTestId('dropdown-close-button').click();
 
-    cy.get('[data-cy=budget-field]')
-      .click()
-      .type('{selectall}{backspace}')
-      .type(10);
-    cy.findByTestId('insinger-contribution-field')
-      .should('exist')
-      .click()
-      .type('{backspace}')
-      .type(2);
     cy.findByTestId('target-beneficiaries-field')
       .should('exist')
       .click()

@@ -1,6 +1,14 @@
 import React from 'react';
 import { css } from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
+import {
+  Row,
+  Tooltip,
+  TooltipContent,
+  TooltipHeader,
+  XsContainer,
+} from 'app/components/charts/Pillars/tooltips/styles';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const row = css`
   display: flex;
@@ -42,5 +50,28 @@ export const BudgetTooltip = (props: any) => {
         <div>€{props.data.Budget}</div>
       </div>
     </div>
+  );
+};
+
+export const BudgetTooltipMobile = (props: any) => {
+  const { t } = useTranslation();
+  return (
+    <XsContainer>
+      <ClickAwayListener onClickAway={() => {}}>
+        <Tooltip>
+          <TooltipHeader>
+            <div> </div>
+            {t(props.data.name)}
+          </TooltipHeader>
+          <line></line>
+          <TooltipContent>
+            <Row>
+              <div>{t('Budget')}</div>
+              <div>€{props.data.Budget}</div>
+            </Row>
+          </TooltipContent>
+        </Tooltip>
+      </ClickAwayListener>
+    </XsContainer>
   );
 };

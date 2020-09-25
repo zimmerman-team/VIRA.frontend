@@ -184,14 +184,13 @@ export function BubbleChart(props: Props) {
                         {
                           label: t('charts.barchart.commitment'),
                           value: tProps.data.insContribution
-                            ? tProps.data.insContribution.toLocaleString(
-                                undefined,
-                                {
+                            ? tProps.data.insContribution
+                                .toLocaleString(undefined, {
                                   currency: 'EUR',
                                   currencyDisplay: 'symbol',
                                   style: 'currency',
-                                }
-                              )
+                                })
+                                .replace('.00', '')
                             : '0',
                         },
                       ]}

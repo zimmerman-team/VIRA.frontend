@@ -249,6 +249,10 @@ function LandingLayout(props: PropsModel) {
           flex-direction: column;
           top: ${value === 0 ? '-48px' : ''};
           position: ${value === 0 ? 'relative' : ''};
+
+          @media (max-width: 600px) {
+            top: 0;
+          }
         `}
       >
         <div
@@ -291,9 +295,9 @@ function LandingLayout(props: PropsModel) {
       {/* hide on mobile */}
 
       <Hidden smDown>
-        <Box width="100%" height="86px" />
+        <Box width="100%" height="72px" />
       </Hidden>
-      <Box width="100%" height="18px" />
+      <Box width="100%" height="32px" />
 
       {/* list module */}
       <ListModule

@@ -45,7 +45,7 @@ export const GranteeListMock: TableModuleModel = {
     rowHover: true,
     pagination: true,
     viewColumns: false,
-    responsive: 'vertical',
+    responsive: 'standard',
     filterType: 'checkbox',
     selectableRows: 'none',
     fixedSelectColumn: false,
