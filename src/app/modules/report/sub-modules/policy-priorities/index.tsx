@@ -38,6 +38,7 @@ import {
   pillar2PolicyPriorities,
 } from 'app/modules/report/sub-modules/policy-priorities/mock';
 import SmallIconChecked from 'app/assets/icons/SmallIconChecked';
+import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';
 
 export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
   // const isMount = useIsMount();
@@ -78,29 +79,34 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
       {/* Pillar */}
-      <Grid
-        item
-        xs={12}
-        md={12}
-        lg={12}
-        data-cy="pillar-radio-buttons"
-        css="padding-left: 32px !important;"
-      >
-        <RadioButtonsGroup
-          items={pillars}
-          value={props.pillar}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            props.setPillar(event.target.value)
-          }
-        />
+
+      <Grid item xs={12} md={12} lg={4}>
+        <Card css={styles.card} data-cy="pillar-radio-buttons">
+          <CardHeader title={t('reports.form.textfield.radio_selection')} />
+          <CardContent>
+            <RadioButtonsGroup
+              items={pillars}
+              value={props.pillar}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                props.setPillar(event.target.value)
+              }
+            />
+          </CardContent>
+        </Card>
       </Grid>
+
+      <Grid item xs={false} sm={false} md={false} lg={8} />
 
       {/* ---------------------------------------------------------------------*/}
       {/* Policy Priorities */}
       <Grid data-cy="policy-priority" item xs={12} md={12} lg={4}>
-        <Card css={styles.card}>
+        <Card css={styles.cardWithTooltip}>
+          <Tooltip tip={t('reports.form.tooltip.policy_priority')} adjust />
           <CardHeader
             title={t('reports.form.textfield.insinger_f_policy_priorities')}
+            css={`
+              padding-top: 1px;
+            `}
           />
           <CardContent>
             <PercentageDropdown
@@ -328,7 +334,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
                     type="number"
                     min={0}
                     value={item.value}
-                    description={item.name}
+                    description={t(item.name)}
                     setValue={(v: number) => {
                       const values = [...props.beneficiaryCounts];
                       values[index].value = v;
