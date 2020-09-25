@@ -1,4 +1,4 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { css } from 'styled-components/macro';
@@ -19,6 +19,21 @@ export const TabStyle = css`
   max-width: 140px;
   margin-left: 24px;
 `;
+
+export function tabStyle(index: number) {
+  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
+  return css`
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.71;
+    letter-spacing: 1.25px;
+    background-color: white;
+    text-transform: capitalize;
+    max-width: 140px;
+    margin-left: ${index === 0 && isMobileWidth ? '0px' : '24px'};
+  `;
+}
 
 export function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;

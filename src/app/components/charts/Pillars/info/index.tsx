@@ -111,6 +111,9 @@ export const PillarCountItem = (props: PillarItemProps) => {
           display: flex;
           justify-content: center;
           align-items: center;
+          @media (max-width: 600px) {
+            font-size: 16px;
+          }
         `}
       >
         {props.count}
@@ -123,6 +126,9 @@ export const PillarCountItem = (props: PillarItemProps) => {
           letter-spacing: 0.250795px;
           color: #000000;
           text-align: center;
+          @media (max-width: 600px) {
+            font-size: 14px;
+          }
         `}
       >
         {t(props.name)}
@@ -135,9 +141,11 @@ export const PillarCountContainer = (props: PillarInfoProps) => {
   return (
     <div
       css={`
+        width: 100%;
         display: flex;
-        width: 60%;
+        overflow: auto;
         margin-bottom: 50px;
+        align-items: flex-start;
       `}
     >
       {getItems(props.data).map((item: PillarItemProps) => (
