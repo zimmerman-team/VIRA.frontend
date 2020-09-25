@@ -128,6 +128,16 @@ export const PillarContainer = (props: PillarContainerProps) => {
               !isEmpty(data) ? data : [],
               props.selectedBreakdown
             )}
+            theme={{
+              ...config.theme,
+              tooltip: {
+                ...config.theme?.tooltip,
+                container: {
+                  ...config.theme?.tooltip?.container,
+                  padding: isMobileWidth ? '0' : '5px 9px',
+                },
+              },
+            }}
           />
         )}
       </ChartWrapper>

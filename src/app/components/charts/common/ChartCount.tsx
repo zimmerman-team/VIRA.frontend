@@ -103,11 +103,11 @@ export const ChartCountContainer = (props: ChartCountInfoProps) => {
   return (
     <div
       css={`
-        display: flex;
         width: 100%;
+        display: flex;
+        overflow: auto;
         margin-bottom: 50px;
         align-items: flex-start;
-        overflow: scroll;
       `}
     >
       {props.items.map((item: ChartCountItemProps) => (

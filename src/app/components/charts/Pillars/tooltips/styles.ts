@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { Typography } from '@material-ui/core';
 
 export const TooltipContent = styled.div`

@@ -141,10 +141,10 @@ export const PillarCountContainer = (props: PillarInfoProps) => {
   return (
     <div
       css={`
-        display: flex;
         width: 100%;
+        display: flex;
+        overflow: auto;
         margin-bottom: 50px;
-        overflow: scroll;
         align-items: flex-start;
       `}
     >

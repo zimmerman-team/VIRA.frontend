@@ -139,6 +139,16 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
               getTooltip(props.selectedBreakdown, isMobileWidth);
             }}
             tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
+            theme={{
+              ...PriorityAreaConfigBase.theme,
+              tooltip: {
+                ...PriorityAreaConfigBase.theme?.tooltip,
+                container: {
+                  ...PriorityAreaConfigBase.theme?.tooltip?.container,
+                  padding: isMobileWidth ? '0' : '5px 9px',
+                },
+              },
+            }}
           />
         )}
       </ChartWrapper>

@@ -118,6 +118,16 @@ export const OneYearAndMultiYearContainer = (
               getTooltip(props.selectedBreakdown, isMobileWidth);
             }}
             tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
+            theme={{
+              ...OneYearAndMultiYearConfigBase.theme,
+              tooltip: {
+                ...OneYearAndMultiYearConfigBase.theme?.tooltip,
+                container: {
+                  ...OneYearAndMultiYearConfigBase.theme?.tooltip?.container,
+                  padding: isMobileWidth ? '0' : '5px 9px',
+                },
+              },
+            }}
           />
         )}
       </ChartWrapper>

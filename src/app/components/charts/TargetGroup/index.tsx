@@ -111,6 +111,16 @@ export const TargetGroupContainer = (props: TargetGroupContainerProps) => {
               getTooltip(props.selectedBreakdown, isMobileWidth);
             }}
             tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
+            theme={{
+              ...TargetGroupConfigBase.theme,
+              tooltip: {
+                ...TargetGroupConfigBase.theme?.tooltip,
+                container: {
+                  ...TargetGroupConfigBase.theme?.tooltip?.container,
+                  padding: isMobileWidth ? '0' : '5px 9px',
+                },
+              },
+            }}
           />
         )}
       </ChartWrapper>
