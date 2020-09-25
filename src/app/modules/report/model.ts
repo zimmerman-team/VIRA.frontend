@@ -41,17 +41,11 @@ export type OutcomesPropsModel = {
   setCountry: Function;
   location: LocationModel | null;
   setLocation: Function;
-  // tarBenTotal: number;
-  // setTarBenTotal: Function;
-  // tarBenTotal2: number;
-  // setTarBenTotal2: Function;
-  // beneficiaryCounts: BeneficiaryCountsModel[];
-  // setBeneficiaryCounts: Function;
-  // policyPriority: { label: string; value: string };
-  // setPolicyPriority: Function;
-  // budget: number;
-  // setBudget: Function;
-  // remainBudget: number;
+  budget: number;
+  setBudget: Function;
+  remainBudget: number;
+  insContribution: number;
+  setInsContribution: Function;
 };
 
 export type PolicyPrioritiesPropsModel = {
@@ -67,11 +61,6 @@ export type PolicyPrioritiesPropsModel = {
   setPolicyPriorities: Function;
   sdgs: LabelWeightModel[];
   setSDGs: Function;
-  budget: number;
-  setBudget: Function;
-  remainBudget: number;
-  insContribution: number;
-  setInsContribution: Function;
   funders: string[];
   setFunders: Function;
 };
