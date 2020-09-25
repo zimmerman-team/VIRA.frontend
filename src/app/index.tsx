@@ -19,13 +19,13 @@ import { useTranslation } from 'react-i18next';
 export function App() {
   const { i18n } = useTranslation();
 
-  const reduxLng = useStoreState(state => state.syncVariables.lng);
+  const reduxLng = useStoreState((state) => state.syncVariables.lng);
 
   React.useEffect(() => {
     if (i18n.language !== reduxLng && reduxLng) {
       i18n.changeLanguage(reduxLng);
     }
-  }, []);
+  }, [i18n.language, reduxLng]);
 
   const classes = useStyles();
   const theme = useTheme();
@@ -40,7 +40,9 @@ export function App() {
     setOpen(false);
   };
 
-  const isLoggedIn = Boolean(useStoreState(state => state.syncVariables.user));
+  const isLoggedIn = Boolean(
+    useStoreState((state) => state.syncVariables.user)
+  );
 
   return (
     <div className={classes.root}>
