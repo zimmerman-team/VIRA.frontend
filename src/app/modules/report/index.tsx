@@ -624,7 +624,13 @@ function CreateReportFunc(props: any) {
 
   const draftSubmitEnabled = title.length > 0 || country.label.length > 0;
 
-  const step2Enabled = validateOutcomeFields(title, country.label);
+  const step2Enabled = validateOutcomeFields(
+    title,
+    country.label,
+    budget,
+    get(projectBudgetData, 'data.remainBudget', 0),
+    insContribution
+  );
 
   let activePolicyPriorities = policyPrioritiesPillar1;
   let activePolicyPrioritiesAction = setPolicyPrioritiesPillar1;
@@ -640,9 +646,6 @@ function CreateReportFunc(props: any) {
       beneficiaryCounts,
       activePolicyPriorities,
       sdgs,
-      budget,
-      get(projectBudgetData, 'data.remainBudget', 0),
-      insContribution,
       funders
     );
 
@@ -830,6 +833,11 @@ function CreateReportFunc(props: any) {
         setCountry,
         location,
         setLocation,
+        budget,
+        setBudget,
+        remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
+        insContribution,
+        setInsContribution,
       }}
       policyPrioritiesProps={{
         pillar,
@@ -844,11 +852,6 @@ function CreateReportFunc(props: any) {
         setSDGs,
         beneficiaryCounts,
         setBeneficiaryCounts,
-        budget,
-        setBudget,
-        remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
-        insContribution,
-        setInsContribution,
         funders,
         setFunders,
       }}

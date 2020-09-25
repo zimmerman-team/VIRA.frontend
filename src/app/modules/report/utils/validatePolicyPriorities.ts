@@ -6,9 +6,6 @@ export function validatePolicyPrioritiesFields(
   beneficiaryCounts: any,
   policyPriorities: LabelWeightModel[],
   sdgs: LabelWeightModel[],
-  budget: number,
-  remainBudget: number,
-  insContribution: number,
   funders: LabelValueModel[]
 ) {
   if (
@@ -20,16 +17,7 @@ export function validatePolicyPrioritiesFields(
   if (sdgs.length === 0 || sumBy(sdgs, 'weight') < 100) {
     return false;
   }
-  if (tarBenTotal === 0 || tarBenTotal < sumBy(beneficiaryCounts, 'value')) {
-    return false;
-  }
-  if (budget === 0) {
-    return false;
-  }
-  if (insContribution === 0) {
-    return false;
-  }
-  if (budget > remainBudget) {
+  if (tarBenTotal === 0) {
     return false;
   }
   return funders.length > 0;
