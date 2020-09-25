@@ -68,7 +68,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.insinger_f_policy_priorities"
-          tooltip="reports.form.textfield.insinger_f_policy_priorities"
           content={props.policyPrioritiesProps.policyPriorities.map(
             (pp) => `${t(pp.label)}: ${pp.weight}%`
           )}
@@ -84,7 +83,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.sdgs"
-          tooltip="reports.form.textfield.sdgs"
           content={props.policyPrioritiesProps.sdgs.map(
             (sdg) => `${t(sdg.label)}: ${sdg.weight}%`
           )}
@@ -99,7 +97,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.budget"
-          tooltip="reports.form.textfield.budget"
           content={props.policyPrioritiesProps.budget}
           testattr="budget-preview-card"
         />
@@ -112,7 +109,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.contribution"
-          tooltip="reports.form.textfield.contribution"
           content={props.policyPrioritiesProps.insContribution}
           testattr="contribution-preview-card"
         />
@@ -125,7 +121,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.target_beneficiaries"
-          tooltip="reports.form.textfield.target_beneficiaries"
           content={props.policyPrioritiesProps.tarBenTotal}
           testattr="target-beneficiaries-preview-card"
         />
@@ -138,7 +133,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.total_commited"
-          tooltip="reports.form.textfield.total_commited"
           content={props.policyPrioritiesProps.tarBenTotal2}
           testattr="target-beneficiaries-2-preview-card"
         />
@@ -151,7 +145,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.of_which_ben"
-          tooltip="reports.form.textfield.of_which_ben"
           content={props.policyPrioritiesProps.beneficiaryCounts.map(
             (b: BeneficiaryCountsModel) => `${b.name}: ${b.value}`
           )}
@@ -166,7 +159,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.other_funders"
-          tooltip="reports.form.textfield.other_funders"
           content={props.policyPrioritiesProps.funders}
           testattr="other-funders-preview-card"
         />
@@ -177,7 +169,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.key_outcomes"
-          tooltip="reports.form.cards.key_outcomes"
           content={props.indicatorVerificationProps.keyOutcomes}
           testattr="key-outcomes-preview-card"
         />
@@ -185,21 +176,20 @@ export const PreviewLayout = (props: PreviewParams) => {
 
       <Spacer />
 
-      <Grid item xs={12} lg={12}>
-        <PreviewCard
-          title="reports.form.cards.monitor"
-          tooltip="reports.form.cards.monitor_expl"
-          content={props.indicatorVerificationProps.monRepOutcomes}
-          testattr="outcomes-preview-card"
-        />
-      </Grid>
+      {/*<Grid item xs={12} lg={12}>*/}
+      {/*  <PreviewCard*/}
+      {/*    title="reports.form.cards.monitor"*/}
+      {/*    tooltip="reports.form.cards.monitor_expl"*/}
+      {/*    content={props.indicatorVerificationProps.monRepOutcomes}*/}
+      {/*    testattr="outcomes-preview-card"*/}
+      {/*  />*/}
+      {/*</Grid>*/}
 
       <Spacer />
 
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.inputs_invested"
-          tooltip="reports.form.cards.inputs_invested"
           content={props.indicatorVerificationProps.inputsInvested}
           testattr="inputs-invested-preview-card"
         />
@@ -210,7 +200,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.activities_undertaken"
-          tooltip="reports.form.cards.activities_undertaken"
           content={props.indicatorVerificationProps.activitiesUndertaken}
           testattr="activities-undertaken-preview-card"
         />
@@ -221,7 +210,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.projectgoals_socialbenefits"
-          tooltip="reports.form.cards.projectgoals_socialbenefits"
           content={props.indicatorVerificationProps.projectgoalsSocialbenefits}
           testattr="projectgoals-socialbenefits-preview-card"
         />
@@ -232,7 +220,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.important_factors"
-          tooltip="reports.form.cards.important_factors"
           content={props.indicatorVerificationProps.importantFactors}
           testattr="important-factors-preview-card"
         />
@@ -243,7 +230,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.orgs_partners"
-          tooltip="reports.form.cards.orgs_partners"
           content={props.indicatorVerificationProps.orgsPartners}
           testattr="orgs-partners-preview-card"
         />
@@ -253,8 +239,17 @@ export const PreviewLayout = (props: PreviewParams) => {
 
       <Grid item xs={12} lg={12}>
         <PreviewCard
+          title="reports.form.cards.partners"
+          content={props.indicatorVerificationProps.partners}
+          testattr="partners-preview-card"
+        />
+      </Grid>
+
+      <Spacer />
+
+      <Grid item xs={12} lg={12}>
+        <PreviewCard
           title="reports.form.cards.key_implementation_challenges"
-          tooltip="reports.form.cards.key_implementation_challenges"
           content={props.challengesPlansProps.keyImplChallenges}
           explanation="reports.form.cards.key_implementation_challenges_expl"
           testattr="key-implementation-challenges-preview-card"
@@ -266,7 +261,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.how_address_challenges"
-          tooltip="reports.form.cards.how_address_challenges"
           content={props.challengesPlansProps.addressChallenges}
           testattr="how-address-challenges-preview-card"
         />
@@ -277,7 +271,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.other_project"
-          tooltip="reports.form.cards.other_project"
           content={props.challengesPlansProps.otherProjOutObs}
           testattr="other-project-preview-card"
         />
@@ -289,7 +282,6 @@ export const PreviewLayout = (props: PreviewParams) => {
         <Grid item xs={12} lg={6}>
           <PreviewCard
             title="reports.form.cards.how_important_insinger_support"
-            tooltip="reports.form.cards.how_important_insinger_support"
             content={
               t(
                 props.challengesPlansProps.howImportantInsingerSupport
@@ -301,7 +293,6 @@ export const PreviewLayout = (props: PreviewParams) => {
         <Grid item xs={12} lg={6}>
           <PreviewCard
             title="reports.form.cards.apply_for_more_funding"
-            tooltip="reports.form.cards.apply_for_more_funding"
             content={
               t(props.challengesPlansProps.applyForMoreFunding) as string
             }
@@ -315,7 +306,6 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={12}>
         <PreviewCard
           title="reports.form.cards.other_comments"
-          tooltip="reports.form.cards.other_comments"
           content={props.challengesPlansProps.otherComms}
           explanation="reports.form.cards.other_comments_expl"
           testattr="other-comments-preview-card"

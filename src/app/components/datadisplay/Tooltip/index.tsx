@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProjectPalette } from 'app/theme';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme, makeStyles } from '@material-ui/core/styles';
@@ -9,6 +9,7 @@ type Props = {
   size?: string;
   label?: string;
   tip?: string;
+  adjust?: boolean;
 };
 
 const BaseButton = styled((props) => <Button {...props} />)`
@@ -46,6 +47,14 @@ const LightTooltip = withStyles((theme: Theme) => ({
   },
 }))(Tooltip);
 
+const AdjustedStyling = css`
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  margin-right: 21px;
+  top: 10px;
+`;
+
 /* span is here for a reason https://github.com/atomiks/tippy.js-react */
 export const TooltipButton = (props: Props) => {
   return (
@@ -57,7 +66,7 @@ export const TooltipButton = (props: Props) => {
       }
       placement="top-end"
     >
-      <span>
+      <span css={props.adjust ? AdjustedStyling : ''}>
         <BaseButton
           {...props}
           size={props.size}
