@@ -22,11 +22,11 @@ export function validateIndVerFields(
   if (str5 === '') {
     return false;
   }
-  if (str6 === '') {
-    return false;
-  }
-  if (str7 === '') {
-    return false;
-  }
+  // if (str6 === '') {
+  //   return false;
+  // }
+  // if (str7 === '') {
+  //   return false;
+  // }
   return true;
 }

@@ -30,6 +30,7 @@ const keys = [
   'report_projectgoalsSocialbenefits',
   'report_importantFactors',
   'report_orgsPartners',
+  'report_partners',
   'report_media',
   'report_mediaAdded',
   'report_openMediaModel',

@@ -56,7 +56,6 @@ export interface ReportModel {
   policy_priority?: string;
   budget?: number;
   key_outcomes?: string;
-  monitor_report_outcomes?: string;
   key_implementation_challenges?: string;
   other_project_outcomes?: string;
   plans?: string;

@@ -100,7 +100,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
       {/* ---------------------------------------------------------------------*/}
       {/* Policy Priorities */}
       <Grid data-cy="policy-priority" item xs={12} md={12} lg={4}>
-        <Card css={styles.cardWithTooltip}>
+        <Card css={styles.card}>
           <Tooltip tip={t('reports.form.tooltip.policy_priority')} adjust />
           <CardHeader
             title={t('reports.form.textfield.insinger_f_policy_priorities')}

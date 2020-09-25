@@ -50,7 +50,7 @@ export const RadioButtonsGroup = (props: RadioButtonsGroupModel) => {
               key={item.value}
               value={item.value}
               onChange={props.onChange}
-              label={'Pillar 1: ' + t(item.label)}
+              label={t(item.label)}
             />
           ))}
         </RadioGroup>
