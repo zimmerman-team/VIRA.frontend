@@ -2,7 +2,7 @@
   "detail": {
     "title": "",
     "generateReportBtn": "Genereer rapport",
-    "tooltip": "Met het resterende budget kan geen rapport worden gemaakt.",
+    "tooltip": "Er is een bestaand rapport voor dit project",
     "stats": {
       "total_budget": "Totaal budget",
       "remaining_budget": "Resterende budget",

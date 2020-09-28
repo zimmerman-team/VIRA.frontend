@@ -146,12 +146,12 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         <Card>
           <CardHeader title={t('reports.form.textfield.budget')} />
           <CardContent
-            css={`
-              padding-bottom: 6px !important;
-              > div:first-of-type {
-                height: inherit;
-              }
-            `}
+          // css={`
+          //   padding-bottom: 6px !important;
+          //   > div:first-of-type {
+          //     height: inherit;
+          //   }
+          // `}
           >
             <IntentTexFieldSingleLine
               testattr="budget-field"
@@ -162,10 +162,11 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
               setValue={props.setBudget}
               description=""
             />
-            <Box height="5px" width="100%" />
-            <Typography variant="body2" color="secondary" css={styles.infoText}>
+            <Box height="14px" width="100%" />
+            {/* <Box height="5px" width="100%" /> */}
+            {/* <Typography variant="body2" color="secondary" css={styles.infoText}>
               {t('reports.form.textfield.remaining')}: {props.remainBudget}€
-            </Typography>
+            </Typography> */}
           </CardContent>
         </Card>
         <div css="width: 100%;height: 50px;" />
@@ -181,7 +182,6 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
               setValue={props.setInsContribution}
               description=""
             />
-
             <Box height="14px" width="100%" />
           </CardContent>
         </Card>
