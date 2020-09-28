@@ -44,7 +44,6 @@ export const IndicatorVerificationLayout = (
           componentID="indVer1"
           value={props.keyOutcomes}
           setValue={props.setKeyOutcomes}
-          tooltip={t('reports.form.cards.key_outcomes')}
           description={t('reports.form.cards.key_outcomes')}
         />
       </Grid>
@@ -57,11 +56,10 @@ export const IndicatorVerificationLayout = (
         <IntentTexArea
           testattr="text-area-2"
           componentID="indVer2"
-          value={props.monRepOutcomes}
-          setValue={props.setMonRepOutcomes}
-          tooltip={t('reports.form.cards.monitor')}
-          description={t('reports.form.cards.monitor')}
-          explanation={t('reports.form.cards.monitor_expl')}
+          value={props.inputsInvested}
+          setValue={props.setInputsInvested}
+          description={t('reports.form.cards.inputs_invested')}
+          explanation={t('reports.form.cards.inputs_invested_expl')}
         />
       </Grid>
 
@@ -73,11 +71,9 @@ export const IndicatorVerificationLayout = (
         <IntentTexArea
           testattr="text-area-3"
           componentID="indVer3"
-          value={props.inputsInvested}
-          setValue={props.setInputsInvested}
-          tooltip={t('reports.form.cards.inputs_invested')}
-          description={t('reports.form.cards.inputs_invested')}
-          explanation={t('reports.form.cards.inputs_invested_expl')}
+          value={props.activitiesUndertaken}
+          setValue={props.setActivitiesUndertaken}
+          description={t('reports.form.cards.activities_undertaken')}
         />
       </Grid>
 
@@ -89,10 +85,9 @@ export const IndicatorVerificationLayout = (
         <IntentTexArea
           testattr="text-area-4"
           componentID="indVer4"
-          value={props.activitiesUndertaken}
-          setValue={props.setActivitiesUndertaken}
-          tooltip={t('reports.form.cards.activities_undertaken')}
-          description={t('reports.form.cards.activities_undertaken')}
+          value={props.projectgoalsSocialbenefits}
+          setValue={props.setProjectgoalsSocialbenefits}
+          description={t('reports.form.cards.projectgoals_socialbenefits')}
         />
       </Grid>
 
@@ -104,10 +99,9 @@ export const IndicatorVerificationLayout = (
         <IntentTexArea
           testattr="text-area-5"
           componentID="indVer5"
-          value={props.projectgoalsSocialbenefits}
-          setValue={props.setProjectgoalsSocialbenefits}
-          tooltip={t('reports.form.cards.projectgoals_socialbenefits')}
-          description={t('reports.form.cards.projectgoals_socialbenefits')}
+          value={props.importantFactors}
+          setValue={props.setImportantFactors}
+          description={t('reports.form.cards.important_factors')}
         />
       </Grid>
 
@@ -119,10 +113,9 @@ export const IndicatorVerificationLayout = (
         <IntentTexArea
           testattr="text-area-6"
           componentID="indVer6"
-          value={props.importantFactors}
-          setValue={props.setImportantFactors}
-          tooltip={t('reports.form.cards.important_factors')}
-          description={t('reports.form.cards.important_factors')}
+          value={props.orgsPartners}
+          setValue={props.setOrgsPartners}
+          description={t('reports.form.cards.orgs_partners')}
         />
       </Grid>
 
@@ -134,10 +127,9 @@ export const IndicatorVerificationLayout = (
         <IntentTexArea
           testattr="text-area-7"
           componentID="indVer7"
-          value={props.orgsPartners}
-          setValue={props.setOrgsPartners}
-          tooltip={t('reports.form.cards.orgs_partners')}
-          description={t('reports.form.cards.orgs_partners')}
+          value={props.partners}
+          setValue={props.setPartners}
+          description={t('reports.form.cards.partners')}
         />
       </Grid>
 

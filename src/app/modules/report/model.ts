@@ -68,8 +68,6 @@ export type PolicyPrioritiesPropsModel = {
 export type IndicatorVerificationPropsModel = {
   keyOutcomes: string;
   setKeyOutcomes: Function;
-  monRepOutcomes: string;
-  setMonRepOutcomes: Function;
   inputsInvested: string;
   setInputsInvested: Function;
   activitiesUndertaken: string;
@@ -80,6 +78,8 @@ export type IndicatorVerificationPropsModel = {
   setImportantFactors: Function;
   orgsPartners: string;
   setOrgsPartners: Function;
+  partners: string;
+  setPartners: Function;
   media: MediaModel;
   setMedia: Function;
   mediaAdded: any;

@@ -37,6 +37,7 @@ export function formatReportDetail(data: any) {
     projectgoals_socialbenefits: reportDetailRecord.projectgoals_socialbenefits,
     important_factors: reportDetailRecord.important_factors,
     orgs_partners: reportDetailRecord.orgs_partners,
+    partners: reportDetailRecord.partners,
     how_address_challenges: reportDetailRecord.how_address_challenges,
     how_important_insinger_support:
       reportDetailRecord.how_important_insinger_support,
