@@ -5,6 +5,7 @@
 // @ts-nocheck
 import 'styled-components/macro';
 import React from 'react';
+import axios from 'axios';
 import get from 'lodash/get';
 import find from 'lodash/find';
 import sumBy from 'lodash/sumBy';
@@ -129,17 +130,33 @@ export function GeoMap(props: Props) {
     }
   }
 
+  async function getPlaceFromLocation(longitude: number, latitude: number) {
+    return axios
+      .get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?types=place&limit=5&access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
+      )
+      .then((response: any) => {
+        return get(response, 'data.features[0].place_name', null);
+      })
+      .catch((error: any) => {
+        return null;
+      });
+  }
+
   function onMapClick(e: PointerEvent) {
     if (props.setPointSelection) {
-      const iso3 = wc([e.lngLat[0], e.lngLat[1]]);
-      let country = null;
-      if (iso3) {
-        country = find(countries, { iso3 });
-      }
-      props.setPointSelection({
-        longitude: e.lngLat[0],
-        latitude: e.lngLat[1],
-        country: country || { label: '', value: '' },
+      getPlaceFromLocation(e.lngLat[0], e.lngLat[1]).then((place: any) => {
+        const iso3 = wc([e.lngLat[0], e.lngLat[1]]);
+        let country = null;
+        if (iso3) {
+          country = find(countries, { iso3 });
+        }
+        props.setPointSelection({
+          longitude: e.lngLat[0],
+          latitude: e.lngLat[1],
+          country: country || { label: '', value: '' },
+          place,
+        });
       });
     }
     setViewport((prev) => ({
@@ -198,14 +215,17 @@ export function GeoMap(props: Props) {
           lngLat: event.lngLat,
           properties: feature.properties,
         };
+        const countryPins = filter(props.data.mapMarkers, {
+          country: feature.properties.name,
+        });
         setHoveredLayer({
-          name: feature.properties.name,
-          value: sumBy(
-            filter(props.data.mapMarkers, { name: feature.properties.name }),
-            'value'
-          ),
           latitude: event.lngLat[1],
           longitude: event.lngLat[0],
+          name: feature.properties.name,
+          value: sumBy(countryPins, 'value'),
+          target: sumBy(countryPins, 'target'),
+          reached: sumBy(countryPins, 'reached'),
+          contribution: sumBy(countryPins, 'contribution'),
         });
       } else {
         setHoveredLayer(null);
@@ -286,16 +306,22 @@ export function GeoMap(props: Props) {
                   />
                 )}
               >
-                {(props.data.mapMarkers || []).map((m: []) => (
+                {filter(
+                  props.data.mapMarkers || [],
+                  (m: any) => m.longitude
+                ).map((m: any) => (
                   <MapPin
                     key={getRandomKey()}
                     name={m.name}
                     value={m.value}
+                    target={m.target}
+                    reached={m.reached}
                     latitude={m.latitude}
                     maxValue={maxPinValue}
                     longitude={m.longitude}
                     onHover={setHoveredPin}
                     // onClick={onMapPinClick}
+                    contribution={m.contribution}
                   />
                 ))}
               </Cluster>

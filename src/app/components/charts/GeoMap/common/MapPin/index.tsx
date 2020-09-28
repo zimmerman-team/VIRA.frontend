@@ -12,11 +12,14 @@ const MIN_WIDTH = 12;
 type Props = {
   name: string;
   value: number;
+  target: number;
+  reached: number;
   latitude: number;
   maxValue: number;
   longitude: number;
   onClick?: Function;
   onHover?: Function;
+  contribution: number;
 };
 
 function getWidth(value: number, maxValue: number) {
@@ -45,6 +48,9 @@ export function MapPin(props: Props) {
           props.onHover({
             name: props.name,
             value: props.value,
+            target: props.target,
+            reached: props.reached,
+            contribution: props.contribution,
             latitude: parseFloat(props.latitude.toString()),
             longitude: parseFloat(props.longitude.toString()),
           })

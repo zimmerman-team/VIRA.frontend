@@ -3,12 +3,19 @@ import { theme } from 'app/theme';
 import { Popup } from 'react-map-gl';
 import { css } from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
+import {
+  ProgressBar,
+  ProgressBarContainer,
+} from 'app/components/charts/BarCharts/common/ChartTooltip';
 
 type PopupProps = {
   name: string;
   value: number;
+  target: number;
+  reached: number;
   latitude: number;
   longitude: number;
+  contribution: number;
 };
 
 const row = css`
@@ -21,6 +28,8 @@ const row = css`
 
 export const MapPopup = (props: PopupProps) => {
   const { t } = useTranslation();
+
+  const percentage = (props.reached * 100) / props.target;
 
   return (
     <Popup
@@ -61,6 +70,21 @@ export const MapPopup = (props: PopupProps) => {
           <div>{t('Budget')}</div>
           <div>€{props.value}</div>
         </div>
+        <div css={row}>
+          <div>{t('Contribution')}</div>
+          <div>€{props.contribution}</div>
+        </div>
+        <div css={row}>
+          <div>{t('People Reached')}</div>
+          <div>{props.reached}</div>
+        </div>
+        <ProgressBarContainer>
+          <ProgressBar
+            css={`
+              width: ${percentage > 100 ? 100 : percentage}%;
+            `}
+          />
+        </ProgressBarContainer>
       </div>
     </Popup>
   );
