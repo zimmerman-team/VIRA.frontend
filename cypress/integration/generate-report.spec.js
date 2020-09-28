@@ -227,7 +227,7 @@ describe('report flow', () => {
     cy.findByTestId('target-beneficiaries-preview-card').should('exist');
     cy.findByTestId('include-ben-preview-card').should('exist');
     cy.findByTestId('key-outcomes-preview-card').should('exist');
-    cy.findByTestId('outcomes-preview-card').should('exist');
+    // cy.findByTestId('outcomes-preview-card').should('exist');
     cy.findByTestId('key-implementation-challenges-preview-card').should(
       'exist'
     );
