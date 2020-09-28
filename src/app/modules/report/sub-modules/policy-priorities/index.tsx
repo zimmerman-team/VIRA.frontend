@@ -73,7 +73,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
       {/* ---------------------------------------------------------------------*/}
       {/* Pillar */}
 
-      <Grid item xs={12} md={12} lg={4}>
+      <Grid item xs={12} md={12} lg={8}>
         <Card css={styles.card} data-cy="pillar-radio-buttons">
           <CardHeader title={t('reports.form.textfield.radio_selection')} />
           <CardContent>
@@ -88,7 +88,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
         </Card>
       </Grid>
 
-      <Grid item xs={false} sm={false} md={false} lg={8} />
+      <Grid item xs={false} sm={false} md={false} lg={4} />
 
       {/* ---------------------------------------------------------------------*/}
       {/* Policy Priorities */}

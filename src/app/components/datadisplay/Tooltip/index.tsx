@@ -52,7 +52,7 @@ const AdjustedStyling = css`
   position: relative;
   justify-content: flex-end;
   margin-right: 21px;
-  top: 10px;
+  // top: 10px;
 `;
 
 /* span is here for a reason https://github.com/atomiks/tippy.js-react */

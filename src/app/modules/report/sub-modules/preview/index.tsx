@@ -97,7 +97,7 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.budget"
-          content={props.outcomesProps.budget}
+          content={`€${props.outcomesProps.budget}`}
           testattr="budget-preview-card"
         />
       </Grid>
@@ -109,7 +109,7 @@ export const PreviewLayout = (props: PreviewParams) => {
       <Grid item xs={12} lg={6}>
         <PreviewCard
           title="reports.form.textfield.contribution"
-          content={props.outcomesProps.insContribution}
+          content={`€${props.outcomesProps.insContribution}`}
           testattr="contribution-preview-card"
         />
       </Grid>
