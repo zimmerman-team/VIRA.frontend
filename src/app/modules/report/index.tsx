@@ -145,10 +145,6 @@ function CreateReportFunc(props: any) {
     'report_keyOutcomes',
     ''
   );
-  const [monRepOutcomes, setMonRepOutcomes] = usePersistedState(
-    'report_monRepOutcomes',
-    ''
-  );
   const [inputsInvested, setInputsInvested] = usePersistedState(
     'report_inputsInvested',
     ''
@@ -165,6 +161,7 @@ function CreateReportFunc(props: any) {
     'report_importantFactors',
     ''
   );
+  const [partners, setPartners] = usePersistedState('report_orgsPartners', '');
   const [orgsPartners, setOrgsPartners] = usePersistedState(
     'report_orgsPartners',
     ''
@@ -436,9 +433,6 @@ function CreateReportFunc(props: any) {
         )
       );
       setKeyOutcomes(get(reportDetailData, 'report.key_outcomes', ''));
-      setMonRepOutcomes(
-        get(reportDetailData, 'report.monitor_report_outcomes', '')
-      );
       setKetImplChallenges(
         get(reportDetailData, 'report.key_implementation_challenges', '')
       );
@@ -460,6 +454,7 @@ function CreateReportFunc(props: any) {
         get(reportDetailData, 'report.important_factors', '')
       );
       setOrgsPartners(get(reportDetailData, 'report.orgs_partners', ''));
+      setPartners(get(reportDetailData, 'report.partners', ''));
       setAddressChallenges(
         get(reportDetailData, 'report.how_address_challenges', '')
       );
@@ -656,12 +651,12 @@ function CreateReportFunc(props: any) {
     step3Enabled &&
     validateIndVerFields(
       keyOutcomes,
-      monRepOutcomes,
       inputsInvested,
       activitiesUndertaken,
       projectgoalsSocialbenefits,
       importantFactors,
-      orgsPartners
+      orgsPartners,
+      partners
     );
 
   const step5Enabled =
@@ -713,12 +708,12 @@ function CreateReportFunc(props: any) {
             budget,
             insContribution,
             key_outcomes: keyOutcomes,
-            monitor_report_outcomes: monRepOutcomes,
             inputs_invested: inputsInvested,
             activities_undertaken: activitiesUndertaken,
             projectgoals_socialbenefits: projectgoalsSocialbenefits,
             important_factors: importantFactors,
             orgs_partners: orgsPartners,
+            partners: partners,
             key_implementation_challenges: keyImplChallenges,
             other_project_outcomes: otherProjOutObs,
             how_address_challenges: addressChallenges,
@@ -771,8 +766,6 @@ function CreateReportFunc(props: any) {
             budget,
             insContribution,
             key_outcomes: keyOutcomes === '' ? ' ' : keyOutcomes,
-            monitor_report_outcomes:
-              monRepOutcomes === '' ? ' ' : monRepOutcomes,
             inputs_invested: inputsInvested === '' ? ' ' : inputsInvested,
             activities_undertaken:
               activitiesUndertaken === '' ? ' ' : activitiesUndertaken,
@@ -782,6 +775,7 @@ function CreateReportFunc(props: any) {
                 : projectgoalsSocialbenefits,
             important_factors: importantFactors === '' ? ' ' : importantFactors,
             orgs_partners: orgsPartners === '' ? ' ' : orgsPartners,
+            partners: partners === '' ? ' ' : partners,
             key_implementation_challenges:
               keyImplChallenges === '' ? ' ' : keyImplChallenges,
             other_project_outcomes:
@@ -861,8 +855,6 @@ function CreateReportFunc(props: any) {
       indicatorVerificationProps={{
         keyOutcomes,
         setKeyOutcomes,
-        monRepOutcomes,
-        setMonRepOutcomes,
         inputsInvested,
         setInputsInvested,
         activitiesUndertaken,
@@ -873,6 +865,8 @@ function CreateReportFunc(props: any) {
         setImportantFactors,
         orgsPartners,
         setOrgsPartners,
+        partners,
+        setPartners,
         media,
         setMedia: onAddMedia,
         mediaAdded,
@@ -903,12 +897,12 @@ function CreateReportFunc(props: any) {
           tarBenTotal,
           beneficiaryCounts,
           keyOutcomes,
-          monRepOutcomes,
           inputsInvested,
           activitiesUndertaken,
           projectgoalsSocialbenefits,
           importantFactors,
           orgsPartners,
+          partners,
           keyImplChallenges,
           otherProjOutObs,
           addressChallenges,

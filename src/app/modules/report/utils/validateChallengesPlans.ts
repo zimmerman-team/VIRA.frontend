@@ -21,5 +21,5 @@ export function validateChallengesPlans(
   if (str5 === '') {
     return false;
   }
-  return str6 !== '';
+  return true;
 }

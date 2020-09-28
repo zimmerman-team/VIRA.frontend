@@ -24,11 +24,11 @@ export const policyPriorities: PolicyPriorityProps[] = [
 export const pillars: ItemModel[] = [
   {
     value: 'Pillar 1: Social Good Projects',
-    label: 'Pillar 1: Social Good',
+    label: 'reports.form.textfield.radio_pillar_one',
   },
   {
     value: 'Pillar 2: Church & Organ restorations projects',
-    label: 'Pillar 2: Church Restorations',
+    label: 'reports.form.textfield.radio_pillar_two',
   },
 ];
 

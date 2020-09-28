@@ -35,7 +35,6 @@ export interface ReportModel {
   target_beneficiaries: string[];
   project: string;
   key_outcomes: string;
-  monitor_report_outcomes: string;
   media: string;
   policy_priorities: string[];
   key_implementation_challenges: string;

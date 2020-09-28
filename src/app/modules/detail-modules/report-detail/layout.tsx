@@ -45,11 +45,11 @@ export const ReportDetailLayout = (props: any) => {
       title: 'reports.detail.cards.key_outcomes',
       description: props.report.key_outcomes,
     },
-    {
-      testID: 'monitor-card',
-      title: 'reports.detail.cards.monitor',
-      description: props.report.monitor_report_outcomes,
-    },
+    // {
+    //   testID: 'monitor-card',
+    //   title: 'reports.detail.cards.monitor',
+    //   description: props.report.monitor_report_outcomes,
+    // },
     {
       testID: 'media-card',
       title: 'reports.detail.cards.media',
@@ -79,6 +79,11 @@ export const ReportDetailLayout = (props: any) => {
       testID: 'orgs-partners-card',
       title: 'reports.form.cards.orgs_partners',
       description: props.report.orgs_partners,
+    },
+    {
+      testID: 'partners-card',
+      title: 'reports.form.cards.partners',
+      description: props.report.partners,
     },
     {
       testID: 'challenges-card',

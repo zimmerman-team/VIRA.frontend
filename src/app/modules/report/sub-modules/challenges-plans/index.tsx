@@ -56,7 +56,6 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             t(ChallengeAreaMock[0].explanation)
           }
           description={t(ChallengeAreaMock[0].description)}
-          tooltip={t(ChallengeAreaMock[0].description)}
           value={props.keyImplChallenges}
           setValue={props.setKetImplChallenges}
         />
@@ -71,7 +70,6 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             t(ChallengeAreaMock[1].explanation)
           }
           description={t(ChallengeAreaMock[1].description)}
-          tooltip={t(ChallengeAreaMock[1].description)}
           value={props.addressChallenges}
           setValue={props.setAddressChallenges}
         />
@@ -86,7 +84,6 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             t(ChallengeAreaMock[2].explanation)
           }
           description={t(ChallengeAreaMock[2].description)}
-          tooltip={t(ChallengeAreaMock[2].description)}
           value={props.otherProjOutObs}
           setValue={props.setOtherProjOutObs}
         />
@@ -192,7 +189,6 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             t(ChallengeAreaMock[3].explanation)
           }
           description={t(ChallengeAreaMock[3].description)}
-          tooltip={t(ChallengeAreaMock[3].description)}
           value={props.otherComms}
           setValue={props.setOtherComms}
         />

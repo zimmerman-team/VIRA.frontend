@@ -36,32 +36,36 @@
     "textfield": {
       "title": "Geef een titel op voor uw rapport",
       "preview_title": "Titel",
-      "location": "Voeg locatie toe",
+      "location": "Locatie waar het project zich afspeelde",
       "location_expl": "Op welke van de volgende geografische locaties wordt het project uitgevoerd",
       "exact_location": "Selecteer de exacte locatie",
-      "insinger_f_policy_priorities": "Themas Insinger Stichting",
-      "sdgs": "SDGs",
+      "radio_selection": "Selecteer onder welke pillar uw project valt",
+      "radio_pillar_one": "Pilaar 1: Maatschappelijk welzijn",
+      "radio_pillar_two": "Pillar 2: Cultureel erfgoed",
+      "insinger_f_policy_priorities": "Aan welke Insinger themas heeft uw project bijgedragen? Kies het meest relevante thema, of meerdere indien van toepassing.",
+      "sdgs": "Welke Duuzame Ontwikkelingsdoelenstellingen valt uw project onder? Selecteer alle relevante doelstellingen alstublieft. ",
       "other_funders": "Andere financiers",
-      "budget": "Budget",
+      "budget": "Wat was het totale budget voor dit project?",
       "remaining": "Resterende voor dit project",
-      "contribution": "Insinger Bijdrage",
+      "contribution": "Wat was de bijdrage van Insinger aan dit project?",
       "target_beneficiaries": "Geef aan hoeveel mensen u met uw project wilde bereiken",
-      "total_commited": "Geef aan hoeveel mensen in totaal van uw project hebben geprofiteerd",
+      "total_commited": "Geef aan hoeveel mensen uw project uiteindelijk heeft bereikt",
       "of_which_ben": "Welke doelgroep (en) heeft uw project geholpen? Kies meerdere indien van toepassing.",
       "sdg_mapping_expl": "Voor elke geselecteerde prioriteit verschijnen de relevante SDG's die kunnen worden geselecteerd op basis van onze mapping",
       "percentage_expl": "De som van geselecteerde velden moet gelijk zijn aan 100%",
       "target_group_sdg_expl": "OPMERKING: selecteer “Minder ongelijkheden“ in de vervolgkeuzelijst SDG's hierboven. Als uw project gericht was op vrouwen en meisjes, selecteer dan ook “Gendergelijkheid“ als SDG"
     },
     "cards": {
-      "key_outcomes": "Beschrijf de belangrijkste resultaten die het project beoogde te bereiken",
+      "key_outcomes": "Beschrijf de voornaamste resultaten die het project beoogde te bereiken",
       "monitor": "Vertel ons alstublieft hoe u de hierboven genoemde resultaten heeft gecontroleerd",
       "monitor_expl": "Bijvoorbeeld: a) Toename van prostituees die bankrekeningen en creditcards gebruiken en een permanent verblijf kunnen onderhouden. b) De frequentie van bezoeken aan gezondheids- en sociale ondersteuning is toegenomen, preventieve medische hulp is verbeterd en begunstigden melden een verbeterde gezondheid. c) Aantal gedetineerden dat een diploma van tertiair en beroepsonderwijs behaalt, aansluiting op de arbeidsmarkt één jaar na vrijlating uit de gevangenis.\nAls u basisgegevens heeft (de gegevens waarmee u de voortgang bijhoudt) en een verificatiemiddel (hoe u de gegevens wilt verkrijgen en uit welke bronnen), geef dan ook die informatie op.",
-      "inputs_invested": "Welke input is in het project geïnvesteerd?",
+      "inputs_invested": "Welke inputs zijn in het project geinvesteerd? Denk aan: hoeveel vrijwilligers / personeel hebben meegeholpen, materialen gebruikt, diensten ingehuurd (vervoer bijvoorbeeld) etc.",
       "inputs_invested_expl": "Denk aan het aantal vrijwilligers / ingehuurde mensen, apparatuur, diensten etc.",
       "activities_undertaken": "Welke activiteiten heeft u ondernomen om het project te voltooien?",
-      "projectgoals_socialbenefits": "Welke projectdoel (en) en bredere sociale voordelen (indien van toepassing) heeft u bereikt?",
+      "projectgoals_socialbenefits": "Welke project doelstellingen van het project zijn behaald en hoe heeft het project bijgedragen aan het sociale goede in bredere zin (indien van toepassing)",
       "important_factors": "Wat waren de belangrijkste factoren die u in staat hebben gesteld om uw projectdoel (en) te bereiken? (Geef een lijst in volgorde van belangrijkheid.)",
-      "orgs_partners": "Van welke organisaties heeft u naast Insinger financiering ontvangen? Met welke partners werkte u eventueel samen?",
+      "orgs_partners": "Van welke organisaties heeft u naast Insinger financiering ontvangen? (indien van toepassing)",
+      "partners": "Wie waren uw partners? (indien van toepassing)",
       "media": "Voeg bestand(en) toe (optioneel)",
       "key_implementation_challenges": "Wat waren de belangrijkste uitdagingen die u tijdens het project ondervond?",
       "key_implementation_challenges_expl": "Geef de belangrijkste ervaringen met implementatie-uitdagingen aan en hoe deze zijn aangepakt",
@@ -72,7 +76,7 @@
       "future_plans_expl": "Verwacht u binnen de komende 1-2 jaar waarschijnlijk financiering voor toekomstige activiteiten van de Insinger Stichting?",
       "how_important_insinger_support": "Hoe belangrijk zou u zeggen dat de steun van de Insinger Foundation in het algemeen voor uw project is geweest?",
       "apply_for_more_funding": "Is het waarschijnlijk dat u binnen de komende 1-2 jaar financiering voor toekomstige activiteiten van de Insinger Foundation wilt aanvragen?",
-      "other_comments": "Overig commentaar",
+      "other_comments": "Andere opmerkingen. Laat het ons graag weten als u andere observaties of opmerkingen wilt delen.",
       "other_comments_expl": "Laat het ons weten als u andere opmerkingen of opmerkingen wilt delen met de Insinger Foundation"
     },
     "media_modal": {
@@ -86,6 +90,9 @@
       "cancel": "Annuleren",
       "save": "Sla op",
       "delete": "Verwijderen"
+    },
+    "tooltip": {
+      "policy_priority": "Voorbeeld: als uw project twee thema's in gelijke mate behandeld, schrijft u deze beide 50% toe. Als u bijvoorbeeld drie thema's dekt, geeft u misschien 50% aan het meest relevante thema, en de andere thema's ieder 20% en 30%."
     }
   }
 }
