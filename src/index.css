@@ -78,6 +78,10 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+.mapboxgl-popup-content {
+  background: #242e42 !important;
+}
+
 /* *[] */
 /* a[href*='example'] {
   font-size: 2em;
