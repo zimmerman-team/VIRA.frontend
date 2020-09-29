@@ -543,7 +543,9 @@ function CreateReportFunc(props: any) {
         );
       }
     }
-    setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+    if (!rid) {
+      setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+    }
   }, [projectBudgetData]);
 
   const onStepChange = (tabIndex: number) => {
