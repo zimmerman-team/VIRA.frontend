@@ -156,6 +156,7 @@ export const Autocomplete = (props: AutocompleteParams) => {
       {props.multiple &&
         (props.value as string[]).map((option: string, index: number) => (
           <Tag
+            data-cy={`dropdown-funder-${option}`}
             label={option}
             {...getTagProps({ index })}
             onDelete={() =>

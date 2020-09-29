@@ -9,6 +9,7 @@ describe('report flow', () => {
       cy.wait(2000);
 
       cy.selectRandomProject().then(() => {
+        cy.wait(2000);
         cy.findByTestId('generate-report-button').should('exist').click();
       });
     });
@@ -85,9 +86,12 @@ describe('report flow', () => {
       .type(10);
 
     // open funders list and click top option
-    cy.findByTestId('dropdown-funders').should('exist').click().type('Utopa');
-    // cy.findByTestId('other-funders').should('exist').click().type('Utopa');
-    cy.get('#autocomplete-countries-option-0').click();
+    cy.get('[data-cy=dropdown-funders]').then(($el) => {
+      if ($el.find('[data-cy=dropdown-funder-Utopa]').length === 0) {
+        cy.wrap($el).click().type('Utopa');
+        cy.get('#autocomplete-countries-option-0').click();
+      }
+    });
 
     /*cy.findByTestId('which-when-item-0')
       .should('exist')
@@ -199,13 +203,11 @@ describe('report flow', () => {
       .type('Lorem ipsum dolor simet text area 3');
 
     // open funders list and click top option
-    cy.findByTestId('dropdown-1').should('exist').click().type('A little');
-    // cy.findByTestId('other-funders').should('exist').click().type('Utopa');
+    cy.findByTestId('dropdown-1').should('exist').click();
     cy.get('#autocomplete-countries-option-0').click();
 
     // open funders list and click top option
-    cy.findByTestId('dropdown-2').should('exist').click().type('Yes');
-    // cy.findByTestId('other-funders').should('exist').click().type('Utopa');
+    cy.findByTestId('dropdown-2').should('exist').click();
     cy.get('#autocomplete-countries-option-0').click();
 
     cy.findByTestId('text-area-6-container').should('exist').click();
