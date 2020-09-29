@@ -32,6 +32,10 @@ export const ProjectDetailLayout = (props: any) => {
   );
   const remainingBudget = get(props.remainingBudget, 'data.remainBudget', '');
 
+  function handleReportBtnClick() {
+    props.projectDetail.generateReport(props.reportID);
+  }
+
   return (
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
@@ -45,17 +49,23 @@ export const ProjectDetailLayout = (props: any) => {
       </Grid>
 
       {/* ---------------------------------------------------------------------*/}
-      {/* button: generate report */}
+      {/* button: generate/edit report */}
       {showGenerateBtn && (
         <Hidden xsDown>
           <Grid item xs={12} lg={6} container justify="flex-end">
             <ContainedButton
-              text={t('projects.detail.generateReportBtn')}
-              onClick={props.projectDetail.generateReport}
-              disabled={remainingBudget <= 0}
+              text={t(
+                `${
+                  props.reportID
+                    ? 'reports.detail.editReportBtn'
+                    : 'projects.detail.generateReportBtn'
+                }`
+              )}
+              onClick={handleReportBtnClick}
+              // disabled={props.reportID}
               testattr="generate-report-button"
             />
-            {remainingBudget <= 0 && (
+            {props.reportID && (
               <TooltipButton tip={t('projects.detail.tooltip')} />
             )}
           </Grid>

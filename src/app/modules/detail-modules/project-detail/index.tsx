@@ -47,6 +47,7 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
   const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
+  const [reportID, setReportID] = React.useState(null);
 
   const projectDetailAction = useStoreActions(
     (actions) => actions.projectDetail.fetch
@@ -125,6 +126,9 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
       },
     }).then((res: any) => {
       if (res) {
+        if (get(res, 'data', []).length > 0) {
+          setReportID(res.data[0]._id);
+        }
         setBaseTableForReport({
           ...getBaseTableForReport(get(res, 'data', [])),
           data: formatTableDataForReport(get(res, 'data', [])),
@@ -171,8 +175,8 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
             'person.email',
             ''
           ),
-          generateReport: () => {
-            generateReport();
+          generateReport: (rid: string) => {
+            generateReport(rid);
           },
         });
       }
@@ -255,18 +259,21 @@ const ProjectDetailModuleF = (props: PropsModel | null) => {
     }
   }, [projectID, selectedBreakdown]);
 
-  function generateReport() {
+  function generateReport(rid: string) {
     // todo: refactor routing
     // @ts-ignore
-    props.history.push(`/report/${project_number}/project-info`);
+    props.history.push(
+      `/report/${project_number}/project-info${rid ? `?rid=${rid}` : ''}`
+    );
   }
 
   function onBarChartLegendClick(legend: string) {
     barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
-  console.log('detail', projectBudgetData);
+
   return (
     <ProjectDetailLayout
+      reportID={reportID}
       projectDetail={projectDetails}
       reportTable={baseTableForReport}
       ppVizData={ppVizData}

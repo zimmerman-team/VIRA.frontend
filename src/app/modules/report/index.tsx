@@ -337,12 +337,6 @@ function CreateReportFunc(props: any) {
   }
 
   React.useEffect(() => {
-    if (query.get('rid')) {
-      reportDetailAction({
-        socketName: 'getReport',
-        values: { id: query.get('rid') },
-      });
-    }
     if (allProjectsData.length === 0) {
       allProjectsAction({
         socketName: 'allProject',
@@ -361,6 +355,15 @@ function CreateReportFunc(props: any) {
   }, []);
 
   React.useEffect(() => {
+    if (query.get('rid')) {
+      reportDetailAction({
+        socketName: 'getReport',
+        values: { id: query.get('rid') },
+      });
+    }
+  }, [query.get('rid')]);
+
+  React.useEffect(() => {
     if (get(reportDetailData, 'report', null)) {
       setTitle(get(reportDetailData, 'report.title', ''));
       setCountry({
@@ -372,6 +375,7 @@ function CreateReportFunc(props: any) {
           ? {
               longitude: get(reportDetailData, 'report.location.long', 0),
               latitude: get(reportDetailData, 'report.location.lat', 0),
+              place: get(reportDetailData, 'report.place_name', null),
             }
           : null
       );
@@ -531,6 +535,14 @@ function CreateReportFunc(props: any) {
       props.history.replace('/');
     }
     const rid = query.get('rid');
+    const projectReportID = get(projectBudgetData, 'data.reportId', null);
+    if (projectReportID) {
+      if (rid !== projectReportID) {
+        props.history.replace(
+          `/report/${props.match.params.projectID}/project-info?rid=${projectReportID}`
+        );
+      }
+    }
     if (!rid) {
       setBudget(get(projectBudgetData, 'data.remainBudget', 0));
     }

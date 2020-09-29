@@ -9,7 +9,7 @@ type Props = {
   tip?: string | React.ReactNode;
 };
 
-const ZimmerButton = styled(props => <Button {...props} />)`
+const ZimmerButton = styled((props) => <Button {...props} />)`
   && {
     //project detail specific, please move to the layout file when another component will use this component
     position: relative;
@@ -46,7 +46,7 @@ export const TooltipButton = (props: Props) => {
         {...props}
         size={props.size}
         variant="contained"
-        color="secondary"
+        color="primary"
       >
         i
       </ZimmerButton>
