@@ -26,6 +26,7 @@ import { ReachedTooltip, ReachedTooltipMobile } from './tooltips/Reached';
 import { DurationTooltip, DurationTooltipMobile } from './tooltips/Duration';
 import get from 'lodash/get';
 import { useMediaQuery } from '@material-ui/core';
+import { BarChartBottomAxis } from 'app/components/charts/common/axis/BarChartBottomAxis';
 
 interface PriorityAreaContainerProps {
   data: any;
@@ -126,30 +127,43 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
         {!checkIfNoData(props.data, props.selectedBreakdown) ? (
           <NoData loading={loading} />
         ) : (
-          <ResponsiveBar
-            {...PriorityAreaConfigBase}
-            data={
-              formatPriorityAreaData(
-                props.selectedBreakdown,
-                props.data
-              ) as object[]
-            }
-            keys={getKeys(props.selectedBreakdown)}
-            onClick={() => {
-              getTooltip(props.selectedBreakdown, isMobileWidth);
-            }}
-            tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
-            theme={{
-              ...PriorityAreaConfigBase.theme,
-              tooltip: {
-                ...PriorityAreaConfigBase.theme?.tooltip,
-                container: {
-                  ...PriorityAreaConfigBase.theme?.tooltip?.container,
-                  padding: isMobileWidth ? '0' : '5px 9px',
+          <React.Fragment>
+            <ResponsiveBar
+              {...PriorityAreaConfigBase}
+              data={
+                formatPriorityAreaData(
+                  props.selectedBreakdown,
+                  props.data
+                ) as object[]
+              }
+              keys={getKeys(props.selectedBreakdown)}
+              onClick={() => {
+                getTooltip(props.selectedBreakdown, isMobileWidth);
+              }}
+              tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
+              theme={{
+                ...PriorityAreaConfigBase.theme,
+                tooltip: {
+                  ...PriorityAreaConfigBase.theme?.tooltip,
+                  container: {
+                    ...PriorityAreaConfigBase.theme?.tooltip?.container,
+                    padding: isMobileWidth ? '0' : '5px 9px',
+                  },
                 },
-              },
-            }}
-          />
+              }}
+            />
+            {props.selectedBreakdown === breakdownOptions[2] && (
+              <div
+                css={`
+                  position: relative;
+                  left: 238px;
+                  top: -14px;
+                `}
+              >
+                €
+              </div>
+            )}
+          </React.Fragment>
         )}
       </ChartWrapper>
       <div

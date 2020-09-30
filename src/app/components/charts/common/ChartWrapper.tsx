@@ -20,7 +20,7 @@ export const ChartWrapper = (props: BarChartWrapperProps) => {
           height: ${`${props.height}px`};
           margin-bottom: 20px;
           display: flex;
-
+          flex-direction: column;
           &:first-child {
             margin-top: 20px;
           }
