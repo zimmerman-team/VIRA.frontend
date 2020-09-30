@@ -36,7 +36,7 @@ interface PriorityAreaContainerProps {
   fullWidthLegends?: boolean;
 }
 
-const breakdownOptions = [
+export const breakdownOptions = [
   'None',
   'Target Group',
   'One Year & Multi Year',
@@ -123,7 +123,10 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
         selectedBreakdown={props.selectedBreakdown}
         setSelectedBreakdown={props.setSelectedBreakdown}
       />
-      <ChartWrapper height={56 * get(props, 'data.length', 2)}>
+      <ChartWrapper
+        height={56 * get(props, 'data.length', 2)}
+        selectedBreakdown={props.selectedBreakdown}
+      >
         {!checkIfNoData(props.data, props.selectedBreakdown) ? (
           <NoData loading={loading} />
         ) : (

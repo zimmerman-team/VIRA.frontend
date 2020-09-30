@@ -2,11 +2,13 @@ import { ProjectPalette } from 'app/theme';
 import React, { ReactNode } from 'react';
 import 'styled-components/macro';
 import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll';
+import { breakdownOptions } from 'app/components/charts/PriorityArea';
 
 interface BarChartWrapperProps {
   children?: ReactNode;
   height?: number;
   noSvgCss?: boolean;
+  selectedBreakdown?: string;
 }
 
 export const ChartWrapper = (props: BarChartWrapperProps) => {
@@ -20,7 +22,9 @@ export const ChartWrapper = (props: BarChartWrapperProps) => {
           height: ${`${props.height}px`};
           margin-bottom: 20px;
           display: flex;
-          flex-direction: column;
+          flex-direction: ${props.selectedBreakdown === breakdownOptions[2]
+            ? 'column'
+            : 'row'};
           &:first-child {
             margin-top: 20px;
           }
