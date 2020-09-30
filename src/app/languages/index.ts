@@ -330,9 +330,9 @@ i18n.use(initReactI18next).init({
         'Peace, Justice and strong institutions':
           'Vrede, gerechtigheid en sterke instellingen',
         'Partnerships for the goals': 'Partnerschappen voor de doelen',
-        'Multi year': 'Meerdere jaren',
-        'One year': 'Een jaar',
-        'Project count': 'Project tellen',
+        'Multi year': 'Meerjarig',
+        'One year': 'Eenjarig',
+        'Project count': 'Aantal projecten',
         Contribution: 'Insinger Bijdrage',
       },
     },
