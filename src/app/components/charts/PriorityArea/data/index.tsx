@@ -61,10 +61,22 @@ export function getKeys(selectedBreakdown: string) {
     case 'SDGs':
       return [
         'No poverty',
-        'Clean water and sanitation',
+        'Zero hunger',
         'Good health and well-being',
-        'Gender equality',
         'Quality education',
+        'Gender equality',
+        'Clean water and sanitation',
+        'Affordable and clean energy',
+        'Decent work and economic growth',
+        'Industry, Innovation and Infrastructure',
+        'Reduced inequialities',
+        'Sustainable cities and communities',
+        'Responsible consumption and production',
+        'Climate action',
+        'Life below water',
+        'Life on land',
+        'Peace, Justice and strong institutions',
+        'Partnerships for the goals',
       ];
     default:
       return ['Budget'];
@@ -290,39 +302,121 @@ export interface ChartDataPropsSDGs {
 export function formatPriorityAreaSDGsData(
   data: PriorityAreaSDGsProps[]
 ): ChartDataPropsSDGs[] {
-  const chartData: ChartDataPropsSDGs[] = [];
+  const chartData: any[] = [];
   if (data != null) {
+    console.log('dataz', data);
     data.forEach((priorityArea: PriorityAreaSDGsProps) => {
       chartData.push({
         name: priorityArea.name,
-        'No poverty': get(priorityArea, 'children[0].reached', 0),
-        'No povertyColor': get(priorityArea, 'children[0].color', ''),
-        'Clean water and sanitation': get(
-          priorityArea,
-          'children[1].reached',
-          0
-        ),
-        'Clean water and sanitationColor': get(
-          priorityArea,
-          'children[1].color',
-          ''
-        ),
         'Good health and well-being': get(
           priorityArea,
-          'children[2].reached',
+          'children[0].reached',
           0
         ),
         'Good health and well-beingColor': get(
           priorityArea,
-          'children[2].color',
+          'children[0].color',
           ''
         ),
+        'No poverty': get(priorityArea, 'children[1].reached', 0),
+        'No povertyColor': get(priorityArea, 'children[1].color', ''),
+        'Zero hunger': get(priorityArea, 'children[2].reached', 0),
+        'Zero hungerColor': get(priorityArea, 'children[2].color', ''),
         'Gender equality': get(priorityArea, 'children[3].reached', 0),
         'Gender equalityColor': get(priorityArea, 'children[3].color', ''),
-        'Quality education': get(priorityArea, 'children[4].color', 0),
-        'Quality educationColor': get(priorityArea, 'children[4].color', ''),
+        'Affordable and clean energy': get(
+          priorityArea,
+          'children[4].reached',
+          0
+        ),
+        'Affordable and clean energyColor': get(
+          priorityArea,
+          'children[4].color',
+          ''
+        ),
+        'Industry, innovation and infrastructure': get(
+          priorityArea,
+          'children[5].reached',
+          0
+        ),
+        'Industry, innovation and infrastructureColor': get(
+          priorityArea,
+          'children[5].color',
+          ''
+        ),
+        'Decent work and economic growth': get(
+          priorityArea,
+          'children[6].reached',
+          0
+        ),
+        'Decent work and economic growthColor': get(
+          priorityArea,
+          'children[6].color',
+          ''
+        ),
+        'Quality education': get(priorityArea, 'children[7].reached', 0),
+        'Quality educationColor': get(priorityArea, 'children[7].color', ''),
+        'Clean water and sanitation': get(
+          priorityArea,
+          'children[8].reached',
+          0
+        ),
+        'Clean water and sanitationColor': get(
+          priorityArea,
+          'children[8].color',
+          ''
+        ),
+        'Reduce inequalities': get(priorityArea, 'children[9].reached', 0),
+        'Reduce inequalitiesColor': get(priorityArea, 'children[9].color', ''),
+        'Responsible consumption and production': get(
+          priorityArea,
+          'children[10].reached',
+          0
+        ),
+        'Responsible consumption and productionColor': get(
+          priorityArea,
+          'children[10].color',
+          ''
+        ),
+        'Climate action': get(priorityArea, 'children[11].reached', 0),
+        'Climate actionColor': get(priorityArea, 'children[11].color', ''),
+        'Life on land': get(priorityArea, 'children[12].reached', 0),
+        'Life on landColor': get(priorityArea, 'children[12].color', ''),
+        'Peace, justice and strong institutions': get(
+          priorityArea,
+          'children[13].reached',
+          0
+        ),
+        'Peace, justice and strong institutionsColor': get(
+          priorityArea,
+          'children[13].color',
+          ''
+        ),
+        'Sustainable cities and communities': get(
+          priorityArea,
+          'children[14].reached',
+          0
+        ),
+        'Sustainable cities and communitiesColor': get(
+          priorityArea,
+          'children[14].color',
+          ''
+        ),
+        'Partnerships for the goals': get(
+          priorityArea,
+          'children[15].reached',
+          0
+        ),
+        'Partnerships for the goalsColor': get(
+          priorityArea,
+          'children[15].color',
+          ''
+        ),
+        'Life below water': get(priorityArea, 'children[16].reached', 0),
+        'Life below waterColor': get(priorityArea, 'children[16].color', ''),
       });
     });
   }
+
   return chartData;
 }
