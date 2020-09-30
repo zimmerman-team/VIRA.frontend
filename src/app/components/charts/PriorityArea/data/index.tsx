@@ -137,6 +137,7 @@ export function formatPriorityAreaTargetGroupData(
   const chartData: ChartDataPropsTargetGroup[] = [];
 
   data.forEach((priorityArea: priorityAreaDataProps) => {
+    // TODO: rewrite this logic, children[] is not consistent, check lodash/find
     chartData.push({
       name: priorityArea.name,
       'The Elderly (65+)': get(priorityArea, 'children[0].value', 0),
@@ -161,7 +162,6 @@ export function formatPriorityAreaTargetGroupData(
       ),
     });
   });
-
   return chartData;
 }
 
