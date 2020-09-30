@@ -32,11 +32,11 @@ export const PillarCountDivider = () => (
 
 export const PillarInfoData: PillarItemProps[] = [
   {
-    name: 'Social good',
+    name: 'Pillar 1: Social good',
     count: '0',
   },
   {
-    name: 'Churches & Organs',
+    name: 'Pillar 2: Cultural heritage',
     count: '0',
   },
   {
@@ -48,48 +48,43 @@ export const PillarInfoData: PillarItemProps[] = [
     count: '0',
   },
   {
-    name: 'People reachout of People targeted',
+    name: 'Total people reached out of total targeted',
     count: '0/0',
   },
 ];
 
 function getItems(data: any[]) {
   const items = [...PillarInfoData];
+
   items[0].count = get(
-    find(data, (item: any) => item.name === 'Pillar 1: Social Good Projects'),
+    find(data, (item: any) => item.name === 'Pillar 1: Social good'),
     'count',
     0
   );
   items[2].count = get(
-    find(data, (item: any) => item.name === 'Pillar 1: Social Good Projects'),
+    find(data, (item: any) => item.name === 'Pillar 1: Social good'),
     'spent',
     0
   );
   items[1].count = get(
-    find(
-      data,
-      (item: any) =>
-        item.name === 'Pillar 2: Church & Organ restorations projects'
-    ),
+    find(data, (item: any) => item.name === 'Pillar 2: Cultural heritage'),
     'count',
     0
   );
   items[3].count = get(
-    find(
-      data,
-      (item: any) =>
-        item.name === 'Pillar 2: Church & Organ restorations projects'
-    ),
+    find(data, (item: any) => item.name === 'Pillar 2: Cultural heritage'),
     'spent',
     0
   );
   items[4].count = `${sumBy(data, 'reached')}/${sumBy(data, 'targeted')}`;
+
+  items[0].name = 'reports.form.textfield.radio_pillar_one';
+  items[1].name = 'reports.form.textfield.radio_pillar_two';
   return items;
 }
 
 export const PillarCountItem = (props: PillarItemProps) => {
   const { t } = useTranslation();
-
   return (
     <div
       css={`

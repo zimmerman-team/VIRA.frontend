@@ -265,17 +265,18 @@ i18n.use(initReactI18next).init({
         Country: 'Land',
         Submit: 'Verstuur',
         'People reached out of targeted': 'Mensen bereikten een doelwit',
-        'Social good': 'Sociaal goed',
-        'Churches & Organs': 'Kerken en organen',
-        'Budget Spent Pillar 1': 'Pijler besteed aan budget 1',
-        'Budget Spent Pillar 2': 'Pijler besteed aan budget 2',
-        'People reachout of People targeted': 'Mensen bereiken de doelgroep',
-        'Church & Organ restorations projects':
-          'Restauratieprojecten van kerk en orgel',
-        'Social Good Projects': 'Sociale goede projecten',
-        'Pillar 2: Church & Organ restorations projects':
-          'Pijler 2: Restauratieprojecten van kerk en orgel',
-        'Pillar 1: Social Good Projects': 'Pijler 1: Sociale goede projecten',
+        'Pillar 1: Social good': 'Pilaar 1: Maatschappelijk welzijn',
+        'Pillar 2: Cultural heritage': 'Pilaar 2: Cultureel erfgoed',
+        'Budget Spent Pillar 1':
+          'Budget besteed aan Pilaar 1 - Maatschappelijk welzijn',
+        'Budget Spent Pillar 2':
+          'Budget besteed aan Pilaar 2 - Cultureel erfgoed',
+        'Total people reached out of total targeted':
+          'Totaal aantal mensen bereikt uit beoogde aantal',
+        'Cultural heritage': 'Cultureel erfgoed',
+        'Pillar 1: Social good': 'Pilaar 1: Maatschappelijk welzijn',
+        'Pillar 2: Cultural heritage': 'Pilaar 2: Cultureel erfgoed',
+        'Pillar 1: Social good': 'Pilaar 1: Maatschappelijk Welzijn',
         'Breakdown by': 'Uitsplitsing door',
         'Not at all': 'Helemaal niet',
         'A little': 'Een beetje',
@@ -580,7 +581,7 @@ i18n.use(initReactI18next).init({
     //     'Churches & Organs': 'Kerken en organen',
     //     'Budget Spent Pillar 1': 'Pijler besteed aan budget 1',
     //     'Budget Spent Pillar 2': 'Pijler besteed aan budget 2',
-    //     'People reachout of People targeted': 'Mensen bereiken de doelgroep',
+    //     'Total people reached out of total targeted': 'Mensen bereiken de doelgroep',
     //     'Church & Organ restorations projects':
     //       'Restauratieprojecten van kerk en orgel',
     //     'Social Good Projects': 'Sociale goede projecten',
@@ -865,18 +866,16 @@ i18n.use(initReactI18next).init({
         Country: 'Country',
         Submit: 'Submit',
         'People reached out of targeted': 'Total people reached',
-        'Social good': 'Social good',
-        'Churches & Organs': 'Churches & Organs',
+        'Pillar 1: Social good': 'Pilaar 1: Maatschappelijk welzijn',
+        'Pillar 2: Cultural heritage': 'Pilaar 2: Cultural heritage',
         'Budget Spent Pillar 1': 'Budget Spent Pillar 1',
         'Budget Spent Pillar 2': 'Budget Spent Pillar 2',
-        'People reachout of People targeted':
-          'People reachout of People targeted',
-        'Church & Organ restorations projects':
-          'Church & Organ restorations projects',
-        'Social Good Projects': 'Social Good Projects',
-        'Pillar 2: Church & Organ restorations projects':
-          'Pillar 2: Church & Organ restorations projects',
-        'Pillar 1: Social Good Projects': 'Pillar 1: Social Good Projects',
+        'Total people reached out of total targeted':
+          'Total people reached out of total targeted',
+        'Pillar 2: Cultural heritage': 'Pilaar 2: Cultureel erfgoed',
+        'Pillar 1: Social good': 'Pilaar 1: Maatschappelijk Welzijn',
+        'Pillar 2: Cultural heritage': 'Pilaar 2: Cultureel erfgoed',
+        'Pillar 1: Social good': 'Pilaar 1: Maatschappelijk Welzijn',
         'Breakdown by': 'Breakdown by',
         'Not at all': 'Not at all',
         'A little': 'A little',
