@@ -4,6 +4,8 @@ import {
   CommonBarPropsHorizontal,
 } from 'app/components/charts/common/CommonProps';
 import get from 'lodash/get';
+import find from 'lodash/find';
+import { sdgNames } from 'app/components/charts/TargetGroup/data';
 
 /* ------------------------------------------------------------ */
 /* Common */
@@ -287,42 +289,149 @@ export interface ChartDataPropsSDGs {
   'Quality educationColor': string;
 }
 
+// Finds a child in the data(array) by it's name, by default returns the reached property.
+// Returns either a number or string based on the getElement prop.
+export function findChild(
+  data: any,
+  name: string,
+  getElement: string = 'reached'
+): string | number {
+  return get(
+    find(data.children, (child: any) => child.name === name),
+    getElement,
+    getElement === 'reached' ? 0 : ''
+  );
+}
+
 export function formatPriorityAreaSDGsData(
   data: PriorityAreaSDGsProps[]
-): ChartDataPropsSDGs[] {
-  const chartData: ChartDataPropsSDGs[] = [];
+): any[] {
+  const chartData: any[] = [];
+
   if (data != null) {
     data.forEach((priorityArea: PriorityAreaSDGsProps) => {
       chartData.push({
         name: priorityArea.name,
-        'No poverty': get(priorityArea, 'children[0].reached', 0),
-        'No povertyColor': get(priorityArea, 'children[0].color', ''),
-        'Clean water and sanitation': get(
+        'Good health and well-being': findChild(
           priorityArea,
-          'children[1].reached',
-          0
+          'Good health and well-being'
         ),
-        'Clean water and sanitationColor': get(
+        'Good health and well-beingColor': findChild(
           priorityArea,
-          'children[1].color',
-          ''
+          'Good health and well-being',
+          'color'
         ),
-        'Good health and well-being': get(
+        'No poverty': findChild(priorityArea, 'No poverty'),
+        'No povertyColor': findChild(priorityArea, 'No poverty', 'color'),
+        'Zero hunger': findChild(priorityArea, 'Zero hunger'),
+        'Zero hungerColor': findChild(priorityArea, 'Zero hunger', 'color'),
+        'Gender equality': findChild(priorityArea, 'Gender equality'),
+        'Gender equalityColor': findChild(
           priorityArea,
-          'children[2].reached',
-          0
+          'Gender equality',
+          'color'
         ),
-        'Good health and well-beingColor': get(
+        'Affordable and clean energy': findChild(
           priorityArea,
-          'children[2].color',
-          ''
+          'Affordable and clean energy'
         ),
-        'Gender equality': get(priorityArea, 'children[3].reached', 0),
-        'Gender equalityColor': get(priorityArea, 'children[3].color', ''),
-        'Quality education': get(priorityArea, 'children[4].color', 0),
-        'Quality educationColor': get(priorityArea, 'children[4].color', ''),
+        'Affordable and clean energyColor': findChild(
+          priorityArea,
+          'Affordable and clean energy',
+          'color'
+        ),
+        'Industry, innovation and infrastructure': findChild(
+          priorityArea,
+          'Industry, innovation and infrastructure'
+        ),
+        'Industry, innovation and infrastructureColor': findChild(
+          priorityArea,
+          'Industry, innovation and infrastructure',
+          'color'
+        ),
+        'Decent work and economic growth': findChild(
+          priorityArea,
+          'Decent work and economic growth'
+        ),
+        'Decent work and economic growthColor': findChild(
+          priorityArea,
+          'Decent work and economic growth',
+          'color'
+        ),
+        'Quality education': findChild(priorityArea, 'Quality education'),
+        'Quality educationColor': findChild(
+          priorityArea,
+          'Quality education',
+          'color'
+        ),
+        'Clean water and sanitation': findChild(
+          priorityArea,
+          'Clean water and sanitation'
+        ),
+        'Clean water and sanitationColor': findChild(
+          priorityArea,
+          'Clean water and sanitation',
+          'color'
+        ),
+        'Reduce inequalities': findChild(priorityArea, 'Reduce inequalities'),
+        'Reduce inequalitiesColor': findChild(
+          priorityArea,
+          'Reduce inequalities',
+          'color'
+        ),
+        'Responsible consumption and production': findChild(
+          priorityArea,
+          'Industry, innovation and infrastructure'
+        ),
+        'Responsible consumption and productionColor': findChild(
+          priorityArea,
+          'Industry, innovation and infrastructure',
+          'color'
+        ),
+        'Climate action': findChild(priorityArea, 'Climate action'),
+        'Climate actionColor': findChild(
+          priorityArea,
+          'Climate action',
+          'color'
+        ),
+        'Life on land': findChild(priorityArea, 'Life on land'),
+        'Life on landColor': findChild(priorityArea, 'Life on land', 'color'),
+        'Peace, justice and strong institutions': findChild(
+          priorityArea,
+          'Peace, justice and strong institutions'
+        ),
+        'Peace, justice and strong institutionsColor': findChild(
+          priorityArea,
+          'Peace, justice and strong institutions',
+          'color'
+        ),
+        'Sustainable cities and communities': findChild(
+          priorityArea,
+          'Sustainable cities and communities'
+        ),
+        'Sustainable cities and communitiesColor': findChild(
+          priorityArea,
+          'Sustainable cities and communities',
+          'color'
+        ),
+        'Partnerships for the goals': findChild(
+          priorityArea,
+          'Partnerships for the goals'
+        ),
+        'Partnerships for the goalsColor': findChild(
+          priorityArea,
+          'Partnerships for the goals',
+          'color'
+        ),
+        'Life below water': findChild(priorityArea, 'Life below water'),
+        'Life below waterColor': findChild(
+          priorityArea,
+          'Life below water',
+          'color'
+        ),
       });
     });
   }
+
   return chartData;
 }
