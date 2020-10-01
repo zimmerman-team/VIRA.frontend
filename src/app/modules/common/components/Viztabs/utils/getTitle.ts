@@ -24,7 +24,7 @@ export function getTitleDesc(index: number): string {
     case 1:
       return 'home.chart_description.priority_area';
     case 2:
-      return 'home.chart_description.target_group';
+      return '';
     case 3:
       return 'home.chart_description.one_year_and_multi_year';
     case 4:
