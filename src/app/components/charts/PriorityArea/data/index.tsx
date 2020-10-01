@@ -4,6 +4,7 @@ import {
   CommonBarPropsHorizontal,
 } from 'app/components/charts/common/CommonProps';
 import get from 'lodash/get';
+import find from 'lodash/find';
 
 /* ------------------------------------------------------------ */
 /* Common */
@@ -131,6 +132,20 @@ interface ChartDataPropsTargetGroup {
   'People with disabilitiesColor': string;
 }
 
+// Finds a child in the data(array) by it's name, by default returns the reached property.
+// Returns either a number or string based on the getElement prop.
+export function findChild(
+  data: any,
+  name: string,
+  getElement: string = 'reached'
+): string | number {
+  return get(
+    find(data.children, (child: any) => child.name === name),
+    getElement,
+    getElement === 'reached' || getElement === 'value' ? 0 : ''
+  );
+}
+
 export function formatPriorityAreaTargetGroupData(
   data: priorityAreaDataProps[]
 ): ChartDataPropsTargetGroup[] {
@@ -140,27 +155,47 @@ export function formatPriorityAreaTargetGroupData(
     // TODO: rewrite this logic, children[] is not consistent, check lodash/find
     chartData.push({
       name: priorityArea.name,
-      'The Elderly (65+)': get(priorityArea, 'children[0].value', 0),
-      'The Elderly (65+)Color': get(priorityArea, 'children[0].color', ''),
-      'Women & Girls': get(priorityArea, 'children[1].value', 0),
-      'Women & GirlsColor': get(priorityArea, 'children[1].color', ''),
-      Refugees: get(priorityArea, 'children[2].value', 0),
-      RefugeesColor: get(priorityArea, 'children[2].color', ''),
-      'People with lower income': get(priorityArea, 'children[3].value', 0),
-      'People with lower incomeColor': get(
+      'The Elderly (65+)': findChild(
         priorityArea,
-        'children[3].color',
-        ''
+        'The Elderly (65+)',
+        'value'
       ),
-      'Homeless people': get(priorityArea, 'children[4].value', 0),
-      'Homeless peopleColor': get(priorityArea, 'children[4].color', ''),
-      'People with disabilities': get(priorityArea, 'children[5].value', 0),
-      'People with disabilitiesColor': get(
+      'The Elderly (65+)Color': findChild(
         priorityArea,
-        'children[5].color',
-        ''
+        'The Elderly (65+)',
+        'color'
       ),
-    });
+      'Women & Girls': findChild(priorityArea, 'Women & Girls', 'value'),
+      'Women & GirlsColor': findChild(priorityArea, 'Women & Girls', 'color'),
+      Refugees: findChild(priorityArea, 'Refugees', 'value'),
+      RefugeesColor: findChild(priorityArea, 'Refugees', 'color'),
+      'People with lower income': findChild(
+        priorityArea,
+        'People with lower income',
+        'value'
+      ),
+      'People with lower incomeColor': findChild(
+        priorityArea,
+        'People with lower income',
+        'color'
+      ),
+      'Homeless people': findChild(priorityArea, 'Homeless people', 'value'),
+      'Homeless peopleColor': findChild(
+        priorityArea,
+        'Homeless people',
+        'color'
+      ),
+      'People with disabilities': findChild(
+        priorityArea,
+        'People with disabilities',
+        'value'
+      ),
+      'People with disabilitiesColor': findChild(
+        priorityArea,
+        'People with disabilities',
+        'color'
+      ),
+    } as ChartDataPropsTargetGroup);
   });
   return chartData;
 }
