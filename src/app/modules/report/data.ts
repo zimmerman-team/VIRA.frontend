@@ -94,7 +94,7 @@ export const policyPrioritiesToLangKey = (key: string) => {
       return 'charts.items.sustainability';
     case 'Emancipation of women and girls':
       return 'charts.items.emancipation';
-    case 'Cultural Heritage':
+    case 'Cultural heritage':
       return 'charts.items.heritage';
     default:
       return key;

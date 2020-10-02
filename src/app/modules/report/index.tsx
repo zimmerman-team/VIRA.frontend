@@ -73,7 +73,7 @@ function CreateReportFunc(props: any) {
   // Pillar
   const [pillar, setPillar] = usePersistedState(
     'report_pillar',
-    'Pillar 1: Social Good Projects'
+    'Pillar 1: Social good'
   );
 
   // Policy Priorities
@@ -395,7 +395,7 @@ function CreateReportFunc(props: any) {
       setPillar(get(reportDetailData, 'report.pillar.name', ''));
       if (
         get(reportDetailData, 'report.pillar.name', '') ===
-        'Pillar 2: Church & Organ restorations projects'
+        'Pillar 2: Cultural heritage'
       ) {
         setPolicyPrioritiesPillar2(
           get(reportDetailData, 'report.policy_priorities', []).map(
@@ -644,7 +644,7 @@ function CreateReportFunc(props: any) {
 
   let activePolicyPriorities = policyPrioritiesPillar1;
   let activePolicyPrioritiesAction = setPolicyPrioritiesPillar1;
-  if (pillar === 'Pillar 2: Church & Organ restorations projects') {
+  if (pillar === 'Pillar 2: Cultural heritage') {
     activePolicyPriorities = policyPrioritiesPillar2;
     activePolicyPrioritiesAction = setPolicyPrioritiesPillar2;
   }

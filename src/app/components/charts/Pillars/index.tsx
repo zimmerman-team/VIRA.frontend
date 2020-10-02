@@ -4,6 +4,8 @@ import max from 'lodash/max';
 import find from 'lodash/find';
 import isEmpty from 'lodash/isEmpty';
 import { ResponsiveBar } from '@nivo/bar';
+import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from '@material-ui/core';
 import { useStoreState } from 'app/state/store/hooks';
 import { PillarCountContainer } from 'app/components/charts/Pillars/info';
 
@@ -23,7 +25,6 @@ import {
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
 import { BudgetTooltip, BudgetTooltipMobile } from './tooltips/Budget';
 import { CountTooltip, CountTooltipMobile } from './tooltips/Count';
-import { useMediaQuery } from '@material-ui/core';
 
 interface PillarContainerProps {
   data: any;
@@ -69,6 +70,7 @@ function checkIfNoData(data: any[], breakdown: string) {
 }
 
 export const PillarContainer = (props: PillarContainerProps) => {
+  const { t } = useTranslation();
   const loading = useStoreState(
     (state) =>
       state.getPillarDataByBudget.loading ||
@@ -80,7 +82,7 @@ export const PillarContainer = (props: PillarContainerProps) => {
       : props.data;
   const config =
     props.selectedBreakdown === breakdownOptions[1]
-      ? PillarMultiYearConfig
+      ? PillarMultiYearConfig(t)
       : PillarConfigBase;
   const chartHeight =
     props.selectedBreakdown === breakdownOptions[1]

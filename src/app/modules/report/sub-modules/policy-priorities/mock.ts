@@ -23,11 +23,11 @@ export const policyPriorities: PolicyPriorityProps[] = [
 
 export const pillars: ItemModel[] = [
   {
-    value: 'Pillar 1: Social Good Projects',
+    value: 'Pillar 1: Social good',
     label: 'reports.form.textfield.radio_pillar_one',
   },
   {
-    value: 'Pillar 2: Church & Organ restorations projects',
+    value: 'Pillar 2: Cultural heritage',
     label: 'reports.form.textfield.radio_pillar_two',
   },
 ];
@@ -191,5 +191,5 @@ export const pillar1PolicyPriorities: PolicyPriorityProps[] = [
 ];
 
 export const pillar2PolicyPriorities: PolicyPriorityProps[] = [
-  { label: 'charts.items.heritage', value: 'Cultural Heritage' },
+  { label: 'charts.items.heritage', value: 'Cultural heritage' },
 ];
