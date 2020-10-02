@@ -54,8 +54,10 @@ export const ReachedTooltip = (props: any) => {
       />
       <div css="padding: 5px 0;">
         <div css={row}>
-          <div>{t('People Reached')}</div>
-          <div>{props.data['People Reached']}</div>
+          <div>{t('People Reached/Targeted')}</div>
+          <div>{`${props.data['People Reached']}/${
+            props.data['People Targeted'] + props.data['People Reached']
+          }`}</div>
         </div>
         <ProgressBarContainer>
           <ProgressBar
@@ -87,8 +89,8 @@ export const ReachedTooltipMobile = (props: any) => {
           <line></line>
           <TooltipContent>
             <Row>
-              <div>{t('People Reached')}</div>
-              <div>{props.data['People Reached']}</div>
+              <div>{t('People Reached/Targeted')}</div>
+              <div>{`${props.data['People Reached']}/${props.data['People Targeted']}`}</div>
             </Row>
             <ProgressBarContainer>
               <ProgressBar

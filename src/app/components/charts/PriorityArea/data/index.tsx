@@ -63,10 +63,22 @@ export function getKeys(selectedBreakdown: string) {
     case 'SDGs':
       return [
         'No poverty',
-        'Clean water and sanitation',
+        'Zero hunger',
         'Good health and well-being',
-        'Gender equality',
         'Quality education',
+        'Gender equality',
+        'Clean water and sanitation',
+        'Affordable and clean energy',
+        'Decent work and economic growth',
+        'Industry, Innovation and Infrastructure',
+        'Reduced inequialities',
+        'Sustainable cities and communities',
+        'Responsible consumption and production',
+        'Climate action',
+        'Life below water',
+        'Life on land',
+        'Peace, Justice and strong institutions',
+        'Partnerships for the goals',
       ];
     default:
       return ['Budget'];
@@ -139,26 +151,54 @@ export function formatPriorityAreaTargetGroupData(
   const chartData: ChartDataPropsTargetGroup[] = [];
 
   data.forEach((priorityArea: priorityAreaDataProps) => {
+    const targetgroups = {
+      'The Elderly (65+)': find(priorityArea.children, {
+        name: 'The Elderly (65+)',
+      }),
+      'Women & Girls': find(priorityArea.children, { name: 'Women & Girls' }),
+      Refugees: find(priorityArea.children, { name: 'Refugees' }),
+      'People with lower income': find(priorityArea.children, {
+        name: 'People with lower income',
+      }),
+      'Homeless people': find(priorityArea.children, {
+        name: 'Homeless people',
+      }),
+      'People with disabilities': find(priorityArea.children, {
+        name: 'People with disabilities',
+      }),
+    };
     chartData.push({
       name: priorityArea.name,
-      'The Elderly (65+)': get(priorityArea, 'children[0].value', 0),
-      'The Elderly (65+)Color': get(priorityArea, 'children[0].color', ''),
-      'Women & Girls': get(priorityArea, 'children[1].value', 0),
-      'Women & GirlsColor': get(priorityArea, 'children[1].color', ''),
-      Refugees: get(priorityArea, 'children[2].value', 0),
-      RefugeesColor: get(priorityArea, 'children[2].color', ''),
-      'People with lower income': get(priorityArea, 'children[3].value', 0),
-      'People with lower incomeColor': get(
-        priorityArea,
-        'children[3].color',
+      'The Elderly (65+)': get(targetgroups['The Elderly (65+)'], 'value', 0),
+      'The Elderly (65+)Color': get(
+        targetgroups['The Elderly (65+)'],
+        'color',
         ''
       ),
-      'Homeless people': get(priorityArea, 'children[4].value', 0),
-      'Homeless peopleColor': get(priorityArea, 'children[4].color', ''),
-      'People with disabilities': get(priorityArea, 'children[5].value', 0),
+      'Women & Girls': get(targetgroups['Women & Girls'], 'value', 0),
+      'Women & GirlsColor': get(targetgroups['Women & Girls'], 'color', ''),
+      Refugees: get(targetgroups.Refugees, 'value', 0),
+      RefugeesColor: get(targetgroups.Refugees, 'color', ''),
+      'People with lower income': get(
+        targetgroups['People with lower income'],
+        'value',
+        0
+      ),
+      'People with lower incomeColor': get(
+        targetgroups['People with lower income'],
+        'color',
+        ''
+      ),
+      'Homeless people': get(targetgroups['Homeless people'], 'value', 0),
+      'Homeless peopleColor': get(targetgroups['Homeless people'], 'color', ''),
+      'People with disabilities': get(
+        targetgroups['People with disabilities'],
+        'value',
+        0
+      ),
       'People with disabilitiesColor': get(
-        priorityArea,
-        'children[5].color',
+        targetgroups['People with disabilities'],
+        'color',
         ''
       ),
     });

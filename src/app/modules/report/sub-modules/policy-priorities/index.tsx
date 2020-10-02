@@ -105,7 +105,7 @@ export const PolicyPrioritiesLayout = (props: PolicyPrioritiesPropsModel) => {
             <PercentageDropdown
               testid="dropdown-one"
               values={
-                props.pillar === 'Pillar 1: Social Good Projects'
+                props.pillar === 'Pillar 1: Social good'
                   ? pillar1PolicyPriorities
                   : pillar2PolicyPriorities
               }
