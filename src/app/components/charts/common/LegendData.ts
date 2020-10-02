@@ -125,10 +125,10 @@ export const LegendDataSDGs: LegendItemProps[] = [
 ];
 
 export const LegendDataPillars: LegendItemProps[] = [
-  {
-    legendColor: '#828894',
-    legendName: 'Not Spent',
-  },
+  // {
+  //   legendColor: '#828894',
+  //   legendName: 'Not Spent',
+  // },
   {
     legendColor: '#242E42',
     legendName: 'Spent',
