@@ -1,10 +1,15 @@
+import pullAt from 'lodash/pullAt';
+import findIndex from 'lodash/findIndex';
 import { BarSvgProps } from '@nivo/bar';
 import { CommonBarProps } from 'app/components/charts/common/CommonProps';
-import { BarChartLeftAxis } from 'app/components/charts/common/axis/BarChartLeftAxis';
+import {
+  BarChartLeftAxis,
+  getTranslationKey,
+} from 'app/components/charts/common/axis/BarChartLeftAxis';
 import { BarChartBottomAxis } from 'app/components/charts/common/axis/BarChartBottomAxis';
 
 const Pillar1Colors = ['#242E42', '#828894'];
-const ChartKeys = ['Spent', 'Not Spent'];
+const ChartKeys = ['Spent'];
 
 /* ------------------------------------------------------------ */
 /* base */
@@ -49,23 +54,31 @@ type pillarProps = {
   name: string;
   budget: number;
   spent: number;
+  oneYear: number;
+  multiYear: number;
 };
 
 // @ts-ignore
-export const PillarMultiYearConfig: BarSvgProps = {
-  ...CommonBarProps,
-  margin: {
-    top: 0,
-    right: 0,
-    bottom: 60,
-    left: 48,
-  },
-  layout: 'vertical',
-  groupMode: 'grouped',
-  innerPadding: 32,
-  indexBy: 'name',
-  keys: ChartKeys,
-};
+export function PillarMultiYearConfig(t: any): BarSvgProps {
+  return {
+    ...CommonBarProps,
+    // @ts-ignore
+    axisBottom: {
+      format: (value: any) => t(getTranslationKey(value)),
+    },
+    margin: {
+      top: 0,
+      right: 0,
+      bottom: 60,
+      left: 48,
+    },
+    layout: 'vertical',
+    groupMode: 'grouped',
+    innerPadding: 32,
+    indexBy: 'name',
+    keys: ChartKeys,
+  };
+}
 
 export function formatPillarData(
   data: pillarProps[],
@@ -73,8 +86,39 @@ export function formatPillarData(
 ): any[] {
   const chartData: any[] = [];
 
+  const groupedData = data;
+
+  groupedData.forEach((pillar: pillarProps, index: number) => {
+    if (pillar.name === 'Pillar 1: Social Good Projects') {
+      const fPillar1Index = findIndex(data, { name: 'Pillar 1: Social good' });
+      if (fPillar1Index > -1) {
+        groupedData[fPillar1Index].spent += pillar.spent;
+        groupedData[fPillar1Index].budget += pillar.budget;
+        groupedData[fPillar1Index].oneYear += pillar.oneYear;
+        groupedData[fPillar1Index].multiYear += pillar.multiYear;
+        pullAt(groupedData, [index]);
+      } else {
+        groupedData[index].name = 'Pillar 1: Social Good Projects';
+      }
+    }
+    if (pillar.name === 'Pillar 2: Church & Organ restorations projects') {
+      const fPillar2Index = findIndex(data, {
+        name: 'Pillar 2: Cultural heritage',
+      });
+      if (fPillar2Index > -1) {
+        groupedData[fPillar2Index].spent += pillar.spent;
+        groupedData[fPillar2Index].budget += pillar.budget;
+        groupedData[fPillar2Index].oneYear += pillar.oneYear;
+        groupedData[fPillar2Index].multiYear += pillar.multiYear;
+        pullAt(groupedData, [index]);
+      } else {
+        groupedData[index].name = 'Pillar 2: Cultural heritage';
+      }
+    }
+  });
+
   if (breakdown === 'None') {
-    data.forEach((pillar: pillarProps) => {
+    groupedData.forEach((pillar: pillarProps) => {
       chartData.push({
         name: pillar.name,
         Spent: pillar.spent,
@@ -84,7 +128,7 @@ export function formatPillarData(
       });
     });
   } else if (breakdown === 'One Year & Multi Year') {
-    data.forEach((pillar: any) => {
+    groupedData.forEach((pillar: any) => {
       chartData.push({
         name: pillar.name,
         'Budget One Year': pillar.oneYear,
