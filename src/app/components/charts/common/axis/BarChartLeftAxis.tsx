@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { ProjectPalette } from 'app/theme';
-import { getTspanGroups } from 'app/components/charts/BarCharts/HorizontalBarChart/getTspanGroups';
 import { useTranslation } from 'react-i18next';
+import { getTspanGroups } from 'app/components/charts/BarCharts/HorizontalBarChart/getTspanGroups';
 
 interface BarChartLeftAxisProps {
   value: string;
@@ -10,9 +10,23 @@ interface BarChartLeftAxisProps {
   y: number;
 }
 
+export function getTranslationKey(value: string) {
+  switch (value) {
+    case 'Pillar 1: Social good':
+      return 'reports.form.textfield.radio_pillar_one';
+    case 'Pillar 1: Social Good Projects':
+      return 'reports.form.textfield.radio_pillar_one';
+    case 'Pillar 2: Cultural heritage':
+      return 'reports.form.textfield.radio_pillar_two';
+    case 'Pillar 2: Church & Organ restorations projects':
+      return 'reports.form.textfield.radio_pillar_two';
+    default:
+      return value;
+  }
+}
+
 export const BarChartLeftAxis = (props: BarChartLeftAxisProps) => {
   const { t } = useTranslation();
-
   return (
     <g transform={`translate(${props.x},${props.y + 8})`}>
       <text
@@ -25,7 +39,7 @@ export const BarChartLeftAxis = (props: BarChartLeftAxisProps) => {
         textAnchor="start"
         transform="translate(-256, -10)"
       >
-        {getTspanGroups(t(props.value), 30)}
+        {getTspanGroups(t(getTranslationKey(props.value)), 30)}
       </text>
       <line
         x1="0"

@@ -28,11 +28,11 @@ export const OneYearAndMultiYearCountDivider = () => (
 
 export const OneYearAndMultiYearInfoData: OneYearAndMultiYearItemProps[] = [
   {
-    name: 'Churches & Organs',
+    name: 'Pillar 2: Cultural heritage',
     count: '13',
   },
   {
-    name: 'Social good',
+    name: 'Pillar 1: Social good',
     count: '67',
   },
   {
@@ -44,7 +44,7 @@ export const OneYearAndMultiYearInfoData: OneYearAndMultiYearItemProps[] = [
     count: '650000',
   },
   {
-    name: 'People reachout of People targeted',
+    name: 'Total people reached out of total targeted',
     count: '746/893',
   },
 ];
