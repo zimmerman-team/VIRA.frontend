@@ -38,15 +38,13 @@ interface TargetGroupContainerProps {
   fullWidthLegends?: boolean;
 }
 
-const breakdownOptions = ['None', 'People Reached', 'SDGs'];
+const breakdownOptions = ['None', 'SDGs'];
 
 function getLegendData(breakdown: string) {
   switch (breakdown) {
     case breakdownOptions[0]:
       return [];
     case breakdownOptions[1]:
-      return LegendDataReached;
-    case breakdownOptions[2]:
       return LegendDataSDGs;
     default:
       return [];
@@ -58,8 +56,6 @@ function getTooltip(breakdown: string, isMobileWidth: boolean) {
     case breakdownOptions[0]:
       return isMobileWidth ? BudgetTooltipMobile : BudgetTooltip;
     case breakdownOptions[1]:
-      return isMobileWidth ? ReachedTooltipMobile : ReachedTooltip;
-    case breakdownOptions[2]:
       return isMobileWidth ? TargetGroupTooltipMobile : TargetGroupTooltip;
     default:
       return isMobileWidth ? BudgetTooltipMobile : BudgetTooltip;
@@ -71,8 +67,6 @@ function checkIfNoData(data: any[], breakdown: string) {
     case breakdownOptions[0]:
       return find(data, (item: any) => item.budget > 0);
     case breakdownOptions[1]:
-      return find(data, (item: any) => item.reached > 0 || item.target > 0);
-    case breakdownOptions[2]:
       return find(data, (item: any) =>
         find(item.children, (child: any) => child.reached > 0)
       );

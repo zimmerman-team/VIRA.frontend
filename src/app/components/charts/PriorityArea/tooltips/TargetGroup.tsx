@@ -65,7 +65,7 @@ export const TargetGroupTooltip = (props: any) => {
           <div key={key} css="padding: 5px 0;">
             <div css={row}>
               <div>{t(key)}</div>
-              <div>{props.data[key]}</div>
+              <div>{Math.round(props.data[key])}</div>
             </div>
             <ProgressBarContainer>
               <ProgressBar

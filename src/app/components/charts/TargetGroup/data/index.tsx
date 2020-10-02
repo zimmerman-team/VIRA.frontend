@@ -19,6 +19,26 @@ interface ChartDataProps {
   BudgetColor: string;
 }
 
+export const sdgNames: string[] = [
+  'No poverty',
+  'Zero hunger',
+  'Good health and well-being',
+  'Quality education',
+  'Gender equality',
+  'Clean water and sanitation',
+  'Affordable and clean energy',
+  'Decent work and economic growth',
+  'Industry, Innovation and Infrastructure',
+  'Reduced inequialities',
+  'Sustainable cities and communities',
+  'Responsible consumption and production',
+  'Climate action',
+  'Life below water',
+  'Life on land',
+  'Peace, Justice and strong institutions',
+  'Partnerships for the goals',
+];
+
 export function getKeys(selectedBreakdown: string) {
   switch (selectedBreakdown) {
     case 'None':
@@ -26,13 +46,7 @@ export function getKeys(selectedBreakdown: string) {
     case 'People Reached':
       return ['People Reached', 'People Targeted'];
     case 'SDGs':
-      return [
-        'No poverty',
-        'Clean water and sanitation',
-        'Good health and well-being',
-        'Gender equality',
-        'Quality education',
-      ];
+      return sdgNames;
     default:
       return ['Budget'];
   }

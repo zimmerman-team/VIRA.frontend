@@ -5,6 +5,7 @@ import {
 } from 'app/components/charts/common/CommonProps';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import { sdgNames } from 'app/components/charts/TargetGroup/data';
 
 /* ------------------------------------------------------------ */
 /* Common */
@@ -328,119 +329,145 @@ export interface ChartDataPropsSDGs {
   'Quality educationColor': string;
 }
 
+// Finds a child in the data(array) by it's name, by default returns the reached property.
+// Returns either a number or string based on the getElement prop.
+export function findChild(
+  data: any,
+  name: string,
+  getElement: string = 'reached'
+): string | number {
+  return get(
+    find(data.children, (child: any) => child.name === name),
+    getElement,
+    getElement === 'reached' ? 0 : ''
+  );
+}
+
 export function formatPriorityAreaSDGsData(
   data: PriorityAreaSDGsProps[]
-): ChartDataPropsSDGs[] {
+): any[] {
   const chartData: any[] = [];
+
   if (data != null) {
     data.forEach((priorityArea: PriorityAreaSDGsProps) => {
       chartData.push({
         name: priorityArea.name,
-        'No poverty': get(priorityArea, 'children[0].reached', 0),
-        'No povertyColor': get(priorityArea, 'children[0].color', ''),
-        'Zero hunger': get(priorityArea, 'children[1].reached', 0),
-        'Zero hungerColor': get(priorityArea, 'children[1].color', ''),
-        'Good health and well-being': get(
+        'Good health and well-being': findChild(
           priorityArea,
-          'children[2].reached',
-          0
+          'Good health and well-being'
         ),
-        'Good health and well-beingColor': get(
+        'Good health and well-beingColor': findChild(
           priorityArea,
-          'children[2].color',
-          ''
+          'Good health and well-being',
+          'color'
         ),
-        'Quality education': get(priorityArea, 'children[3].reached', 0),
-        'Quality educationColor': get(priorityArea, 'children[3].color', ''),
-        'Gender equality': get(priorityArea, 'children[4].reached', 0),
-        'Gender equalityColor': get(priorityArea, 'children[4].color', ''),
-        'Clean water and sanitation': get(
+        'No poverty': findChild(priorityArea, 'No poverty'),
+        'No povertyColor': findChild(priorityArea, 'No poverty', 'color'),
+        'Zero hunger': findChild(priorityArea, 'Zero hunger'),
+        'Zero hungerColor': findChild(priorityArea, 'Zero hunger', 'color'),
+        'Gender equality': findChild(priorityArea, 'Gender equality'),
+        'Gender equalityColor': findChild(
           priorityArea,
-          'children[5].reached',
-          0
+          'Gender equality',
+          'color'
         ),
-        'Clean water and sanitationColor': get(
+        'Affordable and clean energy': findChild(
           priorityArea,
-          'children[5].color',
-          ''
+          'Affordable and clean energy'
         ),
-        'Affordable and clean energy': get(
+        'Affordable and clean energyColor': findChild(
           priorityArea,
-          'children[6].reached',
-          0
+          'Affordable and clean energy',
+          'color'
         ),
-        'Affordable and clean energyColor': get(
+        'Industry, innovation and infrastructure': findChild(
           priorityArea,
-          'children[6].color',
-          ''
+          'Industry, innovation and infrastructure'
         ),
-        'Decent work and economic growth': get(
+        'Industry, innovation and infrastructureColor': findChild(
           priorityArea,
-          'children[7].reached',
-          0
+          'Industry, innovation and infrastructure',
+          'color'
         ),
-        'Decent work and economic growthColor': get(
+        'Decent work and economic growth': findChild(
           priorityArea,
-          'children[7].color',
-          ''
+          'Decent work and economic growth'
         ),
-        'Industry, innovation and infrastructure': get(
+        'Decent work and economic growthColor': findChild(
           priorityArea,
-          'children[8].reached',
-          0
+          'Decent work and economic growth',
+          'color'
         ),
-        'Industry, innovation and infrastructureColor': get(
+        'Quality education': findChild(priorityArea, 'Quality education'),
+        'Quality educationColor': findChild(
           priorityArea,
-          'children[8].color',
-          ''
+          'Quality education',
+          'color'
         ),
-        'Reduce inequalities': get(priorityArea, 'children[9].reached', 0),
-        'Reduce inequalitiesColor': get(priorityArea, 'children[9].color', ''),
-        'Sustainable cities and communities': get(
+        'Clean water and sanitation': findChild(
           priorityArea,
-          'children[10].reached',
-          0
+          'Clean water and sanitation'
         ),
-        'Sustainable cities and communitiesColor': get(
+        'Clean water and sanitationColor': findChild(
           priorityArea,
-          'children[10].color',
-          ''
+          'Clean water and sanitation',
+          'color'
         ),
-        'Responsible consumption and production': get(
+        'Reduce inequalities': findChild(priorityArea, 'Reduce inequalities'),
+        'Reduce inequalitiesColor': findChild(
           priorityArea,
-          'children[11].reached',
-          0
+          'Reduce inequalities',
+          'color'
         ),
-        'Responsible consumption and productionColor': get(
+        'Responsible consumption and production': findChild(
           priorityArea,
-          'children[11].color',
-          ''
+          'Industry, innovation and infrastructure'
         ),
-        'Climate action': get(priorityArea, 'children[12].reached', 0),
-        'Climate actionColor': get(priorityArea, 'children[12].color', ''),
-        'Life below water': get(priorityArea, 'children[13].reached', 0),
-        'Life below waterColor': get(priorityArea, 'children[13].color', ''),
-        'Life on land': get(priorityArea, 'children[14].reached', 0),
-        'Life on landColor': get(priorityArea, 'children[14].color', ''),
-        'Peace, justice and strong institutions': get(
+        'Responsible consumption and productionColor': findChild(
           priorityArea,
-          'children[15].reached',
-          0
+          'Industry, innovation and infrastructure',
+          'color'
         ),
-        'Peace, justice and strong institutionsColor': get(
+        'Climate action': findChild(priorityArea, 'Climate action'),
+        'Climate actionColor': findChild(
           priorityArea,
-          'children[15].color',
-          ''
+          'Climate action',
+          'color'
         ),
-        'Partnerships for the goals': get(
+        'Life on land': findChild(priorityArea, 'Life on land'),
+        'Life on landColor': findChild(priorityArea, 'Life on land', 'color'),
+        'Peace, justice and strong institutions': findChild(
           priorityArea,
-          'children[16].reached',
-          0
+          'Peace, justice and strong institutions'
         ),
-        'Partnerships for the goalsColor': get(
+        'Peace, justice and strong institutionsColor': findChild(
           priorityArea,
-          'children[16].color',
-          ''
+          'Peace, justice and strong institutions',
+          'color'
+        ),
+        'Sustainable cities and communities': findChild(
+          priorityArea,
+          'Sustainable cities and communities'
+        ),
+        'Sustainable cities and communitiesColor': findChild(
+          priorityArea,
+          'Sustainable cities and communities',
+          'color'
+        ),
+        'Partnerships for the goals': findChild(
+          priorityArea,
+          'Partnerships for the goals'
+        ),
+        'Partnerships for the goalsColor': findChild(
+          priorityArea,
+          'Partnerships for the goals',
+          'color'
+        ),
+        'Life below water': findChild(priorityArea, 'Life below water'),
+        'Life below waterColor': findChild(
+          priorityArea,
+          'Life below water',
+          'color'
         ),
       });
     });
