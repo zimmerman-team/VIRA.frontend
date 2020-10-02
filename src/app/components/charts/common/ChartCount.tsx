@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 // import { useTranslation } from 'react-i18next';
 
 export interface ChartCountItemProps {
@@ -50,7 +51,7 @@ export const ChartCountInfoData: ChartCountItemProps[] = [
 ];
 
 export const ChartCountItem = (props: ChartCountItemProps) => {
-  // const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -93,7 +94,7 @@ export const ChartCountItem = (props: ChartCountItemProps) => {
           }
         `}
       >
-        {props.name}
+        {t(props.name)}
       </div>
     </div>
   );

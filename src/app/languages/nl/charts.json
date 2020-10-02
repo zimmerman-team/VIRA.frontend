@@ -11,6 +11,14 @@
     "emancipation": "Emancipatie van vrouwen en meisjes",
     "heritage": "Cultureel erfgoed"
   },
+  "count_container": {
+    "multi_year": {
+      "count_one": "Aantal eenjarige projecten",
+      "count_multi": "Aantal meerjarige projecten",
+      "budget_one": "Budget besteed aan eenjarige projecten",
+      "budget_multi": "Budget besteed aan meerjarige projecten"
+    }
+  },
   "barchart": {
     "target": "Doel",
     "budget": "Budget",

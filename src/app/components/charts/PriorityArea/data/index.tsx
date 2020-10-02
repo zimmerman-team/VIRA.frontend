@@ -5,7 +5,6 @@ import {
 } from 'app/components/charts/common/CommonProps';
 import get from 'lodash/get';
 import find from 'lodash/find';
-import { sdgNames } from 'app/components/charts/TargetGroup/data';
 
 /* ------------------------------------------------------------ */
 /* Common */
@@ -145,65 +144,70 @@ interface ChartDataPropsTargetGroup {
   'People with disabilitiesColor': string;
 }
 
+// Finds a child in the data(array) by it's name, by default returns the reached property.
+// Returns either a number or string based on the getElement prop.
+export function findTGChild(
+  data: any,
+  name: string,
+  getElement = 'reached'
+): string | number {
+  return get(
+    find(data.children, (child: any) => child.name === name),
+    getElement,
+    getElement === 'reached' || getElement === 'value' ? 0 : ''
+  );
+}
+
 export function formatPriorityAreaTargetGroupData(
   data: priorityAreaDataProps[]
 ): ChartDataPropsTargetGroup[] {
   const chartData: ChartDataPropsTargetGroup[] = [];
 
   data.forEach((priorityArea: priorityAreaDataProps) => {
-    const targetgroups = {
-      'The Elderly (65+)': find(priorityArea.children, {
-        name: 'The Elderly (65+)',
-      }),
-      'Women & Girls': find(priorityArea.children, { name: 'Women & Girls' }),
-      Refugees: find(priorityArea.children, { name: 'Refugees' }),
-      'People with lower income': find(priorityArea.children, {
-        name: 'People with lower income',
-      }),
-      'Homeless people': find(priorityArea.children, {
-        name: 'Homeless people',
-      }),
-      'People with disabilities': find(priorityArea.children, {
-        name: 'People with disabilities',
-      }),
-    };
     chartData.push({
       name: priorityArea.name,
-      'The Elderly (65+)': get(targetgroups['The Elderly (65+)'], 'value', 0),
-      'The Elderly (65+)Color': get(
-        targetgroups['The Elderly (65+)'],
-        'color',
-        ''
+      'The Elderly (65+)': findTGChild(
+        priorityArea,
+        'The Elderly (65+)',
+        'value'
       ),
-      'Women & Girls': get(targetgroups['Women & Girls'], 'value', 0),
-      'Women & GirlsColor': get(targetgroups['Women & Girls'], 'color', ''),
-      Refugees: get(targetgroups.Refugees, 'value', 0),
-      RefugeesColor: get(targetgroups.Refugees, 'color', ''),
-      'People with lower income': get(
-        targetgroups['People with lower income'],
-        'value',
-        0
+      'The Elderly (65+)Color': findTGChild(
+        priorityArea,
+        'The Elderly (65+)',
+        'color'
       ),
-      'People with lower incomeColor': get(
-        targetgroups['People with lower income'],
-        'color',
-        ''
+      'Women & Girls': findTGChild(priorityArea, 'Women & Girls', 'value'),
+      'Women & GirlsColor': findTGChild(priorityArea, 'Women & Girls', 'color'),
+      Refugees: findTGChild(priorityArea, 'Refugees', 'value'),
+      RefugeesColor: findTGChild(priorityArea, 'Refugees', 'color'),
+      'People with lower income': findTGChild(
+        priorityArea,
+        'People with lower income',
+        'value'
       ),
-      'Homeless people': get(targetgroups['Homeless people'], 'value', 0),
-      'Homeless peopleColor': get(targetgroups['Homeless people'], 'color', ''),
-      'People with disabilities': get(
-        targetgroups['People with disabilities'],
-        'value',
-        0
+      'People with lower incomeColor': findTGChild(
+        priorityArea,
+        'People with lower income',
+        'color'
       ),
-      'People with disabilitiesColor': get(
-        targetgroups['People with disabilities'],
-        'color',
-        ''
+      'Homeless people': findTGChild(priorityArea, 'Homeless people', 'value'),
+      'Homeless peopleColor': findTGChild(
+        priorityArea,
+        'Homeless people',
+        'color'
       ),
-    });
+      'People with disabilities': findTGChild(
+        priorityArea,
+        'People with disabilities',
+        'value'
+      ),
+      'People with disabilitiesColor': findTGChild(
+        priorityArea,
+        'People with disabilities',
+        'color'
+      ),
+    } as ChartDataPropsTargetGroup);
   });
-
   return chartData;
 }
 
@@ -331,10 +335,10 @@ export interface ChartDataPropsSDGs {
 
 // Finds a child in the data(array) by it's name, by default returns the reached property.
 // Returns either a number or string based on the getElement prop.
-export function findChild(
+export function findSDGChild(
   data: any,
   name: string,
-  getElement: string = 'reached'
+  getElement = 'reached'
 ): string | number {
   return get(
     find(data.children, (child: any) => child.name === name),
@@ -352,119 +356,126 @@ export function formatPriorityAreaSDGsData(
     data.forEach((priorityArea: PriorityAreaSDGsProps) => {
       chartData.push({
         name: priorityArea.name,
-        'Good health and well-being': findChild(
+        'Good health and well-being': findSDGChild(
           priorityArea,
           'Good health and well-being'
         ),
-        'Good health and well-beingColor': findChild(
+        'Good health and well-beingColor': findSDGChild(
           priorityArea,
           'Good health and well-being',
           'color'
         ),
-        'No poverty': findChild(priorityArea, 'No poverty'),
-        'No povertyColor': findChild(priorityArea, 'No poverty', 'color'),
-        'Zero hunger': findChild(priorityArea, 'Zero hunger'),
-        'Zero hungerColor': findChild(priorityArea, 'Zero hunger', 'color'),
-        'Gender equality': findChild(priorityArea, 'Gender equality'),
-        'Gender equalityColor': findChild(
+        'No poverty': findSDGChild(priorityArea, 'No poverty'),
+        'No povertyColor': findSDGChild(priorityArea, 'No poverty', 'color'),
+        'Zero hunger': findSDGChild(priorityArea, 'Zero hunger'),
+        'Zero hungerColor': findSDGChild(priorityArea, 'Zero hunger', 'color'),
+        'Gender equality': findSDGChild(priorityArea, 'Gender equality'),
+        'Gender equalityColor': findSDGChild(
           priorityArea,
           'Gender equality',
           'color'
         ),
-        'Affordable and clean energy': findChild(
+        'Affordable and clean energy': findSDGChild(
           priorityArea,
           'Affordable and clean energy'
         ),
-        'Affordable and clean energyColor': findChild(
+        'Affordable and clean energyColor': findSDGChild(
           priorityArea,
           'Affordable and clean energy',
           'color'
         ),
-        'Industry, innovation and infrastructure': findChild(
+        'Industry, innovation and infrastructure': findSDGChild(
           priorityArea,
           'Industry, innovation and infrastructure'
         ),
-        'Industry, innovation and infrastructureColor': findChild(
+        'Industry, innovation and infrastructureColor': findSDGChild(
           priorityArea,
           'Industry, innovation and infrastructure',
           'color'
         ),
-        'Decent work and economic growth': findChild(
+        'Decent work and economic growth': findSDGChild(
           priorityArea,
           'Decent work and economic growth'
         ),
-        'Decent work and economic growthColor': findChild(
+        'Decent work and economic growthColor': findSDGChild(
           priorityArea,
           'Decent work and economic growth',
           'color'
         ),
-        'Quality education': findChild(priorityArea, 'Quality education'),
-        'Quality educationColor': findChild(
+        'Quality education': findSDGChild(priorityArea, 'Quality education'),
+        'Quality educationColor': findSDGChild(
           priorityArea,
           'Quality education',
           'color'
         ),
-        'Clean water and sanitation': findChild(
+        'Clean water and sanitation': findSDGChild(
           priorityArea,
           'Clean water and sanitation'
         ),
-        'Clean water and sanitationColor': findChild(
+        'Clean water and sanitationColor': findSDGChild(
           priorityArea,
           'Clean water and sanitation',
           'color'
         ),
-        'Reduce inequalities': findChild(priorityArea, 'Reduce inequalities'),
-        'Reduce inequalitiesColor': findChild(
+        'Reduce inequalities': findSDGChild(
+          priorityArea,
+          'Reduce inequalities'
+        ),
+        'Reduce inequalitiesColor': findSDGChild(
           priorityArea,
           'Reduce inequalities',
           'color'
         ),
-        'Responsible consumption and production': findChild(
+        'Responsible consumption and production': findSDGChild(
           priorityArea,
           'Industry, innovation and infrastructure'
         ),
-        'Responsible consumption and productionColor': findChild(
+        'Responsible consumption and productionColor': findSDGChild(
           priorityArea,
           'Industry, innovation and infrastructure',
           'color'
         ),
-        'Climate action': findChild(priorityArea, 'Climate action'),
-        'Climate actionColor': findChild(
+        'Climate action': findSDGChild(priorityArea, 'Climate action'),
+        'Climate actionColor': findSDGChild(
           priorityArea,
           'Climate action',
           'color'
         ),
-        'Life on land': findChild(priorityArea, 'Life on land'),
-        'Life on landColor': findChild(priorityArea, 'Life on land', 'color'),
-        'Peace, justice and strong institutions': findChild(
+        'Life on land': findSDGChild(priorityArea, 'Life on land'),
+        'Life on landColor': findSDGChild(
+          priorityArea,
+          'Life on land',
+          'color'
+        ),
+        'Peace, justice and strong institutions': findSDGChild(
           priorityArea,
           'Peace, justice and strong institutions'
         ),
-        'Peace, justice and strong institutionsColor': findChild(
+        'Peace, justice and strong institutionsColor': findSDGChild(
           priorityArea,
           'Peace, justice and strong institutions',
           'color'
         ),
-        'Sustainable cities and communities': findChild(
+        'Sustainable cities and communities': findSDGChild(
           priorityArea,
           'Sustainable cities and communities'
         ),
-        'Sustainable cities and communitiesColor': findChild(
+        'Sustainable cities and communitiesColor': findSDGChild(
           priorityArea,
           'Sustainable cities and communities',
           'color'
         ),
-        'Partnerships for the goals': findChild(
+        'Partnerships for the goals': findSDGChild(
           priorityArea,
           'Partnerships for the goals'
         ),
-        'Partnerships for the goalsColor': findChild(
+        'Partnerships for the goalsColor': findSDGChild(
           priorityArea,
           'Partnerships for the goals',
           'color'
         ),
-        'Life below water': findChild(priorityArea, 'Life below water'),
-        'Life below waterColor': findChild(
+        'Life below water': findSDGChild(priorityArea, 'Life below water'),
+        'Life below waterColor': findSDGChild(
           priorityArea,
           'Life below water',
           'color'

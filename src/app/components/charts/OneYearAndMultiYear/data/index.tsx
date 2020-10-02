@@ -93,19 +93,19 @@ export function formatCountData(
 ): ChartCountItemProps[] {
   const countData: ChartCountItemProps[] = [
     {
-      name: 'Number of One Year projects',
+      name: 'charts.count_container.multi_year.count_one',
       count: get(data, '[0]count', 0).toString(),
     },
     {
-      name: 'Number of Multi Year projects',
+      name: 'charts.count_container.multi_year.count_multi',
       count: get(data, '[1]count', 0).toString(),
     },
     {
-      name: 'One year projects budget spent',
+      name: 'charts.count_container.multi_year.budget_one',
       count: get(data, '[0]budget_Spent', 0).toString(),
     },
     {
-      name: 'Multi year projects budget spent',
+      name: 'charts.count_container.multi_year.budget_multi',
       count: get(data, '[1]count', 0).toString(),
     },
   ];

@@ -11,6 +11,14 @@
     "emancipation": "Emancipation of women and girls",
     "heritage": "Cultural heritage"
   },
+  "count_container": {
+    "multi_year": {
+      "count_one": "Number of One Year projects",
+      "count_multi": "Number of Multi Year projects",
+      "budget_one": "One year projects budget spent",
+      "budget_multi": "Multi year projects budget spent"
+    }
+  },
   "barchart": {
     "target": "Target",
     "budget": "Budget",

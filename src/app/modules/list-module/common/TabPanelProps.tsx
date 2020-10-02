@@ -16,7 +16,7 @@ export const TabStyle = css`
   letter-spacing: 1.25px;
   background-color: white;
   text-transform: capitalize;
-  max-width: 140px;
+  //max-width: 140px;
   margin-left: 24px;
 `;
 
