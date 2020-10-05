@@ -61,7 +61,7 @@ function getTooltip(breakdown: string, isMobileWidth: boolean) {
 function checkIfNoData(data: any[], breakdown: string) {
   switch (breakdown) {
     case breakdownOptions[0]:
-      return find(data, (item: any) => item.budget > 0);
+      return find(data, (item: any) => item.contribution > 0);
     case breakdownOptions[1]:
       return find(data, (item: any) => item.oneYear > 0 || item.multiYear > 0);
     default:
@@ -105,7 +105,7 @@ export const PillarContainer = (props: PillarContainerProps) => {
         width: 100%;
       `}
     >
-      <PillarCountContainer data={props.data} />
+      <PillarCountContainer data={data} />
       <BreakdownSelect
         breakdownOptions={breakdownOptions}
         selectedBreakdown={props.selectedBreakdown}

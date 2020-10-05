@@ -131,7 +131,7 @@ export const LegendDataPillars: LegendItemProps[] = [
   // },
   {
     legendColor: '#242E42',
-    legendName: 'Spent',
+    legendName: 'Contribution',
   },
 ];
 

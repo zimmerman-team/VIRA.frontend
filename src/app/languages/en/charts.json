@@ -16,7 +16,9 @@
       "count_one": "Number of One Year projects",
       "count_multi": "Number of Multi Year projects",
       "budget_one": "One year projects budget spent",
-      "budget_multi": "Multi year projects budget spent"
+      "budget_multi": "Multi year projects budget spent",
+      "contribution_one": "One year projects Insinger Contribution",
+      "contribution_multi": "Multi year projects Insinger Contribution"
     }
   },
   "barchart": {

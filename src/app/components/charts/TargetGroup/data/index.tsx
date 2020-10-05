@@ -17,6 +17,8 @@ interface ChartDataProps {
   name: string;
   Budget: number;
   BudgetColor: string;
+  'Insinger Contribution': number;
+  'Insinger ContributionColor': string;
 }
 
 export const sdgNames: string[] = [
@@ -42,7 +44,7 @@ export const sdgNames: string[] = [
 export function getKeys(selectedBreakdown: string) {
   switch (selectedBreakdown) {
     case 'None':
-      return ['Budget'];
+      return ['Insinger Contribution'];
     case 'People Reached':
       return ['People Reached', 'People Targeted'];
     case 'SDGs':
@@ -82,6 +84,8 @@ export function formatTargetGroupDataBudget(
         name: TargetGroup.name,
         Budget: TargetGroup.budget,
         BudgetColor: BarColor,
+        'Insinger Contribution': TargetGroup.contribution,
+        'Insinger ContributionColor': BarColor,
       });
     });
   }

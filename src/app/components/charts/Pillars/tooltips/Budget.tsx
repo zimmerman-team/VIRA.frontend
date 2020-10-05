@@ -47,13 +47,9 @@ export const BudgetTooltip = (props: any) => {
         `}
       />
       <div css={row}>
-        <div>{t('Spent')}</div>
-        <div>€{props.data.Spent}</div>
+        <div>{t('Contribution')}</div>
+        <div>€{props.data['Insinger Contribution']}</div>
       </div>
-      {/*<div css={row}>*/}
-      {/*  <div>{t('Not Spent')}</div>*/}
-      {/*  <div>€{props.data['Not Spent']}</div>*/}
-      {/*</div>*/}
     </div>
   );
 };
@@ -68,16 +64,12 @@ export const BudgetTooltipMobile = (props: any) => {
             <div> </div>
             {t(props.data.name)}
           </TooltipHeader>
-          <line></line>
+          <line />
           <TooltipContent>
             <Row>
-              <div>{t('Spent')}</div>
-              <div>€{props.data.Spent}</div>
+              <div>{t('Contribution')}</div>
+              <div>€{props.data['Insinger Contribution']}</div>
             </Row>
-            {/*<Row>*/}
-            {/*  <div>{t('Not Spent')}</div>*/}
-            {/*  <div>€{props.data['Not Spent']}</div>*/}
-            {/*</Row>*/}
           </TooltipContent>
         </Tooltip>
       </ClickAwayListener>
