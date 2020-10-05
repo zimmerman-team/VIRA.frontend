@@ -9,7 +9,7 @@ import {
 import { BarChartBottomAxis } from 'app/components/charts/common/axis/BarChartBottomAxis';
 
 const Pillar1Colors = ['#242E42', '#828894'];
-const ChartKeys = ['Spent'];
+const ChartKeys = ['Insinger Contribution'];
 
 /* ------------------------------------------------------------ */
 /* base */
@@ -56,6 +56,7 @@ type pillarProps = {
   spent: number;
   oneYear: number;
   multiYear: number;
+  contribution: number;
 };
 
 // @ts-ignore
@@ -96,6 +97,7 @@ export function formatPillarData(
         groupedData[fPillar1Index].budget += pillar.budget;
         groupedData[fPillar1Index].oneYear += pillar.oneYear;
         groupedData[fPillar1Index].multiYear += pillar.multiYear;
+        groupedData[fPillar1Index].contribution += pillar.contribution;
         pullAt(groupedData, [index]);
       } else {
         groupedData[index].name = 'Pillar 1: Social Good Projects';
@@ -110,6 +112,8 @@ export function formatPillarData(
         groupedData[fPillar2Index].budget += pillar.budget;
         groupedData[fPillar2Index].oneYear += pillar.oneYear;
         groupedData[fPillar2Index].multiYear += pillar.multiYear;
+        groupedData[fPillar2Index].multiYear += pillar.multiYear;
+        groupedData[fPillar2Index].contribution += pillar.contribution;
         pullAt(groupedData, [index]);
       } else {
         groupedData[index].name = 'Pillar 2: Cultural heritage';
@@ -125,6 +129,8 @@ export function formatPillarData(
         SpentColor: Pillar1Colors[0],
         'Not Spent': pillar.budget - pillar.spent,
         'Not SpentColor': Pillar1Colors[1],
+        'Insinger Contribution': pillar.contribution,
+        'Insinger ContributionColor': Pillar1Colors[0],
       });
     });
   } else if (breakdown === 'One Year & Multi Year') {

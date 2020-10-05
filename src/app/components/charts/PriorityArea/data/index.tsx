@@ -44,7 +44,7 @@ export function formatPriorityAreaData(selectedBreakdown: string, data: any) {
 export function getKeys(selectedBreakdown: string) {
   switch (selectedBreakdown) {
     case 'None':
-      return ['Budget'];
+      return ['Insinger Contribution'];
     case 'Target Group':
       return [
         'Children & youth (up to +/- 30 years)',
@@ -56,7 +56,10 @@ export function getKeys(selectedBreakdown: string) {
         'People with disabilities',
       ];
     case 'One Year & Multi Year':
-      return ['Budget One Year', 'Budget Multi Year'];
+      return [
+        'Insinger Contribution One Year',
+        'Insinger Contribution Multi Year',
+      ];
     case 'People Reached':
       return ['People Reached', 'People Targeted'];
     case 'SDGs':
@@ -90,6 +93,8 @@ interface ChartDataPropsNone {
   name: string;
   Budget: number;
   BudgetColor: string;
+  'Insinger Contribution': number;
+  'Insinger ContributionColor': string;
 }
 
 type priorityAreaDataProps = {
@@ -119,6 +124,8 @@ function formatPriorityAreaDataNone(
       name: priorityArea.name,
       Budget: priorityArea.budget,
       BudgetColor: BarColor,
+      'Insinger Contribution': priorityArea.contribution,
+      'Insinger ContributionColor': BarColor,
     });
   });
 
@@ -234,6 +241,10 @@ interface ChartDataPropsOneMultiYear {
   'Budget One YearColor': string;
   'Budget Multi Year': number;
   'Budget Multi YearColor': string;
+  'Insinger Contribution One Year': number;
+  'Insinger Contribution One YearColor': string;
+  'Insinger Contribution Multi Year': number;
+  'Insinger Contribution Multi YearColor': string;
 }
 
 export function formatPriorityAreaOneMultiYearData(
@@ -249,6 +260,18 @@ export function formatPriorityAreaOneMultiYearData(
       'Budget One YearColor': colors[0],
       'Budget Multi Year': get(priorityArea, 'budget_Multi', 0),
       'Budget Multi YearColor': colors[1],
+      'Insinger Contribution One Year': get(
+        priorityArea,
+        'contribution_One',
+        0
+      ),
+      'Insinger Contribution One YearColor': colors[0],
+      'Insinger Contribution Multi Year': get(
+        priorityArea,
+        'contribution_Multi',
+        0
+      ),
+      'Insinger Contribution Multi YearColor': colors[1],
     });
   });
 

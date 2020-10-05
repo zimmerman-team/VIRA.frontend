@@ -269,8 +269,12 @@ i18n.use(initReactI18next).init({
         'Pillar 2: Cultural heritage': 'Pilaar 2: Cultureel erfgoed',
         'Budget Spent Pillar 1':
           'Budget besteed aan Pilaar 1 - Maatschappelijk welzijn',
+        'Contribution Pillar 1':
+          'Insinger Bijdrage aan Pilaar 1 - Maatschappel welzijn',
         'Budget Spent Pillar 2':
           'Budget besteed aan Pilaar 2 - Cultureel erfgoed',
+        'Contribution Pillar 2':
+          'Insinger Bijdrage aan Pilaar 2 - Cultureel erfgoed',
         'Total people reached out of total targeted':
           'Totaal aantal mensen bereikt uit beoogde aantal',
         'Cultural heritage': 'Cultureel erfgoed',
@@ -335,6 +339,10 @@ i18n.use(initReactI18next).init({
         'One year': 'Eenjarig',
         'Project count': 'Aantal projecten',
         Contribution: 'Insinger Bijdrage',
+        'One Year projects Insinger Contribution':
+          'Insinger Bijdrage voor eenjarige projecten',
+        'Multi Year projects Insinger Contribution':
+          'Insinger Bijdrage voor meerjarige projecten',
       },
     },
     // en: {
@@ -894,6 +902,10 @@ i18n.use(initReactI18next).init({
         'Multi Year Projects count': 'Multi Year Projects count',
         'One Year projects Budget': 'One Year projects Budget',
         'Multi Year projects Budget': 'Multi Year projects Budget',
+        'One Year projects Insinger Contribution':
+          'One Year projects Insinger Contribution',
+        'Multi Year projects Insinger Contribution':
+          'Multi Year projects Insinger Contribution',
         'People Reached': 'People Reached',
         'People reached': 'People reached',
         'People targeted': 'People targeted',
@@ -934,6 +946,9 @@ i18n.use(initReactI18next).init({
         'One year': 'One year',
         'Project count': 'Project count',
         Contribution: 'Insinger Contribution',
+        'Contribution Pillar 1': 'Insinger Contribution Pillar 1 - Social good',
+        'Contribution Pillar 2':
+          'Insinger Contribution Pillar 2 - Cultural heritage',
       },
     },
   },
