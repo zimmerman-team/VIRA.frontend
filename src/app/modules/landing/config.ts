@@ -6,6 +6,8 @@ export interface StatItemParams {
   path: string;
   label?: string;
   index?: number;
+  roles?: string[];
+  gridNum: number;
 }
 
 export const StatItemsConfig: StatItemParams[] = [
@@ -13,16 +15,20 @@ export const StatItemsConfig: StatItemParams[] = [
     amount: 0,
     type: 'home.dashboard.projects',
     path: '/list/0',
+    gridNum: 4,
   },
   {
     amount: 0,
     type: 'home.dashboard.grantees',
     path: '/list/1',
+    roles: ['Super admin', 'Administrator'],
+    gridNum: 4,
   },
   {
     amount: 0,
     type: 'home.dashboard.reports',
     path: '/list/2',
+    gridNum: 4,
   },
 ];
 

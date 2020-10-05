@@ -54,8 +54,8 @@ export const StatItem = (props: StatItemParams) => {
   return (
     <Grid
       item
-      xs={4}
-      lg={4}
+      xs={props.gridNum}
+      lg={props.gridNum}
       css={StatItemGridStyle}
       data-cy={`stat-item-${props.index}`}
     >
