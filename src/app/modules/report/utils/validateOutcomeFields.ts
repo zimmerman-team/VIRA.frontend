@@ -14,9 +14,9 @@ export function validateOutcomeFields(
   if (budget === 0) {
     return false;
   }
-  if (budget > remainBudget) {
-    return false;
-  }
+  // if (budget > remainBudget) {
+  //   return false;
+  // }
   if (insContribution === 0) {
     return false;
   }

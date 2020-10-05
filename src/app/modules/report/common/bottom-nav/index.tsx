@@ -68,7 +68,7 @@ export function BottomNav(props: BottomNavModel) {
           icon={isMobileWidth && <ChevronLeft />}
           onClick={props.back}
           disabled={props.backDisabled}
-          css={isMobileWidth && mobileBackStyle}
+          css={isMobileWidth ? mobileBackStyle : ''}
         />
       </Grid>
       <Grid item xs={9} justify="flex-end" css={gridItem}>
@@ -85,7 +85,7 @@ export function BottomNav(props: BottomNavModel) {
                     background: #e57373 !important;
                   }
                   ${isMobileWidth &&
-                    `max-height: 48px;
+                  `max-height: 48px;
                   min-height: 48px;
                   max-width: 132px;`}
                 }
@@ -100,7 +100,7 @@ export function BottomNav(props: BottomNavModel) {
               testattr="draft-button"
               text={t('reports.form.buttons.draft')}
               onClick={props.saveDraft}
-              css={isMobileWidth && mobileButton}
+              css={isMobileWidth ? mobileButton : ''}
             />
             <Box width={`${isMobileWidth ? '8px' : '24px'}`} />
           </React.Fragment>
@@ -112,7 +112,7 @@ export function BottomNav(props: BottomNavModel) {
               `reports.form.buttons.${query.get('rid') ? 'save' : 'submit'}`
             )}
             onClick={props.submit}
-            css={isMobileWidth && mobileButton}
+            css={isMobileWidth ? mobileButton : ''}
           />
         ) : (
           <ContainedButton
@@ -120,7 +120,7 @@ export function BottomNav(props: BottomNavModel) {
             text={t('reports.form.buttons.next')}
             onClick={props.next}
             disabled={props.nextDisabled}
-            css={isMobileWidth && mobileButton}
+            css={isMobileWidth ? mobileButton : ''}
           />
         )}
       </Grid>

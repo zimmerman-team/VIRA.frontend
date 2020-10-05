@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import { InfoCellModuleModel } from 'app/components/datadisplay/Table/model';
 import { TooltipButton as Tooltip } from 'app/components/datadisplay/Tooltip';

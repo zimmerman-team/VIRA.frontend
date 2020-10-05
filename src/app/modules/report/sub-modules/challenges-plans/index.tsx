@@ -61,7 +61,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         />
       </Grid>
 
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-2"
           {...ChallengeAreaMock[1]}
@@ -75,7 +75,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         />
       </Grid>
 
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-3"
           {...ChallengeAreaMock[2]}
@@ -94,7 +94,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         container
         xs={12}
         lg={12}
-        css={isMobileWidth && styles.gridItem}
+        css={isMobileWidth ? styles.gridItem : ''}
       >
         <Grid
           item
@@ -102,7 +102,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
           sm={6}
           md={6}
           lg={4}
-          css={isMobileWidth && styles.gridMobile}
+          css={isMobileWidth ? styles.gridMobile : ''}
           data-cy="how-important-insinger-support"
         >
           <Card
@@ -113,7 +113,9 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
             `}
           >
             <CardHeader
-              css={styles.cardHeader + 'margin-bottom: 23px;'}
+              css={`
+                ${styles.cardHeader}margin-bottom: 23px;
+              `}
               title={t('reports.form.cards.how_important_insinger_support')}
             />
             <CardContent css={styles.cardContent}>
@@ -147,7 +149,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
           sm={6}
           md={6}
           lg={4}
-          css={isMobileWidth && styles.gridMobile}
+          css={isMobileWidth ? styles.gridMobile : ''}
           data-cy="how-important-insinger-support"
         >
           <Card
@@ -180,7 +182,7 @@ export const ChallengesPlansLayout = (props: ChallengesPlansPropsModel) => {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-6"
           {...ChallengeAreaMock[3]}

@@ -1,7 +1,7 @@
 import React from 'react';
+import styled from 'styled-components/macro';
 import Button from '@material-ui/core/Button';
-import styled from 'styled-components';
-import { Tooltip } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
 
 type Props = {
   size?: string;

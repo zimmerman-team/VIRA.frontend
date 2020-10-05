@@ -52,7 +52,7 @@ export const IndicatorVerificationLayout = (
 
       {/* ---------------------------------------------------------------------*/}
       {/* textarea 2 */}
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-2"
           componentID="indVer2"
@@ -67,7 +67,7 @@ export const IndicatorVerificationLayout = (
 
       {/* ---------------------------------------------------------------------*/}
       {/* textarea 3 */}
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-3"
           componentID="indVer3"
@@ -81,7 +81,7 @@ export const IndicatorVerificationLayout = (
 
       {/* ---------------------------------------------------------------------*/}
       {/* textarea 4 */}
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-4"
           componentID="indVer4"
@@ -95,7 +95,7 @@ export const IndicatorVerificationLayout = (
 
       {/* ---------------------------------------------------------------------*/}
       {/* textarea 5 */}
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-5"
           componentID="indVer5"
@@ -109,7 +109,7 @@ export const IndicatorVerificationLayout = (
 
       {/* ---------------------------------------------------------------------*/}
       {/* textarea 6 */}
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-6"
           componentID="indVer6"
@@ -123,7 +123,7 @@ export const IndicatorVerificationLayout = (
 
       {/* ---------------------------------------------------------------------*/}
       {/* textarea 7 */}
-      <Grid item xs={12} lg={12} css={isMobileWidth && styles.gridItem}>
+      <Grid item xs={12} lg={12} css={isMobileWidth ? styles.gridItem : ''}>
         <IntentTexArea
           testattr="text-area-7"
           componentID="indVer7"

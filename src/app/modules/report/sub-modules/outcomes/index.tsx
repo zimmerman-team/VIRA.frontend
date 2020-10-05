@@ -67,7 +67,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         xs={12}
         md={12}
         lg={6}
-        css={isMobileWidth && styles.gridMobile}
+        css={isMobileWidth ? styles.gridMobile : ''}
         data-cy="add-location"
       >
         <Card
@@ -100,7 +100,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         xs={12}
         md={12}
         lg={6}
-        css={isMobileWidth && styles.gridMobile}
+        css={isMobileWidth ? styles.gridMobile : ''}
         data-cy="exact-location"
       >
         <Card>
@@ -141,7 +141,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         md={6}
         lg={6}
         data-cy="budget-container"
-        css={isMobileWidth && styles.gridMobile}
+        css={isMobileWidth ? styles.gridMobile : ''}
       >
         <Card>
           <CardHeader title={t('reports.form.textfield.budget')} />
