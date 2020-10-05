@@ -11,6 +11,7 @@ export interface NavItemParams {
   icon?: React.ReactElement;
   disabled?: boolean;
   testid?: string;
+  roles?: string[];
 }
 
 export const NavItems: NavItemParams[] = [
@@ -28,6 +29,7 @@ export const NavItems: NavItemParams[] = [
     label: 'sidebar.items.grantees',
     path: '/list/1',
     icon: <IconGrantees />,
+    roles: ['Super admin', 'Administrator'],
   },
   {
     label: 'sidebar.items.reports',

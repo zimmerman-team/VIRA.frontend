@@ -213,7 +213,11 @@ function LandingLayout(props: PropsModel) {
       {/* -------------------------------------------------------------- */}
       {/* stat items */}
       <Grid item xs={12}>
-        <StatCard data-cy="stat-card" stats={stats} />
+        <StatCard
+          stats={stats}
+          data-cy="stat-card"
+          signedInUserRole={signedInUserRole}
+        />
       </Grid>
 
       {/* hide on mobile */}
@@ -301,8 +305,12 @@ function LandingLayout(props: PropsModel) {
 
       {/* list module */}
       <ListModule
-        selectedSDG={selectedSDG}
         loadData
+        selectedSDG={selectedSDG}
+        hideGrantees={
+          signedInUserRole !== 'Administrator' &&
+          signedInUserRole !== 'Super admin'
+        }
         dateFilter={{
           start: dateFilterEnabled ? selectedStartDate : null,
           end: dateFilterEnabled ? selectedEndDate : null,
