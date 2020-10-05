@@ -46,8 +46,8 @@ export const BudgetTooltip = (props: any) => {
         `}
       />
       <div css={row}>
-        <div>{t('Budget')}</div>
-        <div>€{props.data.Budget}</div>
+        <div>{t('Contribution')}</div>
+        <div>€{props.data['Insinger Contribution']}</div>
       </div>
     </div>
   );
@@ -63,11 +63,11 @@ export const BudgetTooltipMobile = (props: any) => {
             <div> </div>
             {t(props.data.name)}
           </TooltipHeader>
-          <line></line>
+          <line />
           <TooltipContent>
             <Row>
-              <div>{t('Budget')}</div>
-              <div>€{props.data.Budget}</div>
+              <div>{t('Contribution')}</div>
+              <div>€{props.data['Insinger Contribution']}</div>
             </Row>
           </TooltipContent>
         </Tooltip>

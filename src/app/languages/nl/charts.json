@@ -16,7 +16,9 @@
       "count_one": "Aantal eenjarige projecten",
       "count_multi": "Aantal meerjarige projecten",
       "budget_one": "Budget besteed aan eenjarige projecten",
-      "budget_multi": "Budget besteed aan meerjarige projecten"
+      "budget_multi": "Budget besteed aan meerjarige projecten",
+      "contribution_one": "Bijdrage Insinger aan eenjarige projecten",
+      "contribution_multi": "Bijdrage Insinger aan meerjarige projecten"
     }
   },
   "barchart": {

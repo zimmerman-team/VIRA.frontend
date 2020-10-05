@@ -40,11 +40,11 @@ export const PillarInfoData: PillarItemProps[] = [
     count: '0',
   },
   {
-    name: 'Budget Spent Pillar 1',
+    name: 'Contribution Pillar 1',
     count: '0',
   },
   {
-    name: 'Budget Spent Pillar 2',
+    name: 'Contribution Pillar 2',
     count: '0',
   },
   {
@@ -63,7 +63,7 @@ function getItems(data: any[]) {
   );
   items[2].count = get(
     find(data, (item: any) => item.name === 'Pillar 1: Social good'),
-    'spent',
+    'contribution',
     0
   );
   items[1].count = get(
@@ -73,7 +73,7 @@ function getItems(data: any[]) {
   );
   items[3].count = get(
     find(data, (item: any) => item.name === 'Pillar 2: Cultural heritage'),
-    'spent',
+    'contribution',
     0
   );
   items[4].count = `${sumBy(data, 'reached')}/${sumBy(data, 'targeted')}`;

@@ -91,7 +91,7 @@ export function formatOneYearAndMultiYearPeopleReachedData(data: any[]): any[] {
 export function formatCountData(
   data: OneYearAndMultiYearProps[]
 ): ChartCountItemProps[] {
-  const countData: ChartCountItemProps[] = [
+  return [
     {
       name: 'charts.count_container.multi_year.count_one',
       count: get(data, '[0]count', 0).toString(),
@@ -101,16 +101,14 @@ export function formatCountData(
       count: get(data, '[1]count', 0).toString(),
     },
     {
-      name: 'charts.count_container.multi_year.budget_one',
-      count: get(data, '[0]budget_Spent', 0).toString(),
+      name: 'charts.count_container.multi_year.contribution_one',
+      count: get(data, '[0]contribution', 0).toString(),
     },
     {
-      name: 'charts.count_container.multi_year.budget_multi',
-      count: get(data, '[1]count', 0).toString(),
+      name: 'charts.count_container.multi_year.contribution_multi',
+      count: get(data, '[1]contribution', 0).toString(),
     },
   ];
-
-  return countData;
 }
 
 /* ------------------------------------------------------------ */

@@ -16,6 +16,7 @@ import {
   LegendDataReached,
   LegendDataDuration,
   LegendDataTargetGroups,
+  LegendDataPillars,
 } from 'app/components/charts/common/LegendData';
 import { BudgetTooltip, BudgetTooltipMobile } from './tooltips/Budget';
 import {
@@ -47,7 +48,7 @@ export const breakdownOptions = [
 function getLegendData(breakdown: string) {
   switch (breakdown) {
     case breakdownOptions[0]:
-      return [];
+      return LegendDataPillars;
     case breakdownOptions[1]:
       return LegendDataTargetGroups;
     case breakdownOptions[2]:
@@ -81,7 +82,7 @@ function getTooltip(breakdown: string, isMobileWidth: boolean) {
 function checkIfNoData(data: any[], breakdown: string) {
   switch (breakdown) {
     case breakdownOptions[0]:
-      return find(data, (item: any) => item.budget > 0);
+      return find(data, (item: any) => item.contribution > 0);
     case breakdownOptions[1]:
       return find(data, (item: any) =>
         find(item.children, (child: any) => child.value > 0)

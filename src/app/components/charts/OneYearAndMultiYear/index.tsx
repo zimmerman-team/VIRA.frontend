@@ -53,7 +53,7 @@ function getLegendData(breakdown: string) {
   }
 }
 
-function getTooltip(breakdown: string, isMobileWidth: Boolean) {
+function getTooltip(breakdown: string, isMobileWidth: boolean) {
   switch (breakdown) {
     case breakdownOptions[0]:
       return isMobileWidth ? CountTooltipMobile : CountTooltip;
