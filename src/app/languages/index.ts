@@ -121,7 +121,7 @@ i18n.use(initReactI18next).init({
         // table 2
         Decision: 'Decision',
         'Project title': 'Project title',
-        Organisation: 'Organisation',
+        Organisation: 'Organisatie',
         'Grantee Name': 'Grantee Name',
         'Grantee Type': 'Grantee Type',
         Place: 'Place',
@@ -769,8 +769,6 @@ i18n.use(initReactI18next).init({
         SDG: 'SDG',
         Map: 'Kaart',
         ID: 'identifier',
-        'Project title': 'Titel project',
-        Organisation: 'Organisatie',
         //  --------------------
         'Grantee Name': 'Naam begunstigde',
         'Grantee Name': 'Type begunstigde',

@@ -70,8 +70,17 @@ export const MapPopup = (props: PopupProps) => {
         />
         {props.project && (
           <div css={row}>
-            <div>{t('Project')}</div>
-            <div>{props.project}</div>
+            <div>{t('Project title')}</div>
+            <div
+              css={`
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                max-width: calc(370px - 100px);
+              `}
+            >
+              {props.project}
+            </div>
           </div>
         )}
         {props.organisation && (
