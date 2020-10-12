@@ -316,6 +316,8 @@ export function GeoMap(props: Props) {
                     value={m.value}
                     target={m.target}
                     reached={m.reached}
+                    project={m.project}
+                    organisation={m.org}
                     latitude={m.latitude}
                     maxValue={maxPinValue}
                     longitude={m.longitude}

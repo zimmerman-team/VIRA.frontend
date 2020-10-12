@@ -13,9 +13,11 @@ type PopupProps = {
   value: number;
   target: number;
   reached: number;
+  project?: string;
   latitude: number;
   longitude: number;
   contribution: number;
+  organisation?: string;
 };
 
 const row = css`
@@ -66,6 +68,18 @@ export const MapPopup = (props: PopupProps) => {
             border-color: rgba(255, 255, 255, 0.16);
           `}
         />
+        {props.project && (
+          <div css={row}>
+            <div>{t('Project')}</div>
+            <div>{props.project}</div>
+          </div>
+        )}
+        {props.organisation && (
+          <div css={row}>
+            <div>{t('Organisation')}</div>
+            <div>{props.organisation}</div>
+          </div>
+        )}
         <div css={row}>
           <div>{t('Budget')}</div>
           <div>€{props.value}</div>

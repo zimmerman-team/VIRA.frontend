@@ -17,8 +17,6 @@ export function validatePolicyPrioritiesFields(
   if (sdgs.length === 0 || sumBy(sdgs, 'weight') < 100) {
     return false;
   }
-  if (tarBenTotal === 0) {
-    return false;
-  }
-  return funders.length > 0;
+  return tarBenTotal > 0;
+  // return funders.length > 0;
 }
