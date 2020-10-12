@@ -279,7 +279,7 @@ export function GeoMap(props: Props) {
       >
         {!props.noData && props.data && (
           <>
-            {props.data.countryFeatures && (
+            {/* {props.data.countryFeatures && (
               <Source
                 type="geojson"
                 data={
@@ -291,7 +291,7 @@ export function GeoMap(props: Props) {
               >
                 <Layer {...geoJSON} />
               </Source>
-            )}
+            )} */}
             {mapRef.current && (
               <Cluster
                 map={mapRef.current.getMap()}
@@ -322,7 +322,6 @@ export function GeoMap(props: Props) {
                     maxValue={maxPinValue}
                     longitude={m.longitude}
                     onHover={setHoveredPin}
-                    // onClick={onMapPinClick}
                     contribution={m.contribution}
                   />
                 ))}
@@ -336,13 +335,12 @@ export function GeoMap(props: Props) {
             maxValue={1}
             key="point-selection"
             name="point-selection"
-            onHover={setHoveredPin}
             latitude={get(props.pointSelection, 'latitude', 0)}
             longitude={get(props.pointSelection, 'longitude', 0)}
           />
         )}
         {hoveredLayer && <MapPopup {...hoveredLayer} />}
-        {hoveredPin && <MapPopup {...hoveredPin} />}
+        {hoveredPin && <MapPopup {...hoveredPin} onHover={setHoveredPin} />}
       </ReactMapGL>
       <MapControls zoomIn={handleZoomIn} zoomOut={handleZoomOut} />
     </div>

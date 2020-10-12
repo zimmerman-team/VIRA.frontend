@@ -16,6 +16,7 @@ type PopupProps = {
   project?: string;
   latitude: number;
   longitude: number;
+  onHover?: Function;
   contribution: number;
   organisation?: string;
 };
@@ -38,11 +39,13 @@ export const MapPopup = (props: PopupProps) => {
       tipSize={0}
       dynamicPosition
       offsetTop={-10}
+      offsetLeft={50}
       closeButton={false}
       latitude={props.latitude}
       longitude={props.longitude}
     >
       <div
+        onMouseLeave={() => props.onHover && props.onHover(null)}
         css={`
           color: #fff;
           padding: 6px;
