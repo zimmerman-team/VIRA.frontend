@@ -46,12 +46,12 @@ export const DurationTooltip = (props: any) => {
         `}
       />
       <div css={row}>
-        <div>{t('One Year projects Insinger Contribution')}</div>
-        <div>€{props.data['Insinger Contribution One Year']}</div>
+        <div>{t('One year projects')}</div>
+        <div>{props.data['Project Count One Year']}</div>
       </div>
       <div css={row}>
-        <div>{t('Multi Year projects Insinger Contribution')}</div>
-        <div>€{props.data['Insinger Contribution Multi Year']}</div>
+        <div>{t('Multi year projects')}</div>
+        <div>{props.data['Project Count Multi Year']}</div>
       </div>
     </div>
   );
@@ -70,12 +70,12 @@ export const DurationTooltipMobile = (props: any) => {
           <line />
           <TooltipContent>
             <Row>
-              <div>{t('One Year projects Insinger Contribution')}</div>
-              <div>€{props.data['Insinger Contribution One Year']}</div>
+              <div>{t('One year projects')}</div>
+              <div>{props.data['Project Count One Year']}</div>
             </Row>
             <Row>
-              <div>{t('Multi Year projects Insinger Contribution')}</div>
-              <div>€{props.data['Insinger Contribution Multi Year']}</div>
+              <div>{t('Multi year projects')}</div>
+              <div>{props.data['Project Count Multi Year']}</div>
             </Row>
           </TooltipContent>
         </Tooltip>

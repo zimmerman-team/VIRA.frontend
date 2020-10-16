@@ -56,10 +56,7 @@ export function getKeys(selectedBreakdown: string) {
         'People with disabilities',
       ];
     case 'One Year & Multi Year':
-      return [
-        'Insinger Contribution One Year',
-        'Insinger Contribution Multi Year',
-      ];
+      return ['Project Count One Year', 'Project Count Multi Year'];
     case 'People Reached':
       return ['People Reached', 'People Targeted'];
     case 'SDGs':
@@ -232,6 +229,8 @@ interface PriorityAreaOneAndMultiYearProps {
   reached_One: number;
   target_Multi: number;
   target_One: number;
+  count_One: number;
+  count_Multi: number;
 }
 
 // TODO: design vs data is unclear, showing only budget for now.
@@ -245,6 +244,10 @@ interface ChartDataPropsOneMultiYear {
   'Insinger Contribution One YearColor': string;
   'Insinger Contribution Multi Year': number;
   'Insinger Contribution Multi YearColor': string;
+  'Project Count One Year': number;
+  'Project Count One YearColor': string;
+  'Project Count Multi Year': number;
+  'Project Count Multi YearColor': string;
 }
 
 export function formatPriorityAreaOneMultiYearData(
@@ -272,6 +275,10 @@ export function formatPriorityAreaOneMultiYearData(
         0
       ),
       'Insinger Contribution Multi YearColor': colors[1],
+      'Project Count One Year': get(priorityArea, 'count_One', 0),
+      'Project Count One YearColor': colors[0],
+      'Project Count Multi Year': get(priorityArea, 'count_Multi', 0),
+      'Project Count Multi YearColor': colors[0],
     });
   });
 

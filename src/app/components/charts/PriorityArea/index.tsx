@@ -1,6 +1,10 @@
 import React from 'react';
+import get from 'lodash/get';
+import max from 'lodash/max';
 import find from 'lodash/find';
+import maxBy from 'lodash/maxBy';
 import { ResponsiveBar } from '@nivo/bar';
+import { useMediaQuery } from '@material-ui/core';
 import { useStoreState } from 'app/state/store/hooks';
 import { ChartWrapper } from 'app/components/charts/common/ChartWrapper';
 import BreakdownSelect from 'app/components/inputs/breakdown/BreakdownSelect';
@@ -25,9 +29,6 @@ import {
 } from './tooltips/TargetGroup';
 import { ReachedTooltip, ReachedTooltipMobile } from './tooltips/Reached';
 import { DurationTooltip, DurationTooltipMobile } from './tooltips/Duration';
-import get from 'lodash/get';
-import { useMediaQuery } from '@material-ui/core';
-import { BarChartBottomAxis } from 'app/components/charts/common/axis/BarChartBottomAxis';
 
 interface PriorityAreaContainerProps {
   data: any;
@@ -113,6 +114,21 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
 
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
+  let config = PriorityAreaConfigBase;
+
+  if (props.selectedBreakdown === breakdownOptions[2]) {
+    config = {
+      ...config,
+      axisBottom: {
+        ...config.axisBottom,
+        tickValues: max([
+          get(maxBy(props.data, 'count_One'), 'count_One'),
+          get(maxBy(props.data, 'count_Multi'), 'count_Multi'),
+        ]),
+      },
+    };
+  }
+
   return (
     <div
       css={`
@@ -131,43 +147,30 @@ export const PriorityAreaContainer = (props: PriorityAreaContainerProps) => {
         {!checkIfNoData(props.data, props.selectedBreakdown) ? (
           <NoData loading={loading} />
         ) : (
-          <React.Fragment>
-            <ResponsiveBar
-              {...PriorityAreaConfigBase}
-              data={
-                formatPriorityAreaData(
-                  props.selectedBreakdown,
-                  props.data
-                ) as object[]
-              }
-              keys={getKeys(props.selectedBreakdown)}
-              onClick={() => {
-                getTooltip(props.selectedBreakdown, isMobileWidth);
-              }}
-              tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
-              theme={{
-                ...PriorityAreaConfigBase.theme,
-                tooltip: {
-                  ...PriorityAreaConfigBase.theme?.tooltip,
-                  container: {
-                    ...PriorityAreaConfigBase.theme?.tooltip?.container,
-                    padding: isMobileWidth ? '0' : '5px 9px',
-                  },
+          <ResponsiveBar
+            {...config}
+            data={
+              formatPriorityAreaData(
+                props.selectedBreakdown,
+                props.data
+              ) as object[]
+            }
+            keys={getKeys(props.selectedBreakdown)}
+            onClick={() => {
+              getTooltip(props.selectedBreakdown, isMobileWidth);
+            }}
+            tooltip={getTooltip(props.selectedBreakdown, isMobileWidth)}
+            theme={{
+              ...PriorityAreaConfigBase.theme,
+              tooltip: {
+                ...PriorityAreaConfigBase.theme?.tooltip,
+                container: {
+                  ...PriorityAreaConfigBase.theme?.tooltip?.container,
+                  padding: isMobileWidth ? '0' : '5px 9px',
                 },
-              }}
-            />
-            {props.selectedBreakdown === breakdownOptions[2] && (
-              <div
-                css={`
-                  position: relative;
-                  left: 238px;
-                  top: -14px;
-                `}
-              >
-                €
-              </div>
-            )}
-          </React.Fragment>
+              },
+            }}
+          />
         )}
       </ChartWrapper>
       <div
