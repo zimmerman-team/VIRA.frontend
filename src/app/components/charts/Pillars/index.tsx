@@ -2,6 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 import max from 'lodash/max';
 import find from 'lodash/find';
+import range from 'lodash/range';
 import isEmpty from 'lodash/isEmpty';
 import { ResponsiveBar } from '@nivo/bar';
 import { useTranslation } from 'react-i18next';
@@ -96,6 +97,11 @@ export const PillarContainer = (props: PillarContainerProps) => {
     ) || 1;
   const maxValue: number | 'auto' | undefined =
     props.selectedBreakdown === breakdownOptions[0] ? 'auto' : x * 2;
+  const tickValues = range(0, (maxValue as number) + 1, 1);
+  const axisLeftConfig =
+    props.selectedBreakdown === breakdownOptions[1]
+      ? { ...config.axisLeft, tickValues }
+      : config.axisLeft;
 
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
 
@@ -121,6 +127,7 @@ export const PillarContainer = (props: PillarContainerProps) => {
           <ResponsiveBar
             {...config}
             maxValue={maxValue}
+            axisLeft={axisLeftConfig}
             keys={getKeys(props.selectedBreakdown)}
             onClick={() => {
               getTooltip(props.selectedBreakdown, isMobileWidth);

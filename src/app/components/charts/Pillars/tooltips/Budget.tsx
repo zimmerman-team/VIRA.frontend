@@ -21,6 +21,7 @@ const row = css`
 
 export const BudgetTooltip = (props: any) => {
   const { t } = useTranslation();
+  const name = props.data.name.indexOf('1') ? 'pillar1' : 'pillar2';
   return (
     <div
       css={`
@@ -37,7 +38,7 @@ export const BudgetTooltip = (props: any) => {
           font-weight: 600;
         `}
       >
-        {t(props.data.name)}
+        {t(name)}
       </div>
       <hr
         css={`
@@ -48,7 +49,15 @@ export const BudgetTooltip = (props: any) => {
       />
       <div css={row}>
         <div>{t('Contribution')}</div>
-        <div>€{props.data['Insinger Contribution']}</div>
+        <div>
+          {props.data['Insinger Contribution']
+            .toLocaleString(undefined, {
+              currency: 'EUR',
+              currencyDisplay: 'symbol',
+              style: 'currency',
+            })
+            .replace('.00', '')}
+        </div>
       </div>
     </div>
   );
@@ -56,19 +65,28 @@ export const BudgetTooltip = (props: any) => {
 
 export const BudgetTooltipMobile = (props: any) => {
   const { t } = useTranslation();
+  const name = props.data.name.indexOf('1') ? 'pillar1' : 'pillar2';
   return (
     <XsContainer>
       <ClickAwayListener onClickAway={() => {}}>
         <Tooltip>
           <TooltipHeader>
             <div> </div>
-            {t(props.data.name)}
+            {t(name)}
           </TooltipHeader>
           <line />
           <TooltipContent>
             <Row>
               <div>{t('Contribution')}</div>
-              <div>€{props.data['Insinger Contribution']}</div>
+              <div>
+                {props.data['Insinger Contribution']
+                  .toLocaleString(undefined, {
+                    currency: 'EUR',
+                    currencyDisplay: 'symbol',
+                    style: 'currency',
+                  })
+                  .replace('.00', '')}
+              </div>
             </Row>
           </TooltipContent>
         </Tooltip>

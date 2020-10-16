@@ -22,6 +22,7 @@ export const ReportDetailModuleF = (props: any) => {
     id: '',
     title: '',
     date: '',
+    contribution: 0,
     location: '',
     country: '',
     total_target_beneficiaries: 0,

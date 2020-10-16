@@ -47,7 +47,15 @@ export const BudgetTooltip = (props: any) => {
       />
       <div css={row}>
         <div>{t('Contribution')}</div>
-        <div>€{props.data['Insinger Contribution']}</div>
+        <div>
+          {props.data['Insinger Contribution']
+            .toLocaleString(undefined, {
+              currency: 'EUR',
+              currencyDisplay: 'symbol',
+              style: 'currency',
+            })
+            .replace('.00', '')}
+        </div>
       </div>
     </div>
   );
@@ -67,7 +75,15 @@ export const BudgetTooltipMobile = (props: any) => {
           <TooltipContent>
             <Row>
               <div>{t('Contribution')}</div>
-              <div>€{props.data['Insinger Contribution']}</div>
+              <div>
+                {props.data['Insinger Contribution']
+                  .toLocaleString(undefined, {
+                    currency: 'EUR',
+                    currencyDisplay: 'symbol',
+                    style: 'currency',
+                  })
+                  .replace('.00', '')}
+              </div>
             </Row>
           </TooltipContent>
         </Tooltip>

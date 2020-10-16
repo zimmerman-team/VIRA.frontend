@@ -31,9 +31,50 @@ export const ProjectDetailLayout = (props: any) => {
         props.projectDetail.responsible_person_email
   );
   const remainingBudget = get(props.remainingBudget, 'data.remainBudget', '');
+  const signedInUserRole = useStoreState((state) =>
+    get(state.userDetails.data, 'role', 'Grantee user')
+  );
 
   function handleReportBtnClick() {
     props.projectDetail.generateReport(props.reportID);
+  }
+
+  const titleStats = [
+    {
+      label: t('projects.detail.stats.total_budget'),
+      value: parseInt(props.projectDetail.total_amount || 0, 10)
+        .toLocaleString(undefined, {
+          currency: 'EUR',
+          currencyDisplay: 'symbol',
+          style: 'currency',
+        })
+        .replace('.00', ''),
+    },
+    {
+      label: t('projects.detail.stats.insinger_contribution'),
+      value: parseInt(props.projectDetail.total_insinger_contribution || 0, 10)
+        .toLocaleString(undefined, {
+          currency: 'EUR',
+          currencyDisplay: 'symbol',
+          style: 'currency',
+        })
+        .replace('.00', ''),
+    },
+  ];
+  if (
+    signedInUserRole === 'Super admin' ||
+    signedInUserRole === 'Administrator'
+  ) {
+    titleStats.splice(1, 0, {
+      label: t('projects.detail.stats.remaining_budget'),
+      value: parseInt(remainingBudget || 0, 10)
+        .toLocaleString(undefined, {
+          currency: 'EUR',
+          currencyDisplay: 'symbol',
+          style: 'currency',
+        })
+        .replace('.00', ''),
+    });
   }
 
   return (
@@ -83,41 +124,7 @@ export const ProjectDetailLayout = (props: any) => {
           date={t('*earliest and latest activity start dates')}
           url_note={props.projectDetail.organisation}
           url={props.projectDetail.organisation_link}
-          stats={[
-            {
-              label: t('projects.detail.stats.total_budget'),
-              value: parseInt(props.projectDetail.total_amount || 0, 10)
-                .toLocaleString(undefined, {
-                  currency: 'EUR',
-                  currencyDisplay: 'symbol',
-                  style: 'currency',
-                })
-                .replace('.00', ''),
-            },
-            {
-              label: t('projects.detail.stats.remaining_budget'),
-              value: parseInt(remainingBudget || 0, 10)
-                .toLocaleString(undefined, {
-                  currency: 'EUR',
-                  currencyDisplay: 'symbol',
-                  style: 'currency',
-                })
-                .replace('.00', ''),
-            },
-            {
-              label: t('projects.detail.stats.insinger_contribution'),
-              value: parseInt(
-                props.projectDetail.total_insinger_contribution || 0,
-                10
-              )
-                .toLocaleString(undefined, {
-                  currency: 'EUR',
-                  currencyDisplay: 'symbol',
-                  style: 'currency',
-                })
-                .replace('.00', ''),
-            },
-          ]}
+          stats={titleStats}
         />
       </Grid>
 

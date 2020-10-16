@@ -68,7 +68,7 @@ export function PillarMultiYearConfig(t: any): BarSvgProps {
       format: (value: any) => t(getTranslationKey(value)),
     },
     margin: {
-      top: 0,
+      top: 10,
       right: 0,
       bottom: 60,
       left: 48,

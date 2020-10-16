@@ -46,8 +46,16 @@ export const CountTooltip = (props: any) => {
         `}
       />
       <div css={row}>
-        <div>{t('Project count')}</div>
-        <div>{props.data.count}</div>
+        <div>{t('Contribution')}</div>
+        <div>
+          {props.data.count
+            .toLocaleString(undefined, {
+              currency: 'EUR',
+              currencyDisplay: 'symbol',
+              style: 'currency',
+            })
+            .replace('.00', '')}
+        </div>
       </div>
     </div>
   );
@@ -63,11 +71,19 @@ export const CountTooltipMobile = (props: any) => {
             <div> </div>
             {t(props.data.name)}
           </TooltipHeader>
-          <line></line>
+          <line />
           <TooltipContent>
             <Row>
-              <div>{t('Project count')}</div>
-              <div>{props.data.count}</div>
+              <div>{t('Contribution')}</div>
+              <div>
+                {props.data.count
+                  .toLocaleString(undefined, {
+                    currency: 'EUR',
+                    currencyDisplay: 'symbol',
+                    style: 'currency',
+                  })
+                  .replace('.00', '')}
+              </div>
             </Row>
           </TooltipContent>
         </Tooltip>

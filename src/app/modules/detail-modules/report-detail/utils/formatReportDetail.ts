@@ -12,6 +12,7 @@ export function formatReportDetail(data: any) {
     id: reportDetailRecord._id,
     title: reportDetailRecord.title,
     date,
+    contribution: reportDetailRecord.insContribution,
     location: reportDetailRecord.location,
     country: reportDetailRecord.country,
     total_target_beneficiaries: reportDetailRecord.total_target_beneficiaries,

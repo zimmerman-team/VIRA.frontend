@@ -52,6 +52,7 @@ type OneYearAndMultiYearProps = {
   budget_Spent: number;
   budget_Total: number;
   count: number;
+  contribution: number;
 };
 
 export function formatOneYearAndMultiYearDataBudget(
@@ -62,7 +63,7 @@ export function formatOneYearAndMultiYearDataBudget(
   data.forEach((OneYearAndMultiYear: OneYearAndMultiYearProps) => {
     chartData.push({
       name: OneYearAndMultiYear.name,
-      count: OneYearAndMultiYear.count,
+      count: OneYearAndMultiYear.contribution,
       countColor: OneYearAndMultiYear1Colors[0],
     });
   });

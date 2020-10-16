@@ -298,8 +298,8 @@ export const ReportDetailLayout = (props: any) => {
               testattr="report-title"
               stats={[
                 {
-                  label: t('reports.detail.stats.targetBeneficiaries'),
-                  value: props.report.total_target_beneficiaries,
+                  label: t('Contribution'),
+                  value: props.report.contribution,
                 },
                 {
                   label: t('reports.detail.stats.budget'),
