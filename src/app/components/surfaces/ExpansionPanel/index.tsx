@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-
+import parse from 'html-react-parser';
 import {
   AccordionDetails,
   Accordion,
@@ -87,7 +87,7 @@ export const ExpansionPanel = (props: ExpansionPanelModel) => {
 
           <AccordionDetails css={ExpansionPanelDetailsStyle}>
             <Typography variant="body1" data-cy={`question-${index}-expl`}>
-              {question.expl}
+              {parse(question.expl)}
             </Typography>
           </AccordionDetails>
         </Accordion>
