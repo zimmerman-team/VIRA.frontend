@@ -1,5 +1,5 @@
-![CircleCI](https://img.shields.io/circleci/build/github/zimmerman-team/insinger-frontend/develop?label=develop&token=27b31d401501316061ede5b152f153b63ce967b9)
-![CircleCI](https://img.shields.io/circleci/build/github/zimmerman-team/insinger-frontend/master?label=master&token=27b31d401501316061ede5b152f153b63ce967b9)
+![CircleCI](https://img.shields.io/circleci/build/github/zimmerman-team/VIRA.frontend/develop?label=develop&token=27b31d401501316061ede5b152f153b63ce967b9)
+![CircleCI](https://img.shields.io/circleci/build/github/zimmerman-team/VIRA.frontend/master?label=master&token=27b31d401501316061ede5b152f153b63ce967b9)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f8dd18c30fcbd2396906/maintainability)](https://codeclimate.com/repos/5ebc3e35e429ab6c86006c8d/maintainability)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zimmerman-zimmerman_insinger-frontend&metric=alert_status&token=9678b9e8e6a13130aa5ec4bc1595ba7940b6f288)](https://sonarcloud.io/dashboard?id=zimmerman-zimmerman_insinger-frontend)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
