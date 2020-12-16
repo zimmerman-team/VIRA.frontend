@@ -1,56 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![CircleCI](https://img.shields.io/circleci/build/github/zimmerman-team/VIRA.frontend/develop?label=develop&token=27b31d401501316061ede5b152f153b63ce967b9)
+![CircleCI](https://img.shields.io/circleci/build/github/zimmerman-team/VIRA.frontend/master?label=master&token=27b31d401501316061ede5b152f153b63ce967b9)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f8dd18c30fcbd2396906/maintainability)](https://codeclimate.com/repos/5ebc3e35e429ab6c86006c8d/maintainability)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zimmerman-zimmerman_insinger-frontend&metric=alert_status&token=9678b9e8e6a13130aa5ec4bc1595ba7940b6f288)](https://sonarcloud.io/dashboard?id=zimmerman-zimmerman_insinger-frontend)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
-## Available Scripts
+## What is the Insinger Monitoring & Evaluation Tool?
 
-Before running any of the scripts, please make sure you add an `.env` file in the root directory of the project containing the following:
+This tool allows you to easily generate reports on the basis of projects that have been co-funded by the Insinger Foundation. After logging in, acces is granted to project information and progress can be reported. These reports allow the Insinger Foundation to monitor the effectiveness of contributions more effectively.
+</a>
 
-```
-REACT_APP_PROJECT_URL=http://localhost:3000
-REACT_APP_AUTH_CUSTOM_DOMAIN=<REACT_APP_AUTH_CUSTOM_DOMAIN>
-REACT_APP_AUTH_DOMAIN=<REACT_APP_AUTH_DOMAIN>
-REACT_APP_CLIENT_ID=<REACT_APP_CLIENT_ID>
-REACT_APP_AE_API_CLIENT_ID=<REACT_APP_AE_API_CLIENT_ID>
-REACT_APP_AE_API_CLIENT_SECRET=<REACT_APP_AE_API_CLIENT_SECRET>
-REACT_APP_AE_API_URL=<REACT_APP_AE_API_URL>
-```
+## About the project
 
-In the project directory, you can run:
+- Website: Private
+- Authors: <a href="https://www.zimmerman.team/" target="_blank">Zimmerman</a>
 
-### `yarn start`
+* License: AGPLv3
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Github Frontend Repo: <a href="https://github.com/zimmerman-zimmerman/insinger-frontend" target="_blank">github.com/zimmerman-zimmerman/insinger-frontend</a>
+- Github Backend Repo: <a href="https://github.com/zimmerman-zimmerman/insinger-backend" target="_blank">github.com/zimmerman-zimmerman/insinger-backend</a>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Installing
 
-### `yarn test`
+<b>1.</b> Set up the <a href="https://github.com/zimmerman-zimmerman/insinger-frontend" target="_blank">insinger-frontend</a> first<br/>
+<b>2.</b> Checkout this repository to a local folder<br/>
+<b>3.</b> Make sure you've installed node.js 10.16.3 or higher<br/>
+<b>4.</b> Run `yarn install` <br/>
+<b>5.</b> Create an .env file and specify the following variables:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- REACT_APP_PROJECT_URL=http://localhost:3000
+- REACT_APP_AUTH_CUSTOM_DOMAIN=<REACT_APP_AUTH_CUSTOM_DOMAIN>
+- REACT_APP_AUTH_DOMAIN=<REACT_APP_AUTH_DOMAIN>
+- REACT_APP_CLIENT_ID=<REACT_APP_CLIENT_ID>
+- REACT_APP_AE_API_CLIENT_ID=<REACT_APP_AE_API_CLIENT_ID>
+- REACT_APP_AE_API_CLIENT_SECRET=<REACT_APP_AE_API_CLIENT_SECRET>
+- REACT_APP_AE_API_URL=<REACT_APP_AE_API_URL>
 
-### `yarn build`
+## Running the application
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To be able to properly run the application you will need to set the following environment variables
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- REACT_APP_BACKEND_PORT=<REACT_APP_BACKEND_PORT>
+- REACT_APP_PROJECT_URL=<REACT_APP_PROJECT_URL>
+- REACT_APP_BACKEND_URL=<REACT_APP_BACKEND_URL>
+- REACT_APP_MONGO_DB_URL=<REACT_APP_MONGO_DB_URL>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+After you've correctly set the enviroment variables you can run `yarn start`
