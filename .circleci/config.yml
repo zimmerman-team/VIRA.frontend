@@ -7,8 +7,13 @@ version: 2.1
 executors:
   cypress-executor:
     docker:
-      - image: "cypress/included:4.8.0"
-    resource_class: large
+      - image: "cypress/included:5.0.0"
+    resource_class: medium+
+
+  cypress-executor-med:
+    docker:
+      - image: "cypress/included:5.0.0"
+    resource_class: medium
 
 jobs:
   deploy:
@@ -51,12 +56,15 @@ workflows:
                 command: |
                   if [ "${CIRCLE_BRANCH}" == "master" ]; then
                     echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
+                    echo 'export REACT_APP_CYPRESS_baseUrl="$REACT_APP_PROJECT_URL_STAGING"' >> $BASH_ENV
                     echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_STAGING"' >> $BASH_ENV
                   elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-                    echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_TEST"' >> $BASH_ENV
+                    echo 'export REACT_APP_PROJECT_URL="https://app.ins.test.nyuki.io"' >> $BASH_ENV
+                    echo 'export REACT_APP_CYPRESS_baseUrl="https://app.ins.test.nyuki.io"' >> $BASH_ENV
                     echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_TEST"' >> $BASH_ENV
                   else
-                    echo 'export REACT_APP_PROJECT_URL="$REACT_APP_PROJECT_URL_DEV"' >> $BASH_ENV
+                    echo 'export REACT_APP_PROJECT_URL="https://app.ins.dev.nyuki.io"' >> $BASH_ENV
+                    echo 'export REACT_APP_CYPRESS_baseUrl="https://app.ins.dev.nyuki.io"' >> $BASH_ENV
                     echo 'export REACT_APP_BACKEND_URL="$REACT_APP_BACKEND_URL_DEV"' >> $BASH_ENV
                   fi
                   source $BASH_ENV
@@ -67,11 +75,12 @@ workflows:
             - cypress/install
       - cypress/run:
           executor: cypress-executor
-          yarn: true
-          command: npx happo-cypress -- npx cypress run
-          browser: chrome
           requires:
             - deploy
+          yarn: true
+          #          command: yarn happo-cypress -- -- yarn cypress run --record --parallel
+          #          command: yarn cypress:record:chrome
+          browser: chrome
           record: true
           parallel: true
           parallelism: 6
@@ -81,4 +90,6 @@ workflows:
             - deploy
           filters:
             branches:
-              only: master
+              only:
+                - master
+                - develop

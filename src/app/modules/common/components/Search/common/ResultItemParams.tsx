@@ -13,7 +13,7 @@ interface ResultItemParams {
 }
 
 export const SearchResultItem = (props: ResultItemParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div
       data-cy={`search-result-item-${props.index}`}

@@ -3,7 +3,7 @@ import { css } from 'styled-components/macro';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
-import { StatItemParams } from 'app/modules/landing/statsMock';
+import { StatItemParams } from 'app/modules/landing/config';
 import { ProjectPalette } from 'app/theme';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -50,12 +50,12 @@ const LinkStyle = css`
 `;
 
 export const StatItem = (props: StatItemParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Grid
       item
-      xs={4}
-      lg={4}
+      xs={props.gridNum}
+      lg={props.gridNum}
       css={StatItemGridStyle}
       data-cy={`stat-item-${props.index}`}
     >

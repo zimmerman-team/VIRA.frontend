@@ -5,16 +5,16 @@ describe('test internalization', () => {
     cy.auth();
 
     // check elements
-    cy.findByTestId('stat-item-text-0').should('contain.text', 'Projects');
-
-    cy.findByTestId('language-nl').click();
-    cy.wait(2000);
-
     cy.findByTestId('stat-item-text-0').should('contain.text', 'Projecten');
 
-    cy.get('body').happoScreenshot({
+    cy.findByTestId('language-en').click();
+    cy.wait(2000);
+
+    cy.findByTestId('stat-item-text-0').should('contain.text', 'Projects');
+
+    /*cy.get('body').happoScreenshot({
       component: 'Privacy page',
       variant: 'base',
-    });
+    });*/
   });
 });

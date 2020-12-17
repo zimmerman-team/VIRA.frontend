@@ -9,19 +9,18 @@ import { getNavTabItems } from 'app/modules/landing/utils/getNavTabItems';
 import { GranteeParams } from 'app/modules/detail-modules/grantee-detail/mock';
 import { Box, Grid, Hidden } from '@material-ui/core';
 import { ListModule } from 'app/modules/list-module';
-import { TabNavMockList } from 'app/modules/landing/statsMock';
-import { useTranslation } from 'react-i18next';
+import { NavItemsGeneralConfig } from 'app/modules/landing/config';
 
 import { bubbleMockData } from 'app/components/charts/Bubble/mock';
 import { Viztabs } from 'app/modules/common/components/Viztabs';
-import { checkIfPPData } from 'app/modules/common/components/Viztabs/utils';
 import { ContactsCardMobile } from 'app/components/surfaces/Cards/ContactsCardMobile';
 
 export const GranteeDetailLayout = (props: GranteeParams) => {
-  const { t } = useTranslation();
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    props.onBubbleSelect('');
+    props.onBreakdownSelect('None');
   };
 
   return (
@@ -71,20 +70,25 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* charts */}
-      {checkIfPPData(props.ppVizData) && !props.loading && (
-        <Viztabs
-          value={value}
-          onTabClick={handleChange}
-          data-cy="grantee-detail-viztabs"
-          barChartData={props.ppVizData}
-          barChartLegends={props.barChartLegends}
-          onBarChartLegendClick={props.onBarChartLegendClick}
-          bubbleChartData={{ ...bubbleMockData, children: props.SDGVizData }}
-          selectedBubble={props.selectedSDG}
-          onBubbleSelect={props.onBubbleSelect}
-          geoMapData={props.geoMapData}
-        />
-      )}
+      <Viztabs
+        value={value}
+        onTabClick={handleChange}
+        data-cy="grantee-detail-viztabs"
+        barChartData={props.ppVizData}
+        barChartLegends={props.barChartLegends}
+        onBarChartLegendClick={props.onBarChartLegendClick}
+        bubbleChartData={{ ...bubbleMockData, children: props.SDGVizData }}
+        selectedBubble={props.selectedSDG}
+        onBubbleSelect={props.onBubbleSelect}
+        geoMapData={props.geoMapData}
+        pillarData={props.pillarData}
+        pillarDataByDuration={props.pillarDataByDuration}
+        priorityAreaData={props.priorityAreaData}
+        targetGroupData={props.targetGroupData}
+        oneAndMultiYearData={props.oneAndMultiYearData}
+        selectedBreakdown={props.selectedBreakdown}
+        onBreakdownSelect={props.onBreakdownSelect}
+      />
 
       {/* ---------------------------------------------------------------------*/}
       {/* projects */}
@@ -93,7 +97,7 @@ export const GranteeDetailLayout = (props: GranteeParams) => {
       <ListModule
         data-cy="grantee-detail-projects"
         hideGrantees
-        tabNav={getNavTabItems(TabNavMockList, 'viz')}
+        tabNav={getNavTabItems(NavItemsGeneralConfig, 'viz')}
       />
     </React.Fragment>
   );

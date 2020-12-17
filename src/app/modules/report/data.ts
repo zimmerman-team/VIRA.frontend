@@ -73,3 +73,30 @@ export const projectMockData: projectMockProps = {
   sex: 'male',
   role: 'voorzitter kerkenraad',
 };
+
+export const policyPrioritiesToLangKey = (key: string) => {
+  switch (key) {
+    case 'Poverty reduction':
+      return 'charts.items.poverty';
+    case 'Prisoner rehabilitation':
+      return 'charts.items.prisoner';
+    case 'Reducing forced prostitution':
+      return 'charts.items.prostitution';
+    case 'Helping refugees':
+      return 'charts.items.refugees';
+    case 'Children & Youth engagement':
+      return 'charts.items.children_youth_engagement';
+    case 'Vulnerable groups in society':
+      return 'charts.items.vulnerable_groups';
+    case 'Reducing drug abuse & helping drug addicts':
+      return 'charts.items.drugs';
+    case 'Sustainability':
+      return 'charts.items.sustainability';
+    case 'Emancipation of women and girls':
+      return 'charts.items.emancipation';
+    case 'Cultural heritage':
+      return 'charts.items.heritage';
+    default:
+      return key;
+  }
+};

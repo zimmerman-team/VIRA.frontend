@@ -63,19 +63,19 @@ export function BottomNav(props: BottomNavModel) {
     <Grid container item xs={12} lg={12} justify="space-between" wrap="nowrap">
       <Grid item xs={3}>
         <ContainedButton
-          testAttr="back-button"
+          testattr="back-button"
           text={isMobileWidth ? '' : t('reports.form.buttons.back')}
           icon={isMobileWidth && <ChevronLeft />}
           onClick={props.back}
           disabled={props.backDisabled}
-          css={isMobileWidth && mobileBackStyle}
+          css={isMobileWidth ? mobileBackStyle : ''}
         />
       </Grid>
       <Grid item xs={9} justify="flex-end" css={gridItem}>
         {props.showDeleteBtn && (
           <React.Fragment>
             <ContainedButton
-              testAttr="delete-button"
+              testattr="delete-button"
               text={t('reports.form.buttons.delete')}
               onClick={props.deleteReport}
               css={`
@@ -85,7 +85,7 @@ export function BottomNav(props: BottomNavModel) {
                     background: #e57373 !important;
                   }
                   ${isMobileWidth &&
-                    `max-height: 48px;
+                  `max-height: 48px;
                   min-height: 48px;
                   max-width: 132px;`}
                 }
@@ -97,30 +97,30 @@ export function BottomNav(props: BottomNavModel) {
         {props.showDraftSubmitBtn && (
           <React.Fragment>
             <ContainedButton
-              testAttr="draft-button"
+              testattr="draft-button"
               text={t('reports.form.buttons.draft')}
               onClick={props.saveDraft}
-              css={isMobileWidth && mobileButton}
+              css={isMobileWidth ? mobileButton : ''}
             />
             <Box width={`${isMobileWidth ? '8px' : '24px'}`} />
           </React.Fragment>
         )}
         {props.showSubmitBtn ? (
           <ContainedButton
-            testAttr="submit-button"
+            testattr="submit-button"
             text={t(
               `reports.form.buttons.${query.get('rid') ? 'save' : 'submit'}`
             )}
             onClick={props.submit}
-            css={isMobileWidth && mobileButton}
+            css={isMobileWidth ? mobileButton : ''}
           />
         ) : (
           <ContainedButton
-            testAttr="next-button"
+            testattr="next-button"
             text={t('reports.form.buttons.next')}
             onClick={props.next}
             disabled={props.nextDisabled}
-            css={isMobileWidth && mobileButton}
+            css={isMobileWidth ? mobileButton : ''}
           />
         )}
       </Grid>

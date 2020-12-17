@@ -1,5 +1,5 @@
 // global
-import { Box, Typography, useMediaQuery } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 // aboslute
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
@@ -17,31 +17,29 @@ import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // direct
 import 'styled-components/macro';
-import { ProjectPalette } from 'app/theme';
-import { TeamSelectNew } from 'app/components/inputs/select-team-new';
 
 // TODO: So would be nice to combine this module and "manage-account" in one.
 function ManageUserEditF(props: ManageUserEditModel) {
   const { t } = useTranslation();
   // redux state & actions
-  const addUserData = useStoreState(state => state.addUser.data);
-  const addUserAction = useStoreActions(actions => actions.addUser.fetch);
-  const loadUserData = useStoreState(state => state.loadUser.data);
-  const loadUserAction = useStoreActions(actions => actions.loadUser.fetch);
+  const addUserData = useStoreState((state) => state.addUser.data);
+  const addUserAction = useStoreActions((actions) => actions.addUser.fetch);
+  const loadUserData = useStoreState((state) => state.loadUser.data);
+  const loadUserAction = useStoreActions((actions) => actions.loadUser.fetch);
   const loadUserClearAction = useStoreActions(
-    actions => actions.loadUser.clear
+    (actions) => actions.loadUser.clear
   );
   const snackbarAction = useStoreActions(
-    actions => actions.syncVariables.setSnackbar
+    (actions) => actions.syncVariables.setSnackbar
   );
-  const editUserData = useStoreState(state => state.editUser.data);
-  const editUserAction = useStoreActions(actions => actions.editUser.fetch);
+  const editUserData = useStoreState((state) => state.editUser.data);
+  const editUserAction = useStoreActions((actions) => actions.editUser.fetch);
   const editUserClearAction = useStoreActions(
-    actions => actions.editUser.clear
+    (actions) => actions.editUser.clear
   );
-  const storeUser = useStoreState(state => state.syncVariables.user);
-  const allUsersAction = useStoreActions(actions => actions.allUsers.fetch);
-  const roles = useStoreState(state => state.getUserRoles.data);
+  const storeUser = useStoreState((state) => state.syncVariables.user);
+  const allUsersAction = useStoreActions((actions) => actions.allUsers.fetch);
+  const roles = useStoreState((state) => state.getUserRoles.data);
   // state
   const [firstName, setFirstName] = React.useState(
     get(props, 'form.firstName', '')
@@ -74,12 +72,15 @@ function ManageUserEditF(props: ManageUserEditModel) {
     }
     if (props.mode === 'edit') {
       const prevRoleId = get(
-        find(roles, r => get(r, 'label', '') === get(loadUserData, 'role', '')),
+        find(
+          roles,
+          (r) => get(r, 'label', '') === get(loadUserData, 'role', '')
+        ),
         'value',
         ''
       );
       const roleId = get(
-        find(roles, r => get(r, 'label', '') === role),
+        find(roles, (r) => get(r, 'label', '') === role),
         'value',
         ''
       );
@@ -183,8 +184,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
     return true;
   }
 
-  const loading = useStoreState(state => state.loadUser.loading);
-  const isMobileWidth = useMediaQuery('(max-width: 600px)');
+  const loading = useStoreState((state) => state.loadUser.loading);
 
   // returned components
   return (
@@ -219,6 +219,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           value={firstName}
           setValue={setFirstName}
           id="First Name"
+          data-cy="FirstName"
           label={t('user_management.user.first_name')}
           bigLabel
         />
@@ -228,6 +229,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           value={lastName}
           setValue={setLastName}
           id="Last Name"
+          data-cy="LastName"
           label={t('user_management.user.last_name')}
           bigLabel
         />
@@ -238,6 +240,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           setValue={setEmail}
           id="Email"
           label={t('user_management.user.email')}
+          data-cy="Email"
           bigLabel
         />
         <Box width="100%" height="32px" />
@@ -260,6 +263,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
           <Grid container>
             <Grid item xs={12} md={12} lg={6} xl={6}>
               <RadioButtonsGroup
+                data-cy="TeamSelect"
                 value={role}
                 onChange={(e: any) => setRole(e.target.value)}
                 {...props.form.radioButtonGroup}
@@ -268,6 +272,7 @@ function ManageUserEditF(props: ManageUserEditModel) {
             {props.mode === 'add' && (
               <Grid item xs={12} md={12} lg={6} xl={6}>
                 <TeamSelect
+                  data-cy="TeamSelect1"
                   title={t('user_management.user.select_team')}
                   selectedItem={group}
                   items={props.form.selectOptions}

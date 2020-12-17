@@ -1,29 +1,41 @@
 /// <reference types="Cypress" />
 
-describe('edit report page', () => {
-  it('test edit report page', () => {
+describe('edit an existing report', () => {
+  it('go to reports overview page', () => {
     // authenticate
-    cy.auth();
+    cy.auth().then(() => {
+      cy.findByTestId('language-en').click();
+      cy.wait(2000);
+      // go to reports overview
+      cy.goToReportsOverview();
+    });
+  });
 
-    // reports
-    cy.findByTestId('sidebar-item-3').click();
-
+  it('edit report page', () => {
     // save previous title
-    const prevTitle = '';
-    cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
+    // todo: maybe use a cookie or localstorage for this?
+    let prevTitle = '';
+
+    cy.get(
+      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(1) > :nth-child(1)'
+    )
+      .should('exist')
       .invoke('text')
-      .then(text1 => {
+      .then((text1) => {
         prevTitle = text1;
+        console.log('text1', text1);
       });
 
     // click top report
-    cy.get('[data-testid=MuiDataTableBodyCell-1-0]')
-      .children()
+
+    cy.get(
+      '[data-testid=MuiDataTableBodyCell-1-0] > :nth-child(1) > :nth-child(1)'
+    )
+      .should('exist')
       .click()
       // click edit button if report is not a draft
       .then(() => {
-        !prevTitle.includes('[Draft]') &&
-          cy.findByTestId('contained-button').click();
+        !prevTitle.includes('[Draft]') && cy.findByText('Edit report').click();
       });
 
     // use exact time as new title
@@ -31,13 +43,14 @@ describe('edit report page', () => {
     const newTitle = currentDate.getTime();
 
     // type new title
-    cy.findByTestId('outcome-title')
-      .children()
-      .clear()
-      .type(newTitle);
+    cy.findByTestId('outcome-title').children().clear().type(newTitle);
 
     // next
     cy.findByTestId('next-button').click();
+
+    cy.findByTestId('other-funders').click();
+    // cy.get('#autocomplete-countries-option-0').click();
+
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
     cy.findByTestId('next-button').click();
@@ -46,7 +59,7 @@ describe('edit report page', () => {
     cy.findByTestId('submit-button').click();
 
     // go to report
-    cy.wait(5000);
+    cy.wait(2000);
     cy.findByTestId('dialog-button').click();
 
     // check if title has been updated

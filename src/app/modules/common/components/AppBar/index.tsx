@@ -41,7 +41,6 @@ interface PrimarySearchAppBarParams {
 
 export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
     mobileMoreAnchorEl,
     setMobileMoreAnchorEl,
@@ -49,10 +48,6 @@ export default function PrimarySearchAppBar(props: PrimarySearchAppBarParams) {
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);

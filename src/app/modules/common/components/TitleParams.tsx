@@ -1,14 +1,13 @@
 import { css } from 'styled-components/macro';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { Box, Grid, Hidden } from '@material-ui/core';
 import { ProjectPalette } from 'app/theme';
 import { StatItemDivider } from 'app/modules/landing/common/stats/StatItemDivider';
 import { StatItem } from 'app/modules/common/components/StatItem';
-import Grid from '@material-ui/core/Grid';
+
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Hidden } from '@material-ui/core';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
 
 export interface TitleParams {
@@ -20,7 +19,7 @@ export interface TitleParams {
   url_note?: string;
   url?: string;
   description?: string;
-  testAttr?: string;
+  testattr?: string;
   stats?: { label: string; value: string }[];
   editReport?: void;
   showEditBtn?: boolean;
@@ -72,13 +71,13 @@ export const TitleFragment = (props: TitleParams) => {
     <React.Fragment>
       {/* ---------------------------- */}
       {/* title */}
-      <Typography data-cy={props.testAttr} css={style[0]}>
+      <Typography data-cy={props.testattr} css={style[0]}>
         {t(props.title)}
       </Typography>
       <Box height="15px" />
       {props.showMoreThanTitle && (
         <Grid item container xs={12} sm={12} md={12} lg={12} xl={12}>
-          <Grid item xs={12} lg={8}>
+          <Grid item xs={12} lg={7}>
             {/* ---------------------------- */}
             {/* id */}
             {props.id && (
@@ -105,12 +104,14 @@ export const TitleFragment = (props: TitleParams) => {
               </Typography>
             )}
           </Grid>
-          <div
-            css={`
-              width: 100%;
-              height: 24px;
-            `}
-          />
+          <Hidden lgUp>
+            <div
+              css={`
+                width: 100%;
+                height: 24px;
+              `}
+            />
+          </Hidden>
 
           {/* ---------------------------------------------------------------------*/}
           {/* button: generate report */}
@@ -133,7 +134,7 @@ export const TitleFragment = (props: TitleParams) => {
               item
               container
               xs={12}
-              lg={4}
+              md={5}
               justify="flex-end"
               wrap="nowrap"
             >

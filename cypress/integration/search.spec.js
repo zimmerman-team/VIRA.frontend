@@ -15,9 +15,9 @@ describe('search', () => {
 
     // cy.get('body').happoScreenshot();
 
-    cy.get('body').happoScreenshot({
+    /*cy.get('body').happoScreenshot({
       component: 'Search',
       variant: 'base',
-    });
+    });*/
   });
 });

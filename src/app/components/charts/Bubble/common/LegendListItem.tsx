@@ -3,6 +3,7 @@
 import React from 'react';
 import 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
+import { hexToRgb } from 'app/utils/hexToRgb';
 
 export type LegendListItemProps = {
   name: string;
@@ -16,6 +17,7 @@ export type LegendListItemProps = {
 export function LegendListItem(props: LegendListItemProps) {
   const { t } = useTranslation();
   const hasData = !props.opacity || props.opacity === 1;
+  const rgbColor = hexToRgb(props.color);
   return (
     <li
       css={`
@@ -24,9 +26,9 @@ export function LegendListItem(props: LegendListItemProps) {
         min-height: 24px;
         align-items: center;
         margin-bottom: 16px;
-        opacity: ${props.opacity || 1};
         cursor: ${hasData ? 'pointer' : 'default'};
       `}
+      data-cy={`list-item-${props.name}`}
       onClick={() => props.onClick && hasData && props.onClick(props.name)}
     >
       <div
@@ -35,13 +37,18 @@ export function LegendListItem(props: LegendListItemProps) {
           height: 8px;
           margin-right: 10px;
           border-radius: 50%;
-          background-color: ${props.color};
+          background-color: ${hasData
+            ? props.color
+            : `rgba(${rgbColor?.r}, ${rgbColor?.g}, ${rgbColor?.b}, ${
+                props.opacity || 1
+              })`};
         `}
       />
       <div
         css={`
           max-width: calc(100% - 18px);
           font-weight: ${props.active ? 'bold' : 'normal'};
+          ${!hasData && `color: rgba(0, 0, 0, ${props.opacity});`}
         `}
       >
         {t(props.name)}

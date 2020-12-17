@@ -1,17 +1,17 @@
 // @ts-nocheck
 
-import { projectsTableConfig as mockDatatable } from 'app/components/datadisplay/Table/mock';
+// import { projectsTableConfig as mockDatatable } from 'app/components/datadisplay/Table/mock';
 import { mockData as mockDataBreadcrumbs } from 'app/components/navigation/Breadcrumbs/mock';
-import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';
+// import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';
 import { TitleParams } from 'app/modules/common/components/TitleParams';
 import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
-import { TableModuleModel } from 'app/components/datadisplay/Table/model';
+// import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import { ContactsCardModel } from 'app/components/surfaces/Cards/ContactsCard/model';
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 import { NavItemParams } from 'app/modules/common/consts';
 import { TabNavigatorParams } from 'app/modules/list-module/common/TabNavigator';
 import { HorizontalBarChartModel } from 'app/components/charts/BarCharts/HorizontalBarChart/model';
-import { getBaseTableForProject } from 'app/modules/list-module/utils';
+import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
 
 export const GranteeBreadCrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
 
@@ -24,9 +24,9 @@ export const GranteeDescriptionMock: DescriptionParams = {
     'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',
 };
 
-export const GranteeContactCardMock: ContactsCardModel = mockDataContactsCard;
+// export const GranteeContactCardMock: ContactsCardModel = mockDataContactsCard;
 
-export const GranteeProjectListMock: TableModuleModel = mockDatatable;
+// export const GranteeProjectListMock: TableModuleModel = mockDatatable;
 
 export const navItemMockViz: NavItemParams[] = [
   {
@@ -43,13 +43,14 @@ export const TabNavMockViz: TabNavigatorParams = {
   items: navItemMockViz,
 };
 
+/* todo: get rid of the 'any' types and replace with something more specific */
 export interface GranteeParams {
   match?: any;
   breadcrumbs: BreadcrumbModel;
   title: TitleParams;
   description: DescriptionParams;
   contact: ContactsCardModel;
-  mockData: HorizontalBarChartModel;
+  mockData?: HorizontalBarChartModel;
   barChartLegends: any;
   onBarChartLegendClick?: any;
   ppVizData: any;
@@ -57,7 +58,7 @@ export interface GranteeParams {
   selectedSDG: string;
   onBubbleSelect: Function;
   geoMapData: any;
-  projectParams: any;
+  projectParams?: any;
 }
 
 export const propsMock = {

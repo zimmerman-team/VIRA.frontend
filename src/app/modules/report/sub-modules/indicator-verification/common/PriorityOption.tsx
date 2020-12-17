@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core';
 import { BeneficiaryCountsModel } from 'app/modules/report/model';
 import { InfoCaption } from './InfoCaption';
-import { useTranslation } from 'react-i18next';
 
 export interface PriorityOptionParams {
   onChange: Function;
@@ -18,8 +17,6 @@ export interface PriorityOptionParams {
 }
 
 export const PolicyPriorityOptions = (props: PriorityOptionParams) => {
-  const { t, i18n } = useTranslation();
-
   return (
     <React.Fragment>
       <Typography variant="subtitle2" color="textPrimary">

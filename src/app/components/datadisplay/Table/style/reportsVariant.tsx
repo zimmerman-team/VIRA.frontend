@@ -1,8 +1,9 @@
 // @ts-nocheck
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ProjectPalette, TextStyle } from 'app/theme';
+import { MuiTheme } from 'material-ui/styles';
 
-export const reportsVariant = createMuiTheme({
+export const reportsVariant: MuiTheme = createMuiTheme({
   overrides: {
     MuiSvgIcon: {
       root: {
@@ -12,6 +13,7 @@ export const reportsVariant = createMuiTheme({
     MUIDataTableToolbar: {
       root: {
         paddingLeft: 0,
+        // outline: '2px solid red',
       },
       titleText: {
         fontFamily: TextStyle.fontFamily,
@@ -35,7 +37,7 @@ export const reportsVariant = createMuiTheme({
         fontWeight: 'normal',
         letterSpacing: '0.42px',
         lineHeight: '1.33',
-        padding: '17px 24px',
+        // padding: '17px 24px',
 
         color: 'rgba(1, 1, 10, 0.6)',
         '&:nth-child(1)': {
@@ -49,12 +51,17 @@ export const reportsVariant = createMuiTheme({
     MUIDataTableBodyCell: {
       root: {
         fontSize: '14px',
-        padding: '13px 24px',
+        // padding: '13px 24px',
         color: ProjectPalette.common.black,
         fontWeight: 'normal',
         '& a': {
           fontWeight: '600',
         },
+      },
+    },
+    MuiPaper: {
+      root: {
+        boxShadow: 'none!important',
       },
     },
     MuiTablePagination: {
@@ -72,6 +79,11 @@ export const reportsVariant = createMuiTheme({
     MUIDataTableBodyRow: {
       root: {
         border: 'solid 1px rgba(198, 198, 198, 0.2)',
+      },
+    },
+    MUIDataTableFilterList: {
+      chip: {
+        marginBottom: '8px',
       },
     },
   },

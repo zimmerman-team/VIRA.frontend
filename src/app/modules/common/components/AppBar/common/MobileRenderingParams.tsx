@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+
 interface MobileRenderingParams {
   mobileMoreAnchorEl: HTMLElement | null;
   mobileMenuId: string;
@@ -15,7 +16,7 @@ interface MobileRenderingParams {
   handleMobileMenuClose: () => void;
 }
 export function MobileRendering(props: MobileRenderingParams) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Menu
       anchorEl={props.mobileMoreAnchorEl}

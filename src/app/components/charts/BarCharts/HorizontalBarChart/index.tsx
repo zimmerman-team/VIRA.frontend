@@ -3,7 +3,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import styled from 'styled-components/macro';
 import get from 'lodash/get';
 import { colorScheme } from 'app/components/charts/BarCharts/common/colorUtil';
-import { useMediaQuery, Typography, Box } from '@material-ui/core';
+import { useMediaQuery, Typography } from '@material-ui/core';
 import {
   HorizontalBarChartModel,
   getBarModel,
@@ -22,7 +22,6 @@ import find from 'lodash/find';
 import filter from 'lodash/filter';
 import { useTranslation } from 'react-i18next';
 import { MobileVerticalScroll } from 'app/components/layout/MobileVerticalScroll';
-import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterangePicker';
 
 // TODO:
 //  - Find a way to implement the colouring.
@@ -33,8 +32,7 @@ import { DataDaterangePicker } from 'app/modules/list-module/common/DataDaterang
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-
-const BarComponent = (props: {
+interface BarComponentPropsModel {
   [x: string]: any;
   color?: any;
   y?: any;
@@ -55,7 +53,8 @@ const BarComponent = (props: {
   containerWidth?: any;
   showBar?: boolean;
   showLine?: boolean;
-}) => {
+}
+const BarComponent = (props: BarComponentPropsModel) => {
   const {
     borderRadius,
     borderWidth,
@@ -152,7 +151,7 @@ const BarComponent = (props: {
   );
 };
 
-const BarChart = styled(props => <ResponsiveBar {...props} />)``;
+const BarChart = styled((props) => <ResponsiveBar {...props} />)``;
 
 const ChartContainer = styled.div`
   display: flex;
@@ -161,7 +160,7 @@ const ChartContainer = styled.div`
   align-items: center;
 `;
 
-const NoDataMessage = styled(props => <Typography variant="h6" {...props} />)`
+const NoDataMessage = styled((props) => <Typography variant="h6" {...props} />)`
   && {
     font-size: 1rem;
     font-family: Inter;
@@ -241,7 +240,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
           {(showBudgetLine || showContribLine) && (
             <TopAxis>
               <TopAxisValue>0€</TopAxisValue>
-              <TopAxisValue>{maxBudgetVal}€</TopAxisValue>
+              <TopAxisValue>{`${Math.round(maxBudgetVal)}€`}</TopAxisValue>
             </TopAxis>
           )}
           <div
@@ -292,7 +291,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
                   display: flex;
                 `}
               >
-                {props.chartLegends.map(legend => (
+                {props.chartLegends.map((legend) => (
                   <LegendControl
                     {...legend}
                     key={legend.label}
@@ -332,7 +331,7 @@ export function HorizontalBarChart(props: HorizontalBarChartModel) {
             `}
           />
           <Legends>
-            {props.chartLegends.map(legend => (
+            {props.chartLegends.map((legend) => (
               <LegendControl
                 {...legend}
                 key={legend.label}

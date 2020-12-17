@@ -12,10 +12,16 @@ const MIN_WIDTH = 12;
 type Props = {
   name: string;
   value: number;
+  target: number;
+  reached: number;
+  project: string;
   latitude: number;
   maxValue: number;
   longitude: number;
   onClick?: Function;
+  onHover?: Function;
+  contribution: number;
+  organisation: string;
 };
 
 function getWidth(value: number, maxValue: number) {
@@ -37,6 +43,21 @@ export function MapPin(props: Props) {
         role="button"
         onClick={() =>
           props.onClick && props.onClick([props.longitude, props.latitude])
+        }
+        onMouseLeave={() => props.onHover && props.onHover(null)}
+        onMouseEnter={() =>
+          props.onHover &&
+          props.onHover({
+            name: props.name,
+            value: props.value,
+            target: props.target,
+            reached: props.reached,
+            project: props.project,
+            organisation: props.organisation,
+            contribution: props.contribution,
+            latitude: parseFloat(props.latitude.toString()),
+            longitude: parseFloat(props.longitude.toString()),
+          })
         }
         css={`
           width: ${width}px;

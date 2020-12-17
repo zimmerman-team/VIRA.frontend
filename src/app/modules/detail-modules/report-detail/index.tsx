@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
@@ -8,19 +9,20 @@ import { useParams, withRouter } from 'react-router-dom';
 import { ReportDetailLayout } from 'app/modules/detail-modules/report-detail/layout';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 import get from 'lodash/get';
-import findIndex from 'lodash/findIndex';
-import { formatReportDetail } from './utils/formatReportDetail';
 import { AppConfig } from 'app/data';
+import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
+import { formatReportDetail } from './utils/formatReportDetail';
 
 export const ReportDetailModuleF = (props: any) => {
   useTitle(`${AppConfig.appTitleLong}  Report detail`);
 
-  const report_obj: any = useParams();
-  const report_id: any = report_obj.code;
+  const report_obj: { code: string } = useParams();
+  const report_id: string = report_obj.code;
   const [reportDetails, setreportDetails] = useState({
     id: '',
     title: '',
     date: '',
+    contribution: 0,
     location: '',
     country: '',
     total_target_beneficiaries: 0,
@@ -33,12 +35,21 @@ export const ReportDetailModuleF = (props: any) => {
       },
     },
     key_outcomes: '',
-    monitor_report_outcomes: '',
     media: [],
-    policy_priority: {},
+    policy_priorities: [],
+    pillar: '',
+    sdgs: [],
     key_implementation_challenges: '',
     other_project_outcomes: '',
-    plans: '',
+    inputs_invested: '',
+    activities_undertaken: '',
+    projectgoals_socialbenefits: '',
+    important_factors: '',
+    orgs_partners: '',
+    partners: '',
+    how_address_challenges: '',
+    how_important_insinger_support: '',
+    apply_for_more_funding: '',
     other_comments: '',
     reportID: '',
     barChartData: [],
@@ -61,14 +72,47 @@ export const ReportDetailModuleF = (props: any) => {
     },
   ]);
   const [selectedSDG, setSelectedSDG] = React.useState('');
+  const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
 
   const reportDetailAction = useStoreActions(
-    actions => actions.reportDetail.fetch
+    (actions) => actions.reportDetail.fetch
   );
   const reportDetailClearData = useStoreActions(
-    actions => actions.reportDetail.clear
+    (actions) => actions.reportDetail.clear
   );
-  const reportDetailData = useStoreState(state => state.reportDetail.data);
+  const reportDetailData = useStoreState((state) => state.reportDetail.data);
+
+  const getPillarDataByBudget = useStoreActions(
+    (actions) => actions.getPillarDataByBudget.fetch
+  );
+  const getPillarDataByDuration = useStoreActions(
+    (actions) => actions.getPillarDataByDuration.fetch
+  );
+  const getPriorityAreaBarChartData = useStoreActions(
+    (actions) => actions.getPriorityAreaBarChartData.fetch
+  );
+  const getTargetGroupBarChartData = useStoreActions(
+    (actions) => actions.getTargetGroupBarChartData.fetch
+  );
+  const getOneMultiYearBarChartData = useStoreActions(
+    (actions) => actions.getOneMultiYearBarChartData.fetch
+  );
+
+  const pillarDataByBudget = useStoreState(
+    (state) => state.getPillarDataByBudget.data
+  );
+  const pillarDataByDuration = useStoreState(
+    (state) => state.getPillarDataByDuration.data
+  );
+  const priorityAreaBarChartData = useStoreState(
+    (state) => state.getPriorityAreaBarChartData.data
+  );
+  const targetGroupBarChartData = useStoreState(
+    (state) => state.getTargetGroupBarChartData.data
+  );
+  const oneMultiYearBarChartData = useStoreState(
+    (state) => state.getOneMultiYearBarChartData.data
+  );
 
   React.useEffect(() => {
     return () => reportDetailClearData();
@@ -82,6 +126,42 @@ export const ReportDetailModuleF = (props: any) => {
   }, [report_id]);
 
   React.useEffect(() => {
+    getPillarDataByBudget({
+      socketName: 'getPillarDataByBudget',
+      values: {
+        reportID: report_id,
+      },
+    });
+    getPillarDataByDuration({
+      socketName: 'getPillarDataByDuration',
+      values: {
+        reportID: report_id,
+      },
+    });
+    getPriorityAreaBarChartData({
+      socketName: 'getPriorityAreaBarChartData',
+      values: {
+        reportID: report_id,
+        breakdownBy: selectedBreakdown,
+      },
+    });
+    getTargetGroupBarChartData({
+      socketName: 'getTargetGroupBarChartData',
+      values: {
+        reportID: report_id,
+        breakdownBy: selectedBreakdown,
+      },
+    });
+    getOneMultiYearBarChartData({
+      socketName: 'getOneMultiYearBarChartData',
+      values: {
+        reportID: report_id,
+        breakdownBy: selectedBreakdown,
+      },
+    });
+  }, [report_id, selectedBreakdown]);
+
+  React.useEffect(() => {
     if (get(reportDetailData, 'report', false)) {
       // @ts-ignore
       setreportDetails(formatReportDetail(reportDetailData));
@@ -89,23 +169,12 @@ export const ReportDetailModuleF = (props: any) => {
   }, [reportDetailData]);
 
   function onBarChartLegendClick(legend: string) {
-    const prevBarChartLegends = [...barChartLegends];
-    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
-    if (legendIndex !== -1) {
-      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
-        legendIndex
-      ].selected;
-      setBarChartLegends(prevBarChartLegends);
-    }
-  }
-
-  function onBubbleSelect(bubble: string) {
-    setSelectedSDG(bubble);
+    barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
   function editReport() {
     props.history.push(
-      `/report/${reportDetails.project.id}/outcomes?rid=${reportDetails.id}`
+      `/report/${reportDetails.project.id}/project-info?rid=${reportDetails.id}`
     );
   }
 
@@ -115,9 +184,16 @@ export const ReportDetailModuleF = (props: any) => {
       report={reportDetails}
       editReport={editReport}
       selectedSDG={selectedSDG}
-      onBubbleSelect={onBubbleSelect}
+      onBubbleSelect={setSelectedSDG}
       barChartLegends={barChartLegends}
       onBarChartLegendClick={onBarChartLegendClick}
+      pillarData={pillarDataByBudget}
+      pillarDataByDuration={pillarDataByDuration}
+      priorityAreaData={priorityAreaBarChartData}
+      targetGroupData={targetGroupBarChartData}
+      oneAndMultiYearData={oneMultiYearBarChartData}
+      selectedBreakdown={selectedBreakdown}
+      onBreakdownSelect={setSelectedBreakdown}
     />
   );
 };

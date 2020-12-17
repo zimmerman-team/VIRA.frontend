@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { adminTableData } from 'app/assets/data/insingerData';
@@ -74,7 +75,7 @@ export const mockDataVar1: TableModuleModel = {
     rowHover: false,
     pagination: false,
     viewColumns: true,
-    responsive: 'scrollFullHeight',
+    responsive: 'vertical',
     filterType: 'checkbox',
     selectableRows: 'none',
   },
@@ -109,7 +110,11 @@ export const mockDataVar2: TableModuleModel = {
     {
       name: 'Publishing organisation',
       options: {
-        sortDirection: 'asc',
+        // sortDirection: 'asc',
+        sortOrder: {
+          // name: 'Date',
+          direction: 'asc',
+        },
         filter: true,
         filterType: 'dropdown',
         customBodyRender: (value, tableMeta, updateValue) => {
@@ -120,7 +125,9 @@ export const mockDataVar2: TableModuleModel = {
             />
           );
         },
-        customFilterListRender: value => `Publishing organisation: ${value}`,
+        customFilterListOptions: {
+          render: (value) => `Publishing organisation: ${value}`,
+        },
       },
     },
     {
@@ -128,7 +135,9 @@ export const mockDataVar2: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `GB signatory: ${value}`,
+        customFilterListOptions: {
+          render: (value) => `GB signatory: ${value}`,
+        },
       },
     },
     {
@@ -136,7 +145,9 @@ export const mockDataVar2: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'dropdown',
-        customFilterListRender: value => `Organisation type: ${value}`,
+        customFilterListOptions: {
+          render: (value) => `Organisation type: ${value}`,
+        },
       },
     },
     {
@@ -144,7 +155,9 @@ export const mockDataVar2: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customFilterListRender: value => `Latest IATI version: ${value}`,
+        customFilterListOptions: {
+          render: (value) => `Latest IATI version: ${value}`,
+        },
       },
     },
     {
@@ -156,7 +169,9 @@ export const mockDataVar2: TableModuleModel = {
         customBodyRender: (value, tableMeta, updateValue) => {
           return <IconCellModule value={value} />;
         },
-        customFilterListRender: value => `Publishing hum.data?: ${value}`,
+        customFilterListOptions: {
+          render: (value) => `Publishing hum.data?: ${value}`,
+        },
       },
     },
     {
@@ -168,8 +183,9 @@ export const mockDataVar2: TableModuleModel = {
         customBodyRender: (value, tableMeta, updateValue) => {
           return <IconCellModule value={value} />;
         },
-        customFilterListRender: value =>
-          `Publishing v2.02 hum. data?: ${value}`,
+        customFilterListOptions: {
+          render: (value) => `Publishing v2.02 hum. data?: ${value}`,
+        },
       },
     },
     {
@@ -181,8 +197,9 @@ export const mockDataVar2: TableModuleModel = {
         customBodyRender: (value, tableMeta, updateValue) => {
           return <IconCellModule value={value} />;
         },
-        customFilterListRender: value =>
-          `Publishing v2.03 hum. data?: ${value}`,
+        customFilterListOptions: {
+          render: (value) => `Publishing v2.03 hum. data?: ${value}`,
+        },
       },
     },
     {
@@ -194,7 +211,9 @@ export const mockDataVar2: TableModuleModel = {
         customBodyRender: (value, tableMeta, updateValue) => {
           return <IconCellModule value={value} />;
         },
-        customFilterListRender: value => `Incoming TS traceability: ${value}`,
+        customFilterListOptions: {
+          render: (value) => `Incoming TS traceability: ${value}`,
+        },
       },
     },
   ],
@@ -218,14 +237,14 @@ export const mockDataVar2: TableModuleModel = {
     ) => {
       let csvData = '';
       // building header
-      columns.forEach(column => {
+      columns.forEach((column) => {
         csvData = csvData
           .concat('"'.concat(column.name).concat('"'))
           .concat(',');
       });
       csvData = csvData.concat('\n');
       // building body
-      data.forEach(row => {
+      data.forEach((row) => {
         row.data.forEach((cell: any, index: number) => {
           // console.log('mock - cell', typeof cell);
           const cellVal = index === 0 ? cell.name : cell;
@@ -240,6 +259,7 @@ export const mockDataVar2: TableModuleModel = {
       if (colIndex === 0) {
         indexStr = `[${colIndex}].name`;
       }
+      /* todo: juan, please look into refactoring this piece */
       const sortedData = data.sort((a, b) => {
         const v1 = get(a.data, indexStr, '');
         const v2 = get(b.data, indexStr, '');
@@ -339,7 +359,7 @@ export const mockDataVar3: TableModuleModel = {
     rowHover: true,
     pagination: true,
     viewColumns: true,
-    responsive: 'scrollFullHeight',
+    responsive: 'vertical',
     filterType: 'checkbox',
     selectableRows: 'none',
   },
@@ -409,7 +429,7 @@ export const mockDataVar4: TableModuleModel = {
     rowHover: true,
     pagination: true,
     viewColumns: true,
-    responsive: 'scrollFullHeight',
+    responsive: 'vertical',
     expandableRows: true,
     selectableRows: 'none',
     expandableRowsOnClick: true,
@@ -537,278 +557,6 @@ export const mockDataVar4: TableModuleModel = {
         },
       ],
     ],
-  ],
-};
-
-export const mockDataVar5: TableModuleModel = {
-  title: 'Coverage data',
-  data: [
-    ['01. Jan-2018', '31. Dec 2018', 123324234.0, 123324234.0, '80%'],
-    ['01. Jan-2017', '31. Dec 2018', 123324234.0, 123324234.0, '40%'],
-    ['01. Jan-2017', '31. Dec 2017', 'No data', 'No data', 'No data'],
-    ['01. Jan-2016', '31. Dec 2016', 'No data', 'No data', 'No data'],
-    ['01. Jan-2015', '31. Dec 2015', 'No data', 'No data', 'No data'],
-  ],
-  columns: [
-    {
-      name: 'Period started',
-      options: {
-        filter: false,
-      },
-    },
-    {
-      name: 'Period end',
-      options: {
-        filter: false,
-      },
-    },
-    {
-      name: 'Operational funds available',
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          if (value && value > 0) return formatMoney(value);
-          return 'No data';
-        },
-      },
-    },
-    {
-      name: 'Disbursements & expenditure',
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          if (value && value > 0) return formatMoney(value);
-          return 'No data';
-        },
-      },
-    },
-    {
-      name: 'Rating',
-      options: {
-        filter: false,
-      },
-    },
-  ],
-  options: {
-    print: true,
-    search: false,
-    filter: false,
-    download: true,
-    rowHover: false,
-    pagination: false,
-    viewColumns: true,
-    responsive: 'scrollFullHeight',
-    filterType: 'checkbox',
-    selectableRows: 'none',
-  },
-  columnsCell: ['', '', '', '', ''],
-  totalCell: true,
-  totalRowColsDef: [
-    { dataType: 'none' },
-    { dataType: 'none' },
-    { dataType: 'money' },
-    { dataType: 'money' },
-    { dataType: 'none' },
-  ],
-};
-
-export const mockDataVar6: TableModuleModel = {
-  title: 'Incoming transactions',
-  data: [
-    [
-      '01. Jan-2018',
-      'France',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      'XM-DAV-7PPR-28317',
-    ],
-    [
-      '01. Jan-2018',
-      'Germany',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      'XM-DAV-7PPR-28317',
-    ],
-    [
-      '01. Jan-2018',
-      'France',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      'XM-DAV-7PPR-28317',
-    ],
-    [
-      '01. Jan-2018',
-      'Germany',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      'XM-DAV-7PPR-28317',
-    ],
-    [
-      '01. Jan-2018',
-      'France',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      '',
-    ],
-    [
-      '01. Jan-2018',
-      'Germany',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      '',
-    ],
-
-    [
-      '01. Jan-2018',
-      'France',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      'XM-DAV-7PPR-28317',
-    ],
-    [
-      '01. Jan-2018',
-      'Germany',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      'XM-DAV-7PPR-28317',
-    ],
-    [
-      '01. Jan-2018',
-      'France',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      'XM-DAV-7PPR-28317',
-    ],
-    [
-      '01. Jan-2018',
-      'Germany',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      'XM-DAV-7PPR-28317',
-    ],
-    [
-      '01. Jan-2018',
-      'France',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      '',
-    ],
-    [
-      '01. Jan-2018',
-      'Germany',
-      'Netherlands',
-      123324234.0,
-      123324234.0,
-      123324234.0,
-      '',
-    ],
-  ],
-  columns: [
-    {
-      name: 'Date',
-      options: {
-        filter: false,
-      },
-    },
-    {
-      name: 'From',
-      options: {
-        filter: true,
-        filterType: 'checkbox',
-        filterOptions: { names: ['France', 'Germany'] },
-      },
-    },
-    {
-      name: 'To',
-      options: {
-        filter: true,
-        filterType: 'checkbox',
-        filterOptions: { names: ['Netherlands'] },
-      },
-    },
-    {
-      name: 'Pledged',
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          if (value && value > 0) return formatMoney(value);
-          return 'No data';
-        },
-      },
-    },
-    {
-      name: 'Incoming funds',
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          if (value && value > 0) return formatMoney(value);
-          return 'No data';
-        },
-      },
-    },
-    {
-      name: 'Commitment',
-      options: {
-        filter: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          if (value && value > 0) return formatMoney(value);
-          return 'No data';
-        },
-      },
-    },
-    {
-      name: 'Trace ID.',
-      options: {
-        filter: true,
-        filterType: 'checkbox',
-        filterOptions: { names: ['XM-DAV-7PPR-28317'] },
-      },
-    },
-  ],
-  options: {
-    print: true,
-    search: true,
-    filter: true,
-    download: true,
-    rowHover: false,
-    pagination: true,
-    viewColumns: true,
-    responsive: 'scrollFullHeight',
-    filterType: 'checkbox',
-    selectableRows: 'none',
-  },
-  columnsCell: ['', '', '', '', '', '', ''],
-  totalCell: true,
-  totalRowColsDef: [
-    { dataType: 'none' },
-    { dataType: 'none' },
-    { dataType: 'none' },
-    { dataType: 'money' },
-    { dataType: 'money' },
-    { dataType: 'money' },
-    { dataType: 'none' },
   ],
 };
 
@@ -964,7 +712,7 @@ export const mockDataVar7: TableModuleModel = {
     rowHover: false,
     pagination: false,
     viewColumns: true,
-    responsive: 'scrollFullHeight',
+    responsive: 'standard',
     filterType: 'checkbox',
     selectableRows: 'none',
   },
@@ -993,7 +741,7 @@ export const projectsTableConfig: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return (
             <LinkCellModule
               css={`
@@ -1021,7 +769,7 @@ export const projectsTableConfig: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <LinkCellModule value={value} link="" />;
         },
       },
@@ -1038,7 +786,7 @@ export const projectsTableConfig: TableModuleModel = {
       options: {
         filter: true,
         filterType: 'checkbox',
-        customBodyRender: label => {
+        customBodyRender: (label) => {
           return <ButtonCellModule label="Label" disabled={false} />;
         },
       },
@@ -1052,10 +800,12 @@ export const projectsTableConfig: TableModuleModel = {
     rowHover: false,
     pagination: true,
     viewColumns: false,
-    responsive: 'scrollFullHeight',
+    responsive: 'standard',
     filterType: 'checkbox',
     selectableRows: 'none',
-    fixedHeaderOptions: { xAxis: false, yAxis: false },
+    fixedSelectColumn: false,
+    fixedHeader: false,
+    // fixedHeaderOptions: { xAxis: false, yAxis: false },
   },
   columnsCell: ['', '', '', 'LinkCellModule', '', ''],
 };
@@ -1068,7 +818,7 @@ export const addTeamMemberTableConfig: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <Checkbox />;
         },
       },
@@ -1077,7 +827,7 @@ export const addTeamMemberTableConfig: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return (
             <LinkCellModule
               css={`
@@ -1110,7 +860,7 @@ export const addTeamMemberTableConfig: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <IconCellModule value="Edit" />;
         },
       },
@@ -1124,7 +874,7 @@ export const addTeamMemberTableConfig: TableModuleModel = {
     rowHover: false,
     pagination: true,
     viewColumns: false,
-    responsive: 'scrollFullHeight',
+    responsive: 'vertical',
     filterType: 'checkbox',
     selectableRows: 'none',
     fixedHeader: true,
@@ -1147,7 +897,7 @@ export const mockDataVar10: TableModuleModel = {
       name: 'Name of User Grantee',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return (
             <LinkCellModule
               css={`
@@ -1180,7 +930,7 @@ export const mockDataVar10: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <IconCellModule value="Edit" />;
         },
       },
@@ -1189,7 +939,7 @@ export const mockDataVar10: TableModuleModel = {
       name: '',
       options: {
         filter: false,
-        customBodyRender: value => {
+        customBodyRender: (value) => {
           return <IconCellModule value="Delete" />;
         },
       },
@@ -1203,7 +953,7 @@ export const mockDataVar10: TableModuleModel = {
     rowHover: false,
     pagination: true,
     viewColumns: false,
-    responsive: 'scrollFullHeight',
+    responsive: 'vertical',
     filterType: 'checkbox',
     selectableRows: 'none',
     fixedHeader: true,

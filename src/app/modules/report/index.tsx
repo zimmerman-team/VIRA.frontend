@@ -2,6 +2,7 @@
 import React from 'react';
 import 'styled-components/macro';
 import { withRouter } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import CheckIcon from '@material-ui/icons/Check';
 
 /* utils thirdparty */
@@ -16,7 +17,7 @@ import { tabs } from 'app/modules/report/mock';
 import { CreateReportLayout } from 'app/modules/report/layout';
 
 /* model */
-import { LocationModel } from './model';
+import { LocationModel, LabelWeightModel } from './model';
 import { DialogBtnType } from 'app/components/surfaces/Dialog/model';
 
 /* utils: misc */
@@ -41,11 +42,14 @@ import { useStoreActions, useStoreState } from 'app/state/store/hooks';
 
 /* global variables */
 import { AppConfig } from 'app/data';
+import { policyPrioritiesToLangKey } from './data';
 
 const getTabIndex = (pathname: string, projectID: string): number =>
-  findIndex(tabs, tab => `/report/${projectID}/${tab.path}` === pathname);
+  findIndex(tabs, (tab) => `/report/${projectID}/${tab.path}` === pathname);
 
 function CreateReportFunc(props: any) {
+  const { i18n } = useTranslation();
+  const en = i18n.getFixedT('en');
   useTitle(`${AppConfig.appTitleLong} Create report`);
   const query = useQuery();
   // state
@@ -66,6 +70,12 @@ function CreateReportFunc(props: any) {
     Function
   ] = usePersistedState('report_location', null);
 
+  // Pillar
+  const [pillar, setPillar] = usePersistedState(
+    'report_pillar',
+    'Pillar 1: Social good'
+  );
+
   // Policy Priorities
   const [tarBenTotal, setTarBenTotal] = usePersistedState(
     'report_tarBenTotal',
@@ -79,15 +89,15 @@ function CreateReportFunc(props: any) {
     'report_beneficiaryCounts',
     [
       {
-        name: 'Children/Young people',
+        name: 'Children & youth (up to +/- 30 years)',
         value: 0,
       },
       {
-        name: 'Elderly',
+        name: 'The Elderly (65+)',
         value: 0,
       },
       {
-        name: 'Women',
+        name: 'Women & Girls',
         value: 0,
       },
       {
@@ -95,39 +105,65 @@ function CreateReportFunc(props: any) {
         value: 0,
       },
       {
-        name: 'Low income individuals',
+        name: 'People with lower income',
+        value: 0,
+      },
+      {
+        name: 'Homeless people',
+        value: 0,
+      },
+      {
+        name: 'People with disabilities',
         value: 0,
       },
     ]
   );
-  const [policyPriority, setPolicyPriority] = usePersistedState(
-    'report_policyPriority',
-    {
-      label: '',
-      value: '',
-    }
-  );
+  const [
+    policyPrioritiesPillar1,
+    setPolicyPrioritiesPillar1,
+  ] = usePersistedState('report_policyPriorities1', []);
+  const [
+    policyPrioritiesPillar2,
+    setPolicyPrioritiesPillar2,
+  ] = usePersistedState('report_policyPriorities2', []);
+  const [sdgs, setSDGs] = usePersistedState('report_sdgs', []);
 
   const [budget, setBudget] = usePersistedState(
     'report_budget',
-    useStoreState(state => get(state.projectBudgetData, 'data.remainBudget', 0))
+    useStoreState((state) =>
+      get(state.projectBudgetData, 'data.remainBudget', 0)
+    )
   );
   const [insContribution, setInsContribution] = usePersistedState(
     'report_insContribution',
     0
   );
-  const [funder, setFunder] = usePersistedState('report_funder', {
-    label: '',
-    value: '',
-  });
+  const [funders, setFunders] = usePersistedState('report_funder', []);
 
   // Indicator and verification state
   const [keyOutcomes, setKeyOutcomes] = usePersistedState(
     'report_keyOutcomes',
     ''
   );
-  const [monRepOutcomes, setMonRepOutcomes] = usePersistedState(
-    'report_monRepOutcomes',
+  const [inputsInvested, setInputsInvested] = usePersistedState(
+    'report_inputsInvested',
+    ''
+  );
+  const [activitiesUndertaken, setActivitiesUndertaken] = usePersistedState(
+    'report_activitiesUndertaken',
+    ''
+  );
+  const [
+    projectgoalsSocialbenefits,
+    setProjectgoalsSocialbenefits,
+  ] = usePersistedState('report_projectgoalsSocialbenefits', '');
+  const [importantFactors, setImportantFactors] = usePersistedState(
+    'report_importantFactors',
+    ''
+  );
+  const [partners, setPartners] = usePersistedState('report_orgsPartners', '');
+  const [orgsPartners, setOrgsPartners] = usePersistedState(
+    'report_orgsPartners',
     ''
   );
   const [media, setMedia] = React.useState({
@@ -150,8 +186,16 @@ function CreateReportFunc(props: any) {
     'report_otherProjOutObs',
     ''
   );
-  const [futurePlans, setFuturePlans] = usePersistedState(
-    'report_futurePlans',
+  const [addressChallenges, setAddressChallenges] = usePersistedState(
+    'report_addressChallenges',
+    ''
+  );
+  const [
+    howImportantInsingerSupport,
+    setHowImportantInsingerSupport,
+  ] = usePersistedState('report_howImportantInsingerSupport', '');
+  const [applyForMoreFunding, setApplyForMoreFunding] = usePersistedState(
+    'report_applyForMoreFunding',
     ''
   );
   const [otherComms, setOtherComms] = usePersistedState(
@@ -178,7 +222,8 @@ function CreateReportFunc(props: any) {
       </div>
     ),
     buttons: [] as DialogBtnType[],
-    onClose: () => setDialogProps(prevState => ({ ...prevState, open: false })),
+    onClose: () =>
+      setDialogProps((prevState) => ({ ...prevState, open: false })),
   });
 
   const deleteReport = () => {
@@ -211,61 +256,61 @@ function CreateReportFunc(props: any) {
       },
     ],
     onClose: () =>
-      setDelDialogProps(prevState => ({ ...prevState, open: false })),
+      setDelDialogProps((prevState) => ({ ...prevState, open: false })),
   });
 
   const openDelDialog = () => {
-    setDelDialogProps(d => ({ ...d, open: true }));
+    setDelDialogProps((d) => ({ ...d, open: true }));
   };
 
   // redux actions
   const allProjectsAction = useStoreActions(
-    actions => actions.allProjects.fetch
+    (actions) => actions.allProjects.fetch
   );
-  const addReportAction = useStoreActions(actions => actions.addReport.fetch);
+  const addReportAction = useStoreActions((actions) => actions.addReport.fetch);
   const deleteReportAction = useStoreActions(
-    actions => actions.deleteReport.fetch
+    (actions) => actions.deleteReport.fetch
   );
   const addReportClearAction = useStoreActions(
-    actions => actions.addReport.clear
+    (actions) => actions.addReport.clear
   );
   const deleteReportClearAction = useStoreActions(
-    actions => actions.deleteReport.clear
+    (actions) => actions.deleteReport.clear
   );
   const snackbarAction = useStoreActions(
-    actions => actions.syncVariables.setSnackbar
+    (actions) => actions.syncVariables.setSnackbar
   );
   const projectBudgetDataAction = useStoreActions(
-    actions => actions.projectBudgetData.fetch
+    (actions) => actions.projectBudgetData.fetch
   );
   const reportDetailAction = useStoreActions(
-    actions => actions.reportDetail.fetch
+    (actions) => actions.reportDetail.fetch
   );
   const reportDetailClearAction = useStoreActions(
-    actions => actions.reportDetail.clear
+    (actions) => actions.reportDetail.clear
   );
   // redux data
-  const allProjectsData = useStoreState(state =>
+  const allProjectsData = useStoreState((state) =>
     get(state.allProjects.data, 'data', [])
   );
 
   // console.log("allProjectsData", allProjectsData);
 
-  const addReportData = useStoreState(state => state.addReport.data);
-  const addReportLoading = useStoreState(state => state.addReport.loading);
-  const deleteReportData = useStoreState(state => state.deleteReport.data);
+  const addReportData = useStoreState((state) => state.addReport.data);
+  const addReportLoading = useStoreState((state) => state.addReport.loading);
+  const deleteReportData = useStoreState((state) => state.deleteReport.data);
   const deleteReportLoading = useStoreState(
-    state => state.deleteReport.loading
+    (state) => state.deleteReport.loading
   );
   const projectBudgetData = useStoreState(
-    state => state.projectBudgetData.data
+    (state) => state.projectBudgetData.data
   );
-  const reportDetailData = useStoreState(state => state.reportDetail.data);
+  const reportDetailData = useStoreState((state) => state.reportDetail.data);
 
-  const signedInUserRole = useStoreState(state =>
+  const signedInUserRole = useStoreState((state) =>
     get(state.userDetails.data, 'role', 'Grantee user')
   );
-  const signedInUserEmail = useStoreState(state =>
+  const signedInUserEmail = useStoreState((state) =>
     get(state.userDetails.data, 'email', '')
   );
 
@@ -292,12 +337,6 @@ function CreateReportFunc(props: any) {
   }
 
   React.useEffect(() => {
-    if (query.get('rid')) {
-      reportDetailAction({
-        socketName: 'getReport',
-        values: { id: query.get('rid') },
-      });
-    }
     if (allProjectsData.length === 0) {
       allProjectsAction({
         socketName: 'allProject',
@@ -316,6 +355,15 @@ function CreateReportFunc(props: any) {
   }, []);
 
   React.useEffect(() => {
+    if (query.get('rid')) {
+      reportDetailAction({
+        socketName: 'getReport',
+        values: { id: query.get('rid') },
+      });
+    }
+  }, [query.get('rid')]);
+
+  React.useEffect(() => {
     if (get(reportDetailData, 'report', null)) {
       setTitle(get(reportDetailData, 'report.title', ''));
       setCountry({
@@ -327,6 +375,7 @@ function CreateReportFunc(props: any) {
           ? {
               longitude: get(reportDetailData, 'report.location.long', 0),
               latitude: get(reportDetailData, 'report.location.lat', 0),
+              place: get(reportDetailData, 'report.place_name', null),
             }
           : null
       );
@@ -343,10 +392,36 @@ function CreateReportFunc(props: any) {
           []
         ).map((b: any) => ({ name: b.name, value: b.value }))
       );
-      setPolicyPriority({
-        label: get(reportDetailData, 'report.policy_priority.name', ''),
-        value: get(reportDetailData, 'report.policy_priority.name', ''),
-      });
+      setPillar(get(reportDetailData, 'report.pillar.name', ''));
+      if (
+        get(reportDetailData, 'report.pillar.name', '') ===
+        'Pillar 2: Cultural heritage'
+      ) {
+        setPolicyPrioritiesPillar2(
+          get(reportDetailData, 'report.policy_priorities', []).map(
+            (pp: any) => ({
+              label: policyPrioritiesToLangKey(pp.policy_priority.name),
+              weight: pp.weight,
+            })
+          )
+        );
+      } else {
+        setPolicyPrioritiesPillar1(
+          get(reportDetailData, 'report.policy_priorities', []).map(
+            (pp: any) => ({
+              label: policyPrioritiesToLangKey(pp.policy_priority.name),
+              weight: pp.weight,
+            })
+          )
+        );
+      }
+      setSDGs(
+        get(reportDetailData, 'report.sdgs', []).map((sdg: any) => ({
+          label: `sdgs.${sdg.sdg.code}`,
+          weight: sdg.weight,
+          code: sdg.sdg.code,
+        }))
+      );
       if (get(reportDetailData, 'report.media', []).length > 0) {
         setMediaAdded(
           get(reportDetailData, 'report.media', []).map((m: any) => ({
@@ -356,18 +431,43 @@ function CreateReportFunc(props: any) {
       }
       setBudget(get(reportDetailData, 'report.budget', 0));
       setInsContribution(get(reportDetailData, 'report.insContribution', 0));
-      setKeyOutcomes(get(reportDetailData, 'report.key_outcomes', ''));
-      setMonRepOutcomes(
-        get(reportDetailData, 'report.monitor_report_outcomes', '')
+      setFunders(
+        get(reportDetailData, 'report.funders', []).map(
+          (funder: any) => funder.name
+        )
       );
+      setKeyOutcomes(get(reportDetailData, 'report.key_outcomes', ''));
       setKetImplChallenges(
         get(reportDetailData, 'report.key_implementation_challenges', '')
       );
       setOtherProjOutObs(
         get(reportDetailData, 'report.other_project_outcomes', '')
       );
-      setFuturePlans(get(reportDetailData, 'report.plans', ''));
+      setAddressChallenges(
+        get(reportDetailData, 'report.how_address_challenges', '')
+      );
       setOtherComms(get(reportDetailData, 'report.other_comments', ''));
+      setInputsInvested(get(reportDetailData, 'report.inputs_invested', ''));
+      setActivitiesUndertaken(
+        get(reportDetailData, 'report.activities_undertaken', '')
+      );
+      setProjectgoalsSocialbenefits(
+        get(reportDetailData, 'report.projectgoals_socialbenefits', '')
+      );
+      setImportantFactors(
+        get(reportDetailData, 'report.important_factors', '')
+      );
+      setOrgsPartners(get(reportDetailData, 'report.orgs_partners', ''));
+      setPartners(get(reportDetailData, 'report.partners', ''));
+      setAddressChallenges(
+        get(reportDetailData, 'report.how_address_challenges', '')
+      );
+      setHowImportantInsingerSupport(
+        get(reportDetailData, 'report.how_important_insinger_support', '')
+      );
+      setApplyForMoreFunding(
+        get(reportDetailData, 'report.apply_for_more_funding', '')
+      );
     }
   }, [reportDetailData]);
 
@@ -429,11 +529,23 @@ function CreateReportFunc(props: any) {
   React.useEffect(() => {
     if (
       get(projectBudgetData, 'data', null) &&
-      get(projectBudgetData, 'data.person_email', '-') !== signedInUserEmail
+      get(projectBudgetData, 'data.person_email', '-') !== signedInUserEmail &&
+      signedInUserRole === 'Grantee user'
     ) {
       props.history.replace('/');
     }
-    setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+    const rid = query.get('rid');
+    const projectReportID = get(projectBudgetData, 'data.reportId', null);
+    if (projectReportID) {
+      if (rid !== projectReportID) {
+        props.history.replace(
+          `/report/${props.match.params.projectID}/project-info?rid=${projectReportID}`
+        );
+      }
+    }
+    if (!rid) {
+      setBudget(get(projectBudgetData, 'data.remainBudget', 0));
+    }
   }, [projectBudgetData]);
 
   const onStepChange = (tabIndex: number) => {
@@ -522,29 +634,51 @@ function CreateReportFunc(props: any) {
 
   const draftSubmitEnabled = title.length > 0 || country.label.length > 0;
 
-  const step2Enabled = validateOutcomeFields(title, country.label);
+  const step2Enabled = validateOutcomeFields(
+    title,
+    country.label,
+    budget,
+    get(projectBudgetData, 'data.remainBudget', 0),
+    insContribution
+  );
+
+  let activePolicyPriorities = policyPrioritiesPillar1;
+  let activePolicyPrioritiesAction = setPolicyPrioritiesPillar1;
+  if (pillar === 'Pillar 2: Cultural heritage') {
+    activePolicyPriorities = policyPrioritiesPillar2;
+    activePolicyPrioritiesAction = setPolicyPrioritiesPillar2;
+  }
 
   const step3Enabled =
     step2Enabled &&
     validatePolicyPrioritiesFields(
       tarBenTotal,
       beneficiaryCounts,
-      policyPriority.value,
-      budget,
-      get(projectBudgetData, 'data.remainBudget', 0),
-      insContribution,
-      funder.value
+      activePolicyPriorities,
+      sdgs,
+      funders
     );
 
   const step4Enabled =
-    step3Enabled && validateIndVerFields(keyOutcomes, monRepOutcomes);
+    step3Enabled &&
+    validateIndVerFields(
+      keyOutcomes,
+      inputsInvested,
+      activitiesUndertaken,
+      projectgoalsSocialbenefits,
+      importantFactors,
+      orgsPartners,
+      partners
+    );
 
   const step5Enabled =
     step4Enabled &&
     validateChallengesPlans(
       keyImplChallenges,
       otherProjOutObs,
-      futurePlans,
+      addressChallenges,
+      howImportantInsingerSupport,
+      applyForMoreFunding,
       otherComms
     );
 
@@ -557,9 +691,20 @@ function CreateReportFunc(props: any) {
           data: {
             rid,
             title,
+            pillar,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priority: policyPriority.value,
+            policy_priorities: activePolicyPriorities.map(
+              (pp: LabelWeightModel) => ({
+                ...pp,
+                name: en(pp.label),
+              })
+            ),
+            sdgs: sdgs.map((sdg: LabelWeightModel) => ({
+              ...sdg,
+              name: en(sdg.label),
+            })),
+            /* todo: stefanos, please look into refactoring this piece */
             location: location
               ? {
                   long: (location as LocationModel).longitude,
@@ -568,19 +713,27 @@ function CreateReportFunc(props: any) {
               : null,
             media: mediaAdded.map((m: any) => m.path),
             country: country.label,
+            /* todo: stefanos, please look into refactoring this piece */
             place_name: location ? (location as LocationModel).place : null,
             total_target_beneficiaries: tarBenTotal,
             total_target_beneficiaries_commited: tarBenTotal2,
             budget,
             insContribution,
             key_outcomes: keyOutcomes,
-            monitor_report_outcomes: monRepOutcomes,
+            inputs_invested: inputsInvested,
+            activities_undertaken: activitiesUndertaken,
+            projectgoals_socialbenefits: projectgoalsSocialbenefits,
+            important_factors: importantFactors,
+            orgs_partners: orgsPartners,
+            partners: partners,
             key_implementation_challenges: keyImplChallenges,
             other_project_outcomes: otherProjOutObs,
-            plans: futurePlans,
+            how_address_challenges: addressChallenges,
+            how_important_insinger_support: howImportantInsingerSupport,
+            apply_for_more_funding: applyForMoreFunding,
             other_comments: otherComms,
             isDraft: false,
-            funder: funder.label,
+            funders,
           },
         },
       });
@@ -595,10 +748,21 @@ function CreateReportFunc(props: any) {
         values: {
           data: {
             rid,
+            pillar,
             title: title === '' ? ' ' : title,
             project: props.match.params.projectID,
             target_beneficiaries: beneficiaryCounts,
-            policy_priority: policyPriority.value,
+            policy_priorities: activePolicyPriorities.map(
+              (pp: LabelWeightModel) => ({
+                ...pp,
+                name: pp.label,
+              })
+            ),
+            sdgs: sdgs.map((sdg: LabelWeightModel) => ({
+              ...sdg,
+              name: sdg.label,
+            })),
+            /* todo: stefanos, please look into refactoring this piece */
             location: location
               ? {
                   long: (location as LocationModel).longitude,
@@ -607,22 +771,38 @@ function CreateReportFunc(props: any) {
               : null,
             media: mediaAdded.map((m: any) => m.path),
             country: country.label === '' ? ' ' : country.label,
+            /* todo: stefanos, please look into refactoring this piece */
             place_name: location ? (location as LocationModel).place : null,
             total_target_beneficiaries: tarBenTotal,
             total_target_beneficiaries_commited: tarBenTotal2,
             budget,
             insContribution,
             key_outcomes: keyOutcomes === '' ? ' ' : keyOutcomes,
-            monitor_report_outcomes:
-              monRepOutcomes === '' ? ' ' : monRepOutcomes,
+            inputs_invested: inputsInvested === '' ? ' ' : inputsInvested,
+            activities_undertaken:
+              activitiesUndertaken === '' ? ' ' : activitiesUndertaken,
+            projectgoals_socialbenefits:
+              projectgoalsSocialbenefits === ''
+                ? ' '
+                : projectgoalsSocialbenefits,
+            important_factors: importantFactors === '' ? ' ' : importantFactors,
+            orgs_partners: orgsPartners === '' ? ' ' : orgsPartners,
+            partners: partners === '' ? ' ' : partners,
             key_implementation_challenges:
               keyImplChallenges === '' ? ' ' : keyImplChallenges,
             other_project_outcomes:
               otherProjOutObs === '' ? ' ' : otherProjOutObs,
-            plans: futurePlans === '' ? ' ' : futurePlans,
+            how_address_challenges:
+              addressChallenges === '' ? ' ' : addressChallenges,
+            how_important_insinger_support:
+              howImportantInsingerSupport === ''
+                ? ' '
+                : howImportantInsingerSupport,
+            apply_for_more_funding:
+              applyForMoreFunding === '' ? ' ' : applyForMoreFunding,
             other_comments: otherComms === '' ? ' ' : otherComms,
             isDraft: true,
-            funder: funder.label,
+            funders,
           },
         },
       });
@@ -662,29 +842,43 @@ function CreateReportFunc(props: any) {
         setCountry,
         location,
         setLocation,
-      }}
-      policyPrioritiesProps={{
-        tarBenTotal,
-        tarBenTotal2,
-        setTarBenTotal,
-        setTarBenTotal2,
-        policyPriority,
-        setPolicyPriority,
-        beneficiaryCounts,
-        setBeneficiaryCounts,
         budget,
         setBudget,
         remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
         insContribution,
         setInsContribution,
-        funder,
-        setFunder,
+      }}
+      policyPrioritiesProps={{
+        pillar,
+        setPillar,
+        tarBenTotal,
+        tarBenTotal2,
+        setTarBenTotal,
+        setTarBenTotal2,
+        policyPriorities: activePolicyPriorities,
+        setPolicyPriorities: activePolicyPrioritiesAction,
+        sdgs,
+        setSDGs,
+        beneficiaryCounts,
+        setBeneficiaryCounts,
+        funders,
+        setFunders,
       }}
       indicatorVerificationProps={{
         keyOutcomes,
         setKeyOutcomes,
-        monRepOutcomes,
-        setMonRepOutcomes,
+        inputsInvested,
+        setInputsInvested,
+        activitiesUndertaken,
+        setActivitiesUndertaken,
+        projectgoalsSocialbenefits,
+        setProjectgoalsSocialbenefits,
+        importantFactors,
+        setImportantFactors,
+        orgsPartners,
+        setOrgsPartners,
+        partners,
+        setPartners,
         media,
         setMedia: onAddMedia,
         mediaAdded,
@@ -699,8 +893,12 @@ function CreateReportFunc(props: any) {
         setKetImplChallenges,
         otherProjOutObs,
         setOtherProjOutObs,
-        futurePlans,
-        setFuturePlans,
+        addressChallenges,
+        setAddressChallenges,
+        howImportantInsingerSupport,
+        setHowImportantInsingerSupport,
+        applyForMoreFunding,
+        setApplyForMoreFunding,
         otherComms,
         setOtherComms,
       }}
@@ -711,16 +909,22 @@ function CreateReportFunc(props: any) {
           tarBenTotal,
           beneficiaryCounts,
           keyOutcomes,
-          monRepOutcomes,
+          inputsInvested,
+          activitiesUndertaken,
+          projectgoalsSocialbenefits,
+          importantFactors,
+          orgsPartners,
+          partners,
           keyImplChallenges,
           otherProjOutObs,
-          futurePlans,
+          addressChallenges,
           otherComms,
           budget,
-          policyPriority,
+          policyPriorities: activePolicyPriorities,
+          sdgs,
           remainBudget: get(projectBudgetData, 'data.remainBudget', 0),
           insContribution,
-          funder: funder.value,
+          funders,
         })
       }
       backBtnDisabled={!isNavBtnEnabled('back', initialTabIndex, {})}

@@ -1,16 +1,18 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import styled from 'styled-components';
-import { Tooltip } from '@material-ui/core';
 import { ProjectPalette } from 'app/theme';
+import styled, { css } from 'styled-components/macro';
+import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles, Theme, makeStyles } from '@material-ui/core/styles';
 
 type Props = {
   size?: string;
   label?: string;
   tip?: string;
+  adjust?: boolean;
 };
 
-const BaseButton = styled(props => <Button {...props} />)`
+const BaseButton = styled((props) => <Button {...props} />)`
   && {
     margin-left: 9px;
     background-color: ${ProjectPalette.primary.main};
@@ -35,10 +37,28 @@ const BaseButton = styled(props => <Button {...props} />)`
   }
 `;
 
+const LightTooltip = withStyles((theme: Theme) => ({
+  tooltip: {
+    padding: 10,
+    fontSize: 12,
+    boxShadow: theme.shadows[1],
+    color: 'rgba(0, 0, 0, 0.87)',
+    backgroundColor: theme.palette.common.white,
+  },
+}))(Tooltip);
+
+const AdjustedStyling = css`
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  margin-right: 21px;
+  // top: 10px;
+`;
+
 /* span is here for a reason https://github.com/atomiks/tippy.js-react */
 export const TooltipButton = (props: Props) => {
   return (
-    <Tooltip
+    <LightTooltip
       title={
         <span style={{ whiteSpace: 'pre-wrap' }}>
           {props.tip ? props.tip : 'empty tooltip'}
@@ -46,7 +66,7 @@ export const TooltipButton = (props: Props) => {
       }
       placement="top-end"
     >
-      <span>
+      <span css={props.adjust ? AdjustedStyling : ''}>
         <BaseButton
           {...props}
           size={props.size}
@@ -56,6 +76,6 @@ export const TooltipButton = (props: Props) => {
           i
         </BaseButton>
       </span>
-    </Tooltip>
+    </LightTooltip>
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import get from 'lodash/get';
 import Badge from '@material-ui/core/Badge';
 import { css } from 'styled-components/macro';
 import CloseIcon from '@material-ui/icons/Close';

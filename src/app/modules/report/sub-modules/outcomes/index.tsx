@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { ContainedButton } from 'app/components/inputs/buttons/ContainedButton';
+import { IntentTexFieldSingleLine } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextFieldSingleLine';
 import { IntentTexField } from 'app/modules/report/sub-modules/indicator-verification/common/IntentTextField';
 import { OutcomesPropsModel } from 'app/modules/report/model';
 import { GeoMap } from 'app/components/charts/GeoMap';
@@ -50,7 +51,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
           />
           <CardContent css={styles.cardContent}>
             <IntentTexField
-              testAttr="outcome-title"
+              testattr="outcome-title"
               value={props.title}
               componentID="outcome1"
               setValue={props.setTitle}
@@ -66,7 +67,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         xs={12}
         md={12}
         lg={6}
-        css={isMobileWidth && styles.gridMobile}
+        css={isMobileWidth ? styles.gridMobile : ''}
         data-cy="add-location"
       >
         <Card
@@ -99,7 +100,7 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
         xs={12}
         md={12}
         lg={6}
-        css={isMobileWidth && styles.gridMobile}
+        css={isMobileWidth ? styles.gridMobile : ''}
         data-cy="exact-location"
       >
         <Card>
@@ -122,12 +123,66 @@ export const OutcomesLayout = (props: OutcomesPropsModel) => {
                 </div>
                 <Box width="100%" height="14px" />
                 <ContainedButton
-                  testAttr="remove-button"
+                  testattr="remove-button"
                   text="Remove"
                   onClick={() => props.setLocation(null)}
                 />
               </>
             )}
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/* ---------------------------------------------------------------------*/}
+      {/* budget & insinger-contribution */}
+      <Grid
+        item
+        xs={12}
+        md={6}
+        lg={6}
+        data-cy="budget-container"
+        css={isMobileWidth ? styles.gridMobile : ''}
+      >
+        <Card>
+          <CardHeader title={t('reports.form.textfield.budget')} />
+          <CardContent
+          // css={`
+          //   padding-bottom: 6px !important;
+          //   > div:first-of-type {
+          //     height: inherit;
+          //   }
+          // `}
+          >
+            <IntentTexFieldSingleLine
+              testattr="budget-field"
+              fullWidth
+              type="number"
+              min={0}
+              value={props.budget}
+              setValue={props.setBudget}
+              description=""
+            />
+            <Box height="14px" width="100%" />
+            {/* <Box height="5px" width="100%" /> */}
+            {/* <Typography variant="body2" color="secondary" css={styles.infoText}>
+              {t('reports.form.textfield.remaining')}: {props.remainBudget}€
+            </Typography> */}
+          </CardContent>
+        </Card>
+        <div css="width: 100%;height: 50px;" />
+        <Card>
+          <CardHeader title={t('reports.form.textfield.contribution')} />
+          <CardContent>
+            <IntentTexFieldSingleLine
+              testattr="insinger-contribution-field"
+              fullWidth
+              type="number"
+              min={0}
+              value={props.insContribution}
+              setValue={props.setInsContribution}
+              description=""
+            />
+            <Box height="14px" width="100%" />
           </CardContent>
         </Card>
       </Grid>

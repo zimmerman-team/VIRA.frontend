@@ -1,10 +1,11 @@
+// @ts-nocheck
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const IconNotification = (
   props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
 ) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <svg width={20} height={24} {...props}>
       <defs>

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Typography, Box } from '@material-ui/core';
 
 const ContentContainer = styled.div`
-  width: 300px;
+  width: 382px;
   display: flex;
   padding: 24px;
   border-radius: 2px;
@@ -22,7 +22,7 @@ const Divider = styled.div`
   background: ${ProjectPalette.common.white};
 `;
 
-const Title = styled(props => <Typography {...props} />)`
+const Title = styled((props) => <Typography {...props} />)`
   && {
     color: ${ProjectPalette.common.white};
   }
@@ -33,14 +33,14 @@ const Item = styled.div`
   flex-direction: row;
 `;
 
-const Label = styled(props => <Typography {...props} />)`
+const Label = styled((props) => <Typography {...props} />)`
   && {
     margin-right: 28px;
     color: ${ProjectPalette.common.white};
   }
 `;
 
-const Value = styled(props => <Typography {...props} />)`
+const Value = styled((props) => <Typography {...props} />)`
   && {
     margin-left: auto;
     color: ${ProjectPalette.common.white};
@@ -79,7 +79,7 @@ export const ChartTooltip = (props: ChartTooltipModel) => {
       <Title variant="subtitle2">{t(props.title as string)}</Title>
       <Divider />
       {props.items.map((item: ChartTooltipItemModel, index: number) => {
-        const label = (item.label as string).split(' ');
+        // const label = (item.label as string).split(' ');
         return (
           <React.Fragment key={item.label}>
             <Item
@@ -87,9 +87,7 @@ export const ChartTooltip = (props: ChartTooltipModel) => {
                 margin-bottom: ${item.percentage ? '8px' : 0};
               `}
             >
-              <Label variant="subtitle1">
-                {label[0] ? t(label[0]) : item.label} {label[1] || ''}
-              </Label>
+              <Label variant="subtitle1">{item.label}</Label>
               <Value variant="subtitle1">{item.value}</Value>
             </Item>
             {item.percentage && (

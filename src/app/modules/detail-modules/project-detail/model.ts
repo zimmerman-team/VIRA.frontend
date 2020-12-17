@@ -35,7 +35,6 @@ export interface ReportModel {
   target_beneficiaries: string[];
   project: string;
   key_outcomes: string;
-  monitor_report_outcomes: string;
   media: string;
   policy_priorities: string[];
   key_implementation_challenges: string;
@@ -86,3 +85,27 @@ export const navItemMockViz: NavItemParams[] = [
 export const TabNavMockViz: TabNavigatorParams = {
   items: navItemMockViz,
 };
+
+export interface PropsModel {
+  history: any;
+  location: Location;
+  match: Match;
+}
+
+export interface Location {
+  pathname?: string;
+  search?: string;
+  hash?: string;
+  key?: string;
+}
+
+export interface Match {
+  path?: string;
+  url?: string;
+  isExact?: boolean;
+  params?: Params;
+}
+
+export interface Params {
+  code: string;
+}

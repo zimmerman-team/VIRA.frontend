@@ -5,8 +5,11 @@
 // @ts-nocheck
 import 'styled-components/macro';
 import React from 'react';
+import axios from 'axios';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import sumBy from 'lodash/sumBy';
+import filter from 'lodash/filter';
 import wc from 'which-country';
 import Geocoder from 'react-mapbox-gl-geocoder';
 import ReactMapGL, {
@@ -30,9 +33,11 @@ import { MapGeoCoderInputListItem } from './common/MapGeoCoderInputListItem';
 import Cluster from './common/MapCluster';
 import { ClusterElement } from './common/MapCluster/ClusterElement';
 import { MapControls } from './common/MapControls';
+import { HorizontalBarChartValueModel } from 'src/app/components/charts/BarCharts/HorizontalBarChart/model';
+import { MapPopup } from './common/MapPopup';
 
 type Props = {
-  data?: any;
+  data?: HorizontalBarChartValueModel;
   width?: number;
   height?: number;
   noData?: boolean;
@@ -43,7 +48,7 @@ type Props = {
 export function GeoMap(props: Props) {
   const mapRef: React.RefObject<InteractiveMap> = React.useRef(null);
   const [maxPinValue, setMaxPinValue] = React.useState(
-    Math.max(...get(props.data, 'mapMarkers', []).map((m: any) => m.value))
+    Math.max(...get(props.data, 'mapMarkers', []).map((m: []) => m.value))
   );
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const containerRef: React.RefObject<HTMLDivElement> = React.createRef();
@@ -55,9 +60,11 @@ export function GeoMap(props: Props) {
     zoom: props.noData ? 1 : isMobileWidth ? 0 : 1,
     minZoom: 0,
   });
+  const [hoveredPin, setHoveredPin] = React.useState(null);
+  const [hoveredLayer, setHoveredLayer] = React.useState(null);
 
   React.useEffect(() => {
-    setViewport(prev => ({
+    setViewport((prev) => ({
       ...prev,
       zoom: props.noData ? 1 : isMobileWidth ? 0 : 1,
       height: props.height || (isMobileWidth ? 200 : 557),
@@ -65,7 +72,7 @@ export function GeoMap(props: Props) {
   }, [isMobileWidth]);
 
   React.useEffect(() => {
-    setViewport(prev => ({
+    setViewport((prev) => ({
       ...prev,
       width: get(containerRef.current, 'offsetWidth', 0),
     }));
@@ -74,7 +81,7 @@ export function GeoMap(props: Props) {
   React.useEffect(
     () =>
       setMaxPinValue(
-        Math.max(...get(props.data, 'mapMarkers', []).map((m: any) => m.value))
+        Math.max(...get(props.data, 'mapMarkers', []).map((m: []) => m.value))
       ),
     [get(props.data, 'mapMarkers', [])]
   );
@@ -94,12 +101,17 @@ export function GeoMap(props: Props) {
 
   React.useEffect(() => {
     if (!props.pointSelection) {
-      setViewport(prev => ({ ...prev, latitude: 13, longitude: 25, zoom: 1 }));
+      setViewport((prev) => ({
+        ...prev,
+        latitude: 13,
+        longitude: 25,
+        zoom: 1,
+      }));
     }
   }, [props.pointSelection]);
 
-  function onGeoCoderSelected(viewport: any, item: any) {
-    setViewport(prev => ({ ...prev, ...viewport }));
+  function onGeoCoderSelected(viewportVar: [], item: []) {
+    setViewport((prev) => ({ ...prev, ...viewportVar }));
     if (props.setPointSelection) {
       const iso3 = wc([
         item.geometry.coordinates[0],
@@ -118,20 +130,36 @@ export function GeoMap(props: Props) {
     }
   }
 
+  async function getPlaceFromLocation(longitude: number, latitude: number) {
+    return axios
+      .get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?types=place&limit=5&access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
+      )
+      .then((response: any) => {
+        return get(response, 'data.features[0].place_name', null);
+      })
+      .catch((error: any) => {
+        return null;
+      });
+  }
+
   function onMapClick(e: PointerEvent) {
     if (props.setPointSelection) {
-      const iso3 = wc([e.lngLat[0], e.lngLat[1]]);
-      let country = null;
-      if (iso3) {
-        country = find(countries, { iso3 });
-      }
-      props.setPointSelection({
-        longitude: e.lngLat[0],
-        latitude: e.lngLat[1],
-        country: country || { label: '', value: '' },
+      getPlaceFromLocation(e.lngLat[0], e.lngLat[1]).then((place: any) => {
+        const iso3 = wc([e.lngLat[0], e.lngLat[1]]);
+        let country = null;
+        if (iso3) {
+          country = find(countries, { iso3 });
+        }
+        props.setPointSelection({
+          longitude: e.lngLat[0],
+          latitude: e.lngLat[1],
+          country: country || { label: '', value: '' },
+          place,
+        });
       });
     }
-    setViewport(prev => ({
+    setViewport((prev) => ({
       ...prev,
       zoom: prev.zoom > 10 ? prev.zoom : 10,
       longitude: e.lngLat[0],
@@ -146,7 +174,7 @@ export function GeoMap(props: Props) {
     longitude: number,
     latitude: number
   ) {
-    setViewport((prev: any) => ({
+    setViewport((prev: []) => ({
       ...prev,
       zoom,
       longitude,
@@ -157,7 +185,7 @@ export function GeoMap(props: Props) {
   }
 
   function handleZoomIn() {
-    setViewport(prev => ({
+    setViewport((prev) => ({
       ...prev,
       zoom: prev.zoom + 0.5,
       transitionInterpolator: new LinearInterpolator(),
@@ -167,12 +195,43 @@ export function GeoMap(props: Props) {
 
   function handleZoomOut() {
     if (viewport.zoom - 0.5 >= viewport.minZoom) {
-      setViewport(prev => ({
+      setViewport((prev) => ({
         ...prev,
         zoom: prev.zoom - 0.5,
         transitionInterpolator: new LinearInterpolator(),
         transitionDuration: 500,
       }));
+    }
+  }
+
+  function onHover(event) {
+    if (!hoveredPin) {
+      let hoverLayerInfo = null;
+      const { features } = event;
+
+      const feature = features && features.find((f) => f.layer.id === 'data');
+      if (feature) {
+        hoverLayerInfo = {
+          lngLat: event.lngLat,
+          properties: feature.properties,
+        };
+        const countryPins = filter(props.data.mapMarkers, {
+          country: feature.properties.name,
+        });
+        setHoveredLayer({
+          latitude: event.lngLat[1],
+          longitude: event.lngLat[0],
+          name: feature.properties.name,
+          value: sumBy(countryPins, 'value'),
+          target: sumBy(countryPins, 'target'),
+          reached: sumBy(countryPins, 'reached'),
+          contribution: sumBy(countryPins, 'contribution'),
+        });
+      } else {
+        setHoveredLayer(null);
+      }
+    } else if (hoveredLayer) {
+      setHoveredLayer(null);
     }
   }
 
@@ -212,6 +271,7 @@ export function GeoMap(props: Props) {
       <ReactMapGL
         ref={mapRef}
         {...viewport}
+        onHover={onHover}
         onViewportChange={setViewport}
         mapStyle={props.noData ? mapStyle2 : 'mapbox://styles/mapbox/light-v10'}
         onClick={props.noData ? onMapClick : undefined}
@@ -219,7 +279,7 @@ export function GeoMap(props: Props) {
       >
         {!props.noData && props.data && (
           <>
-            {props.data.countryFeatures && (
+            {/* {props.data.countryFeatures && (
               <Source
                 type="geojson"
                 data={
@@ -231,7 +291,7 @@ export function GeoMap(props: Props) {
               >
                 <Layer {...geoJSON} />
               </Source>
-            )}
+            )} */}
             {mapRef.current && (
               <Cluster
                 map={mapRef.current.getMap()}
@@ -239,22 +299,30 @@ export function GeoMap(props: Props) {
                 extent={512}
                 nodeSize={22}
                 minZoom={viewport.minZoom}
-                element={(clusterProps: any) => (
+                element={(clusterProps: []) => (
                   <ClusterElement
                     {...clusterProps}
                     onClick={handleClusterClick}
                   />
                 )}
               >
-                {(props.data.mapMarkers || []).map((m: any) => (
+                {filter(
+                  props.data.mapMarkers || [],
+                  (m: any) => m.longitude
+                ).map((m: any) => (
                   <MapPin
                     key={getRandomKey()}
                     name={m.name}
                     value={m.value}
+                    target={m.target}
+                    reached={m.reached}
+                    project={m.project}
+                    organisation={m.org}
                     latitude={m.latitude}
                     maxValue={maxPinValue}
                     longitude={m.longitude}
-                    // onClick={onMapPinClick}
+                    onHover={setHoveredPin}
+                    contribution={m.contribution}
                   />
                 ))}
               </Cluster>
@@ -271,6 +339,8 @@ export function GeoMap(props: Props) {
             longitude={get(props.pointSelection, 'longitude', 0)}
           />
         )}
+        {hoveredLayer && <MapPopup {...hoveredLayer} />}
+        {hoveredPin && <MapPopup {...hoveredPin} onHover={setHoveredPin} />}
       </ReactMapGL>
       <MapControls zoomIn={handleZoomIn} zoomOut={handleZoomOut} />
     </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { css } from 'styled-components/macro';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -44,7 +43,7 @@ const styles: any = {
 };
 
 export const OutcomeCard = (props: OutcomeCardParams) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <React.Fragment>
       <Card css={props.media ? styles.card : null}>

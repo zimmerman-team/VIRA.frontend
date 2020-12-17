@@ -1,4 +1,6 @@
-// ***********************************************
+import { getRandomInt } from '../support/utils';
+// *****************************************
+// ******
 // This example commands.js shows you how to
 // create various custom commands and overwrite
 // existing commands.
@@ -23,7 +25,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-import 'happo-cypress';
+// import 'happo-cypress';
 // import 'cypress-audit/commands';
 import '@testing-library/cypress/add-commands';
 import { configure } from '@testing-library/cypress';
@@ -31,14 +33,14 @@ import { configure } from '@testing-library/cypress';
 configure({ testIdAttribute: 'data-cy' });
 
 Cypress.Commands.add('auth', (overrides = {}) => {
-  cy.viewport(1440, 821);
   cy.visit('/login');
 
-  cy.findByTestId('login-email').type(Cypress.env('username'));
-  cy.findByTestId('login-password').type(Cypress.env('password'));
-  cy.findByTestId('login-button').click();
-
-  cy.wait(10000);
+  cy.findByTestId('login-email').should('exist').type(Cypress.env('username'));
+  cy.findByTestId('login-password')
+    .should('exist')
+    .type(Cypress.env('password'));
+  cy.findByTestId('login-button').should('exist').click();
+  cy.wait(6000);
 });
 
 Cypress.Commands.add('viztabs', (overrides = {}) => {
@@ -85,3 +87,25 @@ Cypress.Commands.add('listTabsNoReports', (overrides = {}) => {
   cy.findByTestId('grantees-panel').should('exist');
   // cy.findByTestId('reports-panel').should('exist');
 });
+
+Cypress.Commands.add('goToProjectsOverview', (overrides = {}) => {
+  cy.findByTestId('sidebar-item-1').click();
+});
+Cypress.Commands.add('goToReportsOverview', (overrides = {}) => {
+  cy.findByTestId('sidebar-item-3').click();
+});
+Cypress.Commands.add('selectRandomProject', (overrides = {}) => {
+  let storedProjects = [];
+
+  cy.wait(3000).then(() => {
+    storedProjects = JSON.parse(localStorage.getItem('projectsE2E'));
+    cy.findByText(
+      storedProjects[getRandomInt(0, storedProjects.length - 1)]
+    ).click();
+  });
+});
+Cypress.Commands.add('selectRandomReport', (overrides = {}) => {});
+Cypress.Commands.add('selectSpecificReport', (overrides = {}) => {});
+Cypress.Commands.add('selectSpecificProject', (overrides = {}) => {});
+Cypress.Commands.add('generateReport', (overrides = {}) => {});
+Cypress.Commands.add('editReport', (overrides = {}) => {});

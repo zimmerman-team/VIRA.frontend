@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react';
 
-export const useWindowUnloadEffect = (handler: any, callOnCleanup: any) => {
+export const useWindowUnloadEffect = (handlerVar: any, callOnCleanup: any) => {
   const cb = useRef();
 
-  cb.current = handler;
+  cb.current = handlerVar;
 
   useEffect(() => {
     const handler = () => {
       if (cb) {
-        //@ts-ignore
+        // @ts-ignore
         cb.current();
       }
     };

@@ -5,10 +5,8 @@ import Providers from 'app/Providers';
 import { Container, Grid } from '@material-ui/core';
 import Table from './index';
 
-import {
-  getBaseTableForProject,
-  getBaseTableForGrantee,
-} from 'app/modules/list-module/utils';
+import { getBaseTableForGrantee } from 'app/modules/list-module/utils/getBaseTableForGrantee';
+import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
 export default { title: 'Components ' };
 
 const projectTableConfig = getBaseTableForProject();

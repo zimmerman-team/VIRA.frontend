@@ -9,6 +9,7 @@ import {
 } from 'app/modules/detail-modules/grantee-detail/mock';
 import { TitleParams } from 'app/modules/common/components/TitleParams';
 import { useStoreActions, useStoreState } from 'app/state/store/hooks';
+import { barChartLegendClickFunc } from 'app/components/charts/BarCharts/utils/barChartLegendClickFunc';
 
 import { BreadcrumbModel } from 'app/components/navigation/Breadcrumbs/model';
 import {
@@ -18,22 +19,48 @@ import {
 import get from 'lodash/get';
 
 import { DescriptionParams } from 'app/modules/common/components/DescriptionParams';
-import { ContactsCardModel } from 'app/components/surfaces/Cards/ContactsCard/model';
-import { mockData as mockDataContactsCard } from 'app/components/surfaces/Cards/ContactsCard/mock';
-import {
-  getBaseTableForProject,
-  formatTableDataForProject,
-} from 'app/modules/list-module/utils';
+import { getBaseTableForProject } from 'app/modules/list-module/utils/getBaseTableForProject';
+import { formatTableDataForProject } from 'app/modules/list-module/utils/formatTableDataForProject';
 import { TableModuleModel } from 'app/components/datadisplay/Table/model';
 import findIndex from 'lodash/findIndex';
 import { AppConfig } from 'app/data';
+
+export interface ProjectModel {
+  _id: string;
+  project_number: string;
+  project_name: string;
+  project_description: string;
+  duration: string;
+  start_date: string;
+  end_date: string;
+  total_amount?: number;
+  decision_date: string;
+  decision: string;
+  allocated_amount?: number;
+  released_amount?: any;
+  paid_amount?: number;
+  organisation: Organisation;
+  category: Category;
+  responsible_person: string;
+  __v: number;
+}
+
+export interface Organisation {
+  _id: string;
+  organisation_name: string;
+}
+
+export interface Category {
+  _id: string;
+  name: string;
+}
 
 export function GranteeDetailModule(props: any) {
   // set window title
   useTitle(`${AppConfig.appTitleLong} Grantee detail`);
 
-  const params: any = useParams();
-  const granteeID: any = params.code;
+  const params: { code: string } = useParams();
+  const granteeID: string = params.code;
   const granteeTitleMock: TitleParams = GranteeTitleMock;
   const breadcrumbsMock: BreadcrumbModel = mockDataBreadcrumbs;
   const descriptionMock: DescriptionParams = GranteeDescriptionMock;
@@ -49,22 +76,25 @@ export function GranteeDetailModule(props: any) {
     address: '',
   });
   const [projectTableData, setProjectTableData] = useState([[]]);
+  const [selectedBreakdown, setSelectedBreakdown] = React.useState('None');
 
   const granteeDetailAction = useStoreActions(
-    actions => actions.orgDetail.fetch
+    (actions) => actions.orgDetail.fetch
   );
   const granteeDetailClearAction = useStoreActions(
-    actions => actions.orgDetail.clear
+    (actions) => actions.orgDetail.clear
   );
   const allProjectsAction = useStoreActions(
-    actions => actions.allProjects.fetch
+    (actions) => actions.allProjects.fetch
   );
-  const allReportsAction = useStoreActions(actions => actions.allReports.fetch);
-  const granteeDetailData = useStoreState(state => state.orgDetail.data);
-  const ProjectsData = useStoreState(state => state.allProjects.data);
-  const ReportsData = useStoreState(state => state.allReports.data);
+  const allReportsAction = useStoreActions(
+    (actions) => actions.allReports.fetch
+  );
+  const granteeDetailData = useStoreState((state) => state.orgDetail.data);
+  const ProjectsData = useStoreState((state) => state.allProjects.data);
+
   const loading = useStoreState(
-    state =>
+    (state) =>
       state.orgDetail.loading ||
       state.allProjects.loading ||
       state.allReports.loading ||
@@ -73,12 +103,48 @@ export function GranteeDetailModule(props: any) {
       state.getGeoMapData.loading
   );
   const [selectedSDG, setSelectedSDG] = React.useState('');
-  const getPPVizData = useStoreActions(actions => actions.getPPVizData.fetch);
-  const getSDGVizData = useStoreActions(actions => actions.getSDGVizData.fetch);
-  const getGeoMapData = useStoreActions(actions => actions.getGeoMapData.fetch);
-  const ppVizData = useStoreState(state => state.getPPVizData.data);
-  const SDGVizData = useStoreState(state => state.getSDGVizData.data);
-  const geoMapData = useStoreState(state => state.getGeoMapData.data);
+  const getPPVizData = useStoreActions((actions) => actions.getPPVizData.fetch);
+  const getSDGVizData = useStoreActions(
+    (actions) => actions.getSDGVizData.fetch
+  );
+  const getGeoMapData = useStoreActions(
+    (actions) => actions.getGeoMapData.fetch
+  );
+  const ppVizData = useStoreState((state) => state.getPPVizData.data);
+  const SDGVizData = useStoreState((state) => state.getSDGVizData.data);
+  const geoMapData = useStoreState((state) => state.getGeoMapData.data);
+
+  const getPillarDataByBudget = useStoreActions(
+    (actions) => actions.getPillarDataByBudget.fetch
+  );
+  const getPillarDataByDuration = useStoreActions(
+    (actions) => actions.getPillarDataByDuration.fetch
+  );
+  const getPriorityAreaBarChartData = useStoreActions(
+    (actions) => actions.getPriorityAreaBarChartData.fetch
+  );
+  const getTargetGroupBarChartData = useStoreActions(
+    (actions) => actions.getTargetGroupBarChartData.fetch
+  );
+  const getOneMultiYearBarChartData = useStoreActions(
+    (actions) => actions.getOneMultiYearBarChartData.fetch
+  );
+
+  const pillarDataByBudget = useStoreState(
+    (state) => state.getPillarDataByBudget.data
+  );
+  const pillarDataByDuration = useStoreState(
+    (state) => state.getPillarDataByDuration.data
+  );
+  const priorityAreaBarChartData = useStoreState(
+    (state) => state.getPriorityAreaBarChartData.data
+  );
+  const targetGroupBarChartData = useStoreState(
+    (state) => state.getTargetGroupBarChartData.data
+  );
+  const oneMultiYearBarChartData = useStoreState(
+    (state) => state.getOneMultiYearBarChartData.data
+  );
 
   React.useEffect(() => {
     granteeDetailAction({
@@ -136,29 +202,67 @@ export function GranteeDetailModule(props: any) {
       getPPVizData({
         socketName: 'getPolicyPriorityBarChart',
         values: {
-          projectID: projects.map((p: any) => p._id),
+          projectID: projects.map((project: ProjectModel) => project._id),
         },
       });
       getSDGVizData({
         socketName: 'getSDGBubbleChart',
         values: {
-          projectID: projects.map((p: any) => p._id),
+          projectID: projects.map((project: ProjectModel) => project._id),
         },
       });
       getGeoMapData({
         socketName: 'getGeoMapData',
         values: {
-          projectID: projects.map((p: any) => p._id),
+          projectID: projects.map((project: ProjectModel) => project._id),
         },
       });
       allReportsAction({
         socketName: 'allReport',
         values: {
-          projectID: projects.map((p: any) => p._id),
+          projectID: projects.map((project: ProjectModel) => project._id),
         },
       });
     }
   }, [ProjectsData]);
+
+  React.useEffect(() => {
+    const projects = get(ProjectsData, 'data', []);
+    if (projects.length > 0) {
+      const projectsIds = projects.map((project: ProjectModel) => project._id);
+      getPillarDataByBudget({
+        socketName: 'getPillarDataByBudget',
+        values: {
+          projectID: projectsIds,
+        },
+      });
+      getPillarDataByDuration({
+        socketName: 'getPillarDataByDuration',
+        values: { projectID: projectsIds },
+      });
+      getPriorityAreaBarChartData({
+        socketName: 'getPriorityAreaBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          projectID: projectsIds,
+        },
+      });
+      getTargetGroupBarChartData({
+        socketName: 'getTargetGroupBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          projectID: projectsIds,
+        },
+      });
+      getOneMultiYearBarChartData({
+        socketName: 'getOneMultiYearBarChartData',
+        values: {
+          breakdownBy: selectedBreakdown,
+          projectID: projectsIds,
+        },
+      });
+    }
+  }, [ProjectsData, selectedBreakdown]);
 
   React.useEffect(() => {
     baseTableForProject.data = projectTableData;
@@ -180,14 +284,7 @@ export function GranteeDetailModule(props: any) {
   ]);
 
   function onBarChartLegendClick(legend: string) {
-    const prevBarChartLegends = [...barChartLegends];
-    const legendIndex = findIndex(prevBarChartLegends, { label: legend });
-    if (legendIndex !== -1) {
-      prevBarChartLegends[legendIndex].selected = !prevBarChartLegends[
-        legendIndex
-      ].selected;
-      setBarChartLegends(prevBarChartLegends);
-    }
+    barChartLegendClickFunc(legend, [...barChartLegends], setBarChartLegends);
   }
 
   function onBubbleSelect(bubble: string) {
@@ -195,6 +292,7 @@ export function GranteeDetailModule(props: any) {
   }
 
   return (
+    /* todo: look into why we're not passing mockData */
     <GranteeDetailLayout
       match={props.match}
       loading={loading}
@@ -209,6 +307,13 @@ export function GranteeDetailModule(props: any) {
       geoMapData={geoMapData}
       barChartLegends={barChartLegends}
       onBarChartLegendClick={onBarChartLegendClick}
+      pillarData={pillarDataByBudget}
+      pillarDataByDuration={pillarDataByDuration}
+      priorityAreaData={priorityAreaBarChartData}
+      targetGroupData={targetGroupBarChartData}
+      oneAndMultiYearData={oneMultiYearBarChartData}
+      selectedBreakdown={selectedBreakdown}
+      onBreakdownSelect={setSelectedBreakdown}
     />
   );
 }

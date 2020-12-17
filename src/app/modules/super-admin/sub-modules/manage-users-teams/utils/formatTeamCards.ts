@@ -3,6 +3,26 @@ import find from 'lodash/find';
 import filter from 'lodash/filter';
 import orderBy from 'lodash/orderBy';
 
+export interface NewDataItemModel {
+  _id: string;
+  title: string;
+  description: string;
+  dateCreated: string;
+}
+
+export interface AllDataItemModel {
+  _id: string;
+  name: string;
+  description: string;
+  members: string[];
+  mappings: any[];
+  label: string;
+  value: string;
+  date: string;
+  last_updated: string;
+  createdBy: string;
+}
+
 export function formatTeamCards(
   init: boolean,
   data: any,
@@ -15,7 +35,7 @@ export function formatTeamCards(
   let allData = data;
   let newData = data;
   if (init) {
-    allData = (data || []).map((item: any) => {
+    allData = (data || []).map((item: AllDataItemModel) => {
       const splits = item.description.split(',');
       const creator = find(allUsers, { user_id: splits[1] });
       return {
@@ -28,11 +48,12 @@ export function formatTeamCards(
     newData = allData;
   }
 
+  /* todo: duplicate code in formatUserCards.ts */
   // do search
   if (search !== '') {
     newData = filter(
       newData,
-      (item: any) =>
+      (item: NewDataItemModel) =>
         item.title.toLowerCase().includes(search) ||
         item.description.toLowerCase().includes(search)
     );

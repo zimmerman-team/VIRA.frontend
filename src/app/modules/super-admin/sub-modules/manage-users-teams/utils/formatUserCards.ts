@@ -1,6 +1,10 @@
 import get from 'lodash/get';
 import filter from 'lodash/filter';
 import orderBy from 'lodash/orderBy';
+import {
+  NewDataItemModel,
+  AllDataItemModel,
+} from 'app/modules/super-admin/sub-modules/manage-users-teams/models';
 
 export function formatUserCards(
   init: boolean,
@@ -13,7 +17,7 @@ export function formatUserCards(
   let allData = data;
   let newData = data;
   if (init) {
-    allData = (data || []).map((item: any) => {
+    allData = (data || []).map((item: AllDataItemModel) => {
       const title = item.user_metadata
         ? `${item.user_metadata.firstName} ${item.user_metadata.lastName}`
         : item.name;
@@ -39,7 +43,7 @@ export function formatUserCards(
   if (search !== '') {
     newData = filter(
       newData,
-      (item: any) =>
+      (item: NewDataItemModel) =>
         item.title.toLowerCase().includes(search) ||
         item.description.toLowerCase().includes(search)
     );

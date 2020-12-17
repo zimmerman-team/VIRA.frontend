@@ -10,9 +10,10 @@ import styled from 'styled-components/macro';
 import { ResponsiveBubbleHtml } from '@nivo/circle-packing';
 import { Grid, Card as MuiCard, useMediaQuery } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
+import { hexToRgb } from 'app/utils/hexToRgb';
+import { useTranslation } from 'react-i18next';
 import { LegendList } from './common/LegendList';
 import { BubbleInfoBlock } from './common/BubbleInfoBlock';
-import { otherSdgs } from './mock';
 import { ChartTooltip } from '../BarCharts/common/ChartTooltip';
 
 type Props = {
@@ -30,13 +31,13 @@ const ChartContainer = styled.div`
   justify-content: center;
 `;
 
-const Card = styled(props => <MuiCard {...props} />)`
+const Card = styled((props) => <MuiCard {...props} />)`
   && {
     box-shadow: 0 0 2px 1px rgba(130, 136, 148, 0.08);
   }
 `;
 
-const Content = styled(props => <CardContent {...props} />)`
+const Content = styled((props) => <CardContent {...props} />)`
   display: flex;
   flex-direction: column;
   && {
@@ -48,6 +49,7 @@ const Content = styled(props => <CardContent {...props} />)`
 `;
 
 export function BubbleChart(props: Props) {
+  const { t } = useTranslation();
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
   const [minValue, setMinValue] = React.useState(0);
   const [selectedBubbleObj, setSelectedBubbleObj] = React.useState(null);
@@ -55,7 +57,8 @@ export function BubbleChart(props: Props) {
 
   React.useEffect(() => {
     if (props.data.children) {
-      setMinValue(get(minBy(props.data.children, 'loc'), 'loc', 0));
+      const newMinValue = get(minBy(props.data.children, 'loc'), 'loc', 0);
+      setMinValue(newMinValue === 0 ? 1 : newMinValue);
     }
   }, [props.data]);
 
@@ -74,11 +77,11 @@ export function BubbleChart(props: Props) {
       <Content>
         <Grid container spacing={isMobileWidth ? 0 : 3}>
           {!isMobileWidth && (
-            <Grid item xs={0} sm={0} lg={3}>
+            <Grid item xs={false} sm={false} lg={3}>
               <LegendList
+                items={props.data.children}
                 activeBubble={props.selectedBubble}
                 setActiveBubble={props.setSelectedBubble}
-                items={[...props.data.children, ...otherSdgs]}
               />
             </Grid>
           )}
@@ -96,20 +99,25 @@ export function BubbleChart(props: Props) {
                 identity="name"
                 root={{
                   ...props.data,
-                  children: [
-                    ...props.data.children,
-                    ...otherSdgs.map(os => ({ ...os, loc: minValue })),
-                  ],
+                  children: props.data.children.map((child) => ({
+                    ...child,
+                    loc: child.loc > 0 ? child.loc : minValue,
+                  })),
                 }}
                 isZoomable={false}
                 enableLabel={false}
-                colorBy={v => v.color}
+                colorBy={(v) => v.color}
                 nodeComponent={({ node, style, handlers }) => {
                   if (style.r <= 0) return null;
                   const hasData = !node.data.opacity || node.data.opacity === 1;
+                  const rgbColor = hexToRgb(node.color);
                   return (
                     <div
                       id={(node.data && node.data.id
+                        ? node.data.id
+                        : node.id
+                      ).replace(/[^\w]/gi, '-')}
+                      data-cy={(node.data && node.data.id
                         ? node.data.id
                         : node.id
                       ).replace(/[^\w]/gi, '-')}
@@ -118,15 +126,19 @@ export function BubbleChart(props: Props) {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        background: node.color,
+                        background: `rgba(${rgbColor?.r}, ${rgbColor?.g}, ${
+                          rgbColor?.b
+                        }, ${node.data.opacity || 1})`,
                         top: style.y - style.r,
                         left: style.x - style.r,
                         width: style.r * (isMobileWidth ? 3 : 2.3),
                         height: style.r * (isMobileWidth ? 3 : 2.3),
                         borderRadius: '50%',
-                        opacity: node.data.opacity || 1,
+                        // opacity: node.data.opacity || 1,
                         color: ProjectPalette.common.white,
                         cursor: hasData ? 'pointer' : 'initial',
+                        fontWeight: 700,
+                        fontSize: (style.r * (isMobileWidth ? 3 : 2.3)) / 5,
                         border:
                           selectedBubbleObj &&
                           selectedBubbleObj.number === node.data.number
@@ -134,31 +146,15 @@ export function BubbleChart(props: Props) {
                             : '',
                       }}
                       {...handlers}
-                      onClick={_e =>
+                      onClick={(_e) =>
                         hasData && props.setSelectedBubble(node.id)
                       }
                     >
-                      <svg
-                        css={`
-                          width: 70%;
-                        `}
-                        viewBox="0 0 56 18"
-                      >
-                        <text
-                          x="50%"
-                          y="50%"
-                          fontWeight={700}
-                          textAnchor="middle"
-                          dominantBaseline="middle"
-                          fill={ProjectPalette.common.white}
-                        >
-                          SDG {node.data.number}
-                        </text>
-                      </svg>
+                      SDG {node.data.number}
                     </div>
                   );
                 }}
-                tooltip={tProps => {
+                tooltip={(tProps) => {
                   if (tProps.data.opacity === 0.2 || isMobileWidth) {
                     return null;
                   }
@@ -167,9 +163,9 @@ export function BubbleChart(props: Props) {
                       title={tProps.id}
                       items={[
                         {
-                          label: `Target (${tProps.data.targetPercentage.toFixed(
-                            2
-                          )}%)`,
+                          label: `${t(
+                            'People reached out of targeted'
+                          )} (${tProps.data.targetPercentage.toFixed(2)}%)`,
                           value: tProps.data.targetValue,
                           percentage: tProps.data.targetPercentage,
                         },
@@ -186,23 +182,22 @@ export function BubbleChart(props: Props) {
                               .replace('.00', ''),
                         },
                         {
-                          label: 'charts.barchart.commitment',
+                          label: t('charts.barchart.commitment'),
                           value: tProps.data.insContribution
-                            ? tProps.data.insContribution.toLocaleString(
-                                undefined,
-                                {
+                            ? tProps.data.insContribution
+                                .toLocaleString(undefined, {
                                   currency: 'EUR',
                                   currencyDisplay: 'symbol',
                                   style: 'currency',
-                                }
-                              )
+                                })
+                                .replace('.00', '')
                             : '0',
                         },
                       ]}
                     />
                   );
                 }}
-                colors={props.data.children.map(item => item.color)}
+                colors={props.data.children.map((item) => item.color)}
                 margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
                 theme={{
                   tooltip: {

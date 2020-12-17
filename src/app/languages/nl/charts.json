@@ -1,12 +1,25 @@
 {
   "items": {
-    "drug_use": "Drugsgebruik",
-    "elderly": "Ouderen",
-    "homelessness": "Dakloos",
-    "poverty": "Armoedebestrijding met een focus op jeugd en kinderen",
-    "prisoner": "Rehabilitatie / reïntegratie van gevangenen",
-    "prostitution": "Prostitutie",
-    "refugees": "Vluchtelingen"
+    "poverty": "Armoede bestrijding",
+    "prisoner": "Reïntegratie en rehabilitatie van ex-gevangen",
+    "prostitution": "Tegengaan van gedwongen prostitutie",
+    "refugees": "Vluchtelingen hulp",
+    "children_youth_engagement": "Kinderen & jeugd engagement",
+    "vulnerable_groups": "Precaire groepen (bijv. laag inkomen, ouders & invalide)",
+    "drugs": "Drugsverslaafden helpen & tegengaan van drugsgebruik/drugsmisbruik",
+    "sustainability": "Duurzaamheid",
+    "emancipation": "Emancipatie van vrouwen en meisjes",
+    "heritage": "Cultureel erfgoed"
+  },
+  "count_container": {
+    "multi_year": {
+      "count_one": "Aantal eenjarige projecten",
+      "count_multi": "Aantal meerjarige projecten",
+      "budget_one": "Budget besteed aan eenjarige projecten",
+      "budget_multi": "Budget besteed aan meerjarige projecten",
+      "contribution_one": "Bijdrage Insinger aan eenjarige projecten",
+      "contribution_multi": "Bijdrage Insinger aan meerjarige projecten"
+    }
   },
   "barchart": {
     "target": "Doel",

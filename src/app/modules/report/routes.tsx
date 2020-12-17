@@ -36,7 +36,7 @@ const ReportModuleRoutesF = (props: Props) => {
     <React.Fragment>
       {/* ---------------------------------------------------------------------*/}
       {/* outcomes */}
-      <Route exact path="/report/:projectID/outcomes">
+      <Route exact path="/report/:projectID/project-info">
         <OutcomesLayout {...props.outcomesProps} />
       </Route>
 
@@ -47,7 +47,11 @@ const ReportModuleRoutesF = (props: Props) => {
           <PolicyPrioritiesLayout {...props.policyPrioritiesProps} />
         ) : (
           <Redirect
-            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes${
+            to={`/report/${get(
+              props.match.params,
+              'projectID',
+              ''
+            )}/project-info${
               query.get('rid') ? `?rid=${query.get('rid')}` : ''
             }`}
           />
@@ -56,12 +60,16 @@ const ReportModuleRoutesF = (props: Props) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* indicator & verification */}
-      <Route exact path="/report/:projectID/indicator-verification">
+      <Route exact path="/report/:projectID/goals-and-outcomes">
         {props.step3Enabled ? (
           <IndicatorVerificationLayout {...props.indicatorVerificationProps} />
         ) : (
           <Redirect
-            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes${
+            to={`/report/${get(
+              props.match.params,
+              'projectID',
+              ''
+            )}/project-info${
               query.get('rid') ? `?rid=${query.get('rid')}` : ''
             }`}
           />
@@ -70,12 +78,16 @@ const ReportModuleRoutesF = (props: Props) => {
 
       {/* ---------------------------------------------------------------------*/}
       {/* challenges & plans */}
-      <Route exact path="/report/:projectID/challenges-plans">
+      <Route exact path="/report/:projectID/challenges-and-future-plans">
         {props.step4Enabled ? (
           <ChallengesPlansLayout {...props.challengesPlansProps} />
         ) : (
           <Redirect
-            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes${
+            to={`/report/${get(
+              props.match.params,
+              'projectID',
+              ''
+            )}/project-info${
               query.get('rid') ? `?rid=${query.get('rid')}` : ''
             }`}
           />
@@ -89,7 +101,11 @@ const ReportModuleRoutesF = (props: Props) => {
           <PreviewLayout {...props} />
         ) : (
           <Redirect
-            to={`/report/${get(props.match.params, 'projectID', '')}/outcomes${
+            to={`/report/${get(
+              props.match.params,
+              'projectID',
+              ''
+            )}/project-info${
               query.get('rid') ? `?rid=${query.get('rid')}` : ''
             }`}
           />

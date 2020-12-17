@@ -2,6 +2,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ProjectPalette, TextStyle } from 'app/theme';
 
+/* todo: resolve duplicate code, is the same as variant9.tsx */
 export const projectsVariant = createMuiTheme({
   overrides: {
     MuiSvgIcon: {
@@ -34,7 +35,7 @@ export const projectsVariant = createMuiTheme({
         fontWeight: 'normal',
         letterSpacing: '0.42px',
         lineHeight: '1.33',
-        padding: '17px 24px',
+        // padding: '17px 24px',
         color: 'rgba(1, 1, 10, 0.6)',
       },
       sortAction: {
@@ -44,7 +45,7 @@ export const projectsVariant = createMuiTheme({
     MUIDataTableBodyCell: {
       root: {
         fontSize: '14px',
-        padding: '13px 24px',
+        // padding: '13px 24px',
         color: ProjectPalette.common.black,
         fontWeight: 'normal',
         '& a': {
@@ -76,6 +77,11 @@ export const projectsVariant = createMuiTheme({
     MUIDataTableBodyRow: {
       root: {
         border: 'solid 1px rgba(198, 198, 198, 0.2)',
+      },
+    },
+    MUIDataTableFilterList: {
+      chip: {
+        marginBottom: '8px',
       },
     },
     /*MuiTableHead: {

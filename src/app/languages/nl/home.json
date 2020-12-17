@@ -1,16 +1,27 @@
 {
   "chart_nav": {
-    "map": "Map",
+    "pillars": "Pilaren",
     "priority_area": "Prioriteitsgebied",
-    "sdg": "SDGs"
+    "target_group": "Doelgroep",
+    "one_year_and_multi_year": "Eenjarig & meerjarige projecten",
+    "sdg": "SDGs",
+    "map": "Map"
+  },
+  "chart_description": {
+    "pillars": "Overzicht van projecten per pilaar",
+    "priority_area": "Overzicht van projecten per prioriteitsgebied in een grafiek",
+    "target_group": "De doelgroep en het gespendeerde budget",
+    "one_year_and_multi_year": "Projecten over een enkel en meerdere jaren",
+    "sdg": "",
+    "map": ""
   },
   "dashboard": {
-    "grantees": "Grantees",
+    "grantees": "Begunstigden",
     "projects": "Projecten",
     "reports": "Totaal rapporten"
   },
   "overview_nav": {
-    "grantees": "Grantees",
+    "grantees": "Begunstigden",
     "projects": "Projecten",
     "reports": "Reports"
   }

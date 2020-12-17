@@ -18,6 +18,9 @@ export const StatItem = (props: StatParams) => {
       justify="center"
       alignItems="center"
       direction="column"
+      css={`
+        text-align: center;
+      `}
     >
       <Typography
         css={`

@@ -24,15 +24,35 @@ import { ManageUsers } from 'app/modules/super-admin/sub-modules/manage-users-te
 import { manageUsersTeamsLayoutMock } from 'app/modules/super-admin/sub-modules/manage-users-teams/mock';
 import { UserModel } from 'app/state/api/interfaces';
 import { useStoreState } from 'app/state/store/hooks';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { TabNavMock } from 'app/modules/list-module/mock';
+import { History } from 'history';
 import { manageTeamEditAddMock } from 'app//modules/super-admin/sub-modules/manage-team-edit/mock';
 import { AppConfig } from 'app/data';
 import get from 'lodash/get';
 import filter from 'lodash/filter';
 import findIndex from 'lodash/findIndex';
+import { TabNavMock } from 'app/mock/tabnav';
 import { useClearPersistedState } from './utils/useClearPersistedState';
+
+interface UserRolesModel {
+  _id: string;
+  applicationType: string;
+  applicationId: string;
+  description: string;
+  name: string | any;
+  permissions: any[];
+  users: string[];
+  label: string;
+  value: string;
+}
+
+interface StoreUserModel {
+  email: string;
+  name: string;
+  role: string;
+  _id: string;
+}
 
 /* todo: let's move this logic somewhere else */
 function redirectUnAuth<ReactModule>(
@@ -75,9 +95,14 @@ function redirectAuth(user: UserModel | null) {
 
 export function MainRoutes() {
   useClearPersistedState();
-  const history = useHistory();
-  const storeUser = useStoreState(state => state.syncVariables.user);
-  const userRoles = useStoreState(state => state.getUserRoles.data);
+  const history: History = useHistory();
+  const storeUser: StoreUserModel | null = useStoreState(
+    state => state.syncVariables.user
+  );
+  // @ts-ignore
+  const userRoles: UserRolesModel[] | null = useStoreState(
+    state => state.getUserRoles.data
+  );
   const userGroups = useStoreState(state => state.getUserGroups.data);
   const userRole = useStoreState(state =>
     get(state.userDetails.data, 'role', '')
@@ -236,7 +261,7 @@ export function MainRoutes() {
               radioButtonGroup: {
                 title: 'User Role',
                 items: userRoles
-                  ? filter(userRoles, (ur: any) => ur.name !== 'Super admin')
+                  ? filter(userRoles, ur => ur.name !== 'Super admin')
                   : manageUserEditMock.form.radioButtonGroup.items,
               },
               selectOptions: userGroups,

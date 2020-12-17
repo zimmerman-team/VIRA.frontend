@@ -126,12 +126,12 @@ export const AddMediaLayout = (props: AddMediaParams) => {
         <Grid item container lg={12} justify="flex-end">
           <Grid item container xs={8} md={6} lg={4} justify="space-around">
             <AddMediaButton
-              testAttr="media-cancel-button"
+              testattr="media-cancel-button"
               text={t('reports.form.buttons.cancel')}
               onClick={props.onClose}
             />
             <AddMediaButton
-              testAttr="media-save-button"
+              testattr="media-save-button"
               text={t('reports.form.buttons.save')}
               onClick={props.onSaveMedia}
             />

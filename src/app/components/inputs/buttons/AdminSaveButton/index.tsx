@@ -9,7 +9,7 @@ interface Props {
   icon?: React.ReactNode;
   disabled?: boolean;
   onClick?: any;
-  testAttr?: string;
+  testattr?: string;
 }
 
 const BaseContainedButtonStyle = css`
@@ -56,7 +56,7 @@ export const AdminSaveButton = (props: Props) => {
 
   return (
     <Button
-      data-cy={props.testAttr ? props.testAttr : 'contained-button'}
+      data-cy={props.testattr ? props.testattr : 'contained-button'}
       css={BaseContainedButtonStyle}
       variant="contained"
       color="secondary"

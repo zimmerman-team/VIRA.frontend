@@ -14,7 +14,18 @@ interface SidebarNavButtonParams extends RouteComponentProps {
   icon?: React.ReactElement;
 }
 
-function isNavLinkActive(props: any) {
+interface NavLinkPropsModel {
+  text: string;
+  path: string;
+  index: number;
+  open: boolean;
+  icon: any;
+  history: any;
+  location: any;
+  match: any;
+}
+
+function isNavLinkActive(props: NavLinkPropsModel) {
   if (props.location.pathname === props.path) {
     return true;
   }
@@ -30,7 +41,7 @@ function isNavLinkActive(props: any) {
 
 function SidebarNavButtonF(props: SidebarNavButtonParams): JSX.Element {
   const [isActive, setIsActive] = React.useState(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     setIsActive(isNavLinkActive(props));
@@ -53,7 +64,7 @@ function SidebarNavButtonF(props: SidebarNavButtonParams): JSX.Element {
   const ListItemIconStyle = css`
     && {
       min-width: initial;
-      margin-left: ${props.open ? '0' : '0'};
+      margin-left: 0;
       margin-right: ${props.open ? '13px' : '0'};
     }
   `;

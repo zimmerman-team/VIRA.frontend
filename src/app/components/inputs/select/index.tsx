@@ -16,7 +16,7 @@ import InputBase from '@material-ui/core/InputBase';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import { css } from 'styled-components/macro';
+import 'styled-components/macro';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -62,24 +62,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export function TeamSelect(props: any) {
   const classes = useStyles();
-  // const inputLabel = React.useRef<HTMLLabelElement>(null);
-  // const [labelWidth, setLabelWidth] = React.useState(150);
-  /*  React.useEffect(() => {
-    setLabelWidth(inputLabel.current!.offsetWidth);
-  }, []);*/
 
   // @ts-ignore
   return (
     <FormControl variant="outlined" className={classes.formControl}>
-      {/*<InputLabel
-        ref={inputLabel}
-        id="select-outlined-label"
-        css={`
-          outline: 1px solid red;
-        `}
-      >
-        {props.title}
-      </InputLabel>*/}
       <div
         css={`
           font-style: normal;
@@ -93,7 +79,6 @@ export function TeamSelect(props: any) {
       </div>
       <Select
         id="select-outlined"
-        // labelWidth={labelWidth}
         input={<BootstrapInput />}
         onChange={props.onChange}
         value={props.selectedItem}

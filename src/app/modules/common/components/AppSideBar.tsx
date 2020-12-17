@@ -1,8 +1,12 @@
 // @ts-nocheck
-import { css, CSSProp } from 'styled-components/macro';
+import { css } from 'styled-components/macro';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Theme } from '@material-ui/core/styles';
+import { useStoreState } from 'app/state/store/hooks';
+import get from 'lodash/get';
+import find from 'lodash/find';
+import filter from 'lodash/filter';
 import {
   Drawer,
   IconButton,
@@ -43,7 +47,27 @@ interface AppSideBarParams {
 }
 
 export function AppSideBar(props: AppSideBarParams) {
+  const userRole = useStoreState((state) =>
+    get(state.userDetails.data, 'role', '')
+  );
+  const [navItems, setNavItems] = React.useState(
+    getNavItems(props.navItems, userRole)
+  );
   const isMobileWidth = useMediaQuery('(max-width: 600px)');
+
+  function getNavItems(items: NavItemParams[], locuserRole: string) {
+    return filter(items, (item: NavItemParams) => {
+      if (item.roles) {
+        return find(item.roles, (role: string) => role === locuserRole);
+      }
+      return true;
+    });
+  }
+
+  React.useEffect(() => setNavItems(getNavItems(props.navItems, userRole)), [
+    props.navItems,
+    userRole,
+  ]);
 
   const HeaderStyle = css`
     && {
@@ -148,7 +172,7 @@ export function AppSideBar(props: AppSideBarParams) {
         {/* nav item list */}
         <List css={SidebarListStyle}>
           {/* generate sidebar nav items */}
-          {props.navItems.map((navItem, index) => (
+          {navItems.map((navItem, index) => (
             <SidebarNavButton
               text={navItem.label}
               path={navItem.path}

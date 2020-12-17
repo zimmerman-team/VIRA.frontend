@@ -5,10 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import graph1 from 'app/assets/images/graph_if.png';
 import TableModule from 'app/components/datadisplay/Table';
 import { TabNavigator } from 'app/modules/list-module/common/TabNavigator';
-import { ProjectListMock } from 'app/modules/list-module/mock';
+
 import { PriorityAreaNavMock } from 'app/modules/priority-area/mock';
 import React from 'react';
 import 'styled-components/macro';
+import { ProjectListMock } from 'app/mock/lists/ProjectListMock';
 
 export const PriorityAreaModule = () => {
   return (

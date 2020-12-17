@@ -4,8 +4,8 @@ import { Children, PureComponent, createElement } from 'react';
 import PropTypes from 'prop-types';
 import { Marker } from 'react-map-gl';
 
-const childrenKeys = children =>
-  Children.toArray(children).map(child => child.key);
+const childrenKeys = (children) =>
+  Children.toArray(children).map((child) => child.key);
 
 const shallowCompareChildren = (prevChildren, newChildren) => {
   if (Children.count(prevChildren) !== Children.count(newChildren)) {
@@ -16,7 +16,8 @@ const shallowCompareChildren = (prevChildren, newChildren) => {
   const newKeys = new Set(childrenKeys(newChildren));
   // console.log(prevKeys.length === newKeys.size && prevKeys.every(key => newKeys.has(key)), {prevChildren, newChildren})
   return (
-    prevKeys.length === newKeys.size && prevKeys.every(key => newKeys.has(key))
+    prevKeys.length === newKeys.size &&
+    prevKeys.every((key) => newKeys.has(key))
   );
 };
 
@@ -67,7 +68,7 @@ class Cluster extends PureComponent {
     }
   }
 
-  createCluster = props => {
+  createCluster = (props) => {
     const {
       minZoom,
       maxZoom,
@@ -86,7 +87,7 @@ class Cluster extends PureComponent {
       nodeSize,
     });
 
-    const points = Children.map(children, child => {
+    const points = Children.map(children, (child) => {
       if (child) {
         return point([child.props.longitude, child.props.latitude], child);
       }
@@ -108,7 +109,7 @@ class Cluster extends PureComponent {
   };
 
   render() {
-    const clusters = this.state.clusters.map(cluster => {
+    const clusters = this.state.clusters.map((cluster) => {
       if (cluster.properties.cluster) {
         const [longitude, latitude] = cluster.geometry.coordinates;
         return createElement(Marker, {

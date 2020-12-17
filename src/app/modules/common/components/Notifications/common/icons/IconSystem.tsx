@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 
 export const IconSystem = (
@@ -69,7 +70,7 @@ export const IconSystem = (
         transform="translate(-90 -16)"
       >
         <tspan x={24} y={43}>
-          {'Project (Netherlands)'}
+          Project (Netherlands)
         </tspan>
       </text>
       <g transform="translate(-1132 -234)">

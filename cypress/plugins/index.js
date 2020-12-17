@@ -44,7 +44,7 @@ dotenv.load();
 
 const happoTask = require('happo-cypress/task');
 
-const overrideEnvVars = config => {
+const overrideEnvVars = (config) => {
   const baseUrl = getenv.string('REACT_APP_CYPRESS_baseUrl', '');
   const username = getenv.string('REACT_APP_CYPRESS_USER', '');
   const password = getenv.string('REACT_APP_CYPRESS_PASS', '');
