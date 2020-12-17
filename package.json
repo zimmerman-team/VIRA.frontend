@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/zimmerman-zimmerman/zz-frontend-boilerplate.git"
+    "url": "https://github.com/zimmerman-zimmerman/insinger-frontend.git"
   },
   "dependencies": {
     "@craco/craco": "^5.6.4",
