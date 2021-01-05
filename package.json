@@ -27,7 +27,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.2",
     "auth0-js": "^9.11.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "clsx": "^1.0.4",
     "craco-plugin-react-hot-reload": "^0.1.0",
     "date-fns": "1.30.1",
